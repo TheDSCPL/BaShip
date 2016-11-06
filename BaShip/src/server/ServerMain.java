@@ -1,34 +1,24 @@
 package server;
 
-import server.threads.ServerThread;
-import server.threads.ConsoleThread;
-import server.database.Database;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.*;
+import server.database.*;
+import server.threads.*;
+import sharedlib.coms.*;
+import sharedlib.config.*;
 
-/**
- *
- * @author Alex
- */
 public class ServerMain {
 
-    public static final Database db = new Database("jdbc:postgresql://localhost:5432/");
-    public static final ServerThread server = new ServerThread(4444);
+    public static final Configuration config = new Configuration("src/server/config.properties");
+    public static final Database db = new Database(config.getS("database.url"));
+    public static final ServerThread server = new ServerThread(config.getI("server.port"));
     public static final ConsoleThread console = new ConsoleThread();
-
+    public static final Set<ServerConnection> clients = new HashSet<>();
+    
     public static void main(String args[]) throws SQLException {
-
-        // Connect database
-        db.connect("Alex", "");
-
-        // Start server
+        db.connect(config.getS("database.username"), config.getS("database.password"));
         server.start();
-
-        // Start console
         console.start();
     }
-
-    public static void exit(Exception ex) {
-        ex.printStackTrace(System.err);
-        System.exit(-1);
-    }
+    
 }

@@ -1,7 +1,7 @@
 package server.threads;
 
 import java.net.*;
-import server.ServerMain;
+import sharedlib.coms.*;
 
 /**
  *
@@ -22,11 +22,14 @@ public class ServerThread extends Thread {
             System.out.println("Server running on " + serverSocket.getInetAddress().getHostName() + ":" + serverSocket.getLocalPort());
 
             while (true) {
-                new ClientThread(serverSocket.accept()).start();
+                ServerConnection sc = new ServerConnection(serverSocket.accept());
+                System.out.println("Client connected from " + sc.address());
+                sc.start();
             }
         }
-        catch (Exception ex) {
-            ServerMain.exit(ex);
+        catch (Throwable ex) {
+            ex.printStackTrace();
+            System.exit(-1);
         }
     }
 }

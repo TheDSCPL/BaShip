@@ -1,4 +1,4 @@
-package client.config;
+package sharedlib.config;
 
 import java.io.*;
 import java.util.*;
@@ -9,10 +9,9 @@ import java.util.*;
  */
 public class Configuration {
     private final Properties general = new Properties();
-    private static final String PropertiesFileName = "src/client/config/config.properties";
     
-    public Configuration() {
-        try { general.load(new FileInputStream(new File(PropertiesFileName))); }
+    public Configuration(String propertiesFile) {
+        try { general.load(new FileInputStream(new File(propertiesFile))); }
         catch (Exception ex) { throw new Error("Could not access config file: " + ex); }
     }
     

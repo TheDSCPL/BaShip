@@ -1,7 +1,6 @@
 package server.database;
 
 import java.sql.*;
-import server.ServerMain;
 
 /**
  *
@@ -20,8 +19,9 @@ public class Database {
         try {
             DriverManager.registerDriver(new org.postgresql.Driver());
         }
-        catch (Exception ex) {
-            ServerMain.exit(ex);
+        catch (SQLException ex) {
+            ex.printStackTrace();
+            System.exit(-1);
         }
     }
 
@@ -35,8 +35,6 @@ public class Database {
     public void connect(String username, String password) throws SQLException {
         conn = DriverManager.getConnection(databaseURL, username, password);
     }
-    
-    
 
     public void test() throws SQLException {
         Statement stmt = conn.createStatement();

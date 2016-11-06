@@ -13,18 +13,30 @@ public class ServerConnection extends Connection {
         super(socket);
     }
 
-    public void process() throws IOException, ClassNotFoundException {
-        System.out.println("ServerConnection process receving...");
-        ConnectionObject object = receive();
-
-        System.out.println("Got object: " + object);
-        System.out.println("  \\-with command " + object.command);
-
-        if ("usernameavailable".equals(object.command)) {
-            ConnectionObject response = new ConnectionObject("");
-            response.contents.put("isavaliable", true);
-            send(response);
-            System.out.println("Sent response" + response);
-        }
+    @Override
+    public synchronized void start() {
+        /*synchronized (ServerMain.clients) {
+            ServerMain.clients.add(this);
+        }*/
+        
+        super.start();
+        
+        /*synchronized (ServerMain.clients) {
+            ServerMain.clients.remove(this);
+        }*/
     }
+    
+    /*public void process() throws IOException, ClassNotFoundException {
+        ConnectionObject object = receive();
+        
+        if (object.contents.containsKey("query")) {
+            switch ((String)object.contents.get("query")) {
+                case "usernameavailable":
+                    object.contents.put("isavaliable", true);
+                    break;
+            }
+        }
+        
+        send(object);
+    }*/
 }
