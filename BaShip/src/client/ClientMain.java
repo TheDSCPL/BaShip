@@ -11,17 +11,10 @@ public class ClientMain {
     public static ClientConnection connection;
 
     public static void main(String args[]) throws IOException, ClassNotFoundException {
-
-        System.out.println("Client started");
-
+        
         // Create socket and connect
-        Socket socket = new Socket(config.getS("server.ip"), config.getI("server.port"));
-        
-        System.out.println("Socket created");
-        
+        Socket socket = new Socket(config.getS("server.ip"), config.getI("server.port"));        
         connection = new ClientConnection(socket);
-
-        System.out.println("Connection start");
 
         // Test
         System.out.println("Username available? " + connection.usernameAvailable("alex"));
