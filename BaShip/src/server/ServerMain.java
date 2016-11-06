@@ -16,7 +16,7 @@ public class ServerMain {
     public static final Set<ServerConnection> clients = new HashSet<>();
     
     public static void main(String args[]) throws SQLException {
-        db.connect(config.getS("database.username"), config.getS("database.password"));
+        //db.connect(config.getS("database.username"), config.getS("database.password"));
         server.start();
         console.start();
         
