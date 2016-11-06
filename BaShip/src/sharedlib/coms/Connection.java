@@ -12,10 +12,11 @@ public class Connection extends Thread {
     public Handler handler;
 
     public interface Handler {
-        public ConnectionObject handle(ConnectionObject object);
+
+        public Package handle(Package object);
     }
-    
-    public Connection(Socket socket) throws IOException {
+
+    protected Connection(Socket socket) throws IOException {
         super("Connection thread for socket at " + socket.getInetAddress().getHostName() + ":" + socket.getPort());
         this.socket = socket;
 
@@ -24,48 +25,50 @@ public class Connection extends Thread {
         receive = new ObjectInputStream(socket.getInputStream());
     }
 
-    private boolean waitingForResponse = false;
+    private Package packageWaitingForResponse = null;
 
-    private synchronized boolean getWaitingForResponse() {
-        return waitingForResponse;
+    private synchronized Package getPackageWaitingForResponse() {
+        return packageWaitingForResponse;
     }
 
-    private synchronized void setWaitingForResponse(boolean v) {
-        waitingForResponse = v;
+    private synchronized void setPackageWaitingForResponse(Package v) {
+        packageWaitingForResponse = v;
     }
 
-    private ConnectionObject lastReceivedObject = null;
+    private Package receivedResponse = null;
 
-    private synchronized ConnectionObject getLastReceivedObject() {
-        return lastReceivedObject;
+    private synchronized Package getReceivedResponse() {
+        return receivedResponse;
     }
 
-    private synchronized void setLastReceivedObject(ConnectionObject v) {
-        lastReceivedObject = v;
+    private synchronized void setReceivedResponse(Package v) {
+        receivedResponse = v;
     }
 
-    private void send(ConnectionObject object) throws IOException {
+    private void send(Package object) throws IOException {
         send.writeObject(object);
     }
 
-    private ConnectionObject receive() throws IOException, ClassNotFoundException {
-        return (ConnectionObject) receive.readObject();
+    private Package receive() throws IOException, ClassNotFoundException {
+        return (Package) receive.readObject();
     }
 
-    protected void sendOnly(ConnectionObject object) throws IOException {
-        send(object);
+    protected void sendOnly(Package p) throws IOException {
+        send(p);
     }
 
-    protected ConnectionObject sendAndReceive(ConnectionObject object) throws IOException, InterruptedException {
-        setWaitingForResponse(true);
-        send(object);
+    protected Package sendAndReceive(Package p) throws IOException, InterruptedException {
+        setPackageWaitingForResponse(p);
+        send(p);
 
-        while (getLastReceivedObject() == null) {
+        Package response = null;
+        while (response == null) {
+            response = getReceivedResponse();
             Thread.sleep(1);
         }
 
-        setWaitingForResponse(false);
-        return getLastReceivedObject();
+        setPackageWaitingForResponse(null);
+        return response;
     }
 
     public final String address() {
@@ -76,16 +79,31 @@ public class Connection extends Thread {
     public void run() {
         while (true) {
             try {
-                ConnectionObject obj = receive();
+                Package received = receive();
 
-                if (getWaitingForResponse()) {
-                    setLastReceivedObject(obj);
+                if (received != null) {
+                    boolean handle = true;
+
+                    Package question = getPackageWaitingForResponse();
+                    if (question != null) {
+                        if (received.question != null) {
+                            if (received.question.equals(question)) {
+                                setReceivedResponse(received);
+                                handle = false;
+                            }
+                        }
+                    }
+                    
+                    if (handle && handler != null) {
+                        Package response = handler.handle(received);
+                        if (response != null) {
+                            send(response);
+                        }
+                    }
                 }
                 else {
-                    ConnectionObject response = handler.handle(obj);
-                    if (response != null) {
-                        send(response);
-                    }
+                    System.out.println("Received == null!");
+                    return;
                 }
             }
             catch (Throwable ex) {

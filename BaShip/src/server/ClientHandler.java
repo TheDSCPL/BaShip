@@ -1,26 +1,25 @@
 package server;
 
 import sharedlib.coms.*;
+import sharedlib.coms.Package;
 
-/**
- *
- * @author Alex
- */
 public class ClientHandler implements Connection.Handler {
 
     @Override
-    public ConnectionObject handle(ConnectionObject object) {
-        if (object.contents.containsKey("query")) {
-
+    public Package handle(Package object) {
+        Package response = new Package();
+        response.question = object;
+        
+        if (object.contents.containsKey("query")) {            
             switch ((String) object.contents.get("query")) {
                 case "usernameavailable":
-                    object.contents.put("isavaliable", true);
+                    response.contents.put("isavaliable", true);
                     break;
             }
 
         }
 
-        return object;
+        return response;
     }
 
 }

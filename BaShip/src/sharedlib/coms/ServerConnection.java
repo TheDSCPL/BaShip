@@ -1,23 +1,29 @@
 package sharedlib.coms;
 
-import java.io.*;
+import java.io.IOException;
 import java.net.*;
 
-/**
- *
- * @author Alex
- */
 public class ServerConnection extends Connection {
 
     public ServerConnection(Socket socket) throws IOException {
         super(socket);
     }
-    
-    public void sendChatMessage() {
-        
+
+    public boolean usernameAvailable(String username) throws IOException, ClassNotFoundException, InterruptedException {
+        Package query = new Package();
+        query.contents.put("query", "usernameavailable");
+        query.contents.put("username", username);
+        return (Boolean) sendAndReceive(query).contents.get("isavaliable");
     }
-    
-    public void sendInvitation() {
-        
+
+    /**
+     * Checks if a combination of username/password is valid or not
+     *
+     * @param username
+     * @param password
+     * @return
+     */
+    public boolean checkUsernamePasswordCombination(String username, String password) {
+        return false;
     }
 }

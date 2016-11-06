@@ -4,10 +4,6 @@ import java.net.*;
 import server.*;
 import sharedlib.coms.*;
 
-/**
- *
- * @author Alex
- */
 public class ServerThread extends Thread {
 
     public final int port;
@@ -23,10 +19,10 @@ public class ServerThread extends Thread {
             System.out.println("Server running on " + serverSocket.getInetAddress().getHostName() + ":" + serverSocket.getLocalPort());
 
             while (true) {
-                ServerConnection sc = new ServerConnection(serverSocket.accept());
-                System.out.println("Client connected from " + sc.address());
-                sc.handler = new ClientHandler();
-                sc.start();
+                ClientConnection clientConn = new ClientConnection(serverSocket.accept());
+                System.out.println("Client connected from " + clientConn.address());
+                clientConn.handler = new ClientHandler();
+                clientConn.start();
             }
         }
         catch (Throwable ex) {
