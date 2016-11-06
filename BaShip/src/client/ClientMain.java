@@ -1,5 +1,6 @@
 package client;
 
+import java.awt.*;
 import java.io.IOException;
 import java.net.*;
 import sharedlib.coms.*;
@@ -12,19 +13,11 @@ public class ClientMain {
 
     public static void main(String args[]) throws IOException, ClassNotFoundException, InterruptedException {
         
-        /*LoginPanel loginPanel = new LoginPanel();
-        JFrame frame = new JFrame();
-        frame.setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.PAGE_AXIS));
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.add(loginPanel);
-        frame.pack();
-        frame.setVisible(true);
-        
         java.awt.EventQueue.invokeLater(new Runnable() {
-              public void run() {
-                  loginPanel.setVisible(true);
-              }
-        });*/
+            public void run() {
+                new Frame().setVisible(true);
+            }
+        });
         
         // Create socket and connect
         Socket socket = new Socket(config.getS("server.ip"), config.getI("server.port"));        
