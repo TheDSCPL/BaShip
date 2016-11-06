@@ -24,16 +24,11 @@ public class ClientMain implements Connection.Handler {
 
     public static void main(String args[]) throws IOException, ClassNotFoundException, InterruptedException {
 
-        /*java.awt.EventQueue.invokeLater(new Runnable() {
+        java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 mainFrame.setVisible(true);
             }
-        });*/
- /*java.awt.EventQueue.invokeLater(new Runnable() {
-              public void run() {
-                  loginPanel.setVisible(true);
-              }
-        });*/
+        });
  
         // Create socket and connect
         Socket socket = new Socket(config.getS("server.ip"), config.getI("server.port"));

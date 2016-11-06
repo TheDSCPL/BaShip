@@ -28,6 +28,10 @@ public class LoginPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jDialog1 = new javax.swing.JDialog();
+        jPanel1 = new javax.swing.JPanel();
+        repeatPasswordLabel = new javax.swing.JLabel();
+        repeatPasswordConfirmButton = new javax.swing.JButton();
+        repeatPasswordField = new javax.swing.JPasswordField();
         mainLoginLayer = new javax.swing.JLayeredPane();
         jLayeredPane3 = new javax.swing.JLayeredPane();
         ajaxLoader3 = new javax.swing.JLabel();
@@ -37,21 +41,60 @@ public class LoginPanel extends javax.swing.JPanel {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
+        repeatPasswordLabel.setText("Please, retype your password");
+
+        repeatPasswordConfirmButton.setText("Confirm");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(68, 68, 68)
+                        .addComponent(repeatPasswordConfirmButton))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addComponent(repeatPasswordLabel))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(repeatPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(11, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(15, Short.MAX_VALUE)
+                .addComponent(repeatPasswordLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(repeatPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(repeatPasswordConfirmButton)
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
         jDialog1.getContentPane().setLayout(jDialog1Layout);
         jDialog1Layout.setHorizontalGroup(
             jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDialog1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jDialog1Layout.setVerticalGroup(
             jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(jDialog1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         setMaximumSize(new java.awt.Dimension(386, 251));
         setMinimumSize(new java.awt.Dimension(386, 251));
 
-        jLayeredPane3.setOpaque(true);
+        jLayeredPane3.setCursor(new java.awt.Cursor(java.awt.Cursor.WAIT_CURSOR));
         //pleaseWaitLayer.setVisible(false);
 
         ajaxLoader3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/client/ui/images/ajax-loader.gif"))); // NOI18N
@@ -94,7 +137,6 @@ public class LoginPanel extends javax.swing.JPanel {
 
         usernameLabel.setText("Username:");
 
-        passwordField.setText("dummy_password");
         passwordField.setToolTipText("Insert your password");
         passwordField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -105,6 +147,7 @@ public class LoginPanel extends javax.swing.JPanel {
         passwordLabel.setText("Password:");
 
         jButton1.setText("Login");
+        jButton1.setEnabled(false);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -112,6 +155,7 @@ public class LoginPanel extends javax.swing.JPanel {
         });
 
         jButton2.setText("Register");
+        jButton2.setEnabled(false);
 
         mainLoginLayer.setLayer(jLayeredPane3, javax.swing.JLayeredPane.POPUP_LAYER);
         mainLoginLayer.setLayer(usernameField, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -211,6 +255,7 @@ public class LoginPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLayeredPane jLayeredPane2;
     private javax.swing.JLayeredPane jLayeredPane3;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JLayeredPane mainLoginLayer;
     public final javax.swing.JPasswordField passwordField = new javax.swing.JPasswordField();
     private javax.swing.JLabel passwordLabel;
@@ -218,6 +263,9 @@ public class LoginPanel extends javax.swing.JPanel {
     private javax.swing.JLabel pleaseWaitLabel1;
     private javax.swing.JLayeredPane pleaseWaitLayer;
     private javax.swing.JLayeredPane pleaseWaitLayer1;
+    private javax.swing.JButton repeatPasswordConfirmButton;
+    private javax.swing.JPasswordField repeatPasswordField;
+    private javax.swing.JLabel repeatPasswordLabel;
     public final javax.swing.JTextField usernameField = new javax.swing.JTextField();
     private javax.swing.JLabel usernameLabel;
     // End of variables declaration//GEN-END:variables
