@@ -3,12 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package sharedLibrary;
+package sharedlib.logic.player;
 
 /**
  *
- * @author luisp
+ * @author Alex
  */
-public class Database {
+public class Player {
+    public final int id;
     
+    public Player(int id) {
+        this.id = id;
+    }
 }

@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package sharedLibrary.coms;
+package sharedlib.logic.game;
 
 /**
  *
- * @author luisp
+ * @author Alex
  */
-public class Protocol {
+public class Board {
     
 }

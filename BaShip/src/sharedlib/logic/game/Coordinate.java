@@ -3,12 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package sharedLibrary.logic;
+package sharedlib.logic.game;
 
 /**
  *
- * @author luisp
+ * @author Alex
  */
-public class GlobalChat {
+public class Coordinate {
+    public final int x, y;
     
+    public Coordinate(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
 }
