@@ -9,13 +9,12 @@ public class Connection extends Thread {
     private final ObjectInputStream receive;
     private final ObjectOutputStream send;
 
-    public EventHandler handler;
+    public Handler handler;
 
-    public interface EventHandler {
-
+    public interface Handler {
         public ConnectionObject handle(ConnectionObject object);
     }
-
+    
     public Connection(Socket socket) throws IOException {
         super("Connection thread for socket at " + socket.getInetAddress().getHostName() + ":" + socket.getPort());
         this.socket = socket;
@@ -53,11 +52,11 @@ public class Connection extends Thread {
         return (ConnectionObject) receive.readObject();
     }
 
-    public void sendOnly(ConnectionObject object) throws IOException {
+    protected void sendOnly(ConnectionObject object) throws IOException {
         send(object);
     }
 
-    public ConnectionObject sendAndReceive(ConnectionObject object) throws IOException, InterruptedException {
+    protected ConnectionObject sendAndReceive(ConnectionObject object) throws IOException, InterruptedException {
         setWaitingForResponse(true);
         send(object);
 
@@ -72,10 +71,9 @@ public class Connection extends Thread {
     public final String address() {
         return socket.getInetAddress().getHostName() + ":" + socket.getPort();
     }
-    
-    @Override
-    public synchronized void start() {
 
+    @Override
+    public void run() {
         while (true) {
             try {
                 ConnectionObject obj = receive();
@@ -92,6 +90,7 @@ public class Connection extends Thread {
             }
             catch (Throwable ex) {
                 ex.printStackTrace();
+                return;
             }
         }
     }

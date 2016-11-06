@@ -1,6 +1,7 @@
 package server.threads;
 
 import java.net.*;
+import server.*;
 import sharedlib.coms.*;
 
 /**
@@ -24,6 +25,7 @@ public class ServerThread extends Thread {
             while (true) {
                 ServerConnection sc = new ServerConnection(serverSocket.accept());
                 System.out.println("Client connected from " + sc.address());
+                sc.handler = new ClientHandler();
                 sc.start();
             }
         }

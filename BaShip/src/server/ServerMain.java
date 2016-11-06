@@ -19,6 +19,6 @@ public class ServerMain {
         db.connect(config.getS("database.username"), config.getS("database.password"));
         server.start();
         console.start();
+        
     }
-    
 }
