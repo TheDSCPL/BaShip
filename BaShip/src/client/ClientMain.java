@@ -4,17 +4,32 @@ import java.io.IOException;
 import java.net.*;
 import sharedlib.coms.*;
 import sharedlib.config.*;
+import client.ui.*;
 
 public class ClientMain {
 
+    private ClientMain()
+    {
+        
+    }
+    
+    public static final ClientMain instance = new ClientMain(); //singleton
+    
+    private static final MainFrame mainFrame = new MainFrame();
+    
     public static final Configuration config = new Configuration("src/client/config.properties");
     public static ServerConnection connection;
 
+    public static MainFrame getMainFrame()
+    {
+        return mainFrame;
+    }
+    
     public static void main(String args[]) throws IOException, ClassNotFoundException, InterruptedException {
         
         /*java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Frame().setVisible(true);
+                mainFrame.setVisible(true);
             }
         });*/
         
