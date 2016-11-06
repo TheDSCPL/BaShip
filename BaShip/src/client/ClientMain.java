@@ -21,8 +21,9 @@ public class ClientMain implements Connection.Handler {
     }
     
     public static void main(String args[]) throws IOException, ClassNotFoundException, InterruptedException {
-        // Create socket and connect to server
-        connection = new ServerConnection(new Socket(config.getS("server.ip"), config.getI("server.port")));
+        // Create socket and connect
+        Socket socket = new Socket(config.getS("server.ip"), config.getI("server.port"));
+        connection = new ServerConnection(socket);
         connection.handler = instance;
         connection.start();
         
