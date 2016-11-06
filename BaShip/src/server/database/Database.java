@@ -1,11 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package server;
+package server.database;
 
 import java.sql.*;
+import server.ServerMain;
 
 /**
  *
@@ -25,7 +21,7 @@ public class Database {
             DriverManager.registerDriver(new org.postgresql.Driver());
         }
         catch (Exception ex) {
-            Main.exit(ex);
+            ServerMain.exit(ex);
         }
     }
 

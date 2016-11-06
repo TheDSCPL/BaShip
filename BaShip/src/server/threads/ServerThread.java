@@ -1,21 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package server;
+package server.threads;
 
 import java.net.*;
+import server.ServerMain;
 
 /**
  *
  * @author Alex
  */
-public class Server extends Thread {
+public class ServerThread extends Thread {
 
     public final int port;
 
-    public Server(int port) {
+    public ServerThread(int port) {
+        super("Server thread");
         this.port = port;
     }
 
@@ -25,11 +22,11 @@ public class Server extends Thread {
             System.out.println("Server running on " + serverSocket.getInetAddress().getHostName() + ":" + serverSocket.getLocalPort());
 
             while (true) {
-                new Client(serverSocket.accept()).start();
+                new ClientThread(serverSocket.accept()).start();
             }
         }
         catch (Exception ex) {
-            Main.exit(ex);
+            ServerMain.exit(ex);
         }
     }
 }
