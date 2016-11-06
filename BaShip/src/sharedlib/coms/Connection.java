@@ -14,11 +14,25 @@ abstract public class Connection extends Thread {
 
     public interface Handler {
 
-        public Packet handle(Packet packet);
+        /**
+         * Called whenever a packet is received that isn't part of a request-response routine
+         * @param connection The connection that received the packet
+         * @param packet The packet that has been received
+         * @return A response packet to be sent back, or null
+         */
+        public Packet handle(Connection connection, Packet packet);
 
-        public void connected();
+        /**
+         * Called when the socket connection has just been started
+         * @param connection The connection object representing this connection 
+         */
+        public void connected(Connection connection);
 
-        public void disconnected();
+        /**
+         * Called when the socket connection ceases to exist
+         * @param connection The connection object representing this connection 
+         */
+        public void disconnected(Connection connection);
     }
 
     protected Connection(Socket socket) throws IOException {
@@ -83,46 +97,43 @@ abstract public class Connection extends Thread {
     @Override
     public void run() {
         if (handler != null) {
-            handler.connected();
+            handler.connected(this);
         }
 
         while (true) {
             try {
                 Packet received = receive();
+                boolean handle = true;
 
-                if (received != null) {
-                    boolean handle = true;
-
-                    Packet question = getPackageWaitingForResponse();
-                    if (question != null) {
-                        if (received.request != null) {
-                            if (received.request.equals(question)) {
-                                setReceivedResponse(received);
-                                handle = false;
-                            }
-                        }
-                    }
-
-                    if (handle && handler != null) {
-                        Packet response = handler.handle(received);
-                        if (response != null) {
-                            send(response);
+                Packet question = getPackageWaitingForResponse();
+                if (question != null) {
+                    if (received.request != null) {
+                        if (received.request.equals(question)) {
+                            setReceivedResponse(received);
+                            handle = false;
                         }
                     }
                 }
-                else {
-                    System.out.println("Received == null!");
-                    return;
+
+                if (handle && handler != null) {
+                    Packet response = handler.handle(this, received);
+                    if (response != null) {
+                        send(response);
+                    }
                 }
+
+            }
+            catch (EOFException ex) { // Disconnected
+                break;
             }
             catch (Throwable ex) {
                 ex.printStackTrace();
                 break;
             }
         }
-        
+
         if (handler != null) {
-            handler.disconnected();
+            handler.disconnected(this);
         }
     }
 }

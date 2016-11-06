@@ -12,7 +12,7 @@ public class Configuration {
     
     public Configuration(String propertiesFile) {
         try { general.load(new FileInputStream(new File(propertiesFile))); }
-        catch (Exception ex) { throw new Error("Could not access config file: " + ex); }
+        catch (Throwable ex) { throw new Error("Could not access config file: " + ex); }
     }
     
     public String getS(String key) {

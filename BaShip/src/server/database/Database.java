@@ -2,10 +2,6 @@ package server.database;
 
 import java.sql.*;
 
-/**
- *
- * @author luisp
- */
 public class Database {
     // Create
     // Connect

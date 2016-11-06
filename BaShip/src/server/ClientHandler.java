@@ -6,7 +6,7 @@ import sharedlib.coms.packet.*;
 public class ClientHandler implements Connection.Handler {
 
     @Override
-    public Packet handle(Packet packet) {
+    public Packet handle(Connection connection, Packet packet) {
         Packet response = null;
 
         if (packet instanceof QueryPacket) {
@@ -33,13 +33,19 @@ public class ClientHandler implements Connection.Handler {
     }
 
     @Override
-    public void connected() {
-        
+    public void connected(Connection connection) {
+        System.out.println("Client connected from " + connection.address());
+        synchronized (ServerMain.clients) {
+            ServerMain.clients.add((ClientConnection) connection);
+        }
     }
 
     @Override
-    public void disconnected() {
-        
+    public void disconnected(Connection connection) {
+        System.out.println("Client disconnected from " + connection.address());
+        synchronized (ServerMain.clients) {
+            ServerMain.clients.remove((ClientConnection) connection);
+        }
     }
 
 }
