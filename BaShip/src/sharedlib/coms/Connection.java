@@ -2,8 +2,9 @@ package sharedlib.coms;
 
 import java.io.*;
 import java.net.*;
+import sharedlib.coms.packet.Packet;
 
-public class Connection extends Thread {
+abstract public class Connection extends Thread {
 
     private final Socket socket;
     private final ObjectInputStream receive;
@@ -13,7 +14,11 @@ public class Connection extends Thread {
 
     public interface Handler {
 
-        public Package handle(Package object);
+        public Packet handle(Packet packet);
+
+        public void connected();
+
+        public void disconnected();
     }
 
     protected Connection(Socket socket) throws IOException {
@@ -25,43 +30,43 @@ public class Connection extends Thread {
         receive = new ObjectInputStream(socket.getInputStream());
     }
 
-    private Package packageWaitingForResponse = null;
+    private Packet packageWaitingForResponse = null;
 
-    private synchronized Package getPackageWaitingForResponse() {
+    private synchronized Packet getPackageWaitingForResponse() {
         return packageWaitingForResponse;
     }
 
-    private synchronized void setPackageWaitingForResponse(Package v) {
+    private synchronized void setPackageWaitingForResponse(Packet v) {
         packageWaitingForResponse = v;
     }
 
-    private Package receivedResponse = null;
+    private Packet receivedResponse = null;
 
-    private synchronized Package getReceivedResponse() {
+    private synchronized Packet getReceivedResponse() {
         return receivedResponse;
     }
 
-    private synchronized void setReceivedResponse(Package v) {
+    private synchronized void setReceivedResponse(Packet v) {
         receivedResponse = v;
     }
 
-    private void send(Package object) throws IOException {
+    private void send(Packet object) throws IOException {
         send.writeObject(object);
     }
 
-    private Package receive() throws IOException, ClassNotFoundException {
-        return (Package) receive.readObject();
+    private Packet receive() throws IOException, ClassNotFoundException {
+        return (Packet) receive.readObject();
     }
 
-    protected void sendOnly(Package p) throws IOException {
+    protected final void sendOnly(Packet p) throws IOException {
         send(p);
     }
 
-    protected Package sendAndReceive(Package p) throws IOException, InterruptedException {
+    protected final Packet sendAndReceive(Packet p) throws IOException, InterruptedException {
         setPackageWaitingForResponse(p);
         send(p);
 
-        Package response = null;
+        Packet response = null;
         while (response == null) {
             response = getReceivedResponse();
             Thread.sleep(1);
@@ -77,17 +82,19 @@ public class Connection extends Thread {
 
     @Override
     public void run() {
+        handler.connected();
+        
         while (true) {
             try {
-                Package received = receive();
+                Packet received = receive();
 
                 if (received != null) {
                     boolean handle = true;
 
-                    Package question = getPackageWaitingForResponse();
+                    Packet question = getPackageWaitingForResponse();
                     if (question != null) {
-                        if (received.question != null) {
-                            if (received.question.equals(question)) {
+                        if (received.request != null) {
+                            if (received.request.equals(question)) {
                                 setReceivedResponse(received);
                                 handle = false;
                             }
@@ -95,7 +102,7 @@ public class Connection extends Thread {
                     }
                     
                     if (handle && handler != null) {
-                        Package response = handler.handle(received);
+                        Packet response = handler.handle(received);
                         if (response != null) {
                             send(response);
                         }
@@ -111,5 +118,7 @@ public class Connection extends Thread {
                 return;
             }
         }
+        
+        //handler.disconnected();
     }
 }

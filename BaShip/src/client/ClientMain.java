@@ -30,6 +30,6 @@ public class ClientMain {
         connection.start();
 
         // Test
-        System.out.println("Username available? " + connection.usernameAvailable("alex"));
+        System.out.println("Username available? " + connection.isUsernameAvailable("alex"));
     }
 }

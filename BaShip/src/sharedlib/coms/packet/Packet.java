@@ -1,16 +1,21 @@
-package sharedlib.coms;
+package sharedlib.coms.packet;
 
 import java.io.*;
 import java.util.*;
 
-public class Package implements Serializable {
+public class Packet implements Serializable {
 
+    /**
+     * Unique ID of this packet
+     */
     public final UUID id;
-    public Map<String, Object> contents = new HashMap<>();
+    
+    /**
+     * The Packet object this packet is a response to
+     */
+    public Packet request;
 
-    public Package question;
-
-    public Package() {
+    public Packet() {
         id = UUID.randomUUID();
     }
 
@@ -19,11 +24,11 @@ public class Package implements Serializable {
         if (obj == null) {
             return false;
         }
-        if (!(obj instanceof Package)) {
+        if (!(obj instanceof Packet)) {
             return false;
         }
 
-        return id.equals(((Package) obj).id);
+        return id.equals(((Packet) obj).id);
     }
 
     @Override

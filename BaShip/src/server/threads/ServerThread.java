@@ -20,7 +20,6 @@ public class ServerThread extends Thread {
 
             while (true) {
                 ClientConnection clientConn = new ClientConnection(serverSocket.accept());
-                System.out.println("Client connected from " + clientConn.address());
                 clientConn.handler = new ClientHandler();
                 clientConn.start();
             }
