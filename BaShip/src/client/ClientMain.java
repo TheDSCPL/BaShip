@@ -14,13 +14,11 @@ public class ClientMain {
 
     public static void main(String args[]) throws IOException, ClassNotFoundException {
         
-        LoginPanel loginPanel = new LoginPanel();
-        JFrame frame = new JFrame();
-        frame.setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.PAGE_AXIS));
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.add(loginPanel);
-        frame.pack();
-        frame.setVisible(true);
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new Frame().setVisible(true);
+            }
+        });
         
         /*java.awt.EventQueue.invokeLater(new Runnable() {
               public void run() {
