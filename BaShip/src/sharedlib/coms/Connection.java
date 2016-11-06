@@ -82,8 +82,10 @@ abstract public class Connection extends Thread {
 
     @Override
     public void run() {
-        handler.connected();
-        
+        if (handler != null) {
+            handler.connected();
+        }
+
         while (true) {
             try {
                 Packet received = receive();
@@ -100,7 +102,7 @@ abstract public class Connection extends Thread {
                             }
                         }
                     }
-                    
+
                     if (handle && handler != null) {
                         Packet response = handler.handle(received);
                         if (response != null) {
@@ -115,10 +117,12 @@ abstract public class Connection extends Thread {
             }
             catch (Throwable ex) {
                 ex.printStackTrace();
-                return;
+                break;
             }
         }
         
-        //handler.disconnected();
+        if (handler != null) {
+            handler.disconnected();
+        }
     }
 }
