@@ -18,7 +18,7 @@ public class ServerMain {
     public static void main(String args[]) throws SQLException {
 
         // Connect database
-        db.connect("Alex", "");
+        //db.connect("Alex", "");
 
         // Start server
         server.start();

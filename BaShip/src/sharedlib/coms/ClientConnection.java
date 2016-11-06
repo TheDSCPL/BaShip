@@ -20,5 +20,16 @@ public class ClientConnection extends Connection {
         System.out.println("Got response: " + response);
         return (Boolean) response.contents.get("isavaliable");
     }
+    
+    /**
+     * Checks if a combination of username/password is valid or not
+     * @param username
+     * @param password
+     * @return 
+     */
+    public boolean checkUsernamePasswordCombination(String username, String password)
+    {
+        return false;
+    }
 
 }
