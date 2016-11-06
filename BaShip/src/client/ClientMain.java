@@ -19,6 +19,12 @@ public class ClientMain {
             }
         });
         
+        /*java.awt.EventQueue.invokeLater(new Runnable() {
+              public void run() {
+                  loginPanel.setVisible(true);
+              }
+        });*/
+        
         // Create socket and connect
         Socket socket = new Socket(config.getS("server.ip"), config.getI("server.port"));        
         connection = new ClientConnection(socket);
