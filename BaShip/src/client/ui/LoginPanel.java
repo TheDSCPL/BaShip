@@ -1,24 +1,23 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package client.ui;
 
 import java.awt.Component;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JLayeredPane;
-import javax.swing.JPanel;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
-/**
- *
- * @author luisp
- */
+/*
+Luis, notas:
+ - Login é à direita, Register à esquerda
+ - Não deve ser possível mudar o tamanho da janela
+ - Falta a barra de cima com o botão para as prefs
+ - Falta a zona para publicidade em baixo
+ - A janela que abre para confirmar password devia ser "Modal", ou seja, não dá para fazer nada na outra janela antes de cancelares ou confirmares
+*/
+
+
+
 public class LoginPanel extends javax.swing.JPanel {
 
     /**
