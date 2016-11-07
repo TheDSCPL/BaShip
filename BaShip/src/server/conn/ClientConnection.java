@@ -1,12 +1,11 @@
 package server.conn;
 
-import java.io.*;
 import java.net.*;
-import sharedlib.coms.Connection;
+import sharedlib.conn.*;
 
 public class ClientConnection extends Connection {
 
-    public ClientConnection(Socket socket) throws IOException {
+    public ClientConnection(Socket socket) throws ConnectionException {
         super(socket);
     }
 

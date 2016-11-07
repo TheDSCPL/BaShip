@@ -1,9 +1,9 @@
 package server.conn;
 
-import server.ServerMain;
-import server.conn.ClientConnection;
-import sharedlib.coms.*;
-import sharedlib.coms.packet.*;
+import java.util.logging.*;
+import server.*;
+import sharedlib.conn.*;
+import sharedlib.conn.packet.*;
 
 public class ClientHandler implements Connection.Handler {
 
@@ -19,7 +19,7 @@ public class ClientHandler implements Connection.Handler {
                     response = new BoolPacket(isUsernameAvailable((String) qpckt.m.get("username")));
                     break;
                 default:
-                    System.out.println("server.ClientHandler.handle() unknown query: " + qpckt.query);
+                    Logger.getLogger(this.getClass().getName()).log(Level.WARNING, "Unknown query ''{0}'' -> ignoring", qpckt.query);
             }
 
             if (response != null) {

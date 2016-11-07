@@ -1,12 +1,12 @@
 package client;
 
+import sharedlib.conn.Connection;
+import sharedlib.conn.packet.Packet;
 import client.conn.ServerConnection;
 import client.ui.*;
 import java.io.*;
 import java.net.*;
 import java.util.concurrent.*;
-import sharedlib.coms.*;
-import sharedlib.coms.packet.*;
 import sharedlib.config.*;
 
 public class ClientMain implements Connection.Handler {

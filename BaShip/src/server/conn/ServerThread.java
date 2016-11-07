@@ -26,7 +26,7 @@ public class ServerThread extends Thread {
             }
         }
         catch (IOException ex) {
-            Logger.getLogger(ServerThread.class.getName()).log(Level.SEVERE, "Could not start server", ex);
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "Could not start server -> exiting", ex);
             System.exit(-1);
         }
         

@@ -1,5 +1,6 @@
 package server;
 
+import java.sql.SQLException;
 import java.util.*;
 import server.conn.*;
 import server.database.*;
@@ -13,7 +14,7 @@ public class ServerMain {
     public static final ConsoleThread console = new ConsoleThread();
     public static final Set<ClientConnection> clients = new HashSet<>();
     
-    public static void main(String args[]) {
+    public static void main(String args[]) throws SQLException {
         db.connect(config.getS("database.username"), config.getS("database.password"));
         server.start();
         console.start();

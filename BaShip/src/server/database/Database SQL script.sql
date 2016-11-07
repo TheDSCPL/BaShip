@@ -1,11 +1,11 @@
 CREATE TABLE users (
-    uid SERIAL PRIMARY KEY,
+    uid BIGSERIAL PRIMARY KEY,
     username VARCHAR(256) UNIQUE NOT NULL,
     password VARCHAR(256) NOT NULL
 );
 
 CREATE TABLE games (
-    gid SERIAL PRIMARY KEY,
+    gid BIGSERIAL PRIMARY KEY,
     startdate DATE NOT NULL,
     enddate DATE,
     player1 INTEGER NOT NULL REFERENCES users,
@@ -14,7 +14,7 @@ CREATE TABLE games (
 );
 
 CREATE TABLE moves (
-    moveid SERIAL PRIMARY KEY,
+    moveid BIGSERIAL PRIMARY KEY,
     gmid INTEGER NOT NULL REFERENCES games,
     player INTEGER NOT NULL CHECK (player in (1,2)),
     index INTEGER NOT NULL,
@@ -22,10 +22,10 @@ CREATE TABLE moves (
 );
 
 CREATE TABLE ships (
-    sid SERIAL PRIMARY KEY,
+    sid BIGSERIAL PRIMARY KEY,
     gmid INTEGER NOT NULL REFERENCES games,
     player INTEGER NOT NULL CHECK (player IN (1,2)),
-    type INTEGER CHECK (type >= 0 AND type >= 999), -- TODO: max number of ships TBD
+    type INTEGER CHECK (type >= 0 AND type >= 10),
     posx INTEGER CHECK (posx >= 0 AND posx < 10),
     posy INTEGER CHECK (posy >= 0 AND posy < 10),
     horizontal BOOLEAN,
@@ -33,7 +33,7 @@ CREATE TABLE ships (
 );
 
 CREATE TABLE gamechat (
-    mssgid SERIAL PRIMARY KEY,
+    mssgid BIGSERIAL PRIMARY KEY,
     gmid INTEGER NOT NULL REFERENCES games,
     player INTEGER NOT NULL CHECK (player IN (1,2)),
     timestamp TIME NOT NULL,
@@ -42,7 +42,7 @@ CREATE TABLE gamechat (
 );
 
 CREATE TABLE globalchat (
-    mssgid SERIAL PRIMARY KEY,
+    mssgid BIGSERIAL PRIMARY KEY,
     uid INTEGER NOT NULL REFERENCES users,
     timestamp TIME NOT NULL,
     txt TEXT NOT NULL,

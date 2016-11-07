@@ -1,4 +1,4 @@
-package sharedlib.coms.packet;
+package sharedlib.conn.packet;
 
 public class QueryPacket extends MapPacket {
     public String query;

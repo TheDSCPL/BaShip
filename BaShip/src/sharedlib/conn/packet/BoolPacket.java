@@ -1,4 +1,4 @@
-package sharedlib.coms.packet;
+package sharedlib.conn.packet;
 
 /**
  *

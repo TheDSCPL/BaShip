@@ -19,7 +19,7 @@ public class Database {
             DriverManager.registerDriver(new org.postgresql.Driver());
         }
         catch (SQLException ex) {
-            ex.printStackTrace();
+            Logger.getLogger(ServerMain.class.getName()).log(Level.SEVERE, "Could not find PostgreSQL driver -> exiting", ex);
             System.exit(-1);
         }
     }
@@ -37,7 +37,7 @@ public class Database {
             System.out.println("Connected to SQL database");
         }
         catch (SQLException ex) {
-            Logger.getLogger(ServerMain.class.getName()).log(Level.SEVERE, "Could not connect to SQL database", ex);
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "Could not connect to SQL database -> exiting", ex);
             System.exit(-1);
         }
         
@@ -45,12 +45,7 @@ public class Database {
 
     public void test() throws SQLException {
         Statement stmt = conn.createStatement();
-        String sql = "CREATE TABLE TEST "
-                     + "(ID INT PRIMARY KEY     NOT NULL,"
-                     + " NAME           TEXT    NOT NULL, "
-                     + " AGE            INT     NOT NULL, "
-                     + " ADDRESS        CHAR(50), "
-                     + " SALARY         REAL)";
+        String sql = "";
         stmt.executeUpdate(sql);
     }
 }

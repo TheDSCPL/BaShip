@@ -1,8 +1,9 @@
-package sharedlib.coms;
+package sharedlib.conn;
 
 import java.io.*;
 import java.net.*;
-import sharedlib.coms.packet.Packet;
+import java.util.logging.*;
+import sharedlib.conn.packet.*;
 
 abstract public class Connection extends Thread {
 
@@ -15,7 +16,9 @@ abstract public class Connection extends Thread {
     public interface Handler {
 
         /**
-         * Called whenever a packet is received that isn't part of a request-response routine
+         * Called whenever a packet is received that isn't part of a
+         * request-response routine
+         *
          * @param connection The connection that received the packet
          * @param packet The packet that has been received
          * @return A response packet to be sent back, or null
@@ -24,24 +27,32 @@ abstract public class Connection extends Thread {
 
         /**
          * Called when the socket connection has just been started
-         * @param connection The connection object representing this connection 
+         *
+         * @param connection The connection object representing this connection
          */
         public void connected(Connection connection);
 
         /**
          * Called when the socket connection ceases to exist
-         * @param connection The connection object representing this connection 
+         *
+         * @param connection The connection object representing this connection
          */
         public void disconnected(Connection connection);
     }
 
-    protected Connection(Socket socket) throws IOException {
+    protected Connection(Socket socket) throws ConnectionException {
         super("Connection thread for socket at " + socket.getInetAddress().getHostName() + ":" + socket.getPort());
         this.socket = socket;
 
         // Note: this order is important. First create OutputStream, then create InputStream!
-        send = new ObjectOutputStream(socket.getOutputStream());
-        receive = new ObjectInputStream(socket.getInputStream());
+        try {
+            send = new ObjectOutputStream(socket.getOutputStream());
+            receive = new ObjectInputStream(socket.getInputStream());
+        }
+        catch (IOException ex) {
+            Logger.getLogger(this.getClass().getName()).log(Level.WARNING, null, ex);
+            throw new ConnectionException(ex);
+        }
     }
 
     private Packet packageWaitingForResponse = null;
@@ -72,18 +83,35 @@ abstract public class Connection extends Thread {
         return (Packet) receive.readObject();
     }
 
-    protected final void sendOnly(Packet p) throws IOException {
-        send(p);
+    protected final void sendOnly(Packet p) throws ConnectionException {
+        try {
+            send(p);
+        }
+        catch (IOException ex) {
+            throw new ConnectionException(ex);
+        }
     }
 
-    protected final Packet sendAndReceive(Packet p) throws IOException, InterruptedException {
+    protected final Packet sendAndReceive(Packet p) throws ConnectionException {
         setPackageWaitingForResponse(p);
-        send(p);
+
+        try {
+            send(p);
+        }
+        catch (IOException ex) {
+            throw new ConnectionException(ex);
+        }
 
         Packet response = null;
         while (response == null) {
             response = getReceivedResponse();
-            Thread.sleep(1);
+
+            try {
+                Thread.sleep(1);
+            }
+            catch (InterruptedException ex) {
+                // Ignore interrupted exception
+            }
         }
 
         setPackageWaitingForResponse(null);
@@ -127,7 +155,7 @@ abstract public class Connection extends Thread {
                 break;
             }
             catch (Throwable ex) {
-                ex.printStackTrace();
+                Logger.getLogger(this.getClass().getName()).log(Level.WARNING, "Error when processing packet -> disconnecting", ex);
                 break;
             }
         }
