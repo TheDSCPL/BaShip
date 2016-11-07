@@ -20,9 +20,9 @@ public class ServerThread extends Thread {
             System.out.println("Server running on " + serverSocket.getInetAddress().getHostName() + ":" + serverSocket.getLocalPort());
 
             while (true) {
-                ClientConnection clientConn = new ClientConnection(serverSocket.accept());
+                /*ClientConnection clientConn = new ClientConnection(serverSocket.accept());
                 clientConn.handler = new ClientHandler();
-                clientConn.start();
+                clientConn.start();*/
             }
         }
         catch (IOException ex) {
