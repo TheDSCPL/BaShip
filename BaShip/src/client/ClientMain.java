@@ -15,16 +15,16 @@ public class ClientMain implements Connection.Handler {
 
     public static final ClientMain instance = new ClientMain(); // Singleton
     private static final MainFrame mainFrame = new MainFrame();
-    private static final Executor backgroundExecutor = Executors.newCachedThreadPool();
+    private static final ExecutorService backgroundExecutor = Executors.newCachedThreadPool();
     public static final Configuration config = new Configuration("src/client/config.properties");
     public static ServerConnection connection;
     
     public static void main(String args[]) throws IOException, ClassNotFoundException, InterruptedException {
         // Run interface
-        runMain(() -> { mainFrame.setVisible(true); });
+        runOnUI(() -> { mainFrame.setVisible(true); });
         
         // Test
-        System.out.println("Username available? " + connection.isUsernameAvailable("alex"));
+        //System.out.println("Username available? " + connection.isUsernameAvailable("alex"));
     }
         
     /**
@@ -36,10 +36,18 @@ public class ClientMain implements Connection.Handler {
     }
     
     /**
+     * Run a Runnable on a background thread asynchronously
+     * @param r The runnable to run
+     */
+    public static Future runBackground(Callable r) {
+        return backgroundExecutor.submit(r);
+    }
+    
+    /**
      * Run a Runnable object on the interface thread
      * @param r The runnable to run
      */
-    public static void runMain(Runnable r) {
+    public static void runOnUI(Runnable r) {
         java.awt.EventQueue.invokeLater(r);
     }
     
