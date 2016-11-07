@@ -57,7 +57,7 @@ public class LoginPanel extends javax.swing.JPanel {
         retypePasswordDialog.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         retypePasswordDialog.setAlwaysOnTop(true);
         retypePasswordDialog.setMinimumSize(new java.awt.Dimension(250, 170));
-        retypePasswordDialog.setModalityType(java.awt.Dialog.ModalityType.TOOLKIT_MODAL);
+        retypePasswordDialog.setModalityType(java.awt.Dialog.ModalityType.APPLICATION_MODAL);
         retypePasswordDialog.setName("Retype your password, please"); // NOI18N
 
         retypePasswordLabel.setText("Please, retype your password");

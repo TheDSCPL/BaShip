@@ -10,7 +10,7 @@
           <Dimension value="[250, 170]"/>
         </Property>
         <Property name="modalityType" type="java.awt.Dialog$ModalityType" editor="org.netbeans.modules.form.editors.EnumEditor">
-          <Value id="TOOLKIT_MODAL"/>
+          <Value id="APPLICATION_MODAL"/>
         </Property>
         <Property name="name" type="java.lang.String" value="Retype your password, please" noResource="true"/>
       </Properties>
