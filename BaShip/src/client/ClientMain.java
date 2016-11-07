@@ -1,18 +1,17 @@
 package client;
 
-import sharedlib.conn.Connection;
-import sharedlib.conn.packet.Packet;
 import client.conn.ServerConnection;
 import client.ui.*;
 import java.io.*;
-import java.net.*;
 import java.util.concurrent.*;
 import sharedlib.config.*;
+import sharedlib.conn.Connection;
+import sharedlib.conn.packet.Packet;
 
 public class ClientMain implements Connection.Handler {
 
     private ClientMain() {
-        
+
     }
 
     public static final ClientMain instance = new ClientMain(); // Singleton
@@ -26,7 +25,7 @@ public class ClientMain implements Connection.Handler {
         runOnUI(() -> {
             mainFrame.setVisible(true);
         });
-        
+
         // Test
         //System.out.println("Username available? " + connection.isUsernameAvailable("alex"));
     }
@@ -42,13 +41,14 @@ public class ClientMain implements Connection.Handler {
 
     /**
      * Run a Runnable on a background thread asynchronously
+     *
      * @param r The runnable to run
-     * @return 
+     * @return
      */
     public static Future runBackground(Callable r) {
         return backgroundExecutor.submit(r);
     }
-    
+
     /**
      * Run a Runnable object on the interface thread
      *
@@ -63,11 +63,17 @@ public class ClientMain implements Connection.Handler {
      *
      * @throws java.io.IOException if cannot connect to server
      */
-    public void connectToServer() throws IOException {
-        Socket socket = new Socket(config.getS("server.ip"), config.getI("server.port"));
-        connection = new ServerConnection(socket);
-        connection.handler = instance;
-        connection.start();
+    public void connectToServer() {
+        /*Socket socket;
+        try {
+            socket = new Socket(config.getS("server.ip"), config.getI("server.port"));
+            connection = new ServerConnection(socket);
+            connection.handler = instance;
+            connection.start();
+        }
+        catch (IOException ex) {
+            Logger.getLogger(ClientMain.class.getName()).log(Level.SEVERE, null, ex);
+        }*/
     }
 
     @Override

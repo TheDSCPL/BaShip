@@ -27,10 +27,10 @@ public class ServerConnection extends Connection {
      * @return
      * @throws ConnectionException
      */
-    public boolean checkUsernamePasswordCombination(String username, String password) throws ConnectionException {
+    public boolean checkUsernamePasswordCombination(String username, char[] password) throws ConnectionException {
         QueryPacket request = new QueryPacket("UsernamePasswordPairExist");
         request.m.put("username", username);
-        request.m.put("password", password);
+        //request.m.put("password", password);
         return ((BoolPacket) sendAndReceive(request)).b;
     }
 
