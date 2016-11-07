@@ -1,11 +1,11 @@
 package client.ui;
 
-import java.awt.Component;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
-import javax.swing.JLayeredPane;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
+import client.ClientMain;
+import java.awt.*;
+import java.awt.event.*;
+import java.util.concurrent.*;
+import javax.swing.*;
+import javax.swing.event.*;
 
 /*
 Luis, notas:
@@ -55,7 +55,6 @@ public class LoginPanel extends javax.swing.JPanel {
         registerButton = new javax.swing.JButton();
 
         retypePasswordDialog.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        retypePasswordDialog.setAlwaysOnTop(true);
         retypePasswordDialog.setMinimumSize(new java.awt.Dimension(250, 170));
         retypePasswordDialog.setModalityType(java.awt.Dialog.ModalityType.APPLICATION_MODAL);
         retypePasswordDialog.setName("Retype your password, please"); // NOI18N
@@ -67,6 +66,12 @@ public class LoginPanel extends javax.swing.JPanel {
         retypePasswordConfirmButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 retypePasswordConfirmButtonActionPerformed(evt);
+            }
+        });
+
+        retypePasswordField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                retypePasswordFieldActionPerformed(evt);
             }
         });
 
@@ -89,20 +94,19 @@ public class LoginPanel extends javax.swing.JPanel {
             .addGroup(retypePasswordPanelLayout.createSequentialGroup()
                 .addGroup(retypePasswordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(retypePasswordPanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(retypePasswordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(retypePasswordPanelLayout.createSequentialGroup()
-                                .addGap(2, 2, 2)
-                                .addComponent(retypePasswordConfirmButton)
-                                .addGap(18, 18, 18)
-                                .addComponent(retypePasswordCancelButton))
-                            .addComponent(retypePasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(retypePasswordPanelLayout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addGroup(retypePasswordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(retypePasswordLabel)
-                            .addComponent(retypePasswordNoMatchLabel))))
-                .addContainerGap(11, Short.MAX_VALUE))
+                            .addComponent(retypePasswordNoMatchLabel)))
+                    .addGroup(retypePasswordPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(retypePasswordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(retypePasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(retypePasswordPanelLayout.createSequentialGroup()
+                                .addComponent(retypePasswordConfirmButton)
+                                .addGap(28, 28, 28)
+                                .addComponent(retypePasswordCancelButton)))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         retypePasswordPanelLayout.setVerticalGroup(
             retypePasswordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -124,15 +128,15 @@ public class LoginPanel extends javax.swing.JPanel {
         retypePasswordDialog.getContentPane().setLayout(retypePasswordDialogLayout);
         retypePasswordDialogLayout.setHorizontalGroup(
             retypePasswordDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, retypePasswordDialogLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(retypePasswordDialogLayout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(retypePasswordPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         retypePasswordDialogLayout.setVerticalGroup(
             retypePasswordDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(retypePasswordDialogLayout.createSequentialGroup()
-                .addComponent(retypePasswordPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 112, Short.MAX_VALUE)
+                .addComponent(retypePasswordPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 111, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -179,13 +183,13 @@ public class LoginPanel extends javax.swing.JPanel {
         loadingPanelLayout.setVerticalGroup(
             loadingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(loadingPanelLayout.createSequentialGroup()
-                .addGap(19, 19, 19)
+                .addContainerGap()
                 .addComponent(pleaseWaitLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ajaxLoader3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(loadingCancel)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         usernameField.setToolTipText("Insert Username");
@@ -237,12 +241,8 @@ public class LoginPanel extends javax.swing.JPanel {
         mainLoginLayerLayout.setHorizontalGroup(
             mainLoginLayerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainLoginLayerLayout.createSequentialGroup()
-                .addGap(46, 46, 46)
-                .addGroup(mainLoginLayerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(mainLoginLayerLayout.createSequentialGroup()
-                        .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(38, 38, 38)
-                        .addComponent(registerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(41, 41, 41)
+                .addGroup(mainLoginLayerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(mainLoginLayerLayout.createSequentialGroup()
                         .addGroup(mainLoginLayerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(usernameLabel)
@@ -250,8 +250,12 @@ public class LoginPanel extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(mainLoginLayerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(passwordField)
-                            .addComponent(usernameField, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(45, Short.MAX_VALUE))
+                            .addComponent(usernameField, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(mainLoginLayerLayout.createSequentialGroup()
+                        .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(38, 38, 38)
+                        .addComponent(registerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(50, Short.MAX_VALUE))
             .addGroup(mainLoginLayerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(mainLoginLayerLayout.createSequentialGroup()
                     .addComponent(loadingPanel)
@@ -260,7 +264,7 @@ public class LoginPanel extends javax.swing.JPanel {
         mainLoginLayerLayout.setVerticalGroup(
             mainLoginLayerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainLoginLayerLayout.createSequentialGroup()
-                .addGap(47, 47, 47)
+                .addContainerGap()
                 .addGroup(mainLoginLayerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(usernameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(usernameLabel))
@@ -268,14 +272,14 @@ public class LoginPanel extends javax.swing.JPanel {
                 .addGroup(mainLoginLayerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(passwordLabel))
-                .addGap(49, 49, 49)
+                .addGap(26, 26, 26)
                 .addGroup(mainLoginLayerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(loginButton)
                     .addComponent(registerButton))
-                .addContainerGap(81, Short.MAX_VALUE))
+                .addContainerGap(67, Short.MAX_VALUE))
             .addGroup(mainLoginLayerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(mainLoginLayerLayout.createSequentialGroup()
-                    .addGap(118, 118, 118)
+                    .addGap(64, 64, 64)
                     .addComponent(loadingPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
@@ -292,8 +296,9 @@ public class LoginPanel extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(mainLoginLayer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap()
+                .addComponent(mainLoginLayer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
     
@@ -389,49 +394,47 @@ public class LoginPanel extends javax.swing.JPanel {
         });
     }
     
-    private Thread blinker = null;
-    private void getNewBlinker()
-    {
-        blinker = new Thread()
+    private final Callable blinker = new Callable() {
+        @Override
+        public Object call() throws Exception {
+            try
             {
-                @Override
-                public void run()
+                for (int i = 0; i < 4; i++)
                 {
-                    try {
-                        for(int i=0; i<2; i++)
-                        {
-                            retypePasswordNoMatchLabel.setForeground(new java.awt.Color(0, 0, 0));  //black
-                            Thread.sleep(100);
-                            retypePasswordNoMatchLabel.setForeground(new java.awt.Color(255, 51, 51));  //red
-                            Thread.sleep(100);
-                        }
-                    } catch (InterruptedException leaveThread) {
-                        retypePasswordNoMatchLabel.setForeground(new java.awt.Color(255, 51, 51));  //red
-                        getNewBlinker();
-                        return;
-                    }
+                    ClientMain.runOnUI(() -> {
+                        retypePasswordNoMatchLabel.setForeground(new java.awt.Color(0, 0, 0));
+                    }); //black
+                    Thread.sleep(50);
+                    ClientMain.runOnUI(() -> {
+                        retypePasswordNoMatchLabel.setForeground(new java.awt.Color(255, 51, 51));
+                    });  //red
+                    Thread.sleep(50);
                 }
-            };
-        blinker.setDaemon(true);
-    }
+            }
+            catch (InterruptedException leaveThread)
+            {
+                ClientMain.runOnUI(() -> {
+                    retypePasswordNoMatchLabel.setForeground(new java.awt.Color(255, 51, 51));
+                });  //red
+            }
+            return null;
+        };
+        
+    };
+    private Future lastActiveBlinker = null;
     
     private void blinkPasswordsMismatch()
     {
-        if(!retypePasswordNoMatchLabel.isVisible())
-            return;
-        if(blinker == null)
-        {
-            getNewBlinker();
-        }
+        retypePasswordNoMatchLabel.setVisible(true);
         try
         {
-            if(!blinker.isAlive())
-                blinker.start();
+            if(lastActiveBlinker != null)
+                lastActiveBlinker.cancel(true);
+            lastActiveBlinker = ClientMain.runBackground(blinker);
         }
         catch(Exception ignored)
         {
-            getNewBlinker();
-            blinker.start();
+            
         }
     }
     
@@ -439,24 +442,37 @@ public class LoginPanel extends javax.swing.JPanel {
     {
         retypePasswordField.setText("");
         retypePasswordNoMatchLabel.setVisible(false);
+        try {
+            Point p = null;
+            synchronized(this.getTreeLock())
+            {
+                p=this.getLocationOnScreen();
+            }
+            retypePasswordDialog.setLocation(p);
+        }
+        catch(Throwable ignored)
+        {
+            
+        }
+        retypePasswordDialog.setLocation(getPanelLocation());
         retypePasswordNoMatchLabel.setForeground(new java.awt.Color(255, 51, 51));  //red
         retypePasswordNoMatchLabel.setFont(new java.awt.Font("Tahoma", 1, 11));     //bold
     }
     
     /**
-     * Sets all components in a JLayeredPane as enabled or not.
+     * Sets all components in a Container as enabled or not.
      * @param pane pane to operate on
      * @param enabled if all components should be set to enabled or not
-     * @param recursive if all nested JLayeredPanes' components should also be considered
+     * @param recursive if all nested Containers' components should also be considered
      */
-    private void setPanelEnabled(JLayeredPane pane, boolean enabled, boolean recursive)
+    private void setPanelEnabled(Container pane, boolean enabled, boolean recursive)
     {
         System.out.println("setPanelEnabled " + enabled);
         synchronized (pane.getTreeLock())   //necessary to call getComponents
         {
             for(Component c : pane.getComponents())
             {
-                if(recursive && (c instanceof JLayeredPane))
+                if(recursive && (c instanceof Container))
                     setPanelEnabled((JLayeredPane)c, enabled, recursive);
                 c.setEnabled(enabled);
             }
@@ -494,6 +510,22 @@ public class LoginPanel extends javax.swing.JPanel {
         }
     }
     
+    public Point getPanelLocation()
+    {
+        Point p=null;
+        try {
+            synchronized(this.getTreeLock())
+            {
+                p=this.getLocationOnScreen();
+            }
+        }
+        catch(Throwable ignored)
+        {
+            
+        }
+        return p;
+    }
+    
     private void usernameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameFieldActionPerformed
         loginButtonActionPerformed(evt);
     }//GEN-LAST:event_usernameFieldActionPerformed
@@ -505,6 +537,9 @@ public class LoginPanel extends javax.swing.JPanel {
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
         if(!loginButton.isEnabled() || !loginButton.isVisible())
             return;
+        ClientMain.runBackground(() -> {
+            //ClientMain
+        });
         setLoadingVisible(true);
     }//GEN-LAST:event_loginButtonActionPerformed
 
@@ -547,6 +582,12 @@ public class LoginPanel extends javax.swing.JPanel {
         // TODO cancel server request
         setLoadingVisible(false);
     }//GEN-LAST:event_loadingCancelActionPerformed
+
+    private void retypePasswordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_retypePasswordFieldActionPerformed
+        if(!retypePasswordConfirmButton.isEnabled() || !retypePasswordConfirmButton.isVisible())
+            return;
+        retypePasswordConfirmButtonActionPerformed(evt);
+    }//GEN-LAST:event_retypePasswordFieldActionPerformed
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel ajaxLoader3;
