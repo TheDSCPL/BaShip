@@ -13,7 +13,6 @@ Luis, notas:
  - Não deve ser possível mudar o tamanho da janela
  - Falta a barra de cima com o botão para as prefs
  - Falta a zona para publicidade em baixo
- - A janela que abre para confirmar password devia ser "Modal", ou seja, não dá para fazer nada na outra janela antes de cancelares ou confirmares
 */
 
 
@@ -57,9 +56,9 @@ public class LoginPanel extends javax.swing.JPanel {
 
         retypePasswordDialog.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         retypePasswordDialog.setAlwaysOnTop(true);
-        retypePasswordDialog.setMaximumSize(new java.awt.Dimension(250, 170));
         retypePasswordDialog.setMinimumSize(new java.awt.Dimension(250, 170));
-        retypePasswordDialog.setPreferredSize(new java.awt.Dimension(250, 170));
+        retypePasswordDialog.setModalityType(java.awt.Dialog.ModalityType.TOOLKIT_MODAL);
+        retypePasswordDialog.setName("Retype your password, please"); // NOI18N
 
         retypePasswordLabel.setText("Please, retype your password");
 
@@ -133,7 +132,7 @@ public class LoginPanel extends javax.swing.JPanel {
         retypePasswordDialogLayout.setVerticalGroup(
             retypePasswordDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(retypePasswordDialogLayout.createSequentialGroup()
-                .addComponent(retypePasswordPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
+                .addComponent(retypePasswordPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 112, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
