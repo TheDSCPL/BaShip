@@ -1,9 +1,5 @@
-package server.threads;
+package server;
 
-/**
- *
- * @author Alex
- */
 public class ConsoleThread extends Thread {
     
     public ConsoleThread() {

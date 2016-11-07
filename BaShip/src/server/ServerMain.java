@@ -1,10 +1,8 @@
 package server;
 
-import java.sql.*;
 import java.util.*;
+import server.conn.*;
 import server.database.*;
-import server.threads.*;
-import sharedlib.coms.*;
 import sharedlib.config.*;
 
 public class ServerMain {
@@ -15,8 +13,8 @@ public class ServerMain {
     public static final ConsoleThread console = new ConsoleThread();
     public static final Set<ClientConnection> clients = new HashSet<>();
     
-    public static void main(String args[]) throws SQLException {
-        //db.connect(config.getS("database.username"), config.getS("database.password"));
+    public static void main(String args[]) {
+        db.connect(config.getS("database.username"), config.getS("database.password"));
         server.start();
         console.start();
     }

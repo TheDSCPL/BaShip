@@ -1,8 +1,9 @@
 package client;
 
+import client.conn.ServerConnection;
 import client.ui.*;
 import java.io.*;
-import java.net.Socket;
+import java.net.*;
 import java.util.concurrent.*;
 import sharedlib.coms.*;
 import sharedlib.coms.packet.*;
@@ -11,6 +12,7 @@ import sharedlib.config.*;
 public class ClientMain implements Connection.Handler {
 
     private ClientMain() {
+        
     }
 
     public static final ClientMain instance = new ClientMain(); // Singleton
@@ -18,33 +20,38 @@ public class ClientMain implements Connection.Handler {
     private static final Executor backgroundExecutor = Executors.newCachedThreadPool();
     public static final Configuration config = new Configuration("src/client/config.properties");
     public static ServerConnection connection;
-    
+
     public static void main(String args[]) throws IOException, ClassNotFoundException, InterruptedException {
         // Run interface
-        runMain(() -> { mainFrame.setVisible(true); });
-        
+        runMain(() -> {
+            mainFrame.setVisible(true);
+        });
+
         // Test
         System.out.println("Username available? " + connection.isUsernameAvailable("alex"));
     }
-        
+
     /**
      * Run a Runnable on a background thread asynchronously
+     *
      * @param r The runnable to run
      */
     public static void runBackground(Runnable r) {
         backgroundExecutor.execute(r);
     }
-    
+
     /**
      * Run a Runnable object on the interface thread
+     *
      * @param r The runnable to run
      */
     public static void runMain(Runnable r) {
         java.awt.EventQueue.invokeLater(r);
     }
-    
+
     /**
      * Create socket and connect to server
+     *
      * @throws java.io.IOException if cannot connect to server
      */
     public void connectToServer() throws IOException {

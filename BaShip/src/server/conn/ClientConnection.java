@@ -1,7 +1,8 @@
-package sharedlib.coms;
+package server.conn;
 
 import java.io.*;
 import java.net.*;
+import sharedlib.coms.Connection;
 
 public class ClientConnection extends Connection {
 

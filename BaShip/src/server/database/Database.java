@@ -1,6 +1,9 @@
 package server.database;
 
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import server.ServerMain;
 
 public class Database {
     // Create
@@ -28,8 +31,16 @@ public class Database {
         this.databaseURL = databaseURL;
     }
 
-    public void connect(String username, String password) throws SQLException {
-        conn = DriverManager.getConnection(databaseURL, username, password);
+    public void connect(String username, String password) {
+        try {
+            conn = DriverManager.getConnection(databaseURL, username, password);
+            System.out.println("Connected to SQL database");
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(ServerMain.class.getName()).log(Level.SEVERE, "Could not connect to SQL database", ex);
+            System.exit(-1);
+        }
+        
     }
 
     public void test() throws SQLException {

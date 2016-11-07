@@ -1,8 +1,9 @@
-package sharedlib.coms;
+package client.conn;
 
 import java.io.IOException;
 import java.net.*;
 import java.util.*;
+import sharedlib.coms.Connection;
 import sharedlib.coms.packet.*;
 import sharedlib.logic.game.*;
 import sharedlib.logic.player.*;

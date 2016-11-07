@@ -1,5 +1,7 @@
-package server;
+package server.conn;
 
+import server.ServerMain;
+import server.conn.ClientConnection;
 import sharedlib.coms.*;
 import sharedlib.coms.packet.*;
 

@@ -1,8 +1,9 @@
-package server.threads;
+package server.conn;
 
+import java.io.IOException;
 import java.net.*;
-import server.*;
-import sharedlib.coms.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ServerThread extends Thread {
 
@@ -24,9 +25,10 @@ public class ServerThread extends Thread {
                 clientConn.start();
             }
         }
-        catch (Throwable ex) {
-            ex.printStackTrace();
+        catch (IOException ex) {
+            Logger.getLogger(ServerThread.class.getName()).log(Level.SEVERE, "Could not start server", ex);
             System.exit(-1);
         }
+        
     }
 }
