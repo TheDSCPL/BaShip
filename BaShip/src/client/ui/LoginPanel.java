@@ -1,6 +1,7 @@
 package client.ui;
 
 import java.awt.Component;
+import java.awt.Point;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import javax.swing.JLayeredPane;
@@ -439,6 +440,19 @@ public class LoginPanel extends javax.swing.JPanel {
     {
         retypePasswordField.setText("");
         retypePasswordNoMatchLabel.setVisible(false);
+        try {
+            Point p = null;
+            synchronized(this.getTreeLock())
+            {
+                p=this.getLocationOnScreen();
+                retypePasswordDialog.setLocation(p);
+            }
+        }
+        catch(Throwable ignored)
+        {
+            
+        }
+        retypePasswordDialog.setLocation(getPanelLocation());
         retypePasswordNoMatchLabel.setForeground(new java.awt.Color(255, 51, 51));  //red
         retypePasswordNoMatchLabel.setFont(new java.awt.Font("Tahoma", 1, 11));     //bold
     }
@@ -492,6 +506,22 @@ public class LoginPanel extends javax.swing.JPanel {
             loginButton.setEnabled(false);
             registerButton.setEnabled(false);
         }
+    }
+    
+    public Point getPanelLocation()
+    {
+        Point p=null;
+        try {
+            synchronized(this.getTreeLock())
+            {
+                p=this.getLocationOnScreen();
+            }
+        }
+        catch(Throwable ignored)
+        {
+            
+        }
+        return p;
     }
     
     private void usernameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameFieldActionPerformed
