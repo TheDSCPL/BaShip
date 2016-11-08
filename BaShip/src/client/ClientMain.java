@@ -23,9 +23,9 @@ public class ClientMain {
 
     public static void main(String args[]) throws IOException, ClassNotFoundException, InterruptedException, ConnectionException {
         // Run interface
-        /*runOnUI(() -> {
+        runOnUI(() -> {
             mainFrame.setVisible(true);
-        });*/
+        });
         
         // Test
         connectToServer();
