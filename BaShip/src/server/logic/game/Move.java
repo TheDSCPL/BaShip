@@ -1,6 +1,6 @@
-package sharedlib.logic.game;
+package server.logic.game;
 
-import sharedlib.logic.player.*;
+import server.logic.player.Player;
 
 /**
  *

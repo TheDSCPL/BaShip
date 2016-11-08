@@ -1,9 +1,9 @@
 package server.conn;
 
-import java.io.IOException;
+import java.io.*;
 import java.net.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.logging.*;
+import sharedlib.conn.*;
 
 public class ServerThread extends Thread {
 
@@ -20,15 +20,22 @@ public class ServerThread extends Thread {
             System.out.println("Server running on " + serverSocket.getInetAddress().getHostName() + ":" + serverSocket.getLocalPort());
 
             while (true) {
-                ClientConnection clientConn = new ClientConnection(serverSocket.accept());
-                clientConn.handler = new ClientHandler();
-                clientConn.start();
+                Socket socket = serverSocket.accept();
+
+                try {
+                    Connection conn = new Connection(socket);
+                    Client client = new Client(conn);
+                    conn.start();                    
+                }
+                catch (ConnectionException ex) {
+                    Logger.getLogger(ServerThread.class.getName()).log(Level.WARNING, "Accepted a client socket but could not connect -> ignoring connection", ex);
+                }
             }
         }
         catch (IOException ex) {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "Could not start server -> exiting", ex);
             System.exit(-1);
         }
-        
+
     }
 }

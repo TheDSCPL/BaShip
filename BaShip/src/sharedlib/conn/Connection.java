@@ -2,18 +2,21 @@ package sharedlib.conn;
 
 import java.io.*;
 import java.net.*;
+import java.util.Map;
+import java.util.Optional;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.*;
 import sharedlib.conn.packet.*;
 
-abstract public class Connection extends Thread {
+final public class Connection extends Thread {
 
     private final Socket socket;
-    private final ObjectInputStream receive;
-    private final ObjectOutputStream send;
+    private final BufferedReader receive;
+    private final PrintWriter send;
 
-    public Handler handler;
+    public Delegate delegate;
 
-    public interface Handler {
+    public interface Delegate {
 
         /**
          * Called whenever a packet is received that isn't part of a
@@ -23,7 +26,7 @@ abstract public class Connection extends Thread {
          * @param packet The packet that has been received
          * @return A response packet to be sent back, or null
          */
-        public Packet handle(Connection connection, Packet packet);
+        public Packet handle(Packet packet);
 
         /**
          * Called when the socket connection has just been started
@@ -40,50 +43,34 @@ abstract public class Connection extends Thread {
         public void disconnected(Connection connection);
     }
 
-    protected Connection(Socket socket) throws ConnectionException {
+    public Connection(Socket socket) throws ConnectionException {
         super("Connection thread for socket at " + socket.getInetAddress().getHostName() + ":" + socket.getPort());
         this.socket = socket;
 
-        // Note: this order is important. First create OutputStream, then create InputStream!
         try {
-            send = new ObjectOutputStream(socket.getOutputStream());
-            receive = new ObjectInputStream(socket.getInputStream());
+            send = new PrintWriter(socket.getOutputStream(), true);
+            receive = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         }
         catch (IOException ex) {
-            Logger.getLogger(this.getClass().getName()).log(Level.WARNING, null, ex);
             throw new ConnectionException(ex);
         }
     }
 
-    private Packet packageWaitingForResponse = null;
-
-    private synchronized Packet getPackageWaitingForResponse() {
-        return packageWaitingForResponse;
-    }
-
-    private synchronized void setPackageWaitingForResponse(Packet v) {
-        packageWaitingForResponse = v;
-    }
-
-    private Packet receivedResponse = null;
-
-    private synchronized Packet getReceivedResponse() {
-        return receivedResponse;
-    }
-
-    private synchronized void setReceivedResponse(Packet v) {
-        receivedResponse = v;
-    }
+    private Map<String, Optional<Packet>> packagesWaiting = new ConcurrentHashMap<>();
 
     private void send(Packet object) throws IOException {
-        send.writeObject(object);
+        send.println(object.toString());
     }
 
-    private Packet receive() throws IOException, ClassNotFoundException {
-        return (Packet) receive.readObject();
+    private Packet receive() throws IOException, PacketException {
+        String line = receive.readLine();
+        if (line != null) {
+            return Packet.fromString(line);
+        }
+        return null;
     }
 
-    protected final void sendOnly(Packet p) throws ConnectionException {
+    public void sendOnly(Packet p) throws ConnectionException {
         try {
             send(p);
         }
@@ -92,8 +79,8 @@ abstract public class Connection extends Thread {
         }
     }
 
-    protected final Packet sendAndReceive(Packet p) throws ConnectionException {
-        setPackageWaitingForResponse(p);
+    public final Packet sendAndReceive(Packet p) throws ConnectionException {
+        packagesWaiting.put(p.id, Optional.empty());
 
         try {
             send(p);
@@ -102,10 +89,7 @@ abstract public class Connection extends Thread {
             throw new ConnectionException(ex);
         }
 
-        Packet response = null;
-        while (response == null) {
-            response = getReceivedResponse();
-
+        while (!packagesWaiting.get(p.id).isPresent()) {
             try {
                 Thread.sleep(1);
             }
@@ -114,54 +98,45 @@ abstract public class Connection extends Thread {
             }
         }
 
-        setPackageWaitingForResponse(null);
-        return response;
+        return packagesWaiting.remove(p.id).get();
     }
 
-    public final String address() {
+    public String address() {
         return socket.getInetAddress().getHostName() + ":" + socket.getPort();
     }
 
     @Override
     public void run() {
-        if (handler != null) {
-            handler.connected(this);
+        if (delegate != null) {
+            delegate.connected(this);
         }
 
         while (true) {
             try {
                 Packet received = receive();
-                boolean handle = true;
 
-                Packet question = getPackageWaitingForResponse();
-                if (question != null) {
-                    if (received.request != null) {
-                        if (received.request.equals(question)) {
-                            setReceivedResponse(received);
-                            handle = false;
-                        }
-                    }
+                if (received == null) { // Disconnected
+                    break;
                 }
-
-                if (handle && handler != null) {
-                    Packet response = handler.handle(this, received);
+                else if (packagesWaiting.containsKey(received.pid)) {
+                    packagesWaiting.put(received.pid, Optional.of(received));
+                }
+                else if (delegate != null) {
+                    Packet response = delegate.handle(received);
                     if (response != null) {
+                        response.pid = received.id;
                         send(response);
                     }
                 }
-
             }
-            catch (EOFException ex) { // Disconnected
-                break;
-            }
-            catch (Throwable ex) {
+            catch (IOException | PacketException ex) {
                 Logger.getLogger(this.getClass().getName()).log(Level.WARNING, "Error when processing packet -> disconnecting", ex);
                 break;
             }
         }
 
-        if (handler != null) {
-            handler.disconnected(this);
+        if (delegate != null) {
+            delegate.disconnected(this);
         }
     }
 }

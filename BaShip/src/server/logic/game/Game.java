@@ -1,8 +1,8 @@
-package sharedlib.logic.game;
+package server.logic.game;
 
 import java.util.*;
-import sharedlib.logic.chat.*;
-import sharedlib.logic.player.*;
+import server.logic.chat.Chat;
+import server.logic.player.Player;
 
 /**
  *

@@ -6,14 +6,6 @@ import java.util.logging.Logger;
 import server.ServerMain;
 
 public class Database {
-    // Create
-    // Connect
-    // Begin transaction
-    // Commit transaction
-    // Execute query
-    // Execute query with results
-    // Parse reslts, perhaps?
-
     static {
         try {
             DriverManager.registerDriver(new org.postgresql.Driver());
@@ -42,10 +34,21 @@ public class Database {
         }
         
     }
+    
+    /*public void set(String preparedStatement, Object... values) throws SQLException {
+        PreparedStatement ps = conn.prepareStatement(preparedStatement);
+        ResultSet rs = ps.executeQuery();
+        
+        rs.
+    }
 
     public void test() throws SQLException {
         Statement stmt = conn.createStatement();
         String sql = "";
         stmt.executeUpdate(sql);
+    }*/
+    
+    public Connection getConn() {
+        return conn;
     }
 }

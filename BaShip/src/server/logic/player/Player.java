@@ -1,4 +1,4 @@
-package sharedlib.logic.player;
+package server.logic.player;
 
 public class Player {
     public final int id;

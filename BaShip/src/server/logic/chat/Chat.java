@@ -1,4 +1,4 @@
-package sharedlib.logic.chat;
+package server.logic.chat;
 
 import java.util.*;
 

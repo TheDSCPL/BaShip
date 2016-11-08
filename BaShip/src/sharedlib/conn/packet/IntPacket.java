@@ -1,10 +1,18 @@
 package sharedlib.conn.packet;
 
-/**
- *
- * @author Alex
- */
 public class IntPacket extends Packet {
-    public Integer i;
-    public IntPacket(Integer i) { this.i = i; }
+    public int i;
+    
+    public IntPacket(String s) {
+        i = new Integer(s);
+    }
+    
+    public IntPacket(int i) {
+        this.i = i;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + i;
+    }
 }
