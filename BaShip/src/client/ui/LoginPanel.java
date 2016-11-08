@@ -147,6 +147,8 @@ public class LoginPanel extends javax.swing.JPanel {
         setMaximumSize(new java.awt.Dimension(386, 251));
         setMinimumSize(new java.awt.Dimension(386, 251));
 
+        loadingPanel.setVisible(false);
+
         ajaxLoader3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/client/ui/images/ajax-loader.gif"))); // NOI18N
 
         pleaseWaitLabel.setText("Checking inserted data. Please wait");
@@ -163,18 +165,16 @@ public class LoginPanel extends javax.swing.JPanel {
         loadingPanelLayout.setHorizontalGroup(
             loadingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(loadingPanelLayout.createSequentialGroup()
-                .addContainerGap(60, Short.MAX_VALUE)
+                .addGap(46, 46, 46)
                 .addGroup(loadingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pleaseWaitLabel, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, loadingPanelLayout.createSequentialGroup()
-                        .addGroup(loadingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(pleaseWaitLabel, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, loadingPanelLayout.createSequentialGroup()
-                                .addComponent(ajaxLoader3)
-                                .addGap(71, 71, 71)))
-                        .addGap(47, 47, 47))
+                        .addComponent(ajaxLoader3)
+                        .addGap(71, 71, 71))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, loadingPanelLayout.createSequentialGroup()
                         .addComponent(loadingCancel)
-                        .addGap(101, 101, 101))))
+                        .addGap(54, 54, 54)))
+                .addContainerGap(61, Short.MAX_VALUE))
         );
         loadingPanelLayout.setVerticalGroup(
             loadingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -227,7 +227,7 @@ public class LoginPanel extends javax.swing.JPanel {
         loginPanelLayout.setHorizontalGroup(
             loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(loginPanelLayout.createSequentialGroup()
-                .addGap(46, 46, 46)
+                .addGap(30, 30, 30)
                 .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(loginPanelLayout.createSequentialGroup()
                         .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -241,7 +241,7 @@ public class LoginPanel extends javax.swing.JPanel {
                         .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(38, 38, 38)
                         .addComponent(registerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addContainerGap(61, Short.MAX_VALUE))
         );
         loginPanelLayout.setVerticalGroup(
             loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -274,7 +274,7 @@ public class LoginPanel extends javax.swing.JPanel {
                 .addContainerGap(55, Short.MAX_VALUE))
             .addGroup(mainLoginLayerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(mainLoginLayerLayout.createSequentialGroup()
-                    .addComponent(loginPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(loginPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap()))
         );
         mainLoginLayerLayout.setVerticalGroup(
@@ -295,13 +295,13 @@ public class LoginPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(mainLoginLayer)
+                .addComponent(mainLoginLayer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addComponent(mainLoginLayer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -335,14 +335,14 @@ public class LoginPanel extends javax.swing.JPanel {
             @Override
             public void windowOpened(WindowEvent e) {
                 resetRetypeDialog();
-                setPanelEnabled(mainLoginLayer, false, false);
+                setPanelEnabled(loginPanel, false, false);
             }
 
             @Override
             public void windowClosing(WindowEvent e) {
                 if(loadingPanel.isVisible())    //so the eventual delay on this method call doesn't re-enable the mainPane after the loading pane shows
                     return;
-                setPanelEnabled(mainLoginLayer, true, false);
+                setPanelEnabled(loginPanel, true, false);
                 checkFilledUserPassFields();
             }
 
@@ -350,7 +350,7 @@ public class LoginPanel extends javax.swing.JPanel {
             public void windowClosed(WindowEvent e) {
                 if(loadingPanel.isVisible())    //so the eventual delay on this method call doesn't re-enable the mainPane after the loading pane shows
                     return;
-                setPanelEnabled(mainLoginLayer, true, false);
+                setPanelEnabled(loginPanel, true, false);
                 checkFilledUserPassFields();
                 resetRetypeDialog();
             }
@@ -367,12 +367,12 @@ public class LoginPanel extends javax.swing.JPanel {
 
             @Override
             public void windowActivated(WindowEvent e) {
-                setPanelEnabled(mainLoginLayer, false, false);
+                setPanelEnabled(loginPanel, false, false);
             }
 
             @Override
             public void windowDeactivated(WindowEvent e) {
-                setPanelEnabled(mainLoginLayer, false, false);
+                setPanelEnabled(loginPanel, false, false);
             }
         });
         
@@ -472,13 +472,17 @@ public class LoginPanel extends javax.swing.JPanel {
      */
     private void setPanelEnabled(Container pane, boolean enabled, boolean recursive)
     {
-        System.out.println("setPanelEnabled " + enabled);
         synchronized (pane.getTreeLock())   //necessary to call getComponents
         {
             for(Component c : pane.getComponents())
             {
                 if(recursive && (c instanceof Container))
-                    setPanelEnabled((Container)c, enabled, recursive);
+                {
+                    System.out.println("Recursive setPanelEnabled " + enabled + " " + c.getClass().getSimpleName());
+                    setPanelEnabled((Container)c, enabled, true);
+                }
+                else
+                    System.out.println("Non-recursive setPanelEnabled " + enabled + " " + c.getClass().getSimpleName());
                 c.setEnabled(enabled);
             }
             pane.setEnabled(enabled);
@@ -487,6 +491,7 @@ public class LoginPanel extends javax.swing.JPanel {
     
     private void setLoadingVisible(boolean visible)
     {
+        System.out.println("setLoadingVisible " + visible);
         Component[] components;
         synchronized(loadingPanel.getTreeLock())
         {
@@ -495,12 +500,14 @@ public class LoginPanel extends javax.swing.JPanel {
         for(Component c : components)
             c.setVisible(visible);
         loadingPanel.setVisible(visible);
-        setPanelEnabled(loadingPanel, visible, true);
-        setPanelEnabled(mainLoginLayer, !visible, false);
+        //setPanelEnabled(loadingPanel, visible, true);
+        setPanelEnabled(loginPanel, !visible, false);
+        loginButton.setVisible(!visible);
+        registerButton.setVisible(!visible);
         
         if(!visible)    //if deactivating the loading pane, recheck all the enabled and disabled components in the main pane
         {
-            setPanelEnabled(mainLoginLayer, true, false);
+            setPanelEnabled(loginPanel, true, false);
             //checkFilledUserPassFields();
         }
     }
@@ -549,13 +556,13 @@ public class LoginPanel extends javax.swing.JPanel {
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
         if(!loginButton.isEnabled() || !loginButton.isVisible())
             return;
-        ClientMain.runBackground(() -> {
+        /*ClientMain.runBackground(() -> {
             try {
                 //TODO change the null to the password char[] once it is implemented as such
-                /*if(ClientMain.connection.checkUsernamePasswordCombination(usernameField.getText(), null))
+                if(ClientMain.connection.checkUsernamePasswordCombination(usernameField.getText(), passwordField.getPassword()))
                 {
                     //Credentials are correct!
-                }*/
+                }
             } catch (Throwable ex) {
                 Logger.getLogger(LoginPanel.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -563,7 +570,7 @@ public class LoginPanel extends javax.swing.JPanel {
             {
                 setLoadingVisible(false);
             }
-        });
+        });*/
         setLoadingVisible(true);
     }//GEN-LAST:event_loginButtonActionPerformed
 
