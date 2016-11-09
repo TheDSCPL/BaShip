@@ -1,4 +1,4 @@
-package sharedlib.conn;
+package sharedlib.exceptions;
 
 public class ConnectionException extends Exception {
 

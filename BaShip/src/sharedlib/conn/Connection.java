@@ -1,5 +1,6 @@
 package sharedlib.conn;
 
+import sharedlib.exceptions.PacketException;
 import java.io.*;
 import java.net.*;
 import java.util.Map;
@@ -7,6 +8,7 @@ import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.*;
 import sharedlib.conn.packet.*;
+import sharedlib.exceptions.ConnectionException;
 
 final public class Connection extends Thread {
 
@@ -58,8 +60,8 @@ final public class Connection extends Thread {
 
     private Map<String, Optional<Packet>> packagesWaiting = new ConcurrentHashMap<>();
 
-    private void send(Packet object) throws IOException {
-        send.println(object.toString());
+    private void send(Packet object) throws IOException, PacketException {
+        send.println(object.getString());
     }
 
     private Packet receive() throws IOException, PacketException {
@@ -74,7 +76,7 @@ final public class Connection extends Thread {
         try {
             send(p);
         }
-        catch (IOException ex) {
+        catch (IOException | PacketException ex) {
             throw new ConnectionException(ex);
         }
     }
@@ -85,7 +87,7 @@ final public class Connection extends Thread {
         try {
             send(p);
         }
-        catch (IOException ex) {
+        catch (IOException | PacketException ex) {
             throw new ConnectionException(ex);
         }
 

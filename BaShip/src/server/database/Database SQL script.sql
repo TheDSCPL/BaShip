@@ -1,7 +1,7 @@
 CREATE TABLE users (
     uid BIGSERIAL PRIMARY KEY,
     username VARCHAR(256) UNIQUE NOT NULL,
-    password VARCHAR(256) NOT NULL
+    password VARCHAR(256) NOT 
 );
 
 CREATE TABLE games (

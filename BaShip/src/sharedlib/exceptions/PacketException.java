@@ -1,4 +1,4 @@
-package sharedlib.conn.packet;
+package sharedlib.exceptions;
 
 /**
  *

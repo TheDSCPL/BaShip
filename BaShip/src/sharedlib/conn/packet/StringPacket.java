@@ -1,14 +1,16 @@
 package sharedlib.conn.packet;
 
+import sharedlib.exceptions.PacketException;
+
 public class StringPacket extends Packet {
-    public String s;
+    public String str;
     
     public StringPacket(String s) {
-        this.s = s;
+        str = decodeString(s);
     }
 
     @Override
-    public String toString() {
-        return super.toString() + s;
+    public String getString() throws PacketException {
+        return super.getString() + encodeString(str);
     }
 }

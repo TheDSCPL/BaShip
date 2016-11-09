@@ -1,13 +1,14 @@
 package client;
 
-import client.conn.Server;
+import client.conn.*;
+import client.logic.*;
 import client.ui.*;
 import java.io.*;
-import java.net.Socket;
+import java.net.*;
 import java.util.concurrent.*;
 import sharedlib.config.*;
-import sharedlib.conn.Connection;
-import sharedlib.conn.ConnectionException;
+import sharedlib.conn.*;
+import sharedlib.exceptions.*;
 
 public class ClientMain {
 
@@ -20,6 +21,7 @@ public class ClientMain {
     private static final ExecutorService backgroundExecutor = Executors.newCachedThreadPool();
     public static final Configuration config = new Configuration("src/client/config.properties");
     public static Server server;
+    public static User loggedInUser;
 
     public static void main(String args[]) throws IOException, ClassNotFoundException, InterruptedException, ConnectionException {
         // Run interface
@@ -29,11 +31,11 @@ public class ClientMain {
         
         // Test
         connectToServer();
-        System.out.println("Test: " + server.stringTest());
-        System.out.println("Test: " + server.listTest());
-        server.listMapTest();
-        server.mapTest();
-        server.queryTest();
+        //System.out.println("Test: " + server.stringTest());
+        //System.out.println("Test: " + server.listTest());
+        //server.listMapTest();
+        //server.mapTest();
+        //server.queryTest();
     }
 
     /**

@@ -1,52 +1,41 @@
 package sharedlib.conn.packet;
 
-import java.util.Arrays;
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
+import sharedlib.exceptions.PacketException;
 
 public class ListMapPacket extends Packet {
 
-    public List<Map<String, String>> lm;
+    public List<Map<String, String>> listmap;
 
-    public ListMapPacket(String s) throws PacketException {
-        try {
-            lm = Arrays.asList(s.split(S2R))
-                .stream()
-                .map((ms) -> {
-                    Map<String, String> m = new HashMap<>();
-                    
-                    String[] parts = ms.split(S3R);
-                    for(int i = 0; i < parts.length; i += 2) {
-                        m.put(parts[i], parts[i + 1]);
-                    }
-                    
-                    return m;
-                })
-                .collect(Collectors.toList());
-        }
-        catch (Throwable ex) {
-            throw new PacketException(ex);
+    public ListMapPacket(String str) throws PacketException {
+
+        List<String> list = ListPacket.decodeList(str);
+        listmap = new ArrayList<>();
+
+        for (String s : list) {
+            listmap.add(MapPacket.decodeMap(s));
         }
     }
 
     public ListMapPacket(List<Map<String, String>> lm) {
-        this.lm = lm;
+        this.listmap = lm;
+    }
+
+    public ListMapPacket() {
+        this(new ArrayList<>());
     }
 
     @Override
-    public String toString() {
-        return super.toString()
-               + String
-                .join(S2, lm
-                      .stream()
-                      .map((m) -> {
-                          StringBuilder sb = new StringBuilder();
-                          m.forEach((k, v) -> sb.append(k).append(S3).append(v).append(S3));
-                          return sb.toString();
-                      })
-                      .collect(Collectors.toList()));
+    public String getString() throws PacketException {
+        List<String> list = new ArrayList<>();
+
+        for (Map<String, String> map : listmap) {
+            list.add(MapPacket.encodeMap(map));
+        }
+
+        return super.getString() + ListPacket.encodeList(list);
     }
 
 }

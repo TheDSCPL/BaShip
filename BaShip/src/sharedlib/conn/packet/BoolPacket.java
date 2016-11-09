@@ -1,5 +1,7 @@
 package sharedlib.conn.packet;
 
+import sharedlib.exceptions.PacketException;
+
 public class BoolPacket extends Packet {
     public boolean b;
     
@@ -12,7 +14,7 @@ public class BoolPacket extends Packet {
     }
 
     @Override
-    public String toString() {
-        return super.toString() + (b ? "true" : "false");
+    public String getString() throws PacketException {
+        return super.getString() + (b ? "true" : "false");
     }
 }

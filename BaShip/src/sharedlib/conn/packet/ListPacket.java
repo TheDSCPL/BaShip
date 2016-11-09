@@ -1,21 +1,48 @@
 package sharedlib.conn.packet;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
+import sharedlib.exceptions.PacketException;
 
 public class ListPacket extends Packet {
-    public List<String> l;
-    
-    public ListPacket(String s) {
-        l = Arrays.asList(s.split(S2R));
+
+    public List<String> list;
+
+    public ListPacket(String s) throws PacketException {
+        list = decodeList(s);
     }
-    
+
     public ListPacket(List<String> l) {
-        this.l = l;
+        list = l;
+    }
+
+    public ListPacket() {
+        this(new ArrayList<>());
     }
 
     @Override
-    public String toString() {
-        return super.toString() + String.join(S2, l);
+    public String getString() throws PacketException {
+        return super.getString() + encodeList(list);
+    }
+    
+    public static String encodeList(List<String> list) throws PacketException {
+        StringBuilder sb = new StringBuilder();
+
+        for (String str : list) {
+            sb.append(str).append(SEP_L);
+        }
+        
+        return sb.toString();
+    }
+    
+    public static List<String> decodeList(String str) throws PacketException {
+        List<String> list = new ArrayList<>();
+        
+        String[] sl = str.split(SPLIT_L);
+        for (String s : sl) {
+            list.add(decodeString(s));
+        }
+        
+        return list;
     }
 }

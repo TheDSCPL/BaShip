@@ -1,5 +1,6 @@
 package server.conn;
 
+import sharedlib.exceptions.ConnectionException;
 import java.io.*;
 import java.net.*;
 import java.util.logging.*;

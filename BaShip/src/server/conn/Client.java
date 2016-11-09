@@ -1,14 +1,12 @@
 package server.conn;
 
-import java.util.stream.Collectors;
-import server.ServerMain;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import server.*;
+import server.logic.user.User;
 import sharedlib.conn.*;
-import sharedlib.conn.packet.ListMapPacket;
-import sharedlib.conn.packet.ListPacket;
-import sharedlib.conn.packet.MapPacket;
-import sharedlib.conn.packet.Packet;
-import sharedlib.conn.packet.QueryPacket;
-import sharedlib.conn.packet.StringPacket;
+import sharedlib.conn.packet.*;
 
 public class Client implements Connection.Delegate {
 
@@ -20,51 +18,43 @@ public class Client implements Connection.Delegate {
     }
 
     @Override
-    public Packet handle(Packet packet) {
+    public Packet handle(Packet request) {
         Packet response = null;
 
-        if (packet instanceof StringPacket) {
-            StringPacket pckt = (StringPacket) packet;
-            if (pckt.s.equals("REQUEST")) {
-                response = new StringPacket("RESPONSE");
+        switch (request.query) {
+            case Login: {
+                MapPacket ip = (MapPacket) request;
+                MapPacket op = new MapPacket();
+                try {
+                    User u = User.login(ip.map.get("username"), ip.map.get("password"));
+                    op.map.put("id", String.valueOf(u.id));
+                    op.map.put("username", u.username);
+                }
+                catch (SQLException ex) {
+                    Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+                    op.map.put("error", "Could not run SQL query: " + ex.getMessage());
+                }
+                response = op;
+                break;
             }
-        }
-
-        if (packet instanceof ListPacket) {
-            ListPacket pckt = (ListPacket) packet;
-            response = new ListPacket(pckt.l.stream().map(String::toUpperCase).collect(Collectors.toList()));
-        }
-
-        if (packet instanceof ListMapPacket) {
-            ListMapPacket pckt = (ListMapPacket) packet;
-            System.out.println(pckt.lm);
-        }
-
-        if (packet instanceof QueryPacket) {
-            QueryPacket pckt = (QueryPacket) packet;
-            System.out.println(pckt.query + " -> " + pckt.info);
-        }
-
-        if (packet instanceof MapPacket) {
-            MapPacket pckt = (MapPacket) packet;
-            System.out.println(pckt.m);
-        }
-
-        /*if (packet instanceof QueryPacket) {
-            QueryPacket qpckt = (QueryPacket) packet;
-
-            switch (qpckt.query) {
-                case "UsernameAvailable":
-                    response = new BoolPacket(isUsernameAvailable((String) qpckt.m.get("username")));
-                    break;
-                default:
-                    Logger.getLogger(this.getClass().getName()).log(Level.WARNING, "Unknown query ''{0}'' -> ignoring", qpckt.query);
+            case Register: {
+                MapPacket ip = (MapPacket) request;
+                MapPacket op = new MapPacket();
+                try {
+                    User u = User.register(ip.map.get("username"), ip.map.get("password"));
+                    op.map.put("id", String.valueOf(u.id));
+                    op.map.put("username", u.username);
+                }
+                catch (SQLException ex) {
+                    Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+                    op.map.put("error", "Could not run SQL query: " + ex.getMessage());
+                }
+                response = op;
+                break;
             }
 
-            if (response != null) {
-                response.request = packet;
-            }
-        }*/
+        }
+
         return response;
     }
 

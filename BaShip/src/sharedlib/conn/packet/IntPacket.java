@@ -1,5 +1,7 @@
 package sharedlib.conn.packet;
 
+import sharedlib.exceptions.PacketException;
+
 public class IntPacket extends Packet {
     public int i;
     
@@ -12,7 +14,7 @@ public class IntPacket extends Packet {
     }
 
     @Override
-    public String toString() {
-        return super.toString() + i;
+    public String getString() throws PacketException {
+        return super.getString() + i;
     }
 }
