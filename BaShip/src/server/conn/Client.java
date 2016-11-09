@@ -77,11 +77,6 @@ public class Client implements Connection.Delegate {
     public Delegate delegate;
 
     public interface Delegate {
-
-        public void receiveGameMessage();
-
-        public void receiveGlobalMessage();
-        // ...
+        
     }
-
 }
