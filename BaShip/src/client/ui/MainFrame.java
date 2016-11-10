@@ -5,6 +5,9 @@
  */
 package client.ui;
 
+import client.ClientMain;
+import javax.swing.*;
+
 /**
  *
  * @author luisp
@@ -18,6 +21,20 @@ public class MainFrame extends javax.swing.JFrame {
         initComponents();
     }
 
+    public JPanel getLoginPanel()
+    {
+        return loginPanel2;
+    }
+    
+    public void changeToPanel(javax.swing.JComponent panel)
+    {
+        getContentPane().removeAll();
+        getContentPane().add(advertisementPanel1, java.awt.BorderLayout.PAGE_END);
+        getContentPane().add(panel, java.awt.BorderLayout.CENTER);
+
+        pack();
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -27,98 +44,19 @@ public class MainFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        loginLayout = new javax.swing.JLayeredPane();
-        advertisementPanel = new javax.swing.JLayeredPane();
-        advertisementImage = new javax.swing.JLabel();
-        loginPanel1 = new client.ui.LoginPanel();
-        topBar = new javax.swing.JPanel();
+        loginPanel2 = new client.ui.LoginPanel();
+        advertisementPanel1 = new client.ui.AdvertisementPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
-
-        advertisementPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Advertisement"));
-
-        advertisementImage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        advertisementImage.setText("ADVERTISEMENT BANNER");
-
-        advertisementPanel.setLayer(advertisementImage, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        javax.swing.GroupLayout advertisementPanelLayout = new javax.swing.GroupLayout(advertisementPanel);
-        advertisementPanel.setLayout(advertisementPanelLayout);
-        advertisementPanelLayout.setHorizontalGroup(
-            advertisementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(advertisementImage, javax.swing.GroupLayout.DEFAULT_SIZE, 362, Short.MAX_VALUE)
-        );
-        advertisementPanelLayout.setVerticalGroup(
-            advertisementPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(advertisementImage, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-        );
-
-        topBar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        javax.swing.GroupLayout topBarLayout = new javax.swing.GroupLayout(topBar);
-        topBar.setLayout(topBarLayout);
-        topBarLayout.setHorizontalGroup(
-            topBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        topBarLayout.setVerticalGroup(
-            topBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 32, Short.MAX_VALUE)
-        );
-
-        loginLayout.setLayer(advertisementPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        loginLayout.setLayer(loginPanel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        loginLayout.setLayer(topBar, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        javax.swing.GroupLayout loginLayoutLayout = new javax.swing.GroupLayout(loginLayout);
-        loginLayout.setLayout(loginLayoutLayout);
-        loginLayoutLayout.setHorizontalGroup(
-            loginLayoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(loginLayoutLayout.createSequentialGroup()
-                .addGroup(loginLayoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(loginLayoutLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(advertisementPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(loginPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(topBar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        loginLayoutLayout.setVerticalGroup(
-            loginLayoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, loginLayoutLayout.createSequentialGroup()
-                .addComponent(topBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(loginPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(advertisementPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(loginLayout, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(loginLayout, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
+        getContentPane().add(loginPanel2, java.awt.BorderLayout.CENTER);
+        getContentPane().add(advertisementPanel1, java.awt.BorderLayout.PAGE_END);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel advertisementImage;
-    private javax.swing.JLayeredPane advertisementPanel;
-    private javax.swing.JLayeredPane loginLayout;
-    private client.ui.LoginPanel loginPanel1;
-    private javax.swing.JPanel topBar;
+    private client.ui.AdvertisementPanel advertisementPanel1;
+    private client.ui.LoginPanel loginPanel2;
     // End of variables declaration//GEN-END:variables
 }

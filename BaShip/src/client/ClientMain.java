@@ -28,6 +28,25 @@ public class ClientMain {
         // Run interface
         runOnUI(() -> {
             mainFrame.setVisible(true);
+            runBackground(() -> {
+                try
+                {
+                    JPanel lobby = new LobbyPanel();
+                    while(true)
+                    {
+                        Thread.sleep(1500);
+                        runOnUI(() -> {
+                            mainFrame.changeToPanel(lobby);
+                        });
+                        Thread.sleep(1500);
+                        runOnUI(() -> {
+                            mainFrame.changeToPanel(mainFrame.getLoginPanel());
+                        });
+                    }
+
+                }
+                catch (Exception ignored) {}
+            });
         });
         
         // Connect to server

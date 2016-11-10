@@ -38,14 +38,12 @@ public class LoginPanel extends javax.swing.JPanel {
         jDialog2 = new javax.swing.JDialog();
         jDialog3 = new javax.swing.JDialog();
         jDialog4 = new javax.swing.JDialog();
-        mainLoginLayer = new javax.swing.JLayeredPane();
         loginPanel = new javax.swing.JPanel();
-        usernameField = new javax.swing.JTextField();
         usernameLabel = new javax.swing.JLabel();
-        passwordField = new javax.swing.JPasswordField();
         passwordLabel = new javax.swing.JLabel();
         loginButton = new javax.swing.JButton();
         registerButton = new javax.swing.JButton();
+        topBar = new javax.swing.JPanel();
 
         retypePasswordDialog.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         retypePasswordDialog.setMinimumSize(new java.awt.Dimension(250, 170));
@@ -235,7 +233,7 @@ public class LoginPanel extends javax.swing.JPanel {
                         .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(38, 38, 38)
                         .addComponent(registerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(61, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         loginPanelLayout.setVerticalGroup(
             loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -255,21 +253,17 @@ public class LoginPanel extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        mainLoginLayer.setLayer(loginPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        topBar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        javax.swing.GroupLayout mainLoginLayerLayout = new javax.swing.GroupLayout(mainLoginLayer);
-        mainLoginLayer.setLayout(mainLoginLayerLayout);
-        mainLoginLayerLayout.setHorizontalGroup(
-            mainLoginLayerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(mainLoginLayerLayout.createSequentialGroup()
-                .addComponent(loginPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+        javax.swing.GroupLayout topBarLayout = new javax.swing.GroupLayout(topBar);
+        topBar.setLayout(topBarLayout);
+        topBarLayout.setHorizontalGroup(
+            topBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
-        mainLoginLayerLayout.setVerticalGroup(
-            mainLoginLayerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(mainLoginLayerLayout.createSequentialGroup()
-                .addComponent(loginPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+        topBarLayout.setVerticalGroup(
+            topBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 32, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -278,14 +272,18 @@ public class LoginPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(mainLoginLayer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(loginPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(topBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(mainLoginLayer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(topBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
+                .addComponent(loginPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -586,8 +584,7 @@ public class LoginPanel extends javax.swing.JPanel {
     private javax.swing.JDialog jDialog4;
     private javax.swing.JButton loginButton;
     private javax.swing.JPanel loginPanel;
-    private javax.swing.JLayeredPane mainLoginLayer;
-    private javax.swing.JPasswordField passwordField;
+    public final javax.swing.JPasswordField passwordField = new javax.swing.JPasswordField();
     private javax.swing.JLabel passwordLabel;
     private javax.swing.JButton registerButton;
     private javax.swing.JButton retypePasswordCancelButton;
@@ -597,7 +594,8 @@ public class LoginPanel extends javax.swing.JPanel {
     private javax.swing.JLabel retypePasswordLabel;
     private javax.swing.JLabel retypePasswordNoMatchLabel;
     private javax.swing.JPanel retypePasswordPanel;
-    private javax.swing.JTextField usernameField;
+    private javax.swing.JPanel topBar;
+    public final javax.swing.JTextField usernameField = new javax.swing.JTextField();
     private javax.swing.JLabel usernameLabel;
     // End of variables declaration//GEN-END:variables
 }

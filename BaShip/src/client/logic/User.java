@@ -44,6 +44,6 @@ public class User {
 
     public static boolean isPasswordValid(char[] password) {
         String p = new String(password);
-        return p.length() > 6 && p.matches(".*\\d+.*") && p.matches("^[A-Za-z0-9_]+$");
+        return p.length() >= 6 && p.matches(".*\\d+.*") && p.matches("^[A-Za-z0-9_]+$");
     }
 }
