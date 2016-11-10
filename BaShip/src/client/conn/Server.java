@@ -10,6 +10,7 @@ public class Server implements Connection.Delegate {
 
     private final Connection conn;
 
+    @SuppressWarnings("LeakingThisInConstructor")
     public Server(Connection conn) {
         this.conn = conn;
         this.conn.delegate = this;
@@ -40,6 +41,21 @@ public class Server implements Connection.Delegate {
         public void receiveGlobalMessage();
     }
 
+    public boolean getUsernameAvailable(String username) throws UserMessageException {
+        StringPacket request = new StringPacket(username);
+        request.query = Query.UsernameAvailable;
+
+        BoolPacket response;
+        try {
+            response = (BoolPacket) conn.sendAndReceive(request);
+        }
+        catch (ConnectionException ex) {
+            throw new UserMessageException("Could not connect to server: " + ex.getMessage());
+        }
+
+        return response.b;
+    }
+
     public User doLogin(String username, char[] password) throws UserMessageException {
         MapPacket request = new MapPacket();
         request.query = Query.Login;
@@ -48,12 +64,12 @@ public class Server implements Connection.Delegate {
 
         MapPacket response;
         try {
-            response = (MapPacket) conn.sendAndReceive(request);        
+            response = (MapPacket) conn.sendAndReceive(request);
         }
         catch (ConnectionException ex) {
             throw new UserMessageException("Could not connect to server: " + ex.getMessage());
         }
-        
+
         if (response.map.containsKey("error")) {
             throw new UserMessageException("Could not login: " + response.map.get("error"));
         }
@@ -73,12 +89,12 @@ public class Server implements Connection.Delegate {
 
         MapPacket response;
         try {
-            response = (MapPacket) conn.sendAndReceive(request);        
+            response = (MapPacket) conn.sendAndReceive(request);
         }
         catch (ConnectionException ex) {
             throw new UserMessageException("Could not connect to server: " + ex.getMessage());
         }
-        
+
         if (response.map.containsKey("error")) {
             throw new UserMessageException("Could not register: " + response.map.get("error"));
         }
@@ -87,6 +103,18 @@ public class Server implements Connection.Delegate {
                     Long.parseLong(response.map.get("id")),
                     response.map.get("username")
             );
+        }
+    }
+    
+    public void doLogout() throws UserMessageException {
+        Packet request = new Packet();
+        request.query = Query.Logout;
+
+        try {
+            conn.sendAndReceive(request); // Response is an empty packet, just for confirmation
+        }
+        catch (ConnectionException ex) {
+            throw new UserMessageException("Could not connect to server: " + ex.getMessage());
         }
     }
 }

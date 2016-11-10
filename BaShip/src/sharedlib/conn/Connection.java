@@ -1,6 +1,5 @@
 package sharedlib.conn;
 
-import sharedlib.exceptions.PacketException;
 import java.io.*;
 import java.net.*;
 import java.util.Map;
@@ -9,6 +8,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.*;
 import sharedlib.conn.packet.*;
 import sharedlib.exceptions.ConnectionException;
+import sharedlib.exceptions.PacketException;
 
 final public class Connection extends Thread {
 
@@ -127,6 +127,7 @@ final public class Connection extends Thread {
                     Packet response = delegate.handle(received);
                     if (response != null) {
                         response.pid = received.id;
+                        response.query = Query.Response;
                         send(response);
                     }
                 }

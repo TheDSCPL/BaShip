@@ -1,11 +1,13 @@
 package client.ui;
 
-import client.ClientMain;
+import client.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.concurrent.*;
+import java.util.logging.*;
+import javax.swing.*;
 import javax.swing.event.*;
-import sharedlib.exceptions.UserMessageException;
+import sharedlib.exceptions.*;
 
 public class LoginPanel extends javax.swing.JPanel {
 
@@ -33,12 +35,15 @@ public class LoginPanel extends javax.swing.JPanel {
         retypePasswordField = new javax.swing.JPasswordField();
         retypePasswordCancelButton = new javax.swing.JButton();
         retypePasswordNoMatchLabel = new javax.swing.JLabel();
+        jDialog1 = new javax.swing.JDialog();
+        jDialog2 = new javax.swing.JDialog();
+        jDialog3 = new javax.swing.JDialog();
+        jDialog4 = new javax.swing.JDialog();
         mainLoginLayer = new javax.swing.JLayeredPane();
-        loadingPanel = new javax.swing.JPanel();
-        pleaseWaitLabel = new javax.swing.JLabel();
-        loadingCancel = new javax.swing.JButton();
         loginPanel = new javax.swing.JPanel();
+        usernameField = new javax.swing.JTextField();
         usernameLabel = new javax.swing.JLabel();
+        passwordField = new javax.swing.JPasswordField();
         passwordLabel = new javax.swing.JLabel();
         loginButton = new javax.swing.JButton();
         registerButton = new javax.swing.JButton();
@@ -129,40 +134,52 @@ public class LoginPanel extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
+        javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
+        jDialog1.getContentPane().setLayout(jDialog1Layout);
+        jDialog1Layout.setHorizontalGroup(
+            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        jDialog1Layout.setVerticalGroup(
+            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jDialog2Layout = new javax.swing.GroupLayout(jDialog2.getContentPane());
+        jDialog2.getContentPane().setLayout(jDialog2Layout);
+        jDialog2Layout.setHorizontalGroup(
+            jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        jDialog2Layout.setVerticalGroup(
+            jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jDialog3Layout = new javax.swing.GroupLayout(jDialog3.getContentPane());
+        jDialog3.getContentPane().setLayout(jDialog3Layout);
+        jDialog3Layout.setHorizontalGroup(
+            jDialog3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        jDialog3Layout.setVerticalGroup(
+            jDialog3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jDialog4Layout = new javax.swing.GroupLayout(jDialog4.getContentPane());
+        jDialog4.getContentPane().setLayout(jDialog4Layout);
+        jDialog4Layout.setHorizontalGroup(
+            jDialog4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        jDialog4Layout.setVerticalGroup(
+            jDialog4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
+
         setMaximumSize(new java.awt.Dimension(386, 251));
         setMinimumSize(new java.awt.Dimension(386, 251));
-
-        loadingPanel.setVisible(false);
-
-        pleaseWaitLabel.setText("Checking inserted data. Please wait");
-
-        loadingCancel.setText("Cancel");
-        loadingCancel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                loadingCancelActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout loadingPanelLayout = new javax.swing.GroupLayout(loadingPanel);
-        loadingPanel.setLayout(loadingPanelLayout);
-        loadingPanelLayout.setHorizontalGroup(
-            loadingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(loadingPanelLayout.createSequentialGroup()
-                .addGap(46, 46, 46)
-                .addGroup(loadingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pleaseWaitLabel, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, loadingPanelLayout.createSequentialGroup()
-                        .addComponent(loadingCancel)
-                        .addGap(54, 54, 54)))
-                .addContainerGap(61, Short.MAX_VALUE))
-        );
-        loadingPanelLayout.setVerticalGroup(
-            loadingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, loadingPanelLayout.createSequentialGroup()
-                .addComponent(pleaseWaitLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43)
-                .addComponent(loadingCancel))
-        );
 
         usernameField.setToolTipText("Insert Username");
         usernameField.addActionListener(new java.awt.event.ActionListener() {
@@ -236,10 +253,9 @@ public class LoginPanel extends javax.swing.JPanel {
                 .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(loginButton)
                     .addComponent(registerButton))
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        mainLoginLayer.setLayer(loadingPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
         mainLoginLayer.setLayer(loginPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout mainLoginLayerLayout = new javax.swing.GroupLayout(mainLoginLayer);
@@ -247,24 +263,14 @@ public class LoginPanel extends javax.swing.JPanel {
         mainLoginLayerLayout.setHorizontalGroup(
             mainLoginLayerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainLoginLayerLayout.createSequentialGroup()
-                .addGap(43, 43, 43)
-                .addComponent(loadingPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(55, Short.MAX_VALUE))
-            .addGroup(mainLoginLayerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(mainLoginLayerLayout.createSequentialGroup()
-                    .addComponent(loginPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap()))
+                .addComponent(loginPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         mainLoginLayerLayout.setVerticalGroup(
             mainLoginLayerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainLoginLayerLayout.createSequentialGroup()
-                .addGap(70, 70, 70)
-                .addComponent(loadingPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
-            .addGroup(mainLoginLayerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(mainLoginLayerLayout.createSequentialGroup()
-                    .addComponent(loginPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 22, Short.MAX_VALUE)))
+                .addComponent(loginPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -274,7 +280,7 @@ public class LoginPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(mainLoginLayer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -317,20 +323,12 @@ public class LoginPanel extends javax.swing.JPanel {
 
             @Override
             public void windowClosing(WindowEvent e) {
-                if (loadingPanel.isVisible()) //so the eventual delay on this method call doesn't re-enable the mainPane after the loading pane shows
-                {
-                    return;
-                }
                 setPanelEnabled(loginPanel, true, false);
                 checkFilledUserPassFields();
             }
 
             @Override
             public void windowClosed(WindowEvent e) {
-                if (loadingPanel.isVisible()) //so the eventual delay on this method call doesn't re-enable the mainPane after the loading pane shows
-                {
-                    return;
-                }
                 setPanelEnabled(loginPanel, true, false);
                 checkFilledUserPassFields();
                 resetRetypeDialog();
@@ -466,14 +464,6 @@ public class LoginPanel extends javax.swing.JPanel {
     private void setLoadingVisible(boolean visible) {
         System.out.println("setLoadingVisible " + visible);
         Component[] components;
-        synchronized (loadingPanel.getTreeLock()) {
-            components = loadingPanel.getComponents();
-        }
-        for (Component c : components) {
-            c.setVisible(visible);
-        }
-        loadingPanel.setVisible(visible);
-        //setPanelEnabled(loadingPanel, visible, true);
         setPanelEnabled(loginPanel, !visible, false);
         loginButton.setVisible(!visible);
         registerButton.setVisible(!visible);
@@ -513,51 +503,6 @@ public class LoginPanel extends javax.swing.JPanel {
         return p;
     }
 
-    private void usernameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameFieldActionPerformed
-        loginButtonActionPerformed(evt);
-    }//GEN-LAST:event_usernameFieldActionPerformed
-
-    private void passwordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordFieldActionPerformed
-        loginButtonActionPerformed(evt);
-    }//GEN-LAST:event_passwordFieldActionPerformed
-
-    private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
-        if (!loginButton.isEnabled() || !loginButton.isVisible()) {
-            return;
-        }
-        /*ClientMain.runBackground(() -> {
-            try {
-                //TODO change the null to the password char[] once it is implemented as such
-                if(ClientMain.connection.checkUsernamePasswordCombination(usernameField.getText(), passwordField.getPassword()))
-                {
-                    //Credentials are correct!
-                }
-            } catch (Throwable ex) {
-                Logger.getLogger(LoginPanel.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            finally
-            {
-                setLoadingVisible(false);
-            }
-        });*/
-
-        try {
-            ClientMain.loggedInUser = ClientMain.server.doLogin(usernameField.getText(), passwordField.getPassword());
-        }
-        catch (UserMessageException ex) {
-            //Logger.getLogger(LoginPanel.class.getName()).log(Level.SEVERE, null, ex);
-            System.err.println(ex.getMessage());
-            // Show message alert with text from the exception
-        }
-
-        setLoadingVisible(true);
-    }//GEN-LAST:event_loginButtonActionPerformed
-
-    private void registerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerButtonActionPerformed
-        resetRetypeDialog();
-        retypePasswordDialog.setVisible(true);
-    }//GEN-LAST:event_registerButtonActionPerformed
-
     private void retypePasswordCancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_retypePasswordCancelButtonActionPerformed
         retypePasswordDialog.dispose();
     }//GEN-LAST:event_retypePasswordCancelButtonActionPerformed
@@ -591,19 +536,13 @@ public class LoginPanel extends javax.swing.JPanel {
             ClientMain.loggedInUser = ClientMain.server.doRegister(usernameField.getText(), passwordField.getPassword());
         }
         catch (UserMessageException ex) {
-            //Logger.getLogger(LoginPanel.class.getName()).log(Level.SEVERE, null, ex);
-            System.err.println(ex.getMessage());
-            // Show message alert with text from the exception
+            Logger.getLogger(LoginPanel.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(ClientMain.mainFrame, ex.getMessage());
         }
 
         retypePasswordDialog.dispose();
         setLoadingVisible(true);
     }//GEN-LAST:event_retypePasswordConfirmButtonActionPerformed
-
-    private void loadingCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadingCancelActionPerformed
-        // TODO cancel server request
-        setLoadingVisible(false);
-    }//GEN-LAST:event_loadingCancelActionPerformed
 
     private void retypePasswordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_retypePasswordFieldActionPerformed
         if (!retypePasswordConfirmButton.isEnabled() || !retypePasswordConfirmButton.isVisible()) {
@@ -612,15 +551,60 @@ public class LoginPanel extends javax.swing.JPanel {
         retypePasswordConfirmButtonActionPerformed(evt);
     }//GEN-LAST:event_retypePasswordFieldActionPerformed
 
+    private void registerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerButtonActionPerformed
+        resetRetypeDialog();
+        retypePasswordDialog.setVisible(true);
+    }//GEN-LAST:event_registerButtonActionPerformed
+
+    private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
+        if (!loginButton.isEnabled() || !loginButton.isVisible()) {
+            return;
+        }
+        /*ClientMain.runBackground(() -> {
+            try {
+                //TODO change the null to the password char[] once it is implemented as such
+                if(ClientMain.connection.checkUsernamePasswordCombination(usernameField.getText(), passwordField.getPassword()))
+                {
+                    //Credentials are correct!
+                }
+            } catch (Throwable ex) {
+                Logger.getLogger(LoginPanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            finally
+            {
+                setLoadingVisible(false);
+            }
+        });*/
+
+        try {
+            ClientMain.loggedInUser = ClientMain.server.doLogin(usernameField.getText(), passwordField.getPassword());
+        }
+        catch (UserMessageException ex) {
+            Logger.getLogger(LoginPanel.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(ClientMain.mainFrame, ex.getMessage());
+        }
+
+        setLoadingVisible(true);
+    }//GEN-LAST:event_loginButtonActionPerformed
+
+    private void passwordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordFieldActionPerformed
+        loginButtonActionPerformed(evt);
+    }//GEN-LAST:event_passwordFieldActionPerformed
+
+    private void usernameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameFieldActionPerformed
+        loginButtonActionPerformed(evt);
+    }//GEN-LAST:event_usernameFieldActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton loadingCancel;
-    private javax.swing.JPanel loadingPanel;
+    private javax.swing.JDialog jDialog1;
+    private javax.swing.JDialog jDialog2;
+    private javax.swing.JDialog jDialog3;
+    private javax.swing.JDialog jDialog4;
     private javax.swing.JButton loginButton;
     private javax.swing.JPanel loginPanel;
     private javax.swing.JLayeredPane mainLoginLayer;
-    public final javax.swing.JPasswordField passwordField = new javax.swing.JPasswordField();
+    private javax.swing.JPasswordField passwordField;
     private javax.swing.JLabel passwordLabel;
-    private javax.swing.JLabel pleaseWaitLabel;
     private javax.swing.JButton registerButton;
     private javax.swing.JButton retypePasswordCancelButton;
     private javax.swing.JButton retypePasswordConfirmButton;
@@ -629,7 +613,7 @@ public class LoginPanel extends javax.swing.JPanel {
     private javax.swing.JLabel retypePasswordLabel;
     private javax.swing.JLabel retypePasswordNoMatchLabel;
     private javax.swing.JPanel retypePasswordPanel;
-    public final javax.swing.JTextField usernameField = new javax.swing.JTextField();
+    private javax.swing.JTextField usernameField;
     private javax.swing.JLabel usernameLabel;
     // End of variables declaration//GEN-END:variables
 }

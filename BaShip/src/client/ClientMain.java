@@ -17,7 +17,7 @@ public class ClientMain {
     }
 
     public static final ClientMain instance = new ClientMain(); // Singleton
-    private static final MainFrame mainFrame = new MainFrame();
+    public static final MainFrame mainFrame = new MainFrame();
     private static final ExecutorService backgroundExecutor = Executors.newCachedThreadPool();
     public static final Configuration config = new Configuration("src/client/config.properties");
     public static Server server;

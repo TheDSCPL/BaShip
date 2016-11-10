@@ -6,6 +6,10 @@ package sharedlib.conn;
  */
 public enum Query {
     Empty(""),
+    /**
+     * Indicates packet is not a query, but a response to a query
+     */
+    Response("Response"),
     UsernameAvailable("UsernameAvailable"),
     Register("Register"),
     Login("Login"),

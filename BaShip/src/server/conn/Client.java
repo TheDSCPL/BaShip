@@ -7,11 +7,13 @@ import server.*;
 import server.logic.user.User;
 import sharedlib.conn.*;
 import sharedlib.conn.packet.*;
+import sharedlib.exceptions.UserMessageException;
 
 public class Client implements Connection.Delegate {
 
     private final Connection conn;
 
+    @SuppressWarnings("LeakingThisInConstructor")
     public Client(Connection conn) {
         this.conn = conn;
         this.conn.delegate = this;
@@ -22,17 +24,33 @@ public class Client implements Connection.Delegate {
         Packet response = null;
 
         switch (request.query) {
+            case UsernameAvailable: {
+                StringPacket ip = (StringPacket) request;
+                boolean b = false;
+                try {
+                    b = User.isUsernameAvailable(ip.str);
+                }
+                catch (SQLException ex) {
+                    Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                response = new BoolPacket(b);
+                break;
+            }
             case Login: {
                 MapPacket ip = (MapPacket) request;
                 MapPacket op = new MapPacket();
                 try {
-                    User u = User.login(ip.map.get("username"), ip.map.get("password"));
+                    User u = User.login(this, ip.map.get("username"), ip.map.get("password"));
                     op.map.put("id", String.valueOf(u.id));
                     op.map.put("username", u.username);
                 }
                 catch (SQLException ex) {
                     Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
                     op.map.put("error", "Could not run SQL query: " + ex.getMessage());
+                }
+                catch (UserMessageException ex) {
+                    Logger.getLogger(Client.class.getName()).log(Level.INFO, null, ex);
+                    op.map.put("error", ex.getMessage());
                 }
                 response = op;
                 break;
@@ -41,7 +59,7 @@ public class Client implements Connection.Delegate {
                 MapPacket ip = (MapPacket) request;
                 MapPacket op = new MapPacket();
                 try {
-                    User u = User.register(ip.map.get("username"), ip.map.get("password"));
+                    User u = User.register(this, ip.map.get("username"), ip.map.get("password"));
                     op.map.put("id", String.valueOf(u.id));
                     op.map.put("username", u.username);
                 }
@@ -52,9 +70,13 @@ public class Client implements Connection.Delegate {
                 response = op;
                 break;
             }
-
+            case Logout: {
+                User.logout(this);
+                response = new Packet(); // Empty packet just for confirmation
+                break;
+            }
         }
-
+        
         return response;
     }
 
@@ -77,6 +99,6 @@ public class Client implements Connection.Delegate {
     public Delegate delegate;
 
     public interface Delegate {
-        
+
     }
 }
