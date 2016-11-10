@@ -91,6 +91,7 @@ public class Client implements Connection.Delegate {
     @Override
     public void disconnected(Connection connection) {
         System.out.println("Disconnected from client on " + connection.address());
+        User.logout(this);
         synchronized (ServerMain.clients) {
             ServerMain.clients.remove(this);
         }
