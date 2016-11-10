@@ -6,7 +6,7 @@ import client.ui.*;
 import java.io.*;
 import java.net.*;
 import java.util.concurrent.*;
-import javax.swing.JOptionPane;
+import javax.swing.*;
 import sharedlib.config.*;
 import sharedlib.conn.*;
 import sharedlib.exceptions.*;
@@ -24,12 +24,12 @@ public class ClientMain {
     public static Server server;
     public static User loggedInUser;
 
-    public static void main(String args[]) throws IOException, ClassNotFoundException, InterruptedException, ConnectionException {
+    public static void main(String args[]) {
         // Run interface
         runOnUI(() -> {
             mainFrame.setVisible(true);
         });
-
+        
         // Connect to server
         try {
             connectToServer();
