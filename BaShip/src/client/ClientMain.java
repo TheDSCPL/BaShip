@@ -6,6 +6,7 @@ import client.ui.*;
 import java.io.*;
 import java.net.*;
 import java.util.concurrent.*;
+import javax.swing.JOptionPane;
 import sharedlib.config.*;
 import sharedlib.conn.*;
 import sharedlib.exceptions.*;
@@ -28,14 +29,20 @@ public class ClientMain {
         runOnUI(() -> {
             mainFrame.setVisible(true);
         });
-        
-        // Test
-        connectToServer();
-        //System.out.println("Test: " + server.stringTest());
-        //System.out.println("Test: " + server.listTest());
-        //server.listMapTest();
-        //server.mapTest();
-        //server.queryTest();
+
+        // Connect to server
+        try {
+            connectToServer();
+        }
+        catch (ConnectionException ex) {
+            showAlert("Could not connect to server: " + ex.getMessage());
+        }
+    }
+
+    public static void showAlert(String message) {
+        runOnUI(() -> {
+            JOptionPane.showMessageDialog(ClientMain.mainFrame, message);
+        });
     }
 
     /**
@@ -71,7 +78,7 @@ public class ClientMain {
      *
      * @throws ConnectionException if cannot connect to server
      */
-    public static void connectToServer() throws ConnectionException {
+    private static void connectToServer() throws ConnectionException {
         Socket socket;
         try {
             socket = new Socket(config.getS("server.ip"), config.getI("server.port"));
@@ -79,8 +86,8 @@ public class ClientMain {
         catch (IOException ex) {
             throw new ConnectionException(ex);
         }
-        
-        Connection conn = new Connection(socket);        
+
+        Connection conn = new Connection(socket);
         server = new Server(conn);
         conn.start();
     }

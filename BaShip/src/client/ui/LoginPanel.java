@@ -5,7 +5,6 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.concurrent.*;
 import java.util.logging.*;
-import javax.swing.*;
 import javax.swing.event.*;
 import sharedlib.exceptions.*;
 
@@ -537,7 +536,7 @@ public class LoginPanel extends javax.swing.JPanel {
         }
         catch (UserMessageException ex) {
             Logger.getLogger(LoginPanel.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(ClientMain.mainFrame, ex.getMessage());
+            ClientMain.showAlert(ex.getMessage());
         }
 
         retypePasswordDialog.dispose();
@@ -560,28 +559,13 @@ public class LoginPanel extends javax.swing.JPanel {
         if (!loginButton.isEnabled() || !loginButton.isVisible()) {
             return;
         }
-        /*ClientMain.runBackground(() -> {
-            try {
-                //TODO change the null to the password char[] once it is implemented as such
-                if(ClientMain.connection.checkUsernamePasswordCombination(usernameField.getText(), passwordField.getPassword()))
-                {
-                    //Credentials are correct!
-                }
-            } catch (Throwable ex) {
-                Logger.getLogger(LoginPanel.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            finally
-            {
-                setLoadingVisible(false);
-            }
-        });*/
-
+        
         try {
             ClientMain.loggedInUser = ClientMain.server.doLogin(usernameField.getText(), passwordField.getPassword());
         }
         catch (UserMessageException ex) {
             Logger.getLogger(LoginPanel.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(ClientMain.mainFrame, ex.getMessage());
+            ClientMain.showAlert(ex.getMessage());
         }
 
         setLoadingVisible(true);
