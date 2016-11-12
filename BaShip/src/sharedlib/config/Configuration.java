@@ -1,6 +1,7 @@
 package sharedlib.config;
 
 import java.io.*;
+import java.net.URL;
 import java.util.*;
 import java.util.logging.*;
 
@@ -12,9 +13,9 @@ public class Configuration {
 
     private final Properties general = new Properties();
 
-    public Configuration(String propertiesFile) {
+    public Configuration(URL propertiesFile) {
         try {
-            general.load(new FileInputStream(new File(propertiesFile)));
+            general.load(new FileInputStream(new File(propertiesFile.toURI())));
         }
         catch (Throwable ex) {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "Could not access configuration file -> exiting", ex);

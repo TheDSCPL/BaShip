@@ -16,11 +16,11 @@ public class ClientMain {
     private ClientMain() {
 
     }
-
+    
     public static final ClientMain instance = new ClientMain(); // Singleton
     public static final MainFrame mainFrame = new MainFrame();
     private static final ExecutorService backgroundExecutor = Executors.newCachedThreadPool();
-    public static final Configuration config = new Configuration("src/client/config.properties");
+    public static final Configuration config = new Configuration(ClientMain.class.getResource("config.properties"));
     public static Server server;
     public static User loggedInUser;
 
