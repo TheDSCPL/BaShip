@@ -1,6 +1,7 @@
 package client.ui;
 
 import client.*;
+import client.logic.User;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.concurrent.*;
@@ -126,14 +127,14 @@ public class LoginPanel extends javax.swing.JPanel {
         retypePasswordDialogLayout.setVerticalGroup(
             retypePasswordDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(retypePasswordDialogLayout.createSequentialGroup()
-                .addComponent(retypePasswordPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 111, Short.MAX_VALUE)
+                .addComponent(retypePasswordPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         setMaximumSize(new java.awt.Dimension(386, 251));
         setMinimumSize(new java.awt.Dimension(386, 251));
 
-        usernameField.setToolTipText("Insert Username");
+        usernameField.setToolTipText("");
         usernameField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 usernameFieldActionPerformed(evt);
@@ -142,7 +143,7 @@ public class LoginPanel extends javax.swing.JPanel {
 
         usernameLabel.setText("Username:");
 
-        passwordField.setToolTipText("Insert your password");
+        passwordField.setToolTipText("");
         passwordField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 passwordFieldActionPerformed(evt);
@@ -152,7 +153,7 @@ public class LoginPanel extends javax.swing.JPanel {
         passwordLabel.setText("Password:");
 
         loginButton.setText("Login");
-        loginButton.setToolTipText("Click to login with the inserted credentials");
+        loginButton.setToolTipText("");
         loginButton.setEnabled(false);
         loginButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -161,7 +162,7 @@ public class LoginPanel extends javax.swing.JPanel {
         });
 
         registerButton.setText("Register");
-        registerButton.setToolTipText("Click to retype your password");
+        registerButton.setToolTipText("");
         registerButton.setEnabled(false);
         registerButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -245,7 +246,7 @@ public class LoginPanel extends javax.swing.JPanel {
 
     private void myInitComponents() {
         //CHECK USERNAME/PASSWORD FIELDS TO SEE IF BUTTONS SHOULD BE ENABLED
-        DocumentListener dl = new DocumentListener() {
+        DocumentListener dL = new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
                 checkFilledUserPassFields();
@@ -262,8 +263,8 @@ public class LoginPanel extends javax.swing.JPanel {
             }
         };
 
-        usernameField.getDocument().addDocumentListener(dl);
-        passwordField.getDocument().addDocumentListener(dl);
+        usernameField.getDocument().addDocumentListener(dL);
+        passwordField.getDocument().addDocumentListener(dL);
 
         //LISTENER TO KNOW WHEN THE RETYPE PASSWORD DIALOG IS CLOSED
         retypePasswordDialog.addWindowListener(new WindowListener() {
@@ -328,8 +329,19 @@ public class LoginPanel extends javax.swing.JPanel {
                 this.check();
             }
         });
+        
+        usernameField.setToolTipText(defaultUsernameFieldTooltip);
+        passwordField.setToolTipText(defaultPasswordFieldTooltip);
+        loginButton.setToolTipText(defaultLoginButtonTooltip);
+        registerButton.setToolTipText(defaultRegisterButtonTooltip);
     }
 
+    private final String defaultUsernameFieldTooltip = "Insert username";
+    private final String defaultPasswordFieldTooltip = "Insert password";
+    
+    private final String defaultLoginButtonTooltip = "Click to login with the inserted credentials";
+    private final String defaultRegisterButtonTooltip = "Click to retype your password";
+    
     private final Callable blinker = new Callable() {
         @Override
         public Object call() throws Exception {
@@ -355,6 +367,7 @@ public class LoginPanel extends javax.swing.JPanel {
     ;
 
     };
+    
     private Future lastActiveBlinker = null;
 
     private void blinkPasswordsMismatch() {
@@ -399,35 +412,82 @@ public class LoginPanel extends javax.swing.JPanel {
         }
     }
 
-    /*private void setLoadingVisible(boolean visible) {
-        System.out.println("setLoadingVisible " + visible);
-        Component[] components;
-        setPanelEnabled(loginPanel, !visible, false);
-        loginButton.setVisible(!visible);
-        registerButton.setVisible(!visible);
-
-        if (!visible) //if deactivating the loading pane, recheck all the enabled and disabled components in the main pane
-        {
-            setPanelEnabled(loginPanel, true, false);
-            //checkFilledUserPassFields();
-        }
-    }*/
-
     /**
      * Sets the buttons to enabled or disabled depending on if the
-     * username/password fields are empty or not
+     * username/password fields are valid or not
      */
     private void checkFilledUserPassFields() {
-        if (usernameField.getText().length() > 0 && passwordField.getPassword().length > 0) {
-            loginButton.setEnabled(true);
-            registerButton.setEnabled(true);
-        }
-        else {
+        String user = usernameField.getText();
+        char[] pass = passwordField.getPassword();
+        
+        if (user.length() == 0 && pass.length == 0) {
             loginButton.setEnabled(false);
             registerButton.setEnabled(false);
+
+            usernameField.setToolTipText(defaultUsernameFieldTooltip);
+            passwordField.setToolTipText(defaultPasswordFieldTooltip);
+            loginButton.setToolTipText(defaultLoginButtonTooltip);
+            registerButton.setToolTipText(defaultRegisterButtonTooltip);
+            return;
+        }
+
+        final boolean usernameIsValid  = User.isUsernameValid(user);
+        final boolean passwordIsValid= User.isPasswordValid(pass);
+        final String userError = "Usernames must only contain letters, digits and underscores";
+        final String passError = "Passwords must only contain letters and digits. Password must also have at least 1 digit and its minimum length is 6.";
+        
+        if(!usernameIsValid && user.length() > 0)
+        {
+            usernameField.setToolTipText(userError);
+            usernameField.setForeground(Color.red);
+        } else {
+            usernameField.setToolTipText(defaultUsernameFieldTooltip);
+            usernameField.setForeground(Color.black);
+        }
+        
+        if (!passwordIsValid && pass.length > 0) {
+            passwordField.setToolTipText(passError);
+            passwordField.setForeground(Color.red);
+        } else {
+            passwordField.setToolTipText(defaultPasswordFieldTooltip);
+            passwordField.setForeground(Color.black);
+        }
+        
+        if (usernameIsValid && passwordIsValid) {   //if there were no errors
+            loginButton.setEnabled(true);
+            registerButton.setEnabled(true);
+
+            usernameField.setToolTipText(defaultUsernameFieldTooltip);
+            passwordField.setToolTipText(defaultPasswordFieldTooltip);
+            loginButton.setToolTipText(defaultLoginButtonTooltip);
+            registerButton.setToolTipText(defaultRegisterButtonTooltip);
+        } else {
+            loginButton.setEnabled(false);
+            registerButton.setEnabled(false);
+
+            String error;
+            if(!usernameIsValid && user.length() > 0)
+            {
+                error = userError;
+                if(!passwordIsValid && pass.length > 0)
+                    error += ". " + passError;
+            }
+            else if(!passwordIsValid && pass.length > 0)
+                error = passError;
+            else if(user.length() <= 0 && pass.length <= 0)
+                error = "You must fill in the fields";
+            else if(user.length() <=0 )
+                error = "You must fill in the username";
+            else if(pass.length <= 0)
+                error = "You must fill in the password";
+            else
+                error = "Unknown error!!!";
+            loginButton.setToolTipText(error);
+            registerButton.setToolTipText(error);
+
         }
     }
-
+    
     public Point getPanelLocation() {
         Point p = null;
         try {
@@ -452,6 +512,8 @@ public class LoginPanel extends javax.swing.JPanel {
      * otherwise
      */
     private boolean compareCharArray(char[] ca1, char[] ca2) {
+        if(ca1 == null || ca2 == null)
+            return false;
         if (ca1.length != ca2.length) {
             return false;
         }
