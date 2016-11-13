@@ -1,10 +1,10 @@
 package server.conn;
 
-import sharedlib.exceptions.ConnectionException;
 import java.io.*;
 import java.net.*;
 import java.util.logging.*;
 import sharedlib.conn.*;
+import sharedlib.exceptions.ConnectionException;
 
 public class ServerThread extends Thread {
 
@@ -18,7 +18,7 @@ public class ServerThread extends Thread {
     @Override
     public void run() {
         try (ServerSocket serverSocket = new ServerSocket(port)) {
-            System.out.println("Server running on " + serverSocket.getInetAddress().getHostName() + ":" + serverSocket.getLocalPort());
+            System.out.println("Server running on " + serverSocket.getInetAddress().getHostAddress()+ ":" + serverSocket.getLocalPort());
 
             while (true) {
                 Socket socket = serverSocket.accept();

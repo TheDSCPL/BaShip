@@ -1,13 +1,12 @@
 package server.conn;
 
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.logging.*;
 import server.*;
-import server.logic.user.User;
+import server.logic.user.*;
 import sharedlib.conn.*;
 import sharedlib.conn.packet.*;
-import sharedlib.exceptions.UserMessageException;
+import sharedlib.exceptions.*;
 
 public class Client implements Connection.Delegate {
 
@@ -92,6 +91,7 @@ public class Client implements Connection.Delegate {
     @Override
     public void disconnected(Connection connection) {
         System.out.println("Disconnected from client on " + connection.address());
+        User.logout(this);
         synchronized (ServerMain.clients) {
             ServerMain.clients.remove(this);
         }

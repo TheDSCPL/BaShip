@@ -9,7 +9,7 @@ import sharedlib.exceptions.*;
 
 public class Server implements Connection.Delegate {
 
-    private final Connection conn;
+    private final Connection conn; 
 
     @SuppressWarnings("LeakingThisInConstructor")
     public Server(Connection conn) {
