@@ -55,7 +55,7 @@ public class User {
             }
         }
         else {
-            throw new UserMessageException("Inavlid login credentials");
+            throw new UserMessageException("Invalid login credentials");
         }
     }
     
