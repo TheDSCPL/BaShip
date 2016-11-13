@@ -70,6 +70,7 @@ public class Client implements Connection.Delegate {
                 break;
             }
             case Logout: {
+                System.err.println("Here!");
                 User.logout(this);
                 response = new Packet(); // Empty packet just for confirmation
                 break;
