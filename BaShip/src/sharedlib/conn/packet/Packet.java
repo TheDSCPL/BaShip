@@ -3,6 +3,7 @@ package sharedlib.conn.packet;
 import java.lang.reflect.InvocationTargetException;
 import java.util.UUID;
 import sharedlib.conn.Query;
+import static sharedlib.conn.packet.Packet.decodeString;
 import sharedlib.exceptions.PacketException;
 
 public class Packet {
@@ -10,11 +11,11 @@ public class Packet {
     protected static final String SEP_1 = "\u001C";
     protected static final String SPLIT_1 = "[\\x1C]";
     protected static final String SEP_L = "\u001D";
-    protected static final String SPLIT_L = "[\\x1D]";    
+    protected static final String SPLIT_L = "[\\x1D]";
     protected static final String SEP_M = "\u001E";
     protected static final String SPLIT_M = "[\\x1E]";
     protected static final String SUB_NL = "\u001F";
-    
+
     /**
      * Unique ID of this packet
      */
@@ -40,17 +41,27 @@ public class Packet {
     public static Packet fromString(String string) throws PacketException {
         String[] parts = string.split(SPLIT_1);
 
-        if (parts.length != 5) {
-            throw new PacketException("Invalid packet header size (" + parts.length + "), header: " + string);
-        }
-
         Packet p = null;
+        String packetType = decodeString(parts[0]);
 
-        try {
-            p = (Packet) Class.forName(decodeString(parts[0])).getConstructor(String.class).newInstance(parts[4]);
+        if (packetType.equals(Packet.class.getName())) {
+            if (parts.length != 4) {
+                throw new PacketException("Invalid packet header size (" + parts.length + "), header: " + string);
+            }
+            
+            p = new Packet();
         }
-        catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
-            throw new PacketException("Could not find instantiate correct Packet subclass", ex);
+        else {
+            if (parts.length != 5) {
+                throw new PacketException("Invalid packet header size (" + parts.length + "), header: " + string);
+            }
+            
+            try {
+                p = (Packet) Class.forName(decodeString(parts[0])).getConstructor(String.class).newInstance(parts[4]);
+            }
+            catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
+                throw new PacketException("Could not find instantiate correct Packet subclass", ex);
+            }
         }
 
         p.id = decodeString(parts[1]);
@@ -83,14 +94,14 @@ public class Packet {
         }
         return ((Packet) obj).id.equals(id);
     }
-    
+
     protected static String encodeString(String s) throws PacketException {
         s = s.replaceAll("\n", SUB_NL);
-        
+
         if (s.contains(SEP_1) || s.contains(SEP_L) || s.contains(SEP_M)) {
             throw new PacketException("String to be sent in packet contains invalid characters: " + s);
         }
-        
+
         return s;
     }
 
