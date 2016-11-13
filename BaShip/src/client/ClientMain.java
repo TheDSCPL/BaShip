@@ -27,26 +27,8 @@ public class ClientMain {
     public static void main(String args[]) {
         // Run interface
         runOnUI(() -> {
+            mainFrame.changeToPanel(new LoginPanel());
             mainFrame.setVisible(true);
-            runBackground(() -> {
-                try
-                {
-                    JPanel lobby = new LobbyPanel();
-                    while(true)
-                    {
-                        Thread.sleep(1500);
-                        runOnUI(() -> {
-                            mainFrame.changeToPanel(lobby);
-                        });
-                        Thread.sleep(1500);
-                        runOnUI(() -> {
-                            mainFrame.changeToPanel(mainFrame.getLoginPanel());
-                        });
-                    }
-
-                }
-                catch (Exception ignored) {}
-            });
         });
         
         // Connect to server

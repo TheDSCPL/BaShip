@@ -1,5 +1,6 @@
 package client.conn;
 
+import client.ClientMain;
 import client.logic.*;
 import sharedlib.Crypto;
 import sharedlib.conn.*;
