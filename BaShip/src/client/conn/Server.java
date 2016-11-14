@@ -1,5 +1,6 @@
 package client.conn;
 
+import client.ClientMain;
 import client.logic.*;
 import java.io.IOException;
 import sharedlib.Crypto;
@@ -30,7 +31,7 @@ public class Server implements Connection.Delegate {
     @Override
     public void disconnected(Connection connection) {
         System.out.println("Disconnected from server on " + connection.address());
-
+        ClientMain.server = null; // Remove server
     }
 
     public Delegate delegate;

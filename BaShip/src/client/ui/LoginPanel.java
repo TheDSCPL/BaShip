@@ -540,20 +540,15 @@ public class LoginPanel extends javax.swing.JPanel {
             return;
         }
 
-        boolean errorOccurred = false;
         try {
             if (ClientMain.connectToServer(false)) {
                 ClientMain.loggedInUser = ClientMain.server.doRegister(usernameField.getText(), passwordField.getPassword());
+                ClientMain.mainFrame.changeToPanel(new LobbyPanel());
             }
         }
         catch (UserMessageException ex) {
             Logger.getLogger(LoginPanel.class.getName()).log(Level.SEVERE, null, ex);
             ClientMain.showAlert(ex.getMessage());
-            errorOccurred = true;
-        }
-
-        if (!errorOccurred) {
-            ClientMain.mainFrame.changeToPanel(new LobbyPanel());
         }
 
         retypePasswordDialog.dispose();
@@ -576,10 +571,11 @@ public class LoginPanel extends javax.swing.JPanel {
         if (!loginButton.isEnabled() || !loginButton.isVisible()) {
             return;
         }
-        
+
         try {
             if (ClientMain.connectToServer(false)) {
                 ClientMain.loggedInUser = ClientMain.server.doLogin(usernameField.getText(), passwordField.getPassword());
+                ClientMain.mainFrame.changeToPanel(new LobbyPanel());
             }
         }
         catch (UserMessageException ex) {
@@ -587,8 +583,6 @@ public class LoginPanel extends javax.swing.JPanel {
             ClientMain.showAlert(ex.getMessage());
             return;
         }
-
-        ClientMain.mainFrame.changeToPanel(new LobbyPanel());
     }//GEN-LAST:event_loginButtonActionPerformed
 
     private void passwordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordFieldActionPerformed

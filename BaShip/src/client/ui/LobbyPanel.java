@@ -6,8 +6,6 @@
 package client.ui;
 
 import client.ClientMain;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import sharedlib.exceptions.UserMessageException;
 
 /**
@@ -21,13 +19,13 @@ public class LobbyPanel extends javax.swing.JPanel {
      */
     public LobbyPanel() {
         initComponents();
-        if(ClientMain.loggedInUser == null)
-        {
-            ClientMain.showAlert("Fatal Error!");
+
+        if (ClientMain.loggedInUser == null) {
+            ClientMain.showAlert("Fatal Error!"); // TODO: more descriptive error message
             ClientMain.mainFrame.changeToPanel(new LoginPanel());
             return;
         }
-        
+
         loggedInAsLabel.setText(loggedInAsLabel.getText() + ClientMain.loggedInUser.username);
     }
 
@@ -126,7 +124,8 @@ public class LobbyPanel extends javax.swing.JPanel {
     private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed
         try {
             ClientMain.server.doLogout();
-        } catch (UserMessageException ex) {
+        }
+        catch (UserMessageException ex) {
             ClientMain.showAlert(ex.getMessage());
         }
         ClientMain.loggedInUser = null;
