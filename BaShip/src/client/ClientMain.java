@@ -20,7 +20,7 @@ public class ClientMain {
 
     public static final ClientMain instance = new ClientMain(); // Singleton
     public static final MainFrame mainFrame = new MainFrame();
-    public static final Configuration config = new Configuration(ClientMain.class.getResourceAsStream("config.properties"));
+    public static final Configuration config = new Configuration(ClientMain.class.getResource("config.properties"));
     public static Server server;
     public static User loggedInUser;
     private static final ExecutorService backgroundExecutor = Executors.newCachedThreadPool();
@@ -30,8 +30,9 @@ public class ClientMain {
         runOnUI(() -> {
             mainFrame.changeToPanel(new LoginPanel());
             mainFrame.setVisible(true);
-        });
+            //mainFrame.changeToPanel(new SettingsPanel());
 
+        });
         // Connect to server
         try {
             connectToServer();
