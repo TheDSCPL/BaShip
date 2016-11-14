@@ -256,6 +256,8 @@ public class LoginPanel extends javax.swing.JPanel {
             public void removeUpdate(DocumentEvent e) {
                 checkFilledUserPassFields();
             }
+            
+            //Sou o Luis
 
             //alteramosisto
             
