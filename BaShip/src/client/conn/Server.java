@@ -1,7 +1,7 @@
 package client.conn;
 
-import client.ClientMain;
 import client.logic.*;
+import java.io.IOException;
 import sharedlib.Crypto;
 import sharedlib.conn.*;
 import sharedlib.conn.packet.*;
@@ -9,12 +9,12 @@ import sharedlib.exceptions.*;
 
 public class Server implements Connection.Delegate {
 
-    private final Connection conn; 
+    private final Connection connection; 
 
     @SuppressWarnings("LeakingThisInConstructor")
     public Server(Connection conn) {
-        this.conn = conn;
-        this.conn.delegate = this;
+        this.connection = conn;
+        this.connection.delegate = this;
     }
 
     @Override
@@ -35,6 +35,10 @@ public class Server implements Connection.Delegate {
 
     public Delegate delegate;
 
+    public void disconnect() throws IOException {
+        connection.disconnect();
+    }
+
     public interface Delegate {
 
         public void receiveGameMessage();
@@ -48,7 +52,7 @@ public class Server implements Connection.Delegate {
 
         BoolPacket response;
         try {
-            response = (BoolPacket) conn.sendAndReceive(request);
+            response = (BoolPacket) connection.sendAndReceive(request);
         }
         catch (ConnectionException ex) {
             throw new UserMessageException("Could not connect to server: " + ex.getMessage());
@@ -65,7 +69,7 @@ public class Server implements Connection.Delegate {
 
         MapPacket response;
         try {
-            response = (MapPacket) conn.sendAndReceive(request);
+            response = (MapPacket) connection.sendAndReceive(request);
         }
         catch (ConnectionException ex) {
             throw new UserMessageException("Could not connect to server: " + ex.getMessage());
@@ -90,7 +94,7 @@ public class Server implements Connection.Delegate {
 
         MapPacket response;
         try {
-            response = (MapPacket) conn.sendAndReceive(request);
+            response = (MapPacket) connection.sendAndReceive(request);
         }
         catch (ConnectionException ex) {
             throw new UserMessageException("Could not connect to server: " + ex.getMessage());
@@ -112,7 +116,7 @@ public class Server implements Connection.Delegate {
         request.query = Query.Logout;
 
         try {
-            conn.sendAndReceive(request); // Response is an empty packet, just for confirmation
+            connection.sendAndReceive(request); // Response is an empty packet, just for confirmation
         }
         catch (ConnectionException ex) {
             throw new UserMessageException("Could not connect to server: " + ex.getMessage());

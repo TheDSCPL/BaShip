@@ -10,7 +10,7 @@ import javax.swing.*;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import sharedlib.config.*;
 import sharedlib.conn.*;
-import sharedlib.exceptions.*;
+import sharedlib.exceptions.ConnectionException;
 
 public class ClientMain {
 
@@ -26,19 +26,10 @@ public class ClientMain {
     private static final ExecutorService backgroundExecutor = Executors.newCachedThreadPool();
 
     public static void main(String args[]) {
-        // Run interface
         runOnUI(() -> {
             mainFrame.changeToPanel(new LoginPanel());
             mainFrame.setVisible(true);
         });
-
-        // Connect to server
-        try {
-            connectToServer();
-        }
-        catch (ConnectionException ex) {
-            showAlert("Could not connect to server: " + ex.getMessage());
-        }
     }
 
     public static void showAlert(String message) {
@@ -74,24 +65,35 @@ public class ClientMain {
     public static void runOnUI(Runnable r) {
         java.awt.EventQueue.invokeLater(r);
     }
-
+    
     /**
      * Create socket and connect to server
-     *
-     * @throws ConnectionException if cannot connect to server
+     * @param disconnectPreviousConnection If false, only connects if a connection is not already present. If true, always creates a new connection, even if a disconnect is first necessary
+     * @return true if connected to server successfully
      */
-    private static void connectToServer() throws ConnectionException {
-        Socket socket;
+    public static boolean connectToServer(boolean disconnectPreviousConnection) {
+        if (server != null && !disconnectPreviousConnection) {
+            return true;
+        }
+        
+        if (server != null) {
+            try {
+                server.disconnect();
+            }
+            catch (IOException ignored) {}
+        }
+        
         try {
-            socket = new Socket(config.getS("server.ip"), config.getI("server.port"));
+            Socket socket = new Socket(config.getS("server.ip"), config.getI("server.port"));
+            Connection conn = new Connection(socket);
+            server = new Server(conn);
+            conn.start();
+            return true;
         }
-        catch (IOException ex) {
-            throw new ConnectionException(ex);
+        catch (ConnectionException | IOException ex) {
+            showAlert("Could not connect to server: " + ex.getMessage());
+            return false;
         }
-
-        Connection conn = new Connection(socket);
-        server = new Server(conn);
-        conn.start();
     }
-    
+
 }

@@ -58,6 +58,21 @@ final public class Connection extends Thread {
         }
     }
 
+    public void disconnect() throws IOException {
+        socket.close();
+    }
+
+    public static boolean test(String ip, int port) {
+        try {
+            Socket socket = new Socket(ip, port);
+            socket.close();
+            return true;
+        }
+        catch (IOException ex) {
+            return false;
+        }
+    }
+
     private Map<String, Optional<Packet>> packagesWaiting = new ConcurrentHashMap<>();
 
     private void send(Packet object) throws IOException, PacketException {

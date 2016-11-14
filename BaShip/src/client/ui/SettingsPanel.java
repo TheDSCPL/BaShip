@@ -2,7 +2,7 @@ package client.ui;
 
 import client.ClientMain;
 import java.io.IOException;
-import java.net.Socket;
+import sharedlib.conn.Connection;
 
 public class SettingsPanel extends javax.swing.JPanel {
 
@@ -162,19 +162,20 @@ public class SettingsPanel extends javax.swing.JPanel {
 
             try {
                 ClientMain.config.save();
+                ClientMain.connectToServer(true);
             }
-            catch (IOException ignored) {
+            catch (IOException ex) {
+                ClientMain.showAlert("Could not save settings");
             }
         }
     }//GEN-LAST:event_saveButtonActionPerformed
 
     private void testButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_testButtonActionPerformed
         if (parsePortText() != null) {
-            try {
-                Socket socket = new Socket(ipField.getText(), parsePortText());
+            if (Connection.test(ipField.getText(), parsePortText())) {
                 ClientMain.showAlert("Server settings are ok");
             }
-            catch (IOException ex) {
+            else {
                 ClientMain.showAlert("Could not reach server");
             }
         }
