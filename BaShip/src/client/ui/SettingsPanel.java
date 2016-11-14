@@ -28,6 +28,7 @@ public class SettingsPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         topBar = new javax.swing.JPanel();
+        backButton = new javax.swing.JButton();
         settingsPanel = new javax.swing.JPanel();
         ipField = new javax.swing.JTextField();
         label3 = new javax.swing.JLabel();
@@ -41,15 +42,28 @@ public class SettingsPanel extends javax.swing.JPanel {
 
         topBar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        backButton.setText("Back");
+        backButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout topBarLayout = new javax.swing.GroupLayout(topBar);
         topBar.setLayout(topBarLayout);
         topBarLayout.setHorizontalGroup(
             topBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(topBarLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(backButton)
+                .addContainerGap(281, Short.MAX_VALUE))
         );
         topBarLayout.setVerticalGroup(
             topBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 32, Short.MAX_VALUE)
+            .addGroup(topBarLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(10, Short.MAX_VALUE))
         );
 
         ipField.setToolTipText("");
@@ -165,7 +179,7 @@ public class SettingsPanel extends javax.swing.JPanel {
                 ClientMain.connectToServer(true);
             }
             catch (IOException ex) {
-                ClientMain.showAlert("Could not save settings");
+                ClientMain.showWarning("Could not save settings");
             }
         }
     }//GEN-LAST:event_saveButtonActionPerformed
@@ -173,13 +187,17 @@ public class SettingsPanel extends javax.swing.JPanel {
     private void testButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_testButtonActionPerformed
         if (parsePortText() != null) {
             if (Connection.test(ipField.getText(), parsePortText())) {
-                ClientMain.showAlert("Server settings are ok");
+                ClientMain.showWarning("Server settings are ok");
             }
             else {
-                ClientMain.showAlert("Could not reach server");
+                ClientMain.showWarning("Could not reach server");
             }
         }
     }//GEN-LAST:event_testButtonActionPerformed
+
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
+        ClientMain.mainFrame.changeToPanel(new LoginPanel());
+    }//GEN-LAST:event_backButtonActionPerformed
 
     private Integer parsePortText() {
         String port = portField.getText();
@@ -188,12 +206,13 @@ public class SettingsPanel extends javax.swing.JPanel {
             return Integer.parseInt(port);
         }
         else {
-            ClientMain.showAlert("Invalid port number");
+            ClientMain.showWarning("Invalid port number");
             return null;
         }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton backButton;
     private javax.swing.JCheckBox darkThemeCheckbox;
     private javax.swing.JTextField ipField;
     private javax.swing.JLabel label1;

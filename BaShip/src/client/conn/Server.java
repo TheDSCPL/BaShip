@@ -10,7 +10,7 @@ import sharedlib.exceptions.*;
 
 public class Server implements Connection.Delegate {
 
-    private final Connection connection; 
+    private final Connection connection;
 
     @SuppressWarnings("LeakingThisInConstructor")
     public Server(Connection conn) {
@@ -25,21 +25,20 @@ public class Server implements Connection.Delegate {
 
     @Override
     public void connected(Connection connection) {
-        System.out.println("Connected to server on " + connection.address());
+        ClientMain.connected(connection.address());
     }
 
     @Override
     public void disconnected(Connection connection) {
-        System.out.println("Disconnected from server on " + connection.address());
-        ClientMain.server = null; // Remove server
+        ClientMain.disconnected(connection.address());
     }
-
-    public Delegate delegate;
 
     public void disconnect() throws IOException {
         connection.disconnect();
     }
 
+    public Delegate delegate;
+    
     public interface Delegate {
 
         public void receiveGameMessage();
@@ -80,10 +79,7 @@ public class Server implements Connection.Delegate {
             throw new UserMessageException("Could not login: " + response.map.get("error"));
         }
         else {
-            return new User(
-                    Long.parseLong(response.map.get("id")),
-                    response.map.get("username")
-            );
+            return new User(response.map);
         }
     }
 
@@ -105,13 +101,10 @@ public class Server implements Connection.Delegate {
             throw new UserMessageException("Could not register: " + response.map.get("error"));
         }
         else {
-            return new User(
-                    Long.parseLong(response.map.get("id")),
-                    response.map.get("username")
-            );
+            return new User(response.map);
         }
     }
-    
+
     public void doLogout() throws UserMessageException {
         Packet request = new Packet();
         request.query = Query.Logout;

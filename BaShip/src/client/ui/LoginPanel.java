@@ -41,6 +41,7 @@ public class LoginPanel extends javax.swing.JPanel {
         loginButton = new javax.swing.JButton();
         registerButton = new javax.swing.JButton();
         topBar = new javax.swing.JPanel();
+        settingsButton = new javax.swing.JButton();
 
         retypePasswordDialog.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         retypePasswordDialog.setMinimumSize(new java.awt.Dimension(250, 170));
@@ -124,7 +125,7 @@ public class LoginPanel extends javax.swing.JPanel {
         retypePasswordDialogLayout.setVerticalGroup(
             retypePasswordDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(retypePasswordDialogLayout.createSequentialGroup()
-                .addComponent(retypePasswordPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 111, Short.MAX_VALUE)
+                .addComponent(retypePasswordPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -208,15 +209,28 @@ public class LoginPanel extends javax.swing.JPanel {
 
         topBar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        settingsButton.setText("Settings");
+        settingsButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                settingsButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout topBarLayout = new javax.swing.GroupLayout(topBar);
         topBar.setLayout(topBarLayout);
         topBarLayout.setHorizontalGroup(
             topBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(topBarLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(settingsButton)
+                .addContainerGap(222, Short.MAX_VALUE))
         );
         topBarLayout.setVerticalGroup(
             topBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 32, Short.MAX_VALUE)
+            .addGroup(topBarLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(settingsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(10, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -545,7 +559,7 @@ public class LoginPanel extends javax.swing.JPanel {
         }
         catch (UserMessageException ex) {
             Logger.getLogger(LoginPanel.class.getName()).log(Level.SEVERE, null, ex);
-            ClientMain.showAlert(ex.getMessage());
+            ClientMain.showError(ex.getMessage());
         }
 
         retypePasswordDialog.dispose();
@@ -577,8 +591,7 @@ public class LoginPanel extends javax.swing.JPanel {
         }
         catch (UserMessageException ex) {
             Logger.getLogger(LoginPanel.class.getName()).log(Level.SEVERE, null, ex);
-            ClientMain.showAlert(ex.getMessage());
-            return;
+            ClientMain.showError(ex.getMessage());
         }
     }//GEN-LAST:event_loginButtonActionPerformed
 
@@ -590,9 +603,14 @@ public class LoginPanel extends javax.swing.JPanel {
         loginButtonActionPerformed(evt);
     }//GEN-LAST:event_usernameFieldActionPerformed
 
+    private void settingsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_settingsButtonActionPerformed
+        ClientMain.mainFrame.changeToPanel(new SettingsPanel());
+    }//GEN-LAST:event_settingsButtonActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton loginButton;
     private javax.swing.JPanel loginPanel;
+    private javax.swing.JButton logoutButton;
     public final javax.swing.JPasswordField passwordField = new javax.swing.JPasswordField();
     private javax.swing.JLabel passwordLabel;
     private javax.swing.JButton registerButton;
@@ -603,6 +621,7 @@ public class LoginPanel extends javax.swing.JPanel {
     private javax.swing.JLabel retypePasswordLabel;
     private javax.swing.JLabel retypePasswordNoMatchLabel;
     private javax.swing.JPanel retypePasswordPanel;
+    private javax.swing.JButton settingsButton;
     private javax.swing.JPanel topBar;
     public final javax.swing.JTextField usernameField = new javax.swing.JTextField();
     private javax.swing.JLabel usernameLabel;
