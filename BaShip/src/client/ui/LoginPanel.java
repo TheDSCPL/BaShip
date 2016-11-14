@@ -45,9 +45,6 @@ public class LoginPanel extends javax.swing.JPanel {
         retypePasswordDialog.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         retypePasswordDialog.setMinimumSize(new java.awt.Dimension(250, 170));
         retypePasswordDialog.setModalityType(java.awt.Dialog.ModalityType.APPLICATION_MODAL);
-        retypePasswordDialog.setLocationRelativeTo(LoginPanel.this);
-
-        retypePasswordDialog.setLocation(0,0);
         retypePasswordDialog.setName("Retype your password, please"); // NOI18N
 
         retypePasswordLabel.setText("Please, retype your password");
@@ -127,7 +124,7 @@ public class LoginPanel extends javax.swing.JPanel {
         retypePasswordDialogLayout.setVerticalGroup(
             retypePasswordDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(retypePasswordDialogLayout.createSequentialGroup()
-                .addComponent(retypePasswordPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE)
+                .addComponent(retypePasswordPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 111, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -387,7 +384,7 @@ public class LoginPanel extends javax.swing.JPanel {
     private void resetRetypeDialog() {
         retypePasswordField.setText("");
         retypePasswordNoMatchLabel.setVisible(false);
-        retypePasswordDialog.setLocation(0,0);
+        retypePasswordDialog.setLocation(calculateRetypePasswordDialogPosition());
         retypePasswordNoMatchLabel.setForeground(new java.awt.Color(255, 51, 51));  //red
         retypePasswordNoMatchLabel.setFont(new java.awt.Font("Tahoma", 1, 11));     //bold
     }
@@ -489,17 +486,17 @@ public class LoginPanel extends javax.swing.JPanel {
         }
     }
     
-    public Point getPanelLocation() {
-        Point p = null;
+    public Point calculateRetypePasswordDialogPosition() {
+        Point mainFrameLocation;
         try {
-            synchronized (this.getTreeLock()) {
-                p = this.getLocationOnScreen();
+            synchronized (ClientMain.mainFrame.getTreeLock()) {
+                mainFrameLocation = ClientMain.mainFrame.getLocationOnScreen();
             }
         }
         catch (Throwable ignored) {
-
+            return new Point(0,0);
         }
-        return p;
+        return mainFrameLocation;
     }
 
     private void retypePasswordCancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_retypePasswordCancelButtonActionPerformed

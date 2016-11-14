@@ -8,7 +8,7 @@
         <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[250, 170]"/>
         </Property>
-        <Property name="modalityType" type="java.awt.Dialog$ModalityType" editor="org.netbeans.modules.form.editors.EnumEditor" postCode="retypePasswordDialog.setLocationRelativeTo(LoginPanel.this);&#xa;&#xa;retypePasswordDialog.setLocation(0,0);">
+        <Property name="modalityType" type="java.awt.Dialog$ModalityType" editor="org.netbeans.modules.form.editors.EnumEditor">
           <Value id="APPLICATION_MODAL"/>
         </Property>
         <Property name="name" type="java.lang.String" value="Retype your password, please" noResource="true"/>
