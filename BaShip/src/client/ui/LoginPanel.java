@@ -257,15 +257,12 @@ public class LoginPanel extends javax.swing.JPanel {
                 checkFilledUserPassFields();
             }
             
-            //Sou o Luis
-
-            //alteramosisto
-            
             @Override
             public void changedUpdate(DocumentEvent e) {
                 checkFilledUserPassFields();
             }
         };
+         
 
         usernameField.getDocument().addDocumentListener(dL);
         passwordField.getDocument().addDocumentListener(dL);
