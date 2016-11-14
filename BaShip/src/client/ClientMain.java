@@ -30,9 +30,8 @@ public class ClientMain {
         runOnUI(() -> {
             mainFrame.changeToPanel(new LoginPanel());
             mainFrame.setVisible(true);
-            //mainFrame.changeToPanel(new SettingsPanel());
-
         });
+
         // Connect to server
         try {
             connectToServer();
@@ -94,4 +93,5 @@ public class ClientMain {
         server = new Server(conn);
         conn.start();
     }
+    
 }
