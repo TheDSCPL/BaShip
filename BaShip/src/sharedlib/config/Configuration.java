@@ -51,6 +51,10 @@ public final class Configuration {
         props.setProperty(key, value ? "true" : "false");
     }
     
+    public boolean getB(String key) {
+        return props.getProperty(key).equals("true");
+    }
+    
     public void setS(String key, String value) {
         props.setProperty(key, value);
     }
@@ -59,7 +63,13 @@ public final class Configuration {
         return props.getProperty(key);
     }
 
+    public void setI(String key, int i) {
+        props.setProperty(key, "" + i);
+    }
+    
     public int getI(String key) {
         return Integer.parseInt(props.getProperty(key));
     }
+
+    
 }

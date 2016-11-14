@@ -1,6 +1,8 @@
 package client.ui;
 
 import client.ClientMain;
+import java.io.IOException;
+import java.net.Socket;
 
 public class SettingsPanel extends javax.swing.JPanel {
 
@@ -9,7 +11,11 @@ public class SettingsPanel extends javax.swing.JPanel {
      */
     public SettingsPanel() {
         initComponents();
-        
+
+        darkThemeCheckbox.setSelected(ClientMain.config.getB("darktheme"));
+        soundCheckbox.setSelected(ClientMain.config.getB("sound"));
+        ipField.setText(ClientMain.config.getS("server.ip"));
+        portField.setText(ClientMain.config.getS("server.port"));
     }
 
     /**
@@ -31,6 +37,7 @@ public class SettingsPanel extends javax.swing.JPanel {
         label1 = new javax.swing.JLabel();
         darkThemeCheckbox = new javax.swing.JCheckBox();
         soundCheckbox = new javax.swing.JCheckBox();
+        testButton = new javax.swing.JButton();
 
         topBar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -64,14 +71,25 @@ public class SettingsPanel extends javax.swing.JPanel {
 
         label1.setText("Sound:");
 
+        testButton.setText("Test connection");
+        testButton.setToolTipText("");
+        testButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                testButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout settingsPanelLayout = new javax.swing.GroupLayout(settingsPanel);
         settingsPanel.setLayout(settingsPanelLayout);
         settingsPanelLayout.setHorizontalGroup(
             settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(settingsPanelLayout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(settingsPanelLayout.createSequentialGroup()
+                        .addComponent(testButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(settingsPanelLayout.createSequentialGroup()
                         .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(label1)
@@ -106,7 +124,9 @@ public class SettingsPanel extends javax.swing.JPanel {
                     .addComponent(label3)
                     .addComponent(portField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(saveButton)
+                .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(saveButton)
+                    .addComponent(testButton))
                 .addGap(20, 20, 20))
         );
 
@@ -135,9 +155,42 @@ public class SettingsPanel extends javax.swing.JPanel {
         ClientMain.config.setB("darktheme", darkThemeCheckbox.isSelected());
         ClientMain.config.setB("sound", soundCheckbox.isSelected());
         ClientMain.config.setS("server.ip", ipField.getText());
-        ClientMain.config.setS("server.port", portField.getText());
+
+        Integer port = parsePortText();
+        if (port != null) {
+            ClientMain.config.setI("server.port", port);
+
+            try {
+                ClientMain.config.save();
+            }
+            catch (IOException ignored) {
+            }
+        }
     }//GEN-LAST:event_saveButtonActionPerformed
 
+    private void testButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_testButtonActionPerformed
+        if (parsePortText() != null) {
+            try {
+                Socket socket = new Socket(ipField.getText(), parsePortText());
+                ClientMain.showAlert("Server settings are ok");
+            }
+            catch (IOException ex) {
+                ClientMain.showAlert("Could not reach server");
+            }
+        }
+    }//GEN-LAST:event_testButtonActionPerformed
+
+    private Integer parsePortText() {
+        String port = portField.getText();
+
+        if (port.matches("^[0-9]+$")) { // Only digits, at least one digit
+            return Integer.parseInt(port);
+        }
+        else {
+            ClientMain.showAlert("Invalid port number");
+            return null;
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox darkThemeCheckbox;
@@ -149,6 +202,7 @@ public class SettingsPanel extends javax.swing.JPanel {
     private javax.swing.JButton saveButton;
     private javax.swing.JPanel settingsPanel;
     private javax.swing.JCheckBox soundCheckbox;
+    private javax.swing.JButton testButton;
     private javax.swing.JPanel topBar;
     // End of variables declaration//GEN-END:variables
 }

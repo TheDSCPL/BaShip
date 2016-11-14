@@ -431,7 +431,7 @@ public class LoginPanel extends javax.swing.JPanel {
 
         final boolean usernameIsValid  = User.isUsernameValid(user);
         final boolean passwordIsValid= User.isPasswordValid(pass);
-        final String userError = "Usernames must only contain letters, digits and underscores";
+        final String userError = "Usernames must only contain letters, digits and underscores.";
         final String passError = "Passwords must only contain letters and digits. Password must also have at least 1 digit and its minimum length is 6.";
         
         if(!usernameIsValid && user.length() > 0)
