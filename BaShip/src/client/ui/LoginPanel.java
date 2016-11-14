@@ -257,6 +257,8 @@ public class LoginPanel extends javax.swing.JPanel {
                 checkFilledUserPassFields();
             }
 
+            //alteramosisto
+            
             @Override
             public void changedUpdate(DocumentEvent e) {
                 checkFilledUserPassFields();
