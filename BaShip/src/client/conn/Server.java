@@ -33,6 +33,10 @@ public class Server implements Connection.Delegate {
         ClientMain.disconnected(connection.address());
     }
 
+    public void connect() {
+        connection.connect();
+    }
+    
     public void disconnect() throws IOException {
         connection.disconnect();
     }

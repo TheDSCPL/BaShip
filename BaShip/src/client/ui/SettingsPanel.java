@@ -1,7 +1,7 @@
 package client.ui;
 
 import client.ClientMain;
-import java.io.IOException;
+import client.PrefsKey;
 import sharedlib.conn.Connection;
 
 public class SettingsPanel extends javax.swing.JPanel {
@@ -12,10 +12,10 @@ public class SettingsPanel extends javax.swing.JPanel {
     public SettingsPanel() {
         initComponents();
 
-        darkThemeCheckbox.setSelected(ClientMain.config.getB("darktheme"));
-        soundCheckbox.setSelected(ClientMain.config.getB("sound"));
-        ipField.setText(ClientMain.config.getS("server.ip"));
-        portField.setText(ClientMain.config.getS("server.port"));
+        darkThemeCheckbox.setSelected(ClientMain.prefs.getB(PrefsKey.DarkTheme));
+        soundCheckbox.setSelected(ClientMain.prefs.getB(PrefsKey.Sound));
+        ipField.setText(ClientMain.prefs.getS(PrefsKey.ServerIP));
+        portField.setText("" + ClientMain.prefs.getI(PrefsKey.ServerPort));
     }
 
     /**
@@ -166,21 +166,14 @@ public class SettingsPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
-        ClientMain.config.setB("darktheme", darkThemeCheckbox.isSelected());
-        ClientMain.config.setB("sound", soundCheckbox.isSelected());
-        ClientMain.config.setS("server.ip", ipField.getText());
+        ClientMain.prefs.setB(PrefsKey.DarkTheme, darkThemeCheckbox.isSelected());
+        ClientMain.prefs.setB(PrefsKey.Sound, soundCheckbox.isSelected());
+        ClientMain.prefs.setS(PrefsKey.ServerIP, ipField.getText());
 
         Integer port = parsePortText();
         if (port != null) {
-            ClientMain.config.setI("server.port", port);
-
-            try {
-                ClientMain.config.save();
-                ClientMain.connectToServer(true);
-            }
-            catch (IOException ex) {
-                ClientMain.showWarning("Could not save settings");
-            }
+            ClientMain.prefs.setI(PrefsKey.ServerPort, port);
+            ClientMain.connectToServer(true);
         }
     }//GEN-LAST:event_saveButtonActionPerformed
 

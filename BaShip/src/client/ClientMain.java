@@ -8,7 +8,7 @@ import java.net.*;
 import java.util.concurrent.*;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.*;
-import sharedlib.config.*;
+import sharedlib.config.Preferences;
 import sharedlib.conn.*;
 import sharedlib.exceptions.ConnectionException;
 
@@ -20,7 +20,7 @@ public class ClientMain {
 
     public static final ClientMain instance = new ClientMain(); // Singleton
     public static final MainFrame mainFrame = new MainFrame();
-    public static final Configuration config = new Configuration(ClientMain.class.getResource("config.properties"));
+    public static final Preferences prefs = new Preferences(ClientMain.class);
     public static Server server;
     public static User loggedInUser;
     private static final ExecutorService backgroundExecutor = Executors.newCachedThreadPool();
@@ -54,10 +54,8 @@ public class ClientMain {
         }
 
         try {
-            Socket socket = new Socket(config.getS("server.ip"), config.getI("server.port"));
-            Connection conn = new Connection(socket);
-            server = new Server(conn);
-            conn.start();
+            server = new Server(new Connection(new Socket(prefs.getS(PrefsKey.ServerIP), prefs.getI(PrefsKey.ServerPort))));
+            server.connect();
             return true;
         }
         catch (ConnectionException | IOException ex) {
