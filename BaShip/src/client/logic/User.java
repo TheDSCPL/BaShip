@@ -8,56 +8,16 @@ public class User {
     public final long id;
     public final String username;
     
-    public Statistics statistics;
-    public Status status;
-    
-    public class Statistics {
-        public final int rank;
-        public final int nGames;
-        public final int nWins;
-        public final int nShots;
-
-        public Statistics(int rank, int nGames, int nWins, int nShots) {
-            this.rank = rank;
-            this.nGames = nGames;
-            this.nWins = nWins;
-            this.nShots = nShots;
-        }
-    }
-        
-    public enum Status {
-        Offline("Offline"),
-        Online("Online"),
-        Waiting("Waiting"),
-        Playing("Playing");
-
-        public final String str;
-
-        Status(String s) {
-            str = s;
-        }
-
-        public static Status fromString(String str) {
-            for (Status t : Status.values()) {
-                if (t.str.equals(str)) {
-                    return t;
-                }
-            }
-
-            return null;
-        }
-    }
-    
     public User(Map<String, String> map) {
         id = Long.parseLong(map.get("id"));
         username = map.get("username");
         
-        if (map.containsKey("status")) {
+        /*if (map.containsKey("status")) {
             status = Status.fromString(map.get("status"));
         }
         if (map.containsKey("")) {
             // TODO: finish
-        }
+        }*/
     }
     
     public static boolean isUsernameValid(String username) {

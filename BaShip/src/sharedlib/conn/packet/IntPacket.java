@@ -1,5 +1,6 @@
 package sharedlib.conn.packet;
 
+import sharedlib.conn.Packet;
 import sharedlib.exceptions.PacketException;
 
 public class IntPacket extends Packet {

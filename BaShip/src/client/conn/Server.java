@@ -1,9 +1,13 @@
 package client.conn;
 
+import sharedlib.conn.Packet;
 import client.ClientMain;
 import client.logic.*;
 import java.io.IOException;
+import java.util.List;
+import static java.util.stream.Collectors.toList;
 import sharedlib.Crypto;
+import sharedlib.UserM;
 import sharedlib.conn.*;
 import sharedlib.conn.packet.*;
 import sharedlib.exceptions.*;
@@ -36,13 +40,13 @@ public class Server implements Connection.Delegate {
     public void connect() {
         connection.connect();
     }
-    
+
     public void disconnect() throws IOException {
         connection.disconnect();
     }
 
     public Delegate delegate;
-    
+
     public interface Delegate {
 
         public void receiveGameMessage();
@@ -119,5 +123,21 @@ public class Server implements Connection.Delegate {
         catch (ConnectionException ex) {
             throw new UserMessageException("Could not connect to server: " + ex.getMessage());
         }
+    }
+
+    public List<UserM> getUserList(boolean onlineOnly, String usernameFilter, int orderByColumn, int rowLimit) throws UserMessageException {
+        MapPacket request = new MapPacket();
+        request.query = Query.GetUserList;
+
+        ListMapPacket response;
+        try {
+            response = (ListMapPacket) connection.sendAndReceive(request);
+        }
+        catch (ConnectionException ex) {
+            throw new UserMessageException("Could not connect to server: " + ex.getMessage());
+        }
+
+        // TODO: Error?
+        return response.listmap.stream().map(m -> UserM.fromMap(m)).collect(toList());
     }
 }

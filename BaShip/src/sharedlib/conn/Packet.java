@@ -1,9 +1,8 @@
-package sharedlib.conn.packet;
+package sharedlib.conn;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.UUID;
-import sharedlib.conn.Query;
-import static sharedlib.conn.packet.Packet.decodeString;
+import static sharedlib.conn.Packet.decodeString;
 import sharedlib.exceptions.PacketException;
 
 public class Packet {

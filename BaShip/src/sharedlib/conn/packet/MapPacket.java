@@ -1,5 +1,6 @@
 package sharedlib.conn.packet;
 
+import sharedlib.conn.Packet;
 import java.util.HashMap;
 import java.util.Map;
 import sharedlib.exceptions.PacketException;

@@ -1,5 +1,6 @@
 package sharedlib.conn.packet;
 
+import sharedlib.conn.Packet;
 import java.util.ArrayList;
 import java.util.List;
 import sharedlib.exceptions.PacketException;

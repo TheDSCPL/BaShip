@@ -1,9 +1,5 @@
 package sharedlib.conn;
 
-/**
- *
- * @author Alex
- */
 public enum Query {
     Empty(""),
     /**
@@ -13,7 +9,8 @@ public enum Query {
     UsernameAvailable("UsernameAvailable"),
     Register("Register"),
     Login("Login"),
-    Logout("Logout");
+    Logout("Logout"),
+    GetUserList("GetUserList");
 
     public final String str;
 

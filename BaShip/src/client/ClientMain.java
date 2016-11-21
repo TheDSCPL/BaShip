@@ -9,7 +9,7 @@ import java.util.concurrent.*;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.*;
 import sharedlib.config.Preferences;
-import sharedlib.conn.*;
+import sharedlib.conn.Connection;
 import sharedlib.exceptions.ConnectionException;
 
 public class ClientMain {

@@ -1,9 +1,13 @@
 package server.conn;
 
+import sharedlib.conn.Packet;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.*;
+import static java.util.stream.Collectors.toList;
 import server.*;
 import server.logic.user.*;
+import sharedlib.UserM;
 import sharedlib.conn.*;
 import sharedlib.conn.packet.*;
 import sharedlib.exceptions.*;
@@ -27,7 +31,7 @@ public class Client implements Connection.Delegate {
                 StringPacket ip = (StringPacket) request;
                 boolean b = false;
                 try {
-                    b = User.isUsernameAvailable(ip.str);
+                    b = UserS.isUsernameAvailable(ip.str);
                 }
                 catch (SQLException ex) {
                     Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
@@ -39,7 +43,7 @@ public class Client implements Connection.Delegate {
                 MapPacket ip = (MapPacket) request;
                 MapPacket op = new MapPacket();
                 try {
-                    User u = User.login(this, ip.map.get("username"), ip.map.get("password"));
+                    UserM u = UserS.login(this, ip.map.get("username"), ip.map.get("password"));
                     op.map.put("id", String.valueOf(u.id));
                     op.map.put("username", u.username);
                 }
@@ -58,7 +62,7 @@ public class Client implements Connection.Delegate {
                 MapPacket ip = (MapPacket) request;
                 MapPacket op = new MapPacket();
                 try {
-                    User u = User.register(this, ip.map.get("username"), ip.map.get("password"));
+                    UserM u = UserS.register(this, ip.map.get("username"), ip.map.get("password"));
                     op.map.put("id", String.valueOf(u.id));
                     op.map.put("username", u.username);
                 }
@@ -70,12 +74,31 @@ public class Client implements Connection.Delegate {
                 break;
             }
             case Logout: {
-                User.logout(this);
+                UserS.logout(this);
                 response = new Packet(); // Empty packet just for confirmation
                 break;
             }
+            case GetUserList: {
+                MapPacket ip = (MapPacket) request;
+                ListMapPacket op = new ListMapPacket();
+                try {
+                    List<UserM> ul = UserS.getUserList(Boolean.parseBoolean(ip.map.get("onlineOnly")),
+                                                         ip.map.get("usernameFilter"),
+                                                         Integer.parseInt(ip.map.get("orderByColumn")),
+                                                         Integer.parseInt(ip.map.get("rowLimit")));
+                    
+                    op.listmap = ul.stream().map(u -> u.getMap()).collect(toList());
+                }
+                catch (SQLException ex) {
+                    Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+                    //op.map.put("error", "Could not run SQL query: " + ex.getMessage());
+                    // TODO: errors on ListMapPacket??
+                }
+                response = op;
+                break;
+            }
         }
-        
+
         return response;
     }
 
@@ -90,7 +113,7 @@ public class Client implements Connection.Delegate {
     @Override
     public void disconnected(Connection connection) {
         System.out.println("Disconnected from client on " + connection.address());
-        User.logout(this);
+        UserS.logout(this);
         synchronized (ServerMain.clients) {
             ServerMain.clients.remove(this);
         }
