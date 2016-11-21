@@ -13,7 +13,7 @@ import sharedlib.tuples.Message;
 import sharedlib.tuples.UserInfo;
 import sharedlib.utils.Preferences;
 
-public class ClientMain implements Server.Delegate {
+public class ClientMain {
 
     private ClientMain() {
 
@@ -25,7 +25,7 @@ public class ClientMain implements Server.Delegate {
     public static Server server;
     public static UserInfo loggedInUser;
     private static final ExecutorService backgroundExecutor = Executors.newCachedThreadPool();
-    
+
     public static void main(String args[]) {
         runOnUI(() -> {
             mainFrame.changeToPanel(new LoginPanel());
@@ -67,9 +67,21 @@ public class ClientMain implements Server.Delegate {
 
     public static void connected(String address) {
         System.out.println("Connected to server on " + address);
-        server.delegate = new ClientMain(); // TODO: DEMO
+        
+        // TODO: DEMO
+        server.delegate = new Server.Delegate() {
+            @Override
+            public void receiveGameMessage(Message message) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void receiveGlobalMessage(Message message) {
+                System.out.println("Received global message: " + message);
+            }
+        };
     }
-    
+
     public static void disconnected(String address) {
         System.out.println("Disconnected from server on " + address);
         server = null; // Remove server
@@ -80,13 +92,13 @@ public class ClientMain implements Server.Delegate {
             JOptionPane.showMessageDialog(ClientMain.mainFrame, message, "Info", INFORMATION_MESSAGE);
         });
     }
-    
+
     public static void showWarning(String message) {
         runOnUI(() -> {
             JOptionPane.showMessageDialog(ClientMain.mainFrame, message, "Warning", WARNING_MESSAGE);
         });
     }
-    
+
     public static void showError(String message) {
         runOnUI(() -> {
             JOptionPane.showMessageDialog(ClientMain.mainFrame, message, "Error", ERROR_MESSAGE);
@@ -119,15 +131,5 @@ public class ClientMain implements Server.Delegate {
      */
     public static void runOnUI(Runnable r) {
         java.awt.EventQueue.invokeLater(r);
-    }
-
-    @Override
-    public void receiveGameMessage(Message message) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void receiveGlobalMessage(Message message) {
-        System.out.println("Received global message: " + message); // TODO: DEMO
     }
 }
