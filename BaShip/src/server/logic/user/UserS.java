@@ -48,9 +48,12 @@ public class UserS {
     }
 
     public static void logout(Client client) {
-        loginsID.remove(loginsClient.remove(client));
+        Long id = loginsClient.remove(client);
+        if (id != null) {
+            loginsID.remove(id);
+        }
     }
-    
+
     public static void sendGlobalMessage(Client client, String message) {
         if (loginsClient.containsKey(client)) {
             Message msg = GlobalChatDB.sendGlobalMessage(loginsClient.get(client), message);

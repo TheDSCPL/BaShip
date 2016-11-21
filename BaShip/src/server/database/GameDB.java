@@ -13,24 +13,22 @@ public class GameDB {
 
     public static List<GameInfo> getGameList(GameSearch s) throws SQLException {
         PreparedStatement stmt = ServerMain.db.getConn().prepareStatement(
-                "SELECT gid, username, rank, ngames, nwins, nshots "
-                + "FROM users JOIN user_ranks USING(uid) JOIN user_stats USING(uid) "
-                + "WHERE username LIKE ? "
-                + "ORDER BY ? LIMIT ?"
-        ); // TODO: statement
-        //stmt.setString(1, "%" + s.usernameFilter + "%");
-        //stmt.setInt(2, s.orderByColumn);
-        //stmt.setInt(3, s.rowLimit);
+                "SELECT gmid, p1.uid, p2.uid, p1.username, p2.username, startdate, enddate "
+                + "FROM games JOIN users AS p1 ON player1 = p1.uid JOIN users AS p2 ON player2 = p2.uid "
+                + "WHERE p1.username LIKE ? OR p1.username LIKE ?"
+        ); // TODO: finish SQL statement
+        stmt.setString(1, "%" + s.usernameFilter + "%");
+        stmt.setString(2, "%" + s.usernameFilter + "%");
 
         ResultSet results = stmt.executeQuery();
 
         List<GameInfo> games = new ArrayList<>();
         while (results.next()) {
             long id = results.getLong(1);
-            // TODO: status? currrent move?
+            // TODO: status? currrent move number?
             games.add(new GameInfo(id, results.getLong(2), results.getLong(3), results.getString(4), results.getString(4), results.getDate(5), results.getDate(6)));
         }
-        
+
         return games;
     }
 
