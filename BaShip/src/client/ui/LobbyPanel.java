@@ -21,7 +21,7 @@ public class LobbyPanel extends javax.swing.JPanel {
         initComponents();
 
         if (ClientMain.loggedInUser == null) {
-            ClientMain.showAlert("Fatal Error!"); // TODO: more descriptive error message
+            ClientMain.showWarning("Fatal Error!"); // TODO: more descriptive error message
             ClientMain.mainFrame.changeToPanel(new LoginPanel());
             return;
         }
@@ -129,7 +129,7 @@ public class LobbyPanel extends javax.swing.JPanel {
             ClientMain.server.doLogout();
         }
         catch (UserMessageException ex) {
-            ClientMain.showAlert(ex.getMessage());
+            ClientMain.showWarning(ex.getMessage());
         }
         ClientMain.loggedInUser = null;
         ClientMain.mainFrame.changeToPanel(new LoginPanel());

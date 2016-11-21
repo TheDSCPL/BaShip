@@ -57,7 +57,11 @@ final public class Connection extends Thread {
             throw new ConnectionException(ex);
         }
     }
-
+    
+    public void connect() {
+        start();
+    }
+    
     public void disconnect() throws IOException {
         socket.close();
     }
