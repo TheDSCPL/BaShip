@@ -19,7 +19,7 @@ public class UserS {
     private static final Map<Client, Long> loginsClient = new ConcurrentHashMap<>();
 
     public static boolean isUsernameAvailable(String username) throws SQLException {
-        return server.database.UserDB.isUsernameAvailable(username);
+        return UserDB.isUsernameAvailable(username);
     }
 
     public static UserInfo register(Client client, String username, String passwordHash) throws SQLException {
@@ -33,7 +33,7 @@ public class UserS {
         Long id = UserDB.verifyLoginAndReturnUserID(username, passwordHash);
 
         if (id != null) {
-            if (loginsID.containsKey(id)) {
+            if (isUserLoggedIn(id)) {
                 throw new UserMessageException("Already logged in");
             }
             else {
@@ -48,20 +48,27 @@ public class UserS {
     }
 
     public static void logout(Client client) {
-        Long id = loginsClient.remove(client);
-        if (id != null) {
-            loginsID.remove(id);
+        if (isClientLoggedIn(client)) {
+            loginsID.remove(loginsClient.remove(client));
         }
     }
 
     public static void sendGlobalMessage(Client client, String message) {
-        if (loginsClient.containsKey(client)) {
+        if (isClientLoggedIn(client)) {
             Message msg = GlobalChatDB.sendGlobalMessage(loginsClient.get(client), message);
             UserS.distributeGlobalMessage(msg);
         }
         else {
             Logger.getLogger(UserS.class.getName()).log(Level.SEVERE, "Client tried to send global message without being logged in");
         }
+    }
+
+    public static boolean isClientLoggedIn(Client client) {
+        return loginsClient.containsKey(client);
+    }
+
+    public static boolean isUserLoggedIn(Long userID) {
+        return loginsID.containsKey(userID);
     }
 
     private static void distributeGlobalMessage(Message msg) {
