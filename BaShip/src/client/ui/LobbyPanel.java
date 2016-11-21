@@ -38,11 +38,33 @@ public class LobbyPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        lobby1 = new javax.swing.JLayeredPane();
+        jLabel1 = new javax.swing.JLabel();
         topBar = new javax.swing.JPanel();
         logoutButton = new javax.swing.JButton();
         loggedInAsLabel = new javax.swing.JLabel();
-        lobbyMainPanel = new javax.swing.JPanel();
-        placeholderLabel = new javax.swing.JLabel();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+
+        jLabel1.setText("jLabel1");
+
+        lobby1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        javax.swing.GroupLayout lobby1Layout = new javax.swing.GroupLayout(lobby1);
+        lobby1.setLayout(lobby1Layout);
+        lobby1Layout.setHorizontalGroup(
+            lobby1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(lobby1Layout.createSequentialGroup()
+                .addGap(102, 102, 102)
+                .addComponent(jLabel1)
+                .addContainerGap(117, Short.MAX_VALUE))
+        );
+        lobby1Layout.setVerticalGroup(
+            lobby1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(lobby1Layout.createSequentialGroup()
+                .addGap(76, 76, 76)
+                .addComponent(jLabel1)
+                .addContainerGap(86, Short.MAX_VALUE))
+        );
 
         topBar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -62,7 +84,7 @@ public class LobbyPanel extends javax.swing.JPanel {
         topBarLayout.setHorizontalGroup(
             topBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(topBarLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(158, Short.MAX_VALUE)
                 .addComponent(loggedInAsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(logoutButton)
@@ -80,34 +102,15 @@ public class LobbyPanel extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        placeholderLabel.setText("Lobby placeholder");
-
-        javax.swing.GroupLayout lobbyMainPanelLayout = new javax.swing.GroupLayout(lobbyMainPanel);
-        lobbyMainPanel.setLayout(lobbyMainPanelLayout);
-        lobbyMainPanelLayout.setHorizontalGroup(
-            lobbyMainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, lobbyMainPanelLayout.createSequentialGroup()
-                .addContainerGap(106, Short.MAX_VALUE)
-                .addComponent(placeholderLabel)
-                .addGap(190, 190, 190))
-        );
-        lobbyMainPanelLayout.setVerticalGroup(
-            lobbyMainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, lobbyMainPanelLayout.createSequentialGroup()
-                .addContainerGap(70, Short.MAX_VALUE)
-                .addComponent(placeholderLabel)
-                .addGap(67, 67, 67))
-        );
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(topBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lobbyMainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jTabbedPane1)
+                    .addComponent(topBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -116,8 +119,8 @@ public class LobbyPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(topBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lobbyMainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -134,10 +137,11 @@ public class LobbyPanel extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel lobbyMainPanel;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JLayeredPane lobby1;
     private javax.swing.JLabel loggedInAsLabel;
     private javax.swing.JButton logoutButton;
-    private javax.swing.JLabel placeholderLabel;
     private javax.swing.JPanel topBar;
     // End of variables declaration//GEN-END:variables
 }
