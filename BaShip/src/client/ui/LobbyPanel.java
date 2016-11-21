@@ -43,7 +43,7 @@ public class LobbyPanel extends javax.swing.JPanel {
         topBar = new javax.swing.JPanel();
         logoutButton = new javax.swing.JButton();
         loggedInAsLabel = new javax.swing.JLabel();
-        lobbyTabbedPanel1 = new client.ui.lobbyTabs.lobbyTabbedPanel();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
 
         jLabel1.setText("jLabel1");
 
@@ -84,7 +84,7 @@ public class LobbyPanel extends javax.swing.JPanel {
         topBarLayout.setHorizontalGroup(
             topBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(topBarLayout.createSequentialGroup()
-                .addContainerGap(278, Short.MAX_VALUE)
+                .addContainerGap(158, Short.MAX_VALUE)
                 .addComponent(loggedInAsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(logoutButton)
@@ -109,7 +109,7 @@ public class LobbyPanel extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lobbyTabbedPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 503, Short.MAX_VALUE)
+                    .addComponent(jTabbedPane1)
                     .addComponent(topBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -119,7 +119,7 @@ public class LobbyPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(topBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lobbyTabbedPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -138,8 +138,8 @@ public class LobbyPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLayeredPane lobby1;
-    private client.ui.lobbyTabs.lobbyTabbedPanel lobbyTabbedPanel1;
     private javax.swing.JLabel loggedInAsLabel;
     private javax.swing.JButton logoutButton;
     private javax.swing.JPanel topBar;
