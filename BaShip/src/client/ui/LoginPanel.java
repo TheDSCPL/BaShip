@@ -1,7 +1,7 @@
 package client.ui;
 
 import client.*;
-import client.logic.User;
+import client.logic.UserC;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.concurrent.*;
@@ -442,8 +442,8 @@ public class LoginPanel extends javax.swing.JPanel {
             return;
         }
 
-        final boolean usernameIsValid = User.isUsernameValid(user);
-        final boolean passwordIsValid = User.isPasswordValid(pass);
+        final boolean usernameIsValid = UserC.isUsernameValid(user);
+        final boolean passwordIsValid = UserC.isPasswordValid(pass);
         final String userError = "Usernames must only contain letters, digits and underscores.";
         final String passError = "Passwords must only contain letters and digits. Password must also have at least 1 digit and its minimum length is 6.";
 

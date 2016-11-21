@@ -1,10 +1,10 @@
 package server;
 
+import sharedlib.utils.Preferences;
 import java.sql.SQLException;
 import java.util.*;
 import server.conn.*;
 import server.database.*;
-import sharedlib.config.*;
 
 public class ServerMain {
     

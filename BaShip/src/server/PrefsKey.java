@@ -1,6 +1,6 @@
 package server;
 
-import sharedlib.config.*;
+import sharedlib.utils.Preferences;
 
 public enum PrefsKey implements Preferences.Key {
     DatabaseURL("DatabaseURL", "jdbc:postgresql://dbm.fe.up.pt/lpro1613"),

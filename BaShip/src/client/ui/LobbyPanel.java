@@ -27,6 +27,15 @@ public class LobbyPanel extends javax.swing.JPanel {
         }
 
         loggedInAsLabel.setText(loggedInAsLabel.getText() + ClientMain.loggedInUser.username);
+
+        // TODO: DEMO
+        try {
+            System.out.println(ClientMain.server.getUserList(true, "", 1, 100));
+            ClientMain.server.sendGlobalMessage("Hi! I just logged in!");
+        }
+        catch (UserMessageException ex) {
+            ClientMain.showError(ex.getMessage());
+        }
     }
 
     /**

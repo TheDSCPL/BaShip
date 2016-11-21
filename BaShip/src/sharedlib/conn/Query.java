@@ -1,29 +1,21 @@
 package sharedlib.conn;
 
-/**
- *
- * @author Alex
- */
 public enum Query {
-    Empty(""),
-    /**
-     * Indicates packet is not a query, but a response to a query
-     */
-    Response("Response"),
-    UsernameAvailable("UsernameAvailable"),
-    Register("Register"),
-    Login("Login"),
-    Logout("Logout");
-
-    public final String str;
-
-    Query(String q) {
-        str = q;
-    }
-
+    Empty,
+    UsernameAvailable,
+    Register,
+    Login,
+    Logout,
+    GetUserList,
+    GetGameList,
+    SendGameMessage,
+    ReceiveGameMessage,
+    SendGlobalMessage,
+    ReceiveGlobalMessage;
+    
     public static Query fromString(String str) {
         for (Query t : Query.values()) {
-            if (t.str.equals(str)) {
+            if (t.toString().equals(str)) {
                 return t;
             }
         }

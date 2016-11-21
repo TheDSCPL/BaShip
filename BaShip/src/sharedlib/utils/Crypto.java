@@ -1,4 +1,4 @@
-package sharedlib;
+package sharedlib.utils;
 
 import java.nio.*;
 import java.nio.charset.*;

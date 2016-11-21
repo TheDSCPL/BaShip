@@ -1,21 +1,27 @@
 package server.conn;
 
+import server.logic.UserS;
 import java.sql.SQLException;
 import java.util.logging.*;
 import server.*;
-import server.logic.user.*;
+import server.database.GameDB;
+import server.database.UserDB;
 import sharedlib.conn.*;
-import sharedlib.conn.packet.*;
 import sharedlib.exceptions.*;
+import sharedlib.tuples.ErrorMessage;
+import sharedlib.tuples.GameSearch;
+import sharedlib.tuples.Message;
+import sharedlib.tuples.UserInfo;
+import sharedlib.tuples.UserSearch;
 
 public class Client implements Connection.Delegate {
 
-    private final Connection conn;
+    private final Connection connection;
 
     @SuppressWarnings("LeakingThisInConstructor")
     public Client(Connection conn) {
-        this.conn = conn;
-        this.conn.delegate = this;
+        this.connection = conn;
+        this.connection.delegate = this;
     }
 
     @Override
@@ -24,59 +30,90 @@ public class Client implements Connection.Delegate {
 
         switch (request.query) {
             case UsernameAvailable: {
-                StringPacket ip = (StringPacket) request;
                 boolean b = false;
                 try {
-                    b = User.isUsernameAvailable(ip.str);
+                    b = UserS.isUsernameAvailable((String) request.info);
                 }
                 catch (SQLException ex) {
                     Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                response = new BoolPacket(b);
+                response = new Packet(b);
                 break;
             }
             case Login: {
-                MapPacket ip = (MapPacket) request;
-                MapPacket op = new MapPacket();
+                UserInfo um = (UserInfo) request.info;
+                Object info;
                 try {
-                    User u = User.login(this, ip.map.get("username"), ip.map.get("password"));
-                    op.map.put("id", String.valueOf(u.id));
-                    op.map.put("username", u.username);
+                    info = UserS.login(this, um.username, um.passwordHash);
                 }
                 catch (SQLException ex) {
                     Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
-                    op.map.put("error", "Could not run SQL query: " + ex.getMessage());
+                    info = new ErrorMessage("Could not run SQL query: " + ex.getMessage());
                 }
                 catch (UserMessageException ex) {
                     Logger.getLogger(Client.class.getName()).log(Level.INFO, null, ex);
-                    op.map.put("error", ex.getMessage());
+                    info = new ErrorMessage(ex.getMessage());
                 }
-                response = op;
+                response = new Packet(info);
                 break;
             }
             case Register: {
-                MapPacket ip = (MapPacket) request;
-                MapPacket op = new MapPacket();
+                UserInfo um = (UserInfo) request.info;
+                Object info;
                 try {
-                    User u = User.register(this, ip.map.get("username"), ip.map.get("password"));
-                    op.map.put("id", String.valueOf(u.id));
-                    op.map.put("username", u.username);
+                    info = UserS.register(this, um.username, um.passwordHash);
                 }
                 catch (SQLException ex) {
                     Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
-                    op.map.put("error", "Could not run SQL query: " + ex.getMessage());
+                    info = new ErrorMessage("Could not run SQL query: " + ex.getMessage());
                 }
-                response = op;
+                response = new Packet(info);
                 break;
             }
             case Logout: {
-                User.logout(this);
+                UserS.logout(this);
                 response = new Packet(); // Empty packet just for confirmation
                 break;
             }
+            case GetUserList: {
+                UserSearch s = (UserSearch) request.info;
+                Object info;
+
+                try {
+                    info = UserDB.getUserList(s);
+                }
+                catch (SQLException ex) {
+                    Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+                    info = new ErrorMessage("Could not run SQL query: " + ex.getMessage());
+                }
+                response = new Packet(info);
+                break;
+            }
+            case GetGameList: {
+                GameSearch s = (GameSearch) request.info;
+                Object info;
+
+                try {
+                    info = GameDB.getGameList(s);
+                }
+                catch (SQLException ex) {
+                    Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+                    info = new ErrorMessage("Could not run SQL query: " + ex.getMessage());
+                }
+                response = new Packet(info);
+                break;
+            }
+            case SendGlobalMessage: {                
+                UserS.sendGlobalMessage(this, (String)request.info);
+                break;
+            }
         }
-        
+
         return response;
+    }
+    
+    public void informAboutGlobalMessage(Message msg) throws ConnectionException {
+        connection.sendOnly(new Packet(Query.ReceiveGlobalMessage, msg));
     }
 
     @Override
@@ -90,7 +127,7 @@ public class Client implements Connection.Delegate {
     @Override
     public void disconnected(Connection connection) {
         System.out.println("Disconnected from client on " + connection.address());
-        User.logout(this);
+        UserS.logout(this);
         synchronized (ServerMain.clients) {
             ServerMain.clients.remove(this);
         }
