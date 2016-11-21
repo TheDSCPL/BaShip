@@ -7,12 +7,13 @@ import java.net.*;
 import java.util.concurrent.*;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.*;
-import sharedlib.tuples.UserInfo;
-import sharedlib.config.Preferences;
 import sharedlib.conn.Connection;
 import sharedlib.exceptions.ConnectionException;
+import sharedlib.tuples.Message;
+import sharedlib.tuples.UserInfo;
+import sharedlib.utils.Preferences;
 
-public class ClientMain {
+public class ClientMain implements Server.Delegate {
 
     private ClientMain() {
 
@@ -66,6 +67,7 @@ public class ClientMain {
 
     public static void connected(String address) {
         System.out.println("Connected to server on " + address);
+        server.delegate = new ClientMain(); // TODO: DEMO
     }
     
     public static void disconnected(String address) {
@@ -117,5 +119,15 @@ public class ClientMain {
      */
     public static void runOnUI(Runnable r) {
         java.awt.EventQueue.invokeLater(r);
+    }
+
+    @Override
+    public void receiveGameMessage(Message message) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void receiveGlobalMessage(Message message) {
+        System.out.println("Received global message: " + message); // TODO: DEMO
     }
 }

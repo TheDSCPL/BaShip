@@ -1,4 +1,4 @@
-package sharedlib.config;
+package sharedlib.utils;
 
 public class Preferences {
 

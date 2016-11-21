@@ -1,6 +1,6 @@
 package client;
 
-import sharedlib.config.*;
+import sharedlib.utils.Preferences;
 
 public enum PrefsKey implements Preferences.Key {
     ServerIP("ServerIP", "localhost"),

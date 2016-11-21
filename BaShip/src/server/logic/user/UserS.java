@@ -3,15 +3,20 @@ package server.logic.user;
 import java.sql.*;
 import java.util.*;
 import java.util.concurrent.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import server.conn.*;
+import server.database.GlobalChatDB;
 import server.database.UserDB;
 import sharedlib.exceptions.*;
+import sharedlib.tuples.Message;
 import sharedlib.tuples.UserInfo;
 
 // TODO: UserS status on database?
 public class UserS {
 
-    private static final Map<Long, Client> loggedInUsers = new ConcurrentHashMap<>();
+    private static final Map<Long, Client> loginsID = new ConcurrentHashMap<>();
+    private static final Map<Client, Long> loginsClient = new ConcurrentHashMap<>();
 
     public static boolean isUsernameAvailable(String username) throws SQLException {
         return server.database.UserDB.isUsernameAvailable(username);
@@ -19,7 +24,8 @@ public class UserS {
 
     public static UserInfo register(Client client, String username, String passwordHash) throws SQLException {
         UserInfo user = UserDB.register(username, passwordHash);
-        loggedInUsers.put(user.id, client);
+        loginsID.put(user.id, client);
+        loginsClient.put(client, user.id);
         return user;
     }
 
@@ -27,11 +33,12 @@ public class UserS {
         Long id = UserDB.verifyLoginAndReturnUserID(username, passwordHash);
 
         if (id != null) {
-            if (loggedInUsers.containsKey(id)) {
+            if (loginsID.containsKey(id)) {
                 throw new UserMessageException("Already logged in");
             }
             else {
-                loggedInUsers.put(id, client);
+                loginsID.put(id, client);
+                loginsClient.put(client, id);
                 return new UserInfo(id, username);
             }
         }
@@ -41,7 +48,27 @@ public class UserS {
     }
 
     public static void logout(Client client) {
-        loggedInUsers.values().remove(client);
+        loginsID.remove(loginsClient.remove(client));
     }
     
+    public static void sendGlobalMessage(Client client, String message) {
+        if (loginsClient.containsKey(client)) {
+            Message msg = GlobalChatDB.sendGlobalMessage(loginsClient.get(client), message);
+            UserS.distributeGlobalMessage(msg);
+        }
+        else {
+            Logger.getLogger(UserS.class.getName()).log(Level.SEVERE, "Client tried to send global message without being logged in");
+        }
+    }
+
+    private static void distributeGlobalMessage(Message msg) {
+        for (Client client : loginsID.values()) {
+            try {
+                client.informAboutGlobalMessage(msg);
+            }
+            catch (ConnectionException ex) {
+                Logger.getLogger(UserS.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
 }

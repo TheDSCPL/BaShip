@@ -7,7 +7,11 @@ public enum Query {
     Login,
     Logout,
     GetUserList,
-    GetGameList;
+    GetGameList,
+    SendGameMessage,
+    ReceiveGameMessage,
+    SendGlobalMessage,
+    ReceiveGlobalMessage;
     
     public static Query fromString(String str) {
         for (Query t : Query.values()) {

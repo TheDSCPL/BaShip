@@ -10,17 +10,18 @@ import sharedlib.conn.*;
 import sharedlib.exceptions.*;
 import sharedlib.tuples.ErrorMessage;
 import sharedlib.tuples.GameSearch;
+import sharedlib.tuples.Message;
 import sharedlib.tuples.UserInfo;
 import sharedlib.tuples.UserSearch;
 
 public class Client implements Connection.Delegate {
 
-    private final Connection conn;
+    private final Connection connection;
 
     @SuppressWarnings("LeakingThisInConstructor")
     public Client(Connection conn) {
-        this.conn = conn;
-        this.conn.delegate = this;
+        this.connection = conn;
+        this.connection.delegate = this;
     }
 
     @Override
@@ -102,9 +103,17 @@ public class Client implements Connection.Delegate {
                 response = new Packet(info);
                 break;
             }
+            case SendGlobalMessage: {                
+                UserS.sendGlobalMessage(this, (String)request.info);
+                break;
+            }
         }
 
         return response;
+    }
+    
+    public void informAboutGlobalMessage(Message msg) throws ConnectionException {
+        connection.sendOnly(new Packet(Query.ReceiveGlobalMessage, msg));
     }
 
     @Override

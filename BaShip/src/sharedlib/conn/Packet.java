@@ -24,15 +24,8 @@ public class Packet {
      * response
      */
     String pid;
-
-    /**
-     * Contains a str string or a str that identifies this packet functionally
-     */
+    
     public final Query query;
-
-    /**
-     * The object to be sent
-     */
     public final Object info;
 
     public Packet(Query query, Object info) {
