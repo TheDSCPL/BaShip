@@ -5,6 +5,8 @@
  */
 package client.ui.lobbyTabs;
 
+import client.ClientMain;
+import java.awt.Color;
 import javax.swing.*;
 
 /**
@@ -26,13 +28,20 @@ public class lobbyTabbedPanel extends JPanel {
     private void myInitComponents()
     {
         jTabbedPane1.removeAll();
-        tabs[0] = lobby1;
-        tabs[1] = lobby2;
-        tabs[2] = lobby3;
+        tabs[0] = lobby1_;
+        tabs[1] = lobby2_;
+        tabs[2] = lobby3_;
+        jTabbedPane1.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
+        jTabbedPane1.addChangeListener((e) -> {
+            ClientMain.mainFrame.pack();
+        });
+        //jTabbedPane1.setBackground(Color.GRAY);
         for(int i = 0; i< tabs.length ; i++)
         {
+            //tabs[i].setOpaque(true);
             jTabbedPane1.add("Tab " + i,tabs[i]);
             jTabbedPane1.setTabComponentAt(i,null);
+            //jTabbedPane1.setBackgroundAt(i, Color.GRAY);
         }
     }
     
@@ -45,76 +54,132 @@ public class lobbyTabbedPanel extends JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lobby1 = new javax.swing.JLayeredPane();
+        lobby1 = new javax.swing.JPanel();
+        lobby1_ = new javax.swing.JLayeredPane();
         jLabel1 = new javax.swing.JLabel();
-        lobby2 = new javax.swing.JLayeredPane();
+        lobby2 = new javax.swing.JPanel();
+        lobby2_ = new javax.swing.JLayeredPane();
         jLabel2 = new javax.swing.JLabel();
-        lobby3 = new javax.swing.JLayeredPane();
+        lobby3 = new javax.swing.JPanel();
+        lobby3_ = new javax.swing.JLayeredPane();
         jLabel3 = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
 
+        lobby1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
         jLabel1.setText("jLabel1");
 
-        lobby1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        lobby1_.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        javax.swing.GroupLayout lobby1_Layout = new javax.swing.GroupLayout(lobby1_);
+        lobby1_.setLayout(lobby1_Layout);
+        lobby1_Layout.setHorizontalGroup(
+            lobby1_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, lobby1_Layout.createSequentialGroup()
+                .addGap(0, 447, Short.MAX_VALUE)
+                .addComponent(jLabel1))
+        );
+        lobby1_Layout.setVerticalGroup(
+            lobby1_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, lobby1_Layout.createSequentialGroup()
+                .addGap(0, 392, Short.MAX_VALUE)
+                .addComponent(jLabel1))
+        );
 
         javax.swing.GroupLayout lobby1Layout = new javax.swing.GroupLayout(lobby1);
         lobby1.setLayout(lobby1Layout);
         lobby1Layout.setHorizontalGroup(
             lobby1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(lobby1Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(jLabel1)
-                .addContainerGap(37, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, lobby1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lobby1_)
+                .addContainerGap())
         );
         lobby1Layout.setVerticalGroup(
             lobby1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, lobby1Layout.createSequentialGroup()
-                .addContainerGap(45, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(41, 41, 41))
+                .addContainerGap()
+                .addComponent(lobby1_)
+                .addContainerGap())
         );
 
         jLabel2.setText("jLabel2");
 
-        lobby2.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        lobby2_.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        javax.swing.GroupLayout lobby2_Layout = new javax.swing.GroupLayout(lobby2_);
+        lobby2_.setLayout(lobby2_Layout);
+        lobby2_Layout.setHorizontalGroup(
+            lobby2_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(lobby2_Layout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addComponent(jLabel2)
+                .addContainerGap(417, Short.MAX_VALUE))
+        );
+        lobby2_Layout.setVerticalGroup(
+            lobby2_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, lobby2_Layout.createSequentialGroup()
+                .addContainerGap(354, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addGap(40, 40, 40))
+        );
 
         javax.swing.GroupLayout lobby2Layout = new javax.swing.GroupLayout(lobby2);
         lobby2.setLayout(lobby2Layout);
         lobby2Layout.setHorizontalGroup(
             lobby2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(lobby2Layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addComponent(jLabel2)
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(lobby2_)
+                .addContainerGap())
         );
         lobby2Layout.setVerticalGroup(
             lobby2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, lobby2Layout.createSequentialGroup()
-                .addContainerGap(46, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addGap(40, 40, 40))
+            .addGroup(lobby2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lobby2_)
+                .addContainerGap())
         );
 
         jLabel3.setText("jLabel3");
 
-        lobby3.setLayer(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        lobby3_.setLayer(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        javax.swing.GroupLayout lobby3_Layout = new javax.swing.GroupLayout(lobby3_);
+        lobby3_.setLayout(lobby3_Layout);
+        lobby3_Layout.setHorizontalGroup(
+            lobby3_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, lobby3_Layout.createSequentialGroup()
+                .addContainerGap(426, Short.MAX_VALUE)
+                .addComponent(jLabel3)
+                .addGap(23, 23, 23))
+        );
+        lobby3_Layout.setVerticalGroup(
+            lobby3_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(lobby3_Layout.createSequentialGroup()
+                .addGap(39, 39, 39)
+                .addComponent(jLabel3)
+                .addContainerGap(355, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout lobby3Layout = new javax.swing.GroupLayout(lobby3);
         lobby3.setLayout(lobby3Layout);
         lobby3Layout.setHorizontalGroup(
             lobby3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(lobby3Layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addComponent(jLabel3)
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(lobby3_)
+                .addContainerGap())
         );
         lobby3Layout.setVerticalGroup(
             lobby3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, lobby3Layout.createSequentialGroup()
-                .addContainerGap(45, Short.MAX_VALUE)
-                .addComponent(jLabel3)
-                .addGap(41, 41, 41))
+            .addGroup(lobby3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lobby3_)
+                .addContainerGap())
         );
+
+        jTabbedPane1.setTabLayoutPolicy(javax.swing.JTabbedPane.SCROLL_TAB_LAYOUT);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -122,14 +187,14 @@ public class lobbyTabbedPanel extends JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 503, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -140,8 +205,11 @@ public class lobbyTabbedPanel extends JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JLayeredPane lobby1;
-    private javax.swing.JLayeredPane lobby2;
-    private javax.swing.JLayeredPane lobby3;
+    private javax.swing.JPanel lobby1;
+    private javax.swing.JLayeredPane lobby1_;
+    private javax.swing.JPanel lobby2;
+    private javax.swing.JLayeredPane lobby2_;
+    private javax.swing.JPanel lobby3;
+    private javax.swing.JLayeredPane lobby3_;
     // End of variables declaration//GEN-END:variables
 }
