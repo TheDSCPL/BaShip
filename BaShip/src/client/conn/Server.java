@@ -119,8 +119,8 @@ public class Server implements Connection.Delegate {
         }
     }
 
-    public List<GameInfo> getGameList(boolean currentlyPlayingOnly, String usernameFilter) throws UserMessageException {
-        Packet request = new Packet(Query.GetUserList, new GameSearch(currentlyPlayingOnly, usernameFilter));
+    public List<GameInfo> getGameList(boolean currentlyPlayingOnly, String usernameFilter, int orderByColumn, int rowLimit) throws UserMessageException {
+        Packet request = new Packet(Query.GetUserList, new GameSearch(currentlyPlayingOnly, usernameFilter, orderByColumn, rowLimit));
         Packet response = sendAndReceiveWrapper(request);
 
         if (response.info instanceof ErrorMessage) {
