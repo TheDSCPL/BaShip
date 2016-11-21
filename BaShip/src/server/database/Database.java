@@ -32,7 +32,6 @@ public class Database {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "Could not connect to SQL database -> exiting", ex);
             System.exit(-1);
         }
-        
     }
     
     public Connection getConn() {

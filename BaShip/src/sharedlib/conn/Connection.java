@@ -6,7 +6,6 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.*;
-import sharedlib.conn.packet.*;
 import sharedlib.exceptions.ConnectionException;
 import sharedlib.exceptions.PacketException;
 
@@ -24,7 +23,6 @@ final public class Connection extends Thread {
          * Called whenever a packet is received that isn't part of a
          * request-response routine
          *
-         * @param connection The connection that received the packet
          * @param packet The packet that has been received
          * @return A response packet to be sent back, or null
          */
@@ -146,7 +144,6 @@ final public class Connection extends Thread {
                     Packet response = delegate.handle(received);
                     if (response != null) {
                         response.pid = received.id;
-                        response.query = Query.Response;
                         send(response);
                     }
                 }

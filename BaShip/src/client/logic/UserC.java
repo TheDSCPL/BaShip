@@ -1,24 +1,8 @@
 package client.logic;
 
-import java.util.*;
 import java.util.regex.*;
 
-public class User {
-
-    public final long id;
-    public final String username;
-    
-    public User(Map<String, String> map) {
-        id = Long.parseLong(map.get("id"));
-        username = map.get("username");
-        
-        /*if (map.containsKey("status")) {
-            status = Status.fromString(map.get("status"));
-        }
-        if (map.containsKey("")) {
-            // TODO: finish
-        }*/
-    }
+public class UserC {
     
     public static boolean isUsernameValid(String username) {
         if (username == null || username.length() <= 0) {

@@ -1,16 +1,16 @@
 package client.conn;
 
-import sharedlib.conn.Packet;
 import client.ClientMain;
-import client.logic.*;
 import java.io.IOException;
 import java.util.List;
-import static java.util.stream.Collectors.toList;
-import sharedlib.Crypto;
-import sharedlib.UserM;
 import sharedlib.conn.*;
-import sharedlib.conn.packet.*;
 import sharedlib.exceptions.*;
+import sharedlib.tuples.ErrorMessage;
+import sharedlib.tuples.GameInfo;
+import sharedlib.tuples.GameSearch;
+import sharedlib.tuples.UserInfo;
+import sharedlib.tuples.UserSearch;
+import sharedlib.utils.Crypto;
 
 public class Server implements Connection.Delegate {
 
@@ -55,89 +55,72 @@ public class Server implements Connection.Delegate {
     }
 
     public boolean getUsernameAvailable(String username) throws UserMessageException {
-        StringPacket request = new StringPacket(username);
-        request.query = Query.UsernameAvailable;
-
-        BoolPacket response;
-        try {
-            response = (BoolPacket) connection.sendAndReceive(request);
-        }
-        catch (ConnectionException ex) {
-            throw new UserMessageException("Could not connect to server: " + ex.getMessage());
-        }
-
-        return response.b;
+        Packet request = new Packet(Query.UsernameAvailable, username);
+        Packet response = sendAndReceive(request);
+        return (Boolean) response.info;
     }
 
-    public User doLogin(String username, char[] password) throws UserMessageException {
-        MapPacket request = new MapPacket();
-        request.query = Query.Login;
-        request.map.put("username", username);
-        request.map.put("password", Crypto.SHA1(password));
+    public UserInfo doLogin(String username, char[] password) throws UserMessageException {
+        Packet request = new Packet(Query.Login, new UserInfo(username, Crypto.SHA1(password)));
+        Packet response = sendAndReceive(request);
 
-        MapPacket response;
-        try {
-            response = (MapPacket) connection.sendAndReceive(request);
-        }
-        catch (ConnectionException ex) {
-            throw new UserMessageException("Could not connect to server: " + ex.getMessage());
-        }
-
-        if (response.map.containsKey("error")) {
-            throw new UserMessageException("Could not login: " + response.map.get("error"));
+        if (response.info instanceof ErrorMessage) {
+            throw new UserMessageException("Could not login: " + ((ErrorMessage) response.info).message);
         }
         else {
-            return new User(response.map);
+            return (UserInfo) response.info;
         }
     }
 
-    public User doRegister(String username, char[] password) throws UserMessageException {
-        MapPacket request = new MapPacket();
-        request.query = Query.Register;
-        request.map.put("username", username);
-        request.map.put("password", Crypto.SHA1(password));
+    public UserInfo doRegister(String username, char[] password) throws UserMessageException {
+        Packet request = new Packet(Query.Register, new UserInfo(username, Crypto.SHA1(password)));
+        Packet response = sendAndReceive(request);
 
-        MapPacket response;
-        try {
-            response = (MapPacket) connection.sendAndReceive(request);
-        }
-        catch (ConnectionException ex) {
-            throw new UserMessageException("Could not connect to server: " + ex.getMessage());
-        }
-
-        if (response.map.containsKey("error")) {
-            throw new UserMessageException("Could not register: " + response.map.get("error"));
+        if (response.info instanceof ErrorMessage) {
+            throw new UserMessageException("Could not register: " + ((ErrorMessage) response.info).message);
         }
         else {
-            return new User(response.map);
+            return (UserInfo) response.info;
         }
     }
 
     public void doLogout() throws UserMessageException {
-        Packet request = new Packet();
-        request.query = Query.Logout;
+        Packet request = new Packet(Query.Logout);
+        sendAndReceive(request); // Response is an empty packet, just for confirmation
+    }
 
-        try {
-            connection.sendAndReceive(request); // Response is an empty packet, just for confirmation
+    public List<UserInfo> getUserList(boolean onlineOnly, String usernameFilter, int orderByColumn, int rowLimit) throws UserMessageException {
+        Packet request = new Packet(Query.GetUserList, new UserSearch(onlineOnly, usernameFilter, orderByColumn, rowLimit));
+        Packet response = sendAndReceive(request);
+
+        if (response.info instanceof ErrorMessage) {
+            throw new UserMessageException("Could not register: " + ((ErrorMessage) response.info).message);
         }
-        catch (ConnectionException ex) {
-            throw new UserMessageException("Could not connect to server: " + ex.getMessage());
+        else {
+            return (List<UserInfo>) response.info;
+        }
+    }
+    
+    public List<GameInfo> getGameList(boolean currentlyPlayingOnly, String usernameFilter) throws UserMessageException {
+        Packet request = new Packet(Query.GetUserList, new GameSearch(currentlyPlayingOnly, usernameFilter));
+        Packet response = sendAndReceive(request);
+
+        if (response.info instanceof ErrorMessage) {
+            throw new UserMessageException("Could not register: " + ((ErrorMessage) response.info).message);
+        }
+        else {
+            return (List<GameInfo>) response.info;
         }
     }
 
-    public List<UserM> getUserList(boolean onlineOnly, String usernameFilter, int orderByColumn, int rowLimit) throws UserMessageException {
-        MapPacket request = new MapPacket();
-        request.query = Query.GetUserList;
-
-        ListMapPacket response;
+    private Packet sendAndReceive(Packet request) throws UserMessageException {
+        Packet response;
         try {
-            response = (ListMapPacket) connection.sendAndReceive(request);
+            response = connection.sendAndReceive(request);
         }
         catch (ConnectionException ex) {
             throw new UserMessageException("Could not connect to server: " + ex.getMessage());
         }
-
-        // TODO: Error?
-        return response.listmap.stream().map(m -> UserM.fromMap(m)).collect(toList());
+        return response;
     }
 }

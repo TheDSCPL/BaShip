@@ -1,33 +1,40 @@
-package sharedlib;
+package sharedlib.tuples;
 
 import java.util.*;
 
 /**
  * User info Model
  */
-public class UserM {
+public class UserInfo {
     
-    public final long id;
+    public final Long id;
     public final String username;
+    public final String passwordHash;
     public final Integer rank;
     public final Integer nGames;
     public final Integer nWins;
     public final Integer nShots;
     public final Status status;
 
-    public UserM(long id, String username) {
-        this(0, username, null, null, null, null, null);
+    public UserInfo(Long id, String username) {
+        this(id, username, null, null, null, null, null, null);
     }
-
-    public UserM(long id, String username, Integer rank, Integer nGames, Integer nWins, Integer nShots, Status status) {
+    
+    public UserInfo(String username, String passwordHash) {
+        this(null, username, passwordHash, null, null, null, null, null);
+    }
+    
+    public UserInfo(Long id, String username, String passwordHash, Integer rank, Integer nGames, Integer nWins, Integer nShots, Status status) {
         this.id = id;
         this.username = username;
+        this.passwordHash = passwordHash;
         this.rank = rank;
         this.nGames = nGames;
         this.nWins = nWins;
         this.nShots = nShots;
         this.status = status;
     }
+
         
     public enum Status {
         Offline("Offline"),
@@ -52,8 +59,8 @@ public class UserM {
         }
     }
     
-    public static UserM fromMap(Map<String, String> map) {
-        return null;//new UserM();
+    public static UserInfo fromMap(Map<String, String> map) {
+        return null;//new UserInfo();
     }
     
     public Map<String, String> getMap() {

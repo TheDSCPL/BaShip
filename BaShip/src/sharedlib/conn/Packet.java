@@ -1,8 +1,7 @@
 package sharedlib.conn;
 
-import java.lang.reflect.InvocationTargetException;
+import com.google.gson.Gson;
 import java.util.UUID;
-import static sharedlib.conn.Packet.decodeString;
 import sharedlib.exceptions.PacketException;
 
 public class Packet {
@@ -18,83 +17,78 @@ public class Packet {
     /**
      * Unique ID of this packet
      */
-    public String id;
+    String id;
 
     /**
      * Unique ID of the packet that is the request to which this packet is the
      * response
      */
-    public String pid;
+    String pid;
 
     /**
      * Contains a str string or a str that identifies this packet functionally
      */
-    public Query query;
+    public final Query query;
 
-    public Packet() {
+    /**
+     * The object to be sent
+     */
+    public final Object info;
+
+    public Packet(Query query, Object info) {
         id = UUID.randomUUID().toString();
         pid = "";
-        query = Query.Empty;
+        this.query = query;
+        this.info = info;
+    }
+    
+    public Packet(Object info) {
+        this(Query.Empty, info);
+    }
+    
+    public Packet(Query query) {
+        this(query, "");
+    }
+    
+    public Packet() {
+        this(Query.Empty);
     }
 
-    public static Packet fromString(String string) throws PacketException {
+    private Packet(String id, String pid, Query query, Object info) {
+        this.id = id;
+        this.pid = pid;
+        this.query = query;
+        this.info = info;
+    }
+
+    static Packet fromString(String string) throws PacketException {
         String[] parts = string.split(SPLIT_1);
-
-        Packet p = null;
-        String packetType = decodeString(parts[0]);
-
-        if (packetType.equals(Packet.class.getName())) {
-            if (parts.length != 4) {
-                throw new PacketException("Invalid packet header size (" + parts.length + "), header: " + string);
-            }
-            
-            p = new Packet();
+        
+        String id = decodeString(parts[0]);
+        String pid = decodeString(parts[1]);
+        Query query = Query.fromString(decodeString(parts[2]));
+        Object info;
+        
+        try {
+            info = new Gson().fromJson(decodeString(parts[4]), Class.forName(decodeString(parts[3])));
         }
-        else {
-            if (parts.length != 5) {
-                throw new PacketException("Invalid packet header size (" + parts.length + "), header: " + string);
-            }
-            
-            try {
-                p = (Packet) Class.forName(decodeString(parts[0])).getConstructor(String.class).newInstance(parts[4]);
-            }
-            catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
-                throw new PacketException("Could not find instantiate correct Packet subclass", ex);
-            }
+        catch (ClassNotFoundException | SecurityException | IllegalArgumentException ex) {
+            throw new PacketException("Could not find info class", ex);
+        }
+        
+        if (query == null) {
+            throw new PacketException("Invalid query string: " + decodeString(parts[2]));
         }
 
-        p.id = decodeString(parts[1]);
-        p.pid = decodeString(parts[2]);
-        p.query = Query.fromString(decodeString(parts[3]));
-
-        if (p.query == null) {
-            throw new PacketException("Invalid query string: " + decodeString(parts[3]));
-        }
-
-        return p;
+        return new Packet(id, pid, query, info);
     }
 
-    public String getString() throws PacketException {
-        return this.getClass().getName() + SEP_1 + encodeString(id) + SEP_1 + encodeString(pid) + SEP_1 + encodeString(query.str) + SEP_1;
+    String getString() throws PacketException {
+        String json = new Gson().toJson(info);
+        return encodeString(id) + SEP_1 + encodeString(pid) + SEP_1 + encodeString("" + query) + SEP_1 + encodeString(info.getClass().getName()) + SEP_1 + encodeString(json);
     }
 
-    @Override
-    public int hashCode() {
-        return id.hashCode();
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (!(obj instanceof Packet)) {
-            return false;
-        }
-        return ((Packet) obj).id.equals(id);
-    }
-
-    protected static String encodeString(String s) throws PacketException {
+    private static String encodeString(String s) throws PacketException {
         s = s.replaceAll("\n", SUB_NL);
 
         if (s.contains(SEP_1) || s.contains(SEP_L) || s.contains(SEP_M)) {
@@ -104,7 +98,7 @@ public class Packet {
         return s;
     }
 
-    protected static String decodeString(String s) {
+    private static String decodeString(String s) {
         s = s.replaceAll(SUB_NL, "\n");
         return s;
     }

@@ -1,13 +1,13 @@
 package client;
 
 import client.conn.*;
-import client.logic.*;
 import client.ui.*;
 import java.io.*;
 import java.net.*;
 import java.util.concurrent.*;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.*;
+import sharedlib.tuples.UserInfo;
 import sharedlib.config.Preferences;
 import sharedlib.conn.Connection;
 import sharedlib.exceptions.ConnectionException;
@@ -22,7 +22,7 @@ public class ClientMain {
     public static final MainFrame mainFrame = new MainFrame();
     public static final Preferences prefs = new Preferences(ClientMain.class);
     public static Server server;
-    public static User loggedInUser;
+    public static UserInfo loggedInUser;
     private static final ExecutorService backgroundExecutor = Executors.newCachedThreadPool();
     
     public static void main(String args[]) {
