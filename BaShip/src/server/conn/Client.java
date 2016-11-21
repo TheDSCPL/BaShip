@@ -1,11 +1,11 @@
 package server.conn;
 
+import server.logic.UserS;
 import java.sql.SQLException;
 import java.util.logging.*;
 import server.*;
 import server.database.GameDB;
 import server.database.UserDB;
-import server.logic.user.*;
 import sharedlib.conn.*;
 import sharedlib.exceptions.*;
 import sharedlib.tuples.ErrorMessage;

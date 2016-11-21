@@ -1,4 +1,4 @@
-package server.logic.user;
+package server.logic;
 
 import java.sql.*;
 import java.util.*;
