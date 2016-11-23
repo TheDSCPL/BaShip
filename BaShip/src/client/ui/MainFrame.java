@@ -1,5 +1,12 @@
 package client.ui;
 
+import java.awt.Component;
+import java.awt.Image;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+
 public class MainFrame extends javax.swing.JFrame {
 
     /**
@@ -7,8 +14,45 @@ public class MainFrame extends javax.swing.JFrame {
      */
     public MainFrame() {
         initComponents();
+        imageButtonResizer = new ComponentListener()
+        {
+            private ImageIcon _resizeIcon(ImageIcon srcImg, int width, int height)
+            {
+                Image tempImage = srcImg.getImage().getScaledInstance(width,height ,Image.SCALE_SMOOTH );
+                return new ImageIcon(tempImage);
+            }
+            private void resizeIcon(ComponentEvent e)
+            {
+                JButton button = (JButton)e.getComponent();
+                ImageIcon prevIcon = (ImageIcon)button.getIcon();
+                int width = (int)(button.getWidth()*0.8);
+                int height = (int)(button.getHeight()*0.8);
+                button.setIcon(_resizeIcon(prevIcon,width,height));
+            }
+            @Override
+            public void componentResized(ComponentEvent e) {
+                resizeIcon(e);
+            }
+
+            @Override
+            public void componentMoved(ComponentEvent e) {
+                resizeIcon(e);
+            }
+
+            @Override
+            public void componentShown(ComponentEvent e) {
+                resizeIcon(e);
+            }
+
+            @Override
+            public void componentHidden(ComponentEvent e) {
+                resizeIcon(e);
+            }
+        };
     }
        
+    public final ComponentListener imageButtonResizer;
+    
     public void changeToPanel(javax.swing.JComponent panel)
     {
         getContentPane().removeAll();
