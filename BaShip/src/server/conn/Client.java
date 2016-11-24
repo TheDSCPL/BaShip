@@ -39,37 +39,33 @@ public class Client implements Connection.Delegate {
                 catch (SQLException ex) {
                     Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                response = new Packet(b);
+                response = new Packet(Query.CUsernameAvailableResponse, b);
                 break;
             }
             case CLogin: {
                 UserInfo um = (UserInfo) request.info;
-                Object info;
                 try {
-                    info = UserS.login(this, um.username, um.passwordHash);
+                    response = new Packet(Query.CLogin, UserS.login(this, um.username, um.passwordHash));
                 }
                 catch (SQLException ex) {
                     Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
-                    info = new ErrorMessage("Could not run SQL query: " + ex.getMessage());
+                    response = new Packet(Query.SErrorMessageResponse, new ErrorMessage("Could not run SQL query: " + ex.getMessage()));
                 }
                 catch (UserMessageException ex) {
                     Logger.getLogger(Client.class.getName()).log(Level.INFO, null, ex);
-                    info = new ErrorMessage(ex.getMessage());
+                    response = new Packet(Query.SErrorMessageResponse, new ErrorMessage(ex.getMessage()));
                 }
-                response = new Packet(info);
                 break;
             }
             case CRegister: {
                 UserInfo um = (UserInfo) request.info;
-                Object info;
                 try {
-                    info = UserS.register(this, um.username, um.passwordHash);
+                    response = new Packet(Query.CRegister, UserS.register(this, um.username, um.passwordHash));
                 }
                 catch (SQLException ex) {
                     Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
-                    info = new ErrorMessage("Could not run SQL query: " + ex.getMessage());
+                    response = new Packet(Query.SErrorMessageResponse, new ErrorMessage("Could not run SQL query: " + ex.getMessage()));
                 }
-                response = new Packet(info);
                 break;
             }
             case CLogout: {
@@ -79,30 +75,28 @@ public class Client implements Connection.Delegate {
             }
             case CGetUserList: {
                 UserSearch s = (UserSearch) request.info;
-                Object info;
 
                 try {
-                    info = UserDB.getUserList(s);
+                    response = new Packet(Query.SGetUserListResponse, UserDB.getUserList(s));
                 }
                 catch (SQLException ex) {
                     Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
-                    info = new ErrorMessage("Could not run SQL query: " + ex.getMessage());
+                    response = new Packet(Query.SErrorMessageResponse, new ErrorMessage("Could not run SQL query: " + ex.getMessage()));
                 }
-                response = new Packet(info);
+                
                 break;
             }
             case CGetGameList: {
                 GameSearch s = (GameSearch) request.info;
-                Object info;
 
                 try {
-                    info = GameDB.getGameList(s);
+                    response = new Packet(Query.SGetGameListResponse, GameDB.getGameList(s));
                 }
                 catch (SQLException ex) {
                     Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
-                    info = new ErrorMessage("Could not run SQL query: " + ex.getMessage());
+                    response = new Packet(Query.SErrorMessageResponse, new ErrorMessage("Could not run SQL query: " + ex.getMessage()));
                 }
-                response = new Packet(info);
+                
                 break;
             }
             case CSendGlobalMessage: {
@@ -115,7 +109,7 @@ public class Client implements Connection.Delegate {
                     response = new Packet();
                 }
                 catch (UserMessageException ex) {
-                    response = new Packet(new ErrorMessage(ex.getMessage()));
+                    response = new Packet(Query.SErrorMessageResponse, new ErrorMessage(ex.getMessage()));
                 }
                 break;
             }
@@ -125,7 +119,7 @@ public class Client implements Connection.Delegate {
                     response = new Packet();
                 }
                 catch (UserMessageException ex) {
-                    response = new Packet(new ErrorMessage(ex.getMessage()));
+                    response = new Packet(Query.SErrorMessageResponse, new ErrorMessage(ex.getMessage()));
                 }
                 break;
             }
