@@ -1,9 +1,5 @@
 package sharedlib.tuples;
 
-/**
- *
- * @author Alex
- */
 public class UserSearch {
     public final boolean onlineOnly;
     public final String usernameFilter;

@@ -6,7 +6,9 @@
 package client.ui;
 
 import client.ClientMain;
+import java.util.List;
 import sharedlib.exceptions.UserMessageException;
+import sharedlib.tuples.UserInfo;
 
 /**
  *
@@ -30,7 +32,8 @@ public class LobbyPanel extends javax.swing.JPanel {
 
         // TODO: DEMO
         try {
-            System.out.println(ClientMain.server.getUserList(true, "", 1, 100));
+            List<UserInfo> uil = ClientMain.server.getUserList(true, "", 1, 100);
+            System.out.println(uil);
             ClientMain.server.sendGlobalMessage("Hi! I just logged in!");
         }
         catch (UserMessageException ex) {

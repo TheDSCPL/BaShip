@@ -1,14 +1,16 @@
 package server.conn;
 
-import server.logic.UserS;
 import java.sql.SQLException;
 import java.util.logging.*;
 import server.*;
 import server.database.GameDB;
 import server.database.UserDB;
+import server.logic.GameS;
+import server.logic.UserS;
 import sharedlib.conn.*;
 import sharedlib.exceptions.*;
 import sharedlib.tuples.ErrorMessage;
+import sharedlib.tuples.GameScreenInfo;
 import sharedlib.tuples.GameSearch;
 import sharedlib.tuples.Message;
 import sharedlib.tuples.UserInfo;
@@ -29,7 +31,7 @@ public class Client implements Connection.Delegate {
         Packet response = null;
 
         switch (request.query) {
-            case UsernameAvailable: {
+            case CUsernameAvailable: {
                 boolean b = false;
                 try {
                     b = UserS.isUsernameAvailable((String) request.info);
@@ -40,7 +42,7 @@ public class Client implements Connection.Delegate {
                 response = new Packet(b);
                 break;
             }
-            case Login: {
+            case CLogin: {
                 UserInfo um = (UserInfo) request.info;
                 Object info;
                 try {
@@ -57,7 +59,7 @@ public class Client implements Connection.Delegate {
                 response = new Packet(info);
                 break;
             }
-            case Register: {
+            case CRegister: {
                 UserInfo um = (UserInfo) request.info;
                 Object info;
                 try {
@@ -70,12 +72,12 @@ public class Client implements Connection.Delegate {
                 response = new Packet(info);
                 break;
             }
-            case Logout: {
+            case CLogout: {
                 UserS.logout(this);
                 response = new Packet(); // Empty packet just for confirmation
                 break;
             }
-            case GetUserList: {
+            case CGetUserList: {
                 UserSearch s = (UserSearch) request.info;
                 Object info;
 
@@ -89,7 +91,7 @@ public class Client implements Connection.Delegate {
                 response = new Packet(info);
                 break;
             }
-            case GetGameList: {
+            case CGetGameList: {
                 GameSearch s = (GameSearch) request.info;
                 Object info;
 
@@ -103,17 +105,49 @@ public class Client implements Connection.Delegate {
                 response = new Packet(info);
                 break;
             }
-            case SendGlobalMessage: {                
-                UserS.sendGlobalMessage(this, (String)request.info);
+            case CSendGlobalMessage: {
+                UserS.sendGlobalMessage(this, (String) request.info);
+                break;
+            }
+            case CStartRandomGame: {
+                try {
+                    GameS.startRandomGame(this);
+                    response = new Packet();
+                }
+                catch (UserMessageException ex) {
+                    response = new Packet(new ErrorMessage(ex.getMessage()));
+                }
+                break;
+            }
+            case CStartGameWithPlayer: {
+                try {
+                    GameS.startGameWithPlayer(this, (Long) request.info);
+                    response = new Packet();
+                }
+                catch (UserMessageException ex) {
+                    response = new Packet(new ErrorMessage(ex.getMessage()));
+                }
+                break;
+            }
+            case CAnswerGameInvitation: {
+                GameS.answerGameInvitation(this, (Boolean) request.info);
                 break;
             }
         }
 
         return response;
     }
-    
+
     public void informAboutGlobalMessage(Message msg) throws ConnectionException {
-        connection.sendOnly(new Packet(Query.ReceiveGlobalMessage, msg));
+        connection.sendOnly(new Packet(Query.SReceiveGlobalMessage, msg));
+    }
+
+    public void showGameScreen(GameScreenInfo info) throws ConnectionException {
+        connection.sendOnly(new Packet(Query.SShowGameScreen, info));
+    }
+
+    public void sendGameInvitation() throws ConnectionException {
+        connection.sendOnly(new Packet(Query.SReceiveGameInvitation, "")); // TODO: info?
     }
 
     @Override

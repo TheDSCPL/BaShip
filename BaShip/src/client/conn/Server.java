@@ -7,6 +7,7 @@ import sharedlib.conn.*;
 import sharedlib.exceptions.*;
 import sharedlib.tuples.ErrorMessage;
 import sharedlib.tuples.GameInfo;
+import sharedlib.tuples.GameScreenInfo;
 import sharedlib.tuples.GameSearch;
 import sharedlib.tuples.Message;
 import sharedlib.tuples.UserInfo;
@@ -28,15 +29,27 @@ public class Server implements Connection.Delegate {
         Packet response = null;
 
         switch (request.query) {
-            case ReceiveGameMessage: {
+            case SReceiveGameMessage: {
                 if (delegate != null) {
                     delegate.receiveGameMessage((Message) request.info);
                 }
                 break;
             }
-            case ReceiveGlobalMessage: {
+            case SReceiveGlobalMessage: {
                 if (delegate != null) {
                     delegate.receiveGlobalMessage((Message) request.info);
+                }
+                break;
+            }
+            case SShowGameScreen: {
+                if (delegate != null) {
+                    delegate.showGameScreen((GameScreenInfo) request.info);
+                }
+                break;
+            }
+            case SReceiveGameInvitation: {
+                if (delegate != null) {
+                    delegate.showGameInvitation((String) request.info);
                 }
                 break;
             }
@@ -44,7 +57,7 @@ public class Server implements Connection.Delegate {
 
         return response;
     }
-
+    
     @Override
     public void connected(Connection connection) {
         ClientMain.connected(connection.address());
@@ -70,16 +83,20 @@ public class Server implements Connection.Delegate {
         public void receiveGameMessage(Message message);
 
         public void receiveGlobalMessage(Message message);
+        
+        public void showGameScreen(GameScreenInfo info);
+        
+        public void showGameInvitation(String message);
     }
 
     public boolean getUsernameAvailable(String username) throws UserMessageException {
-        Packet request = new Packet(Query.UsernameAvailable, username);
+        Packet request = new Packet(Query.CUsernameAvailable, username);
         Packet response = sendAndReceiveWrapper(request);
         return (Boolean) response.info;
     }
 
     public UserInfo doLogin(String username, char[] password) throws UserMessageException {
-        Packet request = new Packet(Query.Login, new UserInfo(username, Crypto.SHA1(password)));
+        Packet request = new Packet(Query.CLogin, new UserInfo(username, Crypto.SHA1(password)));
         Packet response = sendAndReceiveWrapper(request);
 
         if (response.info instanceof ErrorMessage) {
@@ -91,7 +108,7 @@ public class Server implements Connection.Delegate {
     }
 
     public UserInfo doRegister(String username, char[] password) throws UserMessageException {
-        Packet request = new Packet(Query.Register, new UserInfo(username, Crypto.SHA1(password)));
+        Packet request = new Packet(Query.CRegister, new UserInfo(username, Crypto.SHA1(password)));
         Packet response = sendAndReceiveWrapper(request);
 
         if (response.info instanceof ErrorMessage) {
@@ -103,12 +120,12 @@ public class Server implements Connection.Delegate {
     }
 
     public void doLogout() throws UserMessageException {
-        Packet request = new Packet(Query.Logout);
+        Packet request = new Packet(Query.CLogout);
         sendAndReceiveWrapper(request); // Response is an empty packet, just for confirmation
     }
 
     public List<UserInfo> getUserList(boolean onlineOnly, String usernameFilter, int orderByColumn, int rowLimit) throws UserMessageException {
-        Packet request = new Packet(Query.GetUserList, new UserSearch(onlineOnly, usernameFilter, orderByColumn, rowLimit));
+        Packet request = new Packet(Query.CGetUserList, new UserSearch(onlineOnly, usernameFilter, orderByColumn, rowLimit));
         Packet response = sendAndReceiveWrapper(request);
 
         if (response.info instanceof ErrorMessage) {
@@ -120,7 +137,7 @@ public class Server implements Connection.Delegate {
     }
 
     public List<GameInfo> getGameList(boolean currentlyPlayingOnly, String usernameFilter, int orderByColumn, int rowLimit) throws UserMessageException {
-        Packet request = new Packet(Query.GetUserList, new GameSearch(currentlyPlayingOnly, usernameFilter, orderByColumn, rowLimit));
+        Packet request = new Packet(Query.CGetUserList, new GameSearch(currentlyPlayingOnly, usernameFilter, orderByColumn, rowLimit));
         Packet response = sendAndReceiveWrapper(request);
 
         if (response.info instanceof ErrorMessage) {
@@ -132,7 +149,30 @@ public class Server implements Connection.Delegate {
     }
 
     public void sendGlobalMessage(String message) throws UserMessageException {
-        Packet request = new Packet(Query.SendGlobalMessage, message);
+        Packet request = new Packet(Query.CSendGlobalMessage, message);
+        sendOnlyWrapper(request);
+    }
+
+    public void startRandomGame() throws UserMessageException {
+        Packet request = new Packet(Query.CStartRandomGame);
+        Packet response = sendAndReceiveWrapper(request);
+        
+        if (response.info instanceof ErrorMessage) {
+            throw new UserMessageException("Could not start random game: " + ((ErrorMessage) response.info).message);
+        }
+    }
+    
+    public void startGameWithPlayer(Long id) throws UserMessageException {
+        Packet request = new Packet(Query.CStartGameWithPlayer, id);
+        Packet response = sendAndReceiveWrapper(request);
+        
+        if (response.info instanceof ErrorMessage) {
+            throw new UserMessageException("Could not start game with player: " + ((ErrorMessage) response.info).message);
+        }
+    }
+    
+    public void anwserGameInvitation(boolean accepted) throws UserMessageException {
+        Packet request = new Packet(Query.CAnswerGameInvitation, accepted);
         sendOnlyWrapper(request);
     }
 
@@ -146,7 +186,7 @@ public class Server implements Connection.Delegate {
         }
         return response;
     }
-    
+
     private void sendOnlyWrapper(Packet request) throws UserMessageException {
         try {
             connection.sendOnly(request);

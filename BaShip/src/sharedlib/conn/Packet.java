@@ -4,15 +4,14 @@ import com.google.gson.Gson;
 import java.util.UUID;
 import sharedlib.exceptions.PacketException;
 
+/**
+ * The unit of information sent between client and server
+ */
 public class Packet {
 
-    protected static final String SEP_1 = "\u001C";
-    protected static final String SPLIT_1 = "[\\x1C]";
-    protected static final String SEP_L = "\u001D";
-    protected static final String SPLIT_L = "[\\x1D]";
-    protected static final String SEP_M = "\u001E";
-    protected static final String SPLIT_M = "[\\x1E]";
-    protected static final String SUB_NL = "\u001F";
+    private static final String SEP_1 = "\u001C";
+    private static final String SPLIT_1 = "[\\x1C]";
+    private static final String SUB_NL = "\u001F";
 
     /**
      * Unique ID of this packet
@@ -25,9 +24,21 @@ public class Packet {
      */
     String pid;
     
+    /**
+     * Query object that defines what this packet represents and contains in the dialogue between client and server
+     */
     public final Query query;
+    
+    /**
+     * The information this packet contains
+     */
     public final Object info;
 
+    /**
+     * Create a new Packet
+     * @param query The query of this packet
+     * @param info The information to be sent
+     */
     public Packet(Query query, Object info) {
         id = UUID.randomUUID().toString();
         pid = "";
@@ -35,16 +46,27 @@ public class Packet {
         this.info = info;
     }
     
+    /**
+     * Create a new Packet with an empty query
+     * @param info The information to be sent
+     */
     public Packet(Object info) {
-        this(Query.Empty, info);
+        this(Query.BEmpty, info);
     }
     
+    /**
+     * Create a new Packet with no information
+     * @param query The query of this packet
+     */
     public Packet(Query query) {
         this(query, "");
     }
     
+    /**
+     * Create a new Packet with an empty query and no information
+     */
     public Packet() {
-        this(Query.Empty);
+        this(Query.BEmpty);
     }
 
     private Packet(String id, String pid, Query query, Object info) {
@@ -54,6 +76,12 @@ public class Packet {
         this.info = info;
     }
 
+    /**
+     * 
+     * @param string The string value which represents a Packet
+     * @return The corresponding Packet object
+     * @throws PacketException if there was a problem parsing the string
+     */
     static Packet fromString(String string) throws PacketException {
         String[] parts = string.split(SPLIT_1);
         
@@ -76,6 +104,10 @@ public class Packet {
         return new Packet(id, pid, query, info);
     }
 
+    /**
+     * @return The string value which represents this packet
+     * @throws PacketException 
+     */
     String getString() throws PacketException {
         String json = new Gson().toJson(info);
         return encodeString(id) + SEP_1 + encodeString(pid) + SEP_1 + encodeString("" + query) + SEP_1 + encodeString(info.getClass().getName()) + SEP_1 + encodeString(json);
@@ -84,7 +116,7 @@ public class Packet {
     private static String encodeString(String s) throws PacketException {
         s = s.replaceAll("\n", SUB_NL);
 
-        if (s.contains(SEP_1) || s.contains(SEP_L) || s.contains(SEP_M)) {
+        if (s.contains(SEP_1)) {
             throw new PacketException("String to be sent in packet contains invalid characters: " + s);
         }
 

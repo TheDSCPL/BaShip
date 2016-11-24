@@ -1,9 +1,5 @@
 package sharedlib.exceptions;
 
-/**
- *
- * @author Alex
- */
 public class UserMessageException extends Exception {
 
     /**

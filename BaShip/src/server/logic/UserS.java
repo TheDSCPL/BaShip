@@ -70,7 +70,25 @@ public class UserS {
     public static boolean isUserLoggedIn(Long userID) {
         return loginsID.containsKey(userID);
     }
-
+    
+    public static Client clientFromID(Long id) {
+        return loginsID.get(id);
+    }
+    
+    public static Long idFromClient(Client c) {
+        return loginsClient.get(c);
+    }
+    
+    public static String usernameFromClient(Client c) {
+        try {
+            return UserDB.getUsernameFromID(idFromClient(c));
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(UserS.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+    
     private static void distributeGlobalMessage(Message msg) {
         for (Client client : loginsID.values()) {
             try {

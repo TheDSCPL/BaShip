@@ -51,6 +51,22 @@ public class UserDB {
         return null;
     }
 
+    public static String getUsernameFromID(long id) throws SQLException {
+        PreparedStatement stmt = ServerMain.db.getConn().prepareStatement(
+                "SELECT username FROM users WHERE uid = ?"
+        );
+        stmt.setLong(1, id);
+
+        ResultSet r = stmt.executeQuery();
+        
+        if (r.next()) {
+            return r.getString(1);
+        }
+        else {
+            return null;
+        }
+    }
+
     public static List<UserInfo> getUserList(UserSearch s) throws SQLException {
         PreparedStatement stmt = ServerMain.db.getConn().prepareStatement(
                 "SELECT uid, username, rank, ngames, nwins, nshots "
