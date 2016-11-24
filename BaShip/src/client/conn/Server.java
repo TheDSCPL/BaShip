@@ -93,7 +93,7 @@ public class Server implements Connection.Delegate {
         Packet request = new Packet(Query.CLogin, new UserInfo(username, Crypto.SHA1(password)));
         Packet response = sendAndReceiveWrapper(request);
 
-        if (response.query == Query.SErrorMessageResponse) {
+        if (response.query == Query.SRErrorMessage) {
             throw new UserMessageException("Could not login: " + ((ErrorMessage) response.info).message);
         }
         else {
@@ -105,7 +105,7 @@ public class Server implements Connection.Delegate {
         Packet request = new Packet(Query.CRegister, new UserInfo(username, Crypto.SHA1(password)));
         Packet response = sendAndReceiveWrapper(request);
 
-        if (response.query == Query.SErrorMessageResponse) {
+        if (response.query == Query.SRErrorMessage) {
             throw new UserMessageException("Could not register: " + ((ErrorMessage) response.info).message);
         }
         else {
@@ -122,7 +122,7 @@ public class Server implements Connection.Delegate {
         Packet request = new Packet(Query.CGetUserList, new UserSearch(onlineOnly, usernameFilter, orderByColumn, rowLimit));
         Packet response = sendAndReceiveWrapper(request);
 
-        if (response.query == Query.SErrorMessageResponse) {
+        if (response.query == Query.SRErrorMessage) {
             throw new UserMessageException("Could not register: " + ((ErrorMessage) response.info).message);
         }
         else {
@@ -134,7 +134,7 @@ public class Server implements Connection.Delegate {
         Packet request = new Packet(Query.CGetGameList, new GameSearch(currentlyPlayingOnly, usernameFilter, orderByColumn, rowLimit));
         Packet response = sendAndReceiveWrapper(request);
 
-        if (response.query == Query.SErrorMessageResponse) {
+        if (response.query == Query.SRErrorMessage) {
             throw new UserMessageException("Could not register: " + ((ErrorMessage) response.info).message);
         }
         else {
@@ -151,7 +151,7 @@ public class Server implements Connection.Delegate {
         Packet request = new Packet(Query.CStartRandomGame);
         Packet response = sendAndReceiveWrapper(request);
         
-        if (response.query == Query.SErrorMessageResponse) {
+        if (response.query == Query.SRErrorMessage) {
             throw new UserMessageException("Could not start random game: " + ((ErrorMessage) response.info).message);
         }
     }
@@ -160,7 +160,7 @@ public class Server implements Connection.Delegate {
         Packet request = new Packet(Query.CStartGameWithPlayer, id);
         Packet response = sendAndReceiveWrapper(request);
         
-        if (response.query == Query.SErrorMessageResponse) {
+        if (response.query == Query.SRErrorMessage) {
             throw new UserMessageException("Could not start game with player: " + ((ErrorMessage) response.info).message);
         }
     }

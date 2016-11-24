@@ -39,7 +39,7 @@ public class Client implements Connection.Delegate {
                 catch (SQLException ex) {
                     Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                response = new Packet(Query.CUsernameAvailableResponse, b);
+                response = new Packet(Query.SRUsernameAvailable, b);
                 break;
             }
             case CLogin: {
@@ -49,11 +49,11 @@ public class Client implements Connection.Delegate {
                 }
                 catch (SQLException ex) {
                     Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
-                    response = new Packet(Query.SErrorMessageResponse, new ErrorMessage("Could not run SQL query: " + ex.getMessage()));
+                    response = new Packet(Query.SRErrorMessage, new ErrorMessage("Could not run SQL query: " + ex.getMessage()));
                 }
                 catch (UserMessageException ex) {
                     Logger.getLogger(Client.class.getName()).log(Level.INFO, null, ex);
-                    response = new Packet(Query.SErrorMessageResponse, new ErrorMessage(ex.getMessage()));
+                    response = new Packet(Query.SRErrorMessage, new ErrorMessage(ex.getMessage()));
                 }
                 break;
             }
@@ -64,7 +64,7 @@ public class Client implements Connection.Delegate {
                 }
                 catch (SQLException ex) {
                     Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
-                    response = new Packet(Query.SErrorMessageResponse, new ErrorMessage("Could not run SQL query: " + ex.getMessage()));
+                    response = new Packet(Query.SRErrorMessage, new ErrorMessage("Could not run SQL query: " + ex.getMessage()));
                 }
                 break;
             }
@@ -77,11 +77,11 @@ public class Client implements Connection.Delegate {
                 UserSearch s = (UserSearch) request.info;
 
                 try {
-                    response = new Packet(Query.SGetUserListResponse, UserDB.getUserList(s));
+                    response = new Packet(Query.SRGetUserList, UserDB.getUserList(s));
                 }
                 catch (SQLException ex) {
                     Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
-                    response = new Packet(Query.SErrorMessageResponse, new ErrorMessage("Could not run SQL query: " + ex.getMessage()));
+                    response = new Packet(Query.SRErrorMessage, new ErrorMessage("Could not run SQL query: " + ex.getMessage()));
                 }
                 
                 break;
@@ -90,11 +90,11 @@ public class Client implements Connection.Delegate {
                 GameSearch s = (GameSearch) request.info;
 
                 try {
-                    response = new Packet(Query.SGetGameListResponse, GameDB.getGameList(s));
+                    response = new Packet(Query.SRGetGameList, GameDB.getGameList(s));
                 }
                 catch (SQLException ex) {
                     Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
-                    response = new Packet(Query.SErrorMessageResponse, new ErrorMessage("Could not run SQL query: " + ex.getMessage()));
+                    response = new Packet(Query.SRErrorMessage, new ErrorMessage("Could not run SQL query: " + ex.getMessage()));
                 }
                 
                 break;
@@ -109,7 +109,7 @@ public class Client implements Connection.Delegate {
                     response = new Packet();
                 }
                 catch (UserMessageException ex) {
-                    response = new Packet(Query.SErrorMessageResponse, new ErrorMessage(ex.getMessage()));
+                    response = new Packet(Query.SRErrorMessage, new ErrorMessage(ex.getMessage()));
                 }
                 break;
             }
@@ -119,7 +119,7 @@ public class Client implements Connection.Delegate {
                     response = new Packet();
                 }
                 catch (UserMessageException ex) {
-                    response = new Packet(Query.SErrorMessageResponse, new ErrorMessage(ex.getMessage()));
+                    response = new Packet(Query.SRErrorMessage, new ErrorMessage(ex.getMessage()));
                 }
                 break;
             }

@@ -9,26 +9,27 @@ import sharedlib.tuples.*;
  * Queries starting with 'C' are sent by the [C]lient to the server.
  * Queries starting with 'S' are sent by the [S]erver to the client.
  * Queries starting with 'B' are sent in [B]oth directions.
+ * Queries starting with 'SR' are sent by the [S]erver to the client and are a [R]esponse to a client request packet.
  */
 public enum Query {
     BEmpty(),
-    SErrorMessageResponse(ErrorMessage.class),
+    SRErrorMessage(ErrorMessage.class),
     CUsernameAvailable(String.class),
-    CUsernameAvailableResponse(Boolean.class),
+    SRUsernameAvailable(Boolean.class),
     CRegister(UserInfo.class),
     CLogin(UserInfo.class),
     CLogout(),
     CGetUserList(UserSearch.class),
-    SGetUserListResponse(new TypeToken<List<UserInfo>>(){}),
+    SRGetUserList(new TypeToken<List<UserInfo>>(){}),
     CGetGameList(GameSearch.class),
-    SGetGameListResponse(new TypeToken<List<GameInfo>>(){}),
-    CSendGameMessage(),
-    SReceiveGameMessage,
+    SRGetGameList(new TypeToken<List<GameInfo>>(){}),
+    CSendGameMessage(String.class),
+    SReceiveGameMessage(Message.class),
     CSendGlobalMessage(String.class),
     SReceiveGlobalMessage(Message.class),
     CStartRandomGame(),
-    CStartGameWithPlayer(),
-    SShowGameScreen(),
+    CStartGameWithPlayer(Long.class),
+    SShowGameScreen(GameScreenInfo.class),
     SReceiveGameInvitation(),
     CAnswerGameInvitation();
     
