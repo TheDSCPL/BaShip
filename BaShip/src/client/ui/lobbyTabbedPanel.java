@@ -82,7 +82,7 @@ public class lobbyTabbedPanel extends JPanel {
         applyFilterButton.addComponentListener(ClientMain.mainFrame.imageButtonResizer);
         clearFilterButton.addComponentListener(ClientMain.mainFrame.imageButtonResizer);
         
-        updateTableData(sortingColumn, maxUsersInTable);
+        updateUsersTableData(sortingColumn, maxUsersInTable);
     }
     
     /**
@@ -125,6 +125,11 @@ public class lobbyTabbedPanel extends JPanel {
         });
 
         clearFilterButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/client/ui/Images/cancel.png"))); // NOI18N
+        clearFilterButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearFilterButtonActionPerformed(evt);
+            }
+        });
 
         lobby1.setLayer(scrollableTable, javax.swing.JLayeredPane.DEFAULT_LAYER);
         lobby1.setLayer(filterField, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -228,7 +233,7 @@ public class lobbyTabbedPanel extends JPanel {
         applyFilterButtonActionPerformed(evt);
     }//GEN-LAST:event_filterFieldActionPerformed
 
-    private void updateTableData(int columnToSortWith, int maxUsers)
+    private void updateUsersTableData(int columnToSortWith, int maxUsers)
     {
         if(columnToSortWith < 0 || columnToSortWith >= tableModel.getColumnCount())
             throw new Error("Invalid column index to sort");
@@ -256,11 +261,21 @@ public class lobbyTabbedPanel extends JPanel {
         }
     }
     
+    private String prevFilter = "";
+    
     private void applyFilterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_applyFilterButtonActionPerformed
-        if(filterField.getText().length() <= 0)
-            return;
-        updateTableData(sortingColumn, maxUsersInTable);
+        if(filterField.getText().equals(prevFilter))
+            return; //so it doesn't send unnecessary requests to the server
+        prevFilter = filterField.getText();
+        updateUsersTableData(sortingColumn, maxUsersInTable);
     }//GEN-LAST:event_applyFilterButtonActionPerformed
+
+    private void clearFilterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearFilterButtonActionPerformed
+        if(filterField.getText() == null || filterField.getText().length() <= 0)
+            return; //so it doesn't send unnecessary requests to the server
+        filterField.setText("");
+        filterFieldActionPerformed(evt);
+    }//GEN-LAST:event_clearFilterButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
