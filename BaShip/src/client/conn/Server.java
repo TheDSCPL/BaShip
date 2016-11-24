@@ -1,17 +1,12 @@
 package client.conn;
 
-import client.ClientMain;
-import java.io.IOException;
-import java.util.List;
+import client.*;
+import java.io.*;
+import java.util.*;
 import sharedlib.conn.*;
 import sharedlib.exceptions.*;
-import sharedlib.tuples.ErrorMessage;
-import sharedlib.tuples.GameInfo;
-import sharedlib.tuples.GameSearch;
-import sharedlib.tuples.Message;
-import sharedlib.tuples.UserInfo;
-import sharedlib.tuples.UserSearch;
-import sharedlib.utils.Crypto;
+import sharedlib.tuples.*;
+import sharedlib.utils.*;
 
 public class Server implements Connection.Delegate {
 

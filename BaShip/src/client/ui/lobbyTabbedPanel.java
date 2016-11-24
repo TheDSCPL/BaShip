@@ -5,11 +5,15 @@
  */
 package client.ui;
 
-import client.ClientMain;
+import client.*;
 import java.awt.*;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
+import java.awt.event.*;
+import java.util.logging.*;
+import java.util.*;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import sharedlib.exceptions.*;
+import sharedlib.tuples.*;
 
 /**
  *
@@ -21,6 +25,7 @@ public class lobbyTabbedPanel extends JPanel {
      * Creates new form lobbyTabbedPanel
      */
     public lobbyTabbedPanel() {
+        preInitComponents();
         initComponents();
         myInitComponents();
     }
@@ -35,6 +40,34 @@ public class lobbyTabbedPanel extends JPanel {
         jTabbedPane1.setTabComponentAt(jTabbedPane1.getTabCount()-1,null);
     }
     
+    private DefaultTableModel tableModel;
+    
+    private void preInitComponents()
+    {
+        tableModel = new javax.swing.table.DefaultTableModel(new Object [][] {},new String [] {"Username", "# Rank", "# Games", "# Wins", "# Shots", "Status"})
+        {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            @Override
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            @Override
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        };
+    }
+    
+    private int sortingColumn = 1;
+    private int maxUsersInTable = 20;
+    
     private void myInitComponents()
     {
         //Add tabs
@@ -48,6 +81,8 @@ public class lobbyTabbedPanel extends JPanel {
         applyFilterButton.setIcon(filterIcon);*/
         applyFilterButton.addComponentListener(ClientMain.mainFrame.imageButtonResizer);
         clearFilterButton.addComponentListener(ClientMain.mainFrame.imageButtonResizer);
+        
+        updateTableData(sortingColumn, maxUsersInTable);
     }
     
     /**
@@ -62,7 +97,7 @@ public class lobbyTabbedPanel extends JPanel {
         lobby1 = new javax.swing.JLayeredPane();
         scrollableTable = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jTextField1 = new javax.swing.JTextField();
+        filterField = new javax.swing.JTextField();
         applyFilterButton = new javax.swing.JButton();
         clearFilterButton = new javax.swing.JButton();
         lobby2 = new javax.swing.JLayeredPane();
@@ -71,36 +106,14 @@ public class lobbyTabbedPanel extends JPanel {
         jLabel3 = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Username", "# Rank", "# Games", "# Wins", "# Shots", "Status"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        jTable1.setModel(tableModel);
         jTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         scrollableTable.setViewportView(jTable1);
 
-        jTextField1.setToolTipText("Press enter to apply filter");
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        filterField.setToolTipText("Press enter to apply filter");
+        filterField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                filterFieldActionPerformed(evt);
             }
         });
 
@@ -114,7 +127,7 @@ public class lobbyTabbedPanel extends JPanel {
         clearFilterButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/client/ui/Images/cancel.png"))); // NOI18N
 
         lobby1.setLayer(scrollableTable, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        lobby1.setLayer(jTextField1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        lobby1.setLayer(filterField, javax.swing.JLayeredPane.DEFAULT_LAYER);
         lobby1.setLayer(applyFilterButton, javax.swing.JLayeredPane.DEFAULT_LAYER);
         lobby1.setLayer(clearFilterButton, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
@@ -127,7 +140,7 @@ public class lobbyTabbedPanel extends JPanel {
                 .addGroup(lobby1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(lobby1Layout.createSequentialGroup()
                         .addGap(12, 12, 12)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(filterField, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(applyFilterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -146,7 +159,7 @@ public class lobbyTabbedPanel extends JPanel {
                 .addGroup(lobby1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(lobby1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(applyFilterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jTextField1))
+                        .addComponent(filterField))
                     .addComponent(clearFilterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(64, Short.MAX_VALUE))
         );
@@ -211,23 +224,53 @@ public class lobbyTabbedPanel extends JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    private void filterFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterFieldActionPerformed
+        applyFilterButtonActionPerformed(evt);
+    }//GEN-LAST:event_filterFieldActionPerformed
 
+    private void updateTableData(int columnToSortWith, int maxUsers)
+    {
+        if(columnToSortWith < 0 || columnToSortWith >= tableModel.getColumnCount())
+            throw new Error("Invalid column index to sort");
+        try {
+            java.util.List<UserInfo> userList = ClientMain.server.getUserList(false, filterField.getText(), columnToSortWith, maxUsers);
+            while(tableModel.getRowCount() > 0)
+                tableModel.removeRow(tableModel.getRowCount()-1);
+            for(int i=0; i<userList.size() ; i++)
+            {
+                UserInfo userInfo = userList.get(i);
+                tableModel.addRow(new Object[] {userInfo.username, userInfo.rank, userInfo.nGames, userInfo.nWins, userInfo.nShots, userInfo.status});
+            }
+        } catch (UserMessageException ex) {
+            ClientMain.showError(ex.getMessage());
+        }
+        catch(Exception ignored)
+        {
+            ignored.printStackTrace();
+            try {
+            System.err.println("Exception: " + ignored.getMessage());
+                ClientMain.server.doLogout();
+            } catch (UserMessageException ex) {
+                Logger.getLogger(lobbyTabbedPanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+    
     private void applyFilterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_applyFilterButtonActionPerformed
-        // TODO add your handling code here:
+        if(filterField.getText().length() <= 0)
+            return;
+        updateTableData(sortingColumn, maxUsersInTable);
     }//GEN-LAST:event_applyFilterButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton applyFilterButton;
     private javax.swing.JButton clearFilterButton;
+    private javax.swing.JTextField filterField;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLayeredPane lobby1;
     private javax.swing.JLayeredPane lobby2;
     private javax.swing.JLayeredPane lobby3;

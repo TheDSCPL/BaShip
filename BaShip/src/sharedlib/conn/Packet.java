@@ -1,8 +1,14 @@
 package sharedlib.conn;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.UUID;
 import sharedlib.exceptions.PacketException;
+import sharedlib.tuples.UserInfo;
+import sharedlib.conn.MyParameterizedType;
 
 public class Packet {
 
@@ -53,7 +59,7 @@ public class Packet {
         this.query = query;
         this.info = info;
     }
-
+    
     static Packet fromString(String string) throws PacketException {
         String[] parts = string.split(SPLIT_1);
         
@@ -62,15 +68,32 @@ public class Packet {
         Query query = Query.fromString(decodeString(parts[2]));
         Object info;
         
+        if (query == null) {
+            throw new PacketException("Invalid query string: " + decodeString(parts[2]));
+        }
+        
         try {
-            info = new Gson().fromJson(decodeString(parts[4]), Class.forName(decodeString(parts[3])));
+            //java.util.ArrayList
+            Class<?> rawClass = Class.forName(decodeString(parts[3]));
+            
+            //Type listGenericType = Class.forName(decodeString(parts[4])); //TODO: trocar a linha de baixo por esta quando se adicionar este valor à string de Json
+            Type listGenericType = Class.forName("sharedlib.tuples.UserInfo");
+            
+            Type[] genericTypes = null;
+            if(rawClass == ArrayList.class)
+                genericTypes = new Type[]{listGenericType};
+            
+            Type type = MyParameterizedType.factory(rawClass, genericTypes, null);
+            
+            //info = new Gson().fromJson(decodeString(parts[5]), type); //TODO: trocar a linha de baixo por esta quando se adicionar este valor à string de Json
+            info = new Gson().fromJson(decodeString(parts[4]), type);
+            //info = new Gson().fromJson(decodeString(parts[4]), new TypeToken<ArrayList<UserInfo>>(){}.getType()); //Deprecated. This way only lets you have a hardcoded generic type
+            
+            /*else
+                info = new Gson().fromJson(decodeString(parts[4]), rawClass);*/
         }
         catch (ClassNotFoundException | SecurityException | IllegalArgumentException ex) {
             throw new PacketException("Could not find info class", ex);
-        }
-        
-        if (query == null) {
-            throw new PacketException("Invalid query string: " + decodeString(parts[2]));
         }
 
         return new Packet(id, pid, query, info);
