@@ -30,7 +30,6 @@ public class GameDB {
         List<GameInfo> games = new ArrayList<>();
         while (results.next()) {
             long id = results.getLong(1);
-            // TODO: status? currrent move number?
             games.add(new GameInfo(id, results.getLong(2), results.getLong(3), results.getString(4), results.getString(4), results.getDate(5), results.getDate(6)));
         }
 

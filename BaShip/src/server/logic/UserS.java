@@ -13,7 +13,6 @@ import sharedlib.tuples.Message;
 import sharedlib.tuples.UserInfo;
 import sharedlib.tuples.UserInfo.Status;
 
-// TODO: UserS status on database?
 public class UserS {
 
     private static final Map<Long, Client> loginsID = new ConcurrentHashMap<>();

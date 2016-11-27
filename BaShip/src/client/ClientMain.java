@@ -50,6 +50,7 @@ public class ClientMain {
                 server.disconnect();
             }
             catch (IOException ignored) {
+                
             }
         }
 

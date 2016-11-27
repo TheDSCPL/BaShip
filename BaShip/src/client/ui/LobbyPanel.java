@@ -21,7 +21,7 @@ public class LobbyPanel extends javax.swing.JPanel {
         initComponents();
 
         if (ClientMain.loggedInUser == null) {
-            ClientMain.showWarning("Fatal Error!"); // TODO: more descriptive error message
+            ClientMain.showWarning("Lobby panel shown without an user logged in");
             ClientMain.mainFrame.changeToPanel(new LoginPanel());
             return;
         }

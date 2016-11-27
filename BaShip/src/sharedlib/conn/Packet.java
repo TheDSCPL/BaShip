@@ -1,9 +1,8 @@
 package sharedlib.conn;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import java.util.UUID;
-import sharedlib.exceptions.PacketException;
+import com.google.gson.*;
+import java.util.*;
+import sharedlib.exceptions.*;
 
 /**
  * The unit of information sent between client and server
@@ -70,8 +69,12 @@ public class Packet {
         this.pid = pid;
         this.query = query;
         this.info = info;
-        
-        // TODO: verify if query.infoType matches info.class
+
+        if (query.infoType != null && info != null) {
+            if (!query.infoType.getRawType().isInstance(info)) {
+                throw new IllegalArgumentException("Packet instantiation failure: class of info object is not compatible with class type defined by query");
+            }
+        }
     }
 
     static Packet fromString(String string) throws PacketException {
@@ -88,26 +91,7 @@ public class Packet {
 
         if (query.infoType != null) {
             try {
-                /*//java.util.ArrayList
-            Class<?> rawClass = Class.forName(decodeString(parts[3]));
-            
-            //Type listGenericType = Class.forName(decodeString(parts[4])); //TODO: trocar a linha de baixo por esta quando se adicionar este valor à string de Json
-            Type listGenericType = Class.forName("sharedlib.tuples.UserInfo");
-            
-            Type[] genericTypes = null;
-            if(rawClass == ArrayList.class)
-                genericTypes = new Type[]{listGenericType};
-            
-            Type type = MyParameterizedType.factory(rawClass, genericTypes, null);
-            
-            //info = new Gson().fromJson(decodeString(parts[5]), type); //TODO: trocar a linha de baixo por esta quando se adicionar este valor à string de Json
-            info = new Gson().fromJson(decodeString(parts[4]), type);
-            //info = new Gson().fromJson(decodeString(parts[4]), new TypeToken<ArrayList<UserInfo>>(){}.getType()); //Deprecated. This way only lets you have a hardcoded generic type
-            
-                 *//*else
-                info = new Gson().fromJson(decodeString(parts[4]), rawClass);*/
-
-                info = getGson().fromJson(decodeString(parts[3]), /*Class.forName(decodeString(parts[3]))*/ query.infoType.getType());
+                info = getGson().fromJson(decodeString(parts[3]), query.infoType.getType());
             }
             catch (SecurityException | IllegalArgumentException ex) {
                 throw new PacketException("Could not find info class", ex);
@@ -126,7 +110,7 @@ public class Packet {
      */
     String getString() throws PacketException {
         String json = info != null ? getGson().toJson(info) : "";
-        return encodeString(id) + SEP_1 + encodeString(pid) + SEP_1 + encodeString("" + query) + SEP_1 + /*encodeString(info.getClass().getName()) + SEP_1 +*/ encodeString(json);
+        return encodeString(id) + SEP_1 + encodeString(pid) + SEP_1 + encodeString("" + query) + SEP_1 + encodeString(json);
     }
 
     private static String encodeString(String s) throws PacketException {
@@ -143,7 +127,7 @@ public class Packet {
         s = s.replaceAll(SUB_NL, "\n");
         return s;
     }
-    
+
     private static Gson getGson() {
         return new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ").create();
     }
