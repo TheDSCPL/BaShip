@@ -53,7 +53,7 @@ public class UserS {
         }
     }
 
-    public static void sendGlobalMessage(Client client, String message) {
+    public static void sendGlobalMessage(Client client, String message) throws SQLException {
         if (isClientLoggedIn(client)) {
             Message msg = GlobalChatDB.sendGlobalMessage(loginsClient.get(client), message);
             UserS.distributeGlobalMessage(msg);

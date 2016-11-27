@@ -74,13 +74,13 @@ public class Server implements Connection.Delegate {
 
     public interface Delegate {
 
-        public void receiveGameMessage(Message message);
+        default public void receiveGameMessage(Message message) {}
 
-        public void receiveGlobalMessage(Message message);
+        default public void receiveGlobalMessage(Message message) {}
         
-        public void showGameScreen(GameScreenInfo info);
+        default public void showGameScreen(GameScreenInfo info) {}
         
-        public void showGameInvitation(String message);
+        default public void showGameInvitation(String message) {}
     }
 
     public boolean getUsernameAvailable(String username) throws UserMessageException {

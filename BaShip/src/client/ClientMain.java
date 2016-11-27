@@ -5,8 +5,6 @@ import client.ui.*;
 import java.io.*;
 import java.net.*;
 import java.util.concurrent.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.*;
 import sharedlib.conn.Connection;

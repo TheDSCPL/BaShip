@@ -83,7 +83,7 @@ public class Client implements Connection.Delegate {
                     Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
                     response = new Packet(Query.SRErrorMessage, new ErrorMessage("Could not run SQL query: " + ex.getMessage()));
                 }
-                
+
                 break;
             }
             case CGetGameList: {
@@ -96,11 +96,17 @@ public class Client implements Connection.Delegate {
                     Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
                     response = new Packet(Query.SRErrorMessage, new ErrorMessage("Could not run SQL query: " + ex.getMessage()));
                 }
-                
+
                 break;
             }
             case CSendGlobalMessage: {
-                UserS.sendGlobalMessage(this, (String) request.info);
+                try {
+                    UserS.sendGlobalMessage(this, (String) request.info);
+                }
+                catch (SQLException ex) {
+                    Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+                    //response = new Packet(Query.SRErrorMessage, new ErrorMessage("Could not run SQL query: " + ex.getMessage())); // TODO: receive response on client side?
+                }
                 break;
             }
             case CStartRandomGame: {
