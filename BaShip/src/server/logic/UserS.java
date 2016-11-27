@@ -11,6 +11,7 @@ import server.database.UserDB;
 import sharedlib.exceptions.*;
 import sharedlib.tuples.Message;
 import sharedlib.tuples.UserInfo;
+import sharedlib.tuples.UserInfo.Status;
 
 // TODO: UserS status on database?
 public class UserS {
@@ -70,15 +71,30 @@ public class UserS {
     public static boolean isUserLoggedIn(Long userID) {
         return loginsID.containsKey(userID);
     }
-    
+
     public static Client clientFromID(Long id) {
         return loginsID.get(id);
     }
-    
+
     public static Long idFromClient(Client c) {
         return loginsClient.get(c);
     }
-    
+
+    public static Status getUserStatus(Long userID) {
+        if (isUserLoggedIn(userID)) {
+            if (GameS.isUserPlaying(clientFromID(userID))) {
+                return Status.Playing;
+            }
+            else if (GameS.isUserWaiting(clientFromID(userID))) {
+                return Status.Waiting;
+            }
+            
+            return Status.Online;
+        }
+        
+        return Status.Offline;
+    }
+
     public static String usernameFromClient(Client c) {
         try {
             return UserDB.getUsernameFromID(idFromClient(c));
@@ -88,7 +104,7 @@ public class UserS {
             return null;
         }
     }
-    
+
     private static void distributeGlobalMessage(Message msg) {
         for (Client client : loginsID.values()) {
             try {

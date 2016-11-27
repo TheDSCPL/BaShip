@@ -9,12 +9,14 @@ import server.logic.GameS;
 import server.logic.UserS;
 import sharedlib.conn.*;
 import sharedlib.exceptions.*;
+import sharedlib.tuples.BoardInfo;
 import sharedlib.tuples.ErrorMessage;
 import sharedlib.tuples.GameScreenInfo;
 import sharedlib.tuples.GameSearch;
 import sharedlib.tuples.Message;
 import sharedlib.tuples.UserInfo;
 import sharedlib.tuples.UserSearch;
+import sharedlib.utils.Coord;
 
 public class Client implements Connection.Delegate {
 
@@ -133,6 +135,14 @@ public class Client implements Connection.Delegate {
                 GameS.answerGameInvitation(this, (Boolean) request.info);
                 break;
             }
+            case CTogglePlaceOnShipSquare: {
+                GameS.togglePlaceShipOnSquare(this, (Coord) request.info);
+                break;
+            }
+            case CFireShot: {
+                GameS.fireShot(this, (Coord) request.info);
+                break;
+            }
         }
 
         return response;
@@ -142,12 +152,16 @@ public class Client implements Connection.Delegate {
         connection.sendOnly(new Packet(Query.SReceiveGlobalMessage, msg));
     }
 
-    public void showGameScreen(GameScreenInfo info) throws ConnectionException {
-        connection.sendOnly(new Packet(Query.SShowGameScreen, info));
+    public void updateGameScreen(GameScreenInfo info) throws ConnectionException {
+        connection.sendOnly(new Packet(Query.SUpdateGameScreen, info));
     }
 
     public void sendGameInvitation() throws ConnectionException {
         connection.sendOnly(new Packet(Query.SReceiveGameInvitation, "")); // TODO: info?
+    }
+
+    public void updateGameBoard(BoardInfo info) throws ConnectionException {
+        connection.sendOnly(new Packet(Query.SUpdateGameBoard, info));
     }
 
     @Override

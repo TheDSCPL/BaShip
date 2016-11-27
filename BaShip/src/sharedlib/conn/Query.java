@@ -3,6 +3,7 @@ package sharedlib.conn;
 import com.google.gson.reflect.TypeToken;
 import java.util.List;
 import sharedlib.tuples.*;
+import sharedlib.utils.Coord;
 
 /**
  * Object that defines the information a Packet sent between client and server contains.
@@ -29,7 +30,10 @@ public enum Query {
     SReceiveGlobalMessage(Message.class),
     CStartRandomGame(),
     CStartGameWithPlayer(Long.class),
-    SShowGameScreen(GameScreenInfo.class),
+    SUpdateGameScreen(GameScreenInfo.class),
+    SUpdateGameBoard(BoardInfo.class),
+    CTogglePlaceOnShipSquare(Coord.class),
+    CFireShot(Coord.class),
     SReceiveGameInvitation(),
     CAnswerGameInvitation();
     

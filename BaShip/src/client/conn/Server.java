@@ -35,15 +35,21 @@ public class Server implements Connection.Delegate {
                 }
                 break;
             }
-            case SShowGameScreen: {
+            case SUpdateGameScreen: {
                 if (delegate != null) {
-                    delegate.showGameScreen((GameScreenInfo) request.info);
+                    delegate.updateGameScreen((GameScreenInfo) request.info);
                 }
                 break;
             }
             case SReceiveGameInvitation: {
                 if (delegate != null) {
                     delegate.showGameInvitation((String) request.info);
+                }
+                break;
+            }
+            case SUpdateGameBoard: {
+                if (delegate != null) {
+                    delegate.updateBoardInfo((BoardInfo) request.info);
                 }
                 break;
             }
@@ -78,9 +84,11 @@ public class Server implements Connection.Delegate {
 
         default public void receiveGlobalMessage(Message message) {}
         
-        default public void showGameScreen(GameScreenInfo info) {}
+        default public void updateGameScreen(GameScreenInfo info) {}
         
         default public void showGameInvitation(String message) {}
+        
+        default public void updateBoardInfo(BoardInfo info) {}
     }
 
     public boolean getUsernameAvailable(String username) throws UserMessageException {
@@ -167,6 +175,16 @@ public class Server implements Connection.Delegate {
     
     public void anwserGameInvitation(boolean accepted) throws UserMessageException {
         Packet request = new Packet(Query.CAnswerGameInvitation, accepted);
+        sendOnlyWrapper(request);
+    }
+    
+    public void togglePlaceShipOnSquare(Coord pos) throws UserMessageException {
+        Packet request = new Packet(Query.CTogglePlaceOnShipSquare, pos);
+        sendOnlyWrapper(request);
+    }
+
+    public void fireShot(Coord pos) throws UserMessageException {
+        Packet request = new Packet(Query.CFireShot, pos);
         sendOnlyWrapper(request);
     }
 
