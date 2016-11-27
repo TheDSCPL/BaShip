@@ -44,7 +44,7 @@ CREATE TABLE gamechat (
 CREATE TABLE globalchat (
     mssgid BIGSERIAL PRIMARY KEY,
     uid INTEGER NOT NULL REFERENCES users,
-    timestamp TIME NOT NULL,
+    timestamp TIMESTAMP WITH TIME ZONE NOT NULL,
     txt TEXT NOT NULL,
     UNIQUE(uid, timestamp)
 );

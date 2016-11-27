@@ -308,6 +308,7 @@ public class lobbyTabbedPanel extends JPanel implements Server.Delegate {
     private void sendButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendButtonActionPerformed
         try {
             ClientMain.server.sendGlobalMessage(inputTextField.getText());
+            inputTextField.setText("");
         }
         catch (UserMessageException ex) {
             Logger.getLogger(lobbyTabbedPanel.class.getName()).log(Level.SEVERE, null, ex);
@@ -319,6 +320,7 @@ public class lobbyTabbedPanel extends JPanel implements Server.Delegate {
     public void receiveGlobalMessage(Message m) {
         // TODO: Better presentation
         messagesTextArea.setText(messagesTextArea.getText() + "[" + m.timestamp + "] " + m.username + "\n" + m.text + "\n\n");
+        messagesTextArea.setCaretPosition(messagesTextArea.getDocument().getLength()); // Scroll to bottom
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

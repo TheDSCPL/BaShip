@@ -1,6 +1,7 @@
 package sharedlib.conn;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import java.util.UUID;
 import sharedlib.exceptions.PacketException;
 
@@ -106,7 +107,7 @@ public class Packet {
                  *//*else
                 info = new Gson().fromJson(decodeString(parts[4]), rawClass);*/
 
-                info = new Gson().fromJson(decodeString(parts[3]), /*Class.forName(decodeString(parts[3]))*/ query.infoType.getType());
+                info = getGson().fromJson(decodeString(parts[3]), /*Class.forName(decodeString(parts[3]))*/ query.infoType.getType());
             }
             catch (SecurityException | IllegalArgumentException ex) {
                 throw new PacketException("Could not find info class", ex);
@@ -124,7 +125,7 @@ public class Packet {
      * @throws PacketException
      */
     String getString() throws PacketException {
-        String json = info != null ? new Gson().toJson(info) : "";
+        String json = info != null ? getGson().toJson(info) : "";
         return encodeString(id) + SEP_1 + encodeString(pid) + SEP_1 + encodeString("" + query) + SEP_1 + /*encodeString(info.getClass().getName()) + SEP_1 +*/ encodeString(json);
     }
 
@@ -141,5 +142,9 @@ public class Packet {
     private static String decodeString(String s) {
         s = s.replaceAll(SUB_NL, "\n");
         return s;
+    }
+    
+    private static Gson getGson() {
+        return new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ").create();
     }
 }
