@@ -3,18 +3,12 @@ package server.conn;
 import java.sql.SQLException;
 import java.util.logging.*;
 import server.*;
-import server.database.GameDB;
-import server.database.UserDB;
-import server.logic.GameS;
-import server.logic.UserS;
+import server.database.*;
+import server.logic.*;
 import sharedlib.conn.*;
 import sharedlib.exceptions.*;
-import sharedlib.tuples.ErrorMessage;
-import sharedlib.tuples.GameScreenInfo;
-import sharedlib.tuples.GameSearch;
-import sharedlib.tuples.Message;
-import sharedlib.tuples.UserInfo;
-import sharedlib.tuples.UserSearch;
+import sharedlib.tuples.*;
+import sharedlib.utils.*;
 
 public class Client implements Connection.Delegate {
 
@@ -83,7 +77,7 @@ public class Client implements Connection.Delegate {
                     Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
                     response = new Packet(Query.SRErrorMessage, new ErrorMessage("Could not run SQL query: " + ex.getMessage()));
                 }
-                
+
                 break;
             }
             case CGetGameList: {
@@ -96,11 +90,18 @@ public class Client implements Connection.Delegate {
                     Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
                     response = new Packet(Query.SRErrorMessage, new ErrorMessage("Could not run SQL query: " + ex.getMessage()));
                 }
-                
+
                 break;
             }
             case CSendGlobalMessage: {
-                UserS.sendGlobalMessage(this, (String) request.info);
+                try {
+                    UserS.sendGlobalMessage(this, (String) request.info);
+                    response = new Packet();
+                }
+                catch (SQLException ex) {
+                    Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+                    response = new Packet(Query.SRErrorMessage, new ErrorMessage("Could not run SQL query: " + ex.getMessage()));
+                }
                 break;
             }
             case CStartRandomGame: {
@@ -127,6 +128,18 @@ public class Client implements Connection.Delegate {
                 GameS.answerGameInvitation(this, (Boolean) request.info);
                 break;
             }
+            case CTogglePlaceOnShipSquare: {
+                GameS.togglePlaceShipOnSquare(this, (Coord) request.info);
+                break;
+            }
+            case CClickReadyButton: {
+                GameS.clickReadyButton(this);
+                break;
+            }
+            case CFireShot: {
+                GameS.fireShot(this, (Coord) request.info);
+                break;
+            }
         }
 
         return response;
@@ -136,12 +149,16 @@ public class Client implements Connection.Delegate {
         connection.sendOnly(new Packet(Query.SReceiveGlobalMessage, msg));
     }
 
-    public void showGameScreen(GameScreenInfo info) throws ConnectionException {
-        connection.sendOnly(new Packet(Query.SShowGameScreen, info));
+    public void updateGameScreen(GameScreenInfo info) throws ConnectionException {
+        connection.sendOnly(new Packet(Query.SUpdateGameScreen, info));
     }
 
     public void sendGameInvitation() throws ConnectionException {
         connection.sendOnly(new Packet(Query.SReceiveGameInvitation, "")); // TODO: info?
+    }
+
+    public void updateGameBoard(BoardInfo info) throws ConnectionException {
+        connection.sendOnly(new Packet(Query.SUpdateGameBoard, info));
     }
 
     @Override
@@ -155,15 +172,10 @@ public class Client implements Connection.Delegate {
     @Override
     public void disconnected(Connection connection) {
         System.out.println("Disconnected from client on " + connection.address());
-        UserS.logout(this);
+        UserS.clientDisconnected(this);
+        GameS.clientDisconnected(this);
         synchronized (ServerMain.clients) {
             ServerMain.clients.remove(this);
         }
-    }
-
-    public Delegate delegate;
-
-    public interface Delegate {
-
     }
 }

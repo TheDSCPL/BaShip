@@ -19,12 +19,12 @@ import sharedlib.tuples.*;
  *
  * @author luisp
  */
-public class lobbyTabbedPanel extends JPanel {
+public class LobbyTabbedPanel extends JPanel {
 
     /**
      * Creates new form lobbyTabbedPanel
      */
-    public lobbyTabbedPanel() {
+    public LobbyTabbedPanel() {
         preInitComponents();
         initComponents();
         myInitComponents();
@@ -339,7 +339,7 @@ public class lobbyTabbedPanel extends JPanel {
             System.err.println("Exception: " + ignored.getMessage());
                 ClientMain.server.doLogout();
             } catch (UserMessageException ex) {
-                Logger.getLogger(lobbyTabbedPanel.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(LobbyTabbedPanel.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
@@ -370,7 +370,7 @@ public class lobbyTabbedPanel extends JPanel {
             System.err.println("Exception: " + e.getMessage());
                 ClientMain.server.doLogout();
             } catch (UserMessageException ex) {
-                Logger.getLogger(lobbyTabbedPanel.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(LobbyTabbedPanel.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
@@ -409,7 +409,7 @@ public class lobbyTabbedPanel extends JPanel {
             globalChatSendMessageField.setText("");
         }
         catch (UserMessageException ex) {
-            Logger.getLogger(lobbyTabbedPanel.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(LobbyTabbedPanel.class.getName()).log(Level.SEVERE, null, ex);
             ClientMain.showError(ex.getMessage());
         }
     }//GEN-LAST:event_globalChatSendButtonActionPerformed

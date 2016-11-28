@@ -6,8 +6,8 @@ CREATE TABLE users (
 
 CREATE TABLE games (
     gid BIGSERIAL PRIMARY KEY,
-    startdate DATE NOT NULL,
-    enddate DATE,
+    startdate TIMESTAMP NOT NULL,
+    enddate TIMESTAMP,
     player1 INTEGER NOT NULL REFERENCES users,
     player2 INTEGER NOT NULL REFERENCES users,
     winner INTEGER REFERENCES users CHECK (winner IN (player1, player2))
@@ -44,7 +44,7 @@ CREATE TABLE gamechat (
 CREATE TABLE globalchat (
     mssgid BIGSERIAL PRIMARY KEY,
     uid INTEGER NOT NULL REFERENCES users,
-    timestamp TIME NOT NULL,
+    timestamp TIMESTAMP WITH TIME ZONE NOT NULL,
     txt TEXT NOT NULL,
     UNIQUE(uid, timestamp)
 );

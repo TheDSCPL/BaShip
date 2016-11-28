@@ -4,9 +4,10 @@ import client.conn.*;
 import client.ui.*;
 import java.io.*;
 import java.net.*;
-import java.util.concurrent.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.*;
 import sharedlib.conn.Connection;
@@ -20,7 +21,7 @@ public class ClientMain {
 
     }
 
-    public static final ClientMain instance = new ClientMain(); // Singleton
+    public static final ClientMain instance = new ClientMain();
     public static final MainFrame mainFrame = new MainFrame();
     public static final Preferences prefs = new Preferences(ClientMain.class);
     public static Server server;
@@ -52,6 +53,7 @@ public class ClientMain {
                 server.disconnect();
             }
             catch (IOException ignored) {
+                
             }
         }
 

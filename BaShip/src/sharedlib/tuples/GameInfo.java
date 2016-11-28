@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class GameInfo {
 
+    // TODO: status? currrent move number?
     public final Long id;
     public final Long player1ID;
     public final Long player2ID;
@@ -21,5 +22,5 @@ public class GameInfo {
         this.startDate = startDate;
         this.endDate = endDate;
     }
-    
+
 }

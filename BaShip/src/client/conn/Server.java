@@ -1,6 +1,7 @@
 package client.conn;
 
 import client.*;
+import client.logic.Logic;
 import java.io.*;
 import java.util.*;
 import sharedlib.conn.*;
@@ -24,27 +25,23 @@ public class Server implements Connection.Delegate {
 
         switch (request.query) {
             case SReceiveGameMessage: {
-                if (delegate != null) {
-                    delegate.receiveGameMessage((Message) request.info);
-                }
+                Logic.receiveGameMessage((Message) request.info);
                 break;
             }
             case SReceiveGlobalMessage: {
-                if (delegate != null) {
-                    delegate.receiveGlobalMessage((Message) request.info);
-                }
+                Logic.receiveGlobalMessage((Message) request.info);
                 break;
             }
-            case SShowGameScreen: {
-                if (delegate != null) {
-                    delegate.showGameScreen((GameScreenInfo) request.info);
-                }
+            case SUpdateGameScreen: {
+                Logic.updateGameScreen((GameScreenInfo) request.info);
                 break;
             }
             case SReceiveGameInvitation: {
-                if (delegate != null) {
-                    delegate.showGameInvitation((String) request.info);
-                }
+                Logic.showGameInvitation((String) request.info);
+                break;
+            }
+            case SUpdateGameBoard: {
+                Logic.updateBoardInfo((BoardInfo) request.info);
                 break;
             }
         }
@@ -68,19 +65,6 @@ public class Server implements Connection.Delegate {
 
     public void disconnect() throws IOException {
         connection.disconnect();
-    }
-
-    public Delegate delegate;
-
-    public interface Delegate {
-
-        public void receiveGameMessage(Message message);
-
-        public void receiveGlobalMessage(Message message);
-        
-        public void showGameScreen(GameScreenInfo info);
-        
-        public void showGameInvitation(String message);
     }
 
     public boolean getUsernameAvailable(String username) throws UserMessageException {
@@ -144,7 +128,11 @@ public class Server implements Connection.Delegate {
 
     public void sendGlobalMessage(String message) throws UserMessageException {
         Packet request = new Packet(Query.CSendGlobalMessage, message);
-        sendOnlyWrapper(request);
+        Packet response = sendAndReceiveWrapper(request);
+        
+        if (response.query == Query.SRErrorMessage) {
+            throw new UserMessageException("Could not send global message: " + ((ErrorMessage) response.info).message);
+        }
     }
 
     public void startRandomGame() throws UserMessageException {
@@ -167,6 +155,21 @@ public class Server implements Connection.Delegate {
     
     public void anwserGameInvitation(boolean accepted) throws UserMessageException {
         Packet request = new Packet(Query.CAnswerGameInvitation, accepted);
+        sendOnlyWrapper(request);
+    }
+    
+    public void togglePlaceShipOnSquare(Coord pos) throws UserMessageException {
+        Packet request = new Packet(Query.CTogglePlaceOnShipSquare, pos);
+        sendOnlyWrapper(request);
+    }
+    
+    public void clickReadyButton() throws UserMessageException {
+        Packet request = new Packet(Query.CClickReadyButton);
+        sendOnlyWrapper(request);
+    }
+
+    public void fireShot(Coord pos) throws UserMessageException {
+        Packet request = new Packet(Query.CFireShot, pos);
         sendOnlyWrapper(request);
     }
 

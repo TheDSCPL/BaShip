@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import server.ServerMain;
+import server.logic.UserS;
 import sharedlib.tuples.UserInfo;
 import sharedlib.tuples.UserSearch;
 
@@ -21,7 +22,7 @@ public class UserDB {
         result.next();
         return result.getInt(1) == 0;
     }
-
+    
     public static UserInfo register(String username, String passwordHash) throws SQLException {
         PreparedStatement stmt = ServerMain.db.getConn().prepareStatement(
                 "INSERT INTO users VALUES (DEFAULT, ?, ?) RETURNING (uid)"
@@ -58,7 +59,7 @@ public class UserDB {
         stmt.setLong(1, id);
 
         ResultSet r = stmt.executeQuery();
-        
+
         if (r.next()) {
             return r.getString(1);
         }
@@ -84,8 +85,13 @@ public class UserDB {
 
         while (results.next()) {
             long id = results.getLong(1);
-            UserInfo.Status status = UserInfo.Status.Online; // TODO: get correct status from user id and filter by it
-            users.add(new UserInfo(id, results.getString(2), null, results.getInt(3), results.getInt(4), results.getInt(5), results.getInt(6), status));
+            users.add(
+                    new UserInfo(
+                            id, results.getString(2), null,
+                            results.getInt(3), results.getInt(4), results.getInt(5),
+                            results.getInt(6), UserS.getUserStatus(id) // TODO: filter by online only
+                    )
+            );
         }
 
         return users;

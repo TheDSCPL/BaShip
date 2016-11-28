@@ -6,9 +6,7 @@
 package client.ui;
 
 import client.ClientMain;
-import java.util.List;
 import sharedlib.exceptions.UserMessageException;
-import sharedlib.tuples.UserInfo;
 
 /**
  *
@@ -23,22 +21,12 @@ public class LobbyPanel extends javax.swing.JPanel {
         initComponents();
 
         if (ClientMain.loggedInUser == null) {
-            ClientMain.showWarning("Fatal Error!"); // TODO: more descriptive error message
+            ClientMain.showWarning("Lobby panel shown without an user logged in");
             ClientMain.mainFrame.changeToPanel(new LoginPanel());
             return;
         }
 
         loggedInAsLabel.setText(loggedInAsLabel.getText() + ClientMain.loggedInUser.username);
-
-        // TODO: DEMO
-        try {
-            List<UserInfo> uil = ClientMain.server.getUserList(true, "", 1, 100);
-            System.out.println(uil);
-            ClientMain.server.sendGlobalMessage("Hi! I just logged in!");
-        }
-        catch (UserMessageException ex) {
-            ClientMain.showError(ex.getMessage());
-        }
     }
 
     /**
@@ -55,7 +43,7 @@ public class LobbyPanel extends javax.swing.JPanel {
         topBar = new javax.swing.JPanel();
         logoutButton = new javax.swing.JButton();
         loggedInAsLabel = new javax.swing.JLabel();
-        lobbyTabbedPanel1 = new client.ui.lobbyTabbedPanel();
+        lobbyTabbedPanel1 = new client.ui.LobbyTabbedPanel();
 
         jLabel1.setText("jLabel1");
 
@@ -154,7 +142,7 @@ public class LobbyPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLayeredPane lobby1;
-    private client.ui.lobbyTabbedPanel lobbyTabbedPanel1;
+    private client.ui.LobbyTabbedPanel lobbyTabbedPanel1;
     private javax.swing.JLabel loggedInAsLabel;
     private javax.swing.JButton logoutButton;
     private javax.swing.JPanel topBar;

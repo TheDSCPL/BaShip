@@ -1,7 +1,5 @@
 package sharedlib.tuples;
 
-import java.util.*;
-
 /**
  * User info Model
  */
@@ -34,37 +32,11 @@ public class UserInfo {
         this.nShots = nShots;
         this.status = status;
     }
-
         
     public enum Status {
-        Offline("Offline"),
-        Online("Online"),
-        Waiting("Waiting"),
-        Playing("Playing");
-
-        public final String str;
-
-        Status(String s) {
-            str = s;
-        }
-
-        public static Status fromString(String str) {
-            for (Status t : Status.values()) {
-                if (t.str.equals(str)) {
-                    return t;
-                }
-            }
-
-            return null;
-        }
+        Offline,
+        Online,
+        Waiting,
+        Playing
     }
-    
-    public static UserInfo fromMap(Map<String, String> map) {
-        return null;//new UserInfo();
-    }
-    
-    public Map<String, String> getMap() {
-        return new HashMap<>();
-    }
-
 }

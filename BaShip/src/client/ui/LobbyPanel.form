@@ -131,7 +131,7 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="client.ui.lobbyTabbedPanel" name="lobbyTabbedPanel1">
+    <Component class="client.ui.LobbyTabbedPanel" name="lobbyTabbedPanel1">
     </Component>
   </SubComponents>
 </Form>

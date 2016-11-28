@@ -11,8 +11,8 @@ import server.database.UserDB;
 import sharedlib.exceptions.*;
 import sharedlib.tuples.Message;
 import sharedlib.tuples.UserInfo;
+import sharedlib.tuples.UserInfo.Status;
 
-// TODO: UserS status on database?
 public class UserS {
 
     private static final Map<Long, Client> loginsID = new ConcurrentHashMap<>();
@@ -53,7 +53,7 @@ public class UserS {
         }
     }
 
-    public static void sendGlobalMessage(Client client, String message) {
+    public static void sendGlobalMessage(Client client, String message) throws SQLException {
         if (isClientLoggedIn(client)) {
             Message msg = GlobalChatDB.sendGlobalMessage(loginsClient.get(client), message);
             UserS.distributeGlobalMessage(msg);
@@ -63,6 +63,10 @@ public class UserS {
         }
     }
 
+    public static void clientDisconnected(Client client) {
+        logout(client);
+    }
+
     public static boolean isClientLoggedIn(Client client) {
         return loginsClient.containsKey(client);
     }
@@ -70,15 +74,32 @@ public class UserS {
     public static boolean isUserLoggedIn(Long userID) {
         return loginsID.containsKey(userID);
     }
-    
+
     public static Client clientFromID(Long id) {
         return loginsID.get(id);
     }
-    
+
     public static Long idFromClient(Client c) {
         return loginsClient.get(c);
     }
-    
+
+    public static Status getUserStatus(Long userID) {
+        if (isUserLoggedIn(userID)) {
+            if (GameS.isClientPlaying(clientFromID(userID))) {
+                return Status.Playing;
+            }
+            else {
+                if (GameS.isClientWaiting(clientFromID(userID))) {
+                    return Status.Waiting;
+                }
+            }
+
+            return Status.Online;
+        }
+
+        return Status.Offline;
+    }
+
     public static String usernameFromClient(Client c) {
         try {
             return UserDB.getUsernameFromID(idFromClient(c));
@@ -88,7 +109,7 @@ public class UserS {
             return null;
         }
     }
-    
+
     private static void distributeGlobalMessage(Message msg) {
         for (Client client : loginsID.values()) {
             try {
