@@ -152,7 +152,11 @@ public class Server implements Connection.Delegate {
 
     public void sendGlobalMessage(String message) throws UserMessageException {
         Packet request = new Packet(Query.CSendGlobalMessage, message);
-        sendOnlyWrapper(request);
+        Packet response = sendAndReceiveWrapper(request);
+        
+        if (response.query == Query.SRErrorMessage) {
+            throw new UserMessageException("Could not send global message: " + ((ErrorMessage) response.info).message);
+        }
     }
 
     public void startRandomGame() throws UserMessageException {

@@ -5,7 +5,7 @@ import java.util.*;
 import sharedlib.exceptions.*;
 
 /**
- * The unit of information sent between client and server
+ * The unit of information sent between client and server.
  */
 public class Packet {
 
@@ -14,29 +14,29 @@ public class Packet {
     private static final String SUB_NL = "\u001F";
 
     /**
-     * Unique ID of this packet
+     * Unique ID of this packet.
      */
     String id;
 
     /**
      * Unique ID of the packet that is the request to which this packet is the
-     * response
+     * response.
      */
     String pid;
 
     /**
      * Query object that defines what this packet represents and contains in the
-     * dialogue between client and server
+     * dialogue between client and server.
      */
     public final Query query;
 
     /**
-     * The information this packet contains
+     * The information this packet contains.
      */
     public final Object info;
 
     /**
-     * Create a new Packet
+     * Create a new Packet.
      *
      * @param query The query of this packet
      * @param info The information to be sent
@@ -49,7 +49,7 @@ public class Packet {
     }
 
     /**
-     * Create a new Packet with no information
+     * Create a new Packet with no information.
      *
      * @param query The query of this packet
      */
@@ -58,7 +58,7 @@ public class Packet {
     }
 
     /**
-     * Create a new Packet with an empty query and no information
+     * Create a new Packet with an empty query and no information.
      */
     public Packet() {
         this(Query.BEmpty);

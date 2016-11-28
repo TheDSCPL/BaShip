@@ -3,20 +3,13 @@ package server.conn;
 import java.sql.SQLException;
 import java.util.logging.*;
 import server.*;
-import server.database.GameDB;
-import server.database.UserDB;
-import server.logic.GameS;
-import server.logic.UserS;
+import server.database.*;
+import server.logic.*;
+import server.logic.game.*;
 import sharedlib.conn.*;
 import sharedlib.exceptions.*;
-import sharedlib.tuples.BoardInfo;
-import sharedlib.tuples.ErrorMessage;
-import sharedlib.tuples.GameScreenInfo;
-import sharedlib.tuples.GameSearch;
-import sharedlib.tuples.Message;
-import sharedlib.tuples.UserInfo;
-import sharedlib.tuples.UserSearch;
-import sharedlib.utils.Coord;
+import sharedlib.tuples.*;
+import sharedlib.utils.*;
 
 public class Client implements Connection.Delegate {
 
@@ -104,10 +97,11 @@ public class Client implements Connection.Delegate {
             case CSendGlobalMessage: {
                 try {
                     UserS.sendGlobalMessage(this, (String) request.info);
+                    response = new Packet();
                 }
                 catch (SQLException ex) {
                     Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
-                    //response = new Packet(Query.SRErrorMessage, new ErrorMessage("Could not run SQL query: " + ex.getMessage())); // TODO: receive response on client side?
+                    response = new Packet(Query.SRErrorMessage, new ErrorMessage("Could not run SQL query: " + ex.getMessage()));
                 }
                 break;
             }
@@ -175,15 +169,10 @@ public class Client implements Connection.Delegate {
     @Override
     public void disconnected(Connection connection) {
         System.out.println("Disconnected from client on " + connection.address());
-        UserS.logout(this);
+        UserS.clientDisconnected(this);
+        GameS.clientDisconnected(this);
         synchronized (ServerMain.clients) {
             ServerMain.clients.remove(this);
         }
-    }
-
-    public Delegate delegate;
-
-    public interface Delegate {
-
     }
 }

@@ -1,11 +1,11 @@
-package server.logic;
+package server.logic.game;
 
 import java.util.*;
 import static java.util.stream.Collectors.toSet;
 import sharedlib.tuples.*;
 import sharedlib.utils.*;
 
-public class Board {
+public class BoardS {
 
     public static final int BOARD_SIZE = 10;
     public static final int SHIP_COUNT = 10;
@@ -21,20 +21,21 @@ public class Board {
                 }
             });
 
-    public static final int TOTAL_SHIP_COUNT = SHIP_COUNT_FOR_SIZE.values().stream().reduce(0, Integer::sum);
+    //public static final int TOTAL_SHIP_COUNT = SHIP_COUNT_FOR_SIZE.values().stream().reduce(0, Integer::sum);
     public static final int TOTAL_BOTTOM_SQUARES_COUNT = SHIP_COUNT_FOR_SIZE.entrySet().stream().map((e) -> e.getKey() * e.getValue()).reduce(0, Integer::sum);
 
     private final Matrix<Boolean> shipsLayer = new Matrix(BOARD_SIZE, BOARD_SIZE, false);
     private final Matrix<Boolean> shotsLayer = new Matrix(BOARD_SIZE, BOARD_SIZE, false);
 
-    private final List<Ship> ships = new ArrayList<>();
+    private final List<ShipS> ships = new ArrayList<>();
     private final Set<Coord> invalidShipSquares = new HashSet<>();
 
+    // PLACING SHIPS
     public void togglePlaceShipOnSquare(Coord c) {
         shipsLayer.set(c, !shipsLayer.get(c));
     }
 
-    public boolean placedShipSquaresAreValid() {
+    public boolean refreshPlacedShipSquares() {
         ships.clear();
 
         // Get sets of connected squares (independent of the shape they may be)
@@ -76,7 +77,7 @@ public class Board {
             if (xAllEqual || yAllEqual) {
                 int minXpos = currentConnectedSquares.stream().map((c) -> c.x).reduce(Integer.MAX_VALUE, Integer::min);
                 int minYpos = currentConnectedSquares.stream().map((c) -> c.y).reduce(Integer.MAX_VALUE, Integer::min);
-                ships.add(new Ship(minXpos, minYpos, currentConnectedSquares.size(), xAllEqual));
+                ships.add(new ShipS(minXpos, minYpos, currentConnectedSquares.size(), xAllEqual));
             }
             else {
                 invalidShipSquares.addAll(currentConnectedSquares);
@@ -105,25 +106,15 @@ public class Board {
         }
     }
 
-    public boolean canShootOnSquare(Coord c) {
-        return !shotsLayer.get(c);
-    }
-
-    public void shootOnSquare(Coord c) {
-        shotsLayer.set(c, true);
-    }
-
-    public BoardInfo getBoardInfoPlaying(boolean showAll) {
-        BoardInfo bi = new BoardInfo();
-
-        if (showAll) {
-            // TODO: finish
+    public boolean placedShipsAreValid() {
+        for (Map.Entry<Integer, Integer> entry : SHIP_COUNT_FOR_SIZE.entrySet()) {
+            int count = (int) ships.stream().filter(s -> s.size == entry.getKey()).count();
+            if (entry.getValue() != count) {
+                return false;
+            }
         }
-        else {
-            // TODO: finish
-        }
-
-        return bi;
+        
+        return true;
     }
 
     public BoardInfo getBoardInfoNotPlaying() {
@@ -142,7 +133,7 @@ public class Board {
         // Populate bottom info rows
         final int[] offset = {16, 10, 4, 0}; // static final
         int[] count = {0, 0, 0, 0};
-        for (Ship s : ships) {
+        for (ShipS s : ships) {
             int index = s.size - 1;
 
             for (int i = offset[index] + count[index]; i < s.size; i++) {
@@ -154,4 +145,33 @@ public class Board {
 
         return bi;
     }
+    
+    // PLAYING
+    public boolean canShootOnSquare(Coord c) {
+        return !shotsLayer.get(c);
+    }
+
+    public void shootOnSquare(Coord c) {
+        shotsLayer.set(c, true);
+    }
+
+    public boolean allShipsAreShot() {
+        Set<Coord> allShipSquares = new HashSet<>();
+        ships.stream().forEach(s -> allShipSquares.addAll(s.getShipSquares()));
+        return allShipSquares.stream().allMatch(c -> shotsLayer.get(c));
+    }
+    
+    public BoardInfo getBoardInfoPlaying(boolean showAll) {
+        BoardInfo bi = new BoardInfo();
+
+        if (showAll) {
+            // TODO: finish
+        }
+        else {
+            // TODO: finish
+        }
+
+        return bi;
+    }
+
 }

@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 import server.conn.*;
 import server.database.GlobalChatDB;
 import server.database.UserDB;
+import server.logic.game.GameS;
 import sharedlib.exceptions.*;
 import sharedlib.tuples.Message;
 import sharedlib.tuples.UserInfo;
@@ -63,6 +64,10 @@ public class UserS {
         }
     }
 
+    public static void clientDisconnected(Client client) {
+        logout(client);
+    }
+
     public static boolean isClientLoggedIn(Client client) {
         return loginsClient.containsKey(client);
     }
@@ -81,16 +86,18 @@ public class UserS {
 
     public static Status getUserStatus(Long userID) {
         if (isUserLoggedIn(userID)) {
-            if (GameS.isUserPlaying(clientFromID(userID))) {
+            if (GameS.isClientPlaying(clientFromID(userID))) {
                 return Status.Playing;
             }
-            else if (GameS.isUserWaiting(clientFromID(userID))) {
-                return Status.Waiting;
+            else {
+                if (GameS.isClientWaiting(clientFromID(userID))) {
+                    return Status.Waiting;
+                }
             }
-            
+
             return Status.Online;
         }
-        
+
         return Status.Offline;
     }
 

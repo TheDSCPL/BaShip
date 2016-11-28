@@ -1,9 +1,10 @@
-package server.logic;
+package server.logic.game;
 
 import java.util.*;
 import java.util.concurrent.*;
 import java.util.logging.*;
 import server.conn.*;
+import server.logic.UserS;
 import sharedlib.exceptions.*;
 import sharedlib.utils.*;
 
@@ -12,18 +13,18 @@ public class GameS {
     private static final Map<Client, GameS> currentGames = new ConcurrentHashMap<>();
     private static final Map<Client, Client> playersWaitingForPlayer = new ConcurrentHashMap<>();
     private static final Queue<Client> playersWaitingForGame = new ConcurrentLinkedQueue<>();
-    private static final Map<Client, Board> playersWaitingBoards = new ConcurrentHashMap<>();
+    private static final Map<Client, BoardS> playersWaitingBoards = new ConcurrentHashMap<>();
 
-    public static void startRandomGame(Client player) throws UserMessageException {
+    public static void startRandomGame(Client client) throws UserMessageException {
         if (!playersWaitingForGame.isEmpty()) {
-            startGame(player, playersWaitingForGame.poll()); // Start a game with the player who has been waiting for the most time
+            startGame(client, playersWaitingForGame.poll()); // Start a game with the player who has been waiting for the most time
         }
         else {
-            startWait(player, null);
+            startWait(client, null);
         }
     }
 
-    public static void startGameWithPlayer(Client player, Long otherPlayerID) throws UserMessageException {
+    public static void startGameWithPlayer(Client client, Long otherPlayerID) throws UserMessageException {
 
         // Other player must be online
         if (UserS.isUserLoggedIn(otherPlayerID)) {
@@ -31,19 +32,19 @@ public class GameS {
 
             // Other player is waiting for a game too -> start game immediately
             if (playersWaitingForGame.contains(otherPlayer)) {
-                startGame(player, otherPlayer);
+                startGame(client, otherPlayer);
             }
             // Other player is playing
             else {
-                if (currentGames.containsKey(player)) {
+                if (currentGames.containsKey(client)) {
                     throw new UserMessageException("Invited user is currently playing");
                 }
                 // Other player is online but available
                 // \-> player starts waiting for otherPlayer
                 // \-> send invitation to otherPlayer
                 else {
-                    startWait(player, otherPlayer);
-                    sendInvitation(player, otherPlayer);
+                    startWait(client, otherPlayer);
+                    sendInvitation(client, otherPlayer);
                 }
             }
         }
@@ -65,17 +66,17 @@ public class GameS {
         }
     }
 
-    private static void startGame(Client p1, Client p2) {
-        GameS game = new GameS(p1, playersWaitingBoards.get(p1), p2, playersWaitingBoards.get(p2));
+    private static void startGame(Client player1, Client player2) {
+        GameS game = new GameS(player1, playersWaitingBoards.get(player1), player2, playersWaitingBoards.get(player2));
         
-        currentGames.put(p1, game);
-        currentGames.put(p2, game);
+        currentGames.put(player1, game);
+        currentGames.put(player2, game);
     }
 
-    private static void startWait(Client player, Client otherPlayer) {
+    private static void startWait(Client clientWaiting, Client targetClient) {
         // Waiting for random game
-        if (otherPlayer == null) {
-            playersWaitingForGame.add(player);
+        if (targetClient == null) {
+            playersWaitingForGame.add(clientWaiting);
 
             /*try {
                 player.updateGameScreen(
@@ -91,7 +92,7 @@ public class GameS {
         }
         // Waiting for a specific player
         else {
-            playersWaitingForPlayer.put(otherPlayer, player);
+            playersWaitingForPlayer.put(targetClient, clientWaiting);
 
             /*try {
                 player.updateGameScreen(
@@ -108,15 +109,15 @@ public class GameS {
     }
     
     public static void togglePlaceShipOnSquare(Client player, Coord pos) {
-        if (isUserPlaying(player)) {
+        if (isClientPlaying(player)) {
             currentGames.get(player).togglePlaceShipOnSquare_(player, pos);
         }
         else {
             if (!playersWaitingBoards.containsKey(player)) {
-                playersWaitingBoards.put(player, new Board());
+                playersWaitingBoards.put(player, new BoardS());
             }
             
-            Board board = playersWaitingBoards.get(player);
+            BoardS board = playersWaitingBoards.get(player);
             board.togglePlaceShipOnSquare(pos);
             
             try {
@@ -129,19 +130,23 @@ public class GameS {
     }
 
     public static void fireShot(Client player, Coord pos) {
-        if (isUserPlaying(player)) {
+        if (isClientPlaying(player)) {
             currentGames.get(player).fireShot_(player, pos);
         }
         else {
             Logger.getLogger(GameS.class.getName()).log(Level.SEVERE, "Player {0} cannot fire shot because he's not playing any game", player);
         }
     }
+    
+    public static void clientDisconnected(Client client) {
+        // TODO: finish
+    }
 
-    public static boolean isUserPlaying(Client user) {
+    public static boolean isClientPlaying(Client user) {
         return currentGames.containsKey(user);
     }
     
-    public static boolean isUserWaiting(Client user) {
+    public static boolean isClientWaiting(Client user) {
         return playersWaitingForGame.contains(user) || playersWaitingForPlayer.containsValue(user);
     }
 
@@ -154,18 +159,18 @@ public class GameS {
     private boolean player1Turn;
     //private final HashSet<Client> spectators; TODO: make this set thread-safe?
 
-    private final Board p1Board;
-    private final Board p2Board;
+    private final BoardS p1Board;
+    private final BoardS p2Board;
 
-    private GameS(Client p1, Board p1Board, Client p2, Board p2Board) {
+    private GameS(Client p1, BoardS p1Board, Client p2, BoardS p2Board) {
 
         // Set players
         player1 = p1;
         player2 = p2;
         
         // Set boards
-        this.p1Board = p1Board != null ? p1Board : new Board();
-        this.p2Board = p2Board != null ? p2Board : new Board();
+        this.p1Board = p1Board != null ? p1Board : new BoardS();
+        this.p2Board = p2Board != null ? p2Board : new BoardS();
 
         // Assign turns
         player1Turn = new Random().nextBoolean();
@@ -174,6 +179,8 @@ public class GameS {
         // Refresh game screen info
         refreshClientInfo();
     }
+    
+    // Start game -> save ship positions
 
     private void fireShot_(Client player, Coord pos) {
         // Verify if player is in this game
