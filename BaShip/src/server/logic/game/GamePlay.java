@@ -13,7 +13,8 @@ public class GamePlay {
     public final Client player1, player2;
     private PlayerState p1State, p2State;
     private final Board p1Board, p2Board;
-
+    private final Long gameID;
+    
     private boolean p1Turn;
     private final HashSet<Client> spectators = new HashSet<>(); // TODO: make this set thread-safe!
 
@@ -35,65 +36,105 @@ public class GamePlay {
         p1Turn = new Random().nextBoolean();
 
         // TODO: create game in DB
-        // Refresh game screen info
+        gameID = 0L;
+        
+        // Refresh interfaces
         refreshClientInfo();
     }
 
     public void clickReadyButton(Client player) {
-        // Start game -> save ship positions
-        // TODO: finish
-        refreshClientInfo();
-    }
-
-    public void fireShot(Client player, Coord pos) {
-        
         // Verify if player is in this game
         if (!isPlayer(player)) {
             return;
         }
         
+        // Verify player is placing ships
+        if (stateForPlayer(player) != PlayerState.PlacingShips) {
+            return;
+        }
+        
+        // Verify if ships are well placed
+        if (!boardForPlayer(player).placedShipsAreValid()) {
+            return;
+        }
+        
+        // Change state for player
+        setStateForPlayer(player, PlayerState.Waiting);
+        
+        // Start game if both players are ready
+        if (stateForPlayer(player1) == PlayerState.Waiting && stateForPlayer(player2) == PlayerState.Waiting) {
+            
+            // Update player states
+            setStateForPlayer(player1, PlayerState.Playing);
+            setStateForPlayer(player2, PlayerState.Playing);
+            
+            // TODO: finish
+            // Start game & save ship positions
+        }
+        
+        // Refresh interfaces
+        refreshClientInfo();
+    }
+
+    public void fireShot(Client player, Coord pos) {
+
+        // Verify if player is in this game
+        if (!isPlayer(player)) {
+            return;
+        }
+
         // Verify player is playing
         if (stateForPlayer(player) != PlayerState.Playing) {
             return;
         }
-        
+
         // Verify current turn
         if (player != currentPlayerTurn()) {
-                    return;
-            }
-        
+            return;
+        }
+
         // Verify player can shoot there
         if (!boardForPlayer(opponent(player)).canShootOnSquare(pos)) {
-                    return;
-                }
-        
+            return;
+        }
+
         // TODO: verify: other tests?
-        
         // Everything ok, continue...
+        // Send that to board
+        boardForPlayer(opponent(player)).shootOnSquare(pos);
 
-                    // Send that to board
-                    boardForPlayer(opponent(player)).shootOnSquare(pos);
-
-                    // Save shot on DB
-                    // TODO: finish
-                    
-                    // Check if player won
-                    if (boardForPlayer(opponent(player)).allShipsAreShot()) {
-                        // TODO: finish
-                    }
-                    else { // Change turn
-                        p1Turn = !p1Turn;
-                    }
+        // Save shot on DB
+        // TODO: finish
         
+        if (boardForPlayer(opponent(player)).allShipsAreShot()) { // Check if player won
+            // TODO: finish
+        }
+        else { // If not, change turn
+            p1Turn = !p1Turn;
+        }
+        
+        // Refresh interfaces
         refreshClientInfo();
     }
 
     public void togglePlaceShipOnSquare(Client player, Coord pos) {
+
         // Verify if player is in this game
-        // Verify player can still place ships
-        // other verifications?
-        // Everything ok:
+        if (!isPlayer(player)) {
+            return;
+        }
+
+        // Verify player is still placing ships
+        if (stateForPlayer(player) != PlayerState.PlacingShips) {
+            return;
+        }
+
+        // TODO: verify: other tests?
+        // Everything ok, continue...
         // Send info to corresponding board
+        boardForPlayer(player).togglePlaceShipOnSquare(pos);
+        
+        // Refresh interfaces
         refreshClientInfo();
     }
 
@@ -198,6 +239,15 @@ public class GamePlay {
         }
 
         return null;
+    }
+    
+    private void setStateForPlayer(Client player, PlayerState state) {
+        if (player == player1) {
+            p1State = state;
+        }
+        else if (player == player2) {
+            p2State = state;
+        }
     }
 
     private Board boardForPlayer(Client player) {

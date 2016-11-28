@@ -6,8 +6,8 @@ CREATE TABLE users (
 
 CREATE TABLE games (
     gid BIGSERIAL PRIMARY KEY,
-    startdate DATE NOT NULL,
-    enddate DATE,
+    startdate TIMESTAMP NOT NULL,
+    enddate TIMESTAMP,
     player1 INTEGER NOT NULL REFERENCES users,
     player2 INTEGER NOT NULL REFERENCES users,
     winner INTEGER REFERENCES users CHECK (winner IN (player1, player2))

@@ -35,5 +35,9 @@ public class GameDB {
 
         return games;
     }
+    
+    /*public static Long createGame(Long player1ID, Long player2ID) {
+        
+    }*/
 
 }

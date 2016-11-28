@@ -6,7 +6,6 @@
 package client.ui;
 
 import client.*;
-import client.conn.*;
 import java.util.*;
 import java.util.logging.*;
 import javax.swing.*;
@@ -18,7 +17,7 @@ import sharedlib.tuples.*;
  *
  * @author luisp
  */
-public class lobbyTabbedPanel extends JPanel implements Server.Delegate {
+public class lobbyTabbedPanel extends JPanel {
 
     /**
      * Creates new form lobbyTabbedPanel
@@ -66,13 +65,12 @@ public class lobbyTabbedPanel extends JPanel implements Server.Delegate {
     private int maxUsersInTable = 20;
 
     private void myInitComponents() {
-        ClientMain.server.delegate = this;
         
         //Add tabs
         jTabbedPane1.removeAll();
         addNewTab(lobby1, "Players");
         addNewTab(lobby2, "Games");
-        addNewTab(lobby3, "Global Chat");
+        //addNewTab(lobby3, "Global Chat");
 
         /*filterIcon = new ImageIcon(getClass().getResource("/client/ui/Images/find.png"));
         clearIcon = new ImageIcon(getClass().getResource("/client/ui/Images/cancel.png"));
@@ -100,11 +98,6 @@ public class lobbyTabbedPanel extends JPanel implements Server.Delegate {
         clearFilterButton = new javax.swing.JButton();
         lobby2 = new javax.swing.JLayeredPane();
         jLabel2 = new javax.swing.JLabel();
-        lobby3 = new javax.swing.JLayeredPane();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        messagesTextArea = new javax.swing.JTextArea();
-        inputTextField = new javax.swing.JTextField();
-        sendButton = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
 
         jTable1.setModel(tableModel);
@@ -191,51 +184,6 @@ public class lobbyTabbedPanel extends JPanel implements Server.Delegate {
                 .addGap(40, 40, 40))
         );
 
-        messagesTextArea.setEditable(false);
-        messagesTextArea.setColumns(20);
-        messagesTextArea.setRows(5);
-        jScrollPane1.setViewportView(messagesTextArea);
-
-        inputTextField.setToolTipText("Press enter to send message");
-        inputTextField.setMaximumSize(new java.awt.Dimension(2147483647, 26));
-
-        sendButton.setText("Send message");
-        sendButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sendButtonActionPerformed(evt);
-            }
-        });
-
-        lobby3.setLayer(jScrollPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        lobby3.setLayer(inputTextField, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        lobby3.setLayer(sendButton, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        javax.swing.GroupLayout lobby3Layout = new javax.swing.GroupLayout(lobby3);
-        lobby3.setLayout(lobby3Layout);
-        lobby3Layout.setHorizontalGroup(
-            lobby3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(lobby3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(lobby3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 429, Short.MAX_VALUE)
-                    .addGroup(lobby3Layout.createSequentialGroup()
-                        .addComponent(inputTextField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(sendButton)))
-                .addContainerGap())
-        );
-        lobby3Layout.setVerticalGroup(
-            lobby3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(lobby3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addGroup(lobby3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(inputTextField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(sendButton))
-                .addContainerGap())
-        );
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -305,38 +253,16 @@ public class lobbyTabbedPanel extends JPanel implements Server.Delegate {
         filterFieldActionPerformed(evt);
     }//GEN-LAST:event_clearFilterButtonActionPerformed
 
-    private void sendButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendButtonActionPerformed
-        try {
-            ClientMain.server.sendGlobalMessage(inputTextField.getText());
-            inputTextField.setText("");
-        }
-        catch (UserMessageException ex) {
-            Logger.getLogger(lobbyTabbedPanel.class.getName()).log(Level.SEVERE, null, ex);
-            ClientMain.showError(ex.getMessage());
-        }
-    }//GEN-LAST:event_sendButtonActionPerformed
-
-    @Override
-    public void receiveGlobalMessage(Message m) {
-        // TODO: Better presentation
-        messagesTextArea.setText(messagesTextArea.getText() + "[" + m.timestamp + "] " + m.username + "\n" + m.text + "\n\n");
-        messagesTextArea.setCaretPosition(messagesTextArea.getDocument().getLength()); // Scroll to bottom
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton applyFilterButton;
     private javax.swing.JButton clearFilterButton;
     private javax.swing.JTextField filterField;
-    private javax.swing.JTextField inputTextField;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JLayeredPane lobby1;
     private javax.swing.JLayeredPane lobby2;
-    private javax.swing.JLayeredPane lobby3;
-    private javax.swing.JTextArea messagesTextArea;
     private javax.swing.JScrollPane scrollableTable;
-    private javax.swing.JButton sendButton;
     // End of variables declaration//GEN-END:variables
 }

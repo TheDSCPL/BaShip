@@ -22,7 +22,7 @@ public class UserDB {
         result.next();
         return result.getInt(1) == 0;
     }
-
+    
     public static UserInfo register(String username, String passwordHash) throws SQLException {
         PreparedStatement stmt = ServerMain.db.getConn().prepareStatement(
                 "INSERT INTO users VALUES (DEFAULT, ?, ?) RETURNING (uid)"
