@@ -32,6 +32,7 @@ public enum Query {
     CStartGameWithPlayer(Long.class),
     SUpdateGameScreen(GameScreenInfo.class),
     SUpdateGameBoard(BoardInfo.class),
+    CClickReadyButton(),
     CTogglePlaceOnShipSquare(Coord.class),
     CFireShot(Coord.class),
     SReceiveGameInvitation(),

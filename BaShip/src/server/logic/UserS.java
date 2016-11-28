@@ -8,7 +8,6 @@ import java.util.logging.Logger;
 import server.conn.*;
 import server.database.GlobalChatDB;
 import server.database.UserDB;
-import server.logic.game.GameS;
 import sharedlib.exceptions.*;
 import sharedlib.tuples.Message;
 import sharedlib.tuples.UserInfo;

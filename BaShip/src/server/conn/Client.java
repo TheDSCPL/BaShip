@@ -5,7 +5,6 @@ import java.util.logging.*;
 import server.*;
 import server.database.*;
 import server.logic.*;
-import server.logic.game.*;
 import sharedlib.conn.*;
 import sharedlib.exceptions.*;
 import sharedlib.tuples.*;
@@ -131,6 +130,10 @@ public class Client implements Connection.Delegate {
             }
             case CTogglePlaceOnShipSquare: {
                 GameS.togglePlaceShipOnSquare(this, (Coord) request.info);
+                break;
+            }
+            case CClickReadyButton: {
+                GameS.clickReadyButton(this);
                 break;
             }
             case CFireShot: {

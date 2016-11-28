@@ -186,6 +186,11 @@ public class Server implements Connection.Delegate {
         Packet request = new Packet(Query.CTogglePlaceOnShipSquare, pos);
         sendOnlyWrapper(request);
     }
+    
+    public void clickReadyButton() throws UserMessageException {
+        Packet request = new Packet(Query.CClickReadyButton);
+        sendOnlyWrapper(request);
+    }
 
     public void fireShot(Coord pos) throws UserMessageException {
         Packet request = new Packet(Query.CFireShot, pos);
