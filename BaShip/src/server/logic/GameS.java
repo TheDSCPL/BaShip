@@ -1,5 +1,6 @@
 package server.logic;
 
+import java.sql.SQLException;
 import java.util.*;
 import java.util.concurrent.*;
 import java.util.logging.*;
@@ -68,11 +69,17 @@ public class GameS {
         }
     }
 
-    private static void startGame(Client player1, Client player2) {
-        GamePlay game = new GamePlay(player1, playersWaitingBoards.get(player1), player2, playersWaitingBoards.get(player2));
-
-        currentGamesPlay.put(player1, game);
-        currentGamesPlay.put(player2, game);
+    private static void startGame(Client player1, Client player2) throws UserMessageException {
+        GamePlay game;
+        try {
+            game = new GamePlay(player1, playersWaitingBoards.get(player1), player2, playersWaitingBoards.get(player2));
+            currentGamesPlay.put(player1, game);
+            currentGamesPlay.put(player2, game);
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(GameS.class.getName()).log(Level.SEVERE, null, ex);
+            throw new UserMessageException("Could not access DB and create game", ex);
+        }
     }
 
     private static void startWait(Client clientWaiting, Client targetClient) {
@@ -108,7 +115,7 @@ public class GameS {
             }
         }
     }
-    
+
     public static void clickReadyButton(Client player) {
         if (isClientPlaying(player)) {
             currentGamesPlay.get(player).clickReadyButton(player);

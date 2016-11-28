@@ -36,8 +36,16 @@ public class GameDB {
         return games;
     }
     
-    /*public static Long createGame(Long player1ID, Long player2ID) {
-        
-    }*/
+    public static Long createGame(Long player1ID, Long player2ID) throws SQLException {
+        PreparedStatement stmt = ServerMain.db.getConn().prepareStatement(
+                "INSERT INTO games VALUES (DEFAULT, NOW(), NULL, ?, ?, NULL) RETURNING (uid)"
+        );
+        stmt.setLong(1, player1ID);
+        stmt.setLong(2, player2ID);
+
+        ResultSet r = stmt.executeQuery();
+        r.next();
+        return r.getLong(1);
+    }
 
 }

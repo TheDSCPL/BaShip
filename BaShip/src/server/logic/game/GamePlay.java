@@ -1,8 +1,10 @@
 package server.logic.game;
 
+import java.sql.SQLException;
 import java.util.*;
 import java.util.logging.*;
 import server.conn.*;
+import server.database.GameDB;
 import server.logic.*;
 import sharedlib.exceptions.*;
 import sharedlib.tuples.*;
@@ -22,7 +24,7 @@ public class GamePlay {
         PlacingShips, Waiting, Playing
     }
 
-    public GamePlay(Client p1, Board p1Board, Client p2, Board p2Board) {
+    public GamePlay(Client p1, Board p1Board, Client p2, Board p2Board) throws SQLException {
 
         // Set players
         player1 = p1;
@@ -34,9 +36,9 @@ public class GamePlay {
 
         // Assign turns
         p1Turn = new Random().nextBoolean();
-
-        // TODO: create game in DB
-        gameID = 0L;
+        
+        // Create game in DB
+        gameID = GameDB.createGame(UserS.idFromClient(p1), UserS.idFromClient(p2));
         
         // Refresh interfaces
         refreshClientInfo();
