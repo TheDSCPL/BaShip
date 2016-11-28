@@ -11,19 +11,15 @@ public class Logic {
     }
 
     static public void receiveGlobalMessage(Message message) {
-//        @Override
-//    public void receiveGlobalMessage(Message m) {
-//        // TODO: Better presentation
-//        messagesTextArea.setText(messagesTextArea.getText() + "[" + m.timestamp + "] " + m.username + "\n" + m.text + "\n\n");
-//        messagesTextArea.setCaretPosition(messagesTextArea.getDocument().getLength()); // Scroll to bottom
-//    }
-    }
-
-    static public void updateGameScreen(GameScreenInfo info) {
-        
+        //messagesTextArea.setText(messagesTextArea.getText() + "[" + m.timestamp + "] " + m.username + "\n" + m.text + "\n\n");
+        //messagesTextArea.setCaretPosition(messagesTextArea.getDocument().getLength()); // Scroll to bottom
     }
 
     static public void showGameInvitation(String message) {
+        
+    }
+
+    static public void updateGameScreen(GameScreenInfo info) {
         
     }
 

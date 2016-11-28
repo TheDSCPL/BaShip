@@ -8,16 +8,12 @@ public class MoveDB {
     
     public static void saveMove(long gameID, int playerN, int moveIndex) throws SQLException {
         PreparedStatement stmt = ServerMain.db.getConn().prepareStatement(
-                "INSERT INTO moves VALUES (DEFAULT, ?, ?) RETURNING (uid)"
+                "INSERT INTO moves VALUES (DEFAULT, ?, ?, ?)"
         );
-        stmt.setString(1, username);
-        stmt.setString(2, passwordHash);
-
-        ResultSet r = stmt.executeQuery();
-        r.next();
-        Long id = r.getLong(1);
-
-        return new UserInfo(id, username);
+        stmt.setLong(1, gameID);
+        stmt.setInt(2, playerN);
+        stmt.setInt(3, moveIndex);
+        stmt.executeUpdate();
     }
     
 }

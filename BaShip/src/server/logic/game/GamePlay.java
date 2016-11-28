@@ -5,6 +5,7 @@ import java.util.*;
 import java.util.logging.*;
 import server.conn.*;
 import server.database.GameDB;
+import server.database.MoveDB;
 import server.logic.*;
 import sharedlib.exceptions.*;
 import sharedlib.tuples.*;
@@ -12,14 +13,17 @@ import sharedlib.utils.*;
 
 public class GamePlay {
 
+    private final Long gameID;
+
     public final Client player1, player2;
     private PlayerState p1State, p2State;
     private final Board p1Board, p2Board;
-    private final Long gameID;
-    
-    private boolean p1Turn;
-    private final HashSet<Client> spectators = new HashSet<>(); // TODO: make this set thread-safe!
 
+    private boolean p1Turn;
+    private int moveIndex;
+
+    private final HashSet<Client> spectators = new HashSet<>(); // TODO: make this set thread-safe!
+    
     private enum PlayerState {
         PlacingShips, Waiting, Playing
     }
@@ -36,10 +40,11 @@ public class GamePlay {
 
         // Assign turns
         p1Turn = new Random().nextBoolean();
-        
+        moveIndex = 0;
+
         // Create game in DB
         gameID = GameDB.createGame(UserS.idFromClient(p1), UserS.idFromClient(p2));
-        
+
         // Refresh interfaces
         refreshClientInfo();
     }
@@ -49,36 +54,36 @@ public class GamePlay {
         if (!isPlayer(player)) {
             return;
         }
-        
+
         // Verify player is placing ships
         if (stateForPlayer(player) != PlayerState.PlacingShips) {
             return;
         }
-        
+
         // Verify if ships are well placed
         if (!boardForPlayer(player).placedShipsAreValid()) {
             return;
         }
-        
+
         // Change state for player
         setStateForPlayer(player, PlayerState.Waiting);
-        
+
         // Start game if both players are ready
         if (stateForPlayer(player1) == PlayerState.Waiting && stateForPlayer(player2) == PlayerState.Waiting) {
-            
+
             // Update player states
             setStateForPlayer(player1, PlayerState.Playing);
             setStateForPlayer(player2, PlayerState.Playing);
-            
+
             // TODO: finish
             // Start game & save ship positions
         }
-        
+
         // Refresh interfaces
         refreshClientInfo();
     }
 
-    public void fireShot(Client player, Coord pos) {
+    public void fireShot(Client player, Coord pos) throws SQLException {
 
         // Verify if player is in this game
         if (!isPlayer(player)) {
@@ -106,15 +111,17 @@ public class GamePlay {
         boardForPlayer(opponent(player)).shootOnSquare(pos);
 
         // Save shot on DB
-        // TODO: finish
+        MoveDB.saveMove(gameID, player == player1 ? 1 : 2, moveIndex);
+        moveIndex++;
         
+        // TODO: finish
         if (boardForPlayer(opponent(player)).allShipsAreShot()) { // Check if player won
             // TODO: finish
         }
         else { // If not, change turn
             p1Turn = !p1Turn;
         }
-        
+
         // Refresh interfaces
         refreshClientInfo();
     }
@@ -135,7 +142,7 @@ public class GamePlay {
         // Everything ok, continue...
         // Send info to corresponding board
         boardForPlayer(player).togglePlaceShipOnSquare(pos);
-        
+
         // Refresh interfaces
         refreshClientInfo();
     }
@@ -242,7 +249,7 @@ public class GamePlay {
 
         return null;
     }
-    
+
     private void setStateForPlayer(Client player, PlayerState state) {
         if (player == player1) {
             p1State = state;
