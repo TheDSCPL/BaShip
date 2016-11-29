@@ -11,8 +11,8 @@ public class GameInfo {
     public final String player2Username;
     public final Date startDate;
     public final Date endDate;
-    public final Boolean isRunning;
-    public final Integer turnNumber;
+    //public final Boolean isRunning;
+    //public final Integer turnNumber;
 
     public GameInfo(Long id, Long player1ID, Long player2ID, String player1Username, String player2Username, Date startDate, Date endDate) {
         this.id = id;

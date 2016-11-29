@@ -133,11 +133,23 @@ public class Client implements Connection.Delegate {
                 break;
             }
             case CClickReadyButton: {
-                GameS.clickReadyButton(this);
+                try {
+                    GameS.clickReadyButton(this);
+                }
+                catch (SQLException ex) {
+                    Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+                    // TODO: handle exception
+                }
                 break;
             }
             case CFireShot: {
-                GameS.fireShot(this, (Coord) request.info);
+                try {
+                    GameS.fireShot(this, (Coord) request.info);
+                }
+                catch (SQLException ex) {
+                    Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+                    // TODO: handle exception
+                }
                 break;
             }
         }

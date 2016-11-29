@@ -116,7 +116,7 @@ public class GameS {
         }
     }
 
-    public static void clickReadyButton(Client player) {
+    public static void clickReadyButton(Client player) throws SQLException {
         if (isClientPlaying(player)) {
             currentGamesPlay.get(player).clickReadyButton(player);
         }
@@ -125,7 +125,7 @@ public class GameS {
         }
     }
 
-    public static void fireShot(Client player, Coord pos) {
+    public static void fireShot(Client player, Coord pos) throws SQLException {
         if (isClientPlaying(player)) {
             currentGamesPlay.get(player).fireShot(player, pos);
         }
@@ -146,13 +146,13 @@ public class GameS {
         return playersWaitingForGame.contains(client) || playersWaitingForPlayer.containsValue(client);
     }
     
-    public static boolean isGameRunning(Long gameID) {
+    /*public static boolean isGameRunning(Long gameID) {
         
     }
     
     public static Integer getGameCurrentMoveNumber(Long gameID) {
         
-    }
+    }*/
 
     private static void updateGameScreenForClient(Client client) {
         GameScreenInfo gsi = null;
