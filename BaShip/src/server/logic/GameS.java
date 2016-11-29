@@ -14,7 +14,8 @@ import sharedlib.utils.*;
 
 public class GameS {
 
-    private static final Map<Client, GamePlay> currentGamesPlay = new ConcurrentHashMap<>();
+    private static final Map<Long, GamePlay> currentGamesPlay = new ConcurrentHashMap<>();
+    private static final Map<Client, GamePlay> currentGamesPlayFromUser = new ConcurrentHashMap<>();
     private static final Map<Client, GameReplay> currentGamesReplay = new ConcurrentHashMap<>();
     private static final Map<Client, Client> playersWaitingForPlayer = new ConcurrentHashMap<>();
     private static final Queue<Client> playersWaitingForGame = new ConcurrentLinkedQueue<>();
@@ -40,7 +41,7 @@ public class GameS {
                 startGame(client, otherPlayer);
             }
             // Other player is playing
-            else if (currentGamesPlay.containsKey(client)) {
+            else if (currentGamesPlayFromUser.containsKey(client)) {
                 throw new UserMessageException("Invited user is currently playing");
             }
             // Other player is online but available
@@ -73,8 +74,9 @@ public class GameS {
         GamePlay game;
         try {
             game = new GamePlay(player1, playersWaitingBoards.get(player1), player2, playersWaitingBoards.get(player2));
-            currentGamesPlay.put(player1, game);
-            currentGamesPlay.put(player2, game);
+            currentGamesPlayFromUser.put(player1, game);
+            currentGamesPlayFromUser.put(player2, game);
+            currentGamesPlay.put(game.gameID, game);
         }
         catch (SQLException ex) {
             Logger.getLogger(GameS.class.getName()).log(Level.SEVERE, null, ex);
@@ -97,7 +99,7 @@ public class GameS {
 
     public static void togglePlaceShipOnSquare(Client player, Coord pos) {
         if (isClientPlaying(player)) {
-            currentGamesPlay.get(player).togglePlaceShipOnSquare(player, pos);
+            currentGamesPlayFromUser.get(player).togglePlaceShipOnSquare(player, pos);
         }
         else {
             if (!playersWaitingBoards.containsKey(player)) {
@@ -118,7 +120,7 @@ public class GameS {
 
     public static void clickReadyButton(Client player) throws SQLException {
         if (isClientPlaying(player)) {
-            currentGamesPlay.get(player).clickReadyButton(player);
+            currentGamesPlayFromUser.get(player).clickReadyButton(player);
         }
         else {
             Logger.getLogger(GameS.class.getName()).log(Level.SEVERE, "Player {0} cannot click ready because he's not playing any game", player);
@@ -127,7 +129,7 @@ public class GameS {
 
     public static void fireShot(Client player, Coord pos) throws SQLException {
         if (isClientPlaying(player)) {
-            currentGamesPlay.get(player).fireShot(player, pos);
+            currentGamesPlayFromUser.get(player).fireShot(player, pos);
         }
         else {
             Logger.getLogger(GameS.class.getName()).log(Level.SEVERE, "Player {0} cannot fire shot because he's not playing any game", player);
@@ -139,20 +141,20 @@ public class GameS {
     }
 
     public static boolean isClientPlaying(Client client) {
-        return currentGamesPlay.containsKey(client);
+        return currentGamesPlayFromUser.containsKey(client);
     }
 
     public static boolean isClientWaiting(Client client) {
         return playersWaitingForGame.contains(client) || playersWaitingForPlayer.containsValue(client);
     }
-    
+
     /*public static boolean isGameRunning(Long gameID) {
-        
-    }
-    
-    public static Integer getGameCurrentMoveNumber(Long gameID) {
-        
+        return currentGamesPlay.get(gameID).gameHasStarted();
     }*/
+
+    public static Integer getGameCurrentMoveNumber(Long gameID) {
+        return currentGamesPlay.get(gameID).getCurrentMoveNumber();
+    }
 
     private static void updateGameScreenForClient(Client client) {
         GameScreenInfo gsi = null;
@@ -181,5 +183,5 @@ public class GameS {
             }
         }
     }
-    
+
 }

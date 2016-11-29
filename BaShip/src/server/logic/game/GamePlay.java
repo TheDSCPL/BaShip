@@ -14,7 +14,7 @@ import sharedlib.utils.*;
 
 public class GamePlay {
 
-    private final Long gameID;
+    public final Long gameID;
 
     public final Client player1, player2;
     private PlayerState p1State, p2State;
@@ -246,7 +246,7 @@ public class GamePlay {
         return spectators.contains(player);
     }
 
-    private boolean gameHasStarted() {
+    public boolean gameHasStarted() {
         return p1State == PlayerState.Playing && p2State == PlayerState.Playing;
     }
 
@@ -281,5 +281,9 @@ public class GamePlay {
         }
 
         return null;
+    }
+    
+    public int getCurrentMoveNumber() {
+        return moveIndex;
     }
 }
