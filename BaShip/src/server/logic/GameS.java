@@ -145,6 +145,14 @@ public class GameS {
     public static boolean isClientWaiting(Client client) {
         return playersWaitingForGame.contains(client) || playersWaitingForPlayer.containsValue(client);
     }
+    
+    public static boolean isGameRunning(Long gameID) {
+        
+    }
+    
+    public static Integer getGameCurrentMoveNumber(Long gameID) {
+        
+    }
 
     private static void updateGameScreenForClient(Client client) {
         GameScreenInfo gsi = null;
@@ -173,4 +181,5 @@ public class GameS {
             }
         }
     }
+    
 }

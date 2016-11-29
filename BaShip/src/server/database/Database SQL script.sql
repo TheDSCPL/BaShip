@@ -6,7 +6,7 @@ CREATE TABLE users (
 
 CREATE TABLE games (
     gid BIGSERIAL PRIMARY KEY,
-    startdate TIMESTAMP NOT NULL,
+    startdate TIMESTAMP,
     enddate TIMESTAMP,
     player1 INTEGER NOT NULL REFERENCES users,
     player2 INTEGER NOT NULL REFERENCES users,

@@ -6,6 +6,7 @@ import java.util.logging.*;
 import server.conn.*;
 import server.database.GameDB;
 import server.database.MoveDB;
+import server.database.ShipDB;
 import server.logic.*;
 import sharedlib.exceptions.*;
 import sharedlib.tuples.*;
@@ -49,7 +50,22 @@ public class GamePlay {
         refreshClientInfo();
     }
 
-    public void clickReadyButton(Client player) {
+    private void startGame() throws SQLException {
+        // Set start date
+        GameDB.setStartTimeToNow(gameID);
+        
+        // Save ship positions
+        ShipDB.saveShipPositions(gameID, 1, p1Board.getShips());
+        ShipDB.saveShipPositions(gameID, 2, p2Board.getShips());
+        
+        // TODO: finish?
+    }
+    
+    private void finishGame() {
+        
+    }
+    
+    public void clickReadyButton(Client player) throws SQLException {
         // Verify if player is in this game
         if (!isPlayer(player)) {
             return;
@@ -74,9 +90,9 @@ public class GamePlay {
             // Update player states
             setStateForPlayer(player1, PlayerState.Playing);
             setStateForPlayer(player2, PlayerState.Playing);
-
-            // TODO: finish
+            
             // Start game & save ship positions
+            startGame();
         }
 
         // Refresh interfaces
@@ -104,18 +120,16 @@ public class GamePlay {
         if (!boardForPlayer(opponent(player)).canShootOnSquare(pos)) {
             return;
         }
-
-        // TODO: verify: other tests?
-        // Everything ok, continue...
-        // Send that to board
+        
+        // Send that shot to board
         boardForPlayer(opponent(player)).shootOnSquare(pos);
 
         // Save shot on DB
         MoveDB.saveMove(gameID, player == player1 ? 1 : 2, moveIndex);
         moveIndex++;
         
-        // TODO: finish
-        if (boardForPlayer(opponent(player)).allShipsAreShot()) { // Check if player won
+        // Check if player won
+        if (boardForPlayer(opponent(player)).allShipsAreShot()) { // Player won
             // TODO: finish
         }
         else { // If not, change turn
@@ -137,9 +151,7 @@ public class GamePlay {
         if (stateForPlayer(player) != PlayerState.PlacingShips) {
             return;
         }
-
-        // TODO: verify: other tests?
-        // Everything ok, continue...
+        
         // Send info to corresponding board
         boardForPlayer(player).togglePlaceShipOnSquare(pos);
 
@@ -193,7 +205,7 @@ public class GamePlay {
 
     private void refreshBoardsForClient(Client client) {
         BoardInfo leftBoard, rightBoard;
-
+        
         if (isPlayer(client)) {
             // TODO: finish
         }

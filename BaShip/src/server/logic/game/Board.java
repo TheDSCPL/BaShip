@@ -115,6 +115,10 @@ public class Board {
 
         return true;
     }
+    
+    public List<Ship> getShips() {
+        return new ArrayList<>(ships);
+    }
 
     // PLAYING
     public boolean canShootOnSquare(Coord c) {
@@ -146,7 +150,7 @@ public class Board {
         });
 
         // Populate bottom info rows
-        final int[] offset = {16, 10, 4, 0}; // static final
+        final int[] offset = {16, 10, 4, 0}; // static final TODO: should change based on info in SHIP_COUNT_FOR_SIZE
         int[] count = {0, 0, 0, 0};
         for (Ship s : ships) {
             int index = s.size - 1;

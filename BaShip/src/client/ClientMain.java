@@ -4,16 +4,13 @@ import client.conn.*;
 import client.ui.*;
 import java.io.*;
 import java.net.*;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
+import java.util.concurrent.*;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.*;
-import sharedlib.conn.Connection;
-import sharedlib.exceptions.ConnectionException;
-import sharedlib.tuples.UserInfo;
-import sharedlib.utils.Preferences;
+import sharedlib.conn.*;
+import sharedlib.exceptions.*;
+import sharedlib.tuples.*;
+import sharedlib.utils.*;
 
 public class ClientMain {
 
