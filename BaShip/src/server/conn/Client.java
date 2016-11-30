@@ -124,6 +124,8 @@ public class Client implements Connection.Delegate {
                 }
                 break;
             }
+            
+            // TODO: Empty responses just for confirmation?
             case CAnswerGameInvitation: {
                 GameS.answerGameInvitation(this, (Boolean) request.info);
                 break;
@@ -133,23 +135,15 @@ public class Client implements Connection.Delegate {
                 break;
             }
             case CClickReadyButton: {
-                try {
-                    GameS.clickReadyButton(this);
-                }
-                catch (SQLException ex) {
-                    Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
-                    // TODO: handle exception
-                }
+                GameS.clickReadyButton(this);
                 break;
             }
             case CFireShot: {
-                try {
-                    GameS.fireShot(this, (Coord) request.info);
-                }
-                catch (SQLException ex) {
-                    Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
-                    // TODO: handle exception
-                }
+                GameS.fireShot(this, (Coord) request.info);
+                break;
+            }
+            case CCloseGame: {
+                GameS.closeGame(this);
                 break;
             }
         }
@@ -171,6 +165,10 @@ public class Client implements Connection.Delegate {
 
     public void updateGameBoard(BoardInfo info) throws ConnectionException {
         connection.sendOnly(new Packet(Query.SUpdateGameBoard, info));
+    }
+
+    public void gameFinished(String message) throws ConnectionException {
+        connection.sendOnly(new Packet(Query.SGameFinished, message));
     }
 
     @Override

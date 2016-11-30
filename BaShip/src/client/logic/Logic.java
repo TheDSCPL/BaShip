@@ -27,4 +27,8 @@ public class Logic {
         
     }
 
+    public static void gameFinished(String message) {
+        // TODO: show message in a popup, close game panel and go back to lobby
+    }
+
 }

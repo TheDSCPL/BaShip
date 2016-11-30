@@ -84,5 +84,22 @@ public class GameDB {
         stmt.setLong(1, gameID);
         stmt.executeUpdate();
     }
+    
+    public static void setEndTimeToNow(Long gameID) throws SQLException {
+        PreparedStatement stmt = ServerMain.db.getConn().prepareStatement(
+                "UPDATE games SET enddate = NOW() WHERE gmid = ?"
+        );
+        stmt.setLong(1, gameID);
+        stmt.executeUpdate();
+    }
+    
+    public static void setWinner(Long gameID, Long playerID) throws SQLException {
+        PreparedStatement stmt = ServerMain.db.getConn().prepareStatement(
+                "UPDATE games SET winner = ? WHERE gmid = ?"
+        );
+        stmt.setLong(1, playerID);
+        stmt.setLong(2, gameID);
+        stmt.executeUpdate();
+    }
 
 }

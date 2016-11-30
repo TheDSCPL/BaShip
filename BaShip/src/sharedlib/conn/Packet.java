@@ -82,20 +82,15 @@ public class Packet {
 
         String id = decodeString(parts[0]);
         String pid = decodeString(parts[1]);
+        
         Query query = Query.fromString(decodeString(parts[2]));
-        Object info;
-
         if (query == null) {
             throw new PacketException("Invalid query string: " + decodeString(parts[2]));
         }
 
+        Object info;
         if (query.infoType != null) {
-            try {
-                info = getGson().fromJson(decodeString(parts[3]), query.infoType.getType());
-            }
-            catch (SecurityException | IllegalArgumentException ex) {
-                throw new PacketException("Could not find info class", ex);
-            }
+            info = getGson().fromJson(decodeString(parts[3]), query.infoType.getType());
         }
         else {
             info = null;

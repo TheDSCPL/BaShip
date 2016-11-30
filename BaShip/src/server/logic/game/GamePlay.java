@@ -24,7 +24,7 @@ public class GamePlay {
     private int moveIndex;
 
     private final HashSet<Client> spectators = new HashSet<>(); // TODO: make this set thread-safe!
-    
+
     private enum PlayerState {
         PlacingShips, Waiting, Playing
     }
@@ -50,22 +50,65 @@ public class GamePlay {
         refreshClientInfo();
     }
 
+    public void gameClosedByClient(Client client) {
+        if (isPlayer(client)) {
+            finishGame("Game ended. Player " + UserS.usernameFromClient(client) + " closed game.", opponent(client));
+        }
+        else {
+            // TODO: spectator?
+        }
+    }
+
+    public void clientDisconnected(Client client) {
+        if (isPlayer(client)) {
+            finishGame("Game ended. Player " + UserS.usernameFromClient(client) + " disconnected.", opponent(client));
+        }
+        else {
+            // TODO: spectator?
+        }
+    }
+
     private void startGame() throws SQLException {
         // Set start date
         GameDB.setStartTimeToNow(gameID);
-        
+
         // Save ship positions
         ShipDB.saveShipPositions(gameID, 1, p1Board.getShips());
         ShipDB.saveShipPositions(gameID, 2, p2Board.getShips());
-        
-        // TODO: finish?
     }
-    
-    private void finishGame() {
-        
+
+    private void finishGame(String message, Client winner) {
+        // Set winner and finish time
+        try {
+            GameDB.setEndTimeToNow(gameID);
+
+            if (winner != null) {
+                GameDB.setWinner(gameID, UserS.idFromClient(winner));
+            }
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(GamePlay.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        // Message players and spectators
+        try {
+            player1.gameFinished(message);
+            player2.gameFinished(message);
+
+            for (Client spectator : spectators) {
+                spectator.gameFinished(message);
+            }
+        }
+        catch (ConnectionException ex) {
+            Logger.getLogger(GamePlay.class.getName()).log(Level.SEVERE, null, ex);
+            // TODO: do anything else with exception?
+        }
+
+        // Remove myself from GameS's lists
+        GameS.gameFinished(this);
     }
-    
-    public void clickReadyButton(Client player) throws SQLException {
+
+    public void clickReadyButton(Client player) {
         // Verify if player is in this game
         if (!isPlayer(player)) {
             return;
@@ -90,16 +133,23 @@ public class GamePlay {
             // Update player states
             setStateForPlayer(player1, PlayerState.Playing);
             setStateForPlayer(player2, PlayerState.Playing);
-            
+
             // Start game & save ship positions
-            startGame();
+            try {
+                startGame();
+            }
+            catch (SQLException ex) {
+                Logger.getLogger(GamePlay.class.getName()).log(Level.SEVERE, null, ex);
+                finishGame("Could not access database to start game", null);
+                return;
+            }
         }
 
         // Refresh interfaces
         refreshClientInfo();
     }
 
-    public void fireShot(Client player, Coord pos) throws SQLException {
+    public void fireShot(Client player, Coord pos) {
 
         // Verify if player is in this game
         if (!isPlayer(player)) {
@@ -120,17 +170,25 @@ public class GamePlay {
         if (!boardForPlayer(opponent(player)).canShootOnSquare(pos)) {
             return;
         }
-        
+
         // Send that shot to board
         boardForPlayer(opponent(player)).shootOnSquare(pos);
 
         // Save shot on DB
-        MoveDB.saveMove(gameID, player == player1 ? 1 : 2, moveIndex);
+        try {
+            MoveDB.saveMove(gameID, player == player1 ? 1 : 2, moveIndex);
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(GamePlay.class.getName()).log(Level.SEVERE, "Could not fire shot", ex);
+            finishGame("Could not access database to fire shot", null);
+            return;
+        }
         moveIndex++;
-        
+
         // Check if player won
         if (boardForPlayer(opponent(player)).allShipsAreShot()) { // Player won
-            // TODO: finish
+            finishGame("Game finished: player " + UserS.usernameFromClient(player) + "won!", player);
+            return;
         }
         else { // If not, change turn
             p1Turn = !p1Turn;
@@ -151,7 +209,7 @@ public class GamePlay {
         if (stateForPlayer(player) != PlayerState.PlacingShips) {
             return;
         }
-        
+
         // Send info to corresponding board
         boardForPlayer(player).togglePlaceShipOnSquare(pos);
 
@@ -162,7 +220,7 @@ public class GamePlay {
     private void refreshClientInfo() {
         refreshClientInfoForClient(player1);
         refreshClientInfoForClient(player2);
-        spectators.stream().forEach((c) -> refreshClientInfoForClient(c));
+        spectators.stream().forEach(this::refreshClientInfoForClient);
     }
 
     private void refreshClientInfoForClient(Client client) {
@@ -174,13 +232,15 @@ public class GamePlay {
         GameScreenInfo info;
 
         if (isPlayer(client)) {
+            boolean opponentReady = stateForPlayer(opponent(client)) == PlayerState.Waiting;
+
             info = new GameScreenInfo(
                     UserS.usernameFromClient(client),
                     UserS.usernameFromClient(opponent(client)),
                     gameHasStarted(),
-                    !gameHasStarted() ? "TODO" : null, // TODO: finish
-                    !gameHasStarted() ? "TODO" : null, // TODO: finish
-                    false, // TODO: finish
+                    !gameHasStarted() ? (opponentReady ? "Opponent is ready" : "Opponent is placing ships") : null,
+                    !gameHasStarted() ? "You can place ships" : null,
+                    stateForPlayer(client) == PlayerState.PlacingShips && boardForPlayer(client).placedShipsAreValid(),
                     client == player1 ? p1Turn : !p1Turn,
                     client == player1 ? !p1Turn : p1Turn
             );
@@ -205,21 +265,24 @@ public class GamePlay {
 
     private void refreshBoardsForClient(Client client) {
         BoardInfo leftBoard, rightBoard;
-        
+        boolean playing = gameHasStarted();
+
         if (isPlayer(client)) {
-            // TODO: finish
+            leftBoard = boardForPlayer(client).getBoardInfo(true, playing, true);
+            rightBoard = boardForPlayer(opponent(client)).getBoardInfo(false, playing, false);
         }
         else {
-            // TODO: finish
+            leftBoard = boardForPlayer(player1).getBoardInfo(true, playing, true);
+            rightBoard = boardForPlayer(player2).getBoardInfo(false, playing, true);
         }
 
-        /*try {
+        try {
             client.updateGameBoard(leftBoard);
             client.updateGameBoard(rightBoard);
         }
         catch (ConnectionException ex) {
             Logger.getLogger(GamePlay.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
+        }
     }
 
     private Client currentPlayerTurn() {
@@ -282,7 +345,7 @@ public class GamePlay {
 
         return null;
     }
-    
+
     public int getCurrentMoveNumber() {
         return moveIndex;
     }

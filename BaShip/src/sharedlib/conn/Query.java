@@ -35,6 +35,8 @@ public enum Query {
     CClickReadyButton(),
     CTogglePlaceOnShipSquare(Coord.class),
     CFireShot(Coord.class),
+    CCloseGame(),
+    SGameFinished(String.class),
     SReceiveGameInvitation(),
     CAnswerGameInvitation();
     

@@ -25,11 +25,10 @@ CREATE TABLE ships (
     sid BIGSERIAL PRIMARY KEY,
     gmid INTEGER NOT NULL REFERENCES games,
     player INTEGER NOT NULL CHECK (player IN (1,2)),
-    type INTEGER CHECK (type >= 0 AND type >= 10),
+    size INTEGER CHECK (type >= 1 AND type <= 4),
     posx INTEGER CHECK (posx >= 0 AND posx < 10),
     posy INTEGER CHECK (posy >= 0 AND posy < 10),
-    horizontal BOOLEAN,
-    UNIQUE(gmid, player, type)
+    vertical BOOLEAN
 );
 
 CREATE TABLE gamechat (

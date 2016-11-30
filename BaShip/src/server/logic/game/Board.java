@@ -2,32 +2,17 @@ package server.logic.game;
 
 import java.util.*;
 import static java.util.stream.Collectors.toSet;
+import static sharedlib.constants.BoardK.*;
 import sharedlib.tuples.*;
 import sharedlib.utils.*;
 
 public class Board {
 
-    public static final int BOARD_SIZE = 10;
-
-    public static final Map<Integer, Integer> SHIP_COUNT_FOR_SIZE
-            = Collections.unmodifiableMap(
-                    new HashMap<Integer, Integer>() {
-                {
-                    put(1, 4);
-                    put(2, 3);
-                    put(3, 2);
-                    put(4, 1);
-                }
-            });
-
-    public static final int SHIP_COUNT = SHIP_COUNT_FOR_SIZE.values().stream().reduce(0, Integer::sum);
-    public static final int BOTTOM_INFO_SQUARES_COUNT = SHIP_COUNT_FOR_SIZE.entrySet().stream().map((e) -> e.getKey() * e.getValue()).reduce(0, Integer::sum);
-
+    private final Set<Coord> invalidShipSquares = new HashSet<>();
     private final Matrix<Boolean> shipsLayer = new Matrix(BOARD_SIZE, BOARD_SIZE, false);
-    private final Matrix<Boolean> shotsLayer = new Matrix(BOARD_SIZE, BOARD_SIZE, false);
 
     private final List<Ship> ships = new ArrayList<>();
-    private final Set<Coord> invalidShipSquares = new HashSet<>();
+    private final Matrix<Boolean> shotsLayer = new Matrix(BOARD_SIZE, BOARD_SIZE, false);
 
     // PLACING SHIPS
     public void togglePlaceShipOnSquare(Coord c) {
@@ -74,8 +59,8 @@ public class Board {
             boolean yAllEqual = currentConnectedSquares.stream().map((c) -> c.y).collect(toSet()).size() == 1;
 
             if (xAllEqual || yAllEqual) {
-                int minXpos = currentConnectedSquares.stream().map((c) -> c.x).reduce(Integer.MAX_VALUE, Integer::min);
-                int minYpos = currentConnectedSquares.stream().map((c) -> c.y).reduce(Integer.MAX_VALUE, Integer::min);
+                int minXpos = currentConnectedSquares.stream().map((c) -> c.x).min(Integer::min).get();
+                int minYpos = currentConnectedSquares.stream().map((c) -> c.y).min(Integer::min).get();
                 ships.add(new Ship(minXpos, minYpos, currentConnectedSquares.size(), xAllEqual));
             }
             else {
@@ -115,7 +100,7 @@ public class Board {
 
         return true;
     }
-    
+
     public List<Ship> getShips() {
         return new ArrayList<>(ships);
     }
@@ -129,15 +114,29 @@ public class Board {
         shotsLayer.set(c, true);
     }
 
-    public boolean allShipsAreShot() {
+    public Set<Coord> allShipSquares() {
         Set<Coord> allShipSquares = new HashSet<>();
         ships.stream().forEach(s -> allShipSquares.addAll(s.getShipSquares()));
-        return allShipSquares.stream().allMatch(c -> shotsLayer.get(c));
+        return allShipSquares;
+    }
+
+    public boolean allShipsAreShot() {
+        return allShipSquares().stream().allMatch(c -> shotsLayer.get(c));
     }
 
     // GET BOARD INFO
-    public BoardInfo getBoardInfoNotPlaying() {
+    public BoardInfo getBoardInfo(boolean leftBoard, boolean playing, boolean showEverything) {
+        if (playing) {
+            return getBoardInfoPlaying(leftBoard, showEverything);
+        }
+        else {
+            return getBoardInfoNotPlaying(leftBoard);
+        }
+    }
+
+    public BoardInfo getBoardInfoNotPlaying(boolean leftBoard) {
         BoardInfo bi = new BoardInfo();
+        bi.leftBoard = leftBoard;
 
         // Populate top board
         shipsLayer.forEach((c, b) -> {
@@ -165,13 +164,47 @@ public class Board {
         return bi;
     }
 
-    public BoardInfo getBoardInfoPlaying(boolean showAll) {
+    public BoardInfo getBoardInfoPlaying(boolean leftBoard, boolean showEverything) {
         BoardInfo bi = new BoardInfo();
+        bi.leftBoard = leftBoard;
 
-        if (showAll) {
+        if (showEverything) {
+            bi.board.setEach((c) -> {
+                if (shotsLayer.get(c) && shipsLayer.get(c)) {
+                    return BoardInfo.SquareFill.GraySquareRedCross;
+                }
+                else if (shotsLayer.get(c) && !shipsLayer.get(c)) {
+                    return BoardInfo.SquareFill.BlueDiamond;
+                }
+                else if (!shotsLayer.get(c) && shipsLayer.get(c)) {
+                    return BoardInfo.SquareFill.GraySquare;
+                }
+                else {
+                    return BoardInfo.SquareFill.Empty;
+                }
+            });
+            
             // TODO: finish
         }
         else {
+            shotsLayer.forEach((coord, shot) -> {
+                BoardInfo.SquareFill fill;
+
+                if (shot) {
+                    if (shipsLayer.get(coord)) {
+                        fill = BoardInfo.SquareFill.GraySquareRedCross;
+                    }
+                    else {
+                        fill = BoardInfo.SquareFill.BlueDiamond;
+                    }
+                }
+                else {
+                    fill = BoardInfo.SquareFill.Empty;
+                }
+
+                bi.board.set(coord, fill);
+            });
+
             // TODO: finish
         }
 

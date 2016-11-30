@@ -44,6 +44,10 @@ public class Server implements Connection.Delegate {
                 Logic.updateBoardInfo((BoardInfo) request.info);
                 break;
             }
+            case SGameFinished: {
+                Logic.gameFinished((String) request.info);
+                break;
+            }
         }
 
         return response;
@@ -170,6 +174,11 @@ public class Server implements Connection.Delegate {
 
     public void fireShot(Coord pos) throws UserMessageException {
         Packet request = new Packet(Query.CFireShot, pos);
+        sendOnlyWrapper(request);
+    }
+    
+    public void closeGame() throws UserMessageException {
+        Packet request = new Packet(Query.CCloseGame);
         sendOnlyWrapper(request);
     }
 

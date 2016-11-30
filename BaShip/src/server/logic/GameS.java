@@ -5,18 +5,15 @@ import java.util.*;
 import java.util.concurrent.*;
 import java.util.logging.*;
 import server.conn.*;
-import server.logic.game.Board;
-import server.logic.game.GamePlay;
-import server.logic.game.GameReplay;
+import server.logic.game.*;
 import sharedlib.exceptions.*;
-import sharedlib.tuples.GameScreenInfo;
+import sharedlib.tuples.*;
 import sharedlib.utils.*;
 
 public class GameS {
 
     private static final Map<Long, GamePlay> currentGamesPlay = new ConcurrentHashMap<>();
     private static final Map<Client, GamePlay> currentGamesPlayFromUser = new ConcurrentHashMap<>();
-    private static final Map<Client, GameReplay> currentGamesReplay = new ConcurrentHashMap<>();
     private static final Map<Client, Client> playersWaitingForPlayer = new ConcurrentHashMap<>();
     private static final Queue<Client> playersWaitingForGame = new ConcurrentLinkedQueue<>();
     private static final Map<Client, Board> playersWaitingBoards = new ConcurrentHashMap<>();
@@ -110,7 +107,7 @@ public class GameS {
             board.togglePlaceShipOnSquare(pos);
 
             try {
-                player.updateGameBoard(board.getBoardInfoNotPlaying());
+                player.updateGameBoard(board.getBoardInfoNotPlaying(true));
             }
             catch (ConnectionException ex) {
                 Logger.getLogger(GameS.class.getName()).log(Level.SEVERE, null, ex);
@@ -118,7 +115,7 @@ public class GameS {
         }
     }
 
-    public static void clickReadyButton(Client player) throws SQLException {
+    public static void clickReadyButton(Client player) {
         if (isClientPlaying(player)) {
             currentGamesPlayFromUser.get(player).clickReadyButton(player);
         }
@@ -127,7 +124,7 @@ public class GameS {
         }
     }
 
-    public static void fireShot(Client player, Coord pos) throws SQLException {
+    public static void fireShot(Client player, Coord pos) {
         if (isClientPlaying(player)) {
             currentGamesPlayFromUser.get(player).fireShot(player, pos);
         }
@@ -135,9 +132,17 @@ public class GameS {
             Logger.getLogger(GameS.class.getName()).log(Level.SEVERE, "Player {0} cannot fire shot because he's not playing any game", player);
         }
     }
+    
+    public static void closeGame(Client client) {
+        currentGamesPlayFromUser.get(client).gameClosedByClient(client);
+    }
+    
+    public static void gameFinished(GamePlay game) {
+        // TODO: finish
+    }
 
     public static void clientDisconnected(Client client) {
-        // TODO: finish
+        currentGamesPlayFromUser.get(client).clientDisconnected(client);
     }
 
     public static boolean isClientPlaying(Client client) {
