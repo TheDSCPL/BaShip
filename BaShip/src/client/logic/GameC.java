@@ -1,18 +1,11 @@
 package client.logic;
 
-import sharedlib.tuples.BoardInfo;
-import sharedlib.tuples.GameScreenInfo;
-import sharedlib.tuples.Message;
+import sharedlib.tuples.*;
 
-public class Logic {
+public class GameC {
 
     static public void receiveGameMessage(Message message) {
         
-    }
-
-    static public void receiveGlobalMessage(Message message) {
-        //messagesTextArea.setText(messagesTextArea.getText() + "[" + m.timestamp + "] " + m.username + "\n" + m.text + "\n\n");
-        //messagesTextArea.setCaretPosition(messagesTextArea.getDocument().getLength()); // Scroll to bottom
     }
 
     static public void showGameInvitation(String message) {

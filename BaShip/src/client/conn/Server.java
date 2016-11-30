@@ -1,7 +1,7 @@
 package client.conn;
 
 import client.*;
-import client.logic.Logic;
+import client.logic.*;
 import java.io.*;
 import java.util.*;
 import sharedlib.conn.*;
@@ -25,27 +25,27 @@ public class Server implements Connection.Delegate {
 
         switch (request.query) {
             case SReceiveGameMessage: {
-                Logic.receiveGameMessage((Message) request.info);
+                GameC.receiveGameMessage((Message) request.info);
                 break;
             }
             case SReceiveGlobalMessage: {
-                Logic.receiveGlobalMessage((Message) request.info);
+                GlobalChatC.receiveGlobalMessage((Message) request.info);
                 break;
             }
             case SUpdateGameScreen: {
-                Logic.updateGameScreen((GameScreenInfo) request.info);
+                GameC.updateGameScreen((GameScreenInfo) request.info);
                 break;
             }
             case SReceiveGameInvitation: {
-                Logic.showGameInvitation((String) request.info);
+                GameC.showGameInvitation((String) request.info);
                 break;
             }
             case SUpdateGameBoard: {
-                Logic.updateBoardInfo((BoardInfo) request.info);
+                GameC.updateBoardInfo((BoardInfo) request.info);
                 break;
             }
             case SGameFinished: {
-                Logic.gameFinished((String) request.info);
+                GameC.gameFinished((String) request.info);
                 break;
             }
         }
