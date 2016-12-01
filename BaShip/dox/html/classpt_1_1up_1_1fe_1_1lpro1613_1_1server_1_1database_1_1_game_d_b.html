@@ -89,7 +89,7 @@ $(document).ready(function(){initNavTree('classpt_1_1up_1_1fe_1_1lpro1613_1_1ser
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a4c567854868d16ae9b919c0655be65a7"><td class="memItemLeft" align="right" valign="top">static List&lt; <a class="el" href="classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1tuples_1_1_game_info.html">GameInfo</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_game_d_b.html#a4c567854868d16ae9b919c0655be65a7">getGameList</a> (<a class="el" href="classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1tuples_1_1_game_search.html">GameSearch</a> s)  throws SQLException </td></tr>
+<tr class="memitem:a4c567854868d16ae9b919c0655be65a7"><td class="memItemLeft" align="right" valign="top">static List&lt; <a class="el" href="classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1structs_1_1_game_info.html">GameInfo</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_game_d_b.html#a4c567854868d16ae9b919c0655be65a7">getGameList</a> (<a class="el" href="classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1structs_1_1_game_search.html">GameSearch</a> s)  throws SQLException </td></tr>
 <tr class="separator:a4c567854868d16ae9b919c0655be65a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af4ec546a91795e5394379cfaaaf073cb"><td class="memItemLeft" align="right" valign="top">static Long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_game_d_b.html#af4ec546a91795e5394379cfaaaf073cb">createGame</a> (Long player1ID, Long player2ID)  throws SQLException </td></tr>
 <tr class="separator:af4ec546a91795e5394379cfaaaf073cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -101,8 +101,10 @@ Static Public Member Functions</h2></td></tr>
 <tr class="separator:a30f4664442da6b7ae80b1821aaa195fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
-<p>Definition at line <a class="el" href="_game_d_b_8java_source.html#l00014">14</a> of file <a class="el" href="_game_d_b_8java_source.html">GameDB.java</a>.</p>
+<div class="textblock"><p>Collection of static methods that access, set and return information present on the table "games" of the database.</p>
+<dl class="section author"><dt>Author</dt><dd>Alex </dd></dl>
+
+<p>Definition at line <a class="el" href="_game_d_b_8java_source.html#l00020">20</a> of file <a class="el" href="_game_d_b_8java_source.html">GameDB.java</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="af4ec546a91795e5394379cfaaaf073cb"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af4ec546a91795e5394379cfaaaf073cb">&sect;&nbsp;</a></span>createGame()</h2>
@@ -137,19 +139,31 @@ Static Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Create a game on the database. This inserts a new row on the "games" table but does not set the start date (the start date is set to NULL)</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">player1ID</td><td>The id of the first player </td></tr>
+    <tr><td class="paramname">player2ID</td><td>The id of the second player </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The unique id of the newly created game </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">SQLException</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p>Definition at line <a class="el" href="_game_d_b_8java_source.html#l00078">78</a> of file <a class="el" href="_game_d_b_8java_source.html">GameDB.java</a>.</p>
+<p>Definition at line <a class="el" href="_game_d_b_8java_source.html#l00100">100</a> of file <a class="el" href="_game_d_b_8java_source.html">GameDB.java</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_game_d_b_af4ec546a91795e5394379cfaaaf073cb_cgraph.png" border="0" usemap="#classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_game_d_b_af4ec546a91795e5394379cfaaaf073cb_cgraph" alt=""/></div>
-<!-- MAP 0 -->
-</div>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_game_d_b_af4ec546a91795e5394379cfaaaf073cb_icgraph.png" border="0" usemap="#classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_game_d_b_af4ec546a91795e5394379cfaaaf073cb_icgraph" alt=""/></div>
-<!-- MAP 1 -->
+<map name="classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_game_d_b_af4ec546a91795e5394379cfaaaf073cb_cgraph" id="classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_game_d_b_af4ec546a91795e5394379cfaaaf073cb_cgraph">
+<area shape="rect" id="node2" href="classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_database.html#aa5ecc24c87d16ca20cc645414d8f3232" title="pt.up.fe.lpro1613.server.database.\lDatabase.getConn" alt="" coords="281,5,506,46"/>
+<area shape="rect" id="node3" href="classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_database.html#ae7e6a39f412e24bea44477224f0fdef0" title="pt.up.fe.lpro1613.server.database.\lDatabase.close" alt="" coords="281,70,506,111"/>
+</map>
 </div>
 
 </div>
@@ -164,9 +178,9 @@ Here is the caller graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static List&lt;<a class="el" href="classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1tuples_1_1_game_info.html">GameInfo</a>&gt; pt.up.fe.lpro1613.server.database.GameDB.getGameList </td>
+          <td class="memname">static List&lt;<a class="el" href="classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1structs_1_1_game_info.html">GameInfo</a>&gt; pt.up.fe.lpro1613.server.database.GameDB.getGameList </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1tuples_1_1_game_search.html">GameSearch</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1structs_1_1_game_search.html">GameSearch</a>&#160;</td>
           <td class="paramname"><em>s</em></td><td>)</td>
           <td> throws SQLException</td>
         </tr>
@@ -177,19 +191,44 @@ Here is the caller graph for this function:</div>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Get the list of all games saved on the database.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">s</td><td>The search parameters </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The list of games </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">SQLException</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p>Definition at line <a class="el" href="_game_d_b_8java_source.html#l00016">16</a> of file <a class="el" href="_game_d_b_8java_source.html">GameDB.java</a>.</p>
+<p>Definition at line <a class="el" href="_game_d_b_8java_source.html#l00029">29</a> of file <a class="el" href="_game_d_b_8java_source.html">GameDB.java</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_game_d_b_a4c567854868d16ae9b919c0655be65a7_cgraph.png" border="0" usemap="#classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_game_d_b_a4c567854868d16ae9b919c0655be65a7_cgraph" alt=""/></div>
-<!-- MAP 2 -->
+<map name="classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_game_d_b_a4c567854868d16ae9b919c0655be65a7_cgraph" id="classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_game_d_b_a4c567854868d16ae9b919c0655be65a7_cgraph">
+<area shape="rect" id="node2" href="classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_database.html#aa5ecc24c87d16ca20cc645414d8f3232" title="pt.up.fe.lpro1613.server.database.\lDatabase.getConn" alt="" coords="1102,5,1327,46"/>
+<area shape="rect" id="node3" href="classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1logic_1_1game_1_1_game_s.html#af9eabf8847fec79f112b49212847a478" title="pt.up.fe.lpro1613.server.logic.game.\lGameS.getGameCurrentMoveNumber" alt="" coords="280,133,531,174"/>
+<area shape="rect" id="node6" href="classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_database.html#ae7e6a39f412e24bea44477224f0fdef0" title="pt.up.fe.lpro1613.server.database.\lDatabase.close" alt="" coords="1102,131,1327,173"/>
+<area shape="rect" id="node4" href="classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1logic_1_1_user_s.html#a26c28666f4e6461ee06eecfe1f55356d" title="pt.up.fe.lpro1613.server.logic.\lUserS.usernameFromClient" alt="" coords="580,99,777,141"/>
+<area shape="rect" id="node8" href="classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1conn_1_1_client.html#ad3cc8b10b942f6260a0e7db7f5a0a538" title="pt.up.fe.lpro1613.server.conn.\lClient.updateGameScreen" alt="" coords="579,165,778,206"/>
+<area shape="rect" id="node5" href="classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_user_d_b.html#ab5c986eb5c2ba36eef3defee599c6903" title="pt.up.fe.lpro1613.server.database.\lUserDB.getUsernameFromID" alt="" coords="827,34,1053,75"/>
+<area shape="rect" id="node7" href="classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1logic_1_1_user_s.html#a6ce47ad78e634c757be0ffc905799b4c" title="pt.up.fe.lpro1613.server.logic.\lUserS.idFromClient" alt="" coords="841,99,1039,141"/>
+<area shape="rect" id="node9" href="classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1conn_1_1_connection.html#acdcf8af7c9a37ede122c6db80d06668f" title="pt.up.fe.lpro1613.sharedlib.conn.\lConnection.sendOnly" alt="" coords="832,165,1048,206"/>
+</map>
 </div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_game_d_b_a4c567854868d16ae9b919c0655be65a7_icgraph.png" border="0" usemap="#classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_game_d_b_a4c567854868d16ae9b919c0655be65a7_icgraph" alt=""/></div>
-<!-- MAP 3 -->
+<map name="classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_game_d_b_a4c567854868d16ae9b919c0655be65a7_icgraph" id="classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_game_d_b_a4c567854868d16ae9b919c0655be65a7_icgraph">
+<area shape="rect" id="node2" href="classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1conn_1_1_client.html#a81efbd1e6b06189da5c814ac767a4a98" title="pt.up.fe.lpro1613.server.conn.\lClient.handle" alt="" coords="281,5,479,46"/>
+</map>
 </div>
 
 </div>
@@ -217,19 +256,29 @@ Here is the caller graph for this function:</div>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Set (on the database) the end time of the game with the given id to the current time.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">gameID</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">SQLException</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p>Definition at line <a class="el" href="_game_d_b_8java_source.html#l00115">115</a> of file <a class="el" href="_game_d_b_8java_source.html">GameDB.java</a>.</p>
+<p>Definition at line <a class="el" href="_game_d_b_8java_source.html#l00151">151</a> of file <a class="el" href="_game_d_b_8java_source.html">GameDB.java</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_game_d_b_ab352e7cd06250b77274f5c4f261f8116_cgraph.png" border="0" usemap="#classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_game_d_b_ab352e7cd06250b77274f5c4f261f8116_cgraph" alt=""/></div>
-<!-- MAP 4 -->
-</div>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_game_d_b_ab352e7cd06250b77274f5c4f261f8116_icgraph.png" border="0" usemap="#classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_game_d_b_ab352e7cd06250b77274f5c4f261f8116_icgraph" alt=""/></div>
-<!-- MAP 5 -->
+<map name="classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_game_d_b_ab352e7cd06250b77274f5c4f261f8116_cgraph" id="classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_game_d_b_ab352e7cd06250b77274f5c4f261f8116_cgraph">
+<area shape="rect" id="node2" href="classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_database.html#aa5ecc24c87d16ca20cc645414d8f3232" title="pt.up.fe.lpro1613.server.database.\lDatabase.getConn" alt="" coords="281,5,506,46"/>
+<area shape="rect" id="node3" href="classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_database.html#ae7e6a39f412e24bea44477224f0fdef0" title="pt.up.fe.lpro1613.server.database.\lDatabase.close" alt="" coords="281,70,506,111"/>
+</map>
 </div>
 
 </div>
@@ -257,19 +306,29 @@ Here is the caller graph for this function:</div>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Set (on the database) the start time of the game with the given id to the current time.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">gameID</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">SQLException</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p>Definition at line <a class="el" href="_game_d_b_8java_source.html#l00100">100</a> of file <a class="el" href="_game_d_b_8java_source.html">GameDB.java</a>.</p>
+<p>Definition at line <a class="el" href="_game_d_b_8java_source.html#l00129">129</a> of file <a class="el" href="_game_d_b_8java_source.html">GameDB.java</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_game_d_b_a991c06b53598f46f4eea30c8c8fc31f7_cgraph.png" border="0" usemap="#classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_game_d_b_a991c06b53598f46f4eea30c8c8fc31f7_cgraph" alt=""/></div>
-<!-- MAP 6 -->
-</div>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_game_d_b_a991c06b53598f46f4eea30c8c8fc31f7_icgraph.png" border="0" usemap="#classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_game_d_b_a991c06b53598f46f4eea30c8c8fc31f7_icgraph" alt=""/></div>
-<!-- MAP 7 -->
+<map name="classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_game_d_b_a991c06b53598f46f4eea30c8c8fc31f7_cgraph" id="classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_game_d_b_a991c06b53598f46f4eea30c8c8fc31f7_cgraph">
+<area shape="rect" id="node2" href="classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_database.html#aa5ecc24c87d16ca20cc645414d8f3232" title="pt.up.fe.lpro1613.server.database.\lDatabase.getConn" alt="" coords="281,5,506,46"/>
+<area shape="rect" id="node3" href="classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_database.html#ae7e6a39f412e24bea44477224f0fdef0" title="pt.up.fe.lpro1613.server.database.\lDatabase.close" alt="" coords="281,70,506,111"/>
+</map>
 </div>
 
 </div>
@@ -307,19 +366,30 @@ Here is the caller graph for this function:</div>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Set (on the database) the winner of the game with the given id.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">gameID</td><td></td></tr>
+    <tr><td class="paramname">playerID</td><td>The id of the winning player. This player must be one of the players of this game. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">SQLException</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p>Definition at line <a class="el" href="_game_d_b_8java_source.html#l00130">130</a> of file <a class="el" href="_game_d_b_8java_source.html">GameDB.java</a>.</p>
+<p>Definition at line <a class="el" href="_game_d_b_8java_source.html#l00174">174</a> of file <a class="el" href="_game_d_b_8java_source.html">GameDB.java</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_game_d_b_a30f4664442da6b7ae80b1821aaa195fa_cgraph.png" border="0" usemap="#classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_game_d_b_a30f4664442da6b7ae80b1821aaa195fa_cgraph" alt=""/></div>
-<!-- MAP 8 -->
-</div>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_game_d_b_a30f4664442da6b7ae80b1821aaa195fa_icgraph.png" border="0" usemap="#classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_game_d_b_a30f4664442da6b7ae80b1821aaa195fa_icgraph" alt=""/></div>
-<!-- MAP 9 -->
+<map name="classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_game_d_b_a30f4664442da6b7ae80b1821aaa195fa_cgraph" id="classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_game_d_b_a30f4664442da6b7ae80b1821aaa195fa_cgraph">
+<area shape="rect" id="node2" href="classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_database.html#aa5ecc24c87d16ca20cc645414d8f3232" title="pt.up.fe.lpro1613.server.database.\lDatabase.getConn" alt="" coords="281,5,506,46"/>
+<area shape="rect" id="node3" href="classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_database.html#ae7e6a39f412e24bea44477224f0fdef0" title="pt.up.fe.lpro1613.server.database.\lDatabase.close" alt="" coords="281,70,506,111"/>
+</map>
 </div>
 
 </div>

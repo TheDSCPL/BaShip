@@ -1,0 +1,12 @@
+<map id="client.ClientMain.runOnUI" name="client.ClientMain.runOnUI">
+<area shape="rect" id="node2" href="$classclient_1_1_client_main.html#a1c318ff544d49e68acce0aeac5446336" title="client.ClientMain.main" alt="" coords="253,20,405,46"/>
+<area shape="rect" id="node3" href="$classclient_1_1_client_main.html#af975fd50f5fb1cc3ec29b65854b2a412" title="client.ClientMain.showInfo" alt="" coords="241,70,418,97"/>
+<area shape="rect" id="node4" href="$classclient_1_1_client_main.html#a0964644423f3d533ca394456ee6f6c95" title="client.ClientMain.showWarning" alt="" coords="227,121,431,148"/>
+<area shape="rect" id="node7" href="$classclient_1_1ui_1_1_login_panel.html#a697f38b937f048e562c634c713d90885" title="client.ui.LoginPanel.Login\lPanel" alt="" coords="976,231,1149,272"/>
+<area shape="rect" id="node10" href="$classclient_1_1_client_main.html#ab814569831a92249ded3d7258c0ac929" title="client.ClientMain.showError" alt="" coords="237,180,421,206"/>
+<area shape="rect" id="node5" href="$classclient_1_1_client_main.html#aecd59c193bdb0536d649be78f72149b0" title="client.ClientMain.connect\lToServer" alt="" coords="491,48,661,90"/>
+<area shape="rect" id="node8" href="$classclient_1_1ui_1_1_settings_panel.html#a95dfa76100b4d18863cd0b572c631ebf" title="client.ui.SettingsPanel.\lSettingsPanel" alt="" coords="745,19,903,60"/>
+<area shape="rect" id="node9" href="$classclient_1_1ui_1_1_lobby_panel.html#aa6432c40dfb52b11101ab3e1e7fbb30c" title="client.ui.LobbyPanel.Lobby\lPanel" alt="" coords="485,114,667,155"/>
+<area shape="rect" id="node6" href="$classclient_1_1ui_1_1_login_panel.html#a9726aa2bc3416aa22ad43d2b4b9eed70" title="client.ui.LoginPanel.calculate\lRetypePasswordDialogPosition" alt="" coords="720,172,928,214"/>
+<area shape="rect" id="node11" href="$classclient_1_1ui_1_1_lobby_tabbed_panel.html#ace5183afecd36f1f1cc30483249ee952" title="client.ui.LobbyTabbedPanel.\lLobbyTabbedPanel" alt="" coords="481,231,671,272"/>
+</map>

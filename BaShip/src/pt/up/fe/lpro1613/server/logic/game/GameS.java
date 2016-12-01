@@ -15,7 +15,9 @@ import pt.up.fe.lpro1613.sharedlib.structs.GameUIInfo;
 import pt.up.fe.lpro1613.sharedlib.utils.Coord;
 
 /**
- * TODO: JAVADOC
+ * Class responsible for managing games being currently played and replayed by
+ * users.
+ *
  * @author Alex
  */
 public class GameS {
@@ -27,9 +29,11 @@ public class GameS {
     private static final Map<Client, Board> playersWaitingBoards = new ConcurrentHashMap<>();
 
     /**
-     * TODO: JAVADOC
-     * @param client
-     * @throws UserMessageException 
+     * Start a game with another random player. The player may be put on a
+     * waiting list if there are no other players available.
+     *
+     * @param client The client that wants to start a game. Cannot be null.
+     * @throws UserMessageException
      */
     public static void startRandomGame(Client client) throws UserMessageException {
         if (!playersWaitingForGame.isEmpty()) {
@@ -41,10 +45,13 @@ public class GameS {
     }
 
     /**
-     * TODO: JAVADOC
-     * @param client
-     * @param otherPlayerID
-     * @throws UserMessageException 
+     * Start a game with another player. The other player must be online and
+     * available (not in a game), or else a {@code UserMessageException} is
+     * thrown. If the player is available, an invitation is sent to him.
+     *
+     * @param client The client that wants to start a game
+     * @param otherPlayerID The player who is to be invited
+     * @throws UserMessageException
      */
     public static void startGameWithPlayer(Client client, Long otherPlayerID) throws UserMessageException {
 
@@ -65,7 +72,7 @@ public class GameS {
             // \-> send invitation to otherPlayer
             else {
                 startWait(client, otherPlayer);
-                sendInvitation(client, otherPlayer);
+                //sendInvitation(client, otherPlayer);
             }
         }
         else {
@@ -74,22 +81,25 @@ public class GameS {
     }
 
     /**
-     * TODO: JAVADOC
-     * @param client
-     * @param acepted 
+     * Inform this class that the client who has received a game invitation has
+     * answered said invitation (either by accepting or denying it).
+     *
+     * @param client The client who received the invitation
+     * @param acepted True if the client accepted the invitation and wants to
+     * start a game
      */
-    public static void answerGameInvitation(Client client, boolean acepted) {
+    /*public static void answerGameInvitation(Client client, boolean acepted) {
         // TODO: finish
-    }
-    
-    private static void sendInvitation(Client from, Client to) {
+    }*/
+
+    /*private static void sendInvitation(Client from, Client to) {
         try {
             to.sendGameInvitation(); // TODO: finish
         }
         catch (ConnectionException ex) {
             Logger.getLogger(GameS.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
+    }*/
 
     private static void startGame(Client player1, Client player2) throws UserMessageException {
         GamePlay game;
@@ -119,9 +129,12 @@ public class GameS {
     }
 
     /**
-     * TODO: JAVADOC
-     * @param player
-     * @param pos 
+     * When placing ships, inform this class that this client has clicked on a
+     * square on the grid. The player must be playing a game, and still be
+     * placing ships.
+     *
+     * @param player The player who clicked on the board
+     * @param pos The position of the board he cliked on
      */
     public static void togglePlaceShipOnSquare(Client player, Coord pos) {
         if (isClientPlaying(player)) {
@@ -145,8 +158,12 @@ public class GameS {
     }
 
     /**
-     * TODO: JAVADOC
-     * @param player 
+     * When placing ships, inform this class that this player has finished
+     * placing all the ships and is ready to start a game. The player must be
+     * playing a game, and still be placing ships. Also, all the ships must be
+     * in valid positions.
+     *
+     * @param player The player who is ready to play the game
      */
     public static void clickReadyButton(Client player) {
         if (isClientPlaying(player)) {
@@ -159,8 +176,9 @@ public class GameS {
 
     /**
      * TODO: JAVADOC
+     *
      * @param player
-     * @param pos 
+     * @param pos
      */
     public static void fireShot(Client player, Coord pos) {
         if (isClientPlaying(player)) {
@@ -170,22 +188,24 @@ public class GameS {
             Logger.getLogger(GameS.class.getName()).log(Level.SEVERE, "Player {0} cannot fire shot because he's not playing any game", player);
         }
     }
-    
+
     /**
      * TODO: JAVADOC
-     * @param client 
+     *
+     * @param client
      */
     public static void closeGame(Client client) {
         currentGamesPlayFromUser.get(client).gameClosedByClient(client);
     }
-    
+
     static void gameFinished(GamePlay game) {
         // TODO: finish
     }
 
     /**
      * TODO: JAVADOC
-     * @param client 
+     *
+     * @param client
      */
     public static void clientDisconnected(Client client) {
         // TODO: finish
@@ -194,8 +214,9 @@ public class GameS {
 
     /**
      * TODO: JAVADOC
+     *
      * @param client
-     * @return 
+     * @return
      */
     public static boolean isClientPlaying(Client client) {
         return currentGamesPlayFromUser.containsKey(client);
@@ -203,8 +224,9 @@ public class GameS {
 
     /**
      * TODO: JAVADOC
+     *
      * @param client
-     * @return 
+     * @return
      */
     public static boolean isClientWaiting(Client client) {
         return playersWaitingForGame.contains(client) || playersWaitingForPlayer.containsValue(client);
@@ -213,11 +235,11 @@ public class GameS {
     /*public static boolean isGameRunning(Long gameID) {
         return currentGamesPlay.get(gameID).gameHasStarted();
     }*/
-
     /**
      * TODO: JAVADOC
+     *
      * @param gameID
-     * @return 
+     * @return
      */
     public static Integer getGameCurrentMoveNumber(Long gameID) {
         return currentGamesPlay.get(gameID).getCurrentMoveNumber();

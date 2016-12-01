@@ -1,0 +1,4 @@
+<map id="pt.up.fe.lpro1613.server.logic.game.GameS.startGameWithPlayer" name="pt.up.fe.lpro1613.server.logic.game.GameS.startGameWithPlayer">
+<area shape="rect" id="node2" href="$classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1logic_1_1_user_s.html#af0725775fa11525afa9299d198d69b2a" title="pt.up.fe.lpro1613.server.logic.\lUserS.isUserLoggedIn" alt="" coords="288,5,485,46"/>
+<area shape="rect" id="node3" href="$classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1logic_1_1_user_s.html#ac189b4e10d166dd53fb0e135c9565fbc" title="pt.up.fe.lpro1613.server.logic.\lUserS.clientFromID" alt="" coords="288,70,485,111"/>
+</map>

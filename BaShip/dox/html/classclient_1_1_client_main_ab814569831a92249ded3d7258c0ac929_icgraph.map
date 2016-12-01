@@ -1,0 +1,5 @@
+<map id="client.ClientMain.showError" name="client.ClientMain.showError">
+<area shape="rect" id="node2" href="$classclient_1_1ui_1_1_lobby_tabbed_panel.html#ace5183afecd36f1f1cc30483249ee952" title="client.ui.LobbyTabbedPanel.\lLobbyTabbedPanel" alt="" coords="246,5,437,46"/>
+<area shape="rect" id="node3" href="$classclient_1_1ui_1_1_login_panel.html#a9726aa2bc3416aa22ad43d2b4b9eed70" title="client.ui.LoginPanel.calculate\lRetypePasswordDialogPosition" alt="" coords="237,70,445,111"/>
+<area shape="rect" id="node4" href="$classclient_1_1ui_1_1_login_panel.html#a697f38b937f048e562c634c713d90885" title="client.ui.LoginPanel.Login\lPanel" alt="" coords="493,70,667,111"/>
+</map>

@@ -1,9 +1,0 @@
-digraph "client.logic.GameC.showGameInvitation"
-{
-  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
-  node [fontname="Helvetica",fontsize="10",shape=record];
-  rankdir="LR";
-  Node7 [label="client.logic.GameC.showGame\lInvitation",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
-  Node7 -> Node8 [dir="back",color="midnightblue",fontsize="10",style="solid"];
-  Node8 [label="client.conn.Server.handle",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classclient_1_1conn_1_1_server.html#a620def50e5115d3798407dfff5433ead"];
-}

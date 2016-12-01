@@ -61,7 +61,7 @@ public class Packet {
      * Create a new Packet with an empty query ({@code Query::Empty}) and no information.
      */
     public Packet() {
-        this(Query.BEmpty);
+        this(Query.B_Empty);
     }
 
     private Packet(String id, String pid, Query query, Object info) {

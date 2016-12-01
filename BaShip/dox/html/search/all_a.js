@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['leftboard',['leftBoard',['../classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1tuples_1_1_board_u_i_info.html#a2433a0822ba65fcc939b72c4dee5b0a9',1,'pt::up::fe::lpro1613::sharedlib::tuples::BoardUIInfo']]],
+  ['leftboard',['leftBoard',['../classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1structs_1_1_board_u_i_info.html#ab18de6ba93265ba5e4d4823b905faf59',1,'pt::up::fe::lpro1613::sharedlib::structs::BoardUIInfo']]],
   ['lobbypanel',['LobbyPanel',['../classclient_1_1ui_1_1_lobby_panel.html#aa6432c40dfb52b11101ab3e1e7fbb30c',1,'client::ui::LobbyPanel']]],
   ['lobbypanel',['LobbyPanel',['../classclient_1_1ui_1_1_lobby_panel.html',1,'client::ui']]],
   ['lobbypanel_2ejava',['LobbyPanel.java',['../_lobby_panel_8java.html',1,'']]],

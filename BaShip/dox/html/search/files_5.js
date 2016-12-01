@@ -9,5 +9,6 @@ var searchData=
   ['gamesearch_2ejava',['GameSearch.java',['../_game_search_8java.html',1,'']]],
   ['gameuiinfo_2ejava',['GameUIInfo.java',['../_game_u_i_info_8java.html',1,'']]],
   ['globalchatc_2ejava',['GlobalChatC.java',['../_global_chat_c_8java.html',1,'']]],
-  ['globalchatdb_2ejava',['GlobalChatDB.java',['../_global_chat_d_b_8java.html',1,'']]]
+  ['globalchatdb_2ejava',['GlobalChatDB.java',['../_global_chat_d_b_8java.html',1,'']]],
+  ['globalchats_2ejava',['GlobalChatS.java',['../_global_chat_s_8java.html',1,'']]]
 ];

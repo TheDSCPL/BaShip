@@ -1,10 +1,11 @@
 var searchData=
 [
+  ['saveglobalmessage',['saveGlobalMessage',['../classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_global_chat_d_b.html#a15e0bde1ec58cad9c518731db3074105',1,'pt::up::fe::lpro1613::server::database::GlobalChatDB']]],
   ['savemove',['saveMove',['../classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_move_d_b.html#ab8f0aae8311817ab4ac56a52f50dbe22',1,'pt::up::fe::lpro1613::server::database::MoveDB']]],
   ['saveshippositions',['saveShipPositions',['../classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_ship_d_b.html#a1b7c2d5d84b479078cbb9b1de9445ae9',1,'pt::up::fe::lpro1613::server::database::ShipDB']]],
   ['sendandreceive',['sendAndReceive',['../classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1conn_1_1_connection.html#ac70216d1f9f5ed2c8b29431b10108620',1,'pt::up::fe::lpro1613::sharedlib::conn::Connection']]],
   ['sendgameinvitation',['sendGameInvitation',['../classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1conn_1_1_client.html#a2d18ebb9809e36b016e9db24c8274522',1,'pt::up::fe::lpro1613::server::conn::Client']]],
-  ['sendglobalmessage',['sendGlobalMessage',['../classclient_1_1conn_1_1_server.html#acbe845e1fc6ba7857fcf6d01377f5432',1,'client.conn.Server.sendGlobalMessage()'],['../classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_global_chat_d_b.html#aefbe59782480cfbc94dddf9d80416cd4',1,'pt.up.fe.lpro1613.server.database.GlobalChatDB.sendGlobalMessage()'],['../classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1logic_1_1_user_s.html#af6142b2b17e9ff980cb39481dfd98a26',1,'pt.up.fe.lpro1613.server.logic.UserS.sendGlobalMessage()']]],
+  ['sendglobalmessage',['sendGlobalMessage',['../classclient_1_1conn_1_1_server.html#acbe845e1fc6ba7857fcf6d01377f5432',1,'client.conn.Server.sendGlobalMessage()'],['../classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1logic_1_1_global_chat_s.html#add5e38be43ae6a703ba3865221171ca5',1,'pt.up.fe.lpro1613.server.logic.GlobalChatS.sendGlobalMessage()']]],
   ['sendonly',['sendOnly',['../classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1conn_1_1_connection.html#acdcf8af7c9a37ede122c6db80d06668f',1,'pt::up::fe::lpro1613::sharedlib::conn::Connection']]],
   ['server',['Server',['../classclient_1_1conn_1_1_server.html#aea9f06e94bc3d3653c06b192ba097a14',1,'client::conn::Server']]],
   ['serverthread',['ServerThread',['../classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1conn_1_1_server_thread.html#a2a2c941ac08b8354d3c5ffa721372244',1,'pt::up::fe::lpro1613::server::conn::ServerThread']]],
@@ -19,12 +20,11 @@ var searchData=
   ['settingspanel',['SettingsPanel',['../classclient_1_1ui_1_1_settings_panel.html#a95dfa76100b4d18863cd0b572c631ebf',1,'client::ui::SettingsPanel']]],
   ['setwinner',['setWinner',['../classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_game_d_b.html#a30f4664442da6b7ae80b1821aaa195fa',1,'pt::up::fe::lpro1613::server::database::GameDB']]],
   ['sha1',['SHA1',['../classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1utils_1_1_crypto.html#a138c47b584355a3e915664a72a578bf9',1,'pt::up::fe::lpro1613::sharedlib::utils::Crypto']]],
-  ['ship',['Ship',['../classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1logic_1_1game_1_1_ship.html#a429cc1e75d290ba2af4e45e3d9325532',1,'pt::up::fe::lpro1613::server::logic::game::Ship']]],
-  ['shootonsquare',['shootOnSquare',['../classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1logic_1_1game_1_1_board.html#afb97d92e700f1eda19c74c609b2f8bf9',1,'pt::up::fe::lpro1613::server::logic::game::Board']]],
+  ['ship',['Ship',['../classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1structs_1_1_ship.html#ac30ae88e8d24056e23552d183b4dc22c',1,'pt::up::fe::lpro1613::sharedlib::structs::Ship']]],
   ['showerror',['showError',['../classclient_1_1_client_main.html#ab814569831a92249ded3d7258c0ac929',1,'client::ClientMain']]],
   ['showgameinvitation',['showGameInvitation',['../classclient_1_1logic_1_1_game_c.html#a62c530e593e489903a8ab6557763be27',1,'client::logic::GameC']]],
   ['showinfo',['showInfo',['../classclient_1_1_client_main.html#af975fd50f5fb1cc3ec29b65854b2a412',1,'client::ClientMain']]],
   ['showwarning',['showWarning',['../classclient_1_1_client_main.html#a0964644423f3d533ca394456ee6f6c95',1,'client::ClientMain']]],
-  ['startgamewithplayer',['startGameWithPlayer',['../classclient_1_1conn_1_1_server.html#a6336de53822bd12d42e8445a598f2838',1,'client.conn.Server.startGameWithPlayer()'],['../classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1logic_1_1_game_s.html#a19226b02188cfd19dee0992b2ce6af7a',1,'pt.up.fe.lpro1613.server.logic.GameS.startGameWithPlayer()']]],
-  ['startrandomgame',['startRandomGame',['../classclient_1_1conn_1_1_server.html#afbeea330d5f40a6edd87387fa71bcc2d',1,'client.conn.Server.startRandomGame()'],['../classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1logic_1_1_game_s.html#ae5c542e43792b48f5fb164730ca69bb2',1,'pt.up.fe.lpro1613.server.logic.GameS.startRandomGame()']]]
+  ['startgamewithplayer',['startGameWithPlayer',['../classclient_1_1conn_1_1_server.html#a6336de53822bd12d42e8445a598f2838',1,'client.conn.Server.startGameWithPlayer()'],['../classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1logic_1_1game_1_1_game_s.html#ae8d6ec6320a1f06d60719c91dbfbe21c',1,'pt.up.fe.lpro1613.server.logic.game.GameS.startGameWithPlayer()']]],
+  ['startrandomgame',['startRandomGame',['../classclient_1_1conn_1_1_server.html#afbeea330d5f40a6edd87387fa71bcc2d',1,'client.conn.Server.startRandomGame()'],['../classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1logic_1_1game_1_1_game_s.html#ad185482b31f44a23e868605f9cc49d09',1,'pt.up.fe.lpro1613.server.logic.game.GameS.startRandomGame()']]]
 ];

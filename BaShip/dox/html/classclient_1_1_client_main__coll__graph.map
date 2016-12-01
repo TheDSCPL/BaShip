@@ -1,0 +1,6 @@
+<map id="client.ClientMain" name="client.ClientMain">
+<area shape="rect" id="node2" href="$classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1utils_1_1_preferences.html" title="pt.up.fe.lpro1613.sharedlib.utils.\lPreferences" alt="" coords="395,5,605,46"/>
+<area shape="rect" id="node3" href="$classclient_1_1ui_1_1_main_frame.html" title="client.ui.MainFrame" alt="" coords="431,71,569,97"/>
+<area shape="rect" id="node6" href="$classclient_1_1conn_1_1_server.html" title="client.conn.Server" alt="" coords="435,125,565,152"/>
+<area shape="rect" id="node7" href="$interfacept_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1conn_1_1_connection_1_1_delegate.html" title="pt.up.fe.lpro1613.sharedlib.conn.\lConnection.Delegate" alt="" coords="5,122,221,163"/>
+</map>

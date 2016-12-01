@@ -1,0 +1,5 @@
+<map id="pt.up.fe.lpro1613.sharedlib.conn.Connection.run" name="pt.up.fe.lpro1613.sharedlib.conn.Connection.run">
+<area shape="rect" id="node2" href="$interfacept_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1conn_1_1_connection_1_1_delegate.html#afeb3c54ced46916733df2ba0b0e2d87e" title="pt.up.fe.lpro1613.sharedlib.conn.\lConnection.Delegate.connected" alt="" coords="276,5,492,46"/>
+<area shape="rect" id="node3" href="$interfacept_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1conn_1_1_connection_1_1_delegate.html#a5b0f77e34d93967ae53cf7e01f0e2835" title="pt.up.fe.lpro1613.sharedlib.conn.\lConnection.Delegate.handle" alt="" coords="276,70,492,111"/>
+<area shape="rect" id="node4" href="$interfacept_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1conn_1_1_connection_1_1_delegate.html#a39547a28a5b1818ca952e8d3d8da15ba" title="pt.up.fe.lpro1613.sharedlib.conn.\lConnection.Delegate.disconnected" alt="" coords="269,135,499,177"/>
+</map>

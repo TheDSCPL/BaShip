@@ -5,13 +5,11 @@
 \item 
 static boolean \hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1logic_1_1_user_s_a9c89c0a0ef730b38021033e58f7911cd}{is\+Username\+Available} (String username)  throws S\+Q\+L\+Exception 
 \item 
-static \hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1tuples_1_1_user_info}{User\+Info} \hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1logic_1_1_user_s_ae46d3839ba68eb377aff71f23e3b3936}{register} (\hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1conn_1_1_client}{Client} client, String username, String password\+Hash)  throws S\+Q\+L\+Exception 
+static \hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1structs_1_1_user_info}{User\+Info} \hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1logic_1_1_user_s_ae46d3839ba68eb377aff71f23e3b3936}{register} (\hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1conn_1_1_client}{Client} client, String username, String password\+Hash)  throws S\+Q\+L\+Exception 
 \item 
-static \hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1tuples_1_1_user_info}{User\+Info} \hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1logic_1_1_user_s_a501230613cfd4f8fee1949c3f116f0ac}{login} (\hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1conn_1_1_client}{Client} client, String username, String password\+Hash)  throws S\+Q\+L\+Exception, User\+Message\+Exception 
+static \hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1structs_1_1_user_info}{User\+Info} \hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1logic_1_1_user_s_a501230613cfd4f8fee1949c3f116f0ac}{login} (\hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1conn_1_1_client}{Client} client, String username, String password\+Hash)  throws S\+Q\+L\+Exception, User\+Message\+Exception 
 \item 
 static void \hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1logic_1_1_user_s_ade6f87a4adfd727f4fceca4f9ac17362}{logout} (\hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1conn_1_1_client}{Client} client)
-\item 
-static void \hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1logic_1_1_user_s_af6142b2b17e9ff980cb39481dfd98a26}{send\+Global\+Message} (\hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1conn_1_1_client}{Client} client, String message)  throws S\+Q\+L\+Exception 
 \item 
 static void \hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1logic_1_1_user_s_afca9c18f164a1006c2411b8e283ec4fb}{client\+Disconnected} (\hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1conn_1_1_client}{Client} client)
 \item 
@@ -23,16 +21,21 @@ static \hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1conn_1_1_client}{
 \item 
 static Long \hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1logic_1_1_user_s_a6ce47ad78e634c757be0ffc905799b4c}{id\+From\+Client} (\hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1conn_1_1_client}{Client} c)
 \item 
-static \hyperlink{enumpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1tuples_1_1_user_info_1_1_status}{Status} \hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1logic_1_1_user_s_a92958d5006bbce1dbc15722f801d67ef}{get\+User\+Status} (Long user\+ID)
+static \hyperlink{enumpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1structs_1_1_user_info_1_1_status}{Status} \hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1logic_1_1_user_s_a92958d5006bbce1dbc15722f801d67ef}{get\+User\+Status} (Long user\+ID)
 \item 
 static String \hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1logic_1_1_user_s_a26c28666f4e6461ee06eecfe1f55356d}{username\+From\+Client} (\hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1conn_1_1_client}{Client} c)
 \end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
+Class responsible for managing the state of the users on the server. Supports basic user operations like login/register/logout and also provides access to various user-\/related info.
+
+\begin{DoxyAuthor}{Author}
+Alex 
+\end{DoxyAuthor}
 
 
-Definition at line 17 of file User\+S.\+java.
+Definition at line 24 of file User\+S.\+java.
 
 
 
@@ -43,160 +46,365 @@ Definition at line 17 of file User\+S.\+java.
 \subsubsection{\texorpdfstring{client\+Disconnected()}{clientDisconnected()}}
 {\footnotesize\ttfamily static void pt.\+up.\+fe.\+lpro1613.\+server.\+logic.\+User\+S.\+client\+Disconnected (\begin{DoxyParamCaption}\item[{\hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1conn_1_1_client}{Client}}]{client }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
 
+Called by the
+\begin{DoxyCode}
+Client 
+\end{DoxyCode}
+ class whenever a client is disconnected. 
+\begin{DoxyParams}{Parameters}
+{\em client} & The client that disconnected \\
+\hline
+\end{DoxyParams}
 
 
-Definition at line 67 of file User\+S.\+java.
+Definition at line 95 of file User\+S.\+java.
 
 Here is the call graph for this function\+:
-% FIG 0
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1logic_1_1_user_s_afca9c18f164a1006c2411b8e283ec4fb_cgraph}
+\end{center}
+\end{figure}
 Here is the caller graph for this function\+:
-% FIG 1
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1logic_1_1_user_s_afca9c18f164a1006c2411b8e283ec4fb_icgraph}
+\end{center}
+\end{figure}
 \hypertarget{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1logic_1_1_user_s_ac189b4e10d166dd53fb0e135c9565fbc}{}\label{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1logic_1_1_user_s_ac189b4e10d166dd53fb0e135c9565fbc} 
 \index{pt\+::up\+::fe\+::lpro1613\+::server\+::logic\+::\+UserS@{pt\+::up\+::fe\+::lpro1613\+::server\+::logic\+::\+UserS}!client\+From\+ID@{client\+From\+ID}}
 \index{client\+From\+ID@{client\+From\+ID}!pt\+::up\+::fe\+::lpro1613\+::server\+::logic\+::\+UserS@{pt\+::up\+::fe\+::lpro1613\+::server\+::logic\+::\+UserS}}
 \subsubsection{\texorpdfstring{client\+From\+I\+D()}{clientFromID()}}
 {\footnotesize\ttfamily static \hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1conn_1_1_client}{Client} pt.\+up.\+fe.\+lpro1613.\+server.\+logic.\+User\+S.\+client\+From\+ID (\begin{DoxyParamCaption}\item[{Long}]{id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
 
+T\+O\+DO\+: J\+A\+V\+A\+D\+OC 
+\begin{DoxyParams}{Parameters}
+{\em id} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
 
 
-Definition at line 79 of file User\+S.\+java.
+Definition at line 122 of file User\+S.\+java.
 
 Here is the caller graph for this function\+:
-% FIG 2
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1logic_1_1_user_s_ac189b4e10d166dd53fb0e135c9565fbc_icgraph}
+\end{center}
+\end{figure}
 \hypertarget{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1logic_1_1_user_s_a92958d5006bbce1dbc15722f801d67ef}{}\label{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1logic_1_1_user_s_a92958d5006bbce1dbc15722f801d67ef} 
 \index{pt\+::up\+::fe\+::lpro1613\+::server\+::logic\+::\+UserS@{pt\+::up\+::fe\+::lpro1613\+::server\+::logic\+::\+UserS}!get\+User\+Status@{get\+User\+Status}}
 \index{get\+User\+Status@{get\+User\+Status}!pt\+::up\+::fe\+::lpro1613\+::server\+::logic\+::\+UserS@{pt\+::up\+::fe\+::lpro1613\+::server\+::logic\+::\+UserS}}
 \subsubsection{\texorpdfstring{get\+User\+Status()}{getUserStatus()}}
-{\footnotesize\ttfamily static \hyperlink{enumpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1tuples_1_1_user_info_1_1_status}{Status} pt.\+up.\+fe.\+lpro1613.\+server.\+logic.\+User\+S.\+get\+User\+Status (\begin{DoxyParamCaption}\item[{Long}]{user\+ID }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+{\footnotesize\ttfamily static \hyperlink{enumpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1structs_1_1_user_info_1_1_status}{Status} pt.\+up.\+fe.\+lpro1613.\+server.\+logic.\+User\+S.\+get\+User\+Status (\begin{DoxyParamCaption}\item[{Long}]{user\+ID }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+T\+O\+DO\+: J\+A\+V\+A\+D\+OC 
+\begin{DoxyParams}{Parameters}
+{\em user\+ID} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
 
 
-
-Definition at line 87 of file User\+S.\+java.
+Definition at line 140 of file User\+S.\+java.
 
 Here is the call graph for this function\+:
-% FIG 3
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1logic_1_1_user_s_a92958d5006bbce1dbc15722f801d67ef_cgraph}
+\end{center}
+\end{figure}
 Here is the caller graph for this function\+:
-% FIG 4
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1logic_1_1_user_s_a92958d5006bbce1dbc15722f801d67ef_icgraph}
+\end{center}
+\end{figure}
 \hypertarget{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1logic_1_1_user_s_a6ce47ad78e634c757be0ffc905799b4c}{}\label{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1logic_1_1_user_s_a6ce47ad78e634c757be0ffc905799b4c} 
 \index{pt\+::up\+::fe\+::lpro1613\+::server\+::logic\+::\+UserS@{pt\+::up\+::fe\+::lpro1613\+::server\+::logic\+::\+UserS}!id\+From\+Client@{id\+From\+Client}}
 \index{id\+From\+Client@{id\+From\+Client}!pt\+::up\+::fe\+::lpro1613\+::server\+::logic\+::\+UserS@{pt\+::up\+::fe\+::lpro1613\+::server\+::logic\+::\+UserS}}
 \subsubsection{\texorpdfstring{id\+From\+Client()}{idFromClient()}}
 {\footnotesize\ttfamily static Long pt.\+up.\+fe.\+lpro1613.\+server.\+logic.\+User\+S.\+id\+From\+Client (\begin{DoxyParamCaption}\item[{\hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1conn_1_1_client}{Client}}]{c }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
 
+T\+O\+DO\+: J\+A\+V\+A\+D\+OC 
+\begin{DoxyParams}{Parameters}
+{\em c} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
 
 
-Definition at line 83 of file User\+S.\+java.
+Definition at line 131 of file User\+S.\+java.
 
 Here is the caller graph for this function\+:
-% FIG 5
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1logic_1_1_user_s_a6ce47ad78e634c757be0ffc905799b4c_icgraph}
+\end{center}
+\end{figure}
 \hypertarget{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1logic_1_1_user_s_abe3cf61bff09cb09e3ed0a5564e98257}{}\label{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1logic_1_1_user_s_abe3cf61bff09cb09e3ed0a5564e98257} 
 \index{pt\+::up\+::fe\+::lpro1613\+::server\+::logic\+::\+UserS@{pt\+::up\+::fe\+::lpro1613\+::server\+::logic\+::\+UserS}!is\+Client\+Logged\+In@{is\+Client\+Logged\+In}}
 \index{is\+Client\+Logged\+In@{is\+Client\+Logged\+In}!pt\+::up\+::fe\+::lpro1613\+::server\+::logic\+::\+UserS@{pt\+::up\+::fe\+::lpro1613\+::server\+::logic\+::\+UserS}}
 \subsubsection{\texorpdfstring{is\+Client\+Logged\+In()}{isClientLoggedIn()}}
 {\footnotesize\ttfamily static boolean pt.\+up.\+fe.\+lpro1613.\+server.\+logic.\+User\+S.\+is\+Client\+Logged\+In (\begin{DoxyParamCaption}\item[{\hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1conn_1_1_client}{Client}}]{client }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
 
+T\+O\+DO\+: J\+A\+V\+A\+D\+OC 
+\begin{DoxyParams}{Parameters}
+{\em client} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
 
 
-Definition at line 71 of file User\+S.\+java.
+Definition at line 104 of file User\+S.\+java.
 
 Here is the caller graph for this function\+:
-% FIG 6
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1logic_1_1_user_s_abe3cf61bff09cb09e3ed0a5564e98257_icgraph}
+\end{center}
+\end{figure}
 \hypertarget{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1logic_1_1_user_s_af0725775fa11525afa9299d198d69b2a}{}\label{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1logic_1_1_user_s_af0725775fa11525afa9299d198d69b2a} 
 \index{pt\+::up\+::fe\+::lpro1613\+::server\+::logic\+::\+UserS@{pt\+::up\+::fe\+::lpro1613\+::server\+::logic\+::\+UserS}!is\+User\+Logged\+In@{is\+User\+Logged\+In}}
 \index{is\+User\+Logged\+In@{is\+User\+Logged\+In}!pt\+::up\+::fe\+::lpro1613\+::server\+::logic\+::\+UserS@{pt\+::up\+::fe\+::lpro1613\+::server\+::logic\+::\+UserS}}
 \subsubsection{\texorpdfstring{is\+User\+Logged\+In()}{isUserLoggedIn()}}
 {\footnotesize\ttfamily static boolean pt.\+up.\+fe.\+lpro1613.\+server.\+logic.\+User\+S.\+is\+User\+Logged\+In (\begin{DoxyParamCaption}\item[{Long}]{user\+ID }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
 
+T\+O\+DO\+: J\+A\+V\+A\+D\+OC 
+\begin{DoxyParams}{Parameters}
+{\em user\+ID} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
 
 
-Definition at line 75 of file User\+S.\+java.
+Definition at line 113 of file User\+S.\+java.
 
 Here is the caller graph for this function\+:
-% FIG 7
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1logic_1_1_user_s_af0725775fa11525afa9299d198d69b2a_icgraph}
+\end{center}
+\end{figure}
 \hypertarget{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1logic_1_1_user_s_a9c89c0a0ef730b38021033e58f7911cd}{}\label{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1logic_1_1_user_s_a9c89c0a0ef730b38021033e58f7911cd} 
 \index{pt\+::up\+::fe\+::lpro1613\+::server\+::logic\+::\+UserS@{pt\+::up\+::fe\+::lpro1613\+::server\+::logic\+::\+UserS}!is\+Username\+Available@{is\+Username\+Available}}
 \index{is\+Username\+Available@{is\+Username\+Available}!pt\+::up\+::fe\+::lpro1613\+::server\+::logic\+::\+UserS@{pt\+::up\+::fe\+::lpro1613\+::server\+::logic\+::\+UserS}}
 \subsubsection{\texorpdfstring{is\+Username\+Available()}{isUsernameAvailable()}}
 {\footnotesize\ttfamily static boolean pt.\+up.\+fe.\+lpro1613.\+server.\+logic.\+User\+S.\+is\+Username\+Available (\begin{DoxyParamCaption}\item[{String}]{username }\end{DoxyParamCaption}) throws S\+Q\+L\+Exception\hspace{0.3cm}{\ttfamily [static]}}
 
+T\+O\+DO\+: J\+A\+V\+A\+D\+OC 
+\begin{DoxyParams}{Parameters}
+{\em username} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em S\+Q\+L\+Exception} & \\
+\hline
+\end{DoxyExceptions}
 
 
-Definition at line 22 of file User\+S.\+java.
+Definition at line 35 of file User\+S.\+java.
 
 Here is the call graph for this function\+:
-% FIG 8
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1logic_1_1_user_s_a9c89c0a0ef730b38021033e58f7911cd_cgraph}
+\end{center}
+\end{figure}
 Here is the caller graph for this function\+:
-% FIG 9
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1logic_1_1_user_s_a9c89c0a0ef730b38021033e58f7911cd_icgraph}
+\end{center}
+\end{figure}
 \hypertarget{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1logic_1_1_user_s_a501230613cfd4f8fee1949c3f116f0ac}{}\label{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1logic_1_1_user_s_a501230613cfd4f8fee1949c3f116f0ac} 
 \index{pt\+::up\+::fe\+::lpro1613\+::server\+::logic\+::\+UserS@{pt\+::up\+::fe\+::lpro1613\+::server\+::logic\+::\+UserS}!login@{login}}
 \index{login@{login}!pt\+::up\+::fe\+::lpro1613\+::server\+::logic\+::\+UserS@{pt\+::up\+::fe\+::lpro1613\+::server\+::logic\+::\+UserS}}
 \subsubsection{\texorpdfstring{login()}{login()}}
-{\footnotesize\ttfamily static \hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1tuples_1_1_user_info}{User\+Info} pt.\+up.\+fe.\+lpro1613.\+server.\+logic.\+User\+S.\+login (\begin{DoxyParamCaption}\item[{\hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1conn_1_1_client}{Client}}]{client,  }\item[{String}]{username,  }\item[{String}]{password\+Hash }\end{DoxyParamCaption}) throws S\+Q\+L\+Exception, \hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1exceptions_1_1_user_message_exception}{User\+Message\+Exception}\hspace{0.3cm}{\ttfamily [static]}}
+{\footnotesize\ttfamily static \hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1structs_1_1_user_info}{User\+Info} pt.\+up.\+fe.\+lpro1613.\+server.\+logic.\+User\+S.\+login (\begin{DoxyParamCaption}\item[{\hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1conn_1_1_client}{Client}}]{client,  }\item[{String}]{username,  }\item[{String}]{password\+Hash }\end{DoxyParamCaption}) throws S\+Q\+L\+Exception, \hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1exceptions_1_1_user_message_exception}{User\+Message\+Exception}\hspace{0.3cm}{\ttfamily [static]}}
+
+T\+O\+DO\+: J\+A\+V\+A\+D\+OC 
+\begin{DoxyParams}{Parameters}
+{\em client} & \\
+\hline
+{\em username} & \\
+\hline
+{\em password\+Hash} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em S\+Q\+L\+Exception} & \\
+\hline
+{\em User\+Message\+Exception} & \\
+\hline
+\end{DoxyExceptions}
 
 
-
-Definition at line 33 of file User\+S.\+java.
+Definition at line 63 of file User\+S.\+java.
 
 Here is the call graph for this function\+:
-% FIG 10
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1logic_1_1_user_s_a501230613cfd4f8fee1949c3f116f0ac_cgraph}
+\end{center}
+\end{figure}
 Here is the caller graph for this function\+:
-% FIG 11
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1logic_1_1_user_s_a501230613cfd4f8fee1949c3f116f0ac_icgraph}
+\end{center}
+\end{figure}
 \hypertarget{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1logic_1_1_user_s_ade6f87a4adfd727f4fceca4f9ac17362}{}\label{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1logic_1_1_user_s_ade6f87a4adfd727f4fceca4f9ac17362} 
 \index{pt\+::up\+::fe\+::lpro1613\+::server\+::logic\+::\+UserS@{pt\+::up\+::fe\+::lpro1613\+::server\+::logic\+::\+UserS}!logout@{logout}}
 \index{logout@{logout}!pt\+::up\+::fe\+::lpro1613\+::server\+::logic\+::\+UserS@{pt\+::up\+::fe\+::lpro1613\+::server\+::logic\+::\+UserS}}
 \subsubsection{\texorpdfstring{logout()}{logout()}}
 {\footnotesize\ttfamily static void pt.\+up.\+fe.\+lpro1613.\+server.\+logic.\+User\+S.\+logout (\begin{DoxyParamCaption}\item[{\hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1conn_1_1_client}{Client}}]{client }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
 
+T\+O\+DO\+: J\+A\+V\+A\+D\+OC 
+\begin{DoxyParams}{Parameters}
+{\em client} & \\
+\hline
+\end{DoxyParams}
 
 
-Definition at line 51 of file User\+S.\+java.
+Definition at line 85 of file User\+S.\+java.
 
 Here is the call graph for this function\+:
-% FIG 12
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1logic_1_1_user_s_ade6f87a4adfd727f4fceca4f9ac17362_cgraph}
+\end{center}
+\end{figure}
 Here is the caller graph for this function\+:
-% FIG 13
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1logic_1_1_user_s_ade6f87a4adfd727f4fceca4f9ac17362_icgraph}
+\end{center}
+\end{figure}
 \hypertarget{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1logic_1_1_user_s_ae46d3839ba68eb377aff71f23e3b3936}{}\label{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1logic_1_1_user_s_ae46d3839ba68eb377aff71f23e3b3936} 
 \index{pt\+::up\+::fe\+::lpro1613\+::server\+::logic\+::\+UserS@{pt\+::up\+::fe\+::lpro1613\+::server\+::logic\+::\+UserS}!register@{register}}
 \index{register@{register}!pt\+::up\+::fe\+::lpro1613\+::server\+::logic\+::\+UserS@{pt\+::up\+::fe\+::lpro1613\+::server\+::logic\+::\+UserS}}
 \subsubsection{\texorpdfstring{register()}{register()}}
-{\footnotesize\ttfamily static \hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1tuples_1_1_user_info}{User\+Info} pt.\+up.\+fe.\+lpro1613.\+server.\+logic.\+User\+S.\+register (\begin{DoxyParamCaption}\item[{\hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1conn_1_1_client}{Client}}]{client,  }\item[{String}]{username,  }\item[{String}]{password\+Hash }\end{DoxyParamCaption}) throws S\+Q\+L\+Exception\hspace{0.3cm}{\ttfamily [static]}}
+{\footnotesize\ttfamily static \hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1structs_1_1_user_info}{User\+Info} pt.\+up.\+fe.\+lpro1613.\+server.\+logic.\+User\+S.\+register (\begin{DoxyParamCaption}\item[{\hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1conn_1_1_client}{Client}}]{client,  }\item[{String}]{username,  }\item[{String}]{password\+Hash }\end{DoxyParamCaption}) throws S\+Q\+L\+Exception\hspace{0.3cm}{\ttfamily [static]}}
+
+T\+O\+DO\+: J\+A\+V\+A\+D\+OC 
+\begin{DoxyParams}{Parameters}
+{\em client} & \\
+\hline
+{\em username} & \\
+\hline
+{\em password\+Hash} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em S\+Q\+L\+Exception} & \\
+\hline
+\end{DoxyExceptions}
 
 
-
-Definition at line 26 of file User\+S.\+java.
+Definition at line 47 of file User\+S.\+java.
 
 Here is the call graph for this function\+:
-% FIG 14
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1logic_1_1_user_s_ae46d3839ba68eb377aff71f23e3b3936_cgraph}
+\end{center}
+\end{figure}
 Here is the caller graph for this function\+:
-% FIG 15
-\hypertarget{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1logic_1_1_user_s_af6142b2b17e9ff980cb39481dfd98a26}{}\label{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1logic_1_1_user_s_af6142b2b17e9ff980cb39481dfd98a26} 
-\index{pt\+::up\+::fe\+::lpro1613\+::server\+::logic\+::\+UserS@{pt\+::up\+::fe\+::lpro1613\+::server\+::logic\+::\+UserS}!send\+Global\+Message@{send\+Global\+Message}}
-\index{send\+Global\+Message@{send\+Global\+Message}!pt\+::up\+::fe\+::lpro1613\+::server\+::logic\+::\+UserS@{pt\+::up\+::fe\+::lpro1613\+::server\+::logic\+::\+UserS}}
-\subsubsection{\texorpdfstring{send\+Global\+Message()}{sendGlobalMessage()}}
-{\footnotesize\ttfamily static void pt.\+up.\+fe.\+lpro1613.\+server.\+logic.\+User\+S.\+send\+Global\+Message (\begin{DoxyParamCaption}\item[{\hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1conn_1_1_client}{Client}}]{client,  }\item[{String}]{message }\end{DoxyParamCaption}) throws S\+Q\+L\+Exception\hspace{0.3cm}{\ttfamily [static]}}
-
-
-
-Definition at line 57 of file User\+S.\+java.
-
-Here is the call graph for this function\+:
-% FIG 16
-Here is the caller graph for this function\+:
-% FIG 17
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1logic_1_1_user_s_ae46d3839ba68eb377aff71f23e3b3936_icgraph}
+\end{center}
+\end{figure}
 \hypertarget{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1logic_1_1_user_s_a26c28666f4e6461ee06eecfe1f55356d}{}\label{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1logic_1_1_user_s_a26c28666f4e6461ee06eecfe1f55356d} 
 \index{pt\+::up\+::fe\+::lpro1613\+::server\+::logic\+::\+UserS@{pt\+::up\+::fe\+::lpro1613\+::server\+::logic\+::\+UserS}!username\+From\+Client@{username\+From\+Client}}
 \index{username\+From\+Client@{username\+From\+Client}!pt\+::up\+::fe\+::lpro1613\+::server\+::logic\+::\+UserS@{pt\+::up\+::fe\+::lpro1613\+::server\+::logic\+::\+UserS}}
 \subsubsection{\texorpdfstring{username\+From\+Client()}{usernameFromClient()}}
 {\footnotesize\ttfamily static String pt.\+up.\+fe.\+lpro1613.\+server.\+logic.\+User\+S.\+username\+From\+Client (\begin{DoxyParamCaption}\item[{\hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1conn_1_1_client}{Client}}]{c }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
 
+T\+O\+DO\+: J\+A\+V\+A\+D\+OC 
+\begin{DoxyParams}{Parameters}
+{\em c} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
 
 
-Definition at line 104 of file User\+S.\+java.
+Definition at line 160 of file User\+S.\+java.
 
 Here is the call graph for this function\+:
-% FIG 18
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1logic_1_1_user_s_a26c28666f4e6461ee06eecfe1f55356d_cgraph}
+\end{center}
+\end{figure}
 Here is the caller graph for this function\+:
-% FIG 19
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1logic_1_1_user_s_a26c28666f4e6461ee06eecfe1f55356d_icgraph}
+\end{center}
+\end{figure}
 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}

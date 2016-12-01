@@ -93,8 +93,10 @@ Static Public Member Functions</h2></td></tr>
 <tr class="separator:ab8f0aae8311817ab4ac56a52f50dbe22"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
-<p>Definition at line <a class="el" href="_move_d_b_8java_source.html#l00007">7</a> of file <a class="el" href="_move_d_b_8java_source.html">MoveDB.java</a>.</p>
+<div class="textblock"><p>Collection of static methods that access, set and return information present on the table "moves" of the database.</p>
+<dl class="section author"><dt>Author</dt><dd>Alex </dd></dl>
+
+<p>Definition at line <a class="el" href="_move_d_b_8java_source.html#l00013">13</a> of file <a class="el" href="_move_d_b_8java_source.html">MoveDB.java</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="ab8f0aae8311817ab4ac56a52f50dbe22"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab8f0aae8311817ab4ac56a52f50dbe22">&sect;&nbsp;</a></span>saveMove()</h2>
@@ -135,19 +137,31 @@ Static Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Save a move made by a player on a game on the database.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">gameID</td><td>The game ID where the player made that move. </td></tr>
+    <tr><td class="paramname">playerN</td><td>The player that made the move. Can be either 1 or 2. Other values raise an SQLException. </td></tr>
+    <tr><td class="paramname">moveIndex</td><td>The move number for that game (for both players of the game). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">SQLException</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p>Definition at line <a class="el" href="_move_d_b_8java_source.html#l00009">9</a> of file <a class="el" href="_move_d_b_8java_source.html">MoveDB.java</a>.</p>
+<p>Definition at line <a class="el" href="_move_d_b_8java_source.html#l00025">25</a> of file <a class="el" href="_move_d_b_8java_source.html">MoveDB.java</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_move_d_b_ab8f0aae8311817ab4ac56a52f50dbe22_cgraph.png" border="0" usemap="#classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_move_d_b_ab8f0aae8311817ab4ac56a52f50dbe22_cgraph" alt=""/></div>
-<!-- MAP 0 -->
-</div>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_move_d_b_ab8f0aae8311817ab4ac56a52f50dbe22_icgraph.png" border="0" usemap="#classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_move_d_b_ab8f0aae8311817ab4ac56a52f50dbe22_icgraph" alt=""/></div>
-<!-- MAP 1 -->
+<map name="classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_move_d_b_ab8f0aae8311817ab4ac56a52f50dbe22_cgraph" id="classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_move_d_b_ab8f0aae8311817ab4ac56a52f50dbe22_cgraph">
+<area shape="rect" id="node2" href="classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_database.html#aa5ecc24c87d16ca20cc645414d8f3232" title="pt.up.fe.lpro1613.server.database.\lDatabase.getConn" alt="" coords="281,5,506,46"/>
+<area shape="rect" id="node3" href="classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_database.html#ae7e6a39f412e24bea44477224f0fdef0" title="pt.up.fe.lpro1613.server.database.\lDatabase.close" alt="" coords="281,70,506,111"/>
+</map>
 </div>
 
 </div>

@@ -7,16 +7,14 @@ var searchData=
   ['cgetgamelist',['CGetGameList',['../enumpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1conn_1_1_query.html#a00dbcd99570bca2872b23d1f77a49186',1,'pt::up::fe::lpro1613::sharedlib::conn::Query']]],
   ['cgetuserlist',['CGetUserList',['../enumpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1conn_1_1_query.html#ae3af9d0613ab8d210b7161a550f7bf14',1,'pt::up::fe::lpro1613::sharedlib::conn::Query']]],
   ['clients',['clients',['../classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1_server_main.html#ad123167652dd573c163e4951b9eeada9',1,'pt::up::fe::lpro1613::server::ServerMain']]],
-  ['clogin',['CLogin',['../enumpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1conn_1_1_query.html#a7b5129f1a1c06d802f15b47b5510e83c',1,'pt::up::fe::lpro1613::sharedlib::conn::Query']]],
   ['clogout',['CLogout',['../enumpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1conn_1_1_query.html#aa40f948ae79a2adcea748969432f2ab3',1,'pt::up::fe::lpro1613::sharedlib::conn::Query']]],
   ['console',['console',['../classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1_server_main.html#af9f54f997c78d9974b788b66d05c4c2c',1,'pt::up::fe::lpro1613::server::ServerMain']]],
-  ['created',['Created',['../enumpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1tuples_1_1_game_info_1_1_state.html#a3c911cef19f0e6a6e21536f55dd2346c',1,'pt::up::fe::lpro1613::sharedlib::tuples::GameInfo::State']]],
-  ['cregister',['CRegister',['../enumpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1conn_1_1_query.html#aa654294e91df382d4d478f1ccddea77b',1,'pt::up::fe::lpro1613::sharedlib::conn::Query']]],
+  ['created',['Created',['../enumpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1structs_1_1_game_info_1_1_state.html#a08d086bc4e26d37aec3de2c6992bd39b',1,'pt::up::fe::lpro1613::sharedlib::structs::GameInfo::State']]],
   ['csendgamemessage',['CSendGameMessage',['../enumpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1conn_1_1_query.html#a73b9f9a48ed316b294a1ed7f6b08fed0',1,'pt::up::fe::lpro1613::sharedlib::conn::Query']]],
   ['csendglobalmessage',['CSendGlobalMessage',['../enumpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1conn_1_1_query.html#a3a8111ba44393eb51bf1152e00787cae',1,'pt::up::fe::lpro1613::sharedlib::conn::Query']]],
   ['cstartgamewithplayer',['CStartGameWithPlayer',['../enumpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1conn_1_1_query.html#a4e8ad00082033bfe9dc8a17424de7a04',1,'pt::up::fe::lpro1613::sharedlib::conn::Query']]],
   ['cstartrandomgame',['CStartRandomGame',['../enumpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1conn_1_1_query.html#a95b2061a9c70c464a4e75dc4cb3e600e',1,'pt::up::fe::lpro1613::sharedlib::conn::Query']]],
   ['ctoggleplaceonshipsquare',['CTogglePlaceOnShipSquare',['../enumpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1conn_1_1_query.html#a5c0bd26ac65c768329e1812a5c6ecc9e',1,'pt::up::fe::lpro1613::sharedlib::conn::Query']]],
-  ['currentlyplayingonly',['currentlyPlayingOnly',['../classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1tuples_1_1_game_search.html#a0a5922980b753f849b7a22cc8998034f',1,'pt::up::fe::lpro1613::sharedlib::tuples::GameSearch']]],
+  ['currentlyplayingonly',['currentlyPlayingOnly',['../classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1structs_1_1_game_search.html#a5e93514e466b4c5742b7d639c7d8412d',1,'pt::up::fe::lpro1613::sharedlib::structs::GameSearch']]],
   ['cusernameavailable',['CUsernameAvailable',['../enumpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1conn_1_1_query.html#ae39b52f0f15ed78e237e84aa822c9a81',1,'pt::up::fe::lpro1613::sharedlib::conn::Query']]]
 ];

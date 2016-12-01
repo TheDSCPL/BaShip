@@ -1,0 +1,6 @@
+<map id="pt.up.fe.lpro1613.server.logic.UserS.usernameFromClient" name="pt.up.fe.lpro1613.server.logic.UserS.usernameFromClient">
+<area shape="rect" id="node2" href="$classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_user_d_b.html#ab5c986eb5c2ba36eef3defee599c6903" title="pt.up.fe.lpro1613.server.database.\lUserDB.getUsernameFromID" alt="" coords="251,37,477,78"/>
+<area shape="rect" id="node5" href="$classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1logic_1_1_user_s.html#a6ce47ad78e634c757be0ffc905799b4c" title="pt.up.fe.lpro1613.server.logic.\lUserS.idFromClient" alt="" coords="265,102,463,143"/>
+<area shape="rect" id="node3" href="$classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_database.html#aa5ecc24c87d16ca20cc645414d8f3232" title="pt.up.fe.lpro1613.server.database.\lDatabase.getConn" alt="" coords="526,5,751,46"/>
+<area shape="rect" id="node4" href="$classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_database.html#ae7e6a39f412e24bea44477224f0fdef0" title="pt.up.fe.lpro1613.server.database.\lDatabase.close" alt="" coords="526,70,751,111"/>
+</map>

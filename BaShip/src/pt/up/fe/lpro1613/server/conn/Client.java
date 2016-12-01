@@ -38,7 +38,7 @@ public class Client implements Connection.Delegate {
         Packet response = null;
 
         switch (request.query) {
-            case CUsernameAvailable: {
+            case C_UsernameAvailable: {
                 boolean b = false;
                 try {
                     b = UserS.isUsernameAvailable((String) request.info);
@@ -46,116 +46,115 @@ public class Client implements Connection.Delegate {
                 catch (SQLException ex) {
                     Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                response = new Packet(Query.SRUsernameAvailable, b);
+                response = new Packet(Query.SR_UsernameAvailable, b);
                 break;
             }
-            case BLogin: {
+            case B_Login: {
                 UserInfo um = (UserInfo) request.info;
                 try {
-                    response = new Packet(Query.BLogin, UserS.login(this, um.username, um.passwordHash));
+                    response = new Packet(Query.B_Login, UserS.login(this, um.username, um.passwordHash));
                 }
                 catch (SQLException ex) {
                     Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
-                    response = new Packet(Query.SRErrorMessage, new ErrorMessage("Could not run SQL query: " + ex.getMessage()));
+                    response = new Packet(Query.SR_ErrorMessage, new ErrorMessage("Could not run SQL query: " + ex.getMessage()));
                 }
                 catch (UserMessageException ex) {
                     Logger.getLogger(Client.class.getName()).log(Level.INFO, null, ex);
-                    response = new Packet(Query.SRErrorMessage, new ErrorMessage(ex.getMessage()));
+                    response = new Packet(Query.SR_ErrorMessage, new ErrorMessage(ex.getMessage()));
                 }
                 break;
             }
-            case BRegister: {
+            case B_Register: {
                 UserInfo um = (UserInfo) request.info;
                 try {
-                    response = new Packet(Query.BRegister, UserS.register(this, um.username, um.passwordHash));
+                    response = new Packet(Query.B_Register, UserS.register(this, um.username, um.passwordHash));
                 }
                 catch (SQLException ex) {
                     Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
-                    response = new Packet(Query.SRErrorMessage, new ErrorMessage("Could not run SQL query: " + ex.getMessage()));
+                    response = new Packet(Query.SR_ErrorMessage, new ErrorMessage("Could not run SQL query: " + ex.getMessage()));
                 }
                 break;
             }
-            case CLogout: {
+            case C_Logout: {
                 UserS.logout(this);
                 response = new Packet(); // Empty packet just for confirmation
                 break;
             }
-            case CGetUserList: {
+            case C_GetUserList: {
                 UserSearch s = (UserSearch) request.info;
 
                 try {
-                    response = new Packet(Query.SRGetUserList, UserDB.getUserList(s));
+                    response = new Packet(Query.SR_GetUserList, UserDB.getUserList(s));
                 }
                 catch (SQLException ex) {
                     Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
-                    response = new Packet(Query.SRErrorMessage, new ErrorMessage("Could not run SQL query: " + ex.getMessage()));
+                    response = new Packet(Query.SR_ErrorMessage, new ErrorMessage("Could not run SQL query: " + ex.getMessage()));
                 }
 
                 break;
             }
-            case CGetGameList: {
+            case C_GetGameList: {
                 GameSearch s = (GameSearch) request.info;
 
                 try {
-                    response = new Packet(Query.SRGetGameList, GameDB.getGameList(s));
+                    response = new Packet(Query.SR_GetGameList, GameDB.getGameList(s));
                 }
                 catch (SQLException ex) {
                     Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
-                    response = new Packet(Query.SRErrorMessage, new ErrorMessage("Could not run SQL query: " + ex.getMessage()));
+                    response = new Packet(Query.SR_ErrorMessage, new ErrorMessage("Could not run SQL query: " + ex.getMessage()));
                 }
 
                 break;
             }
-            case CSendGlobalMessage: {
+            case C_SendGlobalMessage: {
                 try {
                     GlobalChatS.sendGlobalMessage(this, (String) request.info);
                     response = new Packet();
                 }
                 catch (SQLException ex) {
                     Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
-                    response = new Packet(Query.SRErrorMessage, new ErrorMessage("Could not run SQL query: " + ex.getMessage()));
+                    response = new Packet(Query.SR_ErrorMessage, new ErrorMessage("Could not run SQL query: " + ex.getMessage()));
                 }
                 break;
             }
-            case CStartRandomGame: {
+            case C_StartRandomGame: {
                 try {
                     GameS.startRandomGame(this);
                     response = new Packet();
                 }
                 catch (UserMessageException ex) {
-                    response = new Packet(Query.SRErrorMessage, new ErrorMessage(ex.getMessage()));
+                    response = new Packet(Query.SR_ErrorMessage, new ErrorMessage(ex.getMessage()));
                 }
                 break;
             }
-            case CStartGameWithPlayer: {
+            case C_StartGameWithPlayer: {
                 try {
                     GameS.startGameWithPlayer(this, (Long) request.info);
                     response = new Packet();
                 }
                 catch (UserMessageException ex) {
-                    response = new Packet(Query.SRErrorMessage, new ErrorMessage(ex.getMessage()));
+                    response = new Packet(Query.SR_ErrorMessage, new ErrorMessage(ex.getMessage()));
                 }
                 break;
             }
-
             // TODO: Empty responses just for confirmation?
-            case CAnswerGameInvitation: {
+            /*case C_AnswerGameInvitation: {
                 GameS.answerGameInvitation(this, (Boolean) request.info);
                 break;
-            }
-            case CTogglePlaceOnShipSquare: {
+            }*/
+            case C_TogglePlaceOnShipSquare: {
                 GameS.togglePlaceShipOnSquare(this, (Coord) request.info);
                 break;
             }
-            case CClickReadyButton: {
+            case C_ClickReadyButton: {
                 GameS.clickReadyButton(this);
                 break;
             }
-            case CFireShot: {
+            case C_FireShot: {
                 GameS.fireShot(this, (Coord) request.info);
                 break;
             }
-            case CCloseGame: {
+            case C_CloseGame: {
                 GameS.closeGame(this);
                 break;
             }
@@ -172,7 +171,7 @@ public class Client implements Connection.Delegate {
      * @throws ConnectionException
      */
     public void informAboutGlobalMessage(Message msg) throws ConnectionException {
-        connection.sendOnly(new Packet(Query.SReceiveGlobalMessage, msg));
+        connection.sendOnly(new Packet(Query.S_ReceiveGlobalMessage, msg));
     }
 
     /**
@@ -183,7 +182,7 @@ public class Client implements Connection.Delegate {
      * @throws ConnectionException
      */
     public void updateGameScreen(GameUIInfo info) throws ConnectionException {
-        connection.sendOnly(new Packet(Query.SUpdateGameScreen, info));
+        connection.sendOnly(new Packet(Query.S_UpdateGameScreen, info));
     }
 
     /**
@@ -192,9 +191,9 @@ public class Client implements Connection.Delegate {
      *
      * @throws ConnectionException
      */
-    public void sendGameInvitation() throws ConnectionException {
-        connection.sendOnly(new Packet(Query.SReceiveGameInvitation, "")); // TODO: info?
-    }
+    /*public void sendGameInvitation() throws ConnectionException {
+        connection.sendOnly(new Packet(Query.S_ReceiveGameInvitation, "")); // TODO: info?
+    }*/
 
     /**
      * Tell the client to update the UI of one of the boards of the game using
@@ -205,7 +204,7 @@ public class Client implements Connection.Delegate {
      * @throws ConnectionException
      */
     public void updateGameBoard(BoardUIInfo info) throws ConnectionException {
-        connection.sendOnly(new Packet(Query.SUpdateGameBoard, info));
+        connection.sendOnly(new Packet(Query.S_UpdateGameBoard, info));
     }
 
     /**
@@ -215,7 +214,7 @@ public class Client implements Connection.Delegate {
      * @throws ConnectionException
      */
     public void gameFinished(String message) throws ConnectionException {
-        connection.sendOnly(new Packet(Query.SGameFinished, message));
+        connection.sendOnly(new Packet(Query.S_GameFinished, message));
     }
 
     @Override

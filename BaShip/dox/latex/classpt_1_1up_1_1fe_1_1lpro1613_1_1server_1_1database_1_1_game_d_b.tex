@@ -3,7 +3,7 @@
 \subsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-static List$<$ \hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1tuples_1_1_game_info}{Game\+Info} $>$ \hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_game_d_b_a4c567854868d16ae9b919c0655be65a7}{get\+Game\+List} (\hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1tuples_1_1_game_search}{Game\+Search} s)  throws S\+Q\+L\+Exception 
+static List$<$ \hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1structs_1_1_game_info}{Game\+Info} $>$ \hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_game_d_b_a4c567854868d16ae9b919c0655be65a7}{get\+Game\+List} (\hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1structs_1_1_game_search}{Game\+Search} s)  throws S\+Q\+L\+Exception 
 \item 
 static Long \hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_game_d_b_af4ec546a91795e5394379cfaaaf073cb}{create\+Game} (Long player1\+ID, Long player2\+ID)  throws S\+Q\+L\+Exception 
 \item 
@@ -16,9 +16,14 @@ static void \hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1
 
 
 \subsection{Detailed Description}
+Collection of static methods that access, set and return information present on the table \char`\"{}games\char`\"{} of the database.
+
+\begin{DoxyAuthor}{Author}
+Alex 
+\end{DoxyAuthor}
 
 
-Definition at line 14 of file Game\+D\+B.\+java.
+Definition at line 20 of file Game\+D\+B.\+java.
 
 
 
@@ -29,70 +34,168 @@ Definition at line 14 of file Game\+D\+B.\+java.
 \subsubsection{\texorpdfstring{create\+Game()}{createGame()}}
 {\footnotesize\ttfamily static Long pt.\+up.\+fe.\+lpro1613.\+server.\+database.\+Game\+D\+B.\+create\+Game (\begin{DoxyParamCaption}\item[{Long}]{player1\+ID,  }\item[{Long}]{player2\+ID }\end{DoxyParamCaption}) throws S\+Q\+L\+Exception\hspace{0.3cm}{\ttfamily [static]}}
 
+Create a game on the database. This inserts a new row on the \char`\"{}games\char`\"{} table but does not set the start date (the start date is set to N\+U\+LL)
 
 
-Definition at line 78 of file Game\+D\+B.\+java.
+\begin{DoxyParams}{Parameters}
+{\em player1\+ID} & The id of the first player \\
+\hline
+{\em player2\+ID} & The id of the second player \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The unique id of the newly created game 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em S\+Q\+L\+Exception} & \\
+\hline
+\end{DoxyExceptions}
+
+
+Definition at line 100 of file Game\+D\+B.\+java.
 
 Here is the call graph for this function\+:
-% FIG 0
-Here is the caller graph for this function\+:
-% FIG 1
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_game_d_b_af4ec546a91795e5394379cfaaaf073cb_cgraph}
+\end{center}
+\end{figure}
 \hypertarget{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_game_d_b_a4c567854868d16ae9b919c0655be65a7}{}\label{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_game_d_b_a4c567854868d16ae9b919c0655be65a7} 
 \index{pt\+::up\+::fe\+::lpro1613\+::server\+::database\+::\+Game\+DB@{pt\+::up\+::fe\+::lpro1613\+::server\+::database\+::\+Game\+DB}!get\+Game\+List@{get\+Game\+List}}
 \index{get\+Game\+List@{get\+Game\+List}!pt\+::up\+::fe\+::lpro1613\+::server\+::database\+::\+Game\+DB@{pt\+::up\+::fe\+::lpro1613\+::server\+::database\+::\+Game\+DB}}
 \subsubsection{\texorpdfstring{get\+Game\+List()}{getGameList()}}
-{\footnotesize\ttfamily static List$<$\hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1tuples_1_1_game_info}{Game\+Info}$>$ pt.\+up.\+fe.\+lpro1613.\+server.\+database.\+Game\+D\+B.\+get\+Game\+List (\begin{DoxyParamCaption}\item[{\hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1tuples_1_1_game_search}{Game\+Search}}]{s }\end{DoxyParamCaption}) throws S\+Q\+L\+Exception\hspace{0.3cm}{\ttfamily [static]}}
+{\footnotesize\ttfamily static List$<$\hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1structs_1_1_game_info}{Game\+Info}$>$ pt.\+up.\+fe.\+lpro1613.\+server.\+database.\+Game\+D\+B.\+get\+Game\+List (\begin{DoxyParamCaption}\item[{\hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1structs_1_1_game_search}{Game\+Search}}]{s }\end{DoxyParamCaption}) throws S\+Q\+L\+Exception\hspace{0.3cm}{\ttfamily [static]}}
+
+Get the list of all games saved on the database.
 
 
+\begin{DoxyParams}{Parameters}
+{\em s} & The search parameters \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The list of games 
+\end{DoxyReturn}
 
-Definition at line 16 of file Game\+D\+B.\+java.
+\begin{DoxyExceptions}{Exceptions}
+{\em S\+Q\+L\+Exception} & \\
+\hline
+\end{DoxyExceptions}
+
+
+Definition at line 29 of file Game\+D\+B.\+java.
 
 Here is the call graph for this function\+:
-% FIG 2
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_game_d_b_a4c567854868d16ae9b919c0655be65a7_cgraph}
+\end{center}
+\end{figure}
 Here is the caller graph for this function\+:
-% FIG 3
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_game_d_b_a4c567854868d16ae9b919c0655be65a7_icgraph}
+\end{center}
+\end{figure}
 \hypertarget{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_game_d_b_ab352e7cd06250b77274f5c4f261f8116}{}\label{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_game_d_b_ab352e7cd06250b77274f5c4f261f8116} 
 \index{pt\+::up\+::fe\+::lpro1613\+::server\+::database\+::\+Game\+DB@{pt\+::up\+::fe\+::lpro1613\+::server\+::database\+::\+Game\+DB}!set\+End\+Time\+To\+Now@{set\+End\+Time\+To\+Now}}
 \index{set\+End\+Time\+To\+Now@{set\+End\+Time\+To\+Now}!pt\+::up\+::fe\+::lpro1613\+::server\+::database\+::\+Game\+DB@{pt\+::up\+::fe\+::lpro1613\+::server\+::database\+::\+Game\+DB}}
 \subsubsection{\texorpdfstring{set\+End\+Time\+To\+Now()}{setEndTimeToNow()}}
 {\footnotesize\ttfamily static void pt.\+up.\+fe.\+lpro1613.\+server.\+database.\+Game\+D\+B.\+set\+End\+Time\+To\+Now (\begin{DoxyParamCaption}\item[{Long}]{game\+ID }\end{DoxyParamCaption}) throws S\+Q\+L\+Exception\hspace{0.3cm}{\ttfamily [static]}}
 
+Set (on the database) the end time of the game with the given id to the current time.
 
 
-Definition at line 115 of file Game\+D\+B.\+java.
+\begin{DoxyParams}{Parameters}
+{\em game\+ID} & \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em S\+Q\+L\+Exception} & \\
+\hline
+\end{DoxyExceptions}
+
+
+Definition at line 151 of file Game\+D\+B.\+java.
 
 Here is the call graph for this function\+:
-% FIG 4
-Here is the caller graph for this function\+:
-% FIG 5
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_game_d_b_ab352e7cd06250b77274f5c4f261f8116_cgraph}
+\end{center}
+\end{figure}
 \hypertarget{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_game_d_b_a991c06b53598f46f4eea30c8c8fc31f7}{}\label{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_game_d_b_a991c06b53598f46f4eea30c8c8fc31f7} 
 \index{pt\+::up\+::fe\+::lpro1613\+::server\+::database\+::\+Game\+DB@{pt\+::up\+::fe\+::lpro1613\+::server\+::database\+::\+Game\+DB}!set\+Start\+Time\+To\+Now@{set\+Start\+Time\+To\+Now}}
 \index{set\+Start\+Time\+To\+Now@{set\+Start\+Time\+To\+Now}!pt\+::up\+::fe\+::lpro1613\+::server\+::database\+::\+Game\+DB@{pt\+::up\+::fe\+::lpro1613\+::server\+::database\+::\+Game\+DB}}
 \subsubsection{\texorpdfstring{set\+Start\+Time\+To\+Now()}{setStartTimeToNow()}}
 {\footnotesize\ttfamily static void pt.\+up.\+fe.\+lpro1613.\+server.\+database.\+Game\+D\+B.\+set\+Start\+Time\+To\+Now (\begin{DoxyParamCaption}\item[{Long}]{game\+ID }\end{DoxyParamCaption}) throws S\+Q\+L\+Exception\hspace{0.3cm}{\ttfamily [static]}}
 
+Set (on the database) the start time of the game with the given id to the current time.
 
 
-Definition at line 100 of file Game\+D\+B.\+java.
+\begin{DoxyParams}{Parameters}
+{\em game\+ID} & \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em S\+Q\+L\+Exception} & \\
+\hline
+\end{DoxyExceptions}
+
+
+Definition at line 129 of file Game\+D\+B.\+java.
 
 Here is the call graph for this function\+:
-% FIG 6
-Here is the caller graph for this function\+:
-% FIG 7
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_game_d_b_a991c06b53598f46f4eea30c8c8fc31f7_cgraph}
+\end{center}
+\end{figure}
 \hypertarget{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_game_d_b_a30f4664442da6b7ae80b1821aaa195fa}{}\label{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_game_d_b_a30f4664442da6b7ae80b1821aaa195fa} 
 \index{pt\+::up\+::fe\+::lpro1613\+::server\+::database\+::\+Game\+DB@{pt\+::up\+::fe\+::lpro1613\+::server\+::database\+::\+Game\+DB}!set\+Winner@{set\+Winner}}
 \index{set\+Winner@{set\+Winner}!pt\+::up\+::fe\+::lpro1613\+::server\+::database\+::\+Game\+DB@{pt\+::up\+::fe\+::lpro1613\+::server\+::database\+::\+Game\+DB}}
 \subsubsection{\texorpdfstring{set\+Winner()}{setWinner()}}
 {\footnotesize\ttfamily static void pt.\+up.\+fe.\+lpro1613.\+server.\+database.\+Game\+D\+B.\+set\+Winner (\begin{DoxyParamCaption}\item[{Long}]{game\+ID,  }\item[{Long}]{player\+ID }\end{DoxyParamCaption}) throws S\+Q\+L\+Exception\hspace{0.3cm}{\ttfamily [static]}}
 
+Set (on the database) the winner of the game with the given id.
 
 
-Definition at line 130 of file Game\+D\+B.\+java.
+\begin{DoxyParams}{Parameters}
+{\em game\+ID} & \\
+\hline
+{\em player\+ID} & The id of the winning player. This player must be one of the players of this game. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em S\+Q\+L\+Exception} & \\
+\hline
+\end{DoxyExceptions}
+
+
+Definition at line 174 of file Game\+D\+B.\+java.
 
 Here is the call graph for this function\+:
-% FIG 8
-Here is the caller graph for this function\+:
-% FIG 9
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_game_d_b_a30f4664442da6b7ae80b1821aaa195fa_cgraph}
+\end{center}
+\end{figure}
 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}

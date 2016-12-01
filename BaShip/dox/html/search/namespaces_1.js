@@ -13,7 +13,7 @@ var searchData=
   ['pt',['pt',['../namespacept.html',1,'']]],
   ['server',['server',['../namespacept_1_1up_1_1fe_1_1lpro1613_1_1server.html',1,'pt::up::fe::lpro1613']]],
   ['sharedlib',['sharedlib',['../namespacept_1_1up_1_1fe_1_1lpro1613_1_1sharedlib.html',1,'pt::up::fe::lpro1613']]],
-  ['tuples',['tuples',['../namespacept_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1tuples.html',1,'pt::up::fe::lpro1613::sharedlib']]],
+  ['structs',['structs',['../namespacept_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1structs.html',1,'pt::up::fe::lpro1613::sharedlib']]],
   ['up',['up',['../namespacept_1_1up.html',1,'pt']]],
   ['utils',['utils',['../namespacept_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1utils.html',1,'pt::up::fe::lpro1613::sharedlib']]]
 ];

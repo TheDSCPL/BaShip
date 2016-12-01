@@ -1,15 +1,15 @@
 var enumpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1conn_1_1_query =
 [
     [ "BEmpty", "enumpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1conn_1_1_query.html#aa5301799b1d3143c374798784ac198ea", null ],
+    [ "BLogin", "enumpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1conn_1_1_query.html#a3b8ce58870c62903bab13c13a7eb249a", null ],
+    [ "BRegister", "enumpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1conn_1_1_query.html#aa20884de85d3b004e5926324f91f95f5", null ],
     [ "CAnswerGameInvitation", "enumpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1conn_1_1_query.html#a05335746d2327f5ad8b977eb6d491635", null ],
     [ "CClickReadyButton", "enumpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1conn_1_1_query.html#adf41fb6a24eb0a73a98ffdf2b6875e6a", null ],
     [ "CCloseGame", "enumpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1conn_1_1_query.html#a5d1ed333957b4a3453303db0341aac29", null ],
     [ "CFireShot", "enumpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1conn_1_1_query.html#a3b97368feda50d38cc47f9ccffcd8695", null ],
     [ "CGetGameList", "enumpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1conn_1_1_query.html#a00dbcd99570bca2872b23d1f77a49186", null ],
     [ "CGetUserList", "enumpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1conn_1_1_query.html#ae3af9d0613ab8d210b7161a550f7bf14", null ],
-    [ "CLogin", "enumpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1conn_1_1_query.html#a7b5129f1a1c06d802f15b47b5510e83c", null ],
     [ "CLogout", "enumpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1conn_1_1_query.html#aa40f948ae79a2adcea748969432f2ab3", null ],
-    [ "CRegister", "enumpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1conn_1_1_query.html#aa654294e91df382d4d478f1ccddea77b", null ],
     [ "CSendGameMessage", "enumpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1conn_1_1_query.html#a73b9f9a48ed316b294a1ed7f6b08fed0", null ],
     [ "CSendGlobalMessage", "enumpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1conn_1_1_query.html#a3a8111ba44393eb51bf1152e00787cae", null ],
     [ "CStartGameWithPlayer", "enumpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1conn_1_1_query.html#a4e8ad00082033bfe9dc8a17424de7a04", null ],

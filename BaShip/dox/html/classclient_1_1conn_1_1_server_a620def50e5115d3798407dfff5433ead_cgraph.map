@@ -1,0 +1,8 @@
+<map id="client.conn.Server.handle" name="client.conn.Server.handle">
+<area shape="rect" id="node2" href="$classclient_1_1logic_1_1_game_c.html#a70979b2783537bb175c0a8926680e236" title="client.logic.GameC.receive\lGameMessage" alt="" coords="247,5,427,46"/>
+<area shape="rect" id="node3" href="$classclient_1_1logic_1_1_global_chat_c.html#a74158167fb483ea7cec74151a49734cb" title="client.logic.GlobalChatC.receive\lGlobalMessage" alt="" coords="232,70,443,111"/>
+<area shape="rect" id="node4" href="$classclient_1_1logic_1_1_game_c.html#a5efa8858529daa61b2c4639b9a7c2949" title="client.logic.GameC.update\lGameScreen" alt="" coords="248,135,427,177"/>
+<area shape="rect" id="node5" href="$classclient_1_1logic_1_1_game_c.html#a62c530e593e489903a8ab6557763be27" title="client.logic.GameC.showGame\lInvitation" alt="" coords="235,201,440,242"/>
+<area shape="rect" id="node6" href="$classclient_1_1logic_1_1_game_c.html#a055e1c7cadc523d1c851af8856b0214d" title="client.logic.GameC.update\lBoardInfo" alt="" coords="248,266,427,307"/>
+<area shape="rect" id="node7" href="$classclient_1_1logic_1_1_game_c.html#afee9b1e47ab82d704759506c4cb5e2ad" title="client.logic.GameC.gameFinished" alt="" coords="227,332,448,359"/>
+</map>

@@ -3,11 +3,23 @@
 
 
 Inheritance diagram for client.\+conn.\+Server\+:
-% FIG 0
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=242pt]{classclient_1_1conn_1_1_server__inherit__graph}
+\end{center}
+\end{figure}
 
 
 Collaboration diagram for client.\+conn.\+Server\+:
-% FIG 1
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=242pt]{classclient_1_1conn_1_1_server__coll__graph}
+\end{center}
+\end{figure}
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -25,15 +37,15 @@ void \hyperlink{classclient_1_1conn_1_1_server_ab69a81693f41986321e92120aa0918cb
 \item 
 boolean \hyperlink{classclient_1_1conn_1_1_server_ab25d4a9f33372c404d2464d1b608dd77}{get\+Username\+Available} (String username)  throws User\+Message\+Exception 
 \item 
-\hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1tuples_1_1_user_info}{User\+Info} \hyperlink{classclient_1_1conn_1_1_server_a064556a987ee40eb0a91a952ae08969f}{login} (String username, char\mbox{[}$\,$\mbox{]} password)  throws User\+Message\+Exception 
+\hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1structs_1_1_user_info}{User\+Info} \hyperlink{classclient_1_1conn_1_1_server_a064556a987ee40eb0a91a952ae08969f}{login} (String username, char\mbox{[}$\,$\mbox{]} password)  throws User\+Message\+Exception 
 \item 
-\hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1tuples_1_1_user_info}{User\+Info} \hyperlink{classclient_1_1conn_1_1_server_a945189dab00f6350cb5a444a910c4dd5}{register} (String username, char\mbox{[}$\,$\mbox{]} password)  throws User\+Message\+Exception 
+\hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1structs_1_1_user_info}{User\+Info} \hyperlink{classclient_1_1conn_1_1_server_a945189dab00f6350cb5a444a910c4dd5}{register} (String username, char\mbox{[}$\,$\mbox{]} password)  throws User\+Message\+Exception 
 \item 
 void \hyperlink{classclient_1_1conn_1_1_server_af45689754d02a83d53602d01a9bf2427}{logout} ()  throws User\+Message\+Exception 
 \item 
-List$<$ \hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1tuples_1_1_user_info}{User\+Info} $>$ \hyperlink{classclient_1_1conn_1_1_server_a8512a2e59d7e29fb25b913220050060d}{get\+User\+List} (boolean online\+Only, String username\+Filter, int order\+By\+Column, int row\+Limit)  throws User\+Message\+Exception 
+List$<$ \hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1structs_1_1_user_info}{User\+Info} $>$ \hyperlink{classclient_1_1conn_1_1_server_a8512a2e59d7e29fb25b913220050060d}{get\+User\+List} (boolean online\+Only, String username\+Filter, int order\+By\+Column, int row\+Limit)  throws User\+Message\+Exception 
 \item 
-List$<$ \hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1tuples_1_1_game_info}{Game\+Info} $>$ \hyperlink{classclient_1_1conn_1_1_server_ab1f159361ca4682e87f2cea6224f094a}{get\+Game\+List} (boolean currently\+Playing\+Only, String username\+Filter, int row\+Limit)  throws User\+Message\+Exception 
+List$<$ \hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1structs_1_1_game_info}{Game\+Info} $>$ \hyperlink{classclient_1_1conn_1_1_server_ab1f159361ca4682e87f2cea6224f094a}{get\+Game\+List} (boolean currently\+Playing\+Only, String username\+Filter, int row\+Limit)  throws User\+Message\+Exception 
 \item 
 void \hyperlink{classclient_1_1conn_1_1_server_acbe845e1fc6ba7857fcf6d01377f5432}{send\+Global\+Message} (String message)  throws User\+Message\+Exception 
 \item 
@@ -133,7 +145,13 @@ Inform the server that the user closed the game, meaning, clicked the close butt
 Definition at line 305 of file Server.\+java.
 
 Here is the call graph for this function\+:
-% FIG 2
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classclient_1_1conn_1_1_server_a5d1f1961306d3e06c895abc90dfddf9f_cgraph}
+\end{center}
+\end{figure}
 \hypertarget{classclient_1_1conn_1_1_server_a7e96a6bd486520d128a37a8216cf37c3}{}\label{classclient_1_1conn_1_1_server_a7e96a6bd486520d128a37a8216cf37c3} 
 \index{client\+::conn\+::\+Server@{client\+::conn\+::\+Server}!connect@{connect}}
 \index{connect@{connect}!client\+::conn\+::\+Server@{client\+::conn\+::\+Server}}
@@ -145,9 +163,21 @@ Connect to the server through the underlying connection object.
 Definition at line 90 of file Server.\+java.
 
 Here is the call graph for this function\+:
-% FIG 3
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classclient_1_1conn_1_1_server_a7e96a6bd486520d128a37a8216cf37c3_cgraph}
+\end{center}
+\end{figure}
 Here is the caller graph for this function\+:
-% FIG 4
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classclient_1_1conn_1_1_server_a7e96a6bd486520d128a37a8216cf37c3_icgraph}
+\end{center}
+\end{figure}
 \hypertarget{classclient_1_1conn_1_1_server_ac8ad09c9052bfb32e082493ada8d14ab}{}\label{classclient_1_1conn_1_1_server_ac8ad09c9052bfb32e082493ada8d14ab} 
 \index{client\+::conn\+::\+Server@{client\+::conn\+::\+Server}!connected@{connected}}
 \index{connected@{connected}!client\+::conn\+::\+Server@{client\+::conn\+::\+Server}}
@@ -170,7 +200,13 @@ Implements \hyperlink{interfacept_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1conn_1
 Definition at line 78 of file Server.\+java.
 
 Here is the call graph for this function\+:
-% FIG 5
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classclient_1_1conn_1_1_server_ac8ad09c9052bfb32e082493ada8d14ab_cgraph}
+\end{center}
+\end{figure}
 \hypertarget{classclient_1_1conn_1_1_server_ab69a81693f41986321e92120aa0918cb}{}\label{classclient_1_1conn_1_1_server_ab69a81693f41986321e92120aa0918cb} 
 \index{client\+::conn\+::\+Server@{client\+::conn\+::\+Server}!disconnect@{disconnect}}
 \index{disconnect@{disconnect}!client\+::conn\+::\+Server@{client\+::conn\+::\+Server}}
@@ -187,9 +223,21 @@ Disconnect from the server.
 Definition at line 98 of file Server.\+java.
 
 Here is the call graph for this function\+:
-% FIG 6
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classclient_1_1conn_1_1_server_ab69a81693f41986321e92120aa0918cb_cgraph}
+\end{center}
+\end{figure}
 Here is the caller graph for this function\+:
-% FIG 7
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classclient_1_1conn_1_1_server_ab69a81693f41986321e92120aa0918cb_icgraph}
+\end{center}
+\end{figure}
 \hypertarget{classclient_1_1conn_1_1_server_ae2a0ab226b1622da8e19137fb89bdc81}{}\label{classclient_1_1conn_1_1_server_ae2a0ab226b1622da8e19137fb89bdc81} 
 \index{client\+::conn\+::\+Server@{client\+::conn\+::\+Server}!disconnected@{disconnected}}
 \index{disconnected@{disconnected}!client\+::conn\+::\+Server@{client\+::conn\+::\+Server}}
@@ -212,7 +260,13 @@ Implements \hyperlink{interfacept_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1conn_1
 Definition at line 83 of file Server.\+java.
 
 Here is the call graph for this function\+:
-% FIG 8
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classclient_1_1conn_1_1_server_ae2a0ab226b1622da8e19137fb89bdc81_cgraph}
+\end{center}
+\end{figure}
 \hypertarget{classclient_1_1conn_1_1_server_ab1d2fa19e855a803efff54edd2113d83}{}\label{classclient_1_1conn_1_1_server_ab1d2fa19e855a803efff54edd2113d83} 
 \index{client\+::conn\+::\+Server@{client\+::conn\+::\+Server}!fire\+Shot@{fire\+Shot}}
 \index{fire\+Shot@{fire\+Shot}!client\+::conn\+::\+Server@{client\+::conn\+::\+Server}}
@@ -237,7 +291,7 @@ Definition at line 295 of file Server.\+java.
 \index{client\+::conn\+::\+Server@{client\+::conn\+::\+Server}!get\+Game\+List@{get\+Game\+List}}
 \index{get\+Game\+List@{get\+Game\+List}!client\+::conn\+::\+Server@{client\+::conn\+::\+Server}}
 \subsubsection{\texorpdfstring{get\+Game\+List()}{getGameList()}}
-{\footnotesize\ttfamily List$<$\hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1tuples_1_1_game_info}{Game\+Info}$>$ client.\+conn.\+Server.\+get\+Game\+List (\begin{DoxyParamCaption}\item[{boolean}]{currently\+Playing\+Only,  }\item[{String}]{username\+Filter,  }\item[{int}]{row\+Limit }\end{DoxyParamCaption}) throws \hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1exceptions_1_1_user_message_exception}{User\+Message\+Exception}}
+{\footnotesize\ttfamily List$<$\hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1structs_1_1_game_info}{Game\+Info}$>$ client.\+conn.\+Server.\+get\+Game\+List (\begin{DoxyParamCaption}\item[{boolean}]{currently\+Playing\+Only,  }\item[{String}]{username\+Filter,  }\item[{int}]{row\+Limit }\end{DoxyParamCaption}) throws \hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1exceptions_1_1_user_message_exception}{User\+Message\+Exception}}
 
 Get all games played on the server. This list may include all games finished and/or currently being played. 
 \begin{DoxyParams}{Parameters}
@@ -264,7 +318,7 @@ Definition at line 194 of file Server.\+java.
 \index{client\+::conn\+::\+Server@{client\+::conn\+::\+Server}!get\+User\+List@{get\+User\+List}}
 \index{get\+User\+List@{get\+User\+List}!client\+::conn\+::\+Server@{client\+::conn\+::\+Server}}
 \subsubsection{\texorpdfstring{get\+User\+List()}{getUserList()}}
-{\footnotesize\ttfamily List$<$\hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1tuples_1_1_user_info}{User\+Info}$>$ client.\+conn.\+Server.\+get\+User\+List (\begin{DoxyParamCaption}\item[{boolean}]{online\+Only,  }\item[{String}]{username\+Filter,  }\item[{int}]{order\+By\+Column,  }\item[{int}]{row\+Limit }\end{DoxyParamCaption}) throws \hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1exceptions_1_1_user_message_exception}{User\+Message\+Exception}}
+{\footnotesize\ttfamily List$<$\hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1structs_1_1_user_info}{User\+Info}$>$ client.\+conn.\+Server.\+get\+User\+List (\begin{DoxyParamCaption}\item[{boolean}]{online\+Only,  }\item[{String}]{username\+Filter,  }\item[{int}]{order\+By\+Column,  }\item[{int}]{row\+Limit }\end{DoxyParamCaption}) throws \hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1exceptions_1_1_user_message_exception}{User\+Message\+Exception}}
 
 Get all users registered on the server. 
 \begin{DoxyParams}{Parameters}
@@ -337,12 +391,18 @@ Implements \hyperlink{interfacept_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1conn_1
 Definition at line 44 of file Server.\+java.
 
 Here is the call graph for this function\+:
-% FIG 9
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classclient_1_1conn_1_1_server_a620def50e5115d3798407dfff5433ead_cgraph}
+\end{center}
+\end{figure}
 \hypertarget{classclient_1_1conn_1_1_server_a064556a987ee40eb0a91a952ae08969f}{}\label{classclient_1_1conn_1_1_server_a064556a987ee40eb0a91a952ae08969f} 
 \index{client\+::conn\+::\+Server@{client\+::conn\+::\+Server}!login@{login}}
 \index{login@{login}!client\+::conn\+::\+Server@{client\+::conn\+::\+Server}}
 \subsubsection{\texorpdfstring{login()}{login()}}
-{\footnotesize\ttfamily \hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1tuples_1_1_user_info}{User\+Info} client.\+conn.\+Server.\+login (\begin{DoxyParamCaption}\item[{String}]{username,  }\item[{char \mbox{[}$\,$\mbox{]}}]{password }\end{DoxyParamCaption}) throws \hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1exceptions_1_1_user_message_exception}{User\+Message\+Exception}}
+{\footnotesize\ttfamily \hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1structs_1_1_user_info}{User\+Info} client.\+conn.\+Server.\+login (\begin{DoxyParamCaption}\item[{String}]{username,  }\item[{char \mbox{[}$\,$\mbox{]}}]{password }\end{DoxyParamCaption}) throws \hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1exceptions_1_1_user_message_exception}{User\+Message\+Exception}}
 
 Login using the specified username and password 
 \begin{DoxyParams}{Parameters}
@@ -364,7 +424,13 @@ A {\ttfamily User\+Info} object with the fields {\ttfamily id} and {\ttfamily us
 Definition at line 121 of file Server.\+java.
 
 Here is the call graph for this function\+:
-% FIG 10
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classclient_1_1conn_1_1_server_a064556a987ee40eb0a91a952ae08969f_cgraph}
+\end{center}
+\end{figure}
 \hypertarget{classclient_1_1conn_1_1_server_af45689754d02a83d53602d01a9bf2427}{}\label{classclient_1_1conn_1_1_server_af45689754d02a83d53602d01a9bf2427} 
 \index{client\+::conn\+::\+Server@{client\+::conn\+::\+Server}!logout@{logout}}
 \index{logout@{logout}!client\+::conn\+::\+Server@{client\+::conn\+::\+Server}}
@@ -384,7 +450,7 @@ Definition at line 156 of file Server.\+java.
 \index{client\+::conn\+::\+Server@{client\+::conn\+::\+Server}!register@{register}}
 \index{register@{register}!client\+::conn\+::\+Server@{client\+::conn\+::\+Server}}
 \subsubsection{\texorpdfstring{register()}{register()}}
-{\footnotesize\ttfamily \hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1tuples_1_1_user_info}{User\+Info} client.\+conn.\+Server.\+register (\begin{DoxyParamCaption}\item[{String}]{username,  }\item[{char \mbox{[}$\,$\mbox{]}}]{password }\end{DoxyParamCaption}) throws \hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1exceptions_1_1_user_message_exception}{User\+Message\+Exception}}
+{\footnotesize\ttfamily \hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1structs_1_1_user_info}{User\+Info} client.\+conn.\+Server.\+register (\begin{DoxyParamCaption}\item[{String}]{username,  }\item[{char \mbox{[}$\,$\mbox{]}}]{password }\end{DoxyParamCaption}) throws \hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1exceptions_1_1_user_message_exception}{User\+Message\+Exception}}
 
 Register a new user on the server. 
 \begin{DoxyParams}{Parameters}
@@ -406,7 +472,13 @@ A {\ttfamily User\+Info} object with the fields {\ttfamily id} and {\ttfamily us
 Definition at line 140 of file Server.\+java.
 
 Here is the call graph for this function\+:
-% FIG 11
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classclient_1_1conn_1_1_server_a945189dab00f6350cb5a444a910c4dd5_cgraph}
+\end{center}
+\end{figure}
 \hypertarget{classclient_1_1conn_1_1_server_acbe845e1fc6ba7857fcf6d01377f5432}{}\label{classclient_1_1conn_1_1_server_acbe845e1fc6ba7857fcf6d01377f5432} 
 \index{client\+::conn\+::\+Server@{client\+::conn\+::\+Server}!send\+Global\+Message@{send\+Global\+Message}}
 \index{send\+Global\+Message@{send\+Global\+Message}!client\+::conn\+::\+Server@{client\+::conn\+::\+Server}}

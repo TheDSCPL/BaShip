@@ -1,9 +1,0 @@
-digraph "client.logic.GameC.updateBoardInfo"
-{
-  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
-  node [fontname="Helvetica",fontsize="10",shape=record];
-  rankdir="LR";
-  Node10 [label="client.logic.GameC.update\lBoardInfo",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
-  Node10 -> Node11 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node11 [label="client.conn.Server.handle",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classclient_1_1conn_1_1_server.html#a620def50e5115d3798407dfff5433ead"];
-}
