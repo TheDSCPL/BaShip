@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['fireshot',['fireShot',['../classclient_1_1conn_1_1_server.html#ab1d2fa19e855a803efff54edd2113d83',1,'client.conn.Server.fireShot()'],['../classserver_1_1logic_1_1game_1_1_game_play.html#a3976c3d5e4c1b82cdffc28857e8c0a20',1,'server.logic.game.GamePlay.fireShot()'],['../classserver_1_1logic_1_1_game_s.html#aeac56542c71aaa0f3a9571bce4ba962f',1,'server.logic.GameS.fireShot()']]],
-  ['foreach',['forEach',['../classsharedlib_1_1utils_1_1_matrix.html#a97de877e88587019e1a906c230a3b442',1,'sharedlib.utils.Matrix.forEach(MatrixValueConsumer&lt; T &gt; f)'],['../classsharedlib_1_1utils_1_1_matrix.html#af7b756b2f3962e615d7ddfb279c109b4',1,'sharedlib.utils.Matrix.forEach(MatrixCoordConsumer&lt; T &gt; f)']]],
-  ['fromstring',['fromString',['../enumsharedlib_1_1conn_1_1_query.html#a1b8a9273d718763c0bc54aae01d26d16',1,'sharedlib::conn::Query']]]
+  ['fireshot',['fireShot',['../classclient_1_1conn_1_1_server.html#ab1d2fa19e855a803efff54edd2113d83',1,'client.conn.Server.fireShot()'],['../classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1logic_1_1game_1_1_game_play.html#aa8ed98597766510e3ba9f804c61cded8',1,'pt.up.fe.lpro1613.server.logic.game.GamePlay.fireShot()'],['../classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1logic_1_1_game_s.html#aacc27bbcb911c57f6a22d8995dbb2b71',1,'pt.up.fe.lpro1613.server.logic.GameS.fireShot()']]],
+  ['foreach',['forEach',['../classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1utils_1_1_matrix.html#ac7af6583aa41bc5d2c40c9dbc4c46a2c',1,'pt.up.fe.lpro1613.sharedlib.utils.Matrix.forEach(MatrixValueConsumer&lt; T &gt; f)'],['../classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1utils_1_1_matrix.html#a92d8351af8796108dbd2942d206c45e5',1,'pt.up.fe.lpro1613.sharedlib.utils.Matrix.forEach(MatrixCoordConsumer&lt; T &gt; f)']]]
 ];

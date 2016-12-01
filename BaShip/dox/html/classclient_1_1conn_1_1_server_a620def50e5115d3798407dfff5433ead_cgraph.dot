@@ -1,0 +1,19 @@
+digraph "client.conn.Server.handle"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node40 [label="client.conn.Server.handle",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node40 -> Node41 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node41 [label="client.logic.GameC.receive\lGameMessage",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classclient_1_1logic_1_1_game_c.html#a70979b2783537bb175c0a8926680e236"];
+  Node40 -> Node42 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node42 [label="client.logic.GlobalChatC.receive\lGlobalMessage",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classclient_1_1logic_1_1_global_chat_c.html#a74158167fb483ea7cec74151a49734cb"];
+  Node40 -> Node43 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node43 [label="client.logic.GameC.update\lGameScreen",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classclient_1_1logic_1_1_game_c.html#a5efa8858529daa61b2c4639b9a7c2949"];
+  Node40 -> Node44 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node44 [label="client.logic.GameC.showGame\lInvitation",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classclient_1_1logic_1_1_game_c.html#a62c530e593e489903a8ab6557763be27"];
+  Node40 -> Node45 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node45 [label="client.logic.GameC.update\lBoardInfo",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classclient_1_1logic_1_1_game_c.html#a055e1c7cadc523d1c851af8856b0214d"];
+  Node40 -> Node46 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node46 [label="client.logic.GameC.gameFinished",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classclient_1_1logic_1_1_game_c.html#afee9b1e47ab82d704759506c4cb5e2ad"];
+}

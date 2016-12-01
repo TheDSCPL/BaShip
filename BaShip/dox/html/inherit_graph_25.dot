@@ -1,0 +1,13 @@
+digraph "Graphical Class Hierarchy"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node48 [label="Exception",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+  Node48 -> Node0 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node0 [label="pt.up.fe.lpro1613.sharedlib.exceptions.\lConnectionException",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1exceptions_1_1_connection_exception.html"];
+  Node48 -> Node50 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node50 [label="pt.up.fe.lpro1613.sharedlib.exceptions.\lPacketException",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1exceptions_1_1_packet_exception.html"];
+  Node48 -> Node51 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node51 [label="pt.up.fe.lpro1613.sharedlib.exceptions.\lUserMessageException",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1exceptions_1_1_user_message_exception.html"];
+}

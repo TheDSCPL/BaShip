@@ -7,7 +7,7 @@ package client.ui;
 
 import client.ClientMain;
 import client.logic.UserC;
-import sharedlib.exceptions.UserMessageException;
+import pt.up.fe.lpro1613.sharedlib.exceptions.UserMessageException;
 
 /**
  *

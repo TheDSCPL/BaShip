@@ -1,6 +1,8 @@
 package client.logic;
 
-import sharedlib.tuples.*;
+import pt.up.fe.lpro1613.sharedlib.tuples.BoardUIInfo;
+import pt.up.fe.lpro1613.sharedlib.tuples.GameUIInfo;
+import pt.up.fe.lpro1613.sharedlib.tuples.Message;
 
 public class GameC {
 

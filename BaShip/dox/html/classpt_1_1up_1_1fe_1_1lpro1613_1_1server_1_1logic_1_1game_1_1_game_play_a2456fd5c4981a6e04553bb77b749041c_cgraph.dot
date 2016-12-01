@@ -1,0 +1,19 @@
+digraph "pt.up.fe.lpro1613.server.logic.game.GamePlay.gameClosedByClient"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node35 [label="pt.up.fe.lpro1613.server.logic.game.\lGamePlay.gameClosedByClient",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node35 -> Node36 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node36 [label="pt.up.fe.lpro1613.server.logic.game.\lGamePlay.isPlayer",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1logic_1_1game_1_1_game_play.html#a64af21d57da05af1d37d17ea71109aa7"];
+  Node35 -> Node37 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node37 [label="pt.up.fe.lpro1613.server.logic.\lUserS.usernameFromClient",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1logic_1_1_user_s.html#a26c28666f4e6461ee06eecfe1f55356d"];
+  Node37 -> Node38 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node38 [label="pt.up.fe.lpro1613.server.database.\lUserDB.getUsernameFromID",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_user_d_b.html#ab5c986eb5c2ba36eef3defee599c6903"];
+  Node38 -> Node39 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node39 [label="pt.up.fe.lpro1613.server.database.\lDatabase.getConn",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_database.html#aa5ecc24c87d16ca20cc645414d8f3232"];
+  Node38 -> Node40 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node40 [label="pt.up.fe.lpro1613.server.database.\lDatabase.close",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_database.html#ae7e6a39f412e24bea44477224f0fdef0"];
+  Node37 -> Node41 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node41 [label="pt.up.fe.lpro1613.server.logic.\lUserS.idFromClient",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1logic_1_1_user_s.html#a6ce47ad78e634c757be0ffc905799b4c"];
+}

@@ -2,8 +2,8 @@ package client.logic;
 
 import client.ClientMain;
 import java.util.regex.*;
-import sharedlib.exceptions.UserMessageException;
-import sharedlib.tuples.UserInfo;
+import pt.up.fe.lpro1613.sharedlib.exceptions.UserMessageException;
+import pt.up.fe.lpro1613.sharedlib.tuples.UserInfo;
 
 public class UserC {
 

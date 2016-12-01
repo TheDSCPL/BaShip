@@ -1,0 +1,90 @@
+\hypertarget{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1_server_main}{}\section{pt.\+up.\+fe.\+lpro1613.\+server.\+Server\+Main Class Reference}
+\label{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1_server_main}\index{pt.\+up.\+fe.\+lpro1613.\+server.\+Server\+Main@{pt.\+up.\+fe.\+lpro1613.\+server.\+Server\+Main}}
+
+
+Collaboration diagram for pt.\+up.\+fe.\+lpro1613.\+server.\+Server\+Main\+:
+% FIG 0
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1_server_main_aa3501ccad0bb4a2f62168d8f84b12021}{main} (String args\mbox{[}$\,$\mbox{]})  throws S\+Q\+L\+Exception 
+\end{DoxyCompactItemize}
+\subsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static final \hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1utils_1_1_preferences}{Preferences} \hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1_server_main_af70c93d4f50a3f81c9edb159095f6b1c}{prefs} = new \hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1utils_1_1_preferences}{Preferences}(Server\+Main.\+class)
+\item 
+static final \hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1conn_1_1_server_thread}{Server\+Thread} \hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1_server_main_a47b0d3f323dca42ff790cf040be6ce3a}{server} = new \hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1conn_1_1_server_thread}{Server\+Thread}(prefs.\+getI(\hyperlink{enumpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1other_1_1_prefs_key_a92ee06ea77e828cd8272275f9309e142}{Prefs\+Key.\+Server\+Port}))
+\item 
+static final \hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1other_1_1_console_thread}{Console\+Thread} \hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1_server_main_af9f54f997c78d9974b788b66d05c4c2c}{console} = new \hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1other_1_1_console_thread}{Console\+Thread}()
+\item 
+static final Set$<$ \hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1conn_1_1_client}{Client} $>$ \hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1_server_main_ad123167652dd573c163e4951b9eeada9}{clients} = new Hash\+Set$<$$>$()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 11 of file Server\+Main.\+java.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1_server_main_aa3501ccad0bb4a2f62168d8f84b12021}{}\label{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1_server_main_aa3501ccad0bb4a2f62168d8f84b12021} 
+\index{pt\+::up\+::fe\+::lpro1613\+::server\+::\+Server\+Main@{pt\+::up\+::fe\+::lpro1613\+::server\+::\+Server\+Main}!main@{main}}
+\index{main@{main}!pt\+::up\+::fe\+::lpro1613\+::server\+::\+Server\+Main@{pt\+::up\+::fe\+::lpro1613\+::server\+::\+Server\+Main}}
+\subsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily static void pt.\+up.\+fe.\+lpro1613.\+server.\+Server\+Main.\+main (\begin{DoxyParamCaption}\item[{String}]{args\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption}) throws S\+Q\+L\+Exception\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 18 of file Server\+Main.\+java.
+
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1_server_main_ad123167652dd573c163e4951b9eeada9}{}\label{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1_server_main_ad123167652dd573c163e4951b9eeada9} 
+\index{pt\+::up\+::fe\+::lpro1613\+::server\+::\+Server\+Main@{pt\+::up\+::fe\+::lpro1613\+::server\+::\+Server\+Main}!clients@{clients}}
+\index{clients@{clients}!pt\+::up\+::fe\+::lpro1613\+::server\+::\+Server\+Main@{pt\+::up\+::fe\+::lpro1613\+::server\+::\+Server\+Main}}
+\subsubsection{\texorpdfstring{clients}{clients}}
+{\footnotesize\ttfamily final Set$<$\hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1conn_1_1_client}{Client}$>$ pt.\+up.\+fe.\+lpro1613.\+server.\+Server\+Main.\+clients = new Hash\+Set$<$$>$()\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 16 of file Server\+Main.\+java.
+
+\hypertarget{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1_server_main_af9f54f997c78d9974b788b66d05c4c2c}{}\label{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1_server_main_af9f54f997c78d9974b788b66d05c4c2c} 
+\index{pt\+::up\+::fe\+::lpro1613\+::server\+::\+Server\+Main@{pt\+::up\+::fe\+::lpro1613\+::server\+::\+Server\+Main}!console@{console}}
+\index{console@{console}!pt\+::up\+::fe\+::lpro1613\+::server\+::\+Server\+Main@{pt\+::up\+::fe\+::lpro1613\+::server\+::\+Server\+Main}}
+\subsubsection{\texorpdfstring{console}{console}}
+{\footnotesize\ttfamily final \hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1other_1_1_console_thread}{Console\+Thread} pt.\+up.\+fe.\+lpro1613.\+server.\+Server\+Main.\+console = new \hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1other_1_1_console_thread}{Console\+Thread}()\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 15 of file Server\+Main.\+java.
+
+\hypertarget{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1_server_main_af70c93d4f50a3f81c9edb159095f6b1c}{}\label{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1_server_main_af70c93d4f50a3f81c9edb159095f6b1c} 
+\index{pt\+::up\+::fe\+::lpro1613\+::server\+::\+Server\+Main@{pt\+::up\+::fe\+::lpro1613\+::server\+::\+Server\+Main}!prefs@{prefs}}
+\index{prefs@{prefs}!pt\+::up\+::fe\+::lpro1613\+::server\+::\+Server\+Main@{pt\+::up\+::fe\+::lpro1613\+::server\+::\+Server\+Main}}
+\subsubsection{\texorpdfstring{prefs}{prefs}}
+{\footnotesize\ttfamily final \hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1utils_1_1_preferences}{Preferences} pt.\+up.\+fe.\+lpro1613.\+server.\+Server\+Main.\+prefs = new \hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1utils_1_1_preferences}{Preferences}(Server\+Main.\+class)\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 13 of file Server\+Main.\+java.
+
+\hypertarget{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1_server_main_a47b0d3f323dca42ff790cf040be6ce3a}{}\label{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1_server_main_a47b0d3f323dca42ff790cf040be6ce3a} 
+\index{pt\+::up\+::fe\+::lpro1613\+::server\+::\+Server\+Main@{pt\+::up\+::fe\+::lpro1613\+::server\+::\+Server\+Main}!server@{server}}
+\index{server@{server}!pt\+::up\+::fe\+::lpro1613\+::server\+::\+Server\+Main@{pt\+::up\+::fe\+::lpro1613\+::server\+::\+Server\+Main}}
+\subsubsection{\texorpdfstring{server}{server}}
+{\footnotesize\ttfamily final \hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1conn_1_1_server_thread}{Server\+Thread} pt.\+up.\+fe.\+lpro1613.\+server.\+Server\+Main.\+server = new \hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1conn_1_1_server_thread}{Server\+Thread}(prefs.\+getI(\hyperlink{enumpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1other_1_1_prefs_key_a92ee06ea77e828cd8272275f9309e142}{Prefs\+Key.\+Server\+Port}))\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 14 of file Server\+Main.\+java.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+pt/up/fe/lpro1613/server/\hyperlink{_server_main_8java}{Server\+Main.\+java}\end{DoxyCompactItemize}

@@ -1,16 +1,16 @@
 var searchData=
 [
   ['passwordfield',['passwordField',['../classclient_1_1ui_1_1_login_panel.html#a4b3258e8faace6462f58c79cb4a08835',1,'client::ui::LoginPanel']]],
-  ['passwordhash',['passwordHash',['../classsharedlib_1_1tuples_1_1_user_info.html#ac680e59ba2bbe5e5c754977c393729da',1,'sharedlib::tuples::UserInfo']]],
-  ['player1',['player1',['../classserver_1_1logic_1_1game_1_1_game_play.html#a16d7db4931bbedeccb0cf1dbe5c8f193',1,'server::logic::game::GamePlay']]],
-  ['player1id',['player1ID',['../classsharedlib_1_1tuples_1_1_game_info.html#af5d977e3c705e0db8a0ab8dec4f353ed',1,'sharedlib::tuples::GameInfo']]],
-  ['player1turn',['player1Turn',['../classsharedlib_1_1tuples_1_1_game_screen_info.html#a38ed897b3243178155fe43f55c83556c',1,'sharedlib::tuples::GameScreenInfo']]],
-  ['player1username',['player1Username',['../classsharedlib_1_1tuples_1_1_game_info.html#a89da4ca1f9dd359190862a3aae14bdbe',1,'sharedlib::tuples::GameInfo']]],
-  ['player2id',['player2ID',['../classsharedlib_1_1tuples_1_1_game_info.html#aa3a82b92a42c7b61c18e2a214bc5a099',1,'sharedlib::tuples::GameInfo']]],
-  ['player2turn',['player2Turn',['../classsharedlib_1_1tuples_1_1_game_screen_info.html#ae6af422c349ee6dd17af8d2a585e2d2b',1,'sharedlib::tuples::GameScreenInfo']]],
-  ['player2username',['player2Username',['../classsharedlib_1_1tuples_1_1_game_info.html#ad5af3fd8e58b7bdb34326ec50accf0e6',1,'sharedlib::tuples::GameInfo']]],
-  ['playing',['Playing',['../enumsharedlib_1_1tuples_1_1_game_info_1_1_state.html#a2e21975e1bb9d5e7dd0c567be4fa8200',1,'sharedlib.tuples.GameInfo.State.Playing()'],['../enumsharedlib_1_1tuples_1_1_user_info_1_1_status.html#a084ec6670e26a119c0ac26ea891e7e77',1,'sharedlib.tuples.UserInfo.Status.Playing()']]],
-  ['port',['port',['../classserver_1_1conn_1_1_server_thread.html#aa8378d032cb5eaaf76feec72be077b4d',1,'server::conn::ServerThread']]],
-  ['posx',['posx',['../classserver_1_1logic_1_1game_1_1_ship.html#a6cd98fad481d08143ecd02a2f3a03e0b',1,'server::logic::game::Ship']]],
-  ['prefs',['prefs',['../classclient_1_1_client_main.html#ac9b44e4112c8079879407cb8292d5fe3',1,'client.ClientMain.prefs()'],['../classserver_1_1_server_main.html#ad846c85619320e3c5503175b3156c6ce',1,'server.ServerMain.prefs()']]]
+  ['passwordhash',['passwordHash',['../classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1tuples_1_1_user_info.html#a7b87b5f23fd1b1d43f535543dccfeedf',1,'pt::up::fe::lpro1613::sharedlib::tuples::UserInfo']]],
+  ['player1',['player1',['../classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1logic_1_1game_1_1_game_play.html#a3dee975f8da8d824316eabe983eb4080',1,'pt::up::fe::lpro1613::server::logic::game::GamePlay']]],
+  ['player1id',['player1ID',['../classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1tuples_1_1_game_info.html#a4bfc686de26be1a765aef31922211cb5',1,'pt::up::fe::lpro1613::sharedlib::tuples::GameInfo']]],
+  ['player1turn',['player1Turn',['../classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1tuples_1_1_game_u_i_info.html#a0d33270d3239e508449e0804541611f8',1,'pt::up::fe::lpro1613::sharedlib::tuples::GameUIInfo']]],
+  ['player1username',['player1Username',['../classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1tuples_1_1_game_info.html#a413baca7d49fe7f174d23340cedbacae',1,'pt::up::fe::lpro1613::sharedlib::tuples::GameInfo']]],
+  ['player2id',['player2ID',['../classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1tuples_1_1_game_info.html#ae633a96ef35d188e7e29e49345b4fc03',1,'pt::up::fe::lpro1613::sharedlib::tuples::GameInfo']]],
+  ['player2turn',['player2Turn',['../classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1tuples_1_1_game_u_i_info.html#abc6dbaf67552fdd9ced5e5725ae2685b',1,'pt::up::fe::lpro1613::sharedlib::tuples::GameUIInfo']]],
+  ['player2username',['player2Username',['../classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1tuples_1_1_game_info.html#acc5ef9716a5e4a617ac6c1f933671ae7',1,'pt::up::fe::lpro1613::sharedlib::tuples::GameInfo']]],
+  ['playing',['Playing',['../enumpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1tuples_1_1_game_info_1_1_state.html#a91c1fe99e5b17a36fc9ba849d8e1be86',1,'pt.up.fe.lpro1613.sharedlib.tuples.GameInfo.State.Playing()'],['../enumpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1tuples_1_1_user_info_1_1_status.html#a64e1320707271e980af216630588aab5',1,'pt.up.fe.lpro1613.sharedlib.tuples.UserInfo.Status.Playing()']]],
+  ['port',['port',['../classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1conn_1_1_server_thread.html#a89129be61d7282900277bab472083325',1,'pt::up::fe::lpro1613::server::conn::ServerThread']]],
+  ['posx',['posx',['../classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1logic_1_1game_1_1_ship.html#a20376fae088f39d333583ac151fc0a6c',1,'pt::up::fe::lpro1613::server::logic::game::Ship']]],
+  ['prefs',['prefs',['../classclient_1_1_client_main.html#ac9b44e4112c8079879407cb8292d5fe3',1,'client.ClientMain.prefs()'],['../classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1_server_main.html#af70c93d4f50a3f81c9edb159095f6b1c',1,'pt.up.fe.lpro1613.server.ServerMain.prefs()']]]
 ];

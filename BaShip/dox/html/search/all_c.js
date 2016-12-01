@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['ngames',['nGames',['../classsharedlib_1_1tuples_1_1_user_info.html#aed7cc749f766225615c61ae3d22063d9',1,'sharedlib::tuples::UserInfo']]],
-  ['nshots',['nShots',['../classsharedlib_1_1tuples_1_1_user_info.html#aaafc1c84d64409331d72709349653130',1,'sharedlib::tuples::UserInfo']]],
-  ['nwins',['nWins',['../classsharedlib_1_1tuples_1_1_user_info.html#ab74910b9bc813f5090314372da220c04',1,'sharedlib::tuples::UserInfo']]]
+  ['ngames',['nGames',['../classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1tuples_1_1_user_info.html#ace87e94c9ddadfe62cd42182142ee162',1,'pt::up::fe::lpro1613::sharedlib::tuples::UserInfo']]],
+  ['nshots',['nShots',['../classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1tuples_1_1_user_info.html#aa892a3fde9c515586fb0218654581100',1,'pt::up::fe::lpro1613::sharedlib::tuples::UserInfo']]],
+  ['nwins',['nWins',['../classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1tuples_1_1_user_info.html#a7c3c9b1356a8c63c8a8a2ac46d9fde11',1,'pt::up::fe::lpro1613::sharedlib::tuples::UserInfo']]]
 ];

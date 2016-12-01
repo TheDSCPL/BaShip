@@ -1,0 +1,9 @@
+digraph "pt.up.fe.lpro1613.sharedlib.conn.Connection.test"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node46 [label="pt.up.fe.lpro1613.sharedlib.conn.\lConnection.test",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node46 -> Node47 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node47 [label="client.ui.SettingsPanel.\lSettingsPanel",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classclient_1_1ui_1_1_settings_panel.html#a95dfa76100b4d18863cd0b572c631ebf"];
+}

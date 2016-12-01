@@ -1,6 +1,6 @@
 package client.other;
 
-import sharedlib.utils.Preferences;
+import pt.up.fe.lpro1613.sharedlib.utils.Preferences;
 
 /**
  * Contains the keys to the various client-side persistence values

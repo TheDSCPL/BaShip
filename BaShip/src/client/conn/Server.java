@@ -1,13 +1,24 @@
 package client.conn;
 
+import pt.up.fe.lpro1613.sharedlib.tuples.BoardUIInfo;
+import pt.up.fe.lpro1613.sharedlib.conn.Packet;
+import pt.up.fe.lpro1613.sharedlib.conn.Query;
+import pt.up.fe.lpro1613.sharedlib.tuples.ErrorMessage;
+import pt.up.fe.lpro1613.sharedlib.tuples.UserInfo;
+import pt.up.fe.lpro1613.sharedlib.tuples.UserSearch;
+import pt.up.fe.lpro1613.sharedlib.utils.Crypto;
+import pt.up.fe.lpro1613.sharedlib.tuples.GameInfo;
+import pt.up.fe.lpro1613.sharedlib.tuples.Message;
+import pt.up.fe.lpro1613.sharedlib.tuples.GameSearch;
+import pt.up.fe.lpro1613.sharedlib.conn.Connection;
+import pt.up.fe.lpro1613.sharedlib.exceptions.UserMessageException;
+import pt.up.fe.lpro1613.sharedlib.tuples.GameUIInfo;
+import pt.up.fe.lpro1613.sharedlib.utils.Coord;
+import pt.up.fe.lpro1613.sharedlib.exceptions.ConnectionException;
 import client.*;
 import client.logic.*;
 import java.io.*;
 import java.util.*;
-import sharedlib.conn.*;
-import sharedlib.exceptions.*;
-import sharedlib.tuples.*;
-import sharedlib.utils.*;
 
 /**
  * Wrapper around a Connection object that implements the Server-Client protocol

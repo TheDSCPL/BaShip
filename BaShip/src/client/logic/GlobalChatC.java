@@ -1,6 +1,6 @@
 package client.logic;
 
-import sharedlib.tuples.Message;
+import pt.up.fe.lpro1613.sharedlib.tuples.Message;
 
 public class GlobalChatC {
 

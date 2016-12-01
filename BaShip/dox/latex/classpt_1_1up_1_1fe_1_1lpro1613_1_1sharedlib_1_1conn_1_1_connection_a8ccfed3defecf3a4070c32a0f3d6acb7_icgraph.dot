@@ -1,0 +1,17 @@
+digraph "pt.up.fe.lpro1613.sharedlib.conn.Connection.connect"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node9 [label="pt.up.fe.lpro1613.sharedlib.conn.\lConnection.connect",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node9 -> Node10 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node10 [label="client.conn.Server.connect",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classclient_1_1conn_1_1_server.html#a7e96a6bd486520d128a37a8216cf37c3"];
+  Node10 -> Node11 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node11 [label="client.ClientMain.connect\lToServer",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classclient_1_1_client_main.html#aecd59c193bdb0536d649be78f72149b0"];
+  Node11 -> Node12 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node12 [label="client.ui.LoginPanel.calculate\lRetypePasswordDialogPosition",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classclient_1_1ui_1_1_login_panel.html#a9726aa2bc3416aa22ad43d2b4b9eed70"];
+  Node12 -> Node13 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node13 [label="client.ui.LoginPanel.Login\lPanel",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classclient_1_1ui_1_1_login_panel.html#a697f38b937f048e562c634c713d90885"];
+  Node11 -> Node14 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node14 [label="client.ui.SettingsPanel.\lSettingsPanel",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classclient_1_1ui_1_1_settings_panel.html#a95dfa76100b4d18863cd0b572c631ebf"];
+}

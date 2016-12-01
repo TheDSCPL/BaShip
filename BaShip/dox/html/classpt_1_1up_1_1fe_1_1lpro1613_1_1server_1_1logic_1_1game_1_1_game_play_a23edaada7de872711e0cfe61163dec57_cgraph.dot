@@ -1,0 +1,44 @@
+digraph "pt.up.fe.lpro1613.server.logic.game.GamePlay.clientDisconnected"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node9 [label="pt.up.fe.lpro1613.server.logic.game.\lGamePlay.clientDisconnected",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node9 -> Node10 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node10 [label="pt.up.fe.lpro1613.server.logic.game.\lGamePlay.isPlayer",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1logic_1_1game_1_1_game_play.html#a64af21d57da05af1d37d17ea71109aa7"];
+  Node9 -> Node11 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node11 [label="pt.up.fe.lpro1613.server.logic.\lUserS.usernameFromClient",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1logic_1_1_user_s.html#a26c28666f4e6461ee06eecfe1f55356d"];
+  Node11 -> Node12 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node12 [label="pt.up.fe.lpro1613.server.database.\lUserDB.getUsernameFromID",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_user_d_b.html#ab5c986eb5c2ba36eef3defee599c6903"];
+  Node12 -> Node13 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node13 [label="pt.up.fe.lpro1613.server.database.\lDatabase.getConn",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_database.html#aa5ecc24c87d16ca20cc645414d8f3232"];
+  Node12 -> Node14 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node14 [label="pt.up.fe.lpro1613.server.database.\lDatabase.close",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_database.html#ae7e6a39f412e24bea44477224f0fdef0"];
+  Node11 -> Node15 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node15 [label="pt.up.fe.lpro1613.server.logic.\lUserS.idFromClient",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1logic_1_1_user_s.html#a6ce47ad78e634c757be0ffc905799b4c"];
+  Node9 -> Node16 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node16 [label="pt.up.fe.lpro1613.server.database.\lGameDB.setStartTimeToNow",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_game_d_b.html#a991c06b53598f46f4eea30c8c8fc31f7"];
+  Node16 -> Node13 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node16 -> Node14 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node9 -> Node17 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node17 [label="pt.up.fe.lpro1613.server.database.\lShipDB.saveShipPositions",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_ship_d_b.html#a1b7c2d5d84b479078cbb9b1de9445ae9"];
+  Node17 -> Node13 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node17 -> Node14 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node9 -> Node18 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node18 [label="pt.up.fe.lpro1613.server.logic.game.\lBoard.getShips",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1logic_1_1game_1_1_board.html#aaf2e7b01d28bbf83f6878de30f5300fc"];
+  Node9 -> Node19 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node19 [label="pt.up.fe.lpro1613.server.database.\lGameDB.setEndTimeToNow",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_game_d_b.html#ab352e7cd06250b77274f5c4f261f8116"];
+  Node19 -> Node13 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node19 -> Node14 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node9 -> Node20 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node20 [label="pt.up.fe.lpro1613.server.database.\lGameDB.setWinner",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_game_d_b.html#a30f4664442da6b7ae80b1821aaa195fa"];
+  Node20 -> Node13 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node20 -> Node14 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node9 -> Node15 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node9 -> Node21 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node21 [label="pt.up.fe.lpro1613.server.conn.\lClient.gameFinished",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1conn_1_1_client.html#a58789376953d4b6f316a48627dffbae1"];
+  Node21 -> Node22 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node22 [label="pt.up.fe.lpro1613.sharedlib.conn.\lConnection.sendOnly",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1conn_1_1_connection.html#acdcf8af7c9a37ede122c6db80d06668f"];
+  Node9 -> Node23 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node23 [label="pt.up.fe.lpro1613.server.logic.\lGameS.gameFinished",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1logic_1_1_game_s.html#aa8bc8390e9b27b09516dc5edcfdc7981"];
+}
