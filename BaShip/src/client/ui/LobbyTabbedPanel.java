@@ -335,7 +335,7 @@ public class LobbyTabbedPanel extends JPanel {
                 usersTableModel.addRow(new Object[] {userInfo.username, userInfo.rank, userInfo.nGames, userInfo.nWins, userInfo.nShots, userInfo.status});
             }
         } catch (UserMessageException ex) {
-            //ClientMain.showError(ex.getMessage());
+            ClientMain.showError(ex.getMessage());
         }
         catch(Exception ignored)
         {
@@ -366,7 +366,7 @@ public class LobbyTabbedPanel extends JPanel {
                     gameInfo.endDate == null ? ("Playing: " + dF.format(gameInfo.startDate)) : "Played on: " + dF.format(gameInfo.endDate)});
             }
         } catch (UserMessageException ex) {
-            //ClientMain.showError(ex.getMessage());
+            ClientMain.showError(ex.getMessage());
         }
         catch(Exception e)
         {
@@ -415,7 +415,7 @@ public class LobbyTabbedPanel extends JPanel {
         }
         catch (UserMessageException ex) {
             Logger.getLogger(LobbyTabbedPanel.class.getName()).log(Level.SEVERE, null, ex);
-            //ClientMain.showError(ex.getMessage());
+            ClientMain.showError(ex.getMessage());
         }
     }//GEN-LAST:event_globalChatSendButtonActionPerformed
 
