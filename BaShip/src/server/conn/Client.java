@@ -155,7 +155,7 @@ public class Client implements Connection.Delegate {
         connection.sendOnly(new Packet(Query.SReceiveGlobalMessage, msg));
     }
 
-    public void updateGameScreen(GameScreenInfo info) throws ConnectionException {
+    public void updateGameScreen(GameUIInfo info) throws ConnectionException {
         connection.sendOnly(new Packet(Query.SUpdateGameScreen, info));
     }
 
@@ -163,7 +163,7 @@ public class Client implements Connection.Delegate {
         connection.sendOnly(new Packet(Query.SReceiveGameInvitation, "")); // TODO: info?
     }
 
-    public void updateGameBoard(BoardInfo info) throws ConnectionException {
+    public void updateGameBoard(BoardUIInfo info) throws ConnectionException {
         connection.sendOnly(new Packet(Query.SUpdateGameBoard, info));
     }
 

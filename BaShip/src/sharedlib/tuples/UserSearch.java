@@ -1,6 +1,13 @@
 package sharedlib.tuples;
 
+/**
+ * Tuple containing information about how a search for users on the database
+ * should be done.
+ *
+ * @author Alex
+ */
 public class UserSearch {
+
     public final boolean onlineOnly;
     public final String usernameFilter;
     public final int orderByColumn;
@@ -12,5 +19,5 @@ public class UserSearch {
         this.orderByColumn = orderByColumn;
         this.rowLimit = rowLimit;
     }
-    
+
 }

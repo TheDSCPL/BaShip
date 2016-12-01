@@ -43,7 +43,7 @@ public class Server implements Connection.Delegate {
                 break;
             }
             case SUpdateGameScreen: {
-                GameC.updateGameScreen((GameScreenInfo) request.info);
+                GameC.updateGameScreen((GameUIInfo) request.info);
                 break;
             }
             case SReceiveGameInvitation: {
@@ -51,7 +51,7 @@ public class Server implements Connection.Delegate {
                 break;
             }
             case SUpdateGameBoard: {
-                GameC.updateBoardInfo((BoardInfo) request.info);
+                GameC.updateBoardInfo((BoardUIInfo) request.info);
                 break;
             }
             case SGameFinished: {

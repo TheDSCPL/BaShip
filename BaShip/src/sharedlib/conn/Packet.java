@@ -39,7 +39,7 @@ public class Packet {
      * Create a new Packet.
      *
      * @param query The query of this packet
-     * @param info The information to be sent
+     * @param info The information to be sent. Can be null
      */
     public Packet(Query query, Object info) {
         id = UUID.randomUUID().toString();
@@ -58,7 +58,7 @@ public class Packet {
     }
 
     /**
-     * Create a new Packet with an empty query and no information.
+     * Create a new Packet with an empty query ({@code Query::Empty}) and no information.
      */
     public Packet() {
         this(Query.BEmpty);
@@ -77,13 +77,19 @@ public class Packet {
         }
     }
 
+    /**
+     * Instantiate a {@code Packet} object from its string representation
+     * @param string
+     * @return 
+     * @throws PacketException 
+     */
     static Packet fromString(String string) throws PacketException {
         String[] parts = string.split(SPLIT_1);
 
         String id = decodeString(parts[0]);
         String pid = decodeString(parts[1]);
         
-        Query query = Query.fromString(decodeString(parts[2]));
+        Query query = Query.valueOf(decodeString(parts[2]));
         if (query == null) {
             throw new PacketException("Invalid query string: " + decodeString(parts[2]));
         }

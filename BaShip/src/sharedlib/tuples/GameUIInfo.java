@@ -1,6 +1,6 @@
 package sharedlib.tuples;
 
-public class GameScreenInfo {
+public class GameUIInfo {
     public final String titleLeft;
     public final String titleRight;
     public final Boolean showRightBoard;
@@ -10,7 +10,7 @@ public class GameScreenInfo {
     public final Boolean player1Turn;
     public final Boolean player2Turn;
 
-    public GameScreenInfo(String titleLeft, String titleRight, Boolean showRightBoard, String waitMessageLine1, String waitMessageLine2, Boolean showReadyButton, Boolean player1Turn, Boolean player2Turn) {
+    public GameUIInfo(String titleLeft, String titleRight, Boolean showRightBoard, String waitMessageLine1, String waitMessageLine2, Boolean showReadyButton, Boolean player1Turn, Boolean player2Turn) {
         this.titleLeft = titleLeft;
         this.titleRight = titleRight;
         this.showRightBoard = showRightBoard;

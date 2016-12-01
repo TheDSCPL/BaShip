@@ -2,6 +2,12 @@ package sharedlib.tuples;
 
 import java.util.Date;
 
+/**
+ * A class representing a message sent by a user at a certain time with a
+ * certain text.
+ *
+ * @author Alex
+ */
 public class Message {
 
     public final Long id;
@@ -17,5 +23,5 @@ public class Message {
         this.timestamp = timestamp;
         this.text = text;
     }
-    
+
 }

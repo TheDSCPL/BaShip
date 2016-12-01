@@ -125,7 +125,7 @@ public class Board {
     }
 
     // GET BOARD INFO
-    public BoardInfo getBoardInfo(boolean leftBoard, boolean playing, boolean showEverything) {
+    public BoardUIInfo getBoardInfo(boolean leftBoard, boolean playing, boolean showEverything) {
         if (playing) {
             return getBoardInfoPlaying(leftBoard, showEverything);
         }
@@ -134,18 +134,18 @@ public class Board {
         }
     }
 
-    public BoardInfo getBoardInfoNotPlaying(boolean leftBoard) {
-        BoardInfo bi = new BoardInfo();
+    public BoardUIInfo getBoardInfoNotPlaying(boolean leftBoard) {
+        BoardUIInfo bi = new BoardUIInfo();
         bi.leftBoard = leftBoard;
 
         // Populate top board
         shipsLayer.forEach((c, b) -> {
-            bi.board.set(c, b ? BoardInfo.SquareFill.GraySquare : BoardInfo.SquareFill.Empty);
+            bi.board.set(c, b ? BoardUIInfo.SquareFill.GraySquare : BoardUIInfo.SquareFill.Empty);
         });
 
         // Overwirte fill values where ship placement is invalid
         invalidShipSquares.forEach((c) -> {
-            bi.board.set(c, BoardInfo.SquareFill.RedSquare);
+            bi.board.set(c, BoardUIInfo.SquareFill.RedSquare);
         });
 
         // Populate bottom info rows
@@ -155,7 +155,7 @@ public class Board {
             int index = s.size - 1;
 
             for (int i = offset[index] + count[index]; i < s.size; i++) {
-                bi.bottomInfo.set(i, BoardInfo.SquareFill.GraySquare);
+                bi.bottomInfo.set(i, BoardUIInfo.SquareFill.GraySquare);
             }
 
             count[index]++;
@@ -164,23 +164,23 @@ public class Board {
         return bi;
     }
 
-    public BoardInfo getBoardInfoPlaying(boolean leftBoard, boolean showEverything) {
-        BoardInfo bi = new BoardInfo();
+    public BoardUIInfo getBoardInfoPlaying(boolean leftBoard, boolean showEverything) {
+        BoardUIInfo bi = new BoardUIInfo();
         bi.leftBoard = leftBoard;
 
         if (showEverything) {
             bi.board.setEach((c) -> {
                 if (shotsLayer.get(c) && shipsLayer.get(c)) {
-                    return BoardInfo.SquareFill.GraySquareRedCross;
+                    return BoardUIInfo.SquareFill.GraySquareRedCross;
                 }
                 else if (shotsLayer.get(c) && !shipsLayer.get(c)) {
-                    return BoardInfo.SquareFill.BlueDiamond;
+                    return BoardUIInfo.SquareFill.BlueDiamond;
                 }
                 else if (!shotsLayer.get(c) && shipsLayer.get(c)) {
-                    return BoardInfo.SquareFill.GraySquare;
+                    return BoardUIInfo.SquareFill.GraySquare;
                 }
                 else {
-                    return BoardInfo.SquareFill.Empty;
+                    return BoardUIInfo.SquareFill.Empty;
                 }
             });
             
@@ -188,18 +188,18 @@ public class Board {
         }
         else {
             shotsLayer.forEach((coord, shot) -> {
-                BoardInfo.SquareFill fill;
+                BoardUIInfo.SquareFill fill;
 
                 if (shot) {
                     if (shipsLayer.get(coord)) {
-                        fill = BoardInfo.SquareFill.GraySquareRedCross;
+                        fill = BoardUIInfo.SquareFill.GraySquareRedCross;
                     }
                     else {
-                        fill = BoardInfo.SquareFill.BlueDiamond;
+                        fill = BoardUIInfo.SquareFill.BlueDiamond;
                     }
                 }
                 else {
-                    fill = BoardInfo.SquareFill.Empty;
+                    fill = BoardUIInfo.SquareFill.Empty;
                 }
 
                 bi.board.set(coord, fill);

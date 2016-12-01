@@ -163,17 +163,17 @@ public class GameS {
     }
 
     private static void updateGameScreenForClient(Client client) {
-        GameScreenInfo gsi = null;
+        GameUIInfo gsi = null;
 
         if (playersWaitingForGame.contains(client)) {
-            gsi = new GameScreenInfo(
+            gsi = new GameUIInfo(
                     UserS.usernameFromClient(client), "<waiting>", false,
                     "Waiting for opponent", "You can place ships", false,
                     false, false
             );
         }
         else if (playersWaitingForPlayer.containsValue(client)) {
-            gsi = new GameScreenInfo(
+            gsi = new GameUIInfo(
                     UserS.usernameFromClient(client), "<waiting for " + "OTHER PLAYER TODO" + ">", false, // TODO: UserS.usernameFromClient(otherPlayer) 
                     "Waiting for opponent", "You can place ships", false,
                     false, false

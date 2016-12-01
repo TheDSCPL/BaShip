@@ -2,6 +2,13 @@ package sharedlib.tuples;
 
 import java.util.Date;
 
+/**
+ * Tuple containing information about a game. Some fields may be null in some
+ * cases. It is up to the function that returns instances of this class to
+ * specify which fields contain information.
+ *
+ * @author Alex
+ */
 public class GameInfo {
 
     public final Long id;

@@ -1,7 +1,11 @@
 package sharedlib.tuples;
 
 /**
- * User info Model
+ * Tuple containing information about an user. Some fields may be null in some
+ * cases. It is up to the function that returns instances of this class to
+ * specify which fields contain information.
+ *
+ * @author Alex
  */
 public class UserInfo {
     

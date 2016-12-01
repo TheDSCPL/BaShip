@@ -33,7 +33,7 @@ public class GameC {
      *
      * @param info The object containing what is to be displayed on the UI
      */
-    static public void updateGameScreen(GameScreenInfo info) {
+    static public void updateGameScreen(GameUIInfo info) {
 
     }
 
@@ -45,7 +45,7 @@ public class GameC {
      * @param info The object containing what is to be displayed on one of the
      * boards
      */
-    static public void updateBoardInfo(BoardInfo info) {
+    static public void updateBoardInfo(BoardUIInfo info) {
 
     }
 

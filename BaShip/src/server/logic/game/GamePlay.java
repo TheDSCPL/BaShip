@@ -228,12 +228,12 @@ public class GamePlay {
     }
 
     private void refreshGameScreenForClient(Client client) {
-        GameScreenInfo info;
+        GameUIInfo info;
 
         if (isPlayer(client)) {
             boolean opponentReady = stateForPlayer(opponent(client)) == PlayerState.Waiting;
 
-            info = new GameScreenInfo(
+            info = new GameUIInfo(
                     UserS.usernameFromClient(client),
                     UserS.usernameFromClient(opponent(client)),
                     gameHasStarted(),
@@ -245,7 +245,7 @@ public class GamePlay {
             );
         }
         else {
-            info = new GameScreenInfo(
+            info = new GameUIInfo(
                     UserS.usernameFromClient(player1),
                     UserS.usernameFromClient(player2),
                     true,
@@ -263,7 +263,7 @@ public class GamePlay {
     }
 
     private void refreshBoardsForClient(Client client) {
-        BoardInfo leftBoard, rightBoard;
+        BoardUIInfo leftBoard, rightBoard;
         boolean playing = gameHasStarted();
 
         if (isPlayer(client)) {
