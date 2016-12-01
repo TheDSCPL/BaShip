@@ -13,7 +13,7 @@ import pt.up.fe.lpro1613.sharedlib.structs.UserSearch;
 import pt.up.fe.lpro1613.sharedlib.utils.Coord;
 
 /**
- * Object that defines: (1) the information a {@code Packet} sent between client and server contains, (2) the type of event that that {@code Packet} signals.
+ * Object that defines: (1) the information a {@code Packet} sent between client and server contains, (2) the type of event that the {@code Packet} signals.
  * Queries starting with 'C' are sent by the [C]lient to the server.
  * Queries starting with 'S' are sent by the [S]erver to the client.
  * Queries starting with 'B' are sent in [B]oth directions.
