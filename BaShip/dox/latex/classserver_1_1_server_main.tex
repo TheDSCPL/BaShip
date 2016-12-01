@@ -1,0 +1,86 @@
+\hypertarget{classserver_1_1_server_main}{}\section{server.\+Server\+Main Class Reference}
+\label{classserver_1_1_server_main}\index{server.\+Server\+Main@{server.\+Server\+Main}}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \hyperlink{classserver_1_1_server_main_a8813a033bf50655c4dbe0e00508f854d}{main} (String args\mbox{[}$\,$\mbox{]})  throws S\+Q\+L\+Exception 
+\end{DoxyCompactItemize}
+\subsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static final \hyperlink{classsharedlib_1_1utils_1_1_preferences}{Preferences} \hyperlink{classserver_1_1_server_main_ad846c85619320e3c5503175b3156c6ce}{prefs} = new \hyperlink{classsharedlib_1_1utils_1_1_preferences}{Preferences}(Server\+Main.\+class)
+\item 
+static final \hyperlink{classserver_1_1conn_1_1_server_thread}{Server\+Thread} \hyperlink{classserver_1_1_server_main_ab0941f19c36879a7b6b36f9d3c163909}{server} = new \hyperlink{classserver_1_1conn_1_1_server_thread}{Server\+Thread}(prefs.\+getI(\hyperlink{enumserver_1_1other_1_1_prefs_key_a97c1897d83b59cf6735643e3b50d549b}{Prefs\+Key.\+Server\+Port}))
+\item 
+static final \hyperlink{classserver_1_1other_1_1_console_thread}{Console\+Thread} \hyperlink{classserver_1_1_server_main_ad8e92f0aa15ba52ea24b2dd7b9bab924}{console} = new \hyperlink{classserver_1_1other_1_1_console_thread}{Console\+Thread}()
+\item 
+static final Set$<$ \hyperlink{classserver_1_1conn_1_1_client}{Client} $>$ \hyperlink{classserver_1_1_server_main_a9b8ba17f17513631d15fa701692dd82f}{clients} = new Hash\+Set$<$$>$()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 10 of file Server\+Main.\+java.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classserver_1_1_server_main_a8813a033bf50655c4dbe0e00508f854d}{}\label{classserver_1_1_server_main_a8813a033bf50655c4dbe0e00508f854d} 
+\index{server\+::\+Server\+Main@{server\+::\+Server\+Main}!main@{main}}
+\index{main@{main}!server\+::\+Server\+Main@{server\+::\+Server\+Main}}
+\subsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily static void server.\+Server\+Main.\+main (\begin{DoxyParamCaption}\item[{String}]{args\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption}) throws S\+Q\+L\+Exception\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 17 of file Server\+Main.\+java.
+
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classserver_1_1_server_main_a9b8ba17f17513631d15fa701692dd82f}{}\label{classserver_1_1_server_main_a9b8ba17f17513631d15fa701692dd82f} 
+\index{server\+::\+Server\+Main@{server\+::\+Server\+Main}!clients@{clients}}
+\index{clients@{clients}!server\+::\+Server\+Main@{server\+::\+Server\+Main}}
+\subsubsection{\texorpdfstring{clients}{clients}}
+{\footnotesize\ttfamily final Set$<$\hyperlink{classserver_1_1conn_1_1_client}{Client}$>$ server.\+Server\+Main.\+clients = new Hash\+Set$<$$>$()\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 15 of file Server\+Main.\+java.
+
+\hypertarget{classserver_1_1_server_main_ad8e92f0aa15ba52ea24b2dd7b9bab924}{}\label{classserver_1_1_server_main_ad8e92f0aa15ba52ea24b2dd7b9bab924} 
+\index{server\+::\+Server\+Main@{server\+::\+Server\+Main}!console@{console}}
+\index{console@{console}!server\+::\+Server\+Main@{server\+::\+Server\+Main}}
+\subsubsection{\texorpdfstring{console}{console}}
+{\footnotesize\ttfamily final \hyperlink{classserver_1_1other_1_1_console_thread}{Console\+Thread} server.\+Server\+Main.\+console = new \hyperlink{classserver_1_1other_1_1_console_thread}{Console\+Thread}()\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 14 of file Server\+Main.\+java.
+
+\hypertarget{classserver_1_1_server_main_ad846c85619320e3c5503175b3156c6ce}{}\label{classserver_1_1_server_main_ad846c85619320e3c5503175b3156c6ce} 
+\index{server\+::\+Server\+Main@{server\+::\+Server\+Main}!prefs@{prefs}}
+\index{prefs@{prefs}!server\+::\+Server\+Main@{server\+::\+Server\+Main}}
+\subsubsection{\texorpdfstring{prefs}{prefs}}
+{\footnotesize\ttfamily final \hyperlink{classsharedlib_1_1utils_1_1_preferences}{Preferences} server.\+Server\+Main.\+prefs = new \hyperlink{classsharedlib_1_1utils_1_1_preferences}{Preferences}(Server\+Main.\+class)\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 12 of file Server\+Main.\+java.
+
+\hypertarget{classserver_1_1_server_main_ab0941f19c36879a7b6b36f9d3c163909}{}\label{classserver_1_1_server_main_ab0941f19c36879a7b6b36f9d3c163909} 
+\index{server\+::\+Server\+Main@{server\+::\+Server\+Main}!server@{server}}
+\index{server@{server}!server\+::\+Server\+Main@{server\+::\+Server\+Main}}
+\subsubsection{\texorpdfstring{server}{server}}
+{\footnotesize\ttfamily final \hyperlink{classserver_1_1conn_1_1_server_thread}{Server\+Thread} server.\+Server\+Main.\+server = new \hyperlink{classserver_1_1conn_1_1_server_thread}{Server\+Thread}(prefs.\+getI(\hyperlink{enumserver_1_1other_1_1_prefs_key_a97c1897d83b59cf6735643e3b50d549b}{Prefs\+Key.\+Server\+Port}))\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 13 of file Server\+Main.\+java.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+server/\hyperlink{_server_main_8java}{Server\+Main.\+java}\end{DoxyCompactItemize}

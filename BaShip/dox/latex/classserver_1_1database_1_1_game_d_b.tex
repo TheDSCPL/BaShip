@@ -1,0 +1,80 @@
+\hypertarget{classserver_1_1database_1_1_game_d_b}{}\section{server.\+database.\+Game\+DB Class Reference}
+\label{classserver_1_1database_1_1_game_d_b}\index{server.\+database.\+Game\+DB@{server.\+database.\+Game\+DB}}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static List$<$ \hyperlink{classsharedlib_1_1tuples_1_1_game_info}{Game\+Info} $>$ \hyperlink{classserver_1_1database_1_1_game_d_b_a97341282dd0f89b2842dc03fd460a1b5}{get\+Game\+List} (\hyperlink{classsharedlib_1_1tuples_1_1_game_search}{Game\+Search} s)  throws S\+Q\+L\+Exception 
+\item 
+static Long \hyperlink{classserver_1_1database_1_1_game_d_b_ab77073e390b71c37e8d0a84c05878992}{create\+Game} (Long player1\+ID, Long player2\+ID)  throws S\+Q\+L\+Exception 
+\item 
+static void \hyperlink{classserver_1_1database_1_1_game_d_b_a399d52aa4d6f47bd4024568835f35007}{set\+Start\+Time\+To\+Now} (Long game\+ID)  throws S\+Q\+L\+Exception 
+\item 
+static void \hyperlink{classserver_1_1database_1_1_game_d_b_ab406be179c25bb8bfd87ecf3cda383c2}{set\+End\+Time\+To\+Now} (Long game\+ID)  throws S\+Q\+L\+Exception 
+\item 
+static void \hyperlink{classserver_1_1database_1_1_game_d_b_ae64f3d1aca34959c83a73dbb5da7f82b}{set\+Winner} (Long game\+ID, Long player\+ID)  throws S\+Q\+L\+Exception 
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 14 of file Game\+D\+B.\+java.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classserver_1_1database_1_1_game_d_b_ab77073e390b71c37e8d0a84c05878992}{}\label{classserver_1_1database_1_1_game_d_b_ab77073e390b71c37e8d0a84c05878992} 
+\index{server\+::database\+::\+Game\+DB@{server\+::database\+::\+Game\+DB}!create\+Game@{create\+Game}}
+\index{create\+Game@{create\+Game}!server\+::database\+::\+Game\+DB@{server\+::database\+::\+Game\+DB}}
+\subsubsection{\texorpdfstring{create\+Game()}{createGame()}}
+{\footnotesize\ttfamily static Long server.\+database.\+Game\+D\+B.\+create\+Game (\begin{DoxyParamCaption}\item[{Long}]{player1\+ID,  }\item[{Long}]{player2\+ID }\end{DoxyParamCaption}) throws S\+Q\+L\+Exception\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 78 of file Game\+D\+B.\+java.
+
+\hypertarget{classserver_1_1database_1_1_game_d_b_a97341282dd0f89b2842dc03fd460a1b5}{}\label{classserver_1_1database_1_1_game_d_b_a97341282dd0f89b2842dc03fd460a1b5} 
+\index{server\+::database\+::\+Game\+DB@{server\+::database\+::\+Game\+DB}!get\+Game\+List@{get\+Game\+List}}
+\index{get\+Game\+List@{get\+Game\+List}!server\+::database\+::\+Game\+DB@{server\+::database\+::\+Game\+DB}}
+\subsubsection{\texorpdfstring{get\+Game\+List()}{getGameList()}}
+{\footnotesize\ttfamily static List$<$\hyperlink{classsharedlib_1_1tuples_1_1_game_info}{Game\+Info}$>$ server.\+database.\+Game\+D\+B.\+get\+Game\+List (\begin{DoxyParamCaption}\item[{\hyperlink{classsharedlib_1_1tuples_1_1_game_search}{Game\+Search}}]{s }\end{DoxyParamCaption}) throws S\+Q\+L\+Exception\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 16 of file Game\+D\+B.\+java.
+
+\hypertarget{classserver_1_1database_1_1_game_d_b_ab406be179c25bb8bfd87ecf3cda383c2}{}\label{classserver_1_1database_1_1_game_d_b_ab406be179c25bb8bfd87ecf3cda383c2} 
+\index{server\+::database\+::\+Game\+DB@{server\+::database\+::\+Game\+DB}!set\+End\+Time\+To\+Now@{set\+End\+Time\+To\+Now}}
+\index{set\+End\+Time\+To\+Now@{set\+End\+Time\+To\+Now}!server\+::database\+::\+Game\+DB@{server\+::database\+::\+Game\+DB}}
+\subsubsection{\texorpdfstring{set\+End\+Time\+To\+Now()}{setEndTimeToNow()}}
+{\footnotesize\ttfamily static void server.\+database.\+Game\+D\+B.\+set\+End\+Time\+To\+Now (\begin{DoxyParamCaption}\item[{Long}]{game\+ID }\end{DoxyParamCaption}) throws S\+Q\+L\+Exception\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 115 of file Game\+D\+B.\+java.
+
+\hypertarget{classserver_1_1database_1_1_game_d_b_a399d52aa4d6f47bd4024568835f35007}{}\label{classserver_1_1database_1_1_game_d_b_a399d52aa4d6f47bd4024568835f35007} 
+\index{server\+::database\+::\+Game\+DB@{server\+::database\+::\+Game\+DB}!set\+Start\+Time\+To\+Now@{set\+Start\+Time\+To\+Now}}
+\index{set\+Start\+Time\+To\+Now@{set\+Start\+Time\+To\+Now}!server\+::database\+::\+Game\+DB@{server\+::database\+::\+Game\+DB}}
+\subsubsection{\texorpdfstring{set\+Start\+Time\+To\+Now()}{setStartTimeToNow()}}
+{\footnotesize\ttfamily static void server.\+database.\+Game\+D\+B.\+set\+Start\+Time\+To\+Now (\begin{DoxyParamCaption}\item[{Long}]{game\+ID }\end{DoxyParamCaption}) throws S\+Q\+L\+Exception\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 100 of file Game\+D\+B.\+java.
+
+\hypertarget{classserver_1_1database_1_1_game_d_b_ae64f3d1aca34959c83a73dbb5da7f82b}{}\label{classserver_1_1database_1_1_game_d_b_ae64f3d1aca34959c83a73dbb5da7f82b} 
+\index{server\+::database\+::\+Game\+DB@{server\+::database\+::\+Game\+DB}!set\+Winner@{set\+Winner}}
+\index{set\+Winner@{set\+Winner}!server\+::database\+::\+Game\+DB@{server\+::database\+::\+Game\+DB}}
+\subsubsection{\texorpdfstring{set\+Winner()}{setWinner()}}
+{\footnotesize\ttfamily static void server.\+database.\+Game\+D\+B.\+set\+Winner (\begin{DoxyParamCaption}\item[{Long}]{game\+ID,  }\item[{Long}]{player\+ID }\end{DoxyParamCaption}) throws S\+Q\+L\+Exception\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 130 of file Game\+D\+B.\+java.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+server/database/\hyperlink{_game_d_b_8java}{Game\+D\+B.\+java}\end{DoxyCompactItemize}

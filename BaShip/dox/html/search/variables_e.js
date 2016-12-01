@@ -1,0 +1,27 @@
+var searchData=
+[
+  ['server',['server',['../classclient_1_1_client_main.html#a933025baa76b4803c185b02d359a7e15',1,'client.ClientMain.server()'],['../classserver_1_1_server_main.html#ab0941f19c36879a7b6b36f9d3c163909',1,'server.ServerMain.server()']]],
+  ['serverip',['ServerIP',['../enumclient_1_1other_1_1_prefs_key.html#afb3297cc8cba1e49ec031c14e115feb8',1,'client::other::PrefsKey']]],
+  ['serverport',['ServerPort',['../enumclient_1_1other_1_1_prefs_key.html#a967610c3389ceac5034551d3f69c564c',1,'client.other.PrefsKey.ServerPort()'],['../enumserver_1_1other_1_1_prefs_key.html#a97c1897d83b59cf6735643e3b50d549b',1,'server.other.PrefsKey.ServerPort()']]],
+  ['sgamefinished',['SGameFinished',['../enumsharedlib_1_1conn_1_1_query.html#a1946b23695285c3144c5241c073eaf2d',1,'sharedlib::conn::Query']]],
+  ['ship_5fcount',['SHIP_COUNT',['../classsharedlib_1_1constants_1_1_board_k.html#a7b90dc391ec795dbaac068c611dd9787',1,'sharedlib::constants::BoardK']]],
+  ['ship_5fcount_5ffor_5fsize',['SHIP_COUNT_FOR_SIZE',['../classsharedlib_1_1constants_1_1_board_k.html#a53904d51affb4ad3b367258585c91f70',1,'sharedlib::constants::BoardK']]],
+  ['showreadybutton',['showReadyButton',['../classsharedlib_1_1tuples_1_1_game_screen_info.html#a6ad33a0d9b3ccc289366498b863037d7',1,'sharedlib::tuples::GameScreenInfo']]],
+  ['showrightboard',['showRightBoard',['../classsharedlib_1_1tuples_1_1_game_screen_info.html#a0f37c050a0cfbf35d993ca4af17df941',1,'sharedlib::tuples::GameScreenInfo']]],
+  ['size',['size',['../classserver_1_1logic_1_1game_1_1_ship.html#a55a1cc2a311ddaf3a469c5483b137cbf',1,'server::logic::game::Ship']]],
+  ['sound',['Sound',['../enumclient_1_1other_1_1_prefs_key.html#a8ad253d1a3c77e65df307909afb7f52f',1,'client::other::PrefsKey']]],
+  ['sreceivegameinvitation',['SReceiveGameInvitation',['../enumsharedlib_1_1conn_1_1_query.html#ab360a0406c246d18e767e4768362621a',1,'sharedlib::conn::Query']]],
+  ['sreceivegamemessage',['SReceiveGameMessage',['../enumsharedlib_1_1conn_1_1_query.html#a34ddcc74f8326d320a4cffedc2f9a647',1,'sharedlib::conn::Query']]],
+  ['sreceiveglobalmessage',['SReceiveGlobalMessage',['../enumsharedlib_1_1conn_1_1_query.html#a76fcfb3d9ac59f2ed513e76d324b4c88',1,'sharedlib::conn::Query']]],
+  ['srerrormessage',['SRErrorMessage',['../enumsharedlib_1_1conn_1_1_query.html#a8763182a3c749b5e6c26b02e375b53dc',1,'sharedlib::conn::Query']]],
+  ['srgetgamelist',['SRGetGameList',['../enumsharedlib_1_1conn_1_1_query.html#a8f1920c9e5c361e835794de6995ad4cf',1,'sharedlib::conn::Query']]],
+  ['srgetuserlist',['SRGetUserList',['../enumsharedlib_1_1conn_1_1_query.html#ab9bac40bb2fe89f9191824bbe1cb4436',1,'sharedlib::conn::Query']]],
+  ['srusernameavailable',['SRUsernameAvailable',['../enumsharedlib_1_1conn_1_1_query.html#a98a79e98326c0c34f6bfeaf1e42f2648',1,'sharedlib::conn::Query']]],
+  ['startdate',['startDate',['../classsharedlib_1_1tuples_1_1_game_info.html#abb7d07e4ce3a419b45134234b312d4a3',1,'sharedlib::tuples::GameInfo']]],
+  ['state',['state',['../classsharedlib_1_1tuples_1_1_game_info.html#afc333badb334883013fd65eeb7d4fd80',1,'sharedlib::tuples::GameInfo']]],
+  ['status',['status',['../classsharedlib_1_1tuples_1_1_user_info.html#a2122f345a07ca469c305e79827797563',1,'sharedlib::tuples::UserInfo']]],
+  ['supdategameboard',['SUpdateGameBoard',['../enumsharedlib_1_1conn_1_1_query.html#ae0f80c1890732270ea7d20921a599f55',1,'sharedlib::conn::Query']]],
+  ['supdategamescreen',['SUpdateGameScreen',['../enumsharedlib_1_1conn_1_1_query.html#a167840e91edf75faabd1a05c7818f7cb',1,'sharedlib::conn::Query']]],
+  ['sx',['sx',['../classsharedlib_1_1utils_1_1_matrix.html#afb6345b7525e7a0c51bd4f835248521b',1,'sharedlib::utils::Matrix']]],
+  ['sy',['sy',['../classsharedlib_1_1utils_1_1_matrix.html#a184f78d2081c890cd3b09a15b37ea28c',1,'sharedlib::utils::Matrix']]]
+];

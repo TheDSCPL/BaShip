@@ -1,0 +1,22 @@
+var searchData=
+[
+  ['canswergameinvitation',['CAnswerGameInvitation',['../enumsharedlib_1_1conn_1_1_query.html#ac4c7ec95ccd11a96e28a7f8867fb0234',1,'sharedlib::conn::Query']]],
+  ['cclickreadybutton',['CClickReadyButton',['../enumsharedlib_1_1conn_1_1_query.html#af12eeca0b0f06cfde5cac9d2b8a9b7c3',1,'sharedlib::conn::Query']]],
+  ['cclosegame',['CCloseGame',['../enumsharedlib_1_1conn_1_1_query.html#aaf769eea78a5d5c66224ab8492383724',1,'sharedlib::conn::Query']]],
+  ['cfireshot',['CFireShot',['../enumsharedlib_1_1conn_1_1_query.html#af209e818f10f549b31d697a713e0c497',1,'sharedlib::conn::Query']]],
+  ['cgetgamelist',['CGetGameList',['../enumsharedlib_1_1conn_1_1_query.html#ae1f5629ed4a2fa6edbe873b3d34f2c70',1,'sharedlib::conn::Query']]],
+  ['cgetuserlist',['CGetUserList',['../enumsharedlib_1_1conn_1_1_query.html#ae5ad3e5d72c454bea8933cc09c8a6a59',1,'sharedlib::conn::Query']]],
+  ['clients',['clients',['../classserver_1_1_server_main.html#a9b8ba17f17513631d15fa701692dd82f',1,'server::ServerMain']]],
+  ['clogin',['CLogin',['../enumsharedlib_1_1conn_1_1_query.html#aea56634d75f246edb84fc81d18c7c713',1,'sharedlib::conn::Query']]],
+  ['clogout',['CLogout',['../enumsharedlib_1_1conn_1_1_query.html#afc2a083454cba81038adceb4cd48ecf2',1,'sharedlib::conn::Query']]],
+  ['console',['console',['../classserver_1_1_server_main.html#ad8e92f0aa15ba52ea24b2dd7b9bab924',1,'server::ServerMain']]],
+  ['created',['Created',['../enumsharedlib_1_1tuples_1_1_game_info_1_1_state.html#ae938cb1011e43a20daa6f578bebc2c8d',1,'sharedlib::tuples::GameInfo::State']]],
+  ['cregister',['CRegister',['../enumsharedlib_1_1conn_1_1_query.html#a8642336ee80fc5ec0f02531f64b94fbe',1,'sharedlib::conn::Query']]],
+  ['csendgamemessage',['CSendGameMessage',['../enumsharedlib_1_1conn_1_1_query.html#a815b1d848b33445e9489f6da81e91e73',1,'sharedlib::conn::Query']]],
+  ['csendglobalmessage',['CSendGlobalMessage',['../enumsharedlib_1_1conn_1_1_query.html#a67eb88813c5eca451aaea113583641a5',1,'sharedlib::conn::Query']]],
+  ['cstartgamewithplayer',['CStartGameWithPlayer',['../enumsharedlib_1_1conn_1_1_query.html#afd7008679cab67b543ca7a83d1538c95',1,'sharedlib::conn::Query']]],
+  ['cstartrandomgame',['CStartRandomGame',['../enumsharedlib_1_1conn_1_1_query.html#aac53d6c92650e86009f75319e808d02b',1,'sharedlib::conn::Query']]],
+  ['ctoggleplaceonshipsquare',['CTogglePlaceOnShipSquare',['../enumsharedlib_1_1conn_1_1_query.html#a45b6f1768f92f9e9db98221c80217ebb',1,'sharedlib::conn::Query']]],
+  ['currentlyplayingonly',['currentlyPlayingOnly',['../classsharedlib_1_1tuples_1_1_game_search.html#a88c70bcff0388dd9e9704a60980049b8',1,'sharedlib::tuples::GameSearch']]],
+  ['cusernameavailable',['CUsernameAvailable',['../enumsharedlib_1_1conn_1_1_query.html#a8766bb4267f59d52ba82acbdb4d0b314',1,'sharedlib::conn::Query']]]
+];

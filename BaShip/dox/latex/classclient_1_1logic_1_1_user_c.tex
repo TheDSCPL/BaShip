@@ -1,0 +1,189 @@
+\hypertarget{classclient_1_1logic_1_1_user_c}{}\section{client.\+logic.\+UserC Class Reference}
+\label{classclient_1_1logic_1_1_user_c}\index{client.\+logic.\+UserC@{client.\+logic.\+UserC}}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static boolean \hyperlink{classclient_1_1logic_1_1_user_c_a62765c4c4912ee02b3ef70f1b9c0fb4e}{is\+Username\+Valid} (String username)
+\item 
+static boolean \hyperlink{classclient_1_1logic_1_1_user_c_a724d1799c3963f516238cdf0d85ccf52}{is\+Password\+Valid} (char\mbox{[}$\,$\mbox{]} password)
+\item 
+static boolean \hyperlink{classclient_1_1logic_1_1_user_c_aa3736b2a54be77a2b631ca49b9980a8c}{login} (String username, char\mbox{[}$\,$\mbox{]} password)  throws User\+Message\+Exception 
+\item 
+static boolean \hyperlink{classclient_1_1logic_1_1_user_c_a81ee75a5f1f4a278a71054a9c4f72609}{register} (String username, char\mbox{[}$\,$\mbox{]} password)  throws User\+Message\+Exception 
+\item 
+static boolean \hyperlink{classclient_1_1logic_1_1_user_c_a6609a9ab9414bda2dd3a6685cdec3771}{logout} ()  throws User\+Message\+Exception 
+\item 
+static Long \hyperlink{classclient_1_1logic_1_1_user_c_a984cd3489f4deea4f5b96c450635538a}{get\+Logged\+In\+User\+ID} ()
+\item 
+static String \hyperlink{classclient_1_1logic_1_1_user_c_a93ff0dc94af63f55144147389b0b2bdf}{get\+Logged\+In\+Username} ()
+\item 
+static boolean \hyperlink{classclient_1_1logic_1_1_user_c_ad4fb84e487e917c202a4e1bcdea62dd5}{is\+Logged\+In} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 8 of file User\+C.\+java.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classclient_1_1logic_1_1_user_c_a984cd3489f4deea4f5b96c450635538a}{}\label{classclient_1_1logic_1_1_user_c_a984cd3489f4deea4f5b96c450635538a} 
+\index{client\+::logic\+::\+UserC@{client\+::logic\+::\+UserC}!get\+Logged\+In\+User\+ID@{get\+Logged\+In\+User\+ID}}
+\index{get\+Logged\+In\+User\+ID@{get\+Logged\+In\+User\+ID}!client\+::logic\+::\+UserC@{client\+::logic\+::\+UserC}}
+\subsubsection{\texorpdfstring{get\+Logged\+In\+User\+I\+D()}{getLoggedInUserID()}}
+{\footnotesize\ttfamily static Long client.\+logic.\+User\+C.\+get\+Logged\+In\+User\+ID (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\begin{DoxyReturn}{Returns}
+The ID of the user current logged-\/in on this client, or null if no user is logged-\/in 
+\end{DoxyReturn}
+
+
+Definition at line 91 of file User\+C.\+java.
+
+\hypertarget{classclient_1_1logic_1_1_user_c_a93ff0dc94af63f55144147389b0b2bdf}{}\label{classclient_1_1logic_1_1_user_c_a93ff0dc94af63f55144147389b0b2bdf} 
+\index{client\+::logic\+::\+UserC@{client\+::logic\+::\+UserC}!get\+Logged\+In\+Username@{get\+Logged\+In\+Username}}
+\index{get\+Logged\+In\+Username@{get\+Logged\+In\+Username}!client\+::logic\+::\+UserC@{client\+::logic\+::\+UserC}}
+\subsubsection{\texorpdfstring{get\+Logged\+In\+Username()}{getLoggedInUsername()}}
+{\footnotesize\ttfamily static String client.\+logic.\+User\+C.\+get\+Logged\+In\+Username (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\begin{DoxyReturn}{Returns}
+The username of the user current logged-\/in on this client, or null if no user is logged-\/in 
+\end{DoxyReturn}
+
+
+Definition at line 99 of file User\+C.\+java.
+
+\hypertarget{classclient_1_1logic_1_1_user_c_ad4fb84e487e917c202a4e1bcdea62dd5}{}\label{classclient_1_1logic_1_1_user_c_ad4fb84e487e917c202a4e1bcdea62dd5} 
+\index{client\+::logic\+::\+UserC@{client\+::logic\+::\+UserC}!is\+Logged\+In@{is\+Logged\+In}}
+\index{is\+Logged\+In@{is\+Logged\+In}!client\+::logic\+::\+UserC@{client\+::logic\+::\+UserC}}
+\subsubsection{\texorpdfstring{is\+Logged\+In()}{isLoggedIn()}}
+{\footnotesize\ttfamily static boolean client.\+logic.\+User\+C.\+is\+Logged\+In (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\begin{DoxyReturn}{Returns}
+True if this client is currently logged-\/in on the server 
+\end{DoxyReturn}
+
+
+Definition at line 106 of file User\+C.\+java.
+
+\hypertarget{classclient_1_1logic_1_1_user_c_a724d1799c3963f516238cdf0d85ccf52}{}\label{classclient_1_1logic_1_1_user_c_a724d1799c3963f516238cdf0d85ccf52} 
+\index{client\+::logic\+::\+UserC@{client\+::logic\+::\+UserC}!is\+Password\+Valid@{is\+Password\+Valid}}
+\index{is\+Password\+Valid@{is\+Password\+Valid}!client\+::logic\+::\+UserC@{client\+::logic\+::\+UserC}}
+\subsubsection{\texorpdfstring{is\+Password\+Valid()}{isPasswordValid()}}
+{\footnotesize\ttfamily static boolean client.\+logic.\+User\+C.\+is\+Password\+Valid (\begin{DoxyParamCaption}\item[{char \mbox{[}$\,$\mbox{]}}]{password }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Runs the password against a set of rules to determine if it is a valid password
+
+
+\begin{DoxyParams}{Parameters}
+{\em password} & Password to verify \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if it obeys all the rules and can be used as a password 
+\end{DoxyReturn}
+
+
+Definition at line 34 of file User\+C.\+java.
+
+\hypertarget{classclient_1_1logic_1_1_user_c_a62765c4c4912ee02b3ef70f1b9c0fb4e}{}\label{classclient_1_1logic_1_1_user_c_a62765c4c4912ee02b3ef70f1b9c0fb4e} 
+\index{client\+::logic\+::\+UserC@{client\+::logic\+::\+UserC}!is\+Username\+Valid@{is\+Username\+Valid}}
+\index{is\+Username\+Valid@{is\+Username\+Valid}!client\+::logic\+::\+UserC@{client\+::logic\+::\+UserC}}
+\subsubsection{\texorpdfstring{is\+Username\+Valid()}{isUsernameValid()}}
+{\footnotesize\ttfamily static boolean client.\+logic.\+User\+C.\+is\+Username\+Valid (\begin{DoxyParamCaption}\item[{String}]{username }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Runs the username against a set of rules to determine if it is a valid username
+
+
+\begin{DoxyParams}{Parameters}
+{\em username} & Username to verify. Can be null \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if it obeys all the rules, false otherwise or if username is null 
+\end{DoxyReturn}
+
+
+Definition at line 20 of file User\+C.\+java.
+
+\hypertarget{classclient_1_1logic_1_1_user_c_aa3736b2a54be77a2b631ca49b9980a8c}{}\label{classclient_1_1logic_1_1_user_c_aa3736b2a54be77a2b631ca49b9980a8c} 
+\index{client\+::logic\+::\+UserC@{client\+::logic\+::\+UserC}!login@{login}}
+\index{login@{login}!client\+::logic\+::\+UserC@{client\+::logic\+::\+UserC}}
+\subsubsection{\texorpdfstring{login()}{login()}}
+{\footnotesize\ttfamily static boolean client.\+logic.\+User\+C.\+login (\begin{DoxyParamCaption}\item[{String}]{username,  }\item[{char \mbox{[}$\,$\mbox{]}}]{password }\end{DoxyParamCaption}) throws \hyperlink{classsharedlib_1_1exceptions_1_1_user_message_exception}{User\+Message\+Exception}\hspace{0.3cm}{\ttfamily [static]}}
+
+Login using the specified username and password
+
+
+\begin{DoxyParams}{Parameters}
+{\em username} & \\
+\hline
+{\em password} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if login was successful 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em User\+Message\+Exception} & \\
+\hline
+\end{DoxyExceptions}
+
+
+Definition at line 57 of file User\+C.\+java.
+
+\hypertarget{classclient_1_1logic_1_1_user_c_a6609a9ab9414bda2dd3a6685cdec3771}{}\label{classclient_1_1logic_1_1_user_c_a6609a9ab9414bda2dd3a6685cdec3771} 
+\index{client\+::logic\+::\+UserC@{client\+::logic\+::\+UserC}!logout@{logout}}
+\index{logout@{logout}!client\+::logic\+::\+UserC@{client\+::logic\+::\+UserC}}
+\subsubsection{\texorpdfstring{logout()}{logout()}}
+{\footnotesize\ttfamily static boolean client.\+logic.\+User\+C.\+logout (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) throws \hyperlink{classsharedlib_1_1exceptions_1_1_user_message_exception}{User\+Message\+Exception}\hspace{0.3cm}{\ttfamily [static]}}
+
+Logout the current logged-\/in user for this client.
+
+\begin{DoxyReturn}{Returns}
+True if logout was successful 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em User\+Message\+Exception} & \\
+\hline
+\end{DoxyExceptions}
+
+
+Definition at line 81 of file User\+C.\+java.
+
+\hypertarget{classclient_1_1logic_1_1_user_c_a81ee75a5f1f4a278a71054a9c4f72609}{}\label{classclient_1_1logic_1_1_user_c_a81ee75a5f1f4a278a71054a9c4f72609} 
+\index{client\+::logic\+::\+UserC@{client\+::logic\+::\+UserC}!register@{register}}
+\index{register@{register}!client\+::logic\+::\+UserC@{client\+::logic\+::\+UserC}}
+\subsubsection{\texorpdfstring{register()}{register()}}
+{\footnotesize\ttfamily static boolean client.\+logic.\+User\+C.\+register (\begin{DoxyParamCaption}\item[{String}]{username,  }\item[{char \mbox{[}$\,$\mbox{]}}]{password }\end{DoxyParamCaption}) throws \hyperlink{classsharedlib_1_1exceptions_1_1_user_message_exception}{User\+Message\+Exception}\hspace{0.3cm}{\ttfamily [static]}}
+
+Register using the specified username and password
+
+
+\begin{DoxyParams}{Parameters}
+{\em username} & \\
+\hline
+{\em password} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if register was successful 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em User\+Message\+Exception} & \\
+\hline
+\end{DoxyExceptions}
+
+
+Definition at line 70 of file User\+C.\+java.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+client/logic/\hyperlink{_user_c_8java}{User\+C.\+java}\end{DoxyCompactItemize}

@@ -1,7 +1,11 @@
 package sharedlib.exceptions;
 
-import java.sql.SQLException;
-
+/**
+ * This class always contains a message (via the {@code Throwable::getMessage()}
+ * method) that should be shown to the user.
+ *
+ * @author Alex
+ */
 public class UserMessageException extends Exception {
 
     /**
@@ -12,9 +16,5 @@ public class UserMessageException extends Exception {
      */
     public UserMessageException(String msg) {
         super(msg);
-    }
-
-    public UserMessageException(String could_not_access_DB_and_create_game, SQLException ex) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

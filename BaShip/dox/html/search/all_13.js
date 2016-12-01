@@ -1,0 +1,26 @@
+var searchData=
+[
+  ['updateboardinfo',['updateBoardInfo',['../classclient_1_1logic_1_1_game_c.html#a336eb8b84428bb738e4760e992d04997',1,'client::logic::GameC']]],
+  ['updategameboard',['updateGameBoard',['../classserver_1_1conn_1_1_client.html#a3f453d2e735012e76fae03f9e2b16042',1,'server::conn::Client']]],
+  ['updategamescreen',['updateGameScreen',['../classclient_1_1logic_1_1_game_c.html#ae6dfcbeab229817e2e0717ed0bcc2996',1,'client.logic.GameC.updateGameScreen()'],['../classserver_1_1conn_1_1_client.html#a08ac64f27ada096677c9635d530ed39d',1,'server.conn.Client.updateGameScreen()']]],
+  ['userc',['UserC',['../classclient_1_1logic_1_1_user_c.html',1,'client::logic']]],
+  ['userc_2ejava',['UserC.java',['../_user_c_8java.html',1,'']]],
+  ['userdb',['UserDB',['../classserver_1_1database_1_1_user_d_b.html',1,'server::database']]],
+  ['userdb_2ejava',['UserDB.java',['../_user_d_b_8java.html',1,'']]],
+  ['userid',['userID',['../classsharedlib_1_1tuples_1_1_message.html#a2cff2bb100c096bd45b4edeb1f305e3f',1,'sharedlib::tuples::Message']]],
+  ['userinfo',['UserInfo',['../classsharedlib_1_1tuples_1_1_user_info.html#a94efc532e161e878597b0dabe15fc945',1,'sharedlib.tuples.UserInfo.UserInfo(Long id, String username)'],['../classsharedlib_1_1tuples_1_1_user_info.html#a1c4c22e7bcb44e71b4f096a99cb8586b',1,'sharedlib.tuples.UserInfo.UserInfo(String username, String passwordHash)'],['../classsharedlib_1_1tuples_1_1_user_info.html#aa67b1ad5c5fef64f0ae7a8a459a3cec9',1,'sharedlib.tuples.UserInfo.UserInfo(Long id, String username, String passwordHash, Integer rank, Integer nGames, Integer nWins, Integer nShots, Status status)']]],
+  ['userinfo',['UserInfo',['../classsharedlib_1_1tuples_1_1_user_info.html',1,'sharedlib::tuples']]],
+  ['userinfo_2ejava',['UserInfo.java',['../_user_info_8java.html',1,'']]],
+  ['usermessageexception',['UserMessageException',['../classsharedlib_1_1exceptions_1_1_user_message_exception.html',1,'sharedlib::exceptions']]],
+  ['usermessageexception',['UserMessageException',['../classsharedlib_1_1exceptions_1_1_user_message_exception.html#a0f783721b5137a3a012b185c2fa96f44',1,'sharedlib.exceptions.UserMessageException.UserMessageException(String msg)'],['../classsharedlib_1_1exceptions_1_1_user_message_exception.html#a7d3408c95f16dcd17d9048f3be5511d0',1,'sharedlib.exceptions.UserMessageException.UserMessageException(String could_not_access_DB_and_create_game, SQLException ex)']]],
+  ['usermessageexception_2ejava',['UserMessageException.java',['../_user_message_exception_8java.html',1,'']]],
+  ['username',['username',['../classsharedlib_1_1tuples_1_1_message.html#ada81e5986a0d18e2bee75e4283a9a815',1,'sharedlib.tuples.Message.username()'],['../classsharedlib_1_1tuples_1_1_user_info.html#ae2aece1a833e9963fa7dc508992d4cf0',1,'sharedlib.tuples.UserInfo.username()']]],
+  ['usernamefield',['usernameField',['../classclient_1_1ui_1_1_login_panel.html#a3a01950b4312782aa5d78d22d257e19e',1,'client::ui::LoginPanel']]],
+  ['usernamefilter',['usernameFilter',['../classsharedlib_1_1tuples_1_1_game_search.html#a9519b13f2ff02e7e7d4d25fc6cf0f89d',1,'sharedlib.tuples.GameSearch.usernameFilter()'],['../classsharedlib_1_1tuples_1_1_user_search.html#a5680617540c8e1d8901b232717912d65',1,'sharedlib.tuples.UserSearch.usernameFilter()']]],
+  ['usernamefromclient',['usernameFromClient',['../classserver_1_1logic_1_1_user_s.html#a06699931e2b2dde64d63f2f56b3e8524',1,'server::logic::UserS']]],
+  ['users',['UserS',['../classserver_1_1logic_1_1_user_s.html',1,'server::logic']]],
+  ['users_2ejava',['UserS.java',['../_user_s_8java.html',1,'']]],
+  ['usersearch',['UserSearch',['../classsharedlib_1_1tuples_1_1_user_search.html#a0cb2fe1c24c61631c62589299b655c1a',1,'sharedlib::tuples::UserSearch']]],
+  ['usersearch',['UserSearch',['../classsharedlib_1_1tuples_1_1_user_search.html',1,'sharedlib::tuples']]],
+  ['usersearch_2ejava',['UserSearch.java',['../_user_search_8java.html',1,'']]]
+];

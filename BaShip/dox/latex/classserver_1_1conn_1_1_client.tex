@@ -1,0 +1,173 @@
+\hypertarget{classserver_1_1conn_1_1_client}{}\section{server.\+conn.\+Client Class Reference}
+\label{classserver_1_1conn_1_1_client}\index{server.\+conn.\+Client@{server.\+conn.\+Client}}
+Inheritance diagram for server.\+conn.\+Client\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classserver_1_1conn_1_1_client}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classserver_1_1conn_1_1_client_a5097d176d58d7de8d559d175065ceabf}{Client} (\hyperlink{classsharedlib_1_1conn_1_1_connection}{Connection} conn)
+\item 
+\hyperlink{classsharedlib_1_1conn_1_1_packet}{Packet} \hyperlink{classserver_1_1conn_1_1_client_a0ddbd06c67e01c0064b5640d5e82c810}{handle} (\hyperlink{classsharedlib_1_1conn_1_1_packet}{Packet} request)
+\item 
+void \hyperlink{classserver_1_1conn_1_1_client_a7335f0aef6a3b7af5a9194a2bfa69632}{inform\+About\+Global\+Message} (\hyperlink{classsharedlib_1_1tuples_1_1_message}{Message} msg)  throws Connection\+Exception 
+\item 
+void \hyperlink{classserver_1_1conn_1_1_client_a08ac64f27ada096677c9635d530ed39d}{update\+Game\+Screen} (\hyperlink{classsharedlib_1_1tuples_1_1_game_screen_info}{Game\+Screen\+Info} info)  throws Connection\+Exception 
+\item 
+void \hyperlink{classserver_1_1conn_1_1_client_aec42adfdb88bb9420e3e64a9438d5b2f}{send\+Game\+Invitation} ()  throws Connection\+Exception 
+\item 
+void \hyperlink{classserver_1_1conn_1_1_client_a3f453d2e735012e76fae03f9e2b16042}{update\+Game\+Board} (\hyperlink{classsharedlib_1_1tuples_1_1_board_info}{Board\+Info} info)  throws Connection\+Exception 
+\item 
+void \hyperlink{classserver_1_1conn_1_1_client_a6310d31662f51012c9e6e0aa28d43528}{game\+Finished} (String message)  throws Connection\+Exception 
+\item 
+void \hyperlink{classserver_1_1conn_1_1_client_a9c86594158e4eb8e09159567dd94f6ce}{connected} (\hyperlink{classsharedlib_1_1conn_1_1_connection}{Connection} connection)
+\item 
+void \hyperlink{classserver_1_1conn_1_1_client_aa31a10ee47f357ef36983e456c5e9f8e}{disconnected} (\hyperlink{classsharedlib_1_1conn_1_1_connection}{Connection} connection)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 13 of file Client.\+java.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classserver_1_1conn_1_1_client_a5097d176d58d7de8d559d175065ceabf}{}\label{classserver_1_1conn_1_1_client_a5097d176d58d7de8d559d175065ceabf} 
+\index{server\+::conn\+::\+Client@{server\+::conn\+::\+Client}!Client@{Client}}
+\index{Client@{Client}!server\+::conn\+::\+Client@{server\+::conn\+::\+Client}}
+\subsubsection{\texorpdfstring{Client()}{Client()}}
+{\footnotesize\ttfamily server.\+conn.\+Client.\+Client (\begin{DoxyParamCaption}\item[{\hyperlink{classsharedlib_1_1conn_1_1_connection}{Connection}}]{conn }\end{DoxyParamCaption})}
+
+
+
+Definition at line 18 of file Client.\+java.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classserver_1_1conn_1_1_client_a9c86594158e4eb8e09159567dd94f6ce}{}\label{classserver_1_1conn_1_1_client_a9c86594158e4eb8e09159567dd94f6ce} 
+\index{server\+::conn\+::\+Client@{server\+::conn\+::\+Client}!connected@{connected}}
+\index{connected@{connected}!server\+::conn\+::\+Client@{server\+::conn\+::\+Client}}
+\subsubsection{\texorpdfstring{connected()}{connected()}}
+{\footnotesize\ttfamily void server.\+conn.\+Client.\+connected (\begin{DoxyParamCaption}\item[{\hyperlink{classsharedlib_1_1conn_1_1_connection}{Connection}}]{connection }\end{DoxyParamCaption})}
+
+Called when the socket connection has just been started
+
+
+\begin{DoxyParams}{Parameters}
+{\em connection} & The connection object representing this connection \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{interfacesharedlib_1_1conn_1_1_connection_1_1_delegate_acb701b2d46601fd448eba6c79b82694d}{sharedlib.\+conn.\+Connection.\+Delegate}.
+
+
+
+Definition at line 175 of file Client.\+java.
+
+\hypertarget{classserver_1_1conn_1_1_client_aa31a10ee47f357ef36983e456c5e9f8e}{}\label{classserver_1_1conn_1_1_client_aa31a10ee47f357ef36983e456c5e9f8e} 
+\index{server\+::conn\+::\+Client@{server\+::conn\+::\+Client}!disconnected@{disconnected}}
+\index{disconnected@{disconnected}!server\+::conn\+::\+Client@{server\+::conn\+::\+Client}}
+\subsubsection{\texorpdfstring{disconnected()}{disconnected()}}
+{\footnotesize\ttfamily void server.\+conn.\+Client.\+disconnected (\begin{DoxyParamCaption}\item[{\hyperlink{classsharedlib_1_1conn_1_1_connection}{Connection}}]{connection }\end{DoxyParamCaption})}
+
+Called when the socket connection ceases to exist
+
+
+\begin{DoxyParams}{Parameters}
+{\em connection} & The connection object representing this connection \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{interfacesharedlib_1_1conn_1_1_connection_1_1_delegate_a64e49ea25180c770c2cbc1953fd79fed}{sharedlib.\+conn.\+Connection.\+Delegate}.
+
+
+
+Definition at line 183 of file Client.\+java.
+
+\hypertarget{classserver_1_1conn_1_1_client_a6310d31662f51012c9e6e0aa28d43528}{}\label{classserver_1_1conn_1_1_client_a6310d31662f51012c9e6e0aa28d43528} 
+\index{server\+::conn\+::\+Client@{server\+::conn\+::\+Client}!game\+Finished@{game\+Finished}}
+\index{game\+Finished@{game\+Finished}!server\+::conn\+::\+Client@{server\+::conn\+::\+Client}}
+\subsubsection{\texorpdfstring{game\+Finished()}{gameFinished()}}
+{\footnotesize\ttfamily void server.\+conn.\+Client.\+game\+Finished (\begin{DoxyParamCaption}\item[{String}]{message }\end{DoxyParamCaption}) throws \hyperlink{classsharedlib_1_1exceptions_1_1_connection_exception}{Connection\+Exception}}
+
+
+
+Definition at line 170 of file Client.\+java.
+
+\hypertarget{classserver_1_1conn_1_1_client_a0ddbd06c67e01c0064b5640d5e82c810}{}\label{classserver_1_1conn_1_1_client_a0ddbd06c67e01c0064b5640d5e82c810} 
+\index{server\+::conn\+::\+Client@{server\+::conn\+::\+Client}!handle@{handle}}
+\index{handle@{handle}!server\+::conn\+::\+Client@{server\+::conn\+::\+Client}}
+\subsubsection{\texorpdfstring{handle()}{handle()}}
+{\footnotesize\ttfamily \hyperlink{classsharedlib_1_1conn_1_1_packet}{Packet} server.\+conn.\+Client.\+handle (\begin{DoxyParamCaption}\item[{\hyperlink{classsharedlib_1_1conn_1_1_packet}{Packet}}]{packet }\end{DoxyParamCaption})}
+
+Called whenever a packet is received that isn\textquotesingle{}t part of a request-\/response routine
+
+
+\begin{DoxyParams}{Parameters}
+{\em packet} & The packet that has been received \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A response packet to be sent back, or null 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{interfacesharedlib_1_1conn_1_1_connection_1_1_delegate_abb4308f0b1aa890e0c19635f1eb9cd09}{sharedlib.\+conn.\+Connection.\+Delegate}.
+
+
+
+Definition at line 24 of file Client.\+java.
+
+\hypertarget{classserver_1_1conn_1_1_client_a7335f0aef6a3b7af5a9194a2bfa69632}{}\label{classserver_1_1conn_1_1_client_a7335f0aef6a3b7af5a9194a2bfa69632} 
+\index{server\+::conn\+::\+Client@{server\+::conn\+::\+Client}!inform\+About\+Global\+Message@{inform\+About\+Global\+Message}}
+\index{inform\+About\+Global\+Message@{inform\+About\+Global\+Message}!server\+::conn\+::\+Client@{server\+::conn\+::\+Client}}
+\subsubsection{\texorpdfstring{inform\+About\+Global\+Message()}{informAboutGlobalMessage()}}
+{\footnotesize\ttfamily void server.\+conn.\+Client.\+inform\+About\+Global\+Message (\begin{DoxyParamCaption}\item[{\hyperlink{classsharedlib_1_1tuples_1_1_message}{Message}}]{msg }\end{DoxyParamCaption}) throws \hyperlink{classsharedlib_1_1exceptions_1_1_connection_exception}{Connection\+Exception}}
+
+
+
+Definition at line 154 of file Client.\+java.
+
+\hypertarget{classserver_1_1conn_1_1_client_aec42adfdb88bb9420e3e64a9438d5b2f}{}\label{classserver_1_1conn_1_1_client_aec42adfdb88bb9420e3e64a9438d5b2f} 
+\index{server\+::conn\+::\+Client@{server\+::conn\+::\+Client}!send\+Game\+Invitation@{send\+Game\+Invitation}}
+\index{send\+Game\+Invitation@{send\+Game\+Invitation}!server\+::conn\+::\+Client@{server\+::conn\+::\+Client}}
+\subsubsection{\texorpdfstring{send\+Game\+Invitation()}{sendGameInvitation()}}
+{\footnotesize\ttfamily void server.\+conn.\+Client.\+send\+Game\+Invitation (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) throws \hyperlink{classsharedlib_1_1exceptions_1_1_connection_exception}{Connection\+Exception}}
+
+
+
+Definition at line 162 of file Client.\+java.
+
+\hypertarget{classserver_1_1conn_1_1_client_a3f453d2e735012e76fae03f9e2b16042}{}\label{classserver_1_1conn_1_1_client_a3f453d2e735012e76fae03f9e2b16042} 
+\index{server\+::conn\+::\+Client@{server\+::conn\+::\+Client}!update\+Game\+Board@{update\+Game\+Board}}
+\index{update\+Game\+Board@{update\+Game\+Board}!server\+::conn\+::\+Client@{server\+::conn\+::\+Client}}
+\subsubsection{\texorpdfstring{update\+Game\+Board()}{updateGameBoard()}}
+{\footnotesize\ttfamily void server.\+conn.\+Client.\+update\+Game\+Board (\begin{DoxyParamCaption}\item[{\hyperlink{classsharedlib_1_1tuples_1_1_board_info}{Board\+Info}}]{info }\end{DoxyParamCaption}) throws \hyperlink{classsharedlib_1_1exceptions_1_1_connection_exception}{Connection\+Exception}}
+
+
+
+Definition at line 166 of file Client.\+java.
+
+\hypertarget{classserver_1_1conn_1_1_client_a08ac64f27ada096677c9635d530ed39d}{}\label{classserver_1_1conn_1_1_client_a08ac64f27ada096677c9635d530ed39d} 
+\index{server\+::conn\+::\+Client@{server\+::conn\+::\+Client}!update\+Game\+Screen@{update\+Game\+Screen}}
+\index{update\+Game\+Screen@{update\+Game\+Screen}!server\+::conn\+::\+Client@{server\+::conn\+::\+Client}}
+\subsubsection{\texorpdfstring{update\+Game\+Screen()}{updateGameScreen()}}
+{\footnotesize\ttfamily void server.\+conn.\+Client.\+update\+Game\+Screen (\begin{DoxyParamCaption}\item[{\hyperlink{classsharedlib_1_1tuples_1_1_game_screen_info}{Game\+Screen\+Info}}]{info }\end{DoxyParamCaption}) throws \hyperlink{classsharedlib_1_1exceptions_1_1_connection_exception}{Connection\+Exception}}
+
+
+
+Definition at line 158 of file Client.\+java.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+server/conn/\hyperlink{_client_8java}{Client.\+java}\end{DoxyCompactItemize}

@@ -1,0 +1,251 @@
+\hypertarget{classclient_1_1_client_main}{}\section{client.\+Client\+Main Class Reference}
+\label{classclient_1_1_client_main}\index{client.\+Client\+Main@{client.\+Client\+Main}}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \hyperlink{classclient_1_1_client_main_a1c318ff544d49e68acce0aeac5446336}{main} (String args\mbox{[}$\,$\mbox{]})
+\item 
+static boolean \hyperlink{classclient_1_1_client_main_aecd59c193bdb0536d649be78f72149b0}{connect\+To\+Server} (boolean disconnect\+Previous\+Connection)
+\item 
+static void \hyperlink{classclient_1_1_client_main_a37085a4271a663544855402f2892fb51}{connected} (String address)
+\item 
+static void \hyperlink{classclient_1_1_client_main_a824ffde5fd1b48d4a6ec25a9b00c3dc5}{disconnected} (String address)
+\item 
+static void \hyperlink{classclient_1_1_client_main_af975fd50f5fb1cc3ec29b65854b2a412}{show\+Info} (String message)
+\item 
+static void \hyperlink{classclient_1_1_client_main_a0964644423f3d533ca394456ee6f6c95}{show\+Warning} (String message)
+\item 
+static void \hyperlink{classclient_1_1_client_main_ab814569831a92249ded3d7258c0ac929}{show\+Error} (String message)
+\item 
+static void \hyperlink{classclient_1_1_client_main_afb84263c3e741a3f35611ef1b28b838e}{run\+Background} (Runnable r)
+\item 
+static Future \hyperlink{classclient_1_1_client_main_a0b66d467ed48a17869c86a90992937cc}{run\+Background} (Callable r)
+\item 
+static void \hyperlink{classclient_1_1_client_main_ad1c0bf16363beb967cc1a7a9a41a4e21}{run\+On\+UI} (Runnable r)
+\end{DoxyCompactItemize}
+\subsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static final \hyperlink{classclient_1_1ui_1_1_main_frame}{Main\+Frame} \hyperlink{classclient_1_1_client_main_ab0ba57ef294e065b9140994413a5d705}{main\+Frame} = new \hyperlink{classclient_1_1ui_1_1_main_frame}{Main\+Frame}()
+\item 
+static final \hyperlink{classsharedlib_1_1utils_1_1_preferences}{Preferences} \hyperlink{classclient_1_1_client_main_ac9b44e4112c8079879407cb8292d5fe3}{prefs} = new \hyperlink{classsharedlib_1_1utils_1_1_preferences}{Preferences}(Client\+Main.\+class)
+\item 
+static \hyperlink{classclient_1_1conn_1_1_server}{Server} \hyperlink{classclient_1_1_client_main_a933025baa76b4803c185b02d359a7e15}{server}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 15 of file Client\+Main.\+java.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classclient_1_1_client_main_a37085a4271a663544855402f2892fb51}{}\label{classclient_1_1_client_main_a37085a4271a663544855402f2892fb51} 
+\index{client\+::\+Client\+Main@{client\+::\+Client\+Main}!connected@{connected}}
+\index{connected@{connected}!client\+::\+Client\+Main@{client\+::\+Client\+Main}}
+\subsubsection{\texorpdfstring{connected()}{connected()}}
+{\footnotesize\ttfamily static void client.\+Client\+Main.\+connected (\begin{DoxyParamCaption}\item[{String}]{address }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Called by the {\ttfamily server} object automatically whenever the server is connected
+
+
+\begin{DoxyParams}{Parameters}
+{\em address} & The address of the newly connected server \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 73 of file Client\+Main.\+java.
+
+\hypertarget{classclient_1_1_client_main_aecd59c193bdb0536d649be78f72149b0}{}\label{classclient_1_1_client_main_aecd59c193bdb0536d649be78f72149b0} 
+\index{client\+::\+Client\+Main@{client\+::\+Client\+Main}!connect\+To\+Server@{connect\+To\+Server}}
+\index{connect\+To\+Server@{connect\+To\+Server}!client\+::\+Client\+Main@{client\+::\+Client\+Main}}
+\subsubsection{\texorpdfstring{connect\+To\+Server()}{connectToServer()}}
+{\footnotesize\ttfamily static boolean client.\+Client\+Main.\+connect\+To\+Server (\begin{DoxyParamCaption}\item[{boolean}]{disconnect\+Previous\+Connection }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Create a {\ttfamily Socket} and connect to server using a {\ttfamily Connection} object.
+
+
+\begin{DoxyParams}{Parameters}
+{\em disconnect\+Previous\+Connection} & If false, only connects if a connection is not already present. If true, always creates a new connection, even if a disconnect is first necessary. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if connected to server successfully. 
+\end{DoxyReturn}
+
+
+Definition at line 42 of file Client\+Main.\+java.
+
+\hypertarget{classclient_1_1_client_main_a824ffde5fd1b48d4a6ec25a9b00c3dc5}{}\label{classclient_1_1_client_main_a824ffde5fd1b48d4a6ec25a9b00c3dc5} 
+\index{client\+::\+Client\+Main@{client\+::\+Client\+Main}!disconnected@{disconnected}}
+\index{disconnected@{disconnected}!client\+::\+Client\+Main@{client\+::\+Client\+Main}}
+\subsubsection{\texorpdfstring{disconnected()}{disconnected()}}
+{\footnotesize\ttfamily static void client.\+Client\+Main.\+disconnected (\begin{DoxyParamCaption}\item[{String}]{address }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Called by the {\ttfamily server} object automatically whenever the server is disconnected
+
+
+\begin{DoxyParams}{Parameters}
+{\em address} & The address of the recently disconnected server \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 83 of file Client\+Main.\+java.
+
+\hypertarget{classclient_1_1_client_main_a1c318ff544d49e68acce0aeac5446336}{}\label{classclient_1_1_client_main_a1c318ff544d49e68acce0aeac5446336} 
+\index{client\+::\+Client\+Main@{client\+::\+Client\+Main}!main@{main}}
+\index{main@{main}!client\+::\+Client\+Main@{client\+::\+Client\+Main}}
+\subsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily static void client.\+Client\+Main.\+main (\begin{DoxyParamCaption}\item[{String}]{args\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 26 of file Client\+Main.\+java.
+
+\hypertarget{classclient_1_1_client_main_afb84263c3e741a3f35611ef1b28b838e}{}\label{classclient_1_1_client_main_afb84263c3e741a3f35611ef1b28b838e} 
+\index{client\+::\+Client\+Main@{client\+::\+Client\+Main}!run\+Background@{run\+Background}}
+\index{run\+Background@{run\+Background}!client\+::\+Client\+Main@{client\+::\+Client\+Main}}
+\subsubsection{\texorpdfstring{run\+Background()}{runBackground()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily static void client.\+Client\+Main.\+run\+Background (\begin{DoxyParamCaption}\item[{Runnable}]{r }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Run a Runnable on a background thread asynchronously
+
+
+\begin{DoxyParams}{Parameters}
+{\em r} & The runnable to run \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 126 of file Client\+Main.\+java.
+
+\hypertarget{classclient_1_1_client_main_a0b66d467ed48a17869c86a90992937cc}{}\label{classclient_1_1_client_main_a0b66d467ed48a17869c86a90992937cc} 
+\index{client\+::\+Client\+Main@{client\+::\+Client\+Main}!run\+Background@{run\+Background}}
+\index{run\+Background@{run\+Background}!client\+::\+Client\+Main@{client\+::\+Client\+Main}}
+\subsubsection{\texorpdfstring{run\+Background()}{runBackground()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily static Future client.\+Client\+Main.\+run\+Background (\begin{DoxyParamCaption}\item[{Callable}]{r }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Run a Runnable on a background thread asynchronously
+
+
+\begin{DoxyParams}{Parameters}
+{\em r} & The runnable to run \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Definition at line 136 of file Client\+Main.\+java.
+
+\hypertarget{classclient_1_1_client_main_ad1c0bf16363beb967cc1a7a9a41a4e21}{}\label{classclient_1_1_client_main_ad1c0bf16363beb967cc1a7a9a41a4e21} 
+\index{client\+::\+Client\+Main@{client\+::\+Client\+Main}!run\+On\+UI@{run\+On\+UI}}
+\index{run\+On\+UI@{run\+On\+UI}!client\+::\+Client\+Main@{client\+::\+Client\+Main}}
+\subsubsection{\texorpdfstring{run\+On\+U\+I()}{runOnUI()}}
+{\footnotesize\ttfamily static void client.\+Client\+Main.\+run\+On\+UI (\begin{DoxyParamCaption}\item[{Runnable}]{r }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Run a Runnable object on the interface thread
+
+
+\begin{DoxyParams}{Parameters}
+{\em r} & The runnable to run \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 145 of file Client\+Main.\+java.
+
+\hypertarget{classclient_1_1_client_main_ab814569831a92249ded3d7258c0ac929}{}\label{classclient_1_1_client_main_ab814569831a92249ded3d7258c0ac929} 
+\index{client\+::\+Client\+Main@{client\+::\+Client\+Main}!show\+Error@{show\+Error}}
+\index{show\+Error@{show\+Error}!client\+::\+Client\+Main@{client\+::\+Client\+Main}}
+\subsubsection{\texorpdfstring{show\+Error()}{showError()}}
+{\footnotesize\ttfamily static void client.\+Client\+Main.\+show\+Error (\begin{DoxyParamCaption}\item[{String}]{message }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Show a pop-\/up with an error icon and the specified message.
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 115 of file Client\+Main.\+java.
+
+\hypertarget{classclient_1_1_client_main_af975fd50f5fb1cc3ec29b65854b2a412}{}\label{classclient_1_1_client_main_af975fd50f5fb1cc3ec29b65854b2a412} 
+\index{client\+::\+Client\+Main@{client\+::\+Client\+Main}!show\+Info@{show\+Info}}
+\index{show\+Info@{show\+Info}!client\+::\+Client\+Main@{client\+::\+Client\+Main}}
+\subsubsection{\texorpdfstring{show\+Info()}{showInfo()}}
+{\footnotesize\ttfamily static void client.\+Client\+Main.\+show\+Info (\begin{DoxyParamCaption}\item[{String}]{message }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Show a pop-\/up with an info icon and the specified message.
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 93 of file Client\+Main.\+java.
+
+\hypertarget{classclient_1_1_client_main_a0964644423f3d533ca394456ee6f6c95}{}\label{classclient_1_1_client_main_a0964644423f3d533ca394456ee6f6c95} 
+\index{client\+::\+Client\+Main@{client\+::\+Client\+Main}!show\+Warning@{show\+Warning}}
+\index{show\+Warning@{show\+Warning}!client\+::\+Client\+Main@{client\+::\+Client\+Main}}
+\subsubsection{\texorpdfstring{show\+Warning()}{showWarning()}}
+{\footnotesize\ttfamily static void client.\+Client\+Main.\+show\+Warning (\begin{DoxyParamCaption}\item[{String}]{message }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Show a pop-\/up with a warning icon and the specified message.
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 104 of file Client\+Main.\+java.
+
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classclient_1_1_client_main_ab0ba57ef294e065b9140994413a5d705}{}\label{classclient_1_1_client_main_ab0ba57ef294e065b9140994413a5d705} 
+\index{client\+::\+Client\+Main@{client\+::\+Client\+Main}!main\+Frame@{main\+Frame}}
+\index{main\+Frame@{main\+Frame}!client\+::\+Client\+Main@{client\+::\+Client\+Main}}
+\subsubsection{\texorpdfstring{main\+Frame}{mainFrame}}
+{\footnotesize\ttfamily final \hyperlink{classclient_1_1ui_1_1_main_frame}{Main\+Frame} client.\+Client\+Main.\+main\+Frame = new \hyperlink{classclient_1_1ui_1_1_main_frame}{Main\+Frame}()\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 21 of file Client\+Main.\+java.
+
+\hypertarget{classclient_1_1_client_main_ac9b44e4112c8079879407cb8292d5fe3}{}\label{classclient_1_1_client_main_ac9b44e4112c8079879407cb8292d5fe3} 
+\index{client\+::\+Client\+Main@{client\+::\+Client\+Main}!prefs@{prefs}}
+\index{prefs@{prefs}!client\+::\+Client\+Main@{client\+::\+Client\+Main}}
+\subsubsection{\texorpdfstring{prefs}{prefs}}
+{\footnotesize\ttfamily final \hyperlink{classsharedlib_1_1utils_1_1_preferences}{Preferences} client.\+Client\+Main.\+prefs = new \hyperlink{classsharedlib_1_1utils_1_1_preferences}{Preferences}(Client\+Main.\+class)\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 22 of file Client\+Main.\+java.
+
+\hypertarget{classclient_1_1_client_main_a933025baa76b4803c185b02d359a7e15}{}\label{classclient_1_1_client_main_a933025baa76b4803c185b02d359a7e15} 
+\index{client\+::\+Client\+Main@{client\+::\+Client\+Main}!server@{server}}
+\index{server@{server}!client\+::\+Client\+Main@{client\+::\+Client\+Main}}
+\subsubsection{\texorpdfstring{server}{server}}
+{\footnotesize\ttfamily \hyperlink{classclient_1_1conn_1_1_server}{Server} client.\+Client\+Main.\+server\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 23 of file Client\+Main.\+java.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+client/\hyperlink{_client_main_8java}{Client\+Main.\+java}\end{DoxyCompactItemize}

@@ -1,0 +1,164 @@
+\hypertarget{classserver_1_1logic_1_1_game_s}{}\section{server.\+logic.\+GameS Class Reference}
+\label{classserver_1_1logic_1_1_game_s}\index{server.\+logic.\+GameS@{server.\+logic.\+GameS}}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \hyperlink{classserver_1_1logic_1_1_game_s_a37c397e3097027a835b756a9c6584c14}{start\+Random\+Game} (\hyperlink{classserver_1_1conn_1_1_client}{Client} client)  throws User\+Message\+Exception 
+\item 
+static void \hyperlink{classserver_1_1logic_1_1_game_s_a5233992ff9ace095e835a56bd439a55f}{start\+Game\+With\+Player} (\hyperlink{classserver_1_1conn_1_1_client}{Client} client, Long other\+Player\+ID)  throws User\+Message\+Exception 
+\item 
+static void \hyperlink{classserver_1_1logic_1_1_game_s_a6cc95653ec6cfe464226b7d2cf6308de}{answer\+Game\+Invitation} (\hyperlink{classserver_1_1conn_1_1_client}{Client} client, boolean acepted)
+\item 
+static void \hyperlink{classserver_1_1logic_1_1_game_s_a3c1375206147f2112c1e339e93166676}{toggle\+Place\+Ship\+On\+Square} (\hyperlink{classserver_1_1conn_1_1_client}{Client} player, \hyperlink{classsharedlib_1_1utils_1_1_coord}{Coord} pos)
+\item 
+static void \hyperlink{classserver_1_1logic_1_1_game_s_ae6ab66ec3722750bbff9fdaeb6f0ea07}{click\+Ready\+Button} (\hyperlink{classserver_1_1conn_1_1_client}{Client} player)
+\item 
+static void \hyperlink{classserver_1_1logic_1_1_game_s_aeac56542c71aaa0f3a9571bce4ba962f}{fire\+Shot} (\hyperlink{classserver_1_1conn_1_1_client}{Client} player, \hyperlink{classsharedlib_1_1utils_1_1_coord}{Coord} pos)
+\item 
+static void \hyperlink{classserver_1_1logic_1_1_game_s_a5ad22688c4bb480a7252f7b92fc6d1e2}{close\+Game} (\hyperlink{classserver_1_1conn_1_1_client}{Client} client)
+\item 
+static void \hyperlink{classserver_1_1logic_1_1_game_s_a51295bb07c4b243cf798e34eb84eb4ec}{game\+Finished} (\hyperlink{classserver_1_1logic_1_1game_1_1_game_play}{Game\+Play} game)
+\item 
+static void \hyperlink{classserver_1_1logic_1_1_game_s_a84e3aec73f199ebdac03d69e5a73a364}{client\+Disconnected} (\hyperlink{classserver_1_1conn_1_1_client}{Client} client)
+\item 
+static boolean \hyperlink{classserver_1_1logic_1_1_game_s_ad890825fc5720c163f772d810d95e4ff}{is\+Client\+Playing} (\hyperlink{classserver_1_1conn_1_1_client}{Client} client)
+\item 
+static boolean \hyperlink{classserver_1_1logic_1_1_game_s_a4cacb73ebb00070b5c072bea676e92f8}{is\+Client\+Waiting} (\hyperlink{classserver_1_1conn_1_1_client}{Client} client)
+\item 
+static Integer \hyperlink{classserver_1_1logic_1_1_game_s_a92e4c9561cc42c2d73027c2ea3596a08}{get\+Game\+Current\+Move\+Number} (Long game\+ID)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 13 of file Game\+S.\+java.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classserver_1_1logic_1_1_game_s_a6cc95653ec6cfe464226b7d2cf6308de}{}\label{classserver_1_1logic_1_1_game_s_a6cc95653ec6cfe464226b7d2cf6308de} 
+\index{server\+::logic\+::\+GameS@{server\+::logic\+::\+GameS}!answer\+Game\+Invitation@{answer\+Game\+Invitation}}
+\index{answer\+Game\+Invitation@{answer\+Game\+Invitation}!server\+::logic\+::\+GameS@{server\+::logic\+::\+GameS}}
+\subsubsection{\texorpdfstring{answer\+Game\+Invitation()}{answerGameInvitation()}}
+{\footnotesize\ttfamily static void server.\+logic.\+Game\+S.\+answer\+Game\+Invitation (\begin{DoxyParamCaption}\item[{\hyperlink{classserver_1_1conn_1_1_client}{Client}}]{client,  }\item[{boolean}]{acepted }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 57 of file Game\+S.\+java.
+
+\hypertarget{classserver_1_1logic_1_1_game_s_ae6ab66ec3722750bbff9fdaeb6f0ea07}{}\label{classserver_1_1logic_1_1_game_s_ae6ab66ec3722750bbff9fdaeb6f0ea07} 
+\index{server\+::logic\+::\+GameS@{server\+::logic\+::\+GameS}!click\+Ready\+Button@{click\+Ready\+Button}}
+\index{click\+Ready\+Button@{click\+Ready\+Button}!server\+::logic\+::\+GameS@{server\+::logic\+::\+GameS}}
+\subsubsection{\texorpdfstring{click\+Ready\+Button()}{clickReadyButton()}}
+{\footnotesize\ttfamily static void server.\+logic.\+Game\+S.\+click\+Ready\+Button (\begin{DoxyParamCaption}\item[{\hyperlink{classserver_1_1conn_1_1_client}{Client}}]{player }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 118 of file Game\+S.\+java.
+
+\hypertarget{classserver_1_1logic_1_1_game_s_a84e3aec73f199ebdac03d69e5a73a364}{}\label{classserver_1_1logic_1_1_game_s_a84e3aec73f199ebdac03d69e5a73a364} 
+\index{server\+::logic\+::\+GameS@{server\+::logic\+::\+GameS}!client\+Disconnected@{client\+Disconnected}}
+\index{client\+Disconnected@{client\+Disconnected}!server\+::logic\+::\+GameS@{server\+::logic\+::\+GameS}}
+\subsubsection{\texorpdfstring{client\+Disconnected()}{clientDisconnected()}}
+{\footnotesize\ttfamily static void server.\+logic.\+Game\+S.\+client\+Disconnected (\begin{DoxyParamCaption}\item[{\hyperlink{classserver_1_1conn_1_1_client}{Client}}]{client }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 144 of file Game\+S.\+java.
+
+\hypertarget{classserver_1_1logic_1_1_game_s_a5ad22688c4bb480a7252f7b92fc6d1e2}{}\label{classserver_1_1logic_1_1_game_s_a5ad22688c4bb480a7252f7b92fc6d1e2} 
+\index{server\+::logic\+::\+GameS@{server\+::logic\+::\+GameS}!close\+Game@{close\+Game}}
+\index{close\+Game@{close\+Game}!server\+::logic\+::\+GameS@{server\+::logic\+::\+GameS}}
+\subsubsection{\texorpdfstring{close\+Game()}{closeGame()}}
+{\footnotesize\ttfamily static void server.\+logic.\+Game\+S.\+close\+Game (\begin{DoxyParamCaption}\item[{\hyperlink{classserver_1_1conn_1_1_client}{Client}}]{client }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 136 of file Game\+S.\+java.
+
+\hypertarget{classserver_1_1logic_1_1_game_s_aeac56542c71aaa0f3a9571bce4ba962f}{}\label{classserver_1_1logic_1_1_game_s_aeac56542c71aaa0f3a9571bce4ba962f} 
+\index{server\+::logic\+::\+GameS@{server\+::logic\+::\+GameS}!fire\+Shot@{fire\+Shot}}
+\index{fire\+Shot@{fire\+Shot}!server\+::logic\+::\+GameS@{server\+::logic\+::\+GameS}}
+\subsubsection{\texorpdfstring{fire\+Shot()}{fireShot()}}
+{\footnotesize\ttfamily static void server.\+logic.\+Game\+S.\+fire\+Shot (\begin{DoxyParamCaption}\item[{\hyperlink{classserver_1_1conn_1_1_client}{Client}}]{player,  }\item[{\hyperlink{classsharedlib_1_1utils_1_1_coord}{Coord}}]{pos }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 127 of file Game\+S.\+java.
+
+\hypertarget{classserver_1_1logic_1_1_game_s_a51295bb07c4b243cf798e34eb84eb4ec}{}\label{classserver_1_1logic_1_1_game_s_a51295bb07c4b243cf798e34eb84eb4ec} 
+\index{server\+::logic\+::\+GameS@{server\+::logic\+::\+GameS}!game\+Finished@{game\+Finished}}
+\index{game\+Finished@{game\+Finished}!server\+::logic\+::\+GameS@{server\+::logic\+::\+GameS}}
+\subsubsection{\texorpdfstring{game\+Finished()}{gameFinished()}}
+{\footnotesize\ttfamily static void server.\+logic.\+Game\+S.\+game\+Finished (\begin{DoxyParamCaption}\item[{\hyperlink{classserver_1_1logic_1_1game_1_1_game_play}{Game\+Play}}]{game }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 140 of file Game\+S.\+java.
+
+\hypertarget{classserver_1_1logic_1_1_game_s_a92e4c9561cc42c2d73027c2ea3596a08}{}\label{classserver_1_1logic_1_1_game_s_a92e4c9561cc42c2d73027c2ea3596a08} 
+\index{server\+::logic\+::\+GameS@{server\+::logic\+::\+GameS}!get\+Game\+Current\+Move\+Number@{get\+Game\+Current\+Move\+Number}}
+\index{get\+Game\+Current\+Move\+Number@{get\+Game\+Current\+Move\+Number}!server\+::logic\+::\+GameS@{server\+::logic\+::\+GameS}}
+\subsubsection{\texorpdfstring{get\+Game\+Current\+Move\+Number()}{getGameCurrentMoveNumber()}}
+{\footnotesize\ttfamily static Integer server.\+logic.\+Game\+S.\+get\+Game\+Current\+Move\+Number (\begin{DoxyParamCaption}\item[{Long}]{game\+ID }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 161 of file Game\+S.\+java.
+
+\hypertarget{classserver_1_1logic_1_1_game_s_ad890825fc5720c163f772d810d95e4ff}{}\label{classserver_1_1logic_1_1_game_s_ad890825fc5720c163f772d810d95e4ff} 
+\index{server\+::logic\+::\+GameS@{server\+::logic\+::\+GameS}!is\+Client\+Playing@{is\+Client\+Playing}}
+\index{is\+Client\+Playing@{is\+Client\+Playing}!server\+::logic\+::\+GameS@{server\+::logic\+::\+GameS}}
+\subsubsection{\texorpdfstring{is\+Client\+Playing()}{isClientPlaying()}}
+{\footnotesize\ttfamily static boolean server.\+logic.\+Game\+S.\+is\+Client\+Playing (\begin{DoxyParamCaption}\item[{\hyperlink{classserver_1_1conn_1_1_client}{Client}}]{client }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 149 of file Game\+S.\+java.
+
+\hypertarget{classserver_1_1logic_1_1_game_s_a4cacb73ebb00070b5c072bea676e92f8}{}\label{classserver_1_1logic_1_1_game_s_a4cacb73ebb00070b5c072bea676e92f8} 
+\index{server\+::logic\+::\+GameS@{server\+::logic\+::\+GameS}!is\+Client\+Waiting@{is\+Client\+Waiting}}
+\index{is\+Client\+Waiting@{is\+Client\+Waiting}!server\+::logic\+::\+GameS@{server\+::logic\+::\+GameS}}
+\subsubsection{\texorpdfstring{is\+Client\+Waiting()}{isClientWaiting()}}
+{\footnotesize\ttfamily static boolean server.\+logic.\+Game\+S.\+is\+Client\+Waiting (\begin{DoxyParamCaption}\item[{\hyperlink{classserver_1_1conn_1_1_client}{Client}}]{client }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 153 of file Game\+S.\+java.
+
+\hypertarget{classserver_1_1logic_1_1_game_s_a5233992ff9ace095e835a56bd439a55f}{}\label{classserver_1_1logic_1_1_game_s_a5233992ff9ace095e835a56bd439a55f} 
+\index{server\+::logic\+::\+GameS@{server\+::logic\+::\+GameS}!start\+Game\+With\+Player@{start\+Game\+With\+Player}}
+\index{start\+Game\+With\+Player@{start\+Game\+With\+Player}!server\+::logic\+::\+GameS@{server\+::logic\+::\+GameS}}
+\subsubsection{\texorpdfstring{start\+Game\+With\+Player()}{startGameWithPlayer()}}
+{\footnotesize\ttfamily static void server.\+logic.\+Game\+S.\+start\+Game\+With\+Player (\begin{DoxyParamCaption}\item[{\hyperlink{classserver_1_1conn_1_1_client}{Client}}]{client,  }\item[{Long}]{other\+Player\+ID }\end{DoxyParamCaption}) throws \hyperlink{classsharedlib_1_1exceptions_1_1_user_message_exception}{User\+Message\+Exception}\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 30 of file Game\+S.\+java.
+
+\hypertarget{classserver_1_1logic_1_1_game_s_a37c397e3097027a835b756a9c6584c14}{}\label{classserver_1_1logic_1_1_game_s_a37c397e3097027a835b756a9c6584c14} 
+\index{server\+::logic\+::\+GameS@{server\+::logic\+::\+GameS}!start\+Random\+Game@{start\+Random\+Game}}
+\index{start\+Random\+Game@{start\+Random\+Game}!server\+::logic\+::\+GameS@{server\+::logic\+::\+GameS}}
+\subsubsection{\texorpdfstring{start\+Random\+Game()}{startRandomGame()}}
+{\footnotesize\ttfamily static void server.\+logic.\+Game\+S.\+start\+Random\+Game (\begin{DoxyParamCaption}\item[{\hyperlink{classserver_1_1conn_1_1_client}{Client}}]{client }\end{DoxyParamCaption}) throws \hyperlink{classsharedlib_1_1exceptions_1_1_user_message_exception}{User\+Message\+Exception}\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 21 of file Game\+S.\+java.
+
+\hypertarget{classserver_1_1logic_1_1_game_s_a3c1375206147f2112c1e339e93166676}{}\label{classserver_1_1logic_1_1_game_s_a3c1375206147f2112c1e339e93166676} 
+\index{server\+::logic\+::\+GameS@{server\+::logic\+::\+GameS}!toggle\+Place\+Ship\+On\+Square@{toggle\+Place\+Ship\+On\+Square}}
+\index{toggle\+Place\+Ship\+On\+Square@{toggle\+Place\+Ship\+On\+Square}!server\+::logic\+::\+GameS@{server\+::logic\+::\+GameS}}
+\subsubsection{\texorpdfstring{toggle\+Place\+Ship\+On\+Square()}{togglePlaceShipOnSquare()}}
+{\footnotesize\ttfamily static void server.\+logic.\+Game\+S.\+toggle\+Place\+Ship\+On\+Square (\begin{DoxyParamCaption}\item[{\hyperlink{classserver_1_1conn_1_1_client}{Client}}]{player,  }\item[{\hyperlink{classsharedlib_1_1utils_1_1_coord}{Coord}}]{pos }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 97 of file Game\+S.\+java.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+server/logic/\hyperlink{_game_s_8java}{Game\+S.\+java}\end{DoxyCompactItemize}

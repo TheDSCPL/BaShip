@@ -9,9 +9,9 @@ import java.util.logging.Logger;
 public class Crypto {
     
     /**
-     * Encode a string using SHA1
-     * @param str The string to process
-     * @return The result SHA1 string
+     * Encode a string using SHA1.
+     * @param str The string to process.
+     * @return The result SHA1 string.
      */
     public static String SHA1(char[] str) {        
         try {

@@ -2,6 +2,10 @@ package server.other;
 
 import sharedlib.utils.Preferences;
 
+/**
+ * Contains the keys to the various server-side persistence values
+ * @author Alex
+ */
 public enum PrefsKey implements Preferences.Key {
     DatabaseURL("DatabaseURL", "jdbc:postgresql://dbm.fe.up.pt/lpro1613"),
     ServerPort("ServerPort", 4413),

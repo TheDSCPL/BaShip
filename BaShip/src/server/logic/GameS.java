@@ -77,7 +77,7 @@ public class GameS {
         }
         catch (SQLException ex) {
             Logger.getLogger(GameS.class.getName()).log(Level.SEVERE, null, ex);
-            throw new UserMessageException("Could not access DB and create game", ex);
+            throw new UserMessageException("Could not access DB and create game: " + ex.getMessage());
         }
     }
 

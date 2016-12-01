@@ -84,14 +84,25 @@ public class UserC {
         return true;
     }
 
+    /**
+     * @return The ID of the user current logged-in on this client, or null if
+     * no user is logged-in
+     */
     public static Long getLoggedInUserID() {
-        return loggedInUser.id;
+        return loggedInUser != null ? loggedInUser.id : null;
     }
 
+    /**
+     * @return The username of the user current logged-in on this client, or
+     * null if no user is logged-in
+     */
     public static String getLoggedInUsername() {
-        return loggedInUser.username;
+        return loggedInUser != null ? loggedInUser.username : null;
     }
 
+    /**
+     * @return True if this client is currently logged-in on the server
+     */
     public static boolean isLoggedIn() {
         return loggedInUser != null;
     }

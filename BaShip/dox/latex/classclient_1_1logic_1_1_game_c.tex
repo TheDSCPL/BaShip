@@ -1,0 +1,115 @@
+\hypertarget{classclient_1_1logic_1_1_game_c}{}\section{client.\+logic.\+GameC Class Reference}
+\label{classclient_1_1logic_1_1_game_c}\index{client.\+logic.\+GameC@{client.\+logic.\+GameC}}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \hyperlink{classclient_1_1logic_1_1_game_c_a70979b2783537bb175c0a8926680e236}{receive\+Game\+Message} (\hyperlink{classsharedlib_1_1tuples_1_1_message}{Message} message)
+\item 
+static void \hyperlink{classclient_1_1logic_1_1_game_c_a62c530e593e489903a8ab6557763be27}{show\+Game\+Invitation} (String message)
+\item 
+static void \hyperlink{classclient_1_1logic_1_1_game_c_ae6dfcbeab229817e2e0717ed0bcc2996}{update\+Game\+Screen} (\hyperlink{classsharedlib_1_1tuples_1_1_game_screen_info}{Game\+Screen\+Info} info)
+\item 
+static void \hyperlink{classclient_1_1logic_1_1_game_c_a336eb8b84428bb738e4760e992d04997}{update\+Board\+Info} (\hyperlink{classsharedlib_1_1tuples_1_1_board_info}{Board\+Info} info)
+\item 
+static void \hyperlink{classclient_1_1logic_1_1_game_c_afee9b1e47ab82d704759506c4cb5e2ad}{game\+Finished} (String message)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 5 of file Game\+C.\+java.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classclient_1_1logic_1_1_game_c_afee9b1e47ab82d704759506c4cb5e2ad}{}\label{classclient_1_1logic_1_1_game_c_afee9b1e47ab82d704759506c4cb5e2ad} 
+\index{client\+::logic\+::\+GameC@{client\+::logic\+::\+GameC}!game\+Finished@{game\+Finished}}
+\index{game\+Finished@{game\+Finished}!client\+::logic\+::\+GameC@{client\+::logic\+::\+GameC}}
+\subsubsection{\texorpdfstring{game\+Finished()}{gameFinished()}}
+{\footnotesize\ttfamily static void client.\+logic.\+Game\+C.\+game\+Finished (\begin{DoxyParamCaption}\item[{String}]{message }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Called automatically by the {\ttfamily Server} class whenever an {\ttfamily S\+Game\+Finished} packet is received from the server. Shows a pop-\/up telling the user the game finished and why (player won, other player disconnected, etc).
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & The message string to be displayed to the user \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 60 of file Game\+C.\+java.
+
+\hypertarget{classclient_1_1logic_1_1_game_c_a70979b2783537bb175c0a8926680e236}{}\label{classclient_1_1logic_1_1_game_c_a70979b2783537bb175c0a8926680e236} 
+\index{client\+::logic\+::\+GameC@{client\+::logic\+::\+GameC}!receive\+Game\+Message@{receive\+Game\+Message}}
+\index{receive\+Game\+Message@{receive\+Game\+Message}!client\+::logic\+::\+GameC@{client\+::logic\+::\+GameC}}
+\subsubsection{\texorpdfstring{receive\+Game\+Message()}{receiveGameMessage()}}
+{\footnotesize\ttfamily static void client.\+logic.\+Game\+C.\+receive\+Game\+Message (\begin{DoxyParamCaption}\item[{\hyperlink{classsharedlib_1_1tuples_1_1_message}{Message}}]{message }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Called automatically by the {\ttfamily Server} class whenever a new in-\/game message is received.
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & The Message object \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 13 of file Game\+C.\+java.
+
+\hypertarget{classclient_1_1logic_1_1_game_c_a62c530e593e489903a8ab6557763be27}{}\label{classclient_1_1logic_1_1_game_c_a62c530e593e489903a8ab6557763be27} 
+\index{client\+::logic\+::\+GameC@{client\+::logic\+::\+GameC}!show\+Game\+Invitation@{show\+Game\+Invitation}}
+\index{show\+Game\+Invitation@{show\+Game\+Invitation}!client\+::logic\+::\+GameC@{client\+::logic\+::\+GameC}}
+\subsubsection{\texorpdfstring{show\+Game\+Invitation()}{showGameInvitation()}}
+{\footnotesize\ttfamily static void client.\+logic.\+Game\+C.\+show\+Game\+Invitation (\begin{DoxyParamCaption}\item[{String}]{message }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Called automatically by the {\ttfamily Server} class whenever an invitation is received. Shows a pop-\/up to the user with the given message String, allowing the user to choose whether he wants to accept the invitation and start a game or not.
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & The message string to be displayed to the user. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 25 of file Game\+C.\+java.
+
+\hypertarget{classclient_1_1logic_1_1_game_c_a336eb8b84428bb738e4760e992d04997}{}\label{classclient_1_1logic_1_1_game_c_a336eb8b84428bb738e4760e992d04997} 
+\index{client\+::logic\+::\+GameC@{client\+::logic\+::\+GameC}!update\+Board\+Info@{update\+Board\+Info}}
+\index{update\+Board\+Info@{update\+Board\+Info}!client\+::logic\+::\+GameC@{client\+::logic\+::\+GameC}}
+\subsubsection{\texorpdfstring{update\+Board\+Info()}{updateBoardInfo()}}
+{\footnotesize\ttfamily static void client.\+logic.\+Game\+C.\+update\+Board\+Info (\begin{DoxyParamCaption}\item[{\hyperlink{classsharedlib_1_1tuples_1_1_board_info}{Board\+Info}}]{info }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Called automatically by the {\ttfamily Server} class whenever an {\ttfamily S\+Update\+Game\+Board} packet is received from the server. Updates the board on the UI accordingly.
+
+
+\begin{DoxyParams}{Parameters}
+{\em info} & The object containing what is to be displayed on one of the boards \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 48 of file Game\+C.\+java.
+
+\hypertarget{classclient_1_1logic_1_1_game_c_ae6dfcbeab229817e2e0717ed0bcc2996}{}\label{classclient_1_1logic_1_1_game_c_ae6dfcbeab229817e2e0717ed0bcc2996} 
+\index{client\+::logic\+::\+GameC@{client\+::logic\+::\+GameC}!update\+Game\+Screen@{update\+Game\+Screen}}
+\index{update\+Game\+Screen@{update\+Game\+Screen}!client\+::logic\+::\+GameC@{client\+::logic\+::\+GameC}}
+\subsubsection{\texorpdfstring{update\+Game\+Screen()}{updateGameScreen()}}
+{\footnotesize\ttfamily static void client.\+logic.\+Game\+C.\+update\+Game\+Screen (\begin{DoxyParamCaption}\item[{\hyperlink{classsharedlib_1_1tuples_1_1_game_screen_info}{Game\+Screen\+Info}}]{info }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Called automatically by the {\ttfamily Server} class whenever an {\ttfamily S\+Update\+Game\+Screen} packet is received from the server. Updates the interface accordingly.
+
+
+\begin{DoxyParams}{Parameters}
+{\em info} & The object containing what is to be displayed on the UI \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 36 of file Game\+C.\+java.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+client/logic/\hyperlink{_game_c_8java}{Game\+C.\+java}\end{DoxyCompactItemize}

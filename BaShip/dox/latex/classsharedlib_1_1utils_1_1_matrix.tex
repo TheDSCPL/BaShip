@@ -1,0 +1,158 @@
+\hypertarget{classsharedlib_1_1utils_1_1_matrix}{}\section{sharedlib.\+utils.\+Matrix$<$ T $>$ Class Template Reference}
+\label{classsharedlib_1_1utils_1_1_matrix}\index{sharedlib.\+utils.\+Matrix$<$ T $>$@{sharedlib.\+utils.\+Matrix$<$ T $>$}}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+interface \hyperlink{interfacesharedlib_1_1utils_1_1_matrix_1_1_matrix_coord_consumer}{Matrix\+Coord\+Consumer}
+\item 
+interface \hyperlink{interfacesharedlib_1_1utils_1_1_matrix_1_1_matrix_value_consumer}{Matrix\+Value\+Consumer}
+\item 
+interface \hyperlink{interfacesharedlib_1_1utils_1_1_matrix_1_1_matrix_value_producer}{Matrix\+Value\+Producer}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classsharedlib_1_1utils_1_1_matrix_acaf0ae26880860dd079ee63620353fd1}{Matrix} (int \hyperlink{classsharedlib_1_1utils_1_1_matrix_afb6345b7525e7a0c51bd4f835248521b}{sx}, int \hyperlink{classsharedlib_1_1utils_1_1_matrix_a184f78d2081c890cd3b09a15b37ea28c}{sy}, T initial\+Value)
+\item 
+T \hyperlink{classsharedlib_1_1utils_1_1_matrix_a21c0d81f5f4bb563cd4dd71d8bd2b8a7}{get} (\hyperlink{classsharedlib_1_1utils_1_1_coord}{Coord} c)
+\item 
+void \hyperlink{classsharedlib_1_1utils_1_1_matrix_a7d0d0c02287d913332a739cbcdddde7e}{set} (\hyperlink{classsharedlib_1_1utils_1_1_coord}{Coord} c, T value)
+\item 
+T \hyperlink{classsharedlib_1_1utils_1_1_matrix_aca6a0e8ec5f4340706185ad79e1811df}{get\+Or} (\hyperlink{classsharedlib_1_1utils_1_1_coord}{Coord} c, T value)
+\item 
+void \hyperlink{classsharedlib_1_1utils_1_1_matrix_a19d3681f811fe3d54e926985b1e02ff4}{set\+All} (T value)
+\item 
+void \hyperlink{classsharedlib_1_1utils_1_1_matrix_a97de877e88587019e1a906c230a3b442}{for\+Each} (\hyperlink{interfacesharedlib_1_1utils_1_1_matrix_1_1_matrix_value_consumer}{Matrix\+Value\+Consumer}$<$ T $>$ f)
+\item 
+void \hyperlink{classsharedlib_1_1utils_1_1_matrix_af7b756b2f3962e615d7ddfb279c109b4}{for\+Each} (\hyperlink{interfacesharedlib_1_1utils_1_1_matrix_1_1_matrix_coord_consumer}{Matrix\+Coord\+Consumer}$<$ T $>$ f)
+\item 
+void \hyperlink{classsharedlib_1_1utils_1_1_matrix_aa503f540c218968d4660f2c601538316}{set\+Each} (\hyperlink{interfacesharedlib_1_1utils_1_1_matrix_1_1_matrix_value_producer}{Matrix\+Value\+Producer}$<$ T $>$ f)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+final int \hyperlink{classsharedlib_1_1utils_1_1_matrix_afb6345b7525e7a0c51bd4f835248521b}{sx}
+\item 
+final int \hyperlink{classsharedlib_1_1utils_1_1_matrix_a184f78d2081c890cd3b09a15b37ea28c}{sy}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 6 of file Matrix.\+java.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classsharedlib_1_1utils_1_1_matrix_acaf0ae26880860dd079ee63620353fd1}{}\label{classsharedlib_1_1utils_1_1_matrix_acaf0ae26880860dd079ee63620353fd1} 
+\index{sharedlib\+::utils\+::\+Matrix@{sharedlib\+::utils\+::\+Matrix}!Matrix@{Matrix}}
+\index{Matrix@{Matrix}!sharedlib\+::utils\+::\+Matrix@{sharedlib\+::utils\+::\+Matrix}}
+\subsubsection{\texorpdfstring{Matrix()}{Matrix()}}
+{\footnotesize\ttfamily \hyperlink{classsharedlib_1_1utils_1_1_matrix}{sharedlib.\+utils.\+Matrix}$<$ T $>$.\hyperlink{classsharedlib_1_1utils_1_1_matrix}{Matrix} (\begin{DoxyParamCaption}\item[{int}]{sx,  }\item[{int}]{sy,  }\item[{T}]{initial\+Value }\end{DoxyParamCaption})}
+
+
+
+Definition at line 12 of file Matrix.\+java.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classsharedlib_1_1utils_1_1_matrix_a97de877e88587019e1a906c230a3b442}{}\label{classsharedlib_1_1utils_1_1_matrix_a97de877e88587019e1a906c230a3b442} 
+\index{sharedlib\+::utils\+::\+Matrix@{sharedlib\+::utils\+::\+Matrix}!for\+Each@{for\+Each}}
+\index{for\+Each@{for\+Each}!sharedlib\+::utils\+::\+Matrix@{sharedlib\+::utils\+::\+Matrix}}
+\subsubsection{\texorpdfstring{for\+Each()}{forEach()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void \hyperlink{classsharedlib_1_1utils_1_1_matrix}{sharedlib.\+utils.\+Matrix}$<$ T $>$.for\+Each (\begin{DoxyParamCaption}\item[{\hyperlink{interfacesharedlib_1_1utils_1_1_matrix_1_1_matrix_value_consumer}{Matrix\+Value\+Consumer}$<$ T $>$}]{f }\end{DoxyParamCaption})}
+
+
+
+Definition at line 49 of file Matrix.\+java.
+
+\hypertarget{classsharedlib_1_1utils_1_1_matrix_af7b756b2f3962e615d7ddfb279c109b4}{}\label{classsharedlib_1_1utils_1_1_matrix_af7b756b2f3962e615d7ddfb279c109b4} 
+\index{sharedlib\+::utils\+::\+Matrix@{sharedlib\+::utils\+::\+Matrix}!for\+Each@{for\+Each}}
+\index{for\+Each@{for\+Each}!sharedlib\+::utils\+::\+Matrix@{sharedlib\+::utils\+::\+Matrix}}
+\subsubsection{\texorpdfstring{for\+Each()}{forEach()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void \hyperlink{classsharedlib_1_1utils_1_1_matrix}{sharedlib.\+utils.\+Matrix}$<$ T $>$.for\+Each (\begin{DoxyParamCaption}\item[{\hyperlink{interfacesharedlib_1_1utils_1_1_matrix_1_1_matrix_coord_consumer}{Matrix\+Coord\+Consumer}$<$ T $>$}]{f }\end{DoxyParamCaption})}
+
+
+
+Definition at line 58 of file Matrix.\+java.
+
+\hypertarget{classsharedlib_1_1utils_1_1_matrix_a21c0d81f5f4bb563cd4dd71d8bd2b8a7}{}\label{classsharedlib_1_1utils_1_1_matrix_a21c0d81f5f4bb563cd4dd71d8bd2b8a7} 
+\index{sharedlib\+::utils\+::\+Matrix@{sharedlib\+::utils\+::\+Matrix}!get@{get}}
+\index{get@{get}!sharedlib\+::utils\+::\+Matrix@{sharedlib\+::utils\+::\+Matrix}}
+\subsubsection{\texorpdfstring{get()}{get()}}
+{\footnotesize\ttfamily T \hyperlink{classsharedlib_1_1utils_1_1_matrix}{sharedlib.\+utils.\+Matrix}$<$ T $>$.get (\begin{DoxyParamCaption}\item[{\hyperlink{classsharedlib_1_1utils_1_1_coord}{Coord}}]{c }\end{DoxyParamCaption})}
+
+
+
+Definition at line 28 of file Matrix.\+java.
+
+\hypertarget{classsharedlib_1_1utils_1_1_matrix_aca6a0e8ec5f4340706185ad79e1811df}{}\label{classsharedlib_1_1utils_1_1_matrix_aca6a0e8ec5f4340706185ad79e1811df} 
+\index{sharedlib\+::utils\+::\+Matrix@{sharedlib\+::utils\+::\+Matrix}!get\+Or@{get\+Or}}
+\index{get\+Or@{get\+Or}!sharedlib\+::utils\+::\+Matrix@{sharedlib\+::utils\+::\+Matrix}}
+\subsubsection{\texorpdfstring{get\+Or()}{getOr()}}
+{\footnotesize\ttfamily T \hyperlink{classsharedlib_1_1utils_1_1_matrix}{sharedlib.\+utils.\+Matrix}$<$ T $>$.get\+Or (\begin{DoxyParamCaption}\item[{\hyperlink{classsharedlib_1_1utils_1_1_coord}{Coord}}]{c,  }\item[{T}]{value }\end{DoxyParamCaption})}
+
+
+
+Definition at line 36 of file Matrix.\+java.
+
+\hypertarget{classsharedlib_1_1utils_1_1_matrix_a7d0d0c02287d913332a739cbcdddde7e}{}\label{classsharedlib_1_1utils_1_1_matrix_a7d0d0c02287d913332a739cbcdddde7e} 
+\index{sharedlib\+::utils\+::\+Matrix@{sharedlib\+::utils\+::\+Matrix}!set@{set}}
+\index{set@{set}!sharedlib\+::utils\+::\+Matrix@{sharedlib\+::utils\+::\+Matrix}}
+\subsubsection{\texorpdfstring{set()}{set()}}
+{\footnotesize\ttfamily void \hyperlink{classsharedlib_1_1utils_1_1_matrix}{sharedlib.\+utils.\+Matrix}$<$ T $>$.set (\begin{DoxyParamCaption}\item[{\hyperlink{classsharedlib_1_1utils_1_1_coord}{Coord}}]{c,  }\item[{T}]{value }\end{DoxyParamCaption})}
+
+
+
+Definition at line 32 of file Matrix.\+java.
+
+\hypertarget{classsharedlib_1_1utils_1_1_matrix_a19d3681f811fe3d54e926985b1e02ff4}{}\label{classsharedlib_1_1utils_1_1_matrix_a19d3681f811fe3d54e926985b1e02ff4} 
+\index{sharedlib\+::utils\+::\+Matrix@{sharedlib\+::utils\+::\+Matrix}!set\+All@{set\+All}}
+\index{set\+All@{set\+All}!sharedlib\+::utils\+::\+Matrix@{sharedlib\+::utils\+::\+Matrix}}
+\subsubsection{\texorpdfstring{set\+All()}{setAll()}}
+{\footnotesize\ttfamily void \hyperlink{classsharedlib_1_1utils_1_1_matrix}{sharedlib.\+utils.\+Matrix}$<$ T $>$.set\+All (\begin{DoxyParamCaption}\item[{T}]{value }\end{DoxyParamCaption})}
+
+
+
+Definition at line 45 of file Matrix.\+java.
+
+\hypertarget{classsharedlib_1_1utils_1_1_matrix_aa503f540c218968d4660f2c601538316}{}\label{classsharedlib_1_1utils_1_1_matrix_aa503f540c218968d4660f2c601538316} 
+\index{sharedlib\+::utils\+::\+Matrix@{sharedlib\+::utils\+::\+Matrix}!set\+Each@{set\+Each}}
+\index{set\+Each@{set\+Each}!sharedlib\+::utils\+::\+Matrix@{sharedlib\+::utils\+::\+Matrix}}
+\subsubsection{\texorpdfstring{set\+Each()}{setEach()}}
+{\footnotesize\ttfamily void \hyperlink{classsharedlib_1_1utils_1_1_matrix}{sharedlib.\+utils.\+Matrix}$<$ T $>$.set\+Each (\begin{DoxyParamCaption}\item[{\hyperlink{interfacesharedlib_1_1utils_1_1_matrix_1_1_matrix_value_producer}{Matrix\+Value\+Producer}$<$ T $>$}]{f }\end{DoxyParamCaption})}
+
+
+
+Definition at line 66 of file Matrix.\+java.
+
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classsharedlib_1_1utils_1_1_matrix_afb6345b7525e7a0c51bd4f835248521b}{}\label{classsharedlib_1_1utils_1_1_matrix_afb6345b7525e7a0c51bd4f835248521b} 
+\index{sharedlib\+::utils\+::\+Matrix@{sharedlib\+::utils\+::\+Matrix}!sx@{sx}}
+\index{sx@{sx}!sharedlib\+::utils\+::\+Matrix@{sharedlib\+::utils\+::\+Matrix}}
+\subsubsection{\texorpdfstring{sx}{sx}}
+{\footnotesize\ttfamily final int \hyperlink{classsharedlib_1_1utils_1_1_matrix}{sharedlib.\+utils.\+Matrix}$<$ T $>$.sx}
+
+
+
+Definition at line 8 of file Matrix.\+java.
+
+\hypertarget{classsharedlib_1_1utils_1_1_matrix_a184f78d2081c890cd3b09a15b37ea28c}{}\label{classsharedlib_1_1utils_1_1_matrix_a184f78d2081c890cd3b09a15b37ea28c} 
+\index{sharedlib\+::utils\+::\+Matrix@{sharedlib\+::utils\+::\+Matrix}!sy@{sy}}
+\index{sy@{sy}!sharedlib\+::utils\+::\+Matrix@{sharedlib\+::utils\+::\+Matrix}}
+\subsubsection{\texorpdfstring{sy}{sy}}
+{\footnotesize\ttfamily final int \hyperlink{classsharedlib_1_1utils_1_1_matrix}{sharedlib.\+utils.\+Matrix}$<$ T $>$.sy}
+
+
+
+Definition at line 9 of file Matrix.\+java.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+sharedlib/utils/\hyperlink{_matrix_8java}{Matrix.\+java}\end{DoxyCompactItemize}

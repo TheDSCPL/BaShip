@@ -1,5 +1,9 @@
 package sharedlib.utils;
 
+/**
+ * An immutable coordinate class consisting of two integer values: x and y.
+ * @author Alex
+ */
 public class Coord {
     public final int x;
     public final int y;

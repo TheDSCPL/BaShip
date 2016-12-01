@@ -1,0 +1,152 @@
+\hypertarget{classserver_1_1logic_1_1game_1_1_board}{}\section{server.\+logic.\+game.\+Board Class Reference}
+\label{classserver_1_1logic_1_1game_1_1_board}\index{server.\+logic.\+game.\+Board@{server.\+logic.\+game.\+Board}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classserver_1_1logic_1_1game_1_1_board_af74b65d15f58535175cba5586116e5ef}{toggle\+Place\+Ship\+On\+Square} (\hyperlink{classsharedlib_1_1utils_1_1_coord}{Coord} c)
+\item 
+boolean \hyperlink{classserver_1_1logic_1_1game_1_1_board_a5e92f382c9a8f31b78c43ed70feb9f48}{refresh\+Placed\+Ship\+Squares} ()
+\item 
+boolean \hyperlink{classserver_1_1logic_1_1game_1_1_board_a84f0eed1bfb61878ff62ba2ce1249048}{placed\+Ships\+Are\+Valid} ()
+\item 
+List$<$ \hyperlink{classserver_1_1logic_1_1game_1_1_ship}{Ship} $>$ \hyperlink{classserver_1_1logic_1_1game_1_1_board_adaf9b78ef262a7916d34c5a1817d8915}{get\+Ships} ()
+\item 
+boolean \hyperlink{classserver_1_1logic_1_1game_1_1_board_a712480f632538d25735956557c21abad}{can\+Shoot\+On\+Square} (\hyperlink{classsharedlib_1_1utils_1_1_coord}{Coord} c)
+\item 
+void \hyperlink{classserver_1_1logic_1_1game_1_1_board_abcacddd3a6d0e781fb3c39408c6f2720}{shoot\+On\+Square} (\hyperlink{classsharedlib_1_1utils_1_1_coord}{Coord} c)
+\item 
+Set$<$ \hyperlink{classsharedlib_1_1utils_1_1_coord}{Coord} $>$ \hyperlink{classserver_1_1logic_1_1game_1_1_board_ab83f640a1a737762190a65d7486b86dc}{all\+Ship\+Squares} ()
+\item 
+boolean \hyperlink{classserver_1_1logic_1_1game_1_1_board_a1494f4cde8adcae437b6bbec8480c7cf}{all\+Ships\+Are\+Shot} ()
+\item 
+\hyperlink{classsharedlib_1_1tuples_1_1_board_info}{Board\+Info} \hyperlink{classserver_1_1logic_1_1game_1_1_board_a089704355e9f5ee22651d7a410b0ca1e}{get\+Board\+Info} (boolean left\+Board, boolean playing, boolean show\+Everything)
+\item 
+\hyperlink{classsharedlib_1_1tuples_1_1_board_info}{Board\+Info} \hyperlink{classserver_1_1logic_1_1game_1_1_board_a06057751106c2876a164c664e5bf3d26}{get\+Board\+Info\+Not\+Playing} (boolean left\+Board)
+\item 
+\hyperlink{classsharedlib_1_1tuples_1_1_board_info}{Board\+Info} \hyperlink{classserver_1_1logic_1_1game_1_1_board_abefb8ce9f95462573d3613a4bbda3c99}{get\+Board\+Info\+Playing} (boolean left\+Board, boolean show\+Everything)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 9 of file Board.\+java.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classserver_1_1logic_1_1game_1_1_board_a1494f4cde8adcae437b6bbec8480c7cf}{}\label{classserver_1_1logic_1_1game_1_1_board_a1494f4cde8adcae437b6bbec8480c7cf} 
+\index{server\+::logic\+::game\+::\+Board@{server\+::logic\+::game\+::\+Board}!all\+Ships\+Are\+Shot@{all\+Ships\+Are\+Shot}}
+\index{all\+Ships\+Are\+Shot@{all\+Ships\+Are\+Shot}!server\+::logic\+::game\+::\+Board@{server\+::logic\+::game\+::\+Board}}
+\subsubsection{\texorpdfstring{all\+Ships\+Are\+Shot()}{allShipsAreShot()}}
+{\footnotesize\ttfamily boolean server.\+logic.\+game.\+Board.\+all\+Ships\+Are\+Shot (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 123 of file Board.\+java.
+
+\hypertarget{classserver_1_1logic_1_1game_1_1_board_ab83f640a1a737762190a65d7486b86dc}{}\label{classserver_1_1logic_1_1game_1_1_board_ab83f640a1a737762190a65d7486b86dc} 
+\index{server\+::logic\+::game\+::\+Board@{server\+::logic\+::game\+::\+Board}!all\+Ship\+Squares@{all\+Ship\+Squares}}
+\index{all\+Ship\+Squares@{all\+Ship\+Squares}!server\+::logic\+::game\+::\+Board@{server\+::logic\+::game\+::\+Board}}
+\subsubsection{\texorpdfstring{all\+Ship\+Squares()}{allShipSquares()}}
+{\footnotesize\ttfamily Set$<$\hyperlink{classsharedlib_1_1utils_1_1_coord}{Coord}$>$ server.\+logic.\+game.\+Board.\+all\+Ship\+Squares (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 117 of file Board.\+java.
+
+\hypertarget{classserver_1_1logic_1_1game_1_1_board_a712480f632538d25735956557c21abad}{}\label{classserver_1_1logic_1_1game_1_1_board_a712480f632538d25735956557c21abad} 
+\index{server\+::logic\+::game\+::\+Board@{server\+::logic\+::game\+::\+Board}!can\+Shoot\+On\+Square@{can\+Shoot\+On\+Square}}
+\index{can\+Shoot\+On\+Square@{can\+Shoot\+On\+Square}!server\+::logic\+::game\+::\+Board@{server\+::logic\+::game\+::\+Board}}
+\subsubsection{\texorpdfstring{can\+Shoot\+On\+Square()}{canShootOnSquare()}}
+{\footnotesize\ttfamily boolean server.\+logic.\+game.\+Board.\+can\+Shoot\+On\+Square (\begin{DoxyParamCaption}\item[{\hyperlink{classsharedlib_1_1utils_1_1_coord}{Coord}}]{c }\end{DoxyParamCaption})}
+
+
+
+Definition at line 109 of file Board.\+java.
+
+\hypertarget{classserver_1_1logic_1_1game_1_1_board_a089704355e9f5ee22651d7a410b0ca1e}{}\label{classserver_1_1logic_1_1game_1_1_board_a089704355e9f5ee22651d7a410b0ca1e} 
+\index{server\+::logic\+::game\+::\+Board@{server\+::logic\+::game\+::\+Board}!get\+Board\+Info@{get\+Board\+Info}}
+\index{get\+Board\+Info@{get\+Board\+Info}!server\+::logic\+::game\+::\+Board@{server\+::logic\+::game\+::\+Board}}
+\subsubsection{\texorpdfstring{get\+Board\+Info()}{getBoardInfo()}}
+{\footnotesize\ttfamily \hyperlink{classsharedlib_1_1tuples_1_1_board_info}{Board\+Info} server.\+logic.\+game.\+Board.\+get\+Board\+Info (\begin{DoxyParamCaption}\item[{boolean}]{left\+Board,  }\item[{boolean}]{playing,  }\item[{boolean}]{show\+Everything }\end{DoxyParamCaption})}
+
+
+
+Definition at line 128 of file Board.\+java.
+
+\hypertarget{classserver_1_1logic_1_1game_1_1_board_a06057751106c2876a164c664e5bf3d26}{}\label{classserver_1_1logic_1_1game_1_1_board_a06057751106c2876a164c664e5bf3d26} 
+\index{server\+::logic\+::game\+::\+Board@{server\+::logic\+::game\+::\+Board}!get\+Board\+Info\+Not\+Playing@{get\+Board\+Info\+Not\+Playing}}
+\index{get\+Board\+Info\+Not\+Playing@{get\+Board\+Info\+Not\+Playing}!server\+::logic\+::game\+::\+Board@{server\+::logic\+::game\+::\+Board}}
+\subsubsection{\texorpdfstring{get\+Board\+Info\+Not\+Playing()}{getBoardInfoNotPlaying()}}
+{\footnotesize\ttfamily \hyperlink{classsharedlib_1_1tuples_1_1_board_info}{Board\+Info} server.\+logic.\+game.\+Board.\+get\+Board\+Info\+Not\+Playing (\begin{DoxyParamCaption}\item[{boolean}]{left\+Board }\end{DoxyParamCaption})}
+
+
+
+Definition at line 137 of file Board.\+java.
+
+\hypertarget{classserver_1_1logic_1_1game_1_1_board_abefb8ce9f95462573d3613a4bbda3c99}{}\label{classserver_1_1logic_1_1game_1_1_board_abefb8ce9f95462573d3613a4bbda3c99} 
+\index{server\+::logic\+::game\+::\+Board@{server\+::logic\+::game\+::\+Board}!get\+Board\+Info\+Playing@{get\+Board\+Info\+Playing}}
+\index{get\+Board\+Info\+Playing@{get\+Board\+Info\+Playing}!server\+::logic\+::game\+::\+Board@{server\+::logic\+::game\+::\+Board}}
+\subsubsection{\texorpdfstring{get\+Board\+Info\+Playing()}{getBoardInfoPlaying()}}
+{\footnotesize\ttfamily \hyperlink{classsharedlib_1_1tuples_1_1_board_info}{Board\+Info} server.\+logic.\+game.\+Board.\+get\+Board\+Info\+Playing (\begin{DoxyParamCaption}\item[{boolean}]{left\+Board,  }\item[{boolean}]{show\+Everything }\end{DoxyParamCaption})}
+
+
+
+Definition at line 167 of file Board.\+java.
+
+\hypertarget{classserver_1_1logic_1_1game_1_1_board_adaf9b78ef262a7916d34c5a1817d8915}{}\label{classserver_1_1logic_1_1game_1_1_board_adaf9b78ef262a7916d34c5a1817d8915} 
+\index{server\+::logic\+::game\+::\+Board@{server\+::logic\+::game\+::\+Board}!get\+Ships@{get\+Ships}}
+\index{get\+Ships@{get\+Ships}!server\+::logic\+::game\+::\+Board@{server\+::logic\+::game\+::\+Board}}
+\subsubsection{\texorpdfstring{get\+Ships()}{getShips()}}
+{\footnotesize\ttfamily List$<$\hyperlink{classserver_1_1logic_1_1game_1_1_ship}{Ship}$>$ server.\+logic.\+game.\+Board.\+get\+Ships (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 104 of file Board.\+java.
+
+\hypertarget{classserver_1_1logic_1_1game_1_1_board_a84f0eed1bfb61878ff62ba2ce1249048}{}\label{classserver_1_1logic_1_1game_1_1_board_a84f0eed1bfb61878ff62ba2ce1249048} 
+\index{server\+::logic\+::game\+::\+Board@{server\+::logic\+::game\+::\+Board}!placed\+Ships\+Are\+Valid@{placed\+Ships\+Are\+Valid}}
+\index{placed\+Ships\+Are\+Valid@{placed\+Ships\+Are\+Valid}!server\+::logic\+::game\+::\+Board@{server\+::logic\+::game\+::\+Board}}
+\subsubsection{\texorpdfstring{placed\+Ships\+Are\+Valid()}{placedShipsAreValid()}}
+{\footnotesize\ttfamily boolean server.\+logic.\+game.\+Board.\+placed\+Ships\+Are\+Valid (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 93 of file Board.\+java.
+
+\hypertarget{classserver_1_1logic_1_1game_1_1_board_a5e92f382c9a8f31b78c43ed70feb9f48}{}\label{classserver_1_1logic_1_1game_1_1_board_a5e92f382c9a8f31b78c43ed70feb9f48} 
+\index{server\+::logic\+::game\+::\+Board@{server\+::logic\+::game\+::\+Board}!refresh\+Placed\+Ship\+Squares@{refresh\+Placed\+Ship\+Squares}}
+\index{refresh\+Placed\+Ship\+Squares@{refresh\+Placed\+Ship\+Squares}!server\+::logic\+::game\+::\+Board@{server\+::logic\+::game\+::\+Board}}
+\subsubsection{\texorpdfstring{refresh\+Placed\+Ship\+Squares()}{refreshPlacedShipSquares()}}
+{\footnotesize\ttfamily boolean server.\+logic.\+game.\+Board.\+refresh\+Placed\+Ship\+Squares (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 22 of file Board.\+java.
+
+\hypertarget{classserver_1_1logic_1_1game_1_1_board_abcacddd3a6d0e781fb3c39408c6f2720}{}\label{classserver_1_1logic_1_1game_1_1_board_abcacddd3a6d0e781fb3c39408c6f2720} 
+\index{server\+::logic\+::game\+::\+Board@{server\+::logic\+::game\+::\+Board}!shoot\+On\+Square@{shoot\+On\+Square}}
+\index{shoot\+On\+Square@{shoot\+On\+Square}!server\+::logic\+::game\+::\+Board@{server\+::logic\+::game\+::\+Board}}
+\subsubsection{\texorpdfstring{shoot\+On\+Square()}{shootOnSquare()}}
+{\footnotesize\ttfamily void server.\+logic.\+game.\+Board.\+shoot\+On\+Square (\begin{DoxyParamCaption}\item[{\hyperlink{classsharedlib_1_1utils_1_1_coord}{Coord}}]{c }\end{DoxyParamCaption})}
+
+
+
+Definition at line 113 of file Board.\+java.
+
+\hypertarget{classserver_1_1logic_1_1game_1_1_board_af74b65d15f58535175cba5586116e5ef}{}\label{classserver_1_1logic_1_1game_1_1_board_af74b65d15f58535175cba5586116e5ef} 
+\index{server\+::logic\+::game\+::\+Board@{server\+::logic\+::game\+::\+Board}!toggle\+Place\+Ship\+On\+Square@{toggle\+Place\+Ship\+On\+Square}}
+\index{toggle\+Place\+Ship\+On\+Square@{toggle\+Place\+Ship\+On\+Square}!server\+::logic\+::game\+::\+Board@{server\+::logic\+::game\+::\+Board}}
+\subsubsection{\texorpdfstring{toggle\+Place\+Ship\+On\+Square()}{togglePlaceShipOnSquare()}}
+{\footnotesize\ttfamily void server.\+logic.\+game.\+Board.\+toggle\+Place\+Ship\+On\+Square (\begin{DoxyParamCaption}\item[{\hyperlink{classsharedlib_1_1utils_1_1_coord}{Coord}}]{c }\end{DoxyParamCaption})}
+
+
+
+Definition at line 18 of file Board.\+java.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+server/logic/game/\hyperlink{_board_8java}{Board.\+java}\end{DoxyCompactItemize}

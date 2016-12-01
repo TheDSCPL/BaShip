@@ -3,12 +3,27 @@ package sharedlib.utils;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Implements a generic, fixed-size Matrix. This class can hold {@code null}
+ * values.
+ *
+ * @author Alex
+ * @param <T> The type of elements in this matrix
+ */
 public class Matrix<T> {
 
     public final int sx;
     public final int sy;
     private final List<List<T>> list;
 
+    /**
+     * Create a new Matrix with a fixed size and populate that matrix with the
+     * given {@code initialValue}.
+     *
+     * @param sx The width of the matrix.
+     * @param sy The height of the matrix.
+     * @param initialValue The initial acceptAndSet for all positions of the Matrix.
+     */
     public Matrix(int sx, int sy, T initialValue) {
         this.list = new ArrayList<>();
         this.sx = sx;
@@ -25,27 +40,59 @@ public class Matrix<T> {
         }
     }
 
+    /**
+     * Get the acceptAndSet present at this coordinate.
+     *
+     * @param c
+     * @return
+     */
     public T get(Coord c) {
         return list.get(c.x).get(c.y);
     }
 
+    /**
+     * Set the acceptAndSet present at this coordinate to the given acceptAndSet.
+     *
+     * @param c
+     * @param value
+     */
     public void set(Coord c, T value) {
         list.get(c.x).set(c.y, value);
     }
 
-    public T getOr(Coord c, T value) {
+    /**
+     * Get the acceptAndSet present at this coordinate or the default acceptAndSet given if
+ the coordinate is out of bounds.
+     *
+     * @param c
+     * @param defaultValue
+     * @return The acceptAndSet present at this coordinate or {@code defaultValue} if
+     * the coordinate is out of bounds
+     */
+    public T getOr(Coord c, T defaultValue) {
         if (c.x >= 0 && c.y >= 0 && c.x < sx && c.y < sy) {
             return get(c);
         }
         else {
-            return value;
+            return defaultValue;
         }
     }
 
+    /**
+     * Set all values on this matrix to the given acceptAndSet.
+     *
+     * @param value
+     */
     public void setAll(T value) {
         setEach((c) -> value);
     }
 
+    /**
+     * Loop through all elements on this matrix, passing in the coordinate and
+ the corresponding acceptAndSet at that position.
+     *
+     * @param f
+     */
     public void forEach(MatrixValueConsumer<T> f) {
         for (int x = 0; x < sx; x++) {
             for (int y = 0; y < sy; y++) {
@@ -55,6 +102,11 @@ public class Matrix<T> {
         }
     }
 
+    /**
+     * Loop through all the possible coordinate values for this matrix.
+     *
+     * @param f
+     */
     public void forEach(MatrixCoordConsumer<T> f) {
         for (int x = 0; x < sx; x++) {
             for (int y = 0; y < sy; y++) {
@@ -63,11 +115,18 @@ public class Matrix<T> {
         }
     }
 
+    /**
+     * Loop through all elements on this matrix, passing in the coordinate and
+ the corresponding acceptAndSet at that position and assigning to that position
+ the new acceptAndSet returned by the functional interface.
+     *
+     * @param f
+     */
     public void setEach(MatrixValueProducer<T> f) {
         for (int x = 0; x < sx; x++) {
             for (int y = 0; y < sy; y++) {
                 Coord c = new Coord(x, y);
-                set(c, f.value(c));
+                set(c, f.acceptAndSet(c));
             }
         }
     }
@@ -87,6 +146,6 @@ public class Matrix<T> {
     @FunctionalInterface
     public interface MatrixValueProducer<T> {
 
-        T value(Coord c);
+        T acceptAndSet(Coord c);
     }
 }

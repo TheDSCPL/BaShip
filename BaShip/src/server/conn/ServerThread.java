@@ -7,11 +7,16 @@ import sharedlib.conn.*;
 import sharedlib.exceptions.ConnectionException;
 
 /**
- * Thread responsible for accepting new clients and creating a new <code>Client</code> instance for each.
+ * Thread responsible for accepting new clients and creating a new
+ * {@code Client} instance for each.
+ *
  * @author Alex
  */
 public class ServerThread extends Thread {
 
+    /**
+     * The port on which to create a {@code ServerSocket}.
+     */
     public final int port;
 
     public ServerThread(int port) {
@@ -30,7 +35,7 @@ public class ServerThread extends Thread {
                 try {
                     Connection conn = new Connection(socket);
                     Client client = new Client(conn);
-                    conn.start();                    
+                    conn.start();
                 }
                 catch (ConnectionException ex) {
                     Logger.getLogger(ServerThread.class.getName()).log(Level.WARNING, "Accepted a client socket but could not connect -> ignoring connection", ex);

@@ -1,0 +1,80 @@
+\hypertarget{classserver_1_1database_1_1_user_d_b}{}\section{server.\+database.\+User\+DB Class Reference}
+\label{classserver_1_1database_1_1_user_d_b}\index{server.\+database.\+User\+DB@{server.\+database.\+User\+DB}}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static boolean \hyperlink{classserver_1_1database_1_1_user_d_b_af32ba65fd689f3566e77a8eb1b529264}{is\+Username\+Available} (String username)  throws S\+Q\+L\+Exception 
+\item 
+static \hyperlink{classsharedlib_1_1tuples_1_1_user_info}{User\+Info} \hyperlink{classserver_1_1database_1_1_user_d_b_a8d4ba4100ff7d292c1f3354f1c533c09}{register} (String username, String password\+Hash)  throws S\+Q\+L\+Exception 
+\item 
+static Long \hyperlink{classserver_1_1database_1_1_user_d_b_abfde8257ad4d22b2ce4c09de2074bc80}{verify\+Login\+And\+Return\+User\+ID} (String username, String password\+Hash)  throws S\+Q\+L\+Exception 
+\item 
+static String \hyperlink{classserver_1_1database_1_1_user_d_b_a13f56f4018e26fd3835d4d4104980300}{get\+Username\+From\+ID} (long id)  throws S\+Q\+L\+Exception 
+\item 
+static List$<$ \hyperlink{classsharedlib_1_1tuples_1_1_user_info}{User\+Info} $>$ \hyperlink{classserver_1_1database_1_1_user_d_b_a31c37dfb567cb36fd4f0d49cdde8a2be}{get\+User\+List} (\hyperlink{classsharedlib_1_1tuples_1_1_user_search}{User\+Search} s)  throws S\+Q\+L\+Exception 
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 13 of file User\+D\+B.\+java.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classserver_1_1database_1_1_user_d_b_a31c37dfb567cb36fd4f0d49cdde8a2be}{}\label{classserver_1_1database_1_1_user_d_b_a31c37dfb567cb36fd4f0d49cdde8a2be} 
+\index{server\+::database\+::\+User\+DB@{server\+::database\+::\+User\+DB}!get\+User\+List@{get\+User\+List}}
+\index{get\+User\+List@{get\+User\+List}!server\+::database\+::\+User\+DB@{server\+::database\+::\+User\+DB}}
+\subsubsection{\texorpdfstring{get\+User\+List()}{getUserList()}}
+{\footnotesize\ttfamily static List$<$\hyperlink{classsharedlib_1_1tuples_1_1_user_info}{User\+Info}$>$ server.\+database.\+User\+D\+B.\+get\+User\+List (\begin{DoxyParamCaption}\item[{\hyperlink{classsharedlib_1_1tuples_1_1_user_search}{User\+Search}}]{s }\end{DoxyParamCaption}) throws S\+Q\+L\+Exception\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 105 of file User\+D\+B.\+java.
+
+\hypertarget{classserver_1_1database_1_1_user_d_b_a13f56f4018e26fd3835d4d4104980300}{}\label{classserver_1_1database_1_1_user_d_b_a13f56f4018e26fd3835d4d4104980300} 
+\index{server\+::database\+::\+User\+DB@{server\+::database\+::\+User\+DB}!get\+Username\+From\+ID@{get\+Username\+From\+ID}}
+\index{get\+Username\+From\+ID@{get\+Username\+From\+ID}!server\+::database\+::\+User\+DB@{server\+::database\+::\+User\+DB}}
+\subsubsection{\texorpdfstring{get\+Username\+From\+I\+D()}{getUsernameFromID()}}
+{\footnotesize\ttfamily static String server.\+database.\+User\+D\+B.\+get\+Username\+From\+ID (\begin{DoxyParamCaption}\item[{long}]{id }\end{DoxyParamCaption}) throws S\+Q\+L\+Exception\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 82 of file User\+D\+B.\+java.
+
+\hypertarget{classserver_1_1database_1_1_user_d_b_af32ba65fd689f3566e77a8eb1b529264}{}\label{classserver_1_1database_1_1_user_d_b_af32ba65fd689f3566e77a8eb1b529264} 
+\index{server\+::database\+::\+User\+DB@{server\+::database\+::\+User\+DB}!is\+Username\+Available@{is\+Username\+Available}}
+\index{is\+Username\+Available@{is\+Username\+Available}!server\+::database\+::\+User\+DB@{server\+::database\+::\+User\+DB}}
+\subsubsection{\texorpdfstring{is\+Username\+Available()}{isUsernameAvailable()}}
+{\footnotesize\ttfamily static boolean server.\+database.\+User\+D\+B.\+is\+Username\+Available (\begin{DoxyParamCaption}\item[{String}]{username }\end{DoxyParamCaption}) throws S\+Q\+L\+Exception\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 15 of file User\+D\+B.\+java.
+
+\hypertarget{classserver_1_1database_1_1_user_d_b_a8d4ba4100ff7d292c1f3354f1c533c09}{}\label{classserver_1_1database_1_1_user_d_b_a8d4ba4100ff7d292c1f3354f1c533c09} 
+\index{server\+::database\+::\+User\+DB@{server\+::database\+::\+User\+DB}!register@{register}}
+\index{register@{register}!server\+::database\+::\+User\+DB@{server\+::database\+::\+User\+DB}}
+\subsubsection{\texorpdfstring{register()}{register()}}
+{\footnotesize\ttfamily static \hyperlink{classsharedlib_1_1tuples_1_1_user_info}{User\+Info} server.\+database.\+User\+D\+B.\+register (\begin{DoxyParamCaption}\item[{String}]{username,  }\item[{String}]{password\+Hash }\end{DoxyParamCaption}) throws S\+Q\+L\+Exception\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 35 of file User\+D\+B.\+java.
+
+\hypertarget{classserver_1_1database_1_1_user_d_b_abfde8257ad4d22b2ce4c09de2074bc80}{}\label{classserver_1_1database_1_1_user_d_b_abfde8257ad4d22b2ce4c09de2074bc80} 
+\index{server\+::database\+::\+User\+DB@{server\+::database\+::\+User\+DB}!verify\+Login\+And\+Return\+User\+ID@{verify\+Login\+And\+Return\+User\+ID}}
+\index{verify\+Login\+And\+Return\+User\+ID@{verify\+Login\+And\+Return\+User\+ID}!server\+::database\+::\+User\+DB@{server\+::database\+::\+User\+DB}}
+\subsubsection{\texorpdfstring{verify\+Login\+And\+Return\+User\+I\+D()}{verifyLoginAndReturnUserID()}}
+{\footnotesize\ttfamily static Long server.\+database.\+User\+D\+B.\+verify\+Login\+And\+Return\+User\+ID (\begin{DoxyParamCaption}\item[{String}]{username,  }\item[{String}]{password\+Hash }\end{DoxyParamCaption}) throws S\+Q\+L\+Exception\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 58 of file User\+D\+B.\+java.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+server/database/\hyperlink{_user_d_b_8java}{User\+D\+B.\+java}\end{DoxyCompactItemize}
