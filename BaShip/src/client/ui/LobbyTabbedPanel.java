@@ -5,15 +5,19 @@
  */
 package client.ui;
 
-import pt.up.fe.lpro1613.sharedlib.exceptions.UserMessageException;
-import pt.up.fe.lpro1613.sharedlib.structs.UserInfo;
-import pt.up.fe.lpro1613.sharedlib.structs.GameInfo;
-import client.*;
+import client.ClientMain;
+import client.logic.GameC;
+import client.logic.GlobalChatC;
+import client.logic.UserC;
 import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.logging.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import pt.up.fe.lpro1613.sharedlib.exceptions.UserMessageException;
+import pt.up.fe.lpro1613.sharedlib.structs.GameInfo;
+import pt.up.fe.lpro1613.sharedlib.structs.UserInfo;
 
 /**
  *
@@ -36,8 +40,8 @@ public class LobbyTabbedPanel extends JPanel {
     {
         if(tab == null)
             return;
-        jTabbedPane1.add(name ,tab);
-        jTabbedPane1.setTabComponentAt(jTabbedPane1.getTabCount()-1,null);
+        jTabbedPane.add(name ,tab);
+        jTabbedPane.setTabComponentAt(jTabbedPane.getTabCount()-1,null);
     }
     
     private DefaultTableModel usersTableModel;
@@ -77,7 +81,7 @@ public class LobbyTabbedPanel extends JPanel {
     private void myInitComponents()
     {
         //Add tabs
-        jTabbedPane1.removeAll();
+        jTabbedPane.removeAll();
         addNewTab(usersTab, "Players");
         addNewTab(gamesTab, "Games");
         addNewTab(globalChatTab, "Global Chat");
@@ -85,12 +89,13 @@ public class LobbyTabbedPanel extends JPanel {
         /*filterIcon = new ImageIcon(getClass().getResource("/client/ui/Images/find.png"));
         clearIcon = new ImageIcon(getClass().getResource("/client/ui/Images/cancel.png"));
         applyFilterButton.setIcon(filterIcon);*/
+        
         applyUserFilterButton.addComponentListener(ClientMain.mainFrame.imageButtonResizer);
         clearUserFilterButton.addComponentListener(ClientMain.mainFrame.imageButtonResizer);
         applyGamesFilterButton.addComponentListener(ClientMain.mainFrame.imageButtonResizer);
         clearGamesFilterButton.addComponentListener(ClientMain.mainFrame.imageButtonResizer);
         
-        updateUsersTableData(sortingColumn, maxEntriesPerTable);
+        //updateUsersTableData(sortingColumn, maxEntriesPerTable);
     }
     
     /**
@@ -120,7 +125,7 @@ public class LobbyTabbedPanel extends JPanel {
         globalChatTextArea = new javax.swing.JTextArea();
         globalChatSendMessageField = new javax.swing.JTextField();
         globalChatSendButton = new javax.swing.JButton();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jTabbedPane = new javax.swing.JTabbedPane();
 
         usersTable.setModel(usersTableModel);
         usersTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -300,14 +305,14 @@ public class LobbyTabbedPanel extends JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
+                .addComponent(jTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)
+                .addComponent(jTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -321,7 +326,7 @@ public class LobbyTabbedPanel extends JPanel {
         if(columnToSortWith < 0 || columnToSortWith >= usersTableModel.getColumnCount())
             throw new IndexOutOfBoundsException("Invalid column index to sort");
         try {
-            List<UserInfo> userList = ClientMain.server.getUserList(false, filterUserField.getText(), columnToSortWith, maxUsers);
+            List<UserInfo> userList = UserC.getUserList(false, filterUserField.getText(), columnToSortWith, maxUsers);
             while(usersTableModel.getRowCount() > 0)
                 usersTableModel.removeRow(usersTableModel.getRowCount()-1);
             for(int i=0; i<userList.size() ; i++)
@@ -330,14 +335,14 @@ public class LobbyTabbedPanel extends JPanel {
                 usersTableModel.addRow(new Object[] {userInfo.username, userInfo.rank, userInfo.nGames, userInfo.nWins, userInfo.nShots, userInfo.status});
             }
         } catch (UserMessageException ex) {
-            ClientMain.showError(ex.getMessage());
+            //ClientMain.showError(ex.getMessage());
         }
         catch(Exception ignored)
         {
             ignored.printStackTrace();
             try {
             System.err.println("Exception: " + ignored.getMessage());
-                ClientMain.server.logout();
+                UserC.logout();
             } catch (UserMessageException ex) {
                 Logger.getLogger(LobbyTabbedPanel.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -350,7 +355,7 @@ public class LobbyTabbedPanel extends JPanel {
             throw new IndexOutOfBoundsException("Invalid column index to sort");
         try {
             //TODO: checkbox hardcoded to false
-            List<GameInfo> gamesList = ClientMain.server.getGameList(false, filterGamesField.getText(), maxUsers);
+            List<GameInfo> gamesList = GameC.getGameList(false, filterGamesField.getText(), maxUsers);
             while(gamesTableModel.getRowCount() > 0)
                 gamesTableModel.removeRow(gamesTableModel.getRowCount()-1);
             SimpleDateFormat dF = new SimpleDateFormat("yyyy.MM.dd 'at' HH:mm:ss");
@@ -361,14 +366,14 @@ public class LobbyTabbedPanel extends JPanel {
                     gameInfo.endDate == null ? ("Playing: " + dF.format(gameInfo.startDate)) : "Played on: " + dF.format(gameInfo.endDate)});
             }
         } catch (UserMessageException ex) {
-            ClientMain.showError(ex.getMessage());
+            //ClientMain.showError(ex.getMessage());
         }
         catch(Exception e)
         {
             e.printStackTrace();
             try {
             System.err.println("Exception: " + e.getMessage());
-                ClientMain.server.logout();
+                UserC.logout();
             } catch (UserMessageException ex) {
                 Logger.getLogger(LobbyTabbedPanel.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -405,12 +410,12 @@ public class LobbyTabbedPanel extends JPanel {
 
     private void globalChatSendButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_globalChatSendButtonActionPerformed
         try {
-            ClientMain.server.sendGlobalMessage(globalChatSendMessageField.getText());
+            GlobalChatC.sendGlobalMessage(globalChatSendMessageField.getText());
             globalChatSendMessageField.setText("");
         }
         catch (UserMessageException ex) {
             Logger.getLogger(LobbyTabbedPanel.class.getName()).log(Level.SEVERE, null, ex);
-            ClientMain.showError(ex.getMessage());
+            //ClientMain.showError(ex.getMessage());
         }
     }//GEN-LAST:event_globalChatSendButtonActionPerformed
 
@@ -429,7 +434,7 @@ public class LobbyTabbedPanel extends JPanel {
     private javax.swing.JTextField globalChatSendMessageField;
     private javax.swing.JLayeredPane globalChatTab;
     private javax.swing.JTextArea globalChatTextArea;
-    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTabbedPane jTabbedPane;
     private javax.swing.JScrollPane scrollableGamesTable;
     private javax.swing.JScrollPane scrollableGlobalChat;
     private javax.swing.JScrollPane scrollableUsersTable;

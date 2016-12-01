@@ -1,10 +1,19 @@
 package client.logic;
 
+import client.ClientMain;
+import java.util.List;
+import pt.up.fe.lpro1613.sharedlib.exceptions.UserMessageException;
 import pt.up.fe.lpro1613.sharedlib.structs.BoardUIInfo;
+import pt.up.fe.lpro1613.sharedlib.structs.GameInfo;
 import pt.up.fe.lpro1613.sharedlib.structs.GameUIInfo;
 import pt.up.fe.lpro1613.sharedlib.structs.Message;
 
 public class GameC {
+    
+    public static List<GameInfo> getGameList(boolean currentlyPlayingOnly, String usernameFilter, int rowLimit) throws UserMessageException {
+        return ClientMain.server.getGameList(currentlyPlayingOnly, usernameFilter, rowLimit);
+    }
+
 
     /**
      * Called automatically by the <code>Server</code> class whenever a new

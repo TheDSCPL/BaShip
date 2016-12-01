@@ -1,6 +1,7 @@
 package client.logic;
 
 import client.ClientMain;
+import java.util.List;
 import java.util.regex.*;
 import pt.up.fe.lpro1613.sharedlib.exceptions.UserMessageException;
 import pt.up.fe.lpro1613.sharedlib.structs.UserInfo;
@@ -105,6 +106,10 @@ public class UserC {
      */
     public static boolean isLoggedIn() {
         return loggedInUser != null;
+    }
+
+    public static List<UserInfo> getUserList(boolean onlineOnly, String text, int columnToSortWith, int maxUsers) throws UserMessageException {
+        return ClientMain.server.getUserList(onlineOnly, text, maxUsers, maxUsers);
     }
 
 }

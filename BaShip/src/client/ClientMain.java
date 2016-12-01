@@ -1,16 +1,17 @@
 package client;
 
-import pt.up.fe.lpro1613.sharedlib.conn.Connection;
-import pt.up.fe.lpro1613.sharedlib.utils.Preferences;
-import pt.up.fe.lpro1613.sharedlib.exceptions.ConnectionException;
-import client.other.PrefsKey;
 import client.conn.*;
-import client.ui.*;
+import client.other.PrefsKey;
+import client.ui.LoginPanel;
+import client.ui.MainFrame;
 import java.io.*;
 import java.net.*;
 import java.util.concurrent.*;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.*;
+import pt.up.fe.lpro1613.sharedlib.conn.Connection;
+import pt.up.fe.lpro1613.sharedlib.exceptions.ConnectionException;
+import pt.up.fe.lpro1613.sharedlib.utils.Preferences;
 
 public class ClientMain {
 

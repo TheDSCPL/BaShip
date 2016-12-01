@@ -1,6 +1,6 @@
 package client.conn;
 
-import client.*;
+import client.ClientMain;
 import client.logic.*;
 import java.io.*;
 import java.util.*;

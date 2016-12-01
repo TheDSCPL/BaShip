@@ -1,5 +1,7 @@
 package client.logic;
 
+import client.ClientMain;
+import pt.up.fe.lpro1613.sharedlib.exceptions.UserMessageException;
 import pt.up.fe.lpro1613.sharedlib.structs.Message;
 
 public class GlobalChatC {
@@ -14,6 +16,10 @@ public class GlobalChatC {
     static public void receiveGlobalMessage(Message message) {
         //messagesTextArea.setText(messagesTextArea.getText() + "[" + m.timestamp + "] " + m.username + "\n" + m.text + "\n\n");
         //messagesTextArea.setCaretPosition(messagesTextArea.getDocument().getLength()); // Scroll to bottom
+    }
+
+    public static void sendGlobalMessage(String text) throws UserMessageException {
+        ClientMain.server.sendGlobalMessage(text);
     }
 
 }
