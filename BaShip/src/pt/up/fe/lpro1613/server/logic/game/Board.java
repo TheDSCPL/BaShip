@@ -1,13 +1,13 @@
 package pt.up.fe.lpro1613.server.logic.game;
 
-import pt.up.fe.lpro1613.sharedlib.tuples.BoardUIInfo;
-import pt.up.fe.lpro1613.sharedlib.utils.Matrix;
-import pt.up.fe.lpro1613.sharedlib.utils.Coord;
 import java.util.*;
 import static java.util.stream.Collectors.toSet;
 import static pt.up.fe.lpro1613.sharedlib.constants.BoardK.*;
+import pt.up.fe.lpro1613.sharedlib.tuples.BoardUIInfo;
+import pt.up.fe.lpro1613.sharedlib.utils.Coord;
+import pt.up.fe.lpro1613.sharedlib.utils.Matrix;
 
-public class Board {
+class Board {
 
     private final Set<Coord> invalidShipSquares = new HashSet<>();
     private final Matrix<Boolean> shipsLayer = new Matrix(BOARD_SIZE, BOARD_SIZE, false);

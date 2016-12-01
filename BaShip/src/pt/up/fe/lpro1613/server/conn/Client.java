@@ -6,7 +6,8 @@ import java.util.logging.Logger;
 import pt.up.fe.lpro1613.server.ServerMain;
 import pt.up.fe.lpro1613.server.database.GameDB;
 import pt.up.fe.lpro1613.server.database.UserDB;
-import pt.up.fe.lpro1613.server.logic.GameS;
+import pt.up.fe.lpro1613.server.logic.game.GameS;
+import pt.up.fe.lpro1613.server.logic.GlobalChatS;
 import pt.up.fe.lpro1613.server.logic.UserS;
 import pt.up.fe.lpro1613.sharedlib.conn.Connection;
 import pt.up.fe.lpro1613.sharedlib.conn.Packet;
@@ -107,7 +108,7 @@ public class Client implements Connection.Delegate {
             }
             case CSendGlobalMessage: {
                 try {
-                    UserS.sendGlobalMessage(this, (String) request.info);
+                    GlobalChatS.sendGlobalMessage(this, (String) request.info);
                     response = new Packet();
                 }
                 catch (SQLException ex) {

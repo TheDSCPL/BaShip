@@ -9,14 +9,13 @@ import pt.up.fe.lpro1613.server.conn.Client;
 import pt.up.fe.lpro1613.server.database.GameDB;
 import pt.up.fe.lpro1613.server.database.MoveDB;
 import pt.up.fe.lpro1613.server.database.ShipDB;
-import pt.up.fe.lpro1613.server.logic.GameS;
 import pt.up.fe.lpro1613.server.logic.UserS;
 import pt.up.fe.lpro1613.sharedlib.exceptions.ConnectionException;
 import pt.up.fe.lpro1613.sharedlib.tuples.BoardUIInfo;
 import pt.up.fe.lpro1613.sharedlib.tuples.GameUIInfo;
 import pt.up.fe.lpro1613.sharedlib.utils.Coord;
 
-public class GamePlay {
+class GamePlay {
 
     public final Long gameID;
 

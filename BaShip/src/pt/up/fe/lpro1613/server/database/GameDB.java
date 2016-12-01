@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import pt.up.fe.lpro1613.server.logic.GameS;
+import pt.up.fe.lpro1613.server.logic.game.GameS;
 import pt.up.fe.lpro1613.sharedlib.tuples.GameInfo;
 import pt.up.fe.lpro1613.sharedlib.tuples.GameSearch;
 

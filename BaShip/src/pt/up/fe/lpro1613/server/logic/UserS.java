@@ -1,12 +1,12 @@
 package pt.up.fe.lpro1613.server.logic;
 
+import pt.up.fe.lpro1613.server.logic.game.GameS;
 import java.sql.*;
 import java.util.*;
 import java.util.concurrent.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import pt.up.fe.lpro1613.server.conn.Client;
-import pt.up.fe.lpro1613.server.database.GlobalChatDB;
 import pt.up.fe.lpro1613.server.database.UserDB;
 import pt.up.fe.lpro1613.sharedlib.exceptions.ConnectionException;
 import pt.up.fe.lpro1613.sharedlib.exceptions.UserMessageException;
@@ -14,15 +14,36 @@ import pt.up.fe.lpro1613.sharedlib.tuples.Message;
 import pt.up.fe.lpro1613.sharedlib.tuples.UserInfo;
 import pt.up.fe.lpro1613.sharedlib.tuples.UserInfo.Status;
 
+/**
+ * Class responsible for managing the state of the users on the server. Supports
+ * basic user operations like login/register/logout and also provides access to
+ * various user-related info.
+ *
+ * @author Alex
+ */
 public class UserS {
 
     private static final Map<Long, Client> loginsID = new ConcurrentHashMap<>();
     private static final Map<Client, Long> loginsClient = new ConcurrentHashMap<>();
 
+    /**
+     * 
+     * @param username
+     * @return
+     * @throws SQLException 
+     */
     public static boolean isUsernameAvailable(String username) throws SQLException {
         return UserDB.isUsernameAvailable(username);
     }
 
+    /**
+     * 
+     * @param client
+     * @param username
+     * @param passwordHash
+     * @return
+     * @throws SQLException 
+     */
     public static UserInfo register(Client client, String username, String passwordHash) throws SQLException {
         UserInfo user = UserDB.register(username, passwordHash);
         loginsID.put(user.id, client);
@@ -30,6 +51,15 @@ public class UserS {
         return user;
     }
 
+    /**
+     * 
+     * @param client
+     * @param username
+     * @param passwordHash
+     * @return
+     * @throws SQLException
+     * @throws UserMessageException 
+     */
     public static UserInfo login(Client client, String username, String passwordHash) throws SQLException, UserMessageException {
         Long id = UserDB.verifyLoginAndReturnUserID(username, passwordHash);
 
@@ -48,51 +78,72 @@ public class UserS {
         }
     }
 
+    /**
+     * 
+     * @param client 
+     */
     public static void logout(Client client) {
         if (isClientLoggedIn(client)) {
             loginsID.remove(loginsClient.remove(client));
         }
     }
 
-    public static void sendGlobalMessage(Client client, String message) throws SQLException {
-        if (isClientLoggedIn(client)) {
-            Message msg = GlobalChatDB.sendGlobalMessage(loginsClient.get(client), message);
-            UserS.distributeGlobalMessage(msg);
-        }
-        else {
-            Logger.getLogger(UserS.class.getName()).log(Level.SEVERE, "Client tried to send global message without being logged in");
-        }
-    }
-
+    /**
+     * Called by the {@code Client} class whenever a client is disconnected.
+     * @param client The client that disconnected
+     */
     public static void clientDisconnected(Client client) {
         logout(client);
     }
 
+    /**
+     * 
+     * @param client
+     * @return 
+     */
     public static boolean isClientLoggedIn(Client client) {
         return loginsClient.containsKey(client);
     }
 
+    /**
+     * 
+     * @param userID
+     * @return 
+     */
     public static boolean isUserLoggedIn(Long userID) {
         return loginsID.containsKey(userID);
     }
 
+    /**
+     * 
+     * @param id
+     * @return 
+     */
     public static Client clientFromID(Long id) {
         return loginsID.get(id);
     }
 
+    /**
+     * 
+     * @param c
+     * @return 
+     */
     public static Long idFromClient(Client c) {
         return loginsClient.get(c);
     }
 
+    /**
+     * 
+     * @param userID
+     * @return 
+     */
     public static Status getUserStatus(Long userID) {
         if (isUserLoggedIn(userID)) {
             if (GameS.isClientPlaying(clientFromID(userID))) {
                 return Status.Playing;
             }
-            else {
-                if (GameS.isClientWaiting(clientFromID(userID))) {
-                    return Status.Waiting;
-                }
+            else if (GameS.isClientWaiting(clientFromID(userID))) {
+                return Status.Waiting;
             }
 
             return Status.Online;
@@ -101,6 +152,11 @@ public class UserS {
         return Status.Offline;
     }
 
+    /**
+     * 
+     * @param c
+     * @return 
+     */
     public static String usernameFromClient(Client c) {
         try {
             return UserDB.getUsernameFromID(idFromClient(c));
@@ -111,7 +167,7 @@ public class UserS {
         }
     }
 
-    private static void distributeGlobalMessage(Message msg) {
+    static void distributeGlobalMessage(Message msg) {
         for (Client client : loginsID.values()) {
             try {
                 client.informAboutGlobalMessage(msg);

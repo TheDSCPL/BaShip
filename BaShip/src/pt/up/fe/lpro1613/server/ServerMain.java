@@ -1,7 +1,8 @@
 package pt.up.fe.lpro1613.server;
 
 import java.sql.SQLException;
-import java.util.*;
+import java.util.HashSet;
+import java.util.Set;
 import pt.up.fe.lpro1613.server.conn.Client;
 import pt.up.fe.lpro1613.server.conn.ServerThread;
 import pt.up.fe.lpro1613.server.other.ConsoleThread;

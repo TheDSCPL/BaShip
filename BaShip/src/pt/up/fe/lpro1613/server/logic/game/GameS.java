@@ -1,4 +1,4 @@
-package pt.up.fe.lpro1613.server.logic;
+package pt.up.fe.lpro1613.server.logic.game;
 
 import java.sql.SQLException;
 import java.util.Map;
@@ -8,6 +8,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import pt.up.fe.lpro1613.server.conn.Client;
+import pt.up.fe.lpro1613.server.logic.UserS;
 import pt.up.fe.lpro1613.server.logic.game.Board;
 import pt.up.fe.lpro1613.server.logic.game.GamePlay;
 import pt.up.fe.lpro1613.sharedlib.exceptions.ConnectionException;
@@ -15,6 +16,10 @@ import pt.up.fe.lpro1613.sharedlib.exceptions.UserMessageException;
 import pt.up.fe.lpro1613.sharedlib.tuples.GameUIInfo;
 import pt.up.fe.lpro1613.sharedlib.utils.Coord;
 
+/**
+ * 
+ * @author Alex
+ */
 public class GameS {
 
     private static final Map<Long, GamePlay> currentGamesPlay = new ConcurrentHashMap<>();
@@ -23,6 +28,11 @@ public class GameS {
     private static final Queue<Client> playersWaitingForGame = new ConcurrentLinkedQueue<>();
     private static final Map<Client, Board> playersWaitingBoards = new ConcurrentHashMap<>();
 
+    /**
+     * 
+     * @param client
+     * @throws UserMessageException 
+     */
     public static void startRandomGame(Client client) throws UserMessageException {
         if (!playersWaitingForGame.isEmpty()) {
             startGame(client, playersWaitingForGame.poll()); // Start a game with the player who has been waiting for the most time
@@ -32,6 +42,12 @@ public class GameS {
         }
     }
 
+    /**
+     * 
+     * @param client
+     * @param otherPlayerID
+     * @throws UserMessageException 
+     */
     public static void startGameWithPlayer(Client client, Long otherPlayerID) throws UserMessageException {
 
         // Other player must be online
@@ -59,10 +75,15 @@ public class GameS {
         }
     }
 
+    /**
+     * 
+     * @param client
+     * @param acepted 
+     */
     public static void answerGameInvitation(Client client, boolean acepted) {
         // TODO: finish
     }
-
+    
     private static void sendInvitation(Client from, Client to) {
         try {
             to.sendGameInvitation(); // TODO: finish
@@ -99,6 +120,11 @@ public class GameS {
         updateGameScreenForClient(targetClient);
     }
 
+    /**
+     * 
+     * @param player
+     * @param pos 
+     */
     public static void togglePlaceShipOnSquare(Client player, Coord pos) {
         if (isClientPlaying(player)) {
             currentGamesPlayFromUser.get(player).togglePlaceShipOnSquare(player, pos);
@@ -120,6 +146,10 @@ public class GameS {
         }
     }
 
+    /**
+     * 
+     * @param player 
+     */
     public static void clickReadyButton(Client player) {
         if (isClientPlaying(player)) {
             currentGamesPlayFromUser.get(player).clickReadyButton(player);
@@ -129,6 +159,11 @@ public class GameS {
         }
     }
 
+    /**
+     * 
+     * @param player
+     * @param pos 
+     */
     public static void fireShot(Client player, Coord pos) {
         if (isClientPlaying(player)) {
             currentGamesPlayFromUser.get(player).fireShot(player, pos);
@@ -138,23 +173,45 @@ public class GameS {
         }
     }
     
+    /**
+     * 
+     * @param client 
+     */
     public static void closeGame(Client client) {
         currentGamesPlayFromUser.get(client).gameClosedByClient(client);
     }
     
+    /**
+     * 
+     * @param game 
+     */
     public static void gameFinished(GamePlay game) {
         // TODO: finish
     }
 
+    /**
+     * 
+     * @param client 
+     */
     public static void clientDisconnected(Client client) {
         // TODO: finish
         //currentGamesPlayFromUser.get(client).clientDisconnected(client); // currentGamesPlayFromUser.get(client) may be null
     }
 
+    /**
+     * 
+     * @param client
+     * @return 
+     */
     public static boolean isClientPlaying(Client client) {
         return currentGamesPlayFromUser.containsKey(client);
     }
 
+    /**
+     * 
+     * @param client
+     * @return 
+     */
     public static boolean isClientWaiting(Client client) {
         return playersWaitingForGame.contains(client) || playersWaitingForPlayer.containsValue(client);
     }
@@ -163,6 +220,11 @@ public class GameS {
         return currentGamesPlay.get(gameID).gameHasStarted();
     }*/
 
+    /**
+     * 
+     * @param gameID
+     * @return 
+     */
     public static Integer getGameCurrentMoveNumber(Long gameID) {
         return currentGamesPlay.get(gameID).getCurrentMoveNumber();
     }
