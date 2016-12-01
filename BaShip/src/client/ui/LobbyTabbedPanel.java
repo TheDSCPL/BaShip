@@ -89,12 +89,12 @@ public class LobbyTabbedPanel extends JPanel {
         clearUserFilterButton.addComponentListener(ClientMain.mainFrame.imageButtonResizer);
         applyGamesFilterButton.addComponentListener(ClientMain.mainFrame.imageButtonResizer);
         clearGamesFilterButton.addComponentListener(ClientMain.mainFrame.imageButtonResizer);
-
+        
         if (UserC.isLoggedIn()) {
             updateUsersTableData(sortingColumn, maxEntriesPerTable);
         }
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
