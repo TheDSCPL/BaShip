@@ -142,7 +142,8 @@ public class GameS {
     }
 
     public static void clientDisconnected(Client client) {
-        currentGamesPlayFromUser.get(client).clientDisconnected(client);
+        // TODO: finish
+        //currentGamesPlayFromUser.get(client).clientDisconnected(client); // currentGamesPlayFromUser.get(client) may be null
     }
 
     public static boolean isClientPlaying(Client client) {

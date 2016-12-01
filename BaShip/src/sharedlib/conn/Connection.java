@@ -198,5 +198,7 @@ final public class Connection extends Thread {
         if (delegate != null) {
             delegate.disconnected(this);
         }
+        
+        System.gc();
     }
 }

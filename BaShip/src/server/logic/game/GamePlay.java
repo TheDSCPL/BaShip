@@ -101,7 +101,6 @@ public class GamePlay {
         }
         catch (ConnectionException ex) {
             Logger.getLogger(GamePlay.class.getName()).log(Level.SEVERE, null, ex);
-            // TODO: do anything else with exception?
         }
 
         // Remove myself from GameS's lists

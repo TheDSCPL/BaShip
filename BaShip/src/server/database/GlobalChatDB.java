@@ -1,26 +1,38 @@
 package server.database;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
-import server.ServerMain;
 import sharedlib.tuples.Message;
 
 public class GlobalChatDB {
 
     public static Message sendGlobalMessage(Long userID, String message) throws SQLException {
-        PreparedStatement stmt = ServerMain.db.getConn().prepareStatement(
-                "INSERT INTO globalchat VALUES (DEFAULT, ?, NOW(), ?) RETURNING mssgid, timestamp"
-        );
-        stmt.setLong(1, userID);
-        stmt.setString(2, message);
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
 
-        ResultSet r = stmt.executeQuery();
-        r.next();
-        
-        Long mssgID = r.getLong("mssgid");
-        Date timestamp = r.getTimestamp("timestamp");
-        return new Message(mssgID, userID, UserDB.getUsernameFromID(userID), timestamp, message);
+        try {
+            conn = Database.getConn();
+            stmt = conn.prepareStatement(
+                    "INSERT INTO globalchat VALUES (DEFAULT, ?, NOW(), ?) RETURNING mssgid, timestamp"
+            );
+
+            stmt.setLong(1, userID);
+            stmt.setString(2, message);
+
+            rs = stmt.executeQuery();
+            rs.next();
+
+            Long mssgID = rs.getLong("mssgid");
+            Date timestamp = rs.getTimestamp("timestamp");
+            return new Message(mssgID, userID, UserDB.getUsernameFromID(userID), timestamp, message);
+        }
+        finally {
+            Database.close(conn, stmt, rs);
+        }
     }
+
 }

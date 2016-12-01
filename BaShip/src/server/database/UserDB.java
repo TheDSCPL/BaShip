@@ -1,11 +1,11 @@
 package server.database;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import server.ServerMain;
 import server.logic.UserS;
 import sharedlib.tuples.UserInfo;
 import sharedlib.tuples.UserSearch;
@@ -13,88 +13,132 @@ import sharedlib.tuples.UserSearch;
 public class UserDB {
 
     public static boolean isUsernameAvailable(String username) throws SQLException {
-        PreparedStatement stmt = ServerMain.db.getConn().prepareStatement(
-                "SELECT COUNT(*) FROM users WHERE username = ?"
-        );
-        stmt.setString(1, username);
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
 
-        ResultSet result = stmt.executeQuery(username);
-        result.next();
-        return result.getInt(1) == 0;
+        try {
+            conn = Database.getConn();
+
+            stmt = conn.prepareStatement("SELECT COUNT(*) FROM users WHERE username = ?");
+            stmt.setString(1, username);
+
+            rs = stmt.executeQuery(username);
+            rs.next();
+            return rs.getInt(1) == 0;
+        }
+        finally {
+            Database.close(conn, stmt, rs);
+        }
     }
-    
+
     public static UserInfo register(String username, String passwordHash) throws SQLException {
-        PreparedStatement stmt = ServerMain.db.getConn().prepareStatement(
-                "INSERT INTO users VALUES (DEFAULT, ?, ?) RETURNING (uid)"
-        );
-        stmt.setString(1, username);
-        stmt.setString(2, passwordHash);
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
 
-        ResultSet r = stmt.executeQuery();
-        r.next();
-        Long id = r.getLong(1);
+        try {
+            conn = Database.getConn();
 
-        return new UserInfo(id, username);
+            stmt = conn.prepareStatement("INSERT INTO users VALUES (DEFAULT, ?, ?) RETURNING (uid)");
+            stmt.setString(1, username);
+            stmt.setString(2, passwordHash);
+
+            rs = stmt.executeQuery();
+            rs.next();
+            Long id = rs.getLong(1);
+
+            return new UserInfo(id, username);
+        }
+        finally {
+            Database.close(conn, stmt, rs);
+        }
     }
 
     public static Long verifyLoginAndReturnUserID(String username, String passwordHash) throws SQLException {
-        PreparedStatement stmt = ServerMain.db.getConn().prepareStatement(
-                "SELECT uid FROM users WHERE username = ? AND password = ?"
-        );
-        stmt.setString(1, username);
-        stmt.setString(2, passwordHash);
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
 
-        ResultSet r = stmt.executeQuery();
-        if (r.next()) {
-            return r.getLong(1);
+        try {
+            conn = Database.getConn();
+
+            stmt = conn.prepareStatement("SELECT uid FROM users WHERE username = ? AND password = ?");
+            stmt.setString(1, username);
+            stmt.setString(2, passwordHash);
+
+            rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getLong(1);
+            }
+
+            return null;
         }
-
-        return null;
+        finally {
+            Database.close(conn, stmt, rs);
+        }
     }
 
     public static String getUsernameFromID(long id) throws SQLException {
-        PreparedStatement stmt = ServerMain.db.getConn().prepareStatement(
-                "SELECT username FROM users WHERE uid = ?"
-        );
-        stmt.setLong(1, id);
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
 
-        ResultSet r = stmt.executeQuery();
+        try {
+            conn = Database.getConn();
 
-        if (r.next()) {
-            return r.getString(1);
-        }
-        else {
+            stmt = conn.prepareStatement("SELECT username FROM users WHERE uid = ?");
+            stmt.setLong(1, id);
+
+            rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getString(1);
+            }
+            
             return null;
+        }
+        finally {
+            Database.close(conn, stmt, rs);
         }
     }
 
     public static List<UserInfo> getUserList(UserSearch s) throws SQLException {
-        PreparedStatement stmt = ServerMain.db.getConn().prepareStatement(
-                "SELECT uid, username, rank, ngames, nwins, nshots "
-                + "FROM users JOIN user_ranks USING(uid) JOIN user_stats USING(uid) "
-                + "WHERE username LIKE ? "
-                + "ORDER BY ? LIMIT ?"
-        );
-        stmt.setString(1, "%" + s.usernameFilter + "%");
-        stmt.setInt(2, s.orderByColumn);
-        stmt.setInt(3, s.rowLimit);
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
 
-        ResultSet results = stmt.executeQuery();
-
-        List<UserInfo> users = new ArrayList<>();
-
-        while (results.next()) {
-            long id = results.getLong(1);
-            users.add(
-                    new UserInfo(
-                            id, results.getString(2), null,
-                            results.getInt(3), results.getInt(4), results.getInt(5),
-                            results.getInt(6), UserS.getUserStatus(id) // TODO: filter by online only
-                    )
+        try {
+            conn = Database.getConn();
+            stmt = conn.prepareStatement(
+                    "SELECT uid, username, rank, ngames, nwins, nshots "
+                    + "FROM users JOIN user_ranks USING(uid) JOIN user_stats USING(uid) "
+                    + "WHERE username LIKE ? "
+                    + "ORDER BY ? LIMIT ?"
             );
-        }
+            stmt.setString(1, "%" + s.usernameFilter + "%");
+            stmt.setInt(2, s.orderByColumn);
+            stmt.setInt(3, s.rowLimit);
 
-        return users;
+            rs = stmt.executeQuery();
+
+            List<UserInfo> users = new ArrayList<>();
+
+            while (rs.next()) {
+                long id = rs.getLong(1);
+                users.add(
+                        new UserInfo(
+                                id, rs.getString(2), null,
+                                rs.getInt(3), rs.getInt(4), rs.getInt(5),
+                                rs.getInt(6), UserS.getUserStatus(id) // TODO: filter by online only
+                        )
+                );
+            }
+
+            return users;
+        }
+        finally {
+            Database.close(conn, stmt, rs);
+        }
     }
 
 }

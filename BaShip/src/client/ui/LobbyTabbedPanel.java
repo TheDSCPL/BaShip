@@ -6,7 +6,6 @@
 package client.ui;
 
 import client.*;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.logging.*;
@@ -337,7 +336,7 @@ public class LobbyTabbedPanel extends JPanel {
             ignored.printStackTrace();
             try {
             System.err.println("Exception: " + ignored.getMessage());
-                ClientMain.server.doLogout();
+                ClientMain.server.logout();
             } catch (UserMessageException ex) {
                 Logger.getLogger(LobbyTabbedPanel.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -350,7 +349,7 @@ public class LobbyTabbedPanel extends JPanel {
             throw new IndexOutOfBoundsException("Invalid column index to sort");
         try {
             //TODO: checkbox hardcoded to false
-            List<GameInfo> gamesList = ClientMain.server.getGameList(false, filterGamesField.getText(), columnToSortWith, maxUsers);
+            List<GameInfo> gamesList = ClientMain.server.getGameList(false, filterGamesField.getText(), maxUsers);
             while(gamesTableModel.getRowCount() > 0)
                 gamesTableModel.removeRow(gamesTableModel.getRowCount()-1);
             SimpleDateFormat dF = new SimpleDateFormat("yyyy.MM.dd 'at' HH:mm:ss");
@@ -368,7 +367,7 @@ public class LobbyTabbedPanel extends JPanel {
             e.printStackTrace();
             try {
             System.err.println("Exception: " + e.getMessage());
-                ClientMain.server.doLogout();
+                ClientMain.server.logout();
             } catch (UserMessageException ex) {
                 Logger.getLogger(LobbyTabbedPanel.class.getName()).log(Level.SEVERE, null, ex);
             }

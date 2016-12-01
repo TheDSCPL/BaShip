@@ -1,12 +1,12 @@
-package client;
+package server.other;
 
 import sharedlib.utils.Preferences;
 
 public enum PrefsKey implements Preferences.Key {
-    ServerIP("ServerIP", "localhost"),
+    DatabaseURL("DatabaseURL", "jdbc:postgresql://dbm.fe.up.pt/lpro1613"),
     ServerPort("ServerPort", 4413),
-    DarkTheme("DarkTheme", false),
-    Sound("Sound", true);
+    DatabaseUsername("DatabaseUsername", "lpro1613"),
+    DatabasePassword("DatabasePassword", "X!5493jbo");
 
     private final String key;
     private final Object defaultValue;

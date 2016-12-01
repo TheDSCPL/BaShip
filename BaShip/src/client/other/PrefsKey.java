@@ -1,12 +1,16 @@
-package server;
+package client.other;
 
 import sharedlib.utils.Preferences;
 
+/**
+ * Contains the keys to the various client-side persistence values
+ * @author Alex
+ */
 public enum PrefsKey implements Preferences.Key {
-    DatabaseURL("DatabaseURL", "jdbc:postgresql://dbm.fe.up.pt/lpro1613"),
+    ServerIP("ServerIP", "localhost"),
     ServerPort("ServerPort", 4413),
-    DatabaseUsername("DatabaseUsername", "lpro1613"),
-    DatabasePassword("DatabasePassword", "X!5493jbo");
+    DarkTheme("DarkTheme", false),
+    Sound("Sound", true);
 
     private final String key;
     private final Object defaultValue;

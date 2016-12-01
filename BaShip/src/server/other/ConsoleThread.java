@@ -1,4 +1,4 @@
-package server;
+package server.other;
 
 public class ConsoleThread extends Thread {
     

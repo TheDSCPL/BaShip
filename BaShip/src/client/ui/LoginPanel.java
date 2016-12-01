@@ -505,7 +505,7 @@ public class LoginPanel extends javax.swing.JPanel {
 
         }
     }
-    
+
     public Point calculateRetypePasswordDialogPosition() {
         Point mainFrameLocation;
         try {
@@ -514,7 +514,7 @@ public class LoginPanel extends javax.swing.JPanel {
             }
         }
         catch (Throwable ignored) {
-            return new Point(0,0);
+            return new Point(0, 0);
         }
         return mainFrameLocation;
     }
@@ -553,8 +553,9 @@ public class LoginPanel extends javax.swing.JPanel {
 
         try {
             if (ClientMain.connectToServer(false)) {
-                ClientMain.loggedInUser = ClientMain.server.doRegister(usernameField.getText(), passwordField.getPassword());
-                ClientMain.mainFrame.changeToPanel(new LobbyPanel());
+                if (UserC.register(usernameField.getText(), passwordField.getPassword())) {
+                    ClientMain.mainFrame.changeToPanel(new LobbyPanel());
+                }
             }
         }
         catch (UserMessageException ex) {
@@ -585,8 +586,9 @@ public class LoginPanel extends javax.swing.JPanel {
 
         try {
             if (ClientMain.connectToServer(false)) {
-                ClientMain.loggedInUser = ClientMain.server.doLogin(usernameField.getText(), passwordField.getPassword());
-                ClientMain.mainFrame.changeToPanel(new LobbyPanel());
+                if (UserC.login(usernameField.getText(), passwordField.getPassword())) {
+                    ClientMain.mainFrame.changeToPanel(new LobbyPanel());
+                }
             }
         }
         catch (UserMessageException ex) {

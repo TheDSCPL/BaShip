@@ -6,6 +6,7 @@
 package client.ui;
 
 import client.ClientMain;
+import client.logic.UserC;
 import sharedlib.exceptions.UserMessageException;
 
 /**
@@ -20,13 +21,13 @@ public class LobbyPanel extends javax.swing.JPanel {
     public LobbyPanel() {
         initComponents();
 
-        if (ClientMain.loggedInUser == null) {
+        if (!UserC.isLoggedIn()) {
             ClientMain.showWarning("Lobby panel shown without an user logged in");
             ClientMain.mainFrame.changeToPanel(new LoginPanel());
             return;
         }
 
-        loggedInAsLabel.setText(loggedInAsLabel.getText() + ClientMain.loggedInUser.username);
+        loggedInAsLabel.setText(loggedInAsLabel.getText() + UserC.getLoggedInUsername());
     }
 
     /**
@@ -129,12 +130,11 @@ public class LobbyPanel extends javax.swing.JPanel {
 
     private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed
         try {
-            ClientMain.server.doLogout();
+            UserC.logout();
         }
         catch (UserMessageException ex) {
             ClientMain.showWarning(ex.getMessage());
         }
-        ClientMain.loggedInUser = null;
         ClientMain.mainFrame.changeToPanel(new LoginPanel());
     }//GEN-LAST:event_logoutButtonActionPerformed
 

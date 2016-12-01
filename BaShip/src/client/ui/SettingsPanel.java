@@ -1,7 +1,7 @@
 package client.ui;
 
 import client.ClientMain;
-import client.PrefsKey;
+import client.other.PrefsKey;
 import sharedlib.conn.Connection;
 
 public class SettingsPanel extends javax.swing.JPanel {

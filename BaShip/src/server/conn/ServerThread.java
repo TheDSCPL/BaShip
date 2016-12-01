@@ -1,11 +1,15 @@
 package server.conn;
 
-import sharedlib.exceptions.ConnectionException;
 import java.io.*;
 import java.net.*;
 import java.util.logging.*;
 import sharedlib.conn.*;
+import sharedlib.exceptions.ConnectionException;
 
+/**
+ * Thread responsible for accepting new clients and creating a new <code>Client</code> instance for each.
+ * @author Alex
+ */
 public class ServerThread extends Thread {
 
     public final int port;

@@ -1,5 +1,6 @@
 package client;
 
+import client.other.PrefsKey;
 import client.conn.*;
 import client.ui.*;
 import java.io.*;
@@ -9,7 +10,6 @@ import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.*;
 import sharedlib.conn.*;
 import sharedlib.exceptions.*;
-import sharedlib.tuples.*;
 import sharedlib.utils.*;
 
 public class ClientMain {
@@ -18,11 +18,9 @@ public class ClientMain {
 
     }
 
-    public static final ClientMain instance = new ClientMain();
     public static final MainFrame mainFrame = new MainFrame();
     public static final Preferences prefs = new Preferences(ClientMain.class);
     public static Server server;
-    public static UserInfo loggedInUser;
     private static final ExecutorService backgroundExecutor = Executors.newCachedThreadPool();
 
     public static void main(String args[]) {
@@ -33,12 +31,13 @@ public class ClientMain {
     }
 
     /**
-     * Create socket and connect to server
+     * Create a <code>Socket</code> and connect to server using a
+     * <code>Connection</code> object.
      *
      * @param disconnectPreviousConnection If false, only connects if a
      * connection is not already present. If true, always creates a new
-     * connection, even if a disconnect is first necessary
-     * @return true if connected to server successfully
+     * connection, even if a disconnect is first necessary.
+     * @return True if connected to server successfully.
      */
     public static boolean connectToServer(boolean disconnectPreviousConnection) {
         if (server != null && !disconnectPreviousConnection) {
@@ -50,7 +49,7 @@ public class ClientMain {
                 server.disconnect();
             }
             catch (IOException ignored) {
-                
+
             }
         }
 
@@ -65,27 +64,54 @@ public class ClientMain {
         }
     }
 
+    /**
+     * Called by the <code>server</code> object automatically whenever the
+     * server is connected
+     *
+     * @param address The address of the newly connected server
+     */
     public static void connected(String address) {
         System.out.println("Connected to server on " + address);
     }
 
+    /**
+     * Called by the <code>server</code> object automatically whenever the
+     * server is disconnected
+     *
+     * @param address The address of the recently disconnected server
+     */
     public static void disconnected(String address) {
         System.out.println("Disconnected from server on " + address);
         server = null; // Remove server
     }
 
+    /**
+     * Show a pop-up with an info icon and the specified message.
+     *
+     * @param message
+     */
     public static void showInfo(String message) {
         runOnUI(() -> {
             JOptionPane.showMessageDialog(ClientMain.mainFrame, message, "Info", INFORMATION_MESSAGE);
         });
     }
 
+    /**
+     * Show a pop-up with a warning icon and the specified message.
+     *
+     * @param message
+     */
     public static void showWarning(String message) {
         runOnUI(() -> {
             JOptionPane.showMessageDialog(ClientMain.mainFrame, message, "Warning", WARNING_MESSAGE);
         });
     }
 
+    /**
+     * Show a pop-up with an error icon and the specified message.
+     *
+     * @param message
+     */
     public static void showError(String message) {
         runOnUI(() -> {
             JOptionPane.showMessageDialog(ClientMain.mainFrame, message, "Error", ERROR_MESSAGE);
