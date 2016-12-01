@@ -9,7 +9,7 @@ import static pt.up.fe.lpro1613.server.logic.UserS.isClientLoggedIn;
 import pt.up.fe.lpro1613.sharedlib.tuples.Message;
 
 /**
- * 
+ * XXX
  * @author Alex
  */
 public class GlobalChatS {
@@ -26,7 +26,7 @@ public class GlobalChatS {
      */
     public static void sendGlobalMessage(Client client, String message) throws SQLException {
         if (isClientLoggedIn(client)) {
-            Message msg = GlobalChatDB.sendGlobalMessage(UserS.idFromClient(client), message);
+            Message msg = GlobalChatDB.saveGlobalMessage(UserS.idFromClient(client), message);
             UserS.distributeGlobalMessage(msg);
         }
         else {

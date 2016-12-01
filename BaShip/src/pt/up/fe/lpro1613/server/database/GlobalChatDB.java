@@ -7,18 +7,31 @@ import java.sql.SQLException;
 import java.util.Date;
 import pt.up.fe.lpro1613.sharedlib.tuples.Message;
 
+/**
+ * Collection of static methods that access, set and return information present
+ * on the table "globalchat" of the database.
+ *
+ * @author Alex
+ */
 public class GlobalChatDB {
 
-    public static Message sendGlobalMessage(Long userID, String message) throws SQLException {
+    /**
+     * Save a global message on the database. The message's timestamp is
+     * automatically set to the current time.
+     *
+     * @param userID The id of the user who sent the message.
+     * @param message The string of the message.
+     * @return The message object, equivalent to the row on the database, representing this message
+     * @throws SQLException
+     */
+    public static Message saveGlobalMessage(Long userID, String message) throws SQLException {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
 
         try {
             conn = Database.getConn();
-            stmt = conn.prepareStatement(
-                    "INSERT INTO globalchat VALUES (DEFAULT, ?, NOW(), ?) RETURNING mssgid, timestamp"
-            );
+            stmt = conn.prepareStatement("INSERT INTO globalchat VALUES (DEFAULT, ?, NOW(), ?) RETURNING mssgid, timestamp");
 
             stmt.setLong(1, userID);
             stmt.setString(2, message);

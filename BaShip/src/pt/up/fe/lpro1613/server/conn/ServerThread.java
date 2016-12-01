@@ -1,9 +1,9 @@
 package pt.up.fe.lpro1613.server.conn;
 
-import pt.up.fe.lpro1613.sharedlib.conn.Connection;
 import java.io.*;
 import java.net.*;
 import java.util.logging.*;
+import pt.up.fe.lpro1613.sharedlib.conn.Connection;
 import pt.up.fe.lpro1613.sharedlib.exceptions.ConnectionException;
 
 /**
@@ -18,7 +18,7 @@ public class ServerThread extends Thread {
      * The port on which to create a {@code ServerSocket}.
      */
     public final int port;
-
+    
     public ServerThread(int port) {
         super("Server thread");
         this.port = port;

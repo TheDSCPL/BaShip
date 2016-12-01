@@ -9,15 +9,13 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import pt.up.fe.lpro1613.server.conn.Client;
 import pt.up.fe.lpro1613.server.logic.UserS;
-import pt.up.fe.lpro1613.server.logic.game.Board;
-import pt.up.fe.lpro1613.server.logic.game.GamePlay;
 import pt.up.fe.lpro1613.sharedlib.exceptions.ConnectionException;
 import pt.up.fe.lpro1613.sharedlib.exceptions.UserMessageException;
 import pt.up.fe.lpro1613.sharedlib.tuples.GameUIInfo;
 import pt.up.fe.lpro1613.sharedlib.utils.Coord;
 
 /**
- * 
+ * XXX
  * @author Alex
  */
 public class GameS {
@@ -29,7 +27,7 @@ public class GameS {
     private static final Map<Client, Board> playersWaitingBoards = new ConcurrentHashMap<>();
 
     /**
-     * 
+     * XXX
      * @param client
      * @throws UserMessageException 
      */
@@ -43,7 +41,7 @@ public class GameS {
     }
 
     /**
-     * 
+     * XXX
      * @param client
      * @param otherPlayerID
      * @throws UserMessageException 
@@ -76,7 +74,7 @@ public class GameS {
     }
 
     /**
-     * 
+     * XXX
      * @param client
      * @param acepted 
      */
@@ -121,7 +119,7 @@ public class GameS {
     }
 
     /**
-     * 
+     * XXX
      * @param player
      * @param pos 
      */
@@ -147,7 +145,7 @@ public class GameS {
     }
 
     /**
-     * 
+     * XXX
      * @param player 
      */
     public static void clickReadyButton(Client player) {
@@ -160,7 +158,7 @@ public class GameS {
     }
 
     /**
-     * 
+     * XXX
      * @param player
      * @param pos 
      */
@@ -174,7 +172,7 @@ public class GameS {
     }
     
     /**
-     * 
+     * XXX
      * @param client 
      */
     public static void closeGame(Client client) {
@@ -182,7 +180,7 @@ public class GameS {
     }
     
     /**
-     * 
+     * XXX
      * @param game 
      */
     public static void gameFinished(GamePlay game) {
@@ -190,7 +188,7 @@ public class GameS {
     }
 
     /**
-     * 
+     * XXX
      * @param client 
      */
     public static void clientDisconnected(Client client) {
@@ -199,7 +197,7 @@ public class GameS {
     }
 
     /**
-     * 
+     * XXX
      * @param client
      * @return 
      */
@@ -208,7 +206,7 @@ public class GameS {
     }
 
     /**
-     * 
+     * XXX
      * @param client
      * @return 
      */
@@ -221,7 +219,7 @@ public class GameS {
     }*/
 
     /**
-     * 
+     * XXX
      * @param gameID
      * @return 
      */

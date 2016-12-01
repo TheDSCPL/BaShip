@@ -10,8 +10,20 @@ import pt.up.fe.lpro1613.server.logic.UserS;
 import pt.up.fe.lpro1613.sharedlib.tuples.UserInfo;
 import pt.up.fe.lpro1613.sharedlib.tuples.UserSearch;
 
+/**
+ * Collection of static methods that access, set and return information present
+ * on the table "users" of the database.
+ *
+ * @author Alex
+ */
 public class UserDB {
 
+    /**
+     * XXX
+     * @param username
+     * @return
+     * @throws SQLException 
+     */
     public static boolean isUsernameAvailable(String username) throws SQLException {
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -32,6 +44,13 @@ public class UserDB {
         }
     }
 
+    /**
+     * XXX
+     * @param username
+     * @param passwordHash
+     * @return
+     * @throws SQLException 
+     */
     public static UserInfo register(String username, String passwordHash) throws SQLException {
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -55,6 +74,13 @@ public class UserDB {
         }
     }
 
+    /**
+     * XXX
+     * @param username
+     * @param passwordHash
+     * @return
+     * @throws SQLException 
+     */
     public static Long verifyLoginAndReturnUserID(String username, String passwordHash) throws SQLException {
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -79,6 +105,12 @@ public class UserDB {
         }
     }
 
+    /**
+     * XXX
+     * @param id
+     * @return
+     * @throws SQLException 
+     */
     public static String getUsernameFromID(long id) throws SQLException {
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -94,7 +126,7 @@ public class UserDB {
             if (rs.next()) {
                 return rs.getString(1);
             }
-            
+
             return null;
         }
         finally {
@@ -102,6 +134,12 @@ public class UserDB {
         }
     }
 
+    /**
+     * XXX
+     * @param s
+     * @return
+     * @throws SQLException 
+     */
     public static List<UserInfo> getUserList(UserSearch s) throws SQLException {
         Connection conn = null;
         PreparedStatement stmt = null;

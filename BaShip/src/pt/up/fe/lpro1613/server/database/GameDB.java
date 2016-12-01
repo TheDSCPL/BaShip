@@ -11,8 +11,21 @@ import pt.up.fe.lpro1613.server.logic.game.GameS;
 import pt.up.fe.lpro1613.sharedlib.tuples.GameInfo;
 import pt.up.fe.lpro1613.sharedlib.tuples.GameSearch;
 
+/**
+ * Collection of static methods that access, set and return information present
+ * on the table "games" of the database.
+ *
+ * @author Alex
+ */
 public class GameDB {
 
+    /**
+     * Get the list of all games saved on the database.
+     *
+     * @param s The search parameters
+     * @return The list of games
+     * @throws SQLException
+     */
     public static List<GameInfo> getGameList(GameSearch s) throws SQLException {
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -75,6 +88,15 @@ public class GameDB {
         }
     }
 
+    /**
+     * Create a game on the database. This inserts a new row on the "games"
+     * table but does not set the start date (the start date is set to NULL)
+     *
+     * @param player1ID The id of the first player
+     * @param player2ID The id of the second player
+     * @return The unique id of the newly created game
+     * @throws SQLException
+     */
     public static Long createGame(Long player1ID, Long player2ID) throws SQLException {
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -97,6 +119,13 @@ public class GameDB {
         }
     }
 
+    /**
+     * Set (on the database) the start time of the game with the given id to the
+     * current time.
+     *
+     * @param gameID
+     * @throws SQLException
+     */
     public static void setStartTimeToNow(Long gameID) throws SQLException {
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -112,6 +141,13 @@ public class GameDB {
         }
     }
 
+    /**
+     * Set (on the database) the end time of the game with the given id to the
+     * current time.
+     *
+     * @param gameID
+     * @throws SQLException
+     */
     public static void setEndTimeToNow(Long gameID) throws SQLException {
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -127,6 +163,14 @@ public class GameDB {
         }
     }
 
+    /**
+     * Set (on the database) the winner of the game with the given id.
+     *
+     * @param gameID
+     * @param playerID The id of the winning player. This player must be one of
+     * the players of this game.
+     * @throws SQLException
+     */
     public static void setWinner(Long gameID, Long playerID) throws SQLException {
         Connection conn = null;
         PreparedStatement stmt = null;

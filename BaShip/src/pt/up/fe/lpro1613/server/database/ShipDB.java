@@ -6,8 +6,21 @@ import java.sql.SQLException;
 import java.util.List;
 import pt.up.fe.lpro1613.server.logic.game.Ship;
 
+/**
+ * Collection of static methods that access, set and return information present
+ * on the table "ships" of the database.
+ *
+ * @author Alex
+ */
 public class ShipDB {
 
+    /**
+     * XXX
+     * @param gameID
+     * @param playerN
+     * @param ships
+     * @throws SQLException 
+     */
     public static void saveShipPositions(long gameID, int playerN, List<Ship> ships) throws SQLException {
         Connection conn = null;
         PreparedStatement stmt = null;

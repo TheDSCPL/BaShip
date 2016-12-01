@@ -6,9 +6,9 @@ import java.util.logging.Logger;
 import pt.up.fe.lpro1613.server.ServerMain;
 import pt.up.fe.lpro1613.server.database.GameDB;
 import pt.up.fe.lpro1613.server.database.UserDB;
-import pt.up.fe.lpro1613.server.logic.game.GameS;
 import pt.up.fe.lpro1613.server.logic.GlobalChatS;
 import pt.up.fe.lpro1613.server.logic.UserS;
+import pt.up.fe.lpro1613.server.logic.game.GameS;
 import pt.up.fe.lpro1613.sharedlib.conn.Connection;
 import pt.up.fe.lpro1613.sharedlib.conn.Packet;
 import pt.up.fe.lpro1613.sharedlib.conn.Query;
@@ -164,22 +164,46 @@ public class Client implements Connection.Delegate {
         return response;
     }
 
+    /**
+     * XXX
+     * @param msg
+     * @throws ConnectionException 
+     */
     public void informAboutGlobalMessage(Message msg) throws ConnectionException {
         connection.sendOnly(new Packet(Query.SReceiveGlobalMessage, msg));
     }
 
+    /**
+     * XXX
+     * @param info
+     * @throws ConnectionException 
+     */
     public void updateGameScreen(GameUIInfo info) throws ConnectionException {
         connection.sendOnly(new Packet(Query.SUpdateGameScreen, info));
     }
 
+    /**
+     * XXX
+     * @throws ConnectionException 
+     */
     public void sendGameInvitation() throws ConnectionException {
         connection.sendOnly(new Packet(Query.SReceiveGameInvitation, "")); // TODO: info?
     }
 
+    /**
+     * XXX
+     * @param info
+     * @throws ConnectionException 
+     */
     public void updateGameBoard(BoardUIInfo info) throws ConnectionException {
         connection.sendOnly(new Packet(Query.SUpdateGameBoard, info));
     }
 
+    /**
+     * XXX
+     * @param message
+     * @throws ConnectionException 
+     */
     public void gameFinished(String message) throws ConnectionException {
         connection.sendOnly(new Packet(Query.SGameFinished, message));
     }

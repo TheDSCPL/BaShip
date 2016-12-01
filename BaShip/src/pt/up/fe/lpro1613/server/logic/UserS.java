@@ -1,6 +1,5 @@
 package pt.up.fe.lpro1613.server.logic;
 
-import pt.up.fe.lpro1613.server.logic.game.GameS;
 import java.sql.*;
 import java.util.*;
 import java.util.concurrent.*;
@@ -8,6 +7,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import pt.up.fe.lpro1613.server.conn.Client;
 import pt.up.fe.lpro1613.server.database.UserDB;
+import pt.up.fe.lpro1613.server.logic.game.GameS;
 import pt.up.fe.lpro1613.sharedlib.exceptions.ConnectionException;
 import pt.up.fe.lpro1613.sharedlib.exceptions.UserMessageException;
 import pt.up.fe.lpro1613.sharedlib.tuples.Message;
@@ -27,7 +27,7 @@ public class UserS {
     private static final Map<Client, Long> loginsClient = new ConcurrentHashMap<>();
 
     /**
-     * 
+     * XXX
      * @param username
      * @return
      * @throws SQLException 
@@ -37,7 +37,7 @@ public class UserS {
     }
 
     /**
-     * 
+     * XXX
      * @param client
      * @param username
      * @param passwordHash
@@ -52,7 +52,7 @@ public class UserS {
     }
 
     /**
-     * 
+     * XXX
      * @param client
      * @param username
      * @param passwordHash
@@ -79,7 +79,7 @@ public class UserS {
     }
 
     /**
-     * 
+     * XXX
      * @param client 
      */
     public static void logout(Client client) {
@@ -97,7 +97,7 @@ public class UserS {
     }
 
     /**
-     * 
+     * XXX
      * @param client
      * @return 
      */
@@ -106,7 +106,7 @@ public class UserS {
     }
 
     /**
-     * 
+     * XXX
      * @param userID
      * @return 
      */
@@ -115,7 +115,7 @@ public class UserS {
     }
 
     /**
-     * 
+     * XXX
      * @param id
      * @return 
      */
@@ -124,7 +124,7 @@ public class UserS {
     }
 
     /**
-     * 
+     * XXX
      * @param c
      * @return 
      */
@@ -133,7 +133,7 @@ public class UserS {
     }
 
     /**
-     * 
+     * XXX
      * @param userID
      * @return 
      */
@@ -153,7 +153,7 @@ public class UserS {
     }
 
     /**
-     * 
+     * XXX
      * @param c
      * @return 
      */
