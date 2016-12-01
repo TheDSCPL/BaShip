@@ -35,22 +35,20 @@ public class LobbyTabbedPanel extends JPanel {
     }
 
     private ImageIcon filterIcon, clearIcon;
-    
-    private void addNewTab(JComponent tab, String name)
-    {
-        if(tab == null)
+
+    private void addNewTab(JComponent tab, String name) {
+        if (tab == null) {
             return;
-        jTabbedPane.add(name ,tab);
-        jTabbedPane.setTabComponentAt(jTabbedPane.getTabCount()-1,null);
+        }
+        jTabbedPane.add(name, tab);
+        jTabbedPane.setTabComponentAt(jTabbedPane.getTabCount() - 1, null);
     }
-    
+
     private DefaultTableModel usersTableModel;
     private DefaultTableModel gamesTableModel;
-    
-    private void preInitComponents()
-    {
-        usersTableModel = new javax.swing.table.DefaultTableModel(new Object [][] {},new String [] {"Username", "# Rank", "# Games", "# Wins", "# Shots", "Status"})
-        {
+
+    private void preInitComponents() {
+        usersTableModel = new javax.swing.table.DefaultTableModel(new Object[][]{}, new String[]{"Username", "# Rank", "# Games", "# Wins", "# Shots", "Status"}) {
             @Override
             public Class getColumnClass(int columnIndex) {
                 return Object.class;
@@ -61,8 +59,7 @@ public class LobbyTabbedPanel extends JPanel {
                 return false;
             }
         };
-        gamesTableModel = new javax.swing.table.DefaultTableModel(new Object [][] {}, new String [] {"Players","Status"})
-        {
+        gamesTableModel = new javax.swing.table.DefaultTableModel(new Object[][]{}, new String[]{"Players", "Status"}) {
             @Override
             public Class getColumnClass(int columnIndex) {
                 return Object.class;
@@ -74,30 +71,30 @@ public class LobbyTabbedPanel extends JPanel {
             }
         };
     }
-    
+
     private int sortingColumn = 1;
     private int maxEntriesPerTable = 20;
-    
-    private void myInitComponents()
-    {
+
+    private void myInitComponents() {
         //Add tabs
         jTabbedPane.removeAll();
         addNewTab(usersTab, "Players");
         addNewTab(gamesTab, "Games");
         addNewTab(globalChatTab, "Global Chat");
-        
+
         /*filterIcon = new ImageIcon(getClass().getResource("/client/ui/Images/find.png"));
         clearIcon = new ImageIcon(getClass().getResource("/client/ui/Images/cancel.png"));
         applyFilterButton.setIcon(filterIcon);*/
-        
         applyUserFilterButton.addComponentListener(ClientMain.mainFrame.imageButtonResizer);
         clearUserFilterButton.addComponentListener(ClientMain.mainFrame.imageButtonResizer);
         applyGamesFilterButton.addComponentListener(ClientMain.mainFrame.imageButtonResizer);
         clearGamesFilterButton.addComponentListener(ClientMain.mainFrame.imageButtonResizer);
-        
-        //updateUsersTableData(sortingColumn, maxEntriesPerTable);
+
+        if (UserC.isLoggedIn()) {
+            updateUsersTableData(sortingColumn, maxEntriesPerTable);
+        }
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -321,77 +318,81 @@ public class LobbyTabbedPanel extends JPanel {
         applyUserFilterButtonActionPerformed(evt);
     }//GEN-LAST:event_filterUserFieldActionPerformed
 
-    private void updateUsersTableData(int columnToSortWith, int maxUsers)
-    {
-        if(columnToSortWith < 0 || columnToSortWith >= usersTableModel.getColumnCount())
+    private void updateUsersTableData(int columnToSortWith, int maxUsers) {
+        if (columnToSortWith < 0 || columnToSortWith >= usersTableModel.getColumnCount()) {
             throw new IndexOutOfBoundsException("Invalid column index to sort");
+        }
         try {
             List<UserInfo> userList = UserC.getUserList(false, filterUserField.getText(), columnToSortWith, maxUsers);
-            while(usersTableModel.getRowCount() > 0)
-                usersTableModel.removeRow(usersTableModel.getRowCount()-1);
-            for(int i=0; i<userList.size() ; i++)
-            {
-                UserInfo userInfo = userList.get(i);
-                usersTableModel.addRow(new Object[] {userInfo.username, userInfo.rank, userInfo.nGames, userInfo.nWins, userInfo.nShots, userInfo.status});
+            while (usersTableModel.getRowCount() > 0) {
+                usersTableModel.removeRow(usersTableModel.getRowCount() - 1);
             }
-        } catch (UserMessageException ex) {
+            for (int i = 0; i < userList.size(); i++) {
+                UserInfo userInfo = userList.get(i);
+                usersTableModel.addRow(new Object[]{userInfo.username, userInfo.rank, userInfo.nGames, userInfo.nWins, userInfo.nShots, userInfo.status});
+            }
+        }
+        catch (UserMessageException ex) {
             ClientMain.showError(ex.getMessage());
         }
-        catch(Exception ignored)
-        {
+        catch (Exception ignored) {
             ignored.printStackTrace();
             try {
-            System.err.println("Exception: " + ignored.getMessage());
+                System.err.println("Exception: " + ignored.getMessage());
                 UserC.logout();
-            } catch (UserMessageException ex) {
+            }
+            catch (UserMessageException ex) {
                 Logger.getLogger(LobbyTabbedPanel.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
-    
-    private void updateGamesTableData(int columnToSortWith, int maxUsers)
-    {
-        if(columnToSortWith < 0 || columnToSortWith >= gamesTableModel.getColumnCount())
+
+    private void updateGamesTableData(int columnToSortWith, int maxUsers) {
+        if (columnToSortWith < 0 || columnToSortWith >= gamesTableModel.getColumnCount()) {
             throw new IndexOutOfBoundsException("Invalid column index to sort");
+        }
         try {
             //TODO: checkbox hardcoded to false
             List<GameInfo> gamesList = GameC.getGameList(false, filterGamesField.getText(), maxUsers);
-            while(gamesTableModel.getRowCount() > 0)
-                gamesTableModel.removeRow(gamesTableModel.getRowCount()-1);
-            SimpleDateFormat dF = new SimpleDateFormat("yyyy.MM.dd 'at' HH:mm:ss");
-            for(int i=0; i<gamesList.size() ; i++)
-            {
-                GameInfo gameInfo = gamesList.get(i);
-                gamesTableModel.addRow(new Object[] {gameInfo.player1Username + " VS " + gameInfo.player2Username ,
-                    gameInfo.endDate == null ? ("Playing: " + dF.format(gameInfo.startDate)) : "Played on: " + dF.format(gameInfo.endDate)});
+            while (gamesTableModel.getRowCount() > 0) {
+                gamesTableModel.removeRow(gamesTableModel.getRowCount() - 1);
             }
-        } catch (UserMessageException ex) {
+            SimpleDateFormat dF = new SimpleDateFormat("yyyy.MM.dd 'at' HH:mm:ss");
+            for (int i = 0; i < gamesList.size(); i++) {
+                GameInfo gameInfo = gamesList.get(i);
+                gamesTableModel.addRow(new Object[]{gameInfo.player1Username + " VS " + gameInfo.player2Username,
+                                                    gameInfo.endDate == null ? ("Playing: " + dF.format(gameInfo.startDate)) : "Played on: " + dF.format(gameInfo.endDate)});
+            }
+        }
+        catch (UserMessageException ex) {
             ClientMain.showError(ex.getMessage());
         }
-        catch(Exception e)
-        {
+        catch (Exception e) {
             e.printStackTrace();
             try {
-            System.err.println("Exception: " + e.getMessage());
+                System.err.println("Exception: " + e.getMessage());
                 UserC.logout();
-            } catch (UserMessageException ex) {
+            }
+            catch (UserMessageException ex) {
                 Logger.getLogger(LobbyTabbedPanel.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
-    
+
     private String prevFilter = "";
-    
+
     private void applyUserFilterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_applyUserFilterButtonActionPerformed
-        if(filterUserField.getText().equals(prevFilter))
+        if (filterUserField.getText().equals(prevFilter)) {
             return; //so it doesn't send unnecessary requests to the server
+        }
         prevFilter = filterUserField.getText();
         updateUsersTableData(sortingColumn, maxEntriesPerTable);
     }//GEN-LAST:event_applyUserFilterButtonActionPerformed
 
     private void clearUserFilterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearUserFilterButtonActionPerformed
-        if(filterUserField.getText() == null || filterUserField.getText().length() <= 0)
+        if (filterUserField.getText() == null || filterUserField.getText().length() <= 0) {
             return; //so it doesn't send unnecessary requests to the server
+        }
         filterUserField.setText("");
         applyUserFilterButtonActionPerformed(evt);
     }//GEN-LAST:event_clearUserFilterButtonActionPerformed

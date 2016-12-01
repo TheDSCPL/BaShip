@@ -13,7 +13,7 @@ public class GlobalChatC {
      *
      * @param message The message object to be displayed on the UI
      */
-    static public void receiveGlobalMessage(Message message) {
+    public static void receiveGlobalMessage(Message message) {
         //messagesTextArea.setText(messagesTextArea.getText() + "[" + m.timestamp + "] " + m.username + "\n" + m.text + "\n\n");
         //messagesTextArea.setCaretPosition(messagesTextArea.getDocument().getLength()); // Scroll to bottom
     }
