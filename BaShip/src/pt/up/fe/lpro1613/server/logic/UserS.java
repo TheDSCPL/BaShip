@@ -10,9 +10,9 @@ import pt.up.fe.lpro1613.server.database.UserDB;
 import pt.up.fe.lpro1613.server.logic.game.GameS;
 import pt.up.fe.lpro1613.sharedlib.exceptions.ConnectionException;
 import pt.up.fe.lpro1613.sharedlib.exceptions.UserMessageException;
-import pt.up.fe.lpro1613.sharedlib.tuples.Message;
-import pt.up.fe.lpro1613.sharedlib.tuples.UserInfo;
-import pt.up.fe.lpro1613.sharedlib.tuples.UserInfo.Status;
+import pt.up.fe.lpro1613.sharedlib.structs.Message;
+import pt.up.fe.lpro1613.sharedlib.structs.UserInfo;
+import pt.up.fe.lpro1613.sharedlib.structs.UserInfo.Status;
 
 /**
  * Class responsible for managing the state of the users on the server. Supports
@@ -27,7 +27,7 @@ public class UserS {
     private static final Map<Client, Long> loginsClient = new ConcurrentHashMap<>();
 
     /**
-     * XXX
+     * TODO: JAVADOC
      * @param username
      * @return
      * @throws SQLException 
@@ -37,7 +37,7 @@ public class UserS {
     }
 
     /**
-     * XXX
+     * TODO: JAVADOC
      * @param client
      * @param username
      * @param passwordHash
@@ -52,7 +52,7 @@ public class UserS {
     }
 
     /**
-     * XXX
+     * TODO: JAVADOC
      * @param client
      * @param username
      * @param passwordHash
@@ -79,7 +79,7 @@ public class UserS {
     }
 
     /**
-     * XXX
+     * TODO: JAVADOC
      * @param client 
      */
     public static void logout(Client client) {
@@ -97,7 +97,7 @@ public class UserS {
     }
 
     /**
-     * XXX
+     * TODO: JAVADOC
      * @param client
      * @return 
      */
@@ -106,7 +106,7 @@ public class UserS {
     }
 
     /**
-     * XXX
+     * TODO: JAVADOC
      * @param userID
      * @return 
      */
@@ -115,7 +115,7 @@ public class UserS {
     }
 
     /**
-     * XXX
+     * TODO: JAVADOC
      * @param id
      * @return 
      */
@@ -124,7 +124,7 @@ public class UserS {
     }
 
     /**
-     * XXX
+     * TODO: JAVADOC
      * @param c
      * @return 
      */
@@ -133,7 +133,7 @@ public class UserS {
     }
 
     /**
-     * XXX
+     * TODO: JAVADOC
      * @param userID
      * @return 
      */
@@ -153,7 +153,7 @@ public class UserS {
     }
 
     /**
-     * XXX
+     * TODO: JAVADOC
      * @param c
      * @return 
      */

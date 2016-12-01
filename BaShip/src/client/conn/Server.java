@@ -1,18 +1,18 @@
 package client.conn;
 
-import pt.up.fe.lpro1613.sharedlib.tuples.BoardUIInfo;
+import pt.up.fe.lpro1613.sharedlib.structs.BoardUIInfo;
 import pt.up.fe.lpro1613.sharedlib.conn.Packet;
 import pt.up.fe.lpro1613.sharedlib.conn.Query;
-import pt.up.fe.lpro1613.sharedlib.tuples.ErrorMessage;
-import pt.up.fe.lpro1613.sharedlib.tuples.UserInfo;
-import pt.up.fe.lpro1613.sharedlib.tuples.UserSearch;
+import pt.up.fe.lpro1613.sharedlib.structs.ErrorMessage;
+import pt.up.fe.lpro1613.sharedlib.structs.UserInfo;
+import pt.up.fe.lpro1613.sharedlib.structs.UserSearch;
 import pt.up.fe.lpro1613.sharedlib.utils.Crypto;
-import pt.up.fe.lpro1613.sharedlib.tuples.GameInfo;
-import pt.up.fe.lpro1613.sharedlib.tuples.Message;
-import pt.up.fe.lpro1613.sharedlib.tuples.GameSearch;
+import pt.up.fe.lpro1613.sharedlib.structs.GameInfo;
+import pt.up.fe.lpro1613.sharedlib.structs.Message;
+import pt.up.fe.lpro1613.sharedlib.structs.GameSearch;
 import pt.up.fe.lpro1613.sharedlib.conn.Connection;
 import pt.up.fe.lpro1613.sharedlib.exceptions.UserMessageException;
-import pt.up.fe.lpro1613.sharedlib.tuples.GameUIInfo;
+import pt.up.fe.lpro1613.sharedlib.structs.GameUIInfo;
 import pt.up.fe.lpro1613.sharedlib.utils.Coord;
 import pt.up.fe.lpro1613.sharedlib.exceptions.ConnectionException;
 import client.*;
@@ -119,7 +119,7 @@ public class Server implements Connection.Delegate {
      * @throws UserMessageException 
      */
     public UserInfo login(String username, char[] password) throws UserMessageException {
-        Packet request = new Packet(Query.CLogin, new UserInfo(username, Crypto.SHA1(password)));
+        Packet request = new Packet(Query.BLogin, new UserInfo(username, Crypto.SHA1(password)));
         Packet response = sendAndReceiveWrapper(request);
 
         if (response.query == Query.SRErrorMessage) {
@@ -138,7 +138,7 @@ public class Server implements Connection.Delegate {
      * @throws UserMessageException 
      */
     public UserInfo register(String username, char[] password) throws UserMessageException {
-        Packet request = new Packet(Query.CRegister, new UserInfo(username, Crypto.SHA1(password)));
+        Packet request = new Packet(Query.BRegister, new UserInfo(username, Crypto.SHA1(password)));
         Packet response = sendAndReceiveWrapper(request);
 
         if (response.query == Query.SRErrorMessage) {

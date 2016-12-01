@@ -3,7 +3,7 @@ package client.logic;
 import client.ClientMain;
 import java.util.regex.*;
 import pt.up.fe.lpro1613.sharedlib.exceptions.UserMessageException;
-import pt.up.fe.lpro1613.sharedlib.tuples.UserInfo;
+import pt.up.fe.lpro1613.sharedlib.structs.UserInfo;
 
 public class UserC {
 

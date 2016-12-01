@@ -11,8 +11,8 @@ import pt.up.fe.lpro1613.server.database.MoveDB;
 import pt.up.fe.lpro1613.server.database.ShipDB;
 import pt.up.fe.lpro1613.server.logic.UserS;
 import pt.up.fe.lpro1613.sharedlib.exceptions.ConnectionException;
-import pt.up.fe.lpro1613.sharedlib.tuples.BoardUIInfo;
-import pt.up.fe.lpro1613.sharedlib.tuples.GameUIInfo;
+import pt.up.fe.lpro1613.sharedlib.structs.BoardUIInfo;
+import pt.up.fe.lpro1613.sharedlib.structs.GameUIInfo;
 import pt.up.fe.lpro1613.sharedlib.utils.Coord;
 
 class GamePlay {

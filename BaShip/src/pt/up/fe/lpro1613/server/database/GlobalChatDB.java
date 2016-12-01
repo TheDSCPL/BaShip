@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
-import pt.up.fe.lpro1613.sharedlib.tuples.Message;
+import pt.up.fe.lpro1613.sharedlib.structs.Message;
 
 /**
  * Collection of static methods that access, set and return information present

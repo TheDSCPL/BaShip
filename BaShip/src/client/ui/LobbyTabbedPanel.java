@@ -6,8 +6,8 @@
 package client.ui;
 
 import pt.up.fe.lpro1613.sharedlib.exceptions.UserMessageException;
-import pt.up.fe.lpro1613.sharedlib.tuples.UserInfo;
-import pt.up.fe.lpro1613.sharedlib.tuples.GameInfo;
+import pt.up.fe.lpro1613.sharedlib.structs.UserInfo;
+import pt.up.fe.lpro1613.sharedlib.structs.GameInfo;
 import client.*;
 import java.text.SimpleDateFormat;
 import java.util.*;

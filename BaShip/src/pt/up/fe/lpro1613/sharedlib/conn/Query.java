@@ -2,14 +2,14 @@ package pt.up.fe.lpro1613.sharedlib.conn;
 
 import com.google.gson.reflect.TypeToken;
 import java.util.List;
-import pt.up.fe.lpro1613.sharedlib.tuples.BoardUIInfo;
-import pt.up.fe.lpro1613.sharedlib.tuples.ErrorMessage;
-import pt.up.fe.lpro1613.sharedlib.tuples.GameInfo;
-import pt.up.fe.lpro1613.sharedlib.tuples.GameSearch;
-import pt.up.fe.lpro1613.sharedlib.tuples.GameUIInfo;
-import pt.up.fe.lpro1613.sharedlib.tuples.Message;
-import pt.up.fe.lpro1613.sharedlib.tuples.UserInfo;
-import pt.up.fe.lpro1613.sharedlib.tuples.UserSearch;
+import pt.up.fe.lpro1613.sharedlib.structs.BoardUIInfo;
+import pt.up.fe.lpro1613.sharedlib.structs.ErrorMessage;
+import pt.up.fe.lpro1613.sharedlib.structs.GameInfo;
+import pt.up.fe.lpro1613.sharedlib.structs.GameSearch;
+import pt.up.fe.lpro1613.sharedlib.structs.GameUIInfo;
+import pt.up.fe.lpro1613.sharedlib.structs.Message;
+import pt.up.fe.lpro1613.sharedlib.structs.UserInfo;
+import pt.up.fe.lpro1613.sharedlib.structs.UserSearch;
 import pt.up.fe.lpro1613.sharedlib.utils.Coord;
 
 /**
@@ -24,8 +24,8 @@ public enum Query {
     SRErrorMessage(ErrorMessage.class),
     CUsernameAvailable(String.class),
     SRUsernameAvailable(Boolean.class),
-    CRegister(UserInfo.class),
-    CLogin(UserInfo.class),
+    BRegister(UserInfo.class),
+    BLogin(UserInfo.class),
     CLogout(),
     CGetUserList(UserSearch.class),
     SRGetUserList(new TypeToken<List<UserInfo>>(){}),

@@ -1,4 +1,4 @@
-package pt.up.fe.lpro1613.sharedlib.tuples;
+package pt.up.fe.lpro1613.sharedlib.structs;
 
 /**
  * Tuple containing information about an user. Some fields may be null in some

@@ -7,8 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import pt.up.fe.lpro1613.server.logic.UserS;
-import pt.up.fe.lpro1613.sharedlib.tuples.UserInfo;
-import pt.up.fe.lpro1613.sharedlib.tuples.UserSearch;
+import pt.up.fe.lpro1613.sharedlib.structs.UserInfo;
+import pt.up.fe.lpro1613.sharedlib.structs.UserSearch;
 
 /**
  * Collection of static methods that access, set and return information present
@@ -19,7 +19,7 @@ import pt.up.fe.lpro1613.sharedlib.tuples.UserSearch;
 public class UserDB {
 
     /**
-     * XXX
+     * TODO: JAVADOC
      * @param username
      * @return
      * @throws SQLException 
@@ -45,7 +45,7 @@ public class UserDB {
     }
 
     /**
-     * XXX
+     * TODO: JAVADOC
      * @param username
      * @param passwordHash
      * @return
@@ -75,7 +75,7 @@ public class UserDB {
     }
 
     /**
-     * XXX
+     * TODO: JAVADOC
      * @param username
      * @param passwordHash
      * @return
@@ -106,7 +106,7 @@ public class UserDB {
     }
 
     /**
-     * XXX
+     * TODO: JAVADOC
      * @param id
      * @return
      * @throws SQLException 
@@ -135,7 +135,7 @@ public class UserDB {
     }
 
     /**
-     * XXX
+     * TODO: JAVADOC
      * @param s
      * @return
      * @throws SQLException 

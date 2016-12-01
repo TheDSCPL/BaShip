@@ -1,4 +1,4 @@
-package pt.up.fe.lpro1613.sharedlib.tuples;
+package pt.up.fe.lpro1613.sharedlib.structs;
 
 /**
  * Immutable wrapper around a String. Used for when one of the sides of the

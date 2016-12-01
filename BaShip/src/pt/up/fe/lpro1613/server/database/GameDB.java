@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import pt.up.fe.lpro1613.server.logic.game.GameS;
-import pt.up.fe.lpro1613.sharedlib.tuples.GameInfo;
-import pt.up.fe.lpro1613.sharedlib.tuples.GameSearch;
+import pt.up.fe.lpro1613.sharedlib.structs.GameInfo;
+import pt.up.fe.lpro1613.sharedlib.structs.GameSearch;
 
 /**
  * Collection of static methods that access, set and return information present

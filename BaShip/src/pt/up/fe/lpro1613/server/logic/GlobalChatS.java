@@ -6,10 +6,11 @@ import java.util.logging.Logger;
 import pt.up.fe.lpro1613.server.conn.Client;
 import pt.up.fe.lpro1613.server.database.GlobalChatDB;
 import static pt.up.fe.lpro1613.server.logic.UserS.isClientLoggedIn;
-import pt.up.fe.lpro1613.sharedlib.tuples.Message;
+import pt.up.fe.lpro1613.sharedlib.structs.Message;
 
 /**
- * XXX
+ * Class responsible for managing the global chat between players.
+ *
  * @author Alex
  */
 public class GlobalChatS {

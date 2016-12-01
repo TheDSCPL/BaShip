@@ -13,11 +13,14 @@ import java.sql.SQLException;
 public class MoveDB {
 
     /**
-     * XXX
-     * @param gameID
-     * @param playerN
-     * @param moveIndex
-     * @throws SQLException 
+     * Save a move made by a player on a game on the database.
+     *
+     * @param gameID The game ID where the player made that move.
+     * @param playerN The player that made the move. Can be either 1 or 2. Other
+     * values raise an SQLException.
+     * @param moveIndex The move number for that game (for both players of the
+     * game).
+     * @throws SQLException
      */
     public static void saveMove(long gameID, int playerN, int moveIndex) throws SQLException {
         Connection conn = null;

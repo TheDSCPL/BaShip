@@ -1,4 +1,4 @@
-package pt.up.fe.lpro1613.server.logic.game;
+package pt.up.fe.lpro1613.sharedlib.structs;
 
 import java.util.HashSet;
 import java.util.Set;

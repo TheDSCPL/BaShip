@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
-import pt.up.fe.lpro1613.server.logic.game.Ship;
+import pt.up.fe.lpro1613.sharedlib.structs.Ship;
 
 /**
  * Collection of static methods that access, set and return information present
@@ -15,7 +15,7 @@ import pt.up.fe.lpro1613.server.logic.game.Ship;
 public class ShipDB {
 
     /**
-     * XXX
+     * Save ship layout for a certain game and player to the database.
      * @param gameID
      * @param playerN
      * @param ships

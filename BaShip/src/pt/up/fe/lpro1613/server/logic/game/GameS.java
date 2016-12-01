@@ -11,11 +11,11 @@ import pt.up.fe.lpro1613.server.conn.Client;
 import pt.up.fe.lpro1613.server.logic.UserS;
 import pt.up.fe.lpro1613.sharedlib.exceptions.ConnectionException;
 import pt.up.fe.lpro1613.sharedlib.exceptions.UserMessageException;
-import pt.up.fe.lpro1613.sharedlib.tuples.GameUIInfo;
+import pt.up.fe.lpro1613.sharedlib.structs.GameUIInfo;
 import pt.up.fe.lpro1613.sharedlib.utils.Coord;
 
 /**
- * XXX
+ * TODO: JAVADOC
  * @author Alex
  */
 public class GameS {
@@ -27,7 +27,7 @@ public class GameS {
     private static final Map<Client, Board> playersWaitingBoards = new ConcurrentHashMap<>();
 
     /**
-     * XXX
+     * TODO: JAVADOC
      * @param client
      * @throws UserMessageException 
      */
@@ -41,7 +41,7 @@ public class GameS {
     }
 
     /**
-     * XXX
+     * TODO: JAVADOC
      * @param client
      * @param otherPlayerID
      * @throws UserMessageException 
@@ -74,7 +74,7 @@ public class GameS {
     }
 
     /**
-     * XXX
+     * TODO: JAVADOC
      * @param client
      * @param acepted 
      */
@@ -119,7 +119,7 @@ public class GameS {
     }
 
     /**
-     * XXX
+     * TODO: JAVADOC
      * @param player
      * @param pos 
      */
@@ -145,7 +145,7 @@ public class GameS {
     }
 
     /**
-     * XXX
+     * TODO: JAVADOC
      * @param player 
      */
     public static void clickReadyButton(Client player) {
@@ -158,7 +158,7 @@ public class GameS {
     }
 
     /**
-     * XXX
+     * TODO: JAVADOC
      * @param player
      * @param pos 
      */
@@ -172,23 +172,19 @@ public class GameS {
     }
     
     /**
-     * XXX
+     * TODO: JAVADOC
      * @param client 
      */
     public static void closeGame(Client client) {
         currentGamesPlayFromUser.get(client).gameClosedByClient(client);
     }
     
-    /**
-     * XXX
-     * @param game 
-     */
-    public static void gameFinished(GamePlay game) {
+    static void gameFinished(GamePlay game) {
         // TODO: finish
     }
 
     /**
-     * XXX
+     * TODO: JAVADOC
      * @param client 
      */
     public static void clientDisconnected(Client client) {
@@ -197,7 +193,7 @@ public class GameS {
     }
 
     /**
-     * XXX
+     * TODO: JAVADOC
      * @param client
      * @return 
      */
@@ -206,7 +202,7 @@ public class GameS {
     }
 
     /**
-     * XXX
+     * TODO: JAVADOC
      * @param client
      * @return 
      */
@@ -219,7 +215,7 @@ public class GameS {
     }*/
 
     /**
-     * XXX
+     * TODO: JAVADOC
      * @param gameID
      * @return 
      */
