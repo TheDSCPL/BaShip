@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package client.ui;
+package client.ui.lobby;
 
 import client.ClientMain;
 import client.logic.UserC;
+import client.ui.LoginPanel;
 import pt.up.fe.lpro1613.sharedlib.exceptions.UserMessageException;
 
 /**
@@ -44,7 +45,7 @@ public class LobbyPanel extends javax.swing.JPanel {
         topBar = new javax.swing.JPanel();
         logoutButton = new javax.swing.JButton();
         loggedInAsLabel = new javax.swing.JLabel();
-        lobbyTabbedPanel1 = new client.ui.LobbyTabbedPanel();
+        lobbyTabbedPanel1 = new client.ui.lobby.LobbyTabbedPanel();
 
         jLabel1.setText("jLabel1");
 
@@ -142,7 +143,7 @@ public class LobbyPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLayeredPane lobby1;
-    private client.ui.LobbyTabbedPanel lobbyTabbedPanel1;
+    private client.ui.lobby.LobbyTabbedPanel lobbyTabbedPanel1;
     private javax.swing.JLabel loggedInAsLabel;
     private javax.swing.JButton logoutButton;
     private javax.swing.JPanel topBar;

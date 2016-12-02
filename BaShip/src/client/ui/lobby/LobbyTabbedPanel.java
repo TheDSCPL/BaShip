@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package client.ui;
+package client.ui.lobby;
 
 import client.ClientMain;
 import client.logic.GameC;
@@ -90,10 +90,10 @@ public class LobbyTabbedPanel extends JPanel {
         /*filterIcon = new ImageIcon(getClass().getResource("/client/ui/Images/find.png"));
         clearIcon = new ImageIcon(getClass().getResource("/client/ui/Images/cancel.png"));
         applyFilterButton.setIcon(filterIcon);*/
-        applyUserFilterButton.addComponentListener(ClientMain.mainFrame.imageButtonResizer);
-        clearUserFilterButton.addComponentListener(ClientMain.mainFrame.imageButtonResizer);
-        applyGamesFilterButton.addComponentListener(ClientMain.mainFrame.imageButtonResizer);
-        clearGamesFilterButton.addComponentListener(ClientMain.mainFrame.imageButtonResizer);
+        applyUserFilterButton.addComponentListener(ClientMain.mainFrame.imageResizer);
+        clearUserFilterButton.addComponentListener(ClientMain.mainFrame.imageResizer);
+        applyGamesFilterButton.addComponentListener(ClientMain.mainFrame.imageResizer);
+        clearGamesFilterButton.addComponentListener(ClientMain.mainFrame.imageResizer);
 
         updateUsersTableData(sortingColumn, maxEntriesPerTable);
     }
@@ -178,8 +178,8 @@ public class LobbyTabbedPanel extends JPanel {
             usersTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(usersTabLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(scrollableUsersTable, javax.swing.GroupLayout.DEFAULT_SIZE, 491, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(scrollableUsersTable, javax.swing.GroupLayout.DEFAULT_SIZE, 486, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(usersTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(filterUserField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(applyUserFilterButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)

@@ -9,12 +9,12 @@ package client.ui;
  *
  * @author luisp
  */
-public class AdvertisementPanel extends javax.swing.JPanel {
+public class AdvertisementBanner extends javax.swing.JPanel {
 
     /**
      * Creates new form AdvertisementPanel
      */
-    public AdvertisementPanel() {
+    public AdvertisementBanner() {
         initComponents();
     }
 

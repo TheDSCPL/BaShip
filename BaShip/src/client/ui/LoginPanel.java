@@ -1,5 +1,6 @@
 package client.ui;
 
+import client.ui.lobby.LobbyPanel;
 import client.ClientMain;
 import client.logic.UserC;
 import java.awt.*;

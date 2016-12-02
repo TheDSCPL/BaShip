@@ -6,6 +6,7 @@ import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 
 public class MainFrame extends javax.swing.JFrame {
 
@@ -14,7 +15,7 @@ public class MainFrame extends javax.swing.JFrame {
      */
     public MainFrame() {
         initComponents();
-        imageButtonResizer = new ComponentListener()
+        imageResizer = new ComponentListener()
         {
             private ImageIcon _resizeIcon(ImageIcon srcImg, int width, int height)
             {
@@ -23,11 +24,28 @@ public class MainFrame extends javax.swing.JFrame {
             }
             private void resizeIcon(ComponentEvent e)
             {
-                JButton button = (JButton)e.getComponent();
-                ImageIcon prevIcon = (ImageIcon)button.getIcon();
-                int width = (int)(button.getWidth()*0.8);
-                int height = (int)(button.getHeight()*0.8);
-                button.setIcon(_resizeIcon(prevIcon,width,height));
+                if(e.getComponent() instanceof JButton)
+                {
+                    JButton button = (JButton)e.getComponent();
+                    ImageIcon prevIcon = (ImageIcon)button.getIcon();
+                    if(prevIcon == null)
+                        return;
+                    int width = (int)(button.getWidth()*0.8);
+                    int height = (int)(button.getHeight()*0.8);
+                    button.setIcon(_resizeIcon(prevIcon,width,height));
+                }
+                else if(e.getComponent() instanceof JLabel)
+                {
+                    JLabel label = (JLabel)e.getComponent();
+                    ImageIcon prevIcon = (ImageIcon)label.getIcon();
+                    if(prevIcon == null)
+                        return;
+                    int width = (int)(label.getWidth()*0.8);
+                    int height = (int)(label.getHeight()*0.8);
+                    label.setIcon(_resizeIcon(prevIcon,width,height));
+                }
+                else
+                    throw new ClassCastException("Resizer used on a Component that is neither a Jlabel nor a JButton");
             }
             @Override
             public void componentResized(ComponentEvent e) {
@@ -51,7 +69,7 @@ public class MainFrame extends javax.swing.JFrame {
         };
     }
        
-    public final ComponentListener imageButtonResizer;
+    public final ComponentListener imageResizer;
     
     public void changeToPanel(javax.swing.JComponent panel)
     {
@@ -70,7 +88,7 @@ public class MainFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        advertisementPanel1 = new client.ui.AdvertisementPanel();
+        advertisementPanel1 = new client.ui.AdvertisementBanner();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -80,6 +98,6 @@ public class MainFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private client.ui.AdvertisementPanel advertisementPanel1;
+    private client.ui.AdvertisementBanner advertisementPanel1;
     // End of variables declaration//GEN-END:variables
 }

@@ -35,7 +35,8 @@ public class BoardUIInfo {
      */
     public enum SquareFill {
         Empty,
-        GraySquare, RedSquare,
+        GraySquare,
+        RedSquare,
         RedCross,
         BlueDiamond,
         GrayCircle,
