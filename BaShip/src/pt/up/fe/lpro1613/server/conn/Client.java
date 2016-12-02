@@ -137,7 +137,7 @@ public class Client implements Connection.Delegate {
                 }
                 break;
             }
-            // TODO: Empty responses just for confirmation?
+            // TODO: empty responses just for confirmation?
             /*case C_AnswerGameInvitation: {
                 GameS.answerGameInvitation(this, (Boolean) request.info);
                 break;

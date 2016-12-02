@@ -81,6 +81,11 @@ public class LobbyTabbedPanel extends JPanel {
         addNewTab(usersTab, "Players");
         addNewTab(gamesTab, "Games");
         addNewTab(globalChatTab, "Global Chat");
+        
+        if (!UserC.isLoggedIn())
+        {
+            return;
+        }
 
         /*filterIcon = new ImageIcon(getClass().getResource("/client/ui/Images/find.png"));
         clearIcon = new ImageIcon(getClass().getResource("/client/ui/Images/cancel.png"));
@@ -89,10 +94,8 @@ public class LobbyTabbedPanel extends JPanel {
         clearUserFilterButton.addComponentListener(ClientMain.mainFrame.imageButtonResizer);
         applyGamesFilterButton.addComponentListener(ClientMain.mainFrame.imageButtonResizer);
         clearGamesFilterButton.addComponentListener(ClientMain.mainFrame.imageButtonResizer);
-        
-        if (UserC.isLoggedIn()) {
-            updateUsersTableData(sortingColumn, maxEntriesPerTable);
-        }
+
+        updateUsersTableData(sortingColumn, maxEntriesPerTable);
     }
     
     /**
@@ -161,28 +164,27 @@ public class LobbyTabbedPanel extends JPanel {
             .addGroup(usersTabLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(usersTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(scrollableUsersTable, javax.swing.GroupLayout.DEFAULT_SIZE, 539, Short.MAX_VALUE)
                     .addGroup(usersTabLayout.createSequentialGroup()
-                        .addGap(0, 0, 0)
                         .addComponent(filterUserField, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(applyUserFilterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(clearUserFilterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(scrollableUsersTable, javax.swing.GroupLayout.DEFAULT_SIZE, 539, Short.MAX_VALUE))
+                        .addComponent(clearUserFilterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         usersTabLayout.setVerticalGroup(
             usersTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(usersTabLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(scrollableUsersTable, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
+                .addComponent(scrollableUsersTable, javax.swing.GroupLayout.DEFAULT_SIZE, 491, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(usersTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(usersTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(applyUserFilterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(filterUserField))
-                    .addComponent(clearUserFilterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(64, Short.MAX_VALUE))
+                    .addComponent(filterUserField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(applyUserFilterButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(clearUserFilterButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         gamesTable.setModel(gamesTableModel);
@@ -225,6 +227,7 @@ public class LobbyTabbedPanel extends JPanel {
             .addGroup(gamesTabLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(gamesTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(scrollableGamesTable, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 539, Short.MAX_VALUE)
                     .addGroup(gamesTabLayout.createSequentialGroup()
                         .addComponent(filterGamesField, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -233,22 +236,22 @@ public class LobbyTabbedPanel extends JPanel {
                         .addComponent(clearGamesFilterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(currentPlayingCheckbox)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(scrollableGamesTable, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 539, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         gamesTabLayout.setVerticalGroup(
             gamesTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(gamesTabLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(scrollableGamesTable, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
+                .addComponent(scrollableGamesTable, javax.swing.GroupLayout.DEFAULT_SIZE, 491, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(gamesTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(applyGamesFilterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(filterGamesField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(clearGamesFilterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(gamesTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(filterGamesField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(applyGamesFilterButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(clearGamesFilterButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(currentPlayingCheckbox))
-                .addContainerGap(61, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         globalChatTextArea.setEditable(false);
