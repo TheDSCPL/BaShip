@@ -8,6 +8,8 @@ package client.ui.game.Components;
 import client.ClientMain;
 import java.awt.Color;
 import java.awt.event.ComponentListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.net.URL;
 import javax.swing.*;
 import pt.up.fe.lpro1613.sharedlib.utils.Coord;
@@ -25,11 +27,45 @@ public final class Block extends javax.swing.JPanel {
     public Block(Coord coordinates) {
         initComponents();
         this.coordinates = coordinates;
+        addMouseListener(clickListener);
+        jLabel1.addMouseListener(clickListener);
     }
     
-    private final Icon redCrossIcon = new ImageIcon(getClass().getResource("/client/ui/Images/redCross.png"));
-    private final Icon blueDiamondIcon = new ImageIcon(getClass().getResource("/client/ui/Images/blueDiamond.png"));
-    private final Icon greyCircleIcon = new ImageIcon(getClass().getResource("/client/ui/Images/greyCircle.png"));
+    private final MouseListener clickListener = new MouseListener() {
+        private boolean prev = false;
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            setIcon(prev ? redCrossIcon : null);
+            prev = !prev;
+            System.out.println("clicked");
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+            System.out.println("pressed");
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+            System.out.println("released");
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+            //System.out.println("entered");
+            setColor(new Color(255, 0, 0));
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+            //System.out.println("exited");
+            setColor(Color.black);
+        }
+    };
+    
+    public static final Icon redCrossIcon = new ImageIcon(Block.class.getResource("/client/ui/Images/redCross.png"));
+    public static final Icon blueDiamondIcon = new ImageIcon(Block.class.getResource("/client/ui/Images/blueDiamond.png"));
+    public static final Icon greyCircleIcon = new ImageIcon(Block.class.getResource("/client/ui/Images/greyCircle.png"));
     
     private boolean initialized = false;
     
@@ -54,7 +90,7 @@ public final class Block extends javax.swing.JPanel {
     
     public void setIcon(Icon icon)
     {
-        initializeAfterNetbeansRender();
+        //initializeAfterNetbeansRender();
         
         removeAll();
         
@@ -76,7 +112,8 @@ public final class Block extends javax.swing.JPanel {
         }
         else
         {
-            color = new Color(143,143,143);
+            color = _c;
+            //color = new Color(143,143,143);
         }
         setBackground(color);
         jLabel1.setBackground(color);

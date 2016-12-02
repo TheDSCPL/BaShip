@@ -6,27 +6,33 @@
 package client.ui.game.Components;
 
 import java.awt.*;
+import java.util.Collections;
 import static pt.up.fe.lpro1613.sharedlib.constants.BoardK.*;
 import pt.up.fe.lpro1613.sharedlib.utils.Coord;
+import pt.up.fe.lpro1613.sharedlib.utils.Matrix;
 
 /**
  *
  * @author luisp
  */
-public class Board extends javax.swing.JPanel {
+public final class Board extends javax.swing.JPanel {
 
-    /**
-     * Creates new form Board
-     */
     public Board() {
         initComponents();
         setLayout(new GridLayout(BOARD_SIZE,BOARD_SIZE));
-        for(int i = 0; i < BOARD_SIZE*BOARD_SIZE ; i++)
-        {
-            add(new Block(new Coord(i%BOARD_SIZE,(int)i/BOARD_SIZE)));
+        
+        final Matrix<Block> grid = new Matrix<>(BOARD_SIZE,BOARD_SIZE,null);
+        for(int i = 0; i < BOARD_SIZE*BOARD_SIZE ; i++){
+            Coord coord = new Coord(i%BOARD_SIZE,(int)i/BOARD_SIZE);
+            Block block = new Block(coord);
+            add(block); //puts the Block in the grid
+            grid.set(coord,block);
         }
+        this.grid = grid.getUnmodifiableMatrix();
     }
 
+    final Matrix<Block> grid;
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

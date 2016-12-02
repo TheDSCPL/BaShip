@@ -24,24 +24,23 @@ public class MainFrame extends javax.swing.JFrame {
             }
             private void resizeIcon(ComponentEvent e)
             {
-                if(e.getComponent() instanceof JButton)
+                Component c = e.getComponent();
+                int width = (int)(c.getWidth()*0.8);
+                int height = (int)(c.getHeight()*0.8);
+                if(c instanceof JButton)
                 {
-                    JButton button = (JButton)e.getComponent();
+                    JButton button = (JButton)c;
                     ImageIcon prevIcon = (ImageIcon)button.getIcon();
                     if(prevIcon == null)
                         return;
-                    int width = (int)(button.getWidth()*0.8);
-                    int height = (int)(button.getHeight()*0.8);
                     button.setIcon(_resizeIcon(prevIcon,width,height));
                 }
-                else if(e.getComponent() instanceof JLabel)
+                else if(c instanceof JLabel)
                 {
-                    JLabel label = (JLabel)e.getComponent();
+                    JLabel label = (JLabel)c;
                     ImageIcon prevIcon = (ImageIcon)label.getIcon();
                     if(prevIcon == null)
                         return;
-                    int width = (int)(label.getWidth()*0.8);
-                    int height = (int)(label.getHeight()*0.8);
                     label.setIcon(_resizeIcon(prevIcon,width,height));
                 }
                 else
