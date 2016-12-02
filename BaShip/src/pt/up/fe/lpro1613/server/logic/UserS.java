@@ -44,7 +44,10 @@ public class UserS {
     }
 
     /**
-     * TODO: JAVADOC
+     * Login the user with the given username and password. This user is then
+     * associated to this {@code Client} until the client performs a logout.
+     * Also, no other client may login with the same username until this client
+     * performs a logout.
      *
      * @param client
      * @param username
