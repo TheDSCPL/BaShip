@@ -207,9 +207,10 @@ public class GameS {
 
     /**
      * Inform this class that a client disconnected. Should be called regardless
-     * of the client being in a game currently or not.
+     * of the client being in a game currently or not. If the client is in a
+     * game, this method cancels the game.
      *
-     * @param client The player who closed the game.
+     * @param client The client who disconnected.
      */
     public static void clientDisconnected(Client client) {
         // TODO: finish
@@ -221,7 +222,7 @@ public class GameS {
      * @return True if the client is in a game currently. It returns false
      * otherwise, specially when the user is on the game screen, but waiting,
      * not playing.
-     * @see GameS::isClientWaiting(Client)
+     * @see GameS#isClientWaiting(Client)
      */
     public static boolean isClientPlaying(Client client) {
         return currentGamesPlayFromUser.containsKey(client);
@@ -230,7 +231,7 @@ public class GameS {
     /**
      * @param client
      * @return True if the client is waiting for a game.
-     * @see GameS::isClientPlaying(Client)
+     * @see GameS#isClientPlaying(Client)
      */
     public static boolean isClientWaiting(Client client) {
         return playersWaitingForGame.contains(client) || playersWaitingForPlayer.containsValue(client);
@@ -239,11 +240,11 @@ public class GameS {
     /*public static boolean isGameRunning(Long gameID) {
         return currentGamesPlay.get(gameID).gameHasStarted();
     }*/
-    
     /**
-     * 
+     *
      * @param gameID The game id. This must be an id of a game currently running
-     * @return The number of moves that have been played already in the game (includes both players' moves).
+     * @return The number of moves that have been played already in the game
+     * (includes both players' moves).
      */
     public static Integer getGameCurrentMoveNumber(Long gameID) {
         // TODO: crash if game is not running at this moment

@@ -41,7 +41,7 @@ public class Client implements Connection.Delegate {
             case C_UsernameAvailable: {
                 boolean b = false;
                 try {
-                    b = UserS.isUsernameAvailable((String) request.info);
+                    b = UserDB.isUsernameAvailable((String) request.info);
                 }
                 catch (SQLException ex) {
                     Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
@@ -127,7 +127,7 @@ public class Client implements Connection.Delegate {
                 }
                 break;
             }
-            case C_StartGameWithPlayer: {
+            /*case C_StartGameWithPlayer: {
                 try {
                     GameS.startGameWithPlayer(this, (Long) request.info);
                     response = new Packet();
@@ -136,7 +136,7 @@ public class Client implements Connection.Delegate {
                     response = new Packet(Query.SR_ErrorMessage, new ErrorMessage(ex.getMessage()));
                 }
                 break;
-            }
+            }*/
             // TODO: empty responses just for confirmation?
             /*case C_AnswerGameInvitation: {
                 GameS.answerGameInvitation(this, (Boolean) request.info);
