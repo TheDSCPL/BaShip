@@ -140,6 +140,9 @@ public final class Block extends javax.swing.JPanel {
             case GraySquare:
                 setIcon(null);
                 setColor(GREY_BLOCK_COLOR);
+            case RedSquare:
+                setIcon(null);
+                setColor(RED_BLOCK_COLOR);
             case BlueDiamond:
                 setIcon(BLUE_DIAMOND_ICON);
                 setColor(null);

@@ -28,6 +28,7 @@ public class BoardK {
     public static final Color HOVER_OVER_BLOCK_COLOR = new Color(40, 150, 180);
     //public static final Color GREY_BLOCK_COLOR = new Color(143,143,143);
     public static final Color GREY_BLOCK_COLOR = new Color(202,202,202);
+    public static final Color RED_BLOCK_COLOR = new Color(255,0,0);
     
     /**
      * Total number of ships (for one player only) in a game of Battleship
