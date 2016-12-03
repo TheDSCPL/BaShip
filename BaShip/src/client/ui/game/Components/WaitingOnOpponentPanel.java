@@ -5,6 +5,11 @@
  */
 package client.ui.game.Components;
 
+import client.ClientMain;
+import client.logic.GameC;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import pt.up.fe.lpro1613.sharedlib.exceptions.UserMessageException;
 import pt.up.fe.lpro1613.sharedlib.structs.BoardUIInfo;
 import pt.up.fe.lpro1613.sharedlib.structs.GameUIInfo;
 import pt.up.fe.lpro1613.sharedlib.structs.UIInfo;
@@ -46,8 +51,18 @@ public class WaitingOnOpponentPanel extends SuperBoard {
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jButton1.setText("Randomize placement");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Ready");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -90,6 +105,18 @@ public class WaitingOnOpponentPanel extends SuperBoard {
                 .addGap(42, 42, 42))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        //TODO: randomize
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        try {
+            GameC.clickReadyButton();
+        } catch (UserMessageException ex) {
+            ClientMain.showInfo(ex.getMessage());
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     @Override
     void update(UIInfo info) {
