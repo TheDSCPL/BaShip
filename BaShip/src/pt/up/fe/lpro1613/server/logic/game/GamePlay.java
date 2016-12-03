@@ -41,6 +41,10 @@ class GamePlay {
         // Set boards
         this.p1Board = p1Board != null ? p1Board : new Board();
         this.p2Board = p2Board != null ? p2Board : new Board();
+        
+        // Set states
+        p1State = PlayerState.PlacingShips;
+        p2State = PlayerState.PlacingShips;
 
         // Assign turns
         p1Turn = new Random().nextBoolean();
@@ -151,7 +155,7 @@ class GamePlay {
         refreshClientInfo();
     }
 
-    public void fireShot(Client player, Coord pos) {
+    public void playerClickedRightBoard(Client player, Coord pos) {
 
         // Verify if player is in this game
         if (!isPlayer(player)) {
@@ -200,7 +204,7 @@ class GamePlay {
         refreshClientInfo();
     }
 
-    public void togglePlaceShipOnSquare(Client player, Coord pos) {
+    public void playerClickedLeftBoard(Client player, Coord pos) {
 
         // Verify if player is in this game
         if (!isPlayer(player)) {
@@ -222,6 +226,10 @@ class GamePlay {
     private void refreshClientInfo() {
         refreshClientInfoForClient(player1);
         refreshClientInfoForClient(player2);
+        
+        System.out.println("Player 1 state: " + p1State);
+        System.out.println("Player 2 state: " + p2State);
+        
         spectators.stream().forEach(this::refreshClientInfoForClient);
     }
 
@@ -270,12 +278,12 @@ class GamePlay {
         boolean playing = gameHasStarted();
 
         if (isPlayer(client)) {
-            leftBoard = boardForPlayer(client).getBoardInfo(true, playing, true);
-            rightBoard = boardForPlayer(opponent(client)).getBoardInfo(false, playing, false);
+            leftBoard = boardForPlayer(client).getBoardInfo(playing, true, true);
+            rightBoard = boardForPlayer(opponent(client)).getBoardInfo(playing, false, false);
         }
         else {
-            leftBoard = boardForPlayer(player1).getBoardInfo(true, playing, true);
-            rightBoard = boardForPlayer(player2).getBoardInfo(false, playing, true);
+            leftBoard = boardForPlayer(player1).getBoardInfo(playing, true, true);
+            rightBoard = boardForPlayer(player2).getBoardInfo(playing, true, false);
         }
 
         try {

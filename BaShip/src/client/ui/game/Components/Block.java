@@ -147,8 +147,6 @@ public final class Block extends javax.swing.JPanel {
     }
     
     public void setSquareFill(SquareFill sf) {
-        if(sf != SquareFill.Empty)
-            System.err.println("left: " + left + " | squareFill: " + sf.name());
         switch (sf) {
             case Empty:
                 setIcon(null);

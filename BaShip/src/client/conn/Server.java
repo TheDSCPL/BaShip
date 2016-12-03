@@ -284,14 +284,24 @@ public class Server implements Connection.Delegate {
     }*/
 
     /**
-     * When placing ships, inform the server that the player has clicked on a
-     * square on the grid.
+     * TODO: JAVADOC
      *
      * @param pos The coordinates of the square on the grid.
      * @throws UserMessageException
      */
-    public void togglePlaceShipOnSquare(Coord pos) throws UserMessageException {
-        Packet request = new Packet(Query.C_TogglePlaceOnShipSquare, pos);
+    public void clickLeftBoard(Coord pos) throws UserMessageException {
+        Packet request = new Packet(Query.C_ClickLeftBoard, pos);
+        sendOnlyWrapper(request);
+    }
+    
+    /**
+     * TODO: JAVADOC
+     *
+     * @param pos The coordinates of the square on the grid.
+     * @throws UserMessageException
+     */
+    public void clickRightBoard(Coord pos) throws UserMessageException {
+        Packet request = new Packet(Query.C_ClickRightBoard, pos);
         sendOnlyWrapper(request);
     }
 
@@ -303,20 +313,6 @@ public class Server implements Connection.Delegate {
      */
     public void clickReadyButton() throws UserMessageException {
         Packet request = new Packet(Query.C_ClickReadyButton);
-        sendOnlyWrapper(request);
-    }
-
-    /**
-     * When playing (after placing ships), inform the server that the player
-     * intends to fire a missile on the given coordinates. Requires that it's
-     * this client's turn to play.
-     *
-     * @param pos The coordinates of the square on the grid of the opponent
-     * where to fire the missile.
-     * @throws UserMessageException
-     */
-    public void fireShot(Coord pos) throws UserMessageException {
-        Packet request = new Packet(Query.C_FireShot, pos);
         sendOnlyWrapper(request);
     }
 

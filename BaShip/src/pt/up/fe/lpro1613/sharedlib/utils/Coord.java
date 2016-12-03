@@ -41,4 +41,11 @@ public class Coord {
         hash = 47 * hash + this.y;
         return hash;
     }
+
+    @Override
+    public String toString() {
+        return "Coord{" + "x=" + x + ", y=" + y + '}';
+    }
+    
+    
 }

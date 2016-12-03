@@ -142,16 +142,16 @@ public class Client implements Connection.Delegate {
                 GameS.answerGameInvitation(this, (Boolean) request.info);
                 break;
             }*/
-            case C_TogglePlaceOnShipSquare: {
-                GameS.togglePlaceShipOnSquare(this, (Coord) request.info);
+            case C_ClickLeftBoard: {
+                GameS.clientClickedLeftBoard(this, (Coord) request.info);
+                break;
+            }
+            case C_ClickRightBoard: {
+                GameS.clientClickedRightBoard(this, (Coord) request.info);
                 break;
             }
             case C_ClickReadyButton: {
                 GameS.clickReadyButton(this);
-                break;
-            }
-            case C_FireShot: {
-                GameS.fireShot(this, (Coord) request.info);
                 break;
             }
             case C_CloseGame: {

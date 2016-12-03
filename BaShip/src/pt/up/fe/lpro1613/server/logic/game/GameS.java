@@ -62,21 +62,28 @@ public class GameS {
             if (!playersWaitingBoards.containsKey(client)) {
                 playersWaitingBoards.put(client, new Board());
             }
-            
+
             return playersWaitingBoards.get(client);
         }
 
-        public static void setUsersPlayingGame(Client p1, Client p2, GamePlay gp) {
+        public static void addGame(GamePlay gp, Client p1, Client p2) {
             currentGamesPlayFromUser.put(p1, gp);
             currentGamesPlayFromUser.put(p2, gp);
+            currentGamesPlay.put(gp.gameID, gp);
         }
 
-        public static void registerGame(GamePlay gp) {
-            currentGamesPlay.put(gp.gameID, gp);
+        public static void removeGame(GamePlay gp) {
+            currentGamesPlayFromUser.remove(gp.player1);
+            currentGamesPlayFromUser.remove(gp.player2);
+            currentGamesPlay.remove(gp);
         }
 
         public static void addPlayerWaiting(Client client) {
             playersWaitingForGame.add(client);
+        }
+
+        public static void removePlayerWaiting(Client client) {
+            playersWaitingForGame.remove(client);
         }
 
     }
@@ -157,8 +164,7 @@ public class GameS {
         GamePlay game;
         try {
             game = new GamePlay(player1, Info.waitingBoardForPlayer(player1), player2, Info.waitingBoardForPlayer(player2));
-            Info.setUsersPlayingGame(player1, player2, game);
-            Info.registerGame(game);
+            Info.addGame(game, player1, player2);
         }
         catch (SQLException ex) {
             Logger.getLogger(GameS.class.getName()).log(Level.SEVERE, null, ex);
@@ -169,7 +175,7 @@ public class GameS {
     private static void startWait(Client clientWaiting, Client targetClient) {
         // Waiting for random game
         if (targetClient == null) {
-            Info.addPlayerWaiting(targetClient);
+            Info.addPlayerWaiting(clientWaiting);
         }
         // Waiting for a specific player
         /*else {
@@ -177,31 +183,6 @@ public class GameS {
         }*/
 
         updateGameScreenForClient(clientWaiting);
-    }
-
-    /**
-     * When placing ships, inform this class that this client has clicked on a
-     * square on the grid. The player must be playing a game, and still be
-     * placing ships.
-     *
-     * @param player The player who clicked on the board
-     * @param pos The position of the board he cliked on
-     */
-    public static void togglePlaceShipOnSquare(Client player, Coord pos) {
-        if (isClientPlaying(player)) {
-            Info.gameFromPlayer(player).togglePlaceShipOnSquare(player, pos);
-        }
-        else {
-            Board board = Info.waitingBoardForPlayer(player);
-            board.togglePlaceShipOnSquare(pos);
-
-            try {
-                player.updateGameBoard(board.getBoardInfoNotPlaying(true));
-            }
-            catch (ConnectionException ex) {
-                Logger.getLogger(GameS.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
     }
 
     /**
@@ -222,20 +203,40 @@ public class GameS {
     }
 
     /**
-     * When playing (after placing ships), inform this class that the player
-     * intends to fire a missile on the given coordinates. Requires that it's
-     * this client's turn to play.
-     *
-     * @param player The player who fired the shot.
-     * @param pos The coordinate of where the shot was fired, on the board of
-     * the opponent.
+     * TODO: JAVADOC
+     * 
+     * @param player
+     * @param pos 
      */
-    public static void fireShot(Client player, Coord pos) {
+    public static void clientClickedLeftBoard(Client player, Coord pos) {
         if (isClientPlaying(player)) {
-            Info.gameFromPlayer(player).fireShot(player, pos);
+            Info.gameFromPlayer(player).playerClickedLeftBoard(player, pos);
         }
         else {
-            Logger.getLogger(GameS.class.getName()).log(Level.SEVERE, "Player {0} cannot fire shot because he's not playing any game", player);
+            Board board = Info.waitingBoardForPlayer(player);
+            board.togglePlaceShipOnSquare(pos);
+
+            try {
+                player.updateGameBoard(board.getBoardInfoPlacingShips(true, true));
+            }
+            catch (ConnectionException ex) {
+                Logger.getLogger(GameS.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+    /**
+     * TODO: JAVADOC
+     * 
+     * @param player
+     * @param pos 
+     */
+    public static void clientClickedRightBoard(Client player, Coord pos) {
+        if (isClientPlaying(player)) {
+            Info.gameFromPlayer(player).playerClickedRightBoard(player, pos);
+        }
+        else {
+            Logger.getLogger(GameS.class.getName()).log(Level.SEVERE, "Player {0} cannot click on right board because he's not playing any game", player);
         }
     }
 
@@ -252,6 +253,7 @@ public class GameS {
 
     static void gameFinished(GamePlay game) {
         // TODO: finish
+        Info.removeGame(game);
     }
 
     /**
@@ -262,8 +264,14 @@ public class GameS {
      * @param client The client who disconnected.
      */
     public static void clientDisconnected(Client client) {
+        if (isClientPlaying(client)) {
+            Info.gameFromPlayer(client).clientDisconnected(client);
+        }
+        else if (isClientWaiting(client)) {
+            Info.removePlayerWaiting(client);
+        }
+
         // TODO: finish
-        //currentGamesPlayFromUser.get(client).clientDisconnected(client); // currentGamesPlayFromUser.get(client) may be null
     }
 
     /**

@@ -19,9 +19,10 @@ class Board {
     // PLACING SHIPS
     public void togglePlaceShipOnSquare(Coord c) {
         shipsLayer.set(c, !shipsLayer.get(c));
+        refreshPlacedShipSquares();
     }
 
-    public boolean refreshPlacedShipSquares() {
+    private void refreshPlacedShipSquares() {
         ships.clear();
 
         // Get sets of connected squares (independent of the shape they may be)
@@ -69,23 +70,20 @@ class Board {
                 invalidShipSquares.addAll(currentConnectedSquares);
             }
         }
-
-        return invalidShipSquares.isEmpty();
     }
 
     private void checkSquareSurroundings(Coord pos, Set<Coord> currentConnectedSquares, Set<Coord> allSquaresSeen) {
-        currentConnectedSquares.add(pos);
         allSquaresSeen.add(pos);
+
+        if (shipsLayer.get(pos)) {
+            currentConnectedSquares.add(pos);
+        }
 
         for (int dx = -1; dx <= 1; dx++) {
             for (int dy = -1; dy <= 1; dy++) {
-                if (dx == 0 && dy == 0) {
-                    continue;
-                }
-
                 Coord c = new Coord(pos.x + dx, pos.y + dy);
 
-                if (shipsLayer.getOr(c, false)) {
+                if (!allSquaresSeen.contains(c) && shipsLayer.getOr(c, false)) {
                     checkSquareSurroundings(c, currentConnectedSquares, allSquaresSeen);
                 }
             }
@@ -93,14 +91,14 @@ class Board {
     }
 
     public boolean placedShipsAreValid() {
-        for (Map.Entry<Integer, Integer> entry : SHIP_COUNT_FOR_SIZE.entrySet()) {
+        /*for (Map.Entry<Integer, Integer> entry : SHIP_COUNT_FOR_SIZE.entrySet()) {
             int count = (int) ships.stream().filter(s -> s.size == entry.getKey()).count();
             if (entry.getValue() != count) {
                 return false;
             }
-        }
+        }*/
 
-        return true;
+        return invalidShipSquares.isEmpty();
     }
 
     public List<Ship> getShips() {
@@ -127,40 +125,42 @@ class Board {
     }
 
     // GET BOARD INFO
-    public BoardUIInfo getBoardInfo(boolean leftBoard, boolean playing, boolean showEverything) {
+    public BoardUIInfo getBoardInfo(boolean playing, boolean showEverything, boolean isLeftBoard) {
         if (playing) {
-            return getBoardInfoPlaying(leftBoard, showEverything);
+            return getBoardInfoPlaying(showEverything, isLeftBoard);
         }
         else {
-            return getBoardInfoNotPlaying(leftBoard);
+            return getBoardInfoPlacingShips(showEverything, isLeftBoard);
         }
     }
 
-    public BoardUIInfo getBoardInfoNotPlaying(boolean leftBoard) {
+    public BoardUIInfo getBoardInfoPlacingShips(boolean showEverything, boolean isLeftBoard) {
         BoardUIInfo bi = new BoardUIInfo();
-        bi.leftBoard = leftBoard;
+        bi.leftBoard = isLeftBoard;
 
-        // Populate top board
-        shipsLayer.forEach((c, b) -> {
-            bi.board.set(c, b ? BoardUIInfo.SquareFill.GraySquare : BoardUIInfo.SquareFill.Empty);
-        });
+        if (showEverything) {
+            // Populate top board
+            shipsLayer.forEach((c, b) -> {
+                bi.board.set(c, b ? BoardUIInfo.SquareFill.GraySquare : BoardUIInfo.SquareFill.Empty);
+            });
 
-        // Overwirte fill values where ship placement is invalid
-        invalidShipSquares.forEach((c) -> {
-            bi.board.set(c, BoardUIInfo.SquareFill.RedSquare);
-        });
+            // Overwrite fill values where ship placement is invalid
+            invalidShipSquares.forEach((c) -> {
+                bi.board.set(c, BoardUIInfo.SquareFill.RedSquare);
+            });
 
-        // Populate bottom info rows
-        final int[] offset = {16, 10, 4, 0}; // static final TODO: should change based on info in SHIP_COUNT_FOR_SIZE
-        int[] count = {0, 0, 0, 0};
-        for (Ship s : ships) {
-            int index = s.size - 1;
+            // Populate bottom info rows
+            /*final int[] offset = {16, 10, 4, 0}; // static final TODO: should change based on info in SHIP_COUNT_FOR_SIZE
+            int[] count = {0, 0, 0, 0};
+            for (Ship s : ships) {
+                int index = s.size - 1;
 
-            for (int i = offset[index] + count[index]; i < s.size; i++) {
-                bi.bottomInfo.set(i, BoardUIInfo.SquareFill.GraySquare);
-            }
+                for (int i = offset[index] + count[index]; i < s.size; i++) {
+                    bi.bottomInfo.set(i, BoardUIInfo.SquareFill.GraySquare);
+                }
 
-            count[index]++;
+                count[index]++;
+            }*/
         }
 
         return bi;
@@ -185,7 +185,7 @@ class Board {
                     return BoardUIInfo.SquareFill.Empty;
                 }
             });
-            
+
             // TODO: finish
         }
         else {
