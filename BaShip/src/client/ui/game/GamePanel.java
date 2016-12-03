@@ -18,10 +18,18 @@ public final class GamePanel extends javax.swing.JPanel {
     public GamePanel() {
         initComponents();
         
+        /*final JLayeredPane leftPane = new JLayeredPane();
+        leftPane.setLayer(new Board(true),JLayeredPane.DEFAULT_LAYER);
+        final JLayeredPane rightPane = new JLayeredPane();
+        rightPane.setLayer(new Board(false),JLayeredPane.DEFAULT_LAYER);*/
+        
+        leftBoard = new BoardContainer();
+        rightBoard = new BoardContainer();
+        
         add(new TopBar(), BorderLayout.PAGE_START);
-        add(new BoardContainer(), BorderLayout.LINE_START);
+        add(leftBoard, BorderLayout.LINE_START);
         add(new GameChat(), BorderLayout.CENTER);
-        add(new BoardContainer(), BorderLayout.LINE_END);
+        add(rightBoard, BorderLayout.LINE_END);
     }
 
     /**
@@ -42,6 +50,10 @@ public final class GamePanel extends javax.swing.JPanel {
     }
 
     public void updateBoardInfo(BoardUIInfo info) {
+        System.out.println("" + info);
+        System.out.println(leftBoard);
+        System.out.println(rightBoard);
+        
         if (info.leftBoard) {
             leftBoard.updateBoard(info);
         }

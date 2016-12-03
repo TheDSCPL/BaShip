@@ -75,14 +75,18 @@ public class GameC {
             System.err.println("PROBLEM!!!");
         }
     }
+    
+    static public void clickBoardCoordinate(boolean leftBoard, Coord c) {
+        
+    }
 
-    static public void togglePlaceShipOnSquare(Coord c) throws UserMessageException {
+    /*static public void togglePlaceShipOnSquare(Coord c) throws UserMessageException {
         ClientMain.server.togglePlaceShipOnSquare(c);
     }
 
     static public void fireShot(Coord c) throws UserMessageException {
         ClientMain.server.fireShot(c);
-    }
+    }*/
 
     static public void clickReadyButton() throws UserMessageException {
         ClientMain.server.clickReadyButton();

@@ -105,7 +105,7 @@ public class GameDB {
         try {
             conn = Database.getConn();
             stmt = conn.prepareStatement(
-                    "INSERT INTO games VALUES (DEFAULT, NULL, NULL, ?, ?, NULL) RETURNING (uid)"
+                    "INSERT INTO games VALUES (DEFAULT, NULL, NULL, ?, ?, NULL) RETURNING (gmid)"
             );
             stmt.setLong(1, player1ID);
             stmt.setLong(2, player2ID);
