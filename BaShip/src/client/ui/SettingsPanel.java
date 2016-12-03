@@ -56,14 +56,14 @@ public class SettingsPanel extends javax.swing.JPanel {
             .addGroup(topBarLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(backButton)
-                .addContainerGap(281, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         topBarLayout.setVerticalGroup(
             topBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(topBarLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(10, Short.MAX_VALUE))
+                .addComponent(backButton)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         ipField.setToolTipText("");
@@ -180,10 +180,10 @@ public class SettingsPanel extends javax.swing.JPanel {
     private void testButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_testButtonActionPerformed
         if (parsePortText() != null) {
             if (Connection.test(ipField.getText(), parsePortText())) {
-                ClientMain.showWarning("Server settings are ok");
+                ClientMain.showInfo("Server settings are ok.");
             }
             else {
-                ClientMain.showWarning("Could not reach server");
+                ClientMain.showWarning("Could not reach server.");
             }
         }
     }//GEN-LAST:event_testButtonActionPerformed

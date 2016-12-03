@@ -6,8 +6,11 @@
 package client.ui.lobby;
 
 import client.ClientMain;
+import client.logic.GameC;
 import client.logic.UserC;
 import client.ui.LoginPanel;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import pt.up.fe.lpro1613.sharedlib.exceptions.UserMessageException;
 import pt.up.fe.lpro1613.sharedlib.structs.Message;
 
@@ -44,8 +47,10 @@ public class LobbyPanel extends javax.swing.JPanel {
         lobby1 = new javax.swing.JLayeredPane();
         jLabel1 = new javax.swing.JLabel();
         topBar = new javax.swing.JPanel();
-        logoutButton = new javax.swing.JButton();
         loggedInAsLabel = new javax.swing.JLabel();
+        logoutButton = new javax.swing.JButton();
+        refreshBttn = new javax.swing.JButton();
+        startRandomGameBttn = new javax.swing.JButton();
         lobbyTabbedPanel = new client.ui.lobby.LobbyTabbedPanel();
 
         jLabel1.setText("jLabel1");
@@ -71,6 +76,10 @@ public class LobbyPanel extends javax.swing.JPanel {
 
         topBar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        loggedInAsLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        loggedInAsLabel.setText("Logged in as: ");
+        loggedInAsLabel.setToolTipText("");
+
         logoutButton.setText("Logout");
         logoutButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -78,18 +87,32 @@ public class LobbyPanel extends javax.swing.JPanel {
             }
         });
 
-        loggedInAsLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        loggedInAsLabel.setText("Logged in as: ");
-        loggedInAsLabel.setToolTipText("");
+        refreshBttn.setText("Refresh");
+        refreshBttn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                refreshBttnActionPerformed(evt);
+            }
+        });
+
+        startRandomGameBttn.setText("Start random game");
+        startRandomGameBttn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                startRandomGameBttnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout topBarLayout = new javax.swing.GroupLayout(topBar);
         topBar.setLayout(topBarLayout);
         topBarLayout.setHorizontalGroup(
             topBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(topBarLayout.createSequentialGroup()
-                .addContainerGap(299, Short.MAX_VALUE)
-                .addComponent(loggedInAsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addContainerGap()
+                .addComponent(loggedInAsLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(startRandomGameBttn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(refreshBttn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(logoutButton)
                 .addContainerGap())
         );
@@ -97,12 +120,16 @@ public class LobbyPanel extends javax.swing.JPanel {
             topBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(topBarLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(topBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(topBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(topBarLayout.createSequentialGroup()
-                        .addComponent(logoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addGap(1, 1, 1))
-                    .addComponent(loggedInAsLabel, javax.swing.GroupLayout.Alignment.LEADING))
-                .addContainerGap())
+                        .addGroup(topBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(logoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(refreshBttn)
+                            .addComponent(startRandomGameBttn))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, topBarLayout.createSequentialGroup()
+                        .addComponent(loggedInAsLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -116,7 +143,7 @@ public class LobbyPanel extends javax.swing.JPanel {
                         .addComponent(topBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(lobbyTabbedPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(lobbyTabbedPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 547, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -126,7 +153,7 @@ public class LobbyPanel extends javax.swing.JPanel {
                 .addComponent(topBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lobbyTabbedPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(8, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -140,6 +167,20 @@ public class LobbyPanel extends javax.swing.JPanel {
         ClientMain.mainFrame.changeToPanel(new LoginPanel());
     }//GEN-LAST:event_logoutButtonActionPerformed
 
+    private void refreshBttnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshBttnActionPerformed
+        lobbyTabbedPanel.refreshList();
+    }//GEN-LAST:event_refreshBttnActionPerformed
+
+    private void startRandomGameBttnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startRandomGameBttnActionPerformed
+        try {
+            GameC.startRandomGame();
+        }
+        catch (UserMessageException ex) {
+            Logger.getLogger(LobbyTabbedPanel.class.getName()).log(Level.SEVERE, null, ex);
+            ClientMain.showError(ex.getMessage());
+        }
+    }//GEN-LAST:event_startRandomGameBttnActionPerformed
+
     public void receiveGlobalMessage(Message message) {
         lobbyTabbedPanel.receiveGlobalMessage(message);
     }
@@ -150,6 +191,8 @@ public class LobbyPanel extends javax.swing.JPanel {
     private client.ui.lobby.LobbyTabbedPanel lobbyTabbedPanel;
     private javax.swing.JLabel loggedInAsLabel;
     private javax.swing.JButton logoutButton;
+    private javax.swing.JButton refreshBttn;
+    private javax.swing.JButton startRandomGameBttn;
     private javax.swing.JPanel topBar;
     // End of variables declaration//GEN-END:variables
 }

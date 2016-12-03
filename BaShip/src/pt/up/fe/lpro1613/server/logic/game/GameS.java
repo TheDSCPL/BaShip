@@ -86,6 +86,10 @@ public class GameS {
             playersWaitingForGame.remove(client);
         }
 
+        private static void removeWaitingBoardForPlayer(Client player) {
+            playersWaitingBoards.remove(player);
+        }
+
     }
 
     /**
@@ -165,6 +169,8 @@ public class GameS {
         try {
             game = new GamePlay(player1, Info.waitingBoardForPlayer(player1), player2, Info.waitingBoardForPlayer(player2));
             Info.addGame(game, player1, player2);
+            Info.removeWaitingBoardForPlayer(player1);
+            Info.removeWaitingBoardForPlayer(player2);
         }
         catch (SQLException ex) {
             Logger.getLogger(GameS.class.getName()).log(Level.SEVERE, null, ex);
@@ -183,6 +189,13 @@ public class GameS {
         }*/
 
         updateGameScreenForClient(clientWaiting);
+        
+        try {
+            clientWaiting.updateGameBoard(Info.waitingBoardForPlayer(clientWaiting).getBoardInfoPlacingShips(true, true));
+        }
+        catch (ConnectionException ex) {
+            Logger.getLogger(GameS.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -245,14 +258,17 @@ public class GameS {
      *
      * @param client The player who closed the game.
      */
-    public static void closeGame(Client client) {
+    public static void clientClosedGame(Client client) {
         if (Info.isPlaying(client)) {
-            Info.gameFromPlayer(client).gameClosedByClient(client);
+            Info.gameFromPlayer(client).clientClosedGame(client);
+        }
+        else if (Info.isWaitingForRandomGame(client)) {
+            Info.removePlayerWaiting(client);
         }
     }
 
     static void gameFinished(GamePlay game) {
-        // TODO: finish
+        // TODO: XXX finish & verify
         Info.removeGame(game);
     }
 
@@ -271,7 +287,7 @@ public class GameS {
             Info.removePlayerWaiting(client);
         }
 
-        // TODO: finish
+        // TODO: XXX finish & verify
     }
 
     /**

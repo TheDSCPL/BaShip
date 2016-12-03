@@ -12,7 +12,7 @@ import java.awt.event.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
-import static pt.up.fe.lpro1613.sharedlib.constants.BoardK.*;
+import static pt.up.fe.lpro1613.sharedlib.constants.UIK.*;
 import pt.up.fe.lpro1613.sharedlib.exceptions.UserMessageException;
 import pt.up.fe.lpro1613.sharedlib.structs.BoardUIInfo.SquareFill;
 import pt.up.fe.lpro1613.sharedlib.utils.*;
@@ -25,15 +25,17 @@ public final class Block extends javax.swing.JPanel {
 
     /**
      * Creates new form Block
+     *
      * @param coordinates where this block is in the board
      * @param left true if this block if on a left board
      */
     public Block(Coord coordinates, boolean left) {
         this(coordinates, left, null);
     }
-    
+
     /**
      * Creates new form Block
+     *
      * @param coordinates where this block is in the board
      * @param text Text to be set. If text is not null, no icon can be set.
      * @param left true if this block if on a left board
@@ -43,74 +45,67 @@ public final class Block extends javax.swing.JPanel {
         this.coordinates = coordinates;
         this.left = left;
         sanityCheck();
-        
+
         this.text = text;
-        if(text != null)    //label
+        if (text != null) // Label
         {
             jLabel1.setText(text);
+            jLabel1.setForeground(BOARD_BORDER_COLOR_NORMAL);
         }
-        else    //button
+        else // Button
         {
             addMouseListener(clickListener);
             jLabel1.addMouseListener(clickListener);
-            setBorder(BorderFactory.createLineBorder(new Color(0, 0, 0)));
-            //jLabel1.setText("" + coordinates.x + "" + coordinates.y); //debug block coordinates
+            setBorder(BorderFactory.createLineBorder(BOARD_BORDER_COLOR_NORMAL));
         }
+        
+        setOpaque(false);
     }
     
     private final boolean left;
-    
+
     /**
      * not null if this Block is a line/row label
      */
     public final String text;
-    
+
     /**
-     * @return true if this is a block that is clickable. false if it is a Board label
+     * @return true if this is a block that is clickable. false if it is a Board
+     * label
      */
-    public final boolean isClickableBlock()
-    {
+    public final boolean isClickableBlock() {
         return text == null;
     }
-    
-    private void sanityCheck()
-    {
-        for(Icon i : ICONS)
-            if(i == null)
-            {
+
+    private void sanityCheck() {
+        for (Icon i : ICONS) {
+            if (i == null) {
                 ClientMain.showError("Couldn't open an Icon resource");
                 throw new Error("Couldn't open an Icon resource");
             }
-        
+        }
+
         boolean containsLabel = false;
-        for(Component _c : getComponents())
-        {
-            if(_c == jLabel1)
-            {
+        for (Component _c : getComponents()) {
+            if (_c == jLabel1) {
                 containsLabel = true;
                 break;
             }
         }
-        if(!containsLabel)
+        if (!containsLabel) {
             add(jLabel1);
+        }
         jLabel1.setVisible(true);
         jLabel1.setOpaque(true);
         jLabel1.setHorizontalAlignment(SwingConstants.CENTER);
         jLabel1.setVerticalAlignment(SwingConstants.CENTER);
     }
-    
+
     private final MouseListener clickListener = new MouseListener() {
         @Override
         public void mouseClicked(MouseEvent e) {
-            
-        }
-
-        @Override
-        public void mousePressed(MouseEvent e) {
             try {
                 GameC.clickBoardCoordinate(left, Block.this.coordinates);
-                System.out.println("left: " + left);
-                //setIcon(RED_CROSS_ICON);
             }
             catch (UserMessageException ex) {
                 Logger.getLogger(Block.class.getName()).log(Level.SEVERE, null, ex);
@@ -118,34 +113,39 @@ public final class Block extends javax.swing.JPanel {
         }
 
         @Override
+        public void mousePressed(MouseEvent e) {
+            Block.this.setBorder(BorderFactory.createLineBorder(BOARD_BORDER_COLOR_PRESSED));
+        }
+
+        @Override
         public void mouseReleased(MouseEvent e) {
-            //System.out.println("released");
+            Block.this.setBorder(BorderFactory.createLineBorder(BOARD_BORDER_COLOR_NORMAL));
         }
 
         @Override
         public void mouseEntered(MouseEvent e) {
-            //System.out.println("entered");
+            Block.this.setBorder(BorderFactory.createLineBorder(BOARD_BORDER_COLOR_HOVER));
         }
 
         @Override
         public void mouseExited(MouseEvent e) {
-            //System.out.println("exited");
+            Block.this.setBorder(BorderFactory.createLineBorder(BOARD_BORDER_COLOR_NORMAL));
         }
     };
-    
+
     private boolean iconIsResizable = false;
-    
-    private void setImageResizer()
-    {
-        if(iconIsResizable)
+
+    private void setImageResizer() {
+        if (iconIsResizable) {
             return;
+        }
         iconIsResizable = true;
 
         ComponentListener cl = ClientMain.mainFrame.imageResizer;
-        
+
         jLabel1.addComponentListener(cl);
     }
-    
+
     public void setSquareFill(SquareFill sf) {
         switch (sf) {
             case Empty:
@@ -178,48 +178,47 @@ public final class Block extends javax.swing.JPanel {
                 break;
         }
     }
-    
-    private void setIcon(Icon icon)
-    {
-        if(text != null)
+
+    private void setIcon(Icon icon) {
+        if (text != null) {
             return;
-        
+        }
+
         setImageResizer();
-        
+
         jLabel1.removeAll();
-        
+
         jLabel1.setIcon(icon);
         jLabel1.setHorizontalAlignment(SwingConstants.CENTER);
         jLabel1.setVerticalAlignment(SwingConstants.CENTER);
-        
+
         //To trigger the image resizing
         jLabel1.setVisible(false);
         jLabel1.setVisible(true);
-        
+
         jLabel1.revalidate();
     }
-    
+
     /**
      * Sets the background color of this Block
-     * @param _c new color for this Block. If null, the default Color will be used, aka resets the Block's Color
+     *
+     * @param _c new color for this Block. If null, the default Color will be
+     * used, aka resets the Block's Color
      */
-    private void setColor(java.awt.Color _c)
-    {
+    private void setColor(java.awt.Color _c) {
         Color color;
-        if(_c == null)
-        {
-            color = new Color(240,240,240);
+        if (_c == null) {
+            color = new Color(240, 240, 240);
         }
-        else
-        {
+        else {
             color = _c;
         }
         setBackground(color);
         jLabel1.setBackground(color);
     }
-    
+
     public final Coord coordinates;
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

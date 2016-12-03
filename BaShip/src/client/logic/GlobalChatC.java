@@ -6,6 +6,10 @@ import javax.swing.JComponent;
 import pt.up.fe.lpro1613.sharedlib.exceptions.UserMessageException;
 import pt.up.fe.lpro1613.sharedlib.structs.Message;
 
+/**
+ * TODO: JAVADOC
+ * @author Alex
+ */
 public class GlobalChatC {
 
     /**
@@ -22,6 +26,11 @@ public class GlobalChatC {
         }
     }
 
+    /**
+     * TODO: JAVADOC
+     * @param text
+     * @throws UserMessageException 
+     */
     public static void sendGlobalMessage(String text) throws UserMessageException {
         ClientMain.server.sendGlobalMessage(text);
     }

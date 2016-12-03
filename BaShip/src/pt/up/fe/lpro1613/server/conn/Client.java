@@ -23,6 +23,11 @@ import pt.up.fe.lpro1613.sharedlib.structs.UserInfo;
 import pt.up.fe.lpro1613.sharedlib.structs.UserSearch;
 import pt.up.fe.lpro1613.sharedlib.utils.Coord;
 
+/**
+ * TODO: JAVADOC
+ *
+ * @author Alex
+ */
 public class Client implements Connection.Delegate {
 
     private final Connection connection;
@@ -137,25 +142,29 @@ public class Client implements Connection.Delegate {
                 }
                 break;
             }*/
-            // TODO: empty responses just for confirmation?
-            /*case C_AnswerGameInvitation: {
+
+ /*case C_AnswerGameInvitation: {
                 GameS.answerGameInvitation(this, (Boolean) request.info);
                 break;
             }*/
             case C_ClickLeftBoard: {
                 GameS.clientClickedLeftBoard(this, (Coord) request.info);
+                response = new Packet(); // Empty response just for confirmation
                 break;
             }
             case C_ClickRightBoard: {
                 GameS.clientClickedRightBoard(this, (Coord) request.info);
+                response = new Packet(); // Empty response just for confirmation
                 break;
             }
             case C_ClickReadyButton: {
                 GameS.clickReadyButton(this);
+                response = new Packet(); // Empty response just for confirmation
                 break;
             }
             case C_CloseGame: {
-                GameS.closeGame(this);
+                GameS.clientClosedGame(this);
+                response = new Packet(); // Empty response just for confirmation
                 break;
             }
         }
@@ -194,7 +203,6 @@ public class Client implements Connection.Delegate {
     /*public void sendGameInvitation() throws ConnectionException {
         connection.sendOnly(new Packet(Query.S_ReceiveGameInvitation, "")); // TODO: info?
     }*/
-
     /**
      * Tell the client to update the UI of one of the boards of the game using
      * the given information.
@@ -228,8 +236,11 @@ public class Client implements Connection.Delegate {
     @Override
     public void disconnected(Connection connection) {
         System.out.println("Disconnected from client on " + connection.address());
-        UserS.clientDisconnected(this);
+
+        // It's important that GameS be called first
         GameS.clientDisconnected(this);
+        UserS.clientDisconnected(this);
+
         synchronized (ServerMain.clients) {
             ServerMain.clients.remove(this);
         }

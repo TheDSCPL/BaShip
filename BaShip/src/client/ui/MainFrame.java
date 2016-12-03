@@ -72,12 +72,11 @@ public class MainFrame extends javax.swing.JFrame {
     public final ComponentListener imageResizer;
 
     private JComponent currentPanel;
-
     public JComponent getCurrentPanel() {
         return currentPanel;
     }
 
-    public void changeToPanel(JComponent panel) {
+    public void changeToPanel(JComponent panel) {        
         getContentPane().removeAll();
         getContentPane().add(advertisementPanel, java.awt.BorderLayout.PAGE_END);
         getContentPane().add(panel, java.awt.BorderLayout.CENTER);

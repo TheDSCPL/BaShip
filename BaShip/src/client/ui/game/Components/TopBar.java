@@ -21,29 +21,48 @@ public class TopBar extends javax.swing.JPanel {
      */
     public TopBar() {
         initComponents();
-        repaintNames();
+        reloadUI();
     }
-
+    
     private final String SEPARATOR = "        VS        ";
     private String player1 = "?????";
     private String player2 = "?????";
-    
-    private void repaintNames()
-    {
+
+    private boolean playerTurn;
+    private boolean opponentTurn;
+
+    private void reloadUI() {
         opponentsLabel.setText(player1 + SEPARATOR + player2);
+
+        if (playerTurn || opponentTurn) {
+            if (opponentTurn) {
+                turnLabel.setText("Opponent turn");
+            }
+            else {
+                turnLabel.setText("Your turn");
+            }
+        }
+        else {
+            turnLabel.setText("");
+        }
     }
 
-    public final void setFirstPlayer(String player1)
-    {
+    public final void setTurn(boolean playerTurn, boolean opponentTurn) {
+        this.playerTurn = playerTurn;
+        this.opponentTurn = opponentTurn;
+        reloadUI();
+    }
+
+    public final void setFirstPlayer(String player1) {
         this.player1 = player1;
-        repaintNames();
+        reloadUI();
     }
-    
-    public final void setSecondPlayer(String player2)
-    {
+
+    public final void setSecondPlayer(String player2) {
         this.player2 = player2;
-        repaintNames();
+        reloadUI();
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -56,6 +75,7 @@ public class TopBar extends javax.swing.JPanel {
         topGamePanel = new javax.swing.JLayeredPane();
         opponentsLabel = new javax.swing.JLabel();
         closeBttn = new javax.swing.JButton();
+        turnLabel = new javax.swing.JLabel();
 
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
@@ -71,8 +91,11 @@ public class TopBar extends javax.swing.JPanel {
             }
         });
 
+        turnLabel.setText("Opponent turn");
+
         topGamePanel.setLayer(opponentsLabel, javax.swing.JLayeredPane.DEFAULT_LAYER);
         topGamePanel.setLayer(closeBttn, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        topGamePanel.setLayer(turnLabel, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout topGamePanelLayout = new javax.swing.GroupLayout(topGamePanel);
         topGamePanel.setLayout(topGamePanelLayout);
@@ -80,7 +103,9 @@ public class TopBar extends javax.swing.JPanel {
             topGamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(topGamePanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(opponentsLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE)
+                .addComponent(turnLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(opponentsLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(closeBttn)
                 .addContainerGap())
@@ -89,9 +114,10 @@ public class TopBar extends javax.swing.JPanel {
             topGamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(topGamePanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(topGamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(topGamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(closeBttn)
-                    .addComponent(opponentsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(opponentsLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                    .addComponent(turnLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -127,5 +153,6 @@ public class TopBar extends javax.swing.JPanel {
     private javax.swing.JButton closeBttn;
     private javax.swing.JLabel opponentsLabel;
     private javax.swing.JLayeredPane topGamePanel;
+    private javax.swing.JLabel turnLabel;
     // End of variables declaration//GEN-END:variables
 }

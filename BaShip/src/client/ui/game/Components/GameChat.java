@@ -45,7 +45,7 @@ public class GameChat extends javax.swing.JPanel {
         gameChatSendMessageField.setToolTipText("Press enter to send message");
         gameChatSendMessageField.setMaximumSize(new java.awt.Dimension(2147483647, 26));
 
-        gameChatSendButton.setText("Send message");
+        gameChatSendButton.setText("Send");
         gameChatSendButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 gameChatSendButtonActionPerformed(evt);

@@ -6,6 +6,10 @@ import java.util.regex.*;
 import pt.up.fe.lpro1613.sharedlib.exceptions.UserMessageException;
 import pt.up.fe.lpro1613.sharedlib.structs.UserInfo;
 
+/**
+ * TODO: JAVADOC
+ * @author Alex
+ */
 public class UserC {
 
     private static UserInfo loggedInUser;
@@ -108,6 +112,15 @@ public class UserC {
         return loggedInUser != null;
     }
 
+    /**
+     * TODO: JAVADOC
+     * @param onlineOnly
+     * @param text
+     * @param columnToSortWith
+     * @param maxUsers
+     * @return
+     * @throws UserMessageException 
+     */
     public static List<UserInfo> getUserList(boolean onlineOnly, String text, int columnToSortWith, int maxUsers) throws UserMessageException {
         return ClientMain.server.getUserList(onlineOnly, text, maxUsers, maxUsers);
     }

@@ -73,7 +73,7 @@ public class GameDB {
                                 rs.getLong(3),
                                 rs.getString(4),
                                 rs.getString(5),
-                                state, // TODO: filter by cuurently playing only
+                                state, // TODO: filter by currently playing only
                                 start,
                                 end,
                                 state == GameInfo.State.Playing ? GameS.getGameCurrentMoveNumber(id) : null

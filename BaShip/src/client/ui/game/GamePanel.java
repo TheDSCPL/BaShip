@@ -17,16 +17,15 @@ public final class GamePanel extends javax.swing.JPanel {
      */
     public GamePanel() {
         initComponents();
-        
+
         /*final JLayeredPane leftPane = new JLayeredPane();
         leftPane.setLayer(new Board(true),JLayeredPane.DEFAULT_LAYER);
         final JLayeredPane rightPane = new JLayeredPane();
         rightPane.setLayer(new Board(false),JLayeredPane.DEFAULT_LAYER);*/
-        
         leftBoard = new BoardContainer();
         rightBoard = new BoardContainer();
         topBar = new TopBar();
-        
+
         add(topBar, BorderLayout.PAGE_START);
         add(leftBoard, BorderLayout.LINE_START);
         add(new GameChat(), BorderLayout.CENTER);
@@ -46,25 +45,18 @@ public final class GamePanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     public void updateGameScreen(GameUIInfo info) {
-        //System.out.println("received info:" + info);
-        // TODO: LUIS
         topBar.setFirstPlayer(info.titleLeft);
         topBar.setSecondPlayer(info.titleRight);
-        
+        topBar.setTurn(info.player1Turn, info.player2Turn);
+
         rightBoard.setOpponentWaiting(!info.showRightBoard);
-        //rightBoard.setOpponentWaiting(true);
-        //System.out.println("setOpponentWaitingone: " + (leftBoard.board instanceof WaitingOnOpponentPanel));
-        
-        //Only the Boards that are WaitingOnOpponentPanel will perform any action 
+
+        // Only the Boards that are WaitingOnOpponentPanel will perform any action 
         leftBoard.updateBoard(info);
         rightBoard.updateBoard(info);
     }
 
     public void updateBoardInfo(BoardUIInfo info) {
-        //System.out.println("" + info);
-        //System.out.println(leftBoard);
-        //System.out.println(rightBoard);
-        
         if (info.leftBoard) {
             leftBoard.updateBoard(info);
         }
@@ -72,7 +64,7 @@ public final class GamePanel extends javax.swing.JPanel {
             rightBoard.updateBoard(info);
         }
     }
-    
+
     private final BoardContainer leftBoard;
     private final BoardContainer rightBoard;
     private final TopBar topBar;

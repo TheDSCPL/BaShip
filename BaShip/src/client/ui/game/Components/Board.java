@@ -29,7 +29,10 @@ public final class Board extends SuperBoard {
 
         final int ACTUAL_BOARD_SIZE = BOARD_SIZE + 1;
 
-        setLayout(new GridLayout(ACTUAL_BOARD_SIZE, ACTUAL_BOARD_SIZE));
+        GridLayout gl = new GridLayout(ACTUAL_BOARD_SIZE, ACTUAL_BOARD_SIZE);
+        gl.setHgap(-1);
+        gl.setVgap(-1);
+        setLayout(gl);
 
         final Matrix<Block> grid = new Matrix<>(ACTUAL_BOARD_SIZE, ACTUAL_BOARD_SIZE, null);
         for (int i = 0; i < ACTUAL_BOARD_SIZE * ACTUAL_BOARD_SIZE; i++) {

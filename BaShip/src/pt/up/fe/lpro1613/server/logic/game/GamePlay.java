@@ -59,9 +59,9 @@ class GamePlay {
         refreshClientInfo();
     }
 
-    public void gameClosedByClient(Client client) {
+    public void clientClosedGame(Client client) {
         if (isPlayer(client)) {
-            finishGame("Game ended. Player " + UserS.usernameFromClient(client) + " closed game.", opponent(client));
+            finishGame("Game ended. Player " + UserS.usernameFromClient(client) + " closed game.", opponent(client), client);
         }
         else {
             // TODO: spectator?
@@ -70,7 +70,7 @@ class GamePlay {
 
     public void clientDisconnected(Client client) {
         if (isPlayer(client)) {
-            finishGame("Game ended. Player " + UserS.usernameFromClient(client) + " disconnected.", opponent(client));
+            finishGame("Game ended. Player " + UserS.usernameFromClient(client) + " disconnected.", opponent(client), null);
         }
         else {
             // TODO: spectator?
@@ -86,9 +86,9 @@ class GamePlay {
         ShipDB.saveShipPositions(gameID, 2, p2Board.getShips());
     }
 
-    private void finishGame(String message, Client winner) {
+    // TODO: XXX refactor use of this function
+    private void finishGame(String message, Client winner, Client dontSendMessageTo) {
         finished = true;
-        refreshClientInfo();
 
         // Set winner and finish time
         try {
@@ -104,8 +104,12 @@ class GamePlay {
 
         // Message players and spectators
         try {
-            player1.gameFinished(message);
-            player2.gameFinished(message);
+            if (dontSendMessageTo != player1) {
+                player1.gameFinished(message);
+            }
+            if (dontSendMessageTo != player2) {
+                player2.gameFinished(message);
+            }
 
             for (Client spectator : spectators) {
                 spectator.gameFinished(message);
@@ -151,7 +155,7 @@ class GamePlay {
             }
             catch (SQLException ex) {
                 Logger.getLogger(GamePlay.class.getName()).log(Level.SEVERE, null, ex);
-                finishGame("Could not access database to start game", null);
+                finishGame("Could not access database to start game", null, null);
                 return;
             }
         }
@@ -188,21 +192,22 @@ class GamePlay {
 
         // Send that shot to board
         boardForPlayer(opponent(player)).shootOnSquare(pos);
-        
+
         // Save shot on DB
         try {
             MoveDB.saveMove(gameID, player == player1 ? 1 : 2, moveIndex);
         }
         catch (SQLException ex) {
             Logger.getLogger(GamePlay.class.getName()).log(Level.SEVERE, "Could not fire shot", ex);
-            finishGame("Could not access database to fire shot", null);
+            finishGame("Could not access database to fire shot", null, null);
             return;
         }
         moveIndex++;
 
         // Check if player won
         if (boardForPlayer(opponent(player)).allShipsAreShot()) { // Player won
-            finishGame("Game finished: player " + UserS.usernameFromClient(player) + " won!", player);
+            refreshClientInfo();
+            finishGame("Game finished: player " + UserS.usernameFromClient(player) + " won!", player, null);
         }
         else { // If not, change turn
             p1Turn = !p1Turn;
@@ -236,10 +241,6 @@ class GamePlay {
     private void refreshClientInfo() {
         refreshClientInfoForClient(player1);
         refreshClientInfoForClient(player2);
-
-        System.out.println("Player 1 state: " + p1State);
-        System.out.println("Player 2 state: " + p2State);
-
         spectators.stream().forEach(this::refreshClientInfoForClient);
     }
 
@@ -253,16 +254,18 @@ class GamePlay {
 
         if (isPlayer(client)) {
             boolean opponentReady = stateForPlayer(opponent(client)) == PlayerState.Waiting;
-
+            boolean placingShips = stateForPlayer(client) == PlayerState.PlacingShips;
+            boolean playing = stateForPlayer(client) == PlayerState.Playing;
+            
             info = new GameUIInfo(
                     UserS.usernameFromClient(client),
                     UserS.usernameFromClient(opponent(client)),
                     gameHasStarted(),
                     opponentReady ? "Opponent is ready" : "Opponent is placing ships",
-                    stateForPlayer(client) == PlayerState.PlacingShips ? "You can place ships" : "Please wait for opponent",
-                    stateForPlayer(client) == PlayerState.PlacingShips && boardForPlayer(client).placedShipsAreValid(),
-                    client == player1 ? p1Turn : !p1Turn,
-                    client == player1 ? !p1Turn : p1Turn
+                    placingShips ? "You can place ships" : "Please wait for opponent",
+                    placingShips && boardForPlayer(client).placedShipsAreValid(),
+                    playing ? (client == player1 ? p1Turn : !p1Turn) : false,
+                    playing ? (client == player1 ? !p1Turn : p1Turn) : false
             );
         }
         else {

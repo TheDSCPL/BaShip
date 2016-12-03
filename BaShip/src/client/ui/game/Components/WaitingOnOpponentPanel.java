@@ -7,6 +7,8 @@ package client.ui.game.Components;
 
 import client.ClientMain;
 import client.logic.GameC;
+import javax.swing.BorderFactory;
+import static pt.up.fe.lpro1613.sharedlib.constants.UIK.BOARD_BORDER_COLOR_NORMAL;
 import pt.up.fe.lpro1613.sharedlib.exceptions.UserMessageException;
 import pt.up.fe.lpro1613.sharedlib.structs.GameUIInfo;
 import pt.up.fe.lpro1613.sharedlib.structs.UIInfo;
@@ -17,20 +19,20 @@ import pt.up.fe.lpro1613.sharedlib.structs.UIInfo;
  */
 public class WaitingOnOpponentPanel extends SuperBoard {
 
-    public WaitingOnOpponentPanel()
-    {
+    public WaitingOnOpponentPanel() {
         super(true);
         //Don't use this constructor. Only here so NetBeans can show the interface it Design
     }
-    
+
     /**
      * Creates new form WaitingOnOpponentPanel
      */
     public WaitingOnOpponentPanel(boolean left) {
         super(left);
         initComponents();
+        setBorder(BorderFactory.createLineBorder(BOARD_BORDER_COLOR_NORMAL));
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -40,19 +42,11 @@ public class WaitingOnOpponentPanel extends SuperBoard {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        jButton1.setText("Randomize placement");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
 
         jButton2.setText("Ready");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -77,9 +71,7 @@ public class WaitingOnOpponentPanel extends SuperBoard {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(47, 47, 47)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 37, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
@@ -95,39 +87,34 @@ public class WaitingOnOpponentPanel extends SuperBoard {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 107, Short.MAX_VALUE)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(42, 42, 42))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        //TODO: randomize
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         try {
             GameC.clickReadyButton();
-        } catch (UserMessageException ex) {
+        }
+        catch (UserMessageException ex) {
             ClientMain.showInfo(ex.getMessage());
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     @Override
     void update(UIInfo info) {
-        if(!(info instanceof GameUIInfo))
+        if (!(info instanceof GameUIInfo)) {
             return;
-        GameUIInfo gameInfo = (GameUIInfo)info;
-        System.err.println("GameInfo received");
+        }
+        
+        GameUIInfo gameInfo = (GameUIInfo) info;
         jLabel1.setText(gameInfo.waitMessageLine1);
         jLabel2.setText(gameInfo.waitMessageLine2);
         jButton2.setEnabled(gameInfo.showReadyButton);
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

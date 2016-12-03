@@ -13,12 +13,11 @@
                       <Component id="scrollableUsersTable" pref="539" max="32767" attributes="0"/>
                       <Group type="102" attributes="0">
                           <Component id="filterUserField" min="-2" pref="182" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="applyUserFilterButton" min="-2" pref="20" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="clearUserFilterButton" min="-2" pref="20" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Component id="startRandomGameBttn1" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="applyUserFilterButton" min="-2" pref="29" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="clearUserFilterButton" min="-2" pref="29" max="-2" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -31,11 +30,10 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="scrollableUsersTable" pref="483" max="32767" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="filterUserField" alignment="1" min="-2" max="-2" attributes="0"/>
-                      <Component id="applyUserFilterButton" alignment="1" min="-2" pref="20" max="-2" attributes="0"/>
-                      <Component id="clearUserFilterButton" alignment="1" min="-2" pref="20" max="-2" attributes="0"/>
-                      <Component id="startRandomGameBttn1" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="applyUserFilterButton" pref="0" max="32767" attributes="0"/>
+                      <Component id="clearUserFilterButton" pref="0" max="32767" attributes="0"/>
+                      <Component id="filterUserField" alignment="1" pref="29" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -90,14 +88,6 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="clearUserFilterButtonActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="startRandomGameBttn1">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Start random game"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="startRandomGameBttn1ActionPerformed"/>
-          </Events>
-        </Component>
       </SubComponents>
     </Container>
     <Container class="javax.swing.JLayeredPane" name="gamesTab">
@@ -108,19 +98,21 @@
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="scrollableGamesTable" alignment="1" pref="539" max="32767" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Component id="scrollableGamesTable" pref="539" max="32767" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                      </Group>
                       <Group type="102" attributes="0">
                           <Component id="filterGamesField" min="-2" pref="182" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="applyGamesFilterButton" min="-2" pref="20" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="clearGamesFilterButton" min="-2" pref="20" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="applyGamesFilterButton" min="-2" pref="29" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="clearGamesFilterButton" min="-2" pref="29" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="currentPlayingCheckbox" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -128,15 +120,13 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="scrollableGamesTable" pref="491" max="32767" attributes="0"/>
+                  <Component id="scrollableGamesTable" pref="489" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="filterGamesField" alignment="1" min="-2" max="-2" attributes="0"/>
-                          <Component id="applyGamesFilterButton" alignment="1" min="-2" pref="20" max="-2" attributes="0"/>
-                          <Component id="clearGamesFilterButton" alignment="1" min="-2" pref="20" max="-2" attributes="0"/>
-                      </Group>
-                      <Component id="currentPlayingCheckbox" min="-2" max="-2" attributes="0"/>
+                      <Component id="clearGamesFilterButton" pref="0" max="32767" attributes="0"/>
+                      <Component id="applyGamesFilterButton" pref="0" max="32767" attributes="0"/>
+                      <Component id="filterGamesField" pref="30" max="32767" attributes="0"/>
+                      <Component id="currentPlayingCheckbox" alignment="1" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>

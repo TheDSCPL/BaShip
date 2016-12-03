@@ -23,7 +23,8 @@ public class Matrix<T> {
      *
      * @param sx The width of the matrix.
      * @param sy The height of the matrix.
-     * @param initialValue The initial acceptAndSet for all positions of the Matrix.
+     * @param initialValue The initial acceptAndSet for all positions of the
+     * Matrix.
      */
     public Matrix(int sx, int sy, T initialValue) {
         this.list = new ArrayList<>();
@@ -40,12 +41,11 @@ public class Matrix<T> {
             list.add(l);
         }
     }
-    
-    private Matrix(List<List<T>> list)
-    {
+
+    private Matrix(List<List<T>> list) {
         this.list = list;
         this.sx = list.size();
-        this.sy = (sx  > 0) ? list.get(0).size() : 0;
+        this.sy = (sx > 0) ? list.get(0).size() : 0;
     }
 
     /**
@@ -59,51 +59,47 @@ public class Matrix<T> {
     }
 
     /**
-     * @return returns an 
+     * @return returns an
      */
-    public Matrix<T> getUnmodifiableMatrix()
-    {
+    public Matrix<T> getUnmodifiableMatrix() {
         List<List<T>> tempOuterList = new ArrayList<>();
-        for(List<T> tempInnerList : this.list)
+        for (List<T> tempInnerList : this.list) {
             tempOuterList.add(Collections.unmodifiableList(tempInnerList));
+        }
         return new Matrix<>(Collections.unmodifiableList(tempOuterList));
     }
-    
+
     /**
-     * Set the acceptAndSet present at this coordinate to the given acceptAndSet.
+     * Set the acceptAndSet present at this coordinate to the given
+     * acceptAndSet.
      *
      * @param c
      * @param value
      */
     public void set(Coord c, T value) {
-        set(c.x,c.y,value);
+        set(c.x, c.y, value);
     }
 
     /**
-     * Set the acceptAndSet present at this coordinate to the given acceptAndSet.
+     * Set the acceptAndSet present at this coordinate to the given
+     * acceptAndSet.
      *
      * @param x
      * @param y
      * @param value
      */
     public void set(int x, int y, T value) {
-        try {
-            list.get(x).set(y, value);
-        }
-        catch(UnsupportedOperationException ex)
-        {
-            System.err.println("Tried to change a unmodifiable Matrix");
-        }
+        list.get(x).set(y, value);
     }
-    
+
     /**
-     * Get the acceptAndSet present at this coordinate or the default acceptAndSet given if
- the coordinate is out of bounds.
+     * Get the acceptAndSet present at this coordinate or the default
+     * acceptAndSet given if the coordinate is out of bounds.
      *
      * @param c
      * @param defaultValue
-     * @return The acceptAndSet present at this coordinate or {@code defaultValue} if
-     * the coordinate is out of bounds
+     * @return The acceptAndSet present at this coordinate or
+     * {@code defaultValue} if the coordinate is out of bounds
      */
     public T getOr(Coord c, T defaultValue) {
         if (c.x >= 0 && c.y >= 0 && c.x < sx && c.y < sy) {
@@ -120,33 +116,21 @@ public class Matrix<T> {
      * @param value
      */
     public void setAll(T value) {
-        try {
-            setEach((c) -> value);
-        }
-        catch(UnsupportedOperationException ex)
-        {
-            System.err.println("Tried to change a unmodifiable Matrix");
-        }
+        setEach((c) -> value);
     }
 
     /**
      * Loop through all elements on this matrix, passing in the coordinate and
- the corresponding acceptAndSet at that position.
+     * the corresponding acceptAndSet at that position.
      *
      * @param f
      */
     public void forEach(MatrixValueConsumer<T> f) {
-        try {
-            for (int x = 0; x < sx; x++) {
-                for (int y = 0; y < sy; y++) {
-                    Coord c = new Coord(x, y);
-                    f.accept(c, get(c));
-                }
+        for (int x = 0; x < sx; x++) {
+            for (int y = 0; y < sy; y++) {
+                Coord c = new Coord(x, y);
+                f.accept(c, get(c));
             }
-        }
-        catch(UnsupportedOperationException ex)
-        {
-            System.err.println("Tried to change a unmodifiable Matrix");
         }
     }
 
@@ -156,23 +140,17 @@ public class Matrix<T> {
      * @param f
      */
     public void forEach(MatrixCoordConsumer<T> f) {
-        try {
-            for (int x = 0; x < sx; x++) {
-                for (int y = 0; y < sy; y++) {
-                    f.accept(new Coord(x, y));
-                }
+        for (int x = 0; x < sx; x++) {
+            for (int y = 0; y < sy; y++) {
+                f.accept(new Coord(x, y));
             }
-        }
-        catch(UnsupportedOperationException ex)
-        {
-            System.err.println("Tried to change a unmodifiable Matrix");
         }
     }
 
     /**
      * Loop through all elements on this matrix, passing in the coordinate and
-     * the corresponding acceptAndSet at that position and assigning to that position
-     * the new acceptAndSet returned by the functional interface.
+     * the corresponding acceptAndSet at that position and assigning to that
+     * position the new acceptAndSet returned by the functional interface.
      *
      * @param f
      */
@@ -207,6 +185,5 @@ public class Matrix<T> {
     public String toString() {
         return "Matrix{" + "sx=" + sx + ", sy=" + sy + ", list=" + list + '}';
     }
-    
-    
+
 }

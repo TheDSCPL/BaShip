@@ -209,8 +209,7 @@ class Board {
 
             // TODO: finish
         }
-
-        System.out.println("" + bi);
+        
         return bi;
     }
 

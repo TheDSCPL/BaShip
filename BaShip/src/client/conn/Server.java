@@ -48,10 +48,10 @@ public class Server implements Connection.Delegate {
         Packet response = null;
 
         switch (request.query) {
-            case S_ReceiveGameMessage: {
+            /*case S_ReceiveGameMessage: {
                 GameC.receiveGameMessage((Message) request.info);
                 break;
-            }
+            }*/
             case S_ReceiveGlobalMessage: {
                 GlobalChatC.receiveGlobalMessage((Message) request.info);
                 break;
@@ -186,7 +186,7 @@ public class Server implements Connection.Delegate {
         Packet response = sendAndReceiveWrapper(request);
 
         if (response.query == Query.SR_ErrorMessage) {
-            throw new UserMessageException("Could not register: " + ((ErrorMessage) response.info).message);
+            throw new UserMessageException("Could not get user list: " + ((ErrorMessage) response.info).message);
         }
         else {
             return (List<UserInfo>) response.info;
@@ -211,7 +211,7 @@ public class Server implements Connection.Delegate {
         Packet response = sendAndReceiveWrapper(request);
 
         if (response.query == Query.SR_ErrorMessage) {
-            throw new UserMessageException("Could not register: " + ((ErrorMessage) response.info).message);
+            throw new UserMessageException("Could not get game list: " + ((ErrorMessage) response.info).message);
         }
         else {
             return (List<GameInfo>) response.info;
@@ -291,7 +291,7 @@ public class Server implements Connection.Delegate {
      */
     public void clickLeftBoard(Coord pos) throws UserMessageException {
         Packet request = new Packet(Query.C_ClickLeftBoard, pos);
-        sendOnlyWrapper(request);
+        sendAndReceiveWrapper(request); // Response is an empty packet, just for confirmation
     }
     
     /**
@@ -302,7 +302,7 @@ public class Server implements Connection.Delegate {
      */
     public void clickRightBoard(Coord pos) throws UserMessageException {
         Packet request = new Packet(Query.C_ClickRightBoard, pos);
-        sendOnlyWrapper(request);
+        sendAndReceiveWrapper(request); // Response is an empty packet, just for confirmation
     }
 
     /**
@@ -313,7 +313,7 @@ public class Server implements Connection.Delegate {
      */
     public void clickReadyButton() throws UserMessageException {
         Packet request = new Packet(Query.C_ClickReadyButton);
-        sendOnlyWrapper(request);
+        sendAndReceiveWrapper(request); // Response is an empty packet, just for confirmation
     }
 
     /**
@@ -324,7 +324,7 @@ public class Server implements Connection.Delegate {
      */
     public void closeGame() throws UserMessageException {
         Packet request = new Packet(Query.C_CloseGame);
-        sendOnlyWrapper(request);
+        sendAndReceiveWrapper(request); // Response is an empty packet, just for confirmation
     }
 
     private Packet sendAndReceiveWrapper(Packet request) throws UserMessageException {

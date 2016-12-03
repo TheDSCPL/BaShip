@@ -94,10 +94,10 @@ public class LobbyTabbedPanel extends JPanel {
         clearUserFilterButton.addComponentListener(ClientMain.mainFrame.imageResizer);
         applyGamesFilterButton.addComponentListener(ClientMain.mainFrame.imageResizer);
         clearGamesFilterButton.addComponentListener(ClientMain.mainFrame.imageResizer);
-
-        updateUsersTableData(sortingColumn, maxEntriesPerTable);
+        
+        refreshList();
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -113,7 +113,6 @@ public class LobbyTabbedPanel extends JPanel {
         filterUserField = new javax.swing.JTextField();
         applyUserFilterButton = new javax.swing.JButton();
         clearUserFilterButton = new javax.swing.JButton();
-        startRandomGameBttn1 = new javax.swing.JButton();
         gamesTab = new javax.swing.JLayeredPane();
         scrollableGamesTable = new javax.swing.JScrollPane();
         gamesTable = new javax.swing.JTable();
@@ -153,18 +152,10 @@ public class LobbyTabbedPanel extends JPanel {
             }
         });
 
-        startRandomGameBttn1.setText("Start random game");
-        startRandomGameBttn1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                startRandomGameBttn1ActionPerformed(evt);
-            }
-        });
-
         usersTab.setLayer(scrollableUsersTable, javax.swing.JLayeredPane.DEFAULT_LAYER);
         usersTab.setLayer(filterUserField, javax.swing.JLayeredPane.DEFAULT_LAYER);
         usersTab.setLayer(applyUserFilterButton, javax.swing.JLayeredPane.DEFAULT_LAYER);
         usersTab.setLayer(clearUserFilterButton, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        usersTab.setLayer(startRandomGameBttn1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout usersTabLayout = new javax.swing.GroupLayout(usersTab);
         usersTab.setLayout(usersTabLayout);
@@ -176,12 +167,11 @@ public class LobbyTabbedPanel extends JPanel {
                     .addComponent(scrollableUsersTable, javax.swing.GroupLayout.DEFAULT_SIZE, 539, Short.MAX_VALUE)
                     .addGroup(usersTabLayout.createSequentialGroup()
                         .addComponent(filterUserField, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(applyUserFilterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(clearUserFilterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(startRandomGameBttn1)))
+                        .addGap(18, 18, 18)
+                        .addComponent(applyUserFilterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(clearUserFilterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         usersTabLayout.setVerticalGroup(
@@ -190,11 +180,10 @@ public class LobbyTabbedPanel extends JPanel {
                 .addContainerGap()
                 .addComponent(scrollableUsersTable, javax.swing.GroupLayout.DEFAULT_SIZE, 483, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(usersTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(filterUserField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(applyUserFilterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(clearUserFilterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(startRandomGameBttn1))
+                .addGroup(usersTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(applyUserFilterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(clearUserFilterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(filterUserField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -238,30 +227,30 @@ public class LobbyTabbedPanel extends JPanel {
             .addGroup(gamesTabLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(gamesTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(scrollableGamesTable, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 539, Short.MAX_VALUE)
+                    .addGroup(gamesTabLayout.createSequentialGroup()
+                        .addComponent(scrollableGamesTable, javax.swing.GroupLayout.DEFAULT_SIZE, 539, Short.MAX_VALUE)
+                        .addContainerGap())
                     .addGroup(gamesTabLayout.createSequentialGroup()
                         .addComponent(filterGamesField, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(applyGamesFilterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(clearGamesFilterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(18, 18, 18)
+                        .addComponent(applyGamesFilterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(clearGamesFilterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(currentPlayingCheckbox)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         gamesTabLayout.setVerticalGroup(
             gamesTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(gamesTabLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(scrollableGamesTable, javax.swing.GroupLayout.DEFAULT_SIZE, 491, Short.MAX_VALUE)
+                .addComponent(scrollableGamesTable, javax.swing.GroupLayout.DEFAULT_SIZE, 489, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(gamesTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(gamesTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(filterGamesField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(applyGamesFilterButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(clearGamesFilterButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(currentPlayingCheckbox))
+                    .addComponent(clearGamesFilterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(applyGamesFilterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(filterGamesField, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                    .addComponent(currentPlayingCheckbox, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -328,6 +317,12 @@ public class LobbyTabbedPanel extends JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    void refreshList() {
+        // TODO: finish
+        updateUsersTableData(sortingColumn, maxEntriesPerTable);
+        updateGamesTableData(0, maxEntriesPerTable);
+    }
+
     private void filterUserFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterUserFieldActionPerformed
         applyUserFilterButtonActionPerformed(evt);
     }//GEN-LAST:event_filterUserFieldActionPerformed
@@ -349,16 +344,6 @@ public class LobbyTabbedPanel extends JPanel {
         catch (UserMessageException ex) {
             ClientMain.showError(ex.getMessage());
         }
-        catch (Exception ignored) {
-            ignored.printStackTrace();
-            try {
-                System.err.println("Exception: " + ignored.getMessage());
-                UserC.logout();
-            }
-            catch (UserMessageException ex) {
-                Logger.getLogger(LobbyTabbedPanel.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
     }
 
     private void updateGamesTableData(int columnToSortWith, int maxUsers) {
@@ -366,7 +351,7 @@ public class LobbyTabbedPanel extends JPanel {
             throw new IndexOutOfBoundsException("Invalid column index to sort");
         }
         try {
-            //TODO: checkbox hardcoded to false
+            // TODO: checkbox hardcoded to false
             List<GameInfo> gamesList = GameC.getGameList(false, filterGamesField.getText(), maxUsers);
             while (gamesTableModel.getRowCount() > 0) {
                 gamesTableModel.removeRow(gamesTableModel.getRowCount() - 1);
@@ -375,21 +360,14 @@ public class LobbyTabbedPanel extends JPanel {
             for (int i = 0; i < gamesList.size(); i++) {
                 GameInfo gameInfo = gamesList.get(i);
                 gamesTableModel.addRow(new Object[]{gameInfo.player1Username + " VS " + gameInfo.player2Username,
-                                                    gameInfo.endDate == null ? ("Playing: " + dF.format(gameInfo.startDate)) : "Played on: " + dF.format(gameInfo.endDate)});
+                                                    gameInfo.state != GameInfo.State.Finished ? ("Playing: " + dF.format(gameInfo.startDate)) : "Played on: " + dF.format(gameInfo.endDate)});
             }
         }
         catch (UserMessageException ex) {
             ClientMain.showError(ex.getMessage());
         }
-        catch (Exception e) {
-            e.printStackTrace();
-            try {
-                System.err.println("Exception: " + e.getMessage());
-                UserC.logout();
-            }
-            catch (UserMessageException ex) {
-                Logger.getLogger(LobbyTabbedPanel.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        catch (Exception ignored) {
+            // TODO: code above has bugs and crashes
         }
     }
 
@@ -434,17 +412,7 @@ public class LobbyTabbedPanel extends JPanel {
         }
     }//GEN-LAST:event_globalChatSendButtonActionPerformed
 
-    private void startRandomGameBttn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startRandomGameBttn1ActionPerformed
-        try {
-            GameC.startRandomGame();
-        }
-        catch (UserMessageException ex) {
-            Logger.getLogger(LobbyTabbedPanel.class.getName()).log(Level.SEVERE, null, ex);
-            ClientMain.showError(ex.getMessage());
-        }
-    }//GEN-LAST:event_startRandomGameBttn1ActionPerformed
-
-    void receiveGlobalMessage(Message m) {
+    public void receiveGlobalMessage(Message m) {
         globalChatTextArea.setText(globalChatTextArea.getText() + "[" + m.timestamp + "] " + m.username + "\n" + m.text + "\n\n");
         globalChatTextArea.setCaretPosition(globalChatTextArea.getDocument().getLength()); // Scroll to bottom
     }
@@ -467,7 +435,6 @@ public class LobbyTabbedPanel extends JPanel {
     private javax.swing.JScrollPane scrollableGamesTable;
     private javax.swing.JScrollPane scrollableGlobalChat;
     private javax.swing.JScrollPane scrollableUsersTable;
-    private javax.swing.JButton startRandomGameBttn1;
     private javax.swing.JLayeredPane usersTab;
     private javax.swing.JTable usersTable;
     // End of variables declaration//GEN-END:variables

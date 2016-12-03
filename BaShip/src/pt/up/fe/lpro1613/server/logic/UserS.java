@@ -25,6 +25,7 @@ public class UserS {
 
     private static final Map<Long, Client> loginsID = new ConcurrentHashMap<>();
     private static final Map<Client, Long> loginsClient = new ConcurrentHashMap<>();
+    private static final Map<Client, String> usernamesClient = new ConcurrentHashMap<>();
 
     /**
      * Register the user and, if that is successful (no exception is thrown),
@@ -40,6 +41,7 @@ public class UserS {
         UserInfo user = UserDB.register(username, passwordHash);
         loginsID.put(user.id, client);
         loginsClient.put(client, user.id);
+        usernamesClient.put(client, username);
         return user;
     }
 
@@ -66,6 +68,7 @@ public class UserS {
             else {
                 loginsID.put(id, client);
                 loginsClient.put(client, id);
+                usernamesClient.put(client, username);
                 return new UserInfo(id, username);
             }
         }
@@ -82,6 +85,7 @@ public class UserS {
      */
     public static void logout(Client client) {
         if (isClientLoggedIn(client)) {
+            usernamesClient.remove(client);
             loginsID.remove(loginsClient.remove(client));
         }
     }
@@ -160,7 +164,7 @@ public class UserS {
      * the client is logged-in. If not, returns null.
      */
     public static String usernameFromClient(Client c) {
-        try {
+        /*try {
             Long id = idFromClient(c);
             if (id != null) {
                 return UserDB.getUsernameFromID(id);
@@ -172,7 +176,8 @@ public class UserS {
         catch (SQLException ex) {
             Logger.getLogger(UserS.class.getName()).log(Level.SEVERE, null, ex);
             return null;
-        }
+        }*/
+        return usernamesClient.get(c);
     }
 
     static void distributeGlobalMessage(Message msg) {

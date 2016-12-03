@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 import pt.up.fe.lpro1613.server.conn.Client;
 import pt.up.fe.lpro1613.server.conn.ServerThread;
+import pt.up.fe.lpro1613.server.database.Database;
 import pt.up.fe.lpro1613.server.other.ConsoleThread;
 import pt.up.fe.lpro1613.server.other.PrefsKey;
 import pt.up.fe.lpro1613.sharedlib.utils.Preferences;
@@ -17,6 +18,7 @@ public class ServerMain {
     public static final Set<Client> clients = new HashSet<>();
     
     public static void main(String args[]) throws SQLException {
+        Database.initialize();
         server.start();
         console.start();
     }
