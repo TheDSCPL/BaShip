@@ -5,7 +5,7 @@ CREATE TABLE users (
 );
 
 CREATE TABLE games (
-    gid BIGSERIAL PRIMARY KEY,
+    gmid BIGSERIAL PRIMARY KEY,
     startdate TIMESTAMP,
     enddate TIMESTAMP,
     player1 INTEGER NOT NULL REFERENCES users,
@@ -47,3 +47,26 @@ CREATE TABLE globalchat (
     txt TEXT NOT NULL,
     UNIQUE(uid, timestamp)
 );
+
+CREATE VIEW user_ranks AS SELECT users.uid, 0 AS rank FROM users;
+
+CREATE VIEW user_stats AS SELECT t1.uid,
+    t2.ngames,
+    t1.nwins,
+    t3.nshots
+   FROM ( SELECT users.uid,
+            count(DISTINCT games.gmid) AS nwins
+           FROM users
+             LEFT JOIN games ON games.winner = users.uid
+          GROUP BY users.uid) t1
+     JOIN ( SELECT users.uid,
+            count(DISTINCT games.gmid) AS ngames
+           FROM users
+             LEFT JOIN games ON users.uid = games.player1 OR users.uid = games.player2
+          GROUP BY users.uid) t2 USING (uid)
+     JOIN ( SELECT users.uid,
+            count(DISTINCT moves.moveid) AS nshots
+           FROM users
+             LEFT JOIN games ON users.uid = games.player1 OR users.uid = games.player2
+             LEFT JOIN moves USING (gmid)
+          GROUP BY users.uid) t3 USING (uid);
