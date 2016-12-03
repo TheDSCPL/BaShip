@@ -42,16 +42,14 @@ public final class Board extends javax.swing.JPanel {
             {
                 int offset = x - (left ? 1 : 0);
                 String label = (offset < 0 || offset >= BOARD_SIZE) ? (" ") : ("" + (char) ('A' + offset));    //if the coordinates of this iteration are the coordinates of the empty corner, create it. otherwise create another label with the next char sequence
-                block = new Block(blockCoord, label);
-            }
-            else if (x == (left ? 0 : BOARD_SIZE)) //Rows labels
+                block = new Block(blockCoord, left, label);
+            } else if (x == (left ? 0 : BOARD_SIZE)) //Rows labels
             {
                 String label = (y == 0) ? (" ") : ("" + y);    //if the coordinates of this iteration are the coordinates of the empty corner, create it. otherwise create another label with the next char sequence
-                block = new Block(blockCoord, label);
-            }
-            else //clickable Block
+                block = new Block(blockCoord, left, label);
+            } else //clickable Block
             {
-                block = new Block(blockCoord);
+                block = new Block(blockCoord, left);
             }
             add(block); //puts the Block in the grid
             grid.set(gridCoord, block);

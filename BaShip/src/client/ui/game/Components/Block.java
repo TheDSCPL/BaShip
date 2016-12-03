@@ -6,6 +6,7 @@
 package client.ui.game.Components;
 
 import client.ClientMain;
+import client.logic.GameC;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -21,20 +22,23 @@ public final class Block extends javax.swing.JPanel {
 
     /**
      * Creates new form Block
-     * @param coordinates where this block is in the board 
+     * @param coordinates where this block is in the board
+     * @param left true if this block if on a left board
      */
-    public Block(Coord coordinates) {
-        this(coordinates,null);
+    public Block(Coord coordinates, boolean left) {
+        this(coordinates, left, null);
     }
     
     /**
      * Creates new form Block
      * @param coordinates where this block is in the board
      * @param text Text to be set. If text is not null, no icon can be set.
+     * @param left true if this block if on a left board
      */
-    public Block(Coord coordinates, String text) {
+    public Block(Coord coordinates, boolean left, String text) {
         initComponents();
         this.coordinates = coordinates;
+        this.left = left;
         sanityCheck();
         
         this.text = text;
@@ -51,6 +55,8 @@ public final class Block extends javax.swing.JPanel {
         }
     }
     
+    private final boolean left;
+    
     /**
      * not null if this Block is a line/row label
      */
@@ -66,6 +72,13 @@ public final class Block extends javax.swing.JPanel {
     
     private void sanityCheck()
     {
+        for(Icon i : ICONS)
+            if(i == null)
+            {
+                ClientMain.showError("Couldn't open an Icon resource");
+                throw new Error("Couldn't open an Icon resource");
+            }
+        
         boolean containsLabel = false;
         for(Component _c : getComponents())
         {
@@ -92,6 +105,7 @@ public final class Block extends javax.swing.JPanel {
 
         @Override
         public void mousePressed(MouseEvent e) {
+            GameC.clickBoardCoordinate(left, Block.this.coordinates);
             //setIcon(RED_CROSS_ICON);
         }
 
@@ -113,10 +127,6 @@ public final class Block extends javax.swing.JPanel {
             setColor(previousColor);
         }
     };
-    
-    private static final Icon RED_CROSS_ICON = new ImageIcon(Block.class.getResource("/client/ui/Images/redCross.png"));
-    private static final Icon BLUE_DIAMOND_ICON = new ImageIcon(Block.class.getResource("/client/ui/Images/blueDiamond.png"));
-    private static final Icon GREY_CIRCLE_ICON = new ImageIcon(Block.class.getResource("/client/ui/Images/greyCircle.png"));
     
     private boolean iconIsResizable = false;
     
@@ -143,6 +153,10 @@ public final class Block extends javax.swing.JPanel {
             case RedSquare:
                 setIcon(null);
                 setColor(RED_BLOCK_COLOR);
+            case RedCross:
+                setIcon(RED_CROSS_ICON);
+                setColor(null);
+                break;
             case BlueDiamond:
                 setIcon(BLUE_DIAMOND_ICON);
                 setColor(null);
@@ -151,9 +165,9 @@ public final class Block extends javax.swing.JPanel {
                 setIcon(GREY_CIRCLE_ICON);
                 setColor(null);
                 break;
-            case RedCross:
+            case GraySquareRedCross:
                 setIcon(RED_CROSS_ICON);
-                
+                setColor(GREY_BLOCK_COLOR);
                 break;
         }
     }

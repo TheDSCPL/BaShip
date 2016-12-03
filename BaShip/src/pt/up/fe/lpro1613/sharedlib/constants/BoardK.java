@@ -1,7 +1,10 @@
 package pt.up.fe.lpro1613.sharedlib.constants;
 
+import client.ui.game.Components.Block;
 import java.awt.Color;
 import java.util.*;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 
 public class BoardK {
 
@@ -29,6 +32,11 @@ public class BoardK {
     //public static final Color GREY_BLOCK_COLOR = new Color(143,143,143);
     public static final Color GREY_BLOCK_COLOR = new Color(202,202,202);
     public static final Color RED_BLOCK_COLOR = new Color(255,0,0);
+    
+    public static final Icon RED_CROSS_ICON = new ImageIcon(Block.class.getResource("/client/ui/Images/redCross.png"));
+    public static final Icon BLUE_DIAMOND_ICON = new ImageIcon(Block.class.getResource("/client/ui/Images/blueDiamond.png"));
+    public static final Icon GREY_CIRCLE_ICON = new ImageIcon(Block.class.getResource("/client/ui/Images/greyCircle.png"));
+    public static final Icon[] ICONS = new Icon[] { RED_CROSS_ICON, BLUE_DIAMOND_ICON, GREY_CIRCLE_ICON };
     
     /**
      * Total number of ships (for one player only) in a game of Battleship
