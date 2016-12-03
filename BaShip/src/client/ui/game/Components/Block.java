@@ -6,13 +6,10 @@
 package client.ui.game.Components;
 
 import client.ClientMain;
-import java.awt.Color;
-import java.awt.event.ComponentListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.net.URL;
+import java.awt.*;
+import java.awt.event.*;
 import javax.swing.*;
-import pt.up.fe.lpro1613.sharedlib.utils.Coord;
+import pt.up.fe.lpro1613.sharedlib.utils.*;
 
 /**
  *
@@ -22,32 +19,76 @@ public final class Block extends javax.swing.JPanel {
 
     /**
      * Creates new form Block
-     * @param coordinates where this block is in the board
+     * @param coordinates where this block is in the board 
      */
     public Block(Coord coordinates) {
+        this(coordinates,null);
+    }
+    
+    /**
+     * Creates new form Block
+     * @param coordinates where this block is in the board
+     * @param text Text to be set. If text is not null, no icon can be set.
+     */
+    public Block(Coord coordinates, String text) {
         initComponents();
         this.coordinates = coordinates;
-        addMouseListener(clickListener);
-        jLabel1.addMouseListener(clickListener);
+        sanityCheck();
+        
+        this.text = text;
+        if(text != null)    //label
+        {
+            jLabel1.setText(text);
+        }
+        else    //button
+        {
+            addMouseListener(clickListener);
+            jLabel1.addMouseListener(clickListener);
+            setBorder(BorderFactory.createLineBorder(new Color(0, 0, 0)));
+        }
+    }
+    
+    /**
+     * not null if this Block is a line/row label
+     */
+    public final String text;
+    
+    private void sanityCheck()
+    {
+        boolean containsLabel = false;
+        for(Component _c : getComponents())
+        {
+            if(_c == jLabel1)
+            {
+                containsLabel = true;
+                break;
+            }
+        }
+        if(!containsLabel)
+            add(jLabel1);
+        jLabel1.setVisible(true);
+        jLabel1.setOpaque(true);
+        jLabel1.setHorizontalAlignment(SwingConstants.CENTER);
+        jLabel1.setVerticalAlignment(SwingConstants.CENTER);
     }
     
     private final MouseListener clickListener = new MouseListener() {
         private boolean prev = false;
         @Override
         public void mouseClicked(MouseEvent e) {
-            setIcon(prev ? redCrossIcon : null);
-            prev = !prev;
-            System.out.println("clicked");
+            
         }
 
         @Override
         public void mousePressed(MouseEvent e) {
-            System.out.println("pressed");
+            /*setIcon(prev ? redCrossIcon : null);
+            prev = !prev;*/
+            setIcon(redCrossIcon);
         }
 
         @Override
         public void mouseReleased(MouseEvent e) {
-            System.out.println("released");
+            //System.out.println("released");
         }
 
         @Override
@@ -67,36 +108,35 @@ public final class Block extends javax.swing.JPanel {
     public static final Icon blueDiamondIcon = new ImageIcon(Block.class.getResource("/client/ui/Images/blueDiamond.png"));
     public static final Icon greyCircleIcon = new ImageIcon(Block.class.getResource("/client/ui/Images/greyCircle.png"));
     
-    private boolean initialized = false;
+    private boolean resizable = false;
     
-    private void initializeAfterNetbeansRender()
+    private void setImageResizer()
     {
-        if(initialized)
+        if(resizable)
             return;
-        initialized = true;
+        resizable = true;
 
         ComponentListener cl = ClientMain.mainFrame.imageResizer;
-        
-        ComponentListener[] listeners = jLabel1.getComponentListeners().clone();
-        for(ComponentListener _cl : listeners)
-            if(_cl == cl)
-            {
-                jLabel1.removeComponentListener(_cl);
-                break;
-            }
         
         jLabel1.addComponentListener(cl);
     }
     
     public void setIcon(Icon icon)
     {
-        //initializeAfterNetbeansRender();
+        if(text != null)
+            return;
         
-        removeAll();
+        setImageResizer();
+        
+        jLabel1.removeAll();
         
         jLabel1.setIcon(icon);
         jLabel1.setHorizontalAlignment(SwingConstants.CENTER);
         jLabel1.setVerticalAlignment(SwingConstants.CENTER);
+        
+        //To trigger the image resizing
+        jLabel1.setVisible(false);
+        jLabel1.setVisible(true);
     }
     
     /**
@@ -131,8 +171,6 @@ public final class Block extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-
-        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

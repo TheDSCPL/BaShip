@@ -17,21 +17,42 @@ import pt.up.fe.lpro1613.sharedlib.utils.Matrix;
  */
 public final class Board extends javax.swing.JPanel {
 
-    public Board() {
+    public Board(boolean left) {
         initComponents();
-        setLayout(new GridLayout(BOARD_SIZE,BOARD_SIZE));
         
-        final Matrix<Block> grid = new Matrix<>(BOARD_SIZE,BOARD_SIZE,null);
-        for(int i = 0; i < BOARD_SIZE*BOARD_SIZE ; i++){
-            Coord coord = new Coord(i%BOARD_SIZE,(int)i/BOARD_SIZE);
-            Block block = new Block(coord);
+        final int ACTUAL_BOARD_SIZE = BOARD_SIZE + 1;
+        
+        setLayout(new GridLayout(ACTUAL_BOARD_SIZE,ACTUAL_BOARD_SIZE));
+        
+        final Matrix<Block> grid = new Matrix<>(ACTUAL_BOARD_SIZE,ACTUAL_BOARD_SIZE,null);
+        for(int i = 0; i < ACTUAL_BOARD_SIZE*ACTUAL_BOARD_SIZE ; i++){
+            final int x = i%ACTUAL_BOARD_SIZE;
+            final int y = (int) (i/ACTUAL_BOARD_SIZE);
+            Coord coord = new Coord(x,y);
+            Block block;
+            if(y == 0)  //Columns labels
+            {
+                int offset = x - (left ? 1 : 0);
+                String label = (offset < 0 || offset >= BOARD_SIZE) ? (" ") : ("" + (char)('A' + offset) );    //if the coordinates of this iteration are the coordinates of the empty corner, create it. otherwise create another label with the next char sequence
+                block = new Block(coord,label);
+            }
+            else if(x == (left ? 0 : BOARD_SIZE))   //Rows labels
+            {
+                String label = (y == 0) ? (" ") : ("" + y );    //if the coordinates of this iteration are the coordinates of the empty corner, create it. otherwise create another label with the next char sequence
+                block = new Block(coord,label);
+            }
+            else    //clickable Block
+                block = new Block(coord);
             add(block); //puts the Block in the grid
             grid.set(coord,block);
         }
         this.grid = grid.getUnmodifiableMatrix();
+        
+        this.left = left;
     }
 
-    final Matrix<Block> grid;
+    public final Matrix<Block> grid;
+    private final boolean left;
     
     /**
      * This method is called from within the constructor to initialize the form.
