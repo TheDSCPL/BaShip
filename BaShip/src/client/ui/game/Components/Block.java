@@ -100,7 +100,6 @@ public final class Block extends javax.swing.JPanel {
     }
     
     private final MouseListener clickListener = new MouseListener() {
-        private Color previousColor;
         @Override
         public void mouseClicked(MouseEvent e) {
             
@@ -110,6 +109,7 @@ public final class Block extends javax.swing.JPanel {
         public void mousePressed(MouseEvent e) {
             try {
                 GameC.clickBoardCoordinate(left, Block.this.coordinates);
+                System.out.println("left: " + left);
                 //setIcon(RED_CROSS_ICON);
             }
             catch (UserMessageException ex) {
@@ -125,14 +125,11 @@ public final class Block extends javax.swing.JPanel {
         @Override
         public void mouseEntered(MouseEvent e) {
             //System.out.println("entered");
-            previousColor = jLabel1.getBackground();
-            setColor(HOVER_OVER_BLOCK_COLOR);
         }
 
         @Override
         public void mouseExited(MouseEvent e) {
             //System.out.println("exited");
-            setColor(previousColor);
         }
     };
     
@@ -150,6 +147,8 @@ public final class Block extends javax.swing.JPanel {
     }
     
     public void setSquareFill(SquareFill sf) {
+        if(sf != SquareFill.Empty)
+            System.err.println("left: " + left + " | squareFill: " + sf.name());
         switch (sf) {
             case Empty:
                 setIcon(null);
@@ -158,9 +157,11 @@ public final class Block extends javax.swing.JPanel {
             case GraySquare:
                 setIcon(null);
                 setColor(GREY_BLOCK_COLOR);
+                break;
             case RedSquare:
                 setIcon(null);
                 setColor(RED_BLOCK_COLOR);
+                break;
             case RedCross:
                 setIcon(RED_CROSS_ICON);
                 setColor(null);
@@ -196,6 +197,8 @@ public final class Block extends javax.swing.JPanel {
         //To trigger the image resizing
         jLabel1.setVisible(false);
         jLabel1.setVisible(true);
+        
+        jLabel1.revalidate();
     }
     
     /**
