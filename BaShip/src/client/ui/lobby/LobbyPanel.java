@@ -9,6 +9,7 @@ import client.ClientMain;
 import client.logic.UserC;
 import client.ui.LoginPanel;
 import pt.up.fe.lpro1613.sharedlib.exceptions.UserMessageException;
+import pt.up.fe.lpro1613.sharedlib.structs.Message;
 
 /**
  *
@@ -45,7 +46,7 @@ public class LobbyPanel extends javax.swing.JPanel {
         topBar = new javax.swing.JPanel();
         logoutButton = new javax.swing.JButton();
         loggedInAsLabel = new javax.swing.JLabel();
-        lobbyTabbedPanel1 = new client.ui.lobby.LobbyTabbedPanel();
+        lobbyTabbedPanel = new client.ui.lobby.LobbyTabbedPanel();
 
         jLabel1.setText("jLabel1");
 
@@ -115,7 +116,7 @@ public class LobbyPanel extends javax.swing.JPanel {
                         .addComponent(topBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(lobbyTabbedPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(lobbyTabbedPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -124,7 +125,7 @@ public class LobbyPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(topBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lobbyTabbedPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lobbyTabbedPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -139,11 +140,14 @@ public class LobbyPanel extends javax.swing.JPanel {
         ClientMain.mainFrame.changeToPanel(new LoginPanel());
     }//GEN-LAST:event_logoutButtonActionPerformed
 
+    public void receiveGlobalMessage(Message message) {
+        lobbyTabbedPanel.receiveGlobalMessage(message);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLayeredPane lobby1;
-    private client.ui.lobby.LobbyTabbedPanel lobbyTabbedPanel1;
+    private client.ui.lobby.LobbyTabbedPanel lobbyTabbedPanel;
     private javax.swing.JLabel loggedInAsLabel;
     private javax.swing.JButton logoutButton;
     private javax.swing.JPanel topBar;

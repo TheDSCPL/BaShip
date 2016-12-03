@@ -7,7 +7,8 @@ package client.ui.game;
 
 import client.ui.game.Components.*;
 import java.awt.*;
-import javax.swing.JLayeredPane;
+import pt.up.fe.lpro1613.sharedlib.structs.BoardUIInfo;
+import pt.up.fe.lpro1613.sharedlib.structs.GameUIInfo;
 
 public final class GamePanel extends javax.swing.JPanel {
 
@@ -40,6 +41,22 @@ public final class GamePanel extends javax.swing.JPanel {
         setLayout(new java.awt.BorderLayout());
     }// </editor-fold>//GEN-END:initComponents
 
+    public void updateGameScreen(GameUIInfo info) {
+        System.out.println("received info:" + info);
+        // TODO: LUIS
+    }
+
+    public void updateBoardInfo(BoardUIInfo info) {
+        if (info.leftBoard) {
+            leftBoard.updateBoard(info);
+        }
+        else {
+            rightBoard.updateBoard(info);
+        }
+    }
+    
+    private BoardContainer leftBoard;
+    private BoardContainer rightBoard;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables

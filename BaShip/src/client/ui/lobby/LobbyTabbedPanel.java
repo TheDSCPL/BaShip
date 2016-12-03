@@ -17,6 +17,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import pt.up.fe.lpro1613.sharedlib.exceptions.UserMessageException;
 import pt.up.fe.lpro1613.sharedlib.structs.GameInfo;
+import pt.up.fe.lpro1613.sharedlib.structs.Message;
 import pt.up.fe.lpro1613.sharedlib.structs.UserInfo;
 
 /**
@@ -81,9 +82,8 @@ public class LobbyTabbedPanel extends JPanel {
         addNewTab(usersTab, "Players");
         addNewTab(gamesTab, "Games");
         addNewTab(globalChatTab, "Global Chat");
-        
-        if (!UserC.isLoggedIn())
-        {
+
+        if (!UserC.isLoggedIn()) {
             return;
         }
 
@@ -113,6 +113,7 @@ public class LobbyTabbedPanel extends JPanel {
         filterUserField = new javax.swing.JTextField();
         applyUserFilterButton = new javax.swing.JButton();
         clearUserFilterButton = new javax.swing.JButton();
+        startRandomGameBttn1 = new javax.swing.JButton();
         gamesTab = new javax.swing.JLayeredPane();
         scrollableGamesTable = new javax.swing.JScrollPane();
         gamesTable = new javax.swing.JTable();
@@ -152,10 +153,18 @@ public class LobbyTabbedPanel extends JPanel {
             }
         });
 
+        startRandomGameBttn1.setText("Start random game");
+        startRandomGameBttn1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                startRandomGameBttn1ActionPerformed(evt);
+            }
+        });
+
         usersTab.setLayer(scrollableUsersTable, javax.swing.JLayeredPane.DEFAULT_LAYER);
         usersTab.setLayer(filterUserField, javax.swing.JLayeredPane.DEFAULT_LAYER);
         usersTab.setLayer(applyUserFilterButton, javax.swing.JLayeredPane.DEFAULT_LAYER);
         usersTab.setLayer(clearUserFilterButton, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        usersTab.setLayer(startRandomGameBttn1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout usersTabLayout = new javax.swing.GroupLayout(usersTab);
         usersTab.setLayout(usersTabLayout);
@@ -171,19 +180,21 @@ public class LobbyTabbedPanel extends JPanel {
                         .addComponent(applyUserFilterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(clearUserFilterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(startRandomGameBttn1)))
                 .addContainerGap())
         );
         usersTabLayout.setVerticalGroup(
             usersTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(usersTabLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(scrollableUsersTable, javax.swing.GroupLayout.DEFAULT_SIZE, 486, Short.MAX_VALUE)
+                .addComponent(scrollableUsersTable, javax.swing.GroupLayout.DEFAULT_SIZE, 483, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(usersTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(filterUserField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(applyUserFilterButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(clearUserFilterButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(usersTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(filterUserField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(applyUserFilterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(clearUserFilterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(startRandomGameBttn1))
                 .addContainerGap())
         );
 
@@ -423,6 +434,20 @@ public class LobbyTabbedPanel extends JPanel {
         }
     }//GEN-LAST:event_globalChatSendButtonActionPerformed
 
+    private void startRandomGameBttn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startRandomGameBttn1ActionPerformed
+        try {
+            GameC.startRandomGame();
+        }
+        catch (UserMessageException ex) {
+            Logger.getLogger(LobbyTabbedPanel.class.getName()).log(Level.SEVERE, null, ex);
+            ClientMain.showError(ex.getMessage());
+        }
+    }//GEN-LAST:event_startRandomGameBttn1ActionPerformed
+
+    void receiveGlobalMessage(Message m) {
+        globalChatTextArea.setText(globalChatTextArea.getText() + "[" + m.timestamp + "] " + m.username + "\n" + m.text + "\n\n");
+        globalChatTextArea.setCaretPosition(globalChatTextArea.getDocument().getLength()); // Scroll to bottom
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton applyGamesFilterButton;
@@ -442,7 +467,9 @@ public class LobbyTabbedPanel extends JPanel {
     private javax.swing.JScrollPane scrollableGamesTable;
     private javax.swing.JScrollPane scrollableGlobalChat;
     private javax.swing.JScrollPane scrollableUsersTable;
+    private javax.swing.JButton startRandomGameBttn1;
     private javax.swing.JLayeredPane usersTab;
     private javax.swing.JTable usersTable;
     // End of variables declaration//GEN-END:variables
+
 }

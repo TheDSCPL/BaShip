@@ -124,7 +124,7 @@ public class GameS {
             playersWaitingForPlayer.put(targetClient, clientWaiting);
         }
 
-        updateGameScreenForClient(targetClient);
+        updateGameScreenForClient(clientWaiting);
     }
 
     /**

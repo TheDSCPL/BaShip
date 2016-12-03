@@ -9,6 +9,7 @@ import client.ClientMain;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import pt.up.fe.lpro1613.sharedlib.structs.BoardUIInfo.SquareFill;
 import pt.up.fe.lpro1613.sharedlib.utils.*;
 
 /**
@@ -114,9 +115,9 @@ public final class Block extends javax.swing.JPanel {
         }
     };
     
-    public static final Icon RED_CROSS_ICON = new ImageIcon(Block.class.getResource("/client/ui/Images/redCross.png"));
-    public static final Icon BLUE_DIAMOND_ICON = new ImageIcon(Block.class.getResource("/client/ui/Images/blueDiamond.png"));
-    public static final Icon GREY_CIRCLE_ICON = new ImageIcon(Block.class.getResource("/client/ui/Images/greyCircle.png"));
+    private static final Icon RED_CROSS_ICON = new ImageIcon(Block.class.getResource("/client/ui/Images/redCross.png"));
+    private static final Icon BLUE_DIAMOND_ICON = new ImageIcon(Block.class.getResource("/client/ui/Images/blueDiamond.png"));
+    private static final Icon GREY_CIRCLE_ICON = new ImageIcon(Block.class.getResource("/client/ui/Images/greyCircle.png"));
     
     private boolean iconIsResizable = false;
     
@@ -131,7 +132,21 @@ public final class Block extends javax.swing.JPanel {
         jLabel1.addComponentListener(cl);
     }
     
-    public void setIcon(Icon icon)
+    public void setSquareFill(SquareFill sf) {
+        // TODO: LUIS
+        switch (sf) {
+            case Empty:
+                setIcon(BLUE_DIAMOND_ICON); break;
+            case BlueDiamond:
+                setIcon(BLUE_DIAMOND_ICON); break;
+            case GrayCircle:
+                setIcon(GREY_CIRCLE_ICON); break;
+            case RedCross:
+                setIcon(RED_CROSS_ICON); break;
+        }
+    }
+    
+    private void setIcon(Icon icon)
     {
         if(text != null)
             return;
@@ -153,7 +168,7 @@ public final class Block extends javax.swing.JPanel {
      * Sets the background color of this Block
      * @param _c new color for this Block. If null, the default Color will be used, aka resets the Block's Color
      */
-    public void setColor(java.awt.Color _c)
+    private void setColor(java.awt.Color _c)
     {
         Color color;
         if(_c == null)

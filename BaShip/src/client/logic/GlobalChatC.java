@@ -1,6 +1,8 @@
 package client.logic;
 
 import client.ClientMain;
+import client.ui.lobby.LobbyPanel;
+import javax.swing.JComponent;
 import pt.up.fe.lpro1613.sharedlib.exceptions.UserMessageException;
 import pt.up.fe.lpro1613.sharedlib.structs.Message;
 
@@ -14,8 +16,10 @@ public class GlobalChatC {
      * @param message The message object to be displayed on the UI
      */
     public static void receiveGlobalMessage(Message message) {
-        //messagesTextArea.setText(messagesTextArea.getText() + "[" + m.timestamp + "] " + m.username + "\n" + m.text + "\n\n");
-        //messagesTextArea.setCaretPosition(messagesTextArea.getDocument().getLength()); // Scroll to bottom
+        JComponent panel = ClientMain.mainFrame.getCurrentPanel();
+        if (panel instanceof LobbyPanel) {
+            ((LobbyPanel) panel).receiveGlobalMessage(message);
+        }
     }
 
     public static void sendGlobalMessage(String text) throws UserMessageException {

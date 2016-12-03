@@ -7,7 +7,6 @@ package client.ui.game.Components;
 
 import client.ClientMain;
 import client.logic.*;
-import client.ui.*;
 import java.util.logging.*;
 import pt.up.fe.lpro1613.sharedlib.exceptions.*;
 
@@ -86,7 +85,7 @@ public class GameChat extends javax.swing.JPanel {
             gameChatSendMessageField.setText("");
         }
         catch (UserMessageException ex) {
-            Logger.getLogger(LobbyTabbedPanel.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GameChat.class.getName()).log(Level.SEVERE, null, ex);
             ClientMain.showError(ex.getMessage());
         }
     }//GEN-LAST:event_gameChatSendButtonActionPerformed

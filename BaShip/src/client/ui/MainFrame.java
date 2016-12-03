@@ -6,6 +6,7 @@ import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 
 public class MainFrame extends javax.swing.JFrame {
@@ -70,12 +71,20 @@ public class MainFrame extends javax.swing.JFrame {
        
     public final ComponentListener imageResizer;
     
-    public void changeToPanel(javax.swing.JComponent panel)
+    private JComponent currentPanel;
+
+    public JComponent getCurrentPanel() {
+        return currentPanel;
+    }
+    
+    public void changeToPanel(JComponent panel)
     {
         getContentPane().removeAll();
         getContentPane().add(advertisementPanel, java.awt.BorderLayout.PAGE_END);
         getContentPane().add(panel, java.awt.BorderLayout.CENTER);
         pack();
+        
+        currentPanel = panel;
     }
     
     /**
