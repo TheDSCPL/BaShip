@@ -76,8 +76,9 @@ public class GameC {
         }
     }
     
-    static public void clickBoardCoordinate(boolean leftBoard, Coord c) {
-        
+    static public void clickBoardCoordinate(boolean leftBoard, Coord c) throws UserMessageException {
+        ClientMain.server.togglePlaceShipOnSquare(c);
+        System.out.println("::clickBoardCoordinate");
     }
 
     /*static public void togglePlaceShipOnSquare(Coord c) throws UserMessageException {

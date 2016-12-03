@@ -9,10 +9,13 @@ import client.ClientMain;
 import client.logic.GameC;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
+import static pt.up.fe.lpro1613.sharedlib.constants.BoardK.*;
+import pt.up.fe.lpro1613.sharedlib.exceptions.UserMessageException;
 import pt.up.fe.lpro1613.sharedlib.structs.BoardUIInfo.SquareFill;
 import pt.up.fe.lpro1613.sharedlib.utils.*;
-import static pt.up.fe.lpro1613.sharedlib.constants.BoardK.*;
 
 /**
  *
@@ -105,8 +108,13 @@ public final class Block extends javax.swing.JPanel {
 
         @Override
         public void mousePressed(MouseEvent e) {
-            GameC.clickBoardCoordinate(left, Block.this.coordinates);
-            //setIcon(RED_CROSS_ICON);
+            try {
+                GameC.clickBoardCoordinate(left, Block.this.coordinates);
+                //setIcon(RED_CROSS_ICON);
+            }
+            catch (UserMessageException ex) {
+                Logger.getLogger(Block.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
 
         @Override
