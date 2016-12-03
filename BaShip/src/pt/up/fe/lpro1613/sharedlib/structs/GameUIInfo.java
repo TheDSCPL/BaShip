@@ -1,6 +1,6 @@
 package pt.up.fe.lpro1613.sharedlib.structs;
 
-public class GameUIInfo {
+public class GameUIInfo implements UIInfo{
     public final String titleLeft;
     public final String titleRight;
     public final Boolean showRightBoard;
