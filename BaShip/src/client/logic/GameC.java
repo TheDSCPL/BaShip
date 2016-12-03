@@ -56,6 +56,8 @@ public class GameC {
         }
 
         ((GamePanel) ClientMain.mainFrame.getCurrentPanel()).updateGameScreen(info);
+        
+        System.out.println("game screen info: " + info);
     }
 
     /**
