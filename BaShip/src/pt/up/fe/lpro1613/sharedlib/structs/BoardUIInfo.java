@@ -13,7 +13,7 @@ import pt.up.fe.lpro1613.sharedlib.utils.Matrix;
  *
  * @author Alex
  */
-public class BoardUIInfo {
+public class BoardUIInfo implements UIInfo {
 
     /**
      * Indicates whether this the left board on the UI, or the right.

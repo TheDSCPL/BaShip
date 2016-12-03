@@ -7,15 +7,14 @@ package client.ui.game.Components;
 
 import java.awt.*;
 import static pt.up.fe.lpro1613.sharedlib.constants.BoardK.*;
-import pt.up.fe.lpro1613.sharedlib.structs.BoardUIInfo;
-import pt.up.fe.lpro1613.sharedlib.utils.Coord;
-import pt.up.fe.lpro1613.sharedlib.utils.Matrix;
+import pt.up.fe.lpro1613.sharedlib.structs.*;
+import pt.up.fe.lpro1613.sharedlib.utils.*;
 
 /**
  *
  * @author luisp
  */
-public final class Board extends javax.swing.JPanel {
+public final class Board extends SuperBoard {
 
     private static boolean nextSide = true;
 
@@ -25,6 +24,7 @@ public final class Board extends javax.swing.JPanel {
     }
 
     public Board(boolean left) {
+        super(left);
         initComponents();
 
         final int ACTUAL_BOARD_SIZE = BOARD_SIZE + 1;
@@ -55,12 +55,9 @@ public final class Board extends javax.swing.JPanel {
             grid.set(gridCoord, block);
         }
         this.grid = grid.getUnmodifiableMatrix();
-
-        this.left = left;
     }
 
     private final Matrix<Block> grid;
-    private final boolean left;
 
     private final Block get(Coord c) {
         return grid.get(new Coord(c.x + (left ? 1 : 0), c.y + 1));
@@ -89,9 +86,11 @@ public final class Board extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    void update(BoardUIInfo info) {
-        // TODO: LUIS
-        info.board.forEach((c, v) -> {
+    @Override
+    void update(UIInfo info) {
+        if(!(info instanceof BoardUIInfo))
+            return;
+        ((BoardUIInfo)info).board.forEach((c, v) -> {
             get(c).setSquareFill(v);
         });
     }

@@ -25,8 +25,9 @@ public final class GamePanel extends javax.swing.JPanel {
         
         leftBoard = new BoardContainer();
         rightBoard = new BoardContainer();
+        topBar = new TopBar();
         
-        add(new TopBar(), BorderLayout.PAGE_START);
+        add(topBar, BorderLayout.PAGE_START);
         add(leftBoard, BorderLayout.LINE_START);
         add(new GameChat(), BorderLayout.CENTER);
         add(rightBoard, BorderLayout.LINE_END);
@@ -45,8 +46,16 @@ public final class GamePanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     public void updateGameScreen(GameUIInfo info) {
-        System.out.println("received info:" + info);
+        //System.out.println("received info:" + info);
         // TODO: LUIS
+        topBar.setFirstPlayer(info.titleLeft);
+        topBar.setSecondPlayer(info.titleRight);
+        
+        leftBoard.setOpponentWaiting(!info.showRightBoard);
+        
+        //Only the Boards that are WaitingOnOpponentPanel will perform any action 
+        leftBoard.updateBoard(info);
+        rightBoard.updateBoard(info);
     }
 
     public void updateBoardInfo(BoardUIInfo info) {
@@ -62,8 +71,9 @@ public final class GamePanel extends javax.swing.JPanel {
         }
     }
     
-    private BoardContainer leftBoard;
-    private BoardContainer rightBoard;
+    private final BoardContainer leftBoard;
+    private final BoardContainer rightBoard;
+    private final TopBar topBar;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables

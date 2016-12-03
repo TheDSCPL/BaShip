@@ -5,7 +5,7 @@
  */
 package client.ui.game.Components;
 
-import pt.up.fe.lpro1613.sharedlib.structs.BoardUIInfo;
+import pt.up.fe.lpro1613.sharedlib.structs.*;
 
 /**
  *
@@ -18,6 +18,7 @@ public class BoardContainer extends javax.swing.JPanel {
      */
     public BoardContainer() {
         initComponents();
+        this.left = board.left;
     }
 
     /**
@@ -49,12 +50,35 @@ public class BoardContainer extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-
+    public final boolean left;
+    
+    private boolean waiting;
+    public void setOpponentWaiting(boolean waiting)
+    {
+        this.waiting = waiting;
+        if(waiting && !(board instanceof WaitingOnOpponentPanel))
+        {
+            board = new WaitingOnOpponentPanel(board.left);
+            board.revalidate();
+            board.repaint();
+            this.revalidate();
+            this.repaint();
+        }
+        else if(!waiting && !(board instanceof Board))
+        {
+            board = new Board(left);
+            board.revalidate();
+            board.repaint();
+            this.revalidate();
+            this.repaint();
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private client.ui.game.Components.Board board;
+    private client.ui.game.Components.SuperBoard board;
     // End of variables declaration//GEN-END:variables
 
-    public void updateBoard(BoardUIInfo info) {
+    public void updateBoard(UIInfo info) {
         board.update(info);
     }
 }
