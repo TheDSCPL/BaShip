@@ -11,6 +11,7 @@ import java.awt.event.*;
 import javax.swing.*;
 import pt.up.fe.lpro1613.sharedlib.structs.BoardUIInfo.SquareFill;
 import pt.up.fe.lpro1613.sharedlib.utils.*;
+import static pt.up.fe.lpro1613.sharedlib.constants.BoardK.*;
 
 /**
  *
@@ -82,8 +83,6 @@ public final class Block extends javax.swing.JPanel {
         jLabel1.setVerticalAlignment(SwingConstants.CENTER);
     }
     
-    private static final Color HOVER_COLOR = new Color(40, 150, 180);
-    
     private final MouseListener clickListener = new MouseListener() {
         private Color previousColor;
         @Override
@@ -93,7 +92,7 @@ public final class Block extends javax.swing.JPanel {
 
         @Override
         public void mousePressed(MouseEvent e) {
-            setIcon(RED_CROSS_ICON);
+            //setIcon(RED_CROSS_ICON);
         }
 
         @Override
@@ -105,7 +104,7 @@ public final class Block extends javax.swing.JPanel {
         public void mouseEntered(MouseEvent e) {
             //System.out.println("entered");
             previousColor = jLabel1.getBackground();
-            setColor(HOVER_COLOR);
+            setColor(HOVER_OVER_BLOCK_COLOR);
         }
 
         @Override
@@ -133,16 +132,26 @@ public final class Block extends javax.swing.JPanel {
     }
     
     public void setSquareFill(SquareFill sf) {
-        // TODO: LUIS
         switch (sf) {
             case Empty:
-                setIcon(BLUE_DIAMOND_ICON); break;
+                setIcon(null);
+                setColor(null);
+                break;
+            case GraySquare:
+                setIcon(null);
+                setColor(GREY_BLOCK_COLOR);
             case BlueDiamond:
-                setIcon(BLUE_DIAMOND_ICON); break;
+                setIcon(BLUE_DIAMOND_ICON);
+                setColor(null);
+                break;
             case GrayCircle:
-                setIcon(GREY_CIRCLE_ICON); break;
+                setIcon(GREY_CIRCLE_ICON);
+                setColor(null);
+                break;
             case RedCross:
-                setIcon(RED_CROSS_ICON); break;
+                setIcon(RED_CROSS_ICON);
+                
+                break;
         }
     }
     
@@ -178,7 +187,6 @@ public final class Block extends javax.swing.JPanel {
         else
         {
             color = _c;
-            //color = new Color(143,143,143);
         }
         setBackground(color);
         jLabel1.setBackground(color);

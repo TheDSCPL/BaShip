@@ -1,5 +1,6 @@
 package pt.up.fe.lpro1613.sharedlib.constants;
 
+import java.awt.Color;
 import java.util.*;
 
 public class BoardK {
@@ -24,6 +25,10 @@ public class BoardK {
                 }
             });
 
+    public static final Color HOVER_OVER_BLOCK_COLOR = new Color(40, 150, 180);
+    //public static final Color GREY_BLOCK_COLOR = new Color(143,143,143);
+    public static final Color GREY_BLOCK_COLOR = new Color(202,202,202);
+    
     /**
      * Total number of ships (for one player only) in a game of Battleship
      */

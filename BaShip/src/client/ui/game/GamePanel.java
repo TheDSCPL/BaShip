@@ -18,11 +18,6 @@ public final class GamePanel extends javax.swing.JPanel {
     public GamePanel() {
         initComponents();
         
-        /*final JLayeredPane leftPane = new JLayeredPane();
-        leftPane.setLayer(new Board(true),JLayeredPane.DEFAULT_LAYER);
-        final JLayeredPane rightPane = new JLayeredPane();
-        rightPane.setLayer(new Board(false),JLayeredPane.DEFAULT_LAYER);*/
-        
         add(new TopBar(), BorderLayout.PAGE_START);
         add(new BoardContainer(), BorderLayout.LINE_START);
         add(new GameChat(), BorderLayout.CENTER);
