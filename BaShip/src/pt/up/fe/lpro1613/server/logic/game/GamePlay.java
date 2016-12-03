@@ -23,6 +23,7 @@ class GamePlay {
     private PlayerState p1State, p2State;
     private final Board p1Board, p2Board;
 
+    private boolean finished;
     private boolean p1Turn;
     private int moveIndex;
 
@@ -41,12 +42,13 @@ class GamePlay {
         // Set boards
         this.p1Board = p1Board != null ? p1Board : new Board();
         this.p2Board = p2Board != null ? p2Board : new Board();
-        
+
         // Set states
         p1State = PlayerState.PlacingShips;
         p2State = PlayerState.PlacingShips;
 
         // Assign turns
+        finished = false;
         p1Turn = new Random().nextBoolean();
         moveIndex = 0;
 
@@ -85,6 +87,9 @@ class GamePlay {
     }
 
     private void finishGame(String message, Client winner) {
+        finished = true;
+        refreshClientInfo();
+
         // Set winner and finish time
         try {
             GameDB.setEndTimeToNow(gameID);
@@ -156,6 +161,10 @@ class GamePlay {
     }
 
     public void playerClickedRightBoard(Client player, Coord pos) {
+        // Verify if game has finished
+        if (finished) {
+            return;
+        }
 
         // Verify if player is in this game
         if (!isPlayer(player)) {
@@ -179,7 +188,7 @@ class GamePlay {
 
         // Send that shot to board
         boardForPlayer(opponent(player)).shootOnSquare(pos);
-
+        
         // Save shot on DB
         try {
             MoveDB.saveMove(gameID, player == player1 ? 1 : 2, moveIndex);
@@ -193,18 +202,19 @@ class GamePlay {
 
         // Check if player won
         if (boardForPlayer(opponent(player)).allShipsAreShot()) { // Player won
-            finishGame("Game finished: player " + UserS.usernameFromClient(player) + "won!", player);
-            return;
+            finishGame("Game finished: player " + UserS.usernameFromClient(player) + " won!", player);
         }
         else { // If not, change turn
             p1Turn = !p1Turn;
+            refreshClientInfo();
         }
-
-        // Refresh interfaces
-        refreshClientInfo();
     }
 
     public void playerClickedLeftBoard(Client player, Coord pos) {
+        // Verify if game has finished
+        if (finished) {
+            return;
+        }
 
         // Verify if player is in this game
         if (!isPlayer(player)) {
@@ -226,10 +236,10 @@ class GamePlay {
     private void refreshClientInfo() {
         refreshClientInfoForClient(player1);
         refreshClientInfoForClient(player2);
-        
+
         System.out.println("Player 1 state: " + p1State);
         System.out.println("Player 2 state: " + p2State);
-        
+
         spectators.stream().forEach(this::refreshClientInfoForClient);
     }
 
@@ -248,8 +258,8 @@ class GamePlay {
                     UserS.usernameFromClient(client),
                     UserS.usernameFromClient(opponent(client)),
                     gameHasStarted(),
-                    !gameHasStarted() ? (opponentReady ? "Opponent is ready" : "Opponent is placing ships") : null,
-                    !gameHasStarted() ? "You can place ships" : null,
+                    opponentReady ? "Opponent is ready" : "Opponent is placing ships",
+                    stateForPlayer(client) == PlayerState.PlacingShips ? "You can place ships" : "Please wait for opponent",
                     stateForPlayer(client) == PlayerState.PlacingShips && boardForPlayer(client).placedShipsAreValid(),
                     client == player1 ? p1Turn : !p1Turn,
                     client == player1 ? !p1Turn : p1Turn

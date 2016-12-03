@@ -22,9 +22,9 @@ public class BoardK {
                     new HashMap<Integer, Integer>() {
                 {
                     put(1, 4);
-                    put(2, 3);
-                    put(3, 2);
-                    put(4, 1);
+                    //put(2, 3);
+                    //put(3, 2);
+                    //put(4, 1);
                 }
             });
 

@@ -5,6 +5,11 @@
  */
 package client.ui.game.Components;
 
+import client.logic.GameC;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import pt.up.fe.lpro1613.sharedlib.exceptions.UserMessageException;
+
 /**
  *
  * @author luisp
@@ -50,6 +55,7 @@ public class TopBar extends javax.swing.JPanel {
 
         topGamePanel = new javax.swing.JLayeredPane();
         opponentsLabel = new javax.swing.JLabel();
+        closeBttn = new javax.swing.JButton();
 
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
@@ -58,7 +64,15 @@ public class TopBar extends javax.swing.JPanel {
 
         opponentsLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
+        closeBttn.setText("Close");
+        closeBttn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                closeBttnActionPerformed(evt);
+            }
+        });
+
         topGamePanel.setLayer(opponentsLabel, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        topGamePanel.setLayer(closeBttn, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout topGamePanelLayout = new javax.swing.GroupLayout(topGamePanel);
         topGamePanel.setLayout(topGamePanelLayout);
@@ -66,14 +80,18 @@ public class TopBar extends javax.swing.JPanel {
             topGamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(topGamePanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(opponentsLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
+                .addComponent(opponentsLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(closeBttn)
                 .addContainerGap())
         );
         topGamePanelLayout.setVerticalGroup(
             topGamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(topGamePanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(opponentsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(topGamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(closeBttn)
+                    .addComponent(opponentsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -95,8 +113,18 @@ public class TopBar extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void closeBttnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeBttnActionPerformed
+        try {
+            GameC.closeGame();
+        }
+        catch (UserMessageException ex) {
+            Logger.getLogger(TopBar.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_closeBttnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton closeBttn;
     private javax.swing.JLabel opponentsLabel;
     private javax.swing.JLayeredPane topGamePanel;
     // End of variables declaration//GEN-END:variables

@@ -2,6 +2,7 @@ package client.logic;
 
 import client.ClientMain;
 import client.ui.game.GamePanel;
+import client.ui.lobby.LobbyPanel;
 import java.util.List;
 import javax.swing.JComponent;
 import pt.up.fe.lpro1613.sharedlib.exceptions.UserMessageException;
@@ -104,7 +105,8 @@ public class GameC {
      * @param message The message string to be displayed to the user
      */
     public static void gameFinished(String message) {
-        // TODO: show message in a popup, close game panel and go back to lobby (or wait for close button press)
+        ClientMain.showInfo(message);
+        ClientMain.mainFrame.changeToPanel(new LobbyPanel());
     }
 
 }
