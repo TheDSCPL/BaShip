@@ -59,23 +59,46 @@ public class BoardContainer extends javax.swing.JPanel {
         if(waiting && !(board instanceof WaitingOnOpponentPanel))
         {
             board = new WaitingOnOpponentPanel(board.left);
-            board.revalidate();
+            repaintBoard();
+            /*board.revalidate();
             board.repaint();
             this.revalidate();
-            this.repaint();
+            this.repaint();*/
         }
         else if(!waiting && !(board instanceof Board))
         {
             board = new Board(left);
-            board.revalidate();
+            repaintBoard();
+            /*board.revalidate();
             board.repaint();
             this.revalidate();
-            this.repaint();
+            this.repaint();*/
         }
     }
     
+    private void repaintBoard()
+    {
+        this.removeAll();
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(board, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(board, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private client.ui.game.Components.SuperBoard board;
+    public client.ui.game.Components.SuperBoard board;
     // End of variables declaration//GEN-END:variables
 
     public void updateBoard(UIInfo info) {

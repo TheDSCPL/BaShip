@@ -51,7 +51,9 @@ public final class GamePanel extends javax.swing.JPanel {
         topBar.setFirstPlayer(info.titleLeft);
         topBar.setSecondPlayer(info.titleRight);
         
-        leftBoard.setOpponentWaiting(!info.showRightBoard);
+        rightBoard.setOpponentWaiting(!info.showRightBoard);
+        //rightBoard.setOpponentWaiting(true);
+        //System.out.println("setOpponentWaitingone: " + (leftBoard.board instanceof WaitingOnOpponentPanel));
         
         //Only the Boards that are WaitingOnOpponentPanel will perform any action 
         leftBoard.updateBoard(info);
@@ -59,9 +61,9 @@ public final class GamePanel extends javax.swing.JPanel {
     }
 
     public void updateBoardInfo(BoardUIInfo info) {
-        System.out.println("" + info);
-        System.out.println(leftBoard);
-        System.out.println(rightBoard);
+        //System.out.println("" + info);
+        //System.out.println(leftBoard);
+        //System.out.println(rightBoard);
         
         if (info.leftBoard) {
             leftBoard.updateBoard(info);
