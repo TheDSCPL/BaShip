@@ -202,4 +202,11 @@ public class Matrix<T> {
 
         T acceptAndSet(Coord c);
     }
+
+    @Override
+    public String toString() {
+        return "Matrix{" + "sx=" + sx + ", sy=" + sy + ", list=" + list + '}';
+    }
+    
+    
 }

@@ -42,4 +42,11 @@ public class BoardUIInfo {
         GrayCircle,
         GraySquareRedCross
     }
+
+    @Override
+    public String toString() {
+        return "BoardUIInfo{" + "leftBoard=" + leftBoard + ", board=" + board + ", bottomInfo=" + bottomInfo + '}';
+    }
+    
+    
 }

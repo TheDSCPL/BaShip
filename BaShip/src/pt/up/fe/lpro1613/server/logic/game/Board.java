@@ -1,10 +1,10 @@
 package pt.up.fe.lpro1613.server.logic.game;
 
-import pt.up.fe.lpro1613.sharedlib.structs.Ship;
 import java.util.*;
 import static java.util.stream.Collectors.toSet;
 import static pt.up.fe.lpro1613.sharedlib.constants.BoardK.*;
 import pt.up.fe.lpro1613.sharedlib.structs.BoardUIInfo;
+import pt.up.fe.lpro1613.sharedlib.structs.Ship;
 import pt.up.fe.lpro1613.sharedlib.utils.Coord;
 import pt.up.fe.lpro1613.sharedlib.utils.Matrix;
 
@@ -210,6 +210,7 @@ class Board {
             // TODO: finish
         }
 
+        System.out.println("" + bi);
         return bi;
     }
 

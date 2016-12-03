@@ -20,5 +20,10 @@ public class GameUIInfo {
         this.player1Turn = player1Turn;
         this.player2Turn = player2Turn;
     }
+
+    @Override
+    public String toString() {
+        return "GameUIInfo{" + "titleLeft=" + titleLeft + ", titleRight=" + titleRight + ", showRightBoard=" + showRightBoard + ", waitMessageLine1=" + waitMessageLine1 + ", waitMessageLine2=" + waitMessageLine2 + ", showReadyButton=" + showReadyButton + ", player1Turn=" + player1Turn + ", player2Turn=" + player2Turn + '}';
+    }
     
 }
