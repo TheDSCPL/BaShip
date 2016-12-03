@@ -96,8 +96,7 @@ public class WaitingOnOpponentPanel extends SuperBoard {
         if(!(info instanceof GameUIInfo))
             return;
         GameUIInfo gameInfo = (GameUIInfo)info;
-        if(!gameInfo.showRightBoard)
-            return;
+        System.err.println("GameInfo received");
         jLabel1.setText(gameInfo.waitMessageLine1);
         jLabel2.setText(gameInfo.waitMessageLine2);
         jButton2.setEnabled(gameInfo.showReadyButton);
