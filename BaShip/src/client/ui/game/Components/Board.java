@@ -43,11 +43,13 @@ public final class Board extends SuperBoard {
                 int offset = x - (left ? 1 : 0);
                 String label = (offset < 0 || offset >= BOARD_SIZE) ? (" ") : ("" + (char) ('A' + offset));    //if the coordinates of this iteration are the coordinates of the empty corner, create it. otherwise create another label with the next char sequence
                 block = new Block(blockCoord, left, label);
-            } else if (x == (left ? 0 : BOARD_SIZE)) //Rows labels
+            }
+            else if (x == (left ? 0 : BOARD_SIZE)) //Rows labels
             {
                 String label = (y == 0) ? (" ") : ("" + y);    //if the coordinates of this iteration are the coordinates of the empty corner, create it. otherwise create another label with the next char sequence
                 block = new Block(blockCoord, left, label);
-            } else //clickable Block
+            }
+            else //clickable Block
             {
                 block = new Block(blockCoord, left);
             }
@@ -86,11 +88,14 @@ public final class Board extends SuperBoard {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    // TODO: flicker when firing shots
     @Override
     void update(UIInfo info) {
-        if(!(info instanceof BoardUIInfo))
+        if (!(info instanceof BoardUIInfo)) {
             return;
-        ((BoardUIInfo)info).board.forEach((c, v) -> {
+        }
+
+        ((BoardUIInfo) info).board.forEach((c, v) -> {
             get(c).setSquareFill(v);
         });
     }
