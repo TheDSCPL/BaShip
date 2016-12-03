@@ -92,6 +92,7 @@ public final class Board extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     void update(BoardUIInfo info) {
+        // TODO: LUIS
         info.board.forEach((c, v) -> {
             get(c).setSquareFill(v);
         });

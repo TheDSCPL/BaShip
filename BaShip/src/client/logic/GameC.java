@@ -9,6 +9,7 @@ import pt.up.fe.lpro1613.sharedlib.structs.BoardUIInfo;
 import pt.up.fe.lpro1613.sharedlib.structs.GameInfo;
 import pt.up.fe.lpro1613.sharedlib.structs.GameUIInfo;
 import pt.up.fe.lpro1613.sharedlib.structs.Message;
+import pt.up.fe.lpro1613.sharedlib.utils.Coord;
 
 public class GameC {
 
@@ -73,6 +74,22 @@ public class GameC {
         else {
             System.err.println("PROBLEM!!!");
         }
+    }
+
+    static public void togglePlaceShipOnSquare(Coord c) throws UserMessageException {
+        ClientMain.server.togglePlaceShipOnSquare(c);
+    }
+
+    static public void fireShot(Coord c) throws UserMessageException {
+        ClientMain.server.fireShot(c);
+    }
+
+    static public void clickReadyButton() throws UserMessageException {
+        ClientMain.server.clickReadyButton();
+    }
+
+    static public void closeGame() throws UserMessageException {
+        ClientMain.server.closeGame();
     }
 
     /**
