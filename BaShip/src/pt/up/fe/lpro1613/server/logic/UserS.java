@@ -27,22 +27,14 @@ public class UserS {
     private static final Map<Client, Long> loginsClient = new ConcurrentHashMap<>();
 
     /**
-     * TODO: JAVADOC
-     * @param username
-     * @return
-     * @throws SQLException 
-     */
-    public static boolean isUsernameAvailable(String username) throws SQLException {
-        return UserDB.isUsernameAvailable(username);
-    }
-
-    /**
-     * TODO: JAVADOC
+     * Register the user and, if that is successful (no exception is thrown),
+     * login the user automatically.
+     *
      * @param client
      * @param username
      * @param passwordHash
-     * @return
-     * @throws SQLException 
+     * @return A UserInfo class with the #id and #username fields non-null
+     * @throws SQLException
      */
     public static UserInfo register(Client client, String username, String passwordHash) throws SQLException {
         UserInfo user = UserDB.register(username, passwordHash);
@@ -52,16 +44,20 @@ public class UserS {
     }
 
     /**
-     * TODO: JAVADOC
+     * Login the user with the given username and password. This user is then
+     * associated to this {@code Client} until the client performs a logout.
+     * Also, no other client may login with the same username until this client
+     * performs a logout.
+     *
      * @param client
      * @param username
      * @param passwordHash
      * @return
      * @throws SQLException
-     * @throws UserMessageException 
+     * @throws UserMessageException
      */
     public static UserInfo login(Client client, String username, String passwordHash) throws SQLException, UserMessageException {
-        Long id = UserDB.verifyLoginAndReturnUserID(username, passwordHash);
+        Long id = UserDB.verifyLogin(username, passwordHash);
 
         if (id != null) {
             if (isUserLoggedIn(id)) {
@@ -79,8 +75,10 @@ public class UserS {
     }
 
     /**
-     * TODO: JAVADOC
-     * @param client 
+     * Logout the user. If the client is not logged-in, this method does
+     * nothing.
+     *
+     * @param client
      */
     public static void logout(Client client) {
         if (isClientLoggedIn(client)) {
@@ -89,7 +87,10 @@ public class UserS {
     }
 
     /**
-     * Called by the {@code Client} class whenever a client is disconnected.
+     * Inform this class that a client disconnected. If the user is logged-in,
+     * logout the user. Called by the {@code Client} class whenever a client is
+     * disconnected.
+     *
      * @param client The client that disconnected
      */
     public static void clientDisconnected(Client client) {
@@ -97,45 +98,46 @@ public class UserS {
     }
 
     /**
-     * TODO: JAVADOC
      * @param client
-     * @return 
+     * @return True if a client is currently logged-in.
      */
     public static boolean isClientLoggedIn(Client client) {
         return loginsClient.containsKey(client);
     }
 
     /**
-     * TODO: JAVADOC
      * @param userID
-     * @return 
+     * @return True if the user with the given user id is currently logged-in.
      */
     public static boolean isUserLoggedIn(Long userID) {
         return loginsID.containsKey(userID);
     }
 
     /**
-     * TODO: JAVADOC
      * @param id
-     * @return 
+     * @return The {@code Client} object that is logged-in with the user with
+     * the specified user id. Returns null if the user for that id is not
+     * logged-in and therefore is not assigned to a specific {@code Client}.
      */
     public static Client clientFromID(Long id) {
         return loginsID.get(id);
     }
 
     /**
-     * TODO: JAVADOC
      * @param c
-     * @return 
+     * @return The id of the user for the given {@code Client} object, if the
+     * client is logged-in. If not, returns null.
      */
     public static Long idFromClient(Client c) {
         return loginsClient.get(c);
     }
 
     /**
-     * TODO: JAVADOC
+     * Each user has a status, as defined in {@code UserInfo.Status}, which can
+     * be accessed through this method.
+     *
      * @param userID
-     * @return 
+     * @return The status of the user. Never null
      */
     public static Status getUserStatus(Long userID) {
         if (isUserLoggedIn(userID)) {
@@ -153,13 +155,19 @@ public class UserS {
     }
 
     /**
-     * TODO: JAVADOC
      * @param c
-     * @return 
+     * @return The username of the user for the given {@code Client} object, if
+     * the client is logged-in. If not, returns null.
      */
     public static String usernameFromClient(Client c) {
         try {
-            return UserDB.getUsernameFromID(idFromClient(c));
+            Long id = idFromClient(c);
+            if (id != null) {
+                return UserDB.getUsernameFromID(id);
+            }
+            else {
+                return null;
+            }
         }
         catch (SQLException ex) {
             Logger.getLogger(UserS.class.getName()).log(Level.SEVERE, null, ex);

@@ -19,10 +19,10 @@ public class ClientMain {
     private ClientMain() {
 
     }
-
+    
+    public static Server server;
     public static final MainFrame mainFrame = new MainFrame();
     public static final Preferences prefs = new Preferences(ClientMain.class);
-    public static Server server;
     private static final ExecutorService backgroundExecutor = Executors.newCachedThreadPool();
 
     public static void main(String args[]) {

@@ -309,7 +309,7 @@ public class Server implements Connection.Delegate {
     /**
      * When playing (after placing ships), inform the server that the player
      * intends to fire a missile on the given coordinates. Requires that it's
-     * this client's turn to play
+     * this client's turn to play.
      *
      * @param pos The coordinates of the square on the grid of the opponent
      * where to fire the missile.

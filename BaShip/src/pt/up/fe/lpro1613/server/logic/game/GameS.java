@@ -92,7 +92,7 @@ public class GameS {
         // TODO: finish
     }*/
 
-    /*private static void sendInvitation(Client from, Client to) {
+ /*private static void sendInvitation(Client from, Client to) {
         try {
             to.sendGameInvitation(); // TODO: finish
         }
@@ -100,7 +100,6 @@ public class GameS {
             Logger.getLogger(GameS.class.getName()).log(Level.SEVERE, null, ex);
         }
     }*/
-
     private static void startGame(Client player1, Client player2) throws UserMessageException {
         GamePlay game;
         try {
@@ -175,10 +174,13 @@ public class GameS {
     }
 
     /**
-     * TODO: JAVADOC
+     * When playing (after placing ships), inform this class that the player
+     * intends to fire a missile on the given coordinates. Requires that it's
+     * this client's turn to play.
      *
-     * @param player
-     * @param pos
+     * @param player The player who fired the shot.
+     * @param pos The coordinate of where the shot was fired, on the board of
+     * the opponent.
      */
     public static void fireShot(Client player, Coord pos) {
         if (isClientPlaying(player)) {
@@ -190,12 +192,13 @@ public class GameS {
     }
 
     /**
-     * TODO: JAVADOC
+     * Inform this class that a player closed the game.
      *
-     * @param client
+     * @param client The player who closed the game.
      */
     public static void closeGame(Client client) {
         currentGamesPlayFromUser.get(client).gameClosedByClient(client);
+        // TODO: when client isn't playing, currentGamesPlayFromUser::get returns null and results in a crash
     }
 
     static void gameFinished(GamePlay game) {
@@ -203,9 +206,11 @@ public class GameS {
     }
 
     /**
-     * TODO: JAVADOC
+     * Inform this class that a client disconnected. Should be called regardless
+     * of the client being in a game currently or not. If the client is in a
+     * game, this method cancels the game.
      *
-     * @param client
+     * @param client The client who disconnected.
      */
     public static void clientDisconnected(Client client) {
         // TODO: finish
@@ -213,20 +218,20 @@ public class GameS {
     }
 
     /**
-     * TODO: JAVADOC
-     *
      * @param client
-     * @return
+     * @return True if the client is in a game currently. It returns false
+     * otherwise, specially when the user is on the game screen, but waiting,
+     * not playing.
+     * @see GameS#isClientWaiting(Client)
      */
     public static boolean isClientPlaying(Client client) {
         return currentGamesPlayFromUser.containsKey(client);
     }
 
     /**
-     * TODO: JAVADOC
-     *
      * @param client
-     * @return
+     * @return True if the client is waiting for a game.
+     * @see GameS#isClientPlaying(Client)
      */
     public static boolean isClientWaiting(Client client) {
         return playersWaitingForGame.contains(client) || playersWaitingForPlayer.containsValue(client);
@@ -236,12 +241,13 @@ public class GameS {
         return currentGamesPlay.get(gameID).gameHasStarted();
     }*/
     /**
-     * TODO: JAVADOC
      *
-     * @param gameID
-     * @return
+     * @param gameID The game id. This must be an id of a game currently running
+     * @return The number of moves that have been played already in the game
+     * (includes both players' moves).
      */
     public static Integer getGameCurrentMoveNumber(Long gameID) {
+        // TODO: crash if game is not running at this moment
         return currentGamesPlay.get(gameID).getCurrentMoveNumber();
     }
 
