@@ -4,7 +4,9 @@ import client.conn.*;
 import client.other.PrefsKey;
 import client.ui.LoginPanel;
 import client.ui.MainFrame;
+import client.ui.game.Components.Block;
 import client.ui.game.Components.Board;
+import client.ui.game.GamePanel;
 import java.io.*;
 import java.net.*;
 import java.util.concurrent.*;
@@ -28,7 +30,8 @@ public class ClientMain {
     public static void main(String args[]) {
         runOnUI(() -> {
             //mainFrame.changeToPanel(new LoginPanel());
-            mainFrame.changeToPanel(new Board(true));
+            //mainFrame.changeToPanel(new Board(true));
+            mainFrame.changeToPanel(new GamePanel());
             mainFrame.setVisible(true);
         });
     }

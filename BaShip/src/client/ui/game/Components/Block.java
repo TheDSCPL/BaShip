@@ -45,6 +45,7 @@ public final class Block extends javax.swing.JPanel {
             addMouseListener(clickListener);
             jLabel1.addMouseListener(clickListener);
             setBorder(BorderFactory.createLineBorder(new Color(0, 0, 0)));
+            //jLabel1.setText("" + coordinates.x + "" + coordinates.y); //debug block coordinates
         }
     }
     
@@ -52,6 +53,14 @@ public final class Block extends javax.swing.JPanel {
      * not null if this Block is a line/row label
      */
     public final String text;
+    
+    /**
+     * @return true if this is a block that is clickable. false if it is a Board label
+     */
+    public final boolean isClickableBlock()
+    {
+        return text == null;
+    }
     
     private void sanityCheck()
     {
@@ -72,8 +81,10 @@ public final class Block extends javax.swing.JPanel {
         jLabel1.setVerticalAlignment(SwingConstants.CENTER);
     }
     
+    private static final Color HOVER_COLOR = new Color(40, 150, 180);
+    
     private final MouseListener clickListener = new MouseListener() {
-        private boolean prev = false;
+        private Color previousColor;
         @Override
         public void mouseClicked(MouseEvent e) {
             
@@ -81,9 +92,7 @@ public final class Block extends javax.swing.JPanel {
 
         @Override
         public void mousePressed(MouseEvent e) {
-            /*setIcon(prev ? redCrossIcon : null);
-            prev = !prev;*/
-            setIcon(redCrossIcon);
+            setIcon(RED_CROSS_ICON);
         }
 
         @Override
@@ -94,27 +103,28 @@ public final class Block extends javax.swing.JPanel {
         @Override
         public void mouseEntered(MouseEvent e) {
             //System.out.println("entered");
-            setColor(new Color(255, 0, 0));
+            previousColor = jLabel1.getBackground();
+            setColor(HOVER_COLOR);
         }
 
         @Override
         public void mouseExited(MouseEvent e) {
             //System.out.println("exited");
-            setColor(Color.black);
+            setColor(previousColor);
         }
     };
     
-    public static final Icon redCrossIcon = new ImageIcon(Block.class.getResource("/client/ui/Images/redCross.png"));
-    public static final Icon blueDiamondIcon = new ImageIcon(Block.class.getResource("/client/ui/Images/blueDiamond.png"));
-    public static final Icon greyCircleIcon = new ImageIcon(Block.class.getResource("/client/ui/Images/greyCircle.png"));
+    public static final Icon RED_CROSS_ICON = new ImageIcon(Block.class.getResource("/client/ui/Images/redCross.png"));
+    public static final Icon BLUE_DIAMOND_ICON = new ImageIcon(Block.class.getResource("/client/ui/Images/blueDiamond.png"));
+    public static final Icon GREY_CIRCLE_ICON = new ImageIcon(Block.class.getResource("/client/ui/Images/greyCircle.png"));
     
-    private boolean resizable = false;
+    private boolean iconIsResizable = false;
     
     private void setImageResizer()
     {
-        if(resizable)
+        if(iconIsResizable)
             return;
-        resizable = true;
+        iconIsResizable = true;
 
         ComponentListener cl = ClientMain.mainFrame.imageResizer;
         
@@ -176,11 +186,15 @@ public final class Block extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

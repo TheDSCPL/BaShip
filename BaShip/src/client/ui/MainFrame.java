@@ -73,7 +73,7 @@ public class MainFrame extends javax.swing.JFrame {
     public void changeToPanel(javax.swing.JComponent panel)
     {
         getContentPane().removeAll();
-        getContentPane().add(advertisementPanel1, java.awt.BorderLayout.PAGE_END);
+        getContentPane().add(advertisementPanel, java.awt.BorderLayout.PAGE_END);
         getContentPane().add(panel, java.awt.BorderLayout.CENTER);
         pack();
     }
@@ -87,16 +87,16 @@ public class MainFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        advertisementPanel1 = new client.ui.AdvertisementBanner();
+        advertisementPanel = new client.ui.AdvertisementBanner();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
-        getContentPane().add(advertisementPanel1, java.awt.BorderLayout.PAGE_END);
+        getContentPane().add(advertisementPanel, java.awt.BorderLayout.PAGE_END);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private client.ui.AdvertisementBanner advertisementPanel1;
+    private client.ui.AdvertisementBanner advertisementPanel;
     // End of variables declaration//GEN-END:variables
 }

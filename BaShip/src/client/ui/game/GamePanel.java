@@ -5,17 +5,27 @@
  */
 package client.ui.game;
 
-/**
- *
- * @author luisp
- */
-public class GamePanel extends javax.swing.JPanel {
+import client.ui.game.Components.*;
+import java.awt.*;
+import javax.swing.JLayeredPane;
+
+public final class GamePanel extends javax.swing.JPanel {
 
     /**
      * Creates new form GamePanel
      */
     public GamePanel() {
         initComponents();
+        
+        /*final JLayeredPane leftPane = new JLayeredPane();
+        leftPane.setLayer(new Board(true),JLayeredPane.DEFAULT_LAYER);
+        final JLayeredPane rightPane = new JLayeredPane();
+        rightPane.setLayer(new Board(false),JLayeredPane.DEFAULT_LAYER);*/
+        
+        add(new TopBar(), BorderLayout.PAGE_START);
+        add(new BoardContainer(), BorderLayout.LINE_START);
+        add(new GameChat(), BorderLayout.CENTER);
+        add(new BoardContainer(), BorderLayout.LINE_END);
     }
 
     /**
@@ -27,16 +37,7 @@ public class GamePanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        setLayout(new java.awt.BorderLayout());
     }// </editor-fold>//GEN-END:initComponents
 
 

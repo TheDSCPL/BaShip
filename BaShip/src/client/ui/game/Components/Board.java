@@ -17,6 +17,14 @@ import pt.up.fe.lpro1613.sharedlib.utils.Matrix;
  */
 public final class Board extends javax.swing.JPanel {
 
+    private static boolean nextSide = true;
+    
+    public Board()
+    {
+        this(nextSide);
+        nextSide = !nextSide;
+    }
+    
     public Board(boolean left) {
         initComponents();
         
@@ -28,23 +36,24 @@ public final class Board extends javax.swing.JPanel {
         for(int i = 0; i < ACTUAL_BOARD_SIZE*ACTUAL_BOARD_SIZE ; i++){
             final int x = i%ACTUAL_BOARD_SIZE;
             final int y = (int) (i/ACTUAL_BOARD_SIZE);
-            Coord coord = new Coord(x,y);
+            Coord gridCoord = new Coord(x,y);
+            Coord blockCoord = new Coord(x - (left ? 1 : 0) , y - 1);
             Block block;
             if(y == 0)  //Columns labels
             {
                 int offset = x - (left ? 1 : 0);
                 String label = (offset < 0 || offset >= BOARD_SIZE) ? (" ") : ("" + (char)('A' + offset) );    //if the coordinates of this iteration are the coordinates of the empty corner, create it. otherwise create another label with the next char sequence
-                block = new Block(coord,label);
+                block = new Block(blockCoord,label);
             }
             else if(x == (left ? 0 : BOARD_SIZE))   //Rows labels
             {
                 String label = (y == 0) ? (" ") : ("" + y );    //if the coordinates of this iteration are the coordinates of the empty corner, create it. otherwise create another label with the next char sequence
-                block = new Block(coord,label);
+                block = new Block(blockCoord,label);
             }
             else    //clickable Block
-                block = new Block(coord);
+                block = new Block(blockCoord);
             add(block); //puts the Block in the grid
-            grid.set(coord,block);
+            grid.set(gridCoord,block);
         }
         this.grid = grid.getUnmodifiableMatrix();
         
@@ -54,6 +63,11 @@ public final class Board extends javax.swing.JPanel {
     public final Matrix<Block> grid;
     private final boolean left;
     
+    public final Block get(int x, int y)
+    {
+        return grid.get(new Coord(x + (left ? 1 : 0),y+1));
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -62,6 +76,8 @@ public final class Board extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+
+        setRequestFocusEnabled(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

@@ -9,6 +9,7 @@ import java.util.*;
 import pt.up.fe.lpro1613.sharedlib.utils.Coord;
 import static pt.up.fe.lpro1613.sharedlib.constants.BoardK.*;
 
+@Deprecated
 public class Ship {
     
     public Ship(PossibleShips shipType)
