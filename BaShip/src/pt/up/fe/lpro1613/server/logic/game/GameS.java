@@ -22,11 +22,64 @@ import pt.up.fe.lpro1613.sharedlib.utils.Coord;
  */
 public class GameS {
 
-    private static final Map<Long, GamePlay> currentGamesPlay = new ConcurrentHashMap<>();
-    private static final Map<Client, GamePlay> currentGamesPlayFromUser = new ConcurrentHashMap<>();
-    private static final Map<Client, Client> playersWaitingForPlayer = new ConcurrentHashMap<>();
-    private static final Queue<Client> playersWaitingForGame = new ConcurrentLinkedQueue<>();
-    private static final Map<Client, Board> playersWaitingBoards = new ConcurrentHashMap<>();
+    private static class Info {
+
+        private static final Map<Long, GamePlay> currentGamesPlay = new ConcurrentHashMap<>();
+        private static final Map<Client, GamePlay> currentGamesPlayFromUser = new ConcurrentHashMap<>();
+        //private static final Map<Client, Client> playersWaitingForPlayer = new ConcurrentHashMap<>();
+        private static final Queue<Client> playersWaitingForGame = new ConcurrentLinkedQueue<>();
+        private static final Map<Client, Board> playersWaitingBoards = new ConcurrentHashMap<>();
+
+        public static Client nextPlayerWaitingForGame() {
+            return playersWaitingForGame.poll();
+        }
+
+        public static boolean existsPlayersWaitingForRandomGame() {
+            return !playersWaitingForGame.isEmpty();
+        }
+
+        public static boolean isWaitingForRandomGame(Client c) {
+            return playersWaitingForGame.contains(c);
+        }
+
+        public static boolean isPlaying(Client c) {
+            return currentGamesPlayFromUser.containsKey(c);
+        }
+
+        public static boolean gameIDisBeingPlayed(Long gameID) {
+            return currentGamesPlay.containsKey(gameID);
+        }
+
+        public static GamePlay gameFromGameID(Long gameID) {
+            return currentGamesPlay.get(gameID);
+        }
+
+        public static GamePlay gameFromPlayer(Client client) {
+            return currentGamesPlayFromUser.get(client);
+        }
+
+        public static Board waitingBoardForPlayer(Client client) {
+            if (!playersWaitingBoards.containsKey(client)) {
+                playersWaitingBoards.put(client, new Board());
+            }
+            
+            return playersWaitingBoards.get(client);
+        }
+
+        public static void setUsersPlayingGame(Client p1, Client p2, GamePlay gp) {
+            currentGamesPlayFromUser.put(p1, gp);
+            currentGamesPlayFromUser.put(p2, gp);
+        }
+
+        public static void registerGame(GamePlay gp) {
+            currentGamesPlay.put(gp.gameID, gp);
+        }
+
+        public static void addPlayerWaiting(Client client) {
+            playersWaitingForGame.add(client);
+        }
+
+    }
 
     /**
      * Start a game with another random player. The player may be put on a
@@ -36,8 +89,8 @@ public class GameS {
      * @throws UserMessageException
      */
     public static void startRandomGame(Client client) throws UserMessageException {
-        if (!playersWaitingForGame.isEmpty()) {
-            startGame(client, playersWaitingForGame.poll()); // Start a game with the player who has been waiting for the most time
+        if (Info.existsPlayersWaitingForRandomGame()) {
+            startGame(client, Info.nextPlayerWaitingForGame()); // Start a game with the player who has been waiting for the most time
         }
         else {
             startWait(client, null);
@@ -56,7 +109,7 @@ public class GameS {
     public static void startGameWithPlayer(Client client, Long otherPlayerID) throws UserMessageException {
 
         // Other player must be online
-        if (UserS.isUserLoggedIn(otherPlayerID)) {
+        /*if (UserS.isUserLoggedIn(otherPlayerID)) {
             Client otherPlayer = UserS.clientFromID(otherPlayerID);
 
             // Other player is waiting for a game too -> start game immediately
@@ -77,7 +130,7 @@ public class GameS {
         }
         else {
             throw new UserMessageException("Invited user is not online at the moment");
-        }
+        }*/
     }
 
     /**
@@ -103,10 +156,9 @@ public class GameS {
     private static void startGame(Client player1, Client player2) throws UserMessageException {
         GamePlay game;
         try {
-            game = new GamePlay(player1, playersWaitingBoards.get(player1), player2, playersWaitingBoards.get(player2));
-            currentGamesPlayFromUser.put(player1, game);
-            currentGamesPlayFromUser.put(player2, game);
-            currentGamesPlay.put(game.gameID, game);
+            game = new GamePlay(player1, Info.waitingBoardForPlayer(player1), player2, Info.waitingBoardForPlayer(player2));
+            Info.setUsersPlayingGame(player1, player2, game);
+            Info.registerGame(game);
         }
         catch (SQLException ex) {
             Logger.getLogger(GameS.class.getName()).log(Level.SEVERE, null, ex);
@@ -117,12 +169,12 @@ public class GameS {
     private static void startWait(Client clientWaiting, Client targetClient) {
         // Waiting for random game
         if (targetClient == null) {
-            playersWaitingForGame.add(clientWaiting);
+            Info.addPlayerWaiting(targetClient);
         }
         // Waiting for a specific player
-        else {
+        /*else {
             playersWaitingForPlayer.put(targetClient, clientWaiting);
-        }
+        }*/
 
         updateGameScreenForClient(clientWaiting);
     }
@@ -137,14 +189,10 @@ public class GameS {
      */
     public static void togglePlaceShipOnSquare(Client player, Coord pos) {
         if (isClientPlaying(player)) {
-            currentGamesPlayFromUser.get(player).togglePlaceShipOnSquare(player, pos);
+            Info.gameFromPlayer(player).togglePlaceShipOnSquare(player, pos);
         }
         else {
-            if (!playersWaitingBoards.containsKey(player)) {
-                playersWaitingBoards.put(player, new Board());
-            }
-
-            Board board = playersWaitingBoards.get(player);
+            Board board = Info.waitingBoardForPlayer(player);
             board.togglePlaceShipOnSquare(pos);
 
             try {
@@ -166,7 +214,7 @@ public class GameS {
      */
     public static void clickReadyButton(Client player) {
         if (isClientPlaying(player)) {
-            currentGamesPlayFromUser.get(player).clickReadyButton(player);
+            Info.gameFromPlayer(player).clickReadyButton(player);
         }
         else {
             Logger.getLogger(GameS.class.getName()).log(Level.SEVERE, "Player {0} cannot click ready because he's not playing any game", player);
@@ -184,7 +232,7 @@ public class GameS {
      */
     public static void fireShot(Client player, Coord pos) {
         if (isClientPlaying(player)) {
-            currentGamesPlayFromUser.get(player).fireShot(player, pos);
+            Info.gameFromPlayer(player).fireShot(player, pos);
         }
         else {
             Logger.getLogger(GameS.class.getName()).log(Level.SEVERE, "Player {0} cannot fire shot because he's not playing any game", player);
@@ -197,8 +245,9 @@ public class GameS {
      * @param client The player who closed the game.
      */
     public static void closeGame(Client client) {
-        currentGamesPlayFromUser.get(client).gameClosedByClient(client);
-        // TODO: when client isn't playing, currentGamesPlayFromUser::get returns null and results in a crash
+        if (Info.isPlaying(client)) {
+            Info.gameFromPlayer(client).gameClosedByClient(client);
+        }
     }
 
     static void gameFinished(GamePlay game) {
@@ -225,7 +274,7 @@ public class GameS {
      * @see GameS#isClientWaiting(Client)
      */
     public static boolean isClientPlaying(Client client) {
-        return currentGamesPlayFromUser.containsKey(client);
+        return Info.isPlaying(client);
     }
 
     /**
@@ -234,7 +283,7 @@ public class GameS {
      * @see GameS#isClientPlaying(Client)
      */
     public static boolean isClientWaiting(Client client) {
-        return playersWaitingForGame.contains(client) || playersWaitingForPlayer.containsValue(client);
+        return Info.isWaitingForRandomGame(client);// || playersWaitingForPlayer.containsValue(client);
     }
 
     /*public static boolean isGameRunning(Long gameID) {
@@ -247,27 +296,30 @@ public class GameS {
      * (includes both players' moves).
      */
     public static Integer getGameCurrentMoveNumber(Long gameID) {
-        // TODO: crash if game is not running at this moment
-        return currentGamesPlay.get(gameID).getCurrentMoveNumber();
+        if (Info.gameIDisBeingPlayed(gameID)) {
+            return Info.gameFromGameID(gameID).getCurrentMoveNumber();
+        }
+
+        return null;
     }
 
     private static void updateGameScreenForClient(Client client) {
         GameUIInfo gsi = null;
 
-        if (playersWaitingForGame.contains(client)) {
+        if (Info.isWaitingForRandomGame(client)) {
             gsi = new GameUIInfo(
                     UserS.usernameFromClient(client), "<waiting>", false,
                     "Waiting for opponent", "You can place ships", false,
                     false, false
             );
         }
-        else if (playersWaitingForPlayer.containsValue(client)) {
+        /*else if (playersWaitingForPlayer.containsValue(client)) {
             gsi = new GameUIInfo(
                     UserS.usernameFromClient(client), "<waiting for " + "OTHER PLAYER TODO" + ">", false, // TODO: UserS.usernameFromClient(otherPlayer) 
                     "Waiting for opponent", "You can place ships", false,
                     false, false
             );
-        }
+        }*/
 
         if (gsi != null) {
             try {
