@@ -54,4 +54,9 @@ public class Ship {
         return set;
     }
 
+    @Override
+    public String toString() {
+        return "Ship{" + "posx=" + posx + ", posy=" + posy + ", size=" + size + ", vertical=" + vertical + '}';
+    }
+
 }

@@ -12,7 +12,6 @@ import client.ui.LoginPanel;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import pt.up.fe.lpro1613.sharedlib.exceptions.UserMessageException;
-import pt.up.fe.lpro1613.sharedlib.structs.Message;
 
 /**
  *
@@ -181,8 +180,8 @@ public class LobbyPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_startRandomGameBttnActionPerformed
 
-    public void receiveGlobalMessage(Message message) {
-        lobbyTabbedPanel.receiveGlobalMessage(message);
+    public void refreshGlobalMessages() {
+        lobbyTabbedPanel.refreshGlobalMessages();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

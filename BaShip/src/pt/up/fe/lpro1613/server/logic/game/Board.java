@@ -62,9 +62,9 @@ class Board {
             boolean yAllEqual = currentConnectedSquares.stream().map((c) -> c.y).collect(toSet()).size() == 1;
 
             if (xAllEqual || yAllEqual) {
-                int minXpos = currentConnectedSquares.stream().map((c) -> c.x).min(Integer::min).get();
-                int minYpos = currentConnectedSquares.stream().map((c) -> c.y).min(Integer::min).get();
-                ships.add(new Ship(minXpos, minYpos, currentConnectedSquares.size(), xAllEqual));
+                int minXpos = currentConnectedSquares.stream().map((c) -> c.x).reduce(Integer.MAX_VALUE, (a,b) -> (a < b ? a : b));
+                int minYpos = currentConnectedSquares.stream().map((c) -> c.y).reduce(Integer.MAX_VALUE, (a,b) -> (a < b ? a : b));
+                ships.add(new Ship(minXpos, minYpos, squareCount, xAllEqual));
             }
             else {
                 invalidShipSquares.addAll(currentConnectedSquares);

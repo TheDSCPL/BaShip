@@ -86,7 +86,7 @@ class GamePlay {
         ShipDB.saveShipPositions(gameID, 2, p2Board.getShips());
     }
 
-    // TODO: XXX refactor use of this function
+    // TODO: refactor use of this function
     private void finishGame(String message, Client winner, Client dontSendMessageTo) {
         finished = true;
 
@@ -205,7 +205,9 @@ class GamePlay {
         moveIndex++;
 
         // Check if player won
-        if (boardForPlayer(opponent(player)).allShipsAreShot()) { // Player won
+        boolean asas = boardForPlayer(opponent(player)).allShipsAreShot();
+        System.out.println("All ships are shot: " + asas);
+        if (asas) { // Player won
             refreshClientInfo();
             finishGame("Game finished: player " + UserS.usernameFromClient(player) + " won!", player, null);
         }

@@ -94,10 +94,15 @@ public class LobbyTabbedPanel extends JPanel {
         clearUserFilterButton.addComponentListener(ClientMain.mainFrame.imageResizer);
         applyGamesFilterButton.addComponentListener(ClientMain.mainFrame.imageResizer);
         clearGamesFilterButton.addComponentListener(ClientMain.mainFrame.imageResizer);
-        
+
+        globalChatTextPane.setContentType("text/html");
+        globalChatTextPane.setEditable(false);
+        globalChatTextPane.setText("");
+
         refreshList();
+        refreshGlobalMessages();
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -121,10 +126,10 @@ public class LobbyTabbedPanel extends JPanel {
         clearGamesFilterButton = new javax.swing.JButton();
         currentPlayingCheckbox = new javax.swing.JCheckBox();
         globalChatTab = new javax.swing.JLayeredPane();
-        scrollableGlobalChat = new javax.swing.JScrollPane();
-        globalChatTextArea = new javax.swing.JTextArea();
         globalChatSendMessageField = new javax.swing.JTextField();
         globalChatSendButton = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        globalChatTextPane = new javax.swing.JTextPane();
         jTabbedPane = new javax.swing.JTabbedPane();
 
         usersTable.setModel(usersTableModel);
@@ -254,11 +259,6 @@ public class LobbyTabbedPanel extends JPanel {
                 .addContainerGap())
         );
 
-        globalChatTextArea.setEditable(false);
-        globalChatTextArea.setColumns(20);
-        globalChatTextArea.setRows(5);
-        scrollableGlobalChat.setViewportView(globalChatTextArea);
-
         globalChatSendMessageField.setToolTipText("Press enter to send message");
         globalChatSendMessageField.setMaximumSize(new java.awt.Dimension(2147483647, 26));
 
@@ -269,9 +269,11 @@ public class LobbyTabbedPanel extends JPanel {
             }
         });
 
-        globalChatTab.setLayer(scrollableGlobalChat, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jScrollPane1.setViewportView(globalChatTextPane);
+
         globalChatTab.setLayer(globalChatSendMessageField, javax.swing.JLayeredPane.DEFAULT_LAYER);
         globalChatTab.setLayer(globalChatSendButton, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        globalChatTab.setLayer(jScrollPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout globalChatTabLayout = new javax.swing.GroupLayout(globalChatTab);
         globalChatTab.setLayout(globalChatTabLayout);
@@ -280,9 +282,9 @@ public class LobbyTabbedPanel extends JPanel {
             .addGroup(globalChatTabLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(globalChatTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(scrollableGlobalChat, javax.swing.GroupLayout.DEFAULT_SIZE, 539, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1)
                     .addGroup(globalChatTabLayout.createSequentialGroup()
-                        .addComponent(globalChatSendMessageField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(globalChatSendMessageField, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(globalChatSendButton)))
                 .addContainerGap())
@@ -291,7 +293,7 @@ public class LobbyTabbedPanel extends JPanel {
             globalChatTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(globalChatTabLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(scrollableGlobalChat, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(globalChatTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(globalChatSendMessageField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -320,7 +322,7 @@ public class LobbyTabbedPanel extends JPanel {
     void refreshList() {
         // TODO: finish
         updateUsersTableData(sortingColumn, maxEntriesPerTable);
-        updateGamesTableData(0, maxEntriesPerTable);
+        updateGamesTableData(1, maxEntriesPerTable);
     }
 
     private void filterUserFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterUserFieldActionPerformed
@@ -358,16 +360,18 @@ public class LobbyTabbedPanel extends JPanel {
             }
             SimpleDateFormat dF = new SimpleDateFormat("yyyy.MM.dd 'at' HH:mm:ss");
             for (int i = 0; i < gamesList.size(); i++) {
-                GameInfo gameInfo = gamesList.get(i);
-                gamesTableModel.addRow(new Object[]{gameInfo.player1Username + " VS " + gameInfo.player2Username,
-                                                    gameInfo.state != GameInfo.State.Finished ? ("Playing: " + dF.format(gameInfo.startDate)) : "Played on: " + dF.format(gameInfo.endDate)});
+                try {
+                    GameInfo gameInfo = gamesList.get(i);
+                    gamesTableModel.addRow(new Object[]{gameInfo.player1Username + " VS " + gameInfo.player2Username,
+                                                        gameInfo.state != GameInfo.State.Finished ? ("Playing: " + dF.format(gameInfo.startDate)) : "Played on: " + dF.format(gameInfo.endDate)});
+                }
+                catch (Exception ignored) {
+                    // TODO: code in the try statement has bugs and crashes
+                }
             }
         }
         catch (UserMessageException ex) {
             ClientMain.showError(ex.getMessage());
-        }
-        catch (Exception ignored) {
-            // TODO: code above has bugs and crashes
         }
     }
 
@@ -402,6 +406,10 @@ public class LobbyTabbedPanel extends JPanel {
     }//GEN-LAST:event_clearGamesFilterButtonActionPerformed
 
     private void globalChatSendButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_globalChatSendButtonActionPerformed
+        if (globalChatSendMessageField.getText().isEmpty()) {
+            return;
+        }
+
         try {
             GlobalChatC.sendGlobalMessage(globalChatSendMessageField.getText());
             globalChatSendMessageField.setText("");
@@ -412,9 +420,33 @@ public class LobbyTabbedPanel extends JPanel {
         }
     }//GEN-LAST:event_globalChatSendButtonActionPerformed
 
-    public void receiveGlobalMessage(Message m) {
-        globalChatTextArea.setText(globalChatTextArea.getText() + "[" + m.timestamp + "] " + m.username + "\n" + m.text + "\n\n");
-        globalChatTextArea.setCaretPosition(globalChatTextArea.getDocument().getLength()); // Scroll to bottom
+    public void refreshGlobalMessages() {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("<html>").append("<head>").append("</head>").append("<body>");
+        
+        for (Message m : GlobalChatC.messages) {
+            sb.append("<p>")
+                    .append("<font size=6>")
+                    .append("<b>")
+                    .append(m.username)
+                    .append("</b>")
+                    .append("</font>");
+            sb.append("<br>")
+                    .append("<font size=4; color='red'>")
+                    .append(m.timestamp)
+                    .append("</font>");
+            sb.append("<br>")
+                    .append(m.text);
+            sb.append("</p>");
+        }
+
+        sb.append("</body>").append("</html>");
+
+        System.out.println(sb.toString());
+        globalChatTextPane.setText(sb.toString()); //"[" + m.timestamp + "] " + m.username + "\n" + m.text + "\n\n");
+        System.out.println(globalChatTextPane.getText());
+        globalChatTextPane.setCaretPosition(globalChatTextPane.getDocument().getLength()); // Scroll to bottom
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -430,10 +462,10 @@ public class LobbyTabbedPanel extends JPanel {
     private javax.swing.JButton globalChatSendButton;
     private javax.swing.JTextField globalChatSendMessageField;
     private javax.swing.JLayeredPane globalChatTab;
-    private javax.swing.JTextArea globalChatTextArea;
+    private javax.swing.JTextPane globalChatTextPane;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane;
     private javax.swing.JScrollPane scrollableGamesTable;
-    private javax.swing.JScrollPane scrollableGlobalChat;
     private javax.swing.JScrollPane scrollableUsersTable;
     private javax.swing.JLayeredPane usersTab;
     private javax.swing.JTable usersTable;

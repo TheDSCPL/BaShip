@@ -189,7 +189,7 @@ public class GameS {
         }*/
 
         updateGameScreenForClient(clientWaiting);
-        
+
         try {
             clientWaiting.updateGameBoard(Info.waitingBoardForPlayer(clientWaiting).getBoardInfoPlacingShips(true, true));
         }
@@ -217,9 +217,9 @@ public class GameS {
 
     /**
      * TODO: JAVADOC
-     * 
+     *
      * @param player
-     * @param pos 
+     * @param pos
      */
     public static void clientClickedLeftBoard(Client player, Coord pos) {
         if (isClientPlaying(player)) {
@@ -240,9 +240,9 @@ public class GameS {
 
     /**
      * TODO: JAVADOC
-     * 
+     *
      * @param player
-     * @param pos 
+     * @param pos
      */
     public static void clientClickedRightBoard(Client player, Coord pos) {
         if (isClientPlaying(player)) {
@@ -268,7 +268,6 @@ public class GameS {
     }
 
     static void gameFinished(GamePlay game) {
-        // TODO: XXX finish & verify
         Info.removeGame(game);
     }
 
@@ -285,9 +284,8 @@ public class GameS {
         }
         else if (isClientWaiting(client)) {
             Info.removePlayerWaiting(client);
+            Info.removeWaitingBoardForPlayer(client);
         }
-
-        // TODO: XXX finish & verify
     }
 
     /**
