@@ -205,9 +205,7 @@ class GamePlay {
         moveIndex++;
 
         // Check if player won
-        boolean asas = boardForPlayer(opponent(player)).allShipsAreShot();
-        System.out.println("All ships are shot: " + asas);
-        if (asas) { // Player won
+        if (boardForPlayer(opponent(player)).allShipsAreShot()) { // Player won
             refreshClientInfo();
             finishGame("Game finished: player " + UserS.usernameFromClient(player) + " won!", player, null);
         }
