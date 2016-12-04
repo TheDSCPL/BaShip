@@ -8,32 +8,35 @@ import javax.swing.JComponent;
 import pt.up.fe.lpro1613.sharedlib.exceptions.UserMessageException;
 import pt.up.fe.lpro1613.sharedlib.structs.BoardUIInfo;
 import pt.up.fe.lpro1613.sharedlib.structs.GameInfo;
+import pt.up.fe.lpro1613.sharedlib.structs.GameSearch;
 import pt.up.fe.lpro1613.sharedlib.structs.GameUIInfo;
 import pt.up.fe.lpro1613.sharedlib.utils.Coord;
 
 /**
- * TODO: JAVADOC
+ * Class responsible for managing the state of the game of this user and getting
+ * other game-related info.
+ *
  * @author Alex
  */
 public class GameC {
 
-    private static boolean playingGame = false;
-
     /**
-     * TODO: JAVADOC
-     * @param currentlyPlayingOnly
-     * @param usernameFilter
-     * @param rowLimit
-     * @return
+     * Get all games played on the server. This list may include all games
+     * finished and/or currently being played.
+     *
+     * @param gs The parameters of this search for games
+     * @return A list of <code>GameInfo</code> objects with all its fields
+     * non-null.
      * @throws UserMessageException
      */
-    public static List<GameInfo> getGameList(boolean currentlyPlayingOnly, String usernameFilter, int rowLimit) throws UserMessageException {
-        return ClientMain.server.getGameList(currentlyPlayingOnly, usernameFilter, rowLimit);
+    public static List<GameInfo> getGameList(GameSearch gs) throws UserMessageException {
+        return ClientMain.server.getGameList(gs);
     }
 
     /**
-     * TODO: JAVADOC
-     * @throws UserMessageException 
+     * Ask the server to start a game with another random player.
+     *
+     * @throws UserMessageException
      */
     public static void startRandomGame() throws UserMessageException {
         ClientMain.server.startRandomGame();
@@ -91,10 +94,13 @@ public class GameC {
     }
 
     /**
-     * TODO: JAVADOC
-     * @param leftBoard
-     * @param c
-     * @throws UserMessageException 
+     * Inform the server that this user clicked on the board on a specific
+     * position.
+     *
+     * @param leftBoard True if player clicked on the left board, false if
+     * clicked on the right.
+     * @param c Coordinates of the square where the player clicked
+     * @throws UserMessageException
      */
     static public void clickBoardCoordinate(boolean leftBoard, Coord c) throws UserMessageException {
         if (leftBoard) {
@@ -106,16 +112,19 @@ public class GameC {
     }
 
     /**
-     * TODO: JAVADOC
-     * @throws UserMessageException 
+     * Inform the server that this user has finished placing ships and is ready
+     * to start the game.
+     *
+     * @throws UserMessageException
      */
     static public void clickReadyButton() throws UserMessageException {
         ClientMain.server.clickReadyButton();
     }
 
     /**
-     * TODO: JAVADOC
-     * @throws UserMessageException 
+     * Close the game. Switches the UI to the lobby and informs the server.
+     *
+     * @throws UserMessageException
      */
     static public void closeGame() throws UserMessageException {
         ClientMain.server.closeGame();

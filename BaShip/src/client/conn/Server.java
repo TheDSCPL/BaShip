@@ -169,20 +169,16 @@ public class Server implements Connection.Delegate {
     }
 
     /**
-     * Get all users registered on the server.
+     * Get a filtered list of all users registered on the server. This list may
+     * include all players, online and/or offline.
      *
-     * @param onlineOnly Filter by users that are online only.
-     * @param usernameFilter Filter by users that contain this string in their
-     * username. To include all users pass in an empty String.
-     * @param orderByColumn Which user information to order the results by.
-     * 1=id, 2=username, 3=rank, 4=ngames, 5=nwins, 6=nshots.
-     * @param rowLimit The maximum number of users to retrieve.
+     * @param us The filter parameters.
      * @return A list of <code>UserInfo</code> objects with all its fields
      * non-null.
      * @throws UserMessageException
      */
-    public List<UserInfo> getUserList(boolean onlineOnly, String usernameFilter, int orderByColumn, int rowLimit) throws UserMessageException {
-        Packet request = new Packet(Query.C_GetUserList, new UserSearch(onlineOnly, usernameFilter, orderByColumn, rowLimit));
+    public List<UserInfo> getUserList(UserSearch us) throws UserMessageException {
+        Packet request = new Packet(Query.C_GetUserList, us);
         Packet response = sendAndReceiveWrapper(request);
 
         if (response.query == Query.SR_ErrorMessage) {
@@ -194,20 +190,16 @@ public class Server implements Connection.Delegate {
     }
 
     /**
-     * Get all games played on the server. This list may include all games
-     * finished and/or currently being played.
+     * Get a filtered list of all games played on the server. This list may
+     * include all games finished and/or currently being played.
      *
-     * @param currentlyPlayingOnly Return only games currently being played on
-     * the sever.
-     * @param usernameFilter Filter by games whose players have usernames that
-     * contain this string. To ignore this filter pass in an empty String.
-     * @param rowLimit The maximum number of games to retrieve.
+     * @param gs The filter parameters.
      * @return A list of <code>GameInfo</code> objects with all its fields
      * non-null.
      * @throws UserMessageException
      */
-    public List<GameInfo> getGameList(boolean currentlyPlayingOnly, String usernameFilter, int rowLimit) throws UserMessageException {
-        Packet request = new Packet(Query.C_GetGameList, new GameSearch(currentlyPlayingOnly, usernameFilter, rowLimit));
+    public List<GameInfo> getGameList(GameSearch gs) throws UserMessageException {
+        Packet request = new Packet(Query.C_GetGameList, gs);
         Packet response = sendAndReceiveWrapper(request);
 
         if (response.query == Query.SR_ErrorMessage) {
@@ -236,9 +228,9 @@ public class Server implements Connection.Delegate {
 
     /**
      * Ask the server to start a game with another random player. If the server
- decides to start a game, it will later (not as a response to this packet)
- send a S_UpdateGameScreen packet to this client that will be handled by
- this class separately.
+     * decides to start a game, it will later (not as a response to this packet)
+     * send a S_UpdateGameScreen packet to this client that will be handled by
+     * this class separately.
      *
      * @throws UserMessageException
      */
@@ -253,9 +245,9 @@ public class Server implements Connection.Delegate {
 
     /**
      * Ask the server to start a game with another (specific) player. If the
- server decides to start a game, it will later (not as a response to this
- packet) send a S_UpdateGameScreen packet to this client that will be
- handled by this class separately.
+     * server decides to start a game, it will later (not as a response to this
+     * packet) send a S_UpdateGameScreen packet to this client that will be
+     * handled by this class separately.
      *
      * @param id The id of the other player, to which the server will send an
      * invite
@@ -269,7 +261,6 @@ public class Server implements Connection.Delegate {
             throw new UserMessageException("Could not start game with player: " + ((ErrorMessage) response.info).message);
         }
     }*/
-
     /**
      * Inform the server if the player accepted the invitation or not. This
      * should be called after receiving an invitation from another player.
@@ -282,9 +273,9 @@ public class Server implements Connection.Delegate {
         Packet request = new Packet(Query.C_AnswerGameInvitation, accepted);
         sendOnlyWrapper(request);
     }*/
-
     /**
-     * TODO: JAVADOC
+     * Inform the server that this user clicked on the left board on a specific
+     * position.
      *
      * @param pos The coordinates of the square on the grid.
      * @throws UserMessageException
@@ -293,9 +284,10 @@ public class Server implements Connection.Delegate {
         Packet request = new Packet(Query.C_ClickLeftBoard, pos);
         sendAndReceiveWrapper(request); // Response is an empty packet, just for confirmation
     }
-    
+
     /**
-     * TODO: JAVADOC
+     * Inform the server that this user clicked on the right board on a specific
+     * position.
      *
      * @param pos The coordinates of the square on the grid.
      * @throws UserMessageException

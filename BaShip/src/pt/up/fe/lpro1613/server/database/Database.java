@@ -29,6 +29,10 @@ public class Database {
 
     private static BoneCP connectionPool;
 
+    /**
+     * Connect to the SQL database and set up the thread pool. Needs to be
+     * called before any attempt to run SQl queries.
+     */
     public static void initialize() {
         System.out.print("Connecting to the database... ");
 

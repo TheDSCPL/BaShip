@@ -17,8 +17,10 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import pt.up.fe.lpro1613.sharedlib.exceptions.UserMessageException;
 import pt.up.fe.lpro1613.sharedlib.structs.GameInfo;
+import pt.up.fe.lpro1613.sharedlib.structs.GameSearch;
 import pt.up.fe.lpro1613.sharedlib.structs.Message;
 import pt.up.fe.lpro1613.sharedlib.structs.UserInfo;
+import pt.up.fe.lpro1613.sharedlib.structs.UserSearch;
 
 /**
  *
@@ -334,7 +336,7 @@ public class LobbyTabbedPanel extends JPanel {
             throw new IndexOutOfBoundsException("Invalid column index to sort");
         }
         try {
-            List<UserInfo> userList = UserC.getUserList(false, filterUserField.getText(), columnToSortWith, maxUsers);
+            List<UserInfo> userList = UserC.getUserList(new UserSearch(false, filterUserField.getText(), columnToSortWith, maxUsers));
             while (usersTableModel.getRowCount() > 0) {
                 usersTableModel.removeRow(usersTableModel.getRowCount() - 1);
             }
@@ -354,7 +356,7 @@ public class LobbyTabbedPanel extends JPanel {
         }
         try {
             // TODO: checkbox hardcoded to false
-            List<GameInfo> gamesList = GameC.getGameList(false, filterGamesField.getText(), maxUsers);
+            List<GameInfo> gamesList = GameC.getGameList(new GameSearch(false, filterGamesField.getText(), maxUsers));
             while (gamesTableModel.getRowCount() > 0) {
                 gamesTableModel.removeRow(gamesTableModel.getRowCount() - 1);
             }

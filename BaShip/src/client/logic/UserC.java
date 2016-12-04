@@ -5,9 +5,12 @@ import java.util.List;
 import java.util.regex.*;
 import pt.up.fe.lpro1613.sharedlib.exceptions.UserMessageException;
 import pt.up.fe.lpro1613.sharedlib.structs.UserInfo;
+import pt.up.fe.lpro1613.sharedlib.structs.UserSearch;
 
 /**
- * TODO: JAVADOC
+ * Class responsible for managing the state of the user (logged-in or not) and
+ * performing other user-related tasks.
+ *
  * @author Alex
  */
 public class UserC {
@@ -113,16 +116,16 @@ public class UserC {
     }
 
     /**
-     * TODO: JAVADOC
-     * @param onlineOnly
-     * @param text
-     * @param columnToSortWith
-     * @param maxUsers
-     * @return
-     * @throws UserMessageException 
+     * Get a filtered list of all users registered on the server. This list may
+     * include all players, online and/or offline.
+     *
+     * @param us The filter parameters.
+     * @return A list of <code>UserInfo</code> objects with all its fields
+     * non-null.
+     * @throws UserMessageException
      */
-    public static List<UserInfo> getUserList(boolean onlineOnly, String text, int columnToSortWith, int maxUsers) throws UserMessageException {
-        return ClientMain.server.getUserList(onlineOnly, text, maxUsers, maxUsers);
+    public static List<UserInfo> getUserList(UserSearch us) throws UserMessageException {
+        return ClientMain.server.getUserList(us);
     }
 
 }

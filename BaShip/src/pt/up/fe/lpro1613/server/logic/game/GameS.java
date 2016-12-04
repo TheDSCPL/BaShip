@@ -216,7 +216,8 @@ public class GameS {
     }
 
     /**
-     * TODO: JAVADOC
+     * Informs the state machine of the game that the player clicked on the left
+     * board, which then performs the appropriate operations.
      *
      * @param player
      * @param pos
@@ -239,7 +240,8 @@ public class GameS {
     }
 
     /**
-     * TODO: JAVADOC
+     * Informs the state machine of the game that the player clicked on the right
+     * board, which then performs the appropriate operations.
      *
      * @param player
      * @param pos

@@ -2,6 +2,11 @@ package pt.up.fe.lpro1613.sharedlib.constants;
 
 import java.util.*;
 
+/**
+ * Class holder of various board-related constants.
+ *
+ * @author Alex
+ */
 public class BoardK {
 
     /**
@@ -23,7 +28,7 @@ public class BoardK {
                     put(4, 1);
                 }
             });
-    
+
     /**
      * Total number of ships (for one player only) in a game of Battleship
      */

@@ -6,7 +6,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
 /**
- * TODO: JAVADOC
+ * Class holder of various UI-related constants, such as colors and images.
  *
  * @author Alex
  */

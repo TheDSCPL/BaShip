@@ -13,8 +13,16 @@ import java.util.List;
  */
 public class Matrix<T> {
 
+    /**
+     * Width of the matrix.
+     */
     public final int sx;
+    
+    /**
+     * Height of the matrix.
+     */
     public final int sy;
+    
     private final List<List<T>> list;
 
     /**

@@ -10,18 +10,21 @@ import pt.up.fe.lpro1613.sharedlib.exceptions.UserMessageException;
 import pt.up.fe.lpro1613.sharedlib.structs.Message;
 
 /**
- * TODO: JAVADOC
+ * Class responsible for managing the global chat.
  *
  * @author Alex
  */
 public class GlobalChatC {
 
+    /**
+     * List of messages received since the player logged-in.
+     */
     public static List<Message> messages = Collections.synchronizedList(new ArrayList<>());
 
     /**
-     * Called automatically by the <code>Server</code> class whenever an
-     * <code>SReceiveGlobalMessage</code> packet is received from the server.
-     * Updates the global chat UI accordingly.
+     * Updates the global chat UI accordingly. Called automatically by the
+     * <code>Server</code> class whenever an <code>SReceiveGlobalMessage</code>
+     * packet is received from the server.
      *
      * @param message The message object to be displayed on the UI
      */
@@ -37,9 +40,10 @@ public class GlobalChatC {
     }
 
     /**
-     * TODO: JAVADOC
+     * Send a global message to the server, that will then distribute the
+     * message for all currently logged-in players.
      *
-     * @param text
+     * @param text The text of the message
      * @throws UserMessageException
      */
     public static void sendGlobalMessage(String text) throws UserMessageException {

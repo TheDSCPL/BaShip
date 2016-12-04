@@ -24,7 +24,10 @@ import pt.up.fe.lpro1613.sharedlib.structs.UserSearch;
 import pt.up.fe.lpro1613.sharedlib.utils.Coord;
 
 /**
- * TODO: JAVADOC
+ * Wrapper around a Connection object that implements the Server-Client protocol
+ * for the server side. Methods called on this class send the corresponding
+ * <code>Packet</code> objects to the client, and wait for a response
+ * <code>Packet</code> if necessary.
  *
  * @author Alex
  */

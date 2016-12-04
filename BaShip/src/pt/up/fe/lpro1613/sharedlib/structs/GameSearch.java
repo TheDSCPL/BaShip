@@ -8,8 +8,21 @@ package pt.up.fe.lpro1613.sharedlib.structs;
  */
 public class GameSearch {
 
+    /**
+     * Filter by games that are currently being played. That means, ignore any
+     * game played in the past.
+     */
     public final boolean currentlyPlayingOnly;
+
+    /**
+     * Filter by games played by players whose username contains this string. To
+     * ignore this filter pass in an empty String.
+     */
     public final String usernameFilter;
+
+    /**
+     * Maximum number of games to fetch from the DB.
+     */
     public final int rowLimit;
 
     public GameSearch(boolean currentlyPlayingOnly, String usernameFilter, int rowLimit) {
