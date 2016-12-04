@@ -65,8 +65,19 @@ CREATE VIEW user_stats AS SELECT t1.uid,
              LEFT JOIN games ON users.uid = games.player1 OR users.uid = games.player2
           GROUP BY users.uid) t2 USING (uid)
      JOIN ( SELECT users.uid,
-            count(DISTINCT moves.moveid) AS nshots
+            count(DISTINCT tbl1.moveid) AS nshots
            FROM users
-             LEFT JOIN games ON users.uid = games.player1 OR users.uid = games.player2
-             LEFT JOIN moves USING (gmid)
+             LEFT JOIN ( SELECT users_1.uid,
+                    moves.moveid
+                   FROM users users_1
+                     JOIN games ON users_1.uid = games.player1
+                     LEFT JOIN moves USING (gmid)
+                  WHERE moves.player = 1
+                UNION
+                 SELECT users_1.uid,
+                    moves.moveid
+                   FROM users users_1
+                     JOIN games ON users_1.uid = games.player2
+                     LEFT JOIN moves USING (gmid)
+                  WHERE moves.player = 2) tbl1 USING (uid)
           GROUP BY users.uid) t3 USING (uid);

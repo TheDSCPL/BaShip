@@ -445,9 +445,7 @@ public class LobbyTabbedPanel extends JPanel {
 
         sb.append("</body>").append("</html>");
 
-        System.out.println(sb.toString());
-        globalChatTextPane.setText(sb.toString()); //"[" + m.timestamp + "] " + m.username + "\n" + m.text + "\n\n");
-        System.out.println(globalChatTextPane.getText());
+        globalChatTextPane.setText(sb.toString());
         globalChatTextPane.setCaretPosition(globalChatTextPane.getDocument().getLength()); // Scroll to bottom
     }
 
