@@ -1,7 +1,9 @@
 package server.logic.game;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -14,6 +16,7 @@ import server.logic.UserS;
 import sharedlib.exceptions.ConnectionException;
 import sharedlib.structs.BoardUIInfo;
 import sharedlib.structs.GameUIInfo;
+import sharedlib.structs.GameUIInfo.UIType;
 import sharedlib.structs.Message;
 import sharedlib.utils.Coord;
 
@@ -28,6 +31,8 @@ class GamePlay {
     private boolean finished;
     private boolean p1Turn;
     private int moveIndex;
+
+    private static final List<Message> messages = new ArrayList<>();
 
     private final HashSet<Client> spectators = new HashSet<>();
 
@@ -68,7 +73,14 @@ class GamePlay {
         refreshClientInfoForClient(client);
         
         // Send messages
-        // TODO: XXX
+        for (Message m : messages) {
+            try {
+                client.informAboutGameMessage(m);
+            }
+            catch (ConnectionException ex) {
+                Logger.getLogger(GamePlay.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 
     public synchronized void removeSpectator(Client client) {
@@ -260,6 +272,8 @@ class GamePlay {
         // TODO: correct this "UserS.usernameFromClient(player)"
         Message message = new Message(m.id, m.userID, UserS.usernameFromClient(player), m.timestamp, m.text);
         
+        messages.add(message);
+        
         player1.informAboutGameMessage(message);
         player2.informAboutGameMessage(message);
         
@@ -295,7 +309,8 @@ class GamePlay {
                     placingShips ? "You can place ships" : "Please wait for opponent",
                     placingShips && boardForPlayer(client).placedShipsAreValid(),
                     gameStarted ? (client == player1 ? p1Turn : !p1Turn) : false,
-                    gameStarted ? (client == player1 ? !p1Turn : p1Turn) : false
+                    gameStarted ? (client == player1 ? !p1Turn : p1Turn) : false,
+                    UIType.Play
             );
         }
         else {
@@ -305,7 +320,8 @@ class GamePlay {
                     true,
                     null, null, null,
                     gameStarted ? p1Turn : false,
-                    gameStarted ? !p1Turn : false
+                    gameStarted ? !p1Turn : false,
+                    UIType.Spectate
             );
         }
 

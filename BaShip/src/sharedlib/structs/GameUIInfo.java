@@ -9,8 +9,9 @@ public class GameUIInfo implements UIInfo{
     public final Boolean showReadyButton;
     public final Boolean player1Turn;
     public final Boolean player2Turn;
+    public final UIType uiType;
 
-    public GameUIInfo(String titleLeft, String titleRight, Boolean showRightBoard, String waitMessageLine1, String waitMessageLine2, Boolean showReadyButton, Boolean player1Turn, Boolean player2Turn) {
+    public GameUIInfo(String titleLeft, String titleRight, Boolean showRightBoard, String waitMessageLine1, String waitMessageLine2, Boolean showReadyButton, Boolean player1Turn, Boolean player2Turn, UIType uiType) {
         this.titleLeft = titleLeft;
         this.titleRight = titleRight;
         this.showRightBoard = showRightBoard;
@@ -19,6 +20,11 @@ public class GameUIInfo implements UIInfo{
         this.showReadyButton = showReadyButton;
         this.player1Turn = player1Turn;
         this.player2Turn = player2Turn;
+        this.uiType = uiType;
+    }
+    
+    public enum UIType {
+        Play, Spectate, Replay;
     }
 
     @Override

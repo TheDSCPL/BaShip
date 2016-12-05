@@ -22,8 +22,8 @@ public class GameChatC {
     }
     
     /**
-     * Updates the global chat UI accordingly. Called automatically by the
-     * <code>Server</code> class whenever an <code>SReceiveGlobalMessage</code>
+     * Updates the game chat UI accordingly. Called automatically by the
+     * <code>Server</code> class whenever an <code>SReceiveGameMessage</code>
      * packet is received from the server.
      *
      * @param message The message object to be displayed on the UI
@@ -40,8 +40,8 @@ public class GameChatC {
     }
 
     /**
-     * Send a global message to the server, that will then distribute the
-     * message for all currently logged-in players.
+     * Send a game message to the server, that will then distribute the
+     * message for all players and spectators of the game.
      *
      * @param text The text of the message
      * @throws UserMessageException

@@ -5,6 +5,8 @@ import client.ui.game.GamePanel;
 import client.ui.lobby.LobbyPanel;
 import java.util.List;
 import javax.swing.JComponent;
+import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
 import sharedlib.exceptions.UserMessageException;
 import sharedlib.structs.BoardUIInfo;
 import sharedlib.structs.GameInfo;
@@ -133,7 +135,8 @@ public class GameC {
      */
     public static void gameFinished(String message) {
         ClientMain.runOnUI(() -> {
-            ClientMain.showInfo(message);
+            // TODO: abonitar a coisa (não copiar código da funcao showInfo)
+            JOptionPane.showMessageDialog(ClientMain.mainFrame, message, "Info", INFORMATION_MESSAGE);            
             ClientMain.mainFrame.changeToPanel(new LobbyPanel());
         });
     }

@@ -12,6 +12,7 @@ import server.logic.UserS;
 import sharedlib.exceptions.ConnectionException;
 import sharedlib.exceptions.UserMessageException;
 import sharedlib.structs.GameUIInfo;
+import sharedlib.structs.GameUIInfo.UIType;
 import sharedlib.utils.Coord;
 
 /**
@@ -343,7 +344,8 @@ public class GameS {
             gsi = new GameUIInfo(
                     UserS.usernameFromClient(client), "<waiting>", false,
                     "Waiting for opponent", "You can place ships", false,
-                    false, false
+                    false, false,
+                    UIType.Play
             );
         }
         /*else if (playersWaitingForPlayer.containsValue(client)) {

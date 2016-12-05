@@ -361,14 +361,21 @@ public class LobbyTabbedPanel extends JPanel {
             }
             SimpleDateFormat dF = new SimpleDateFormat("yyyy.MM.dd 'at' HH:mm:ss");
             for (int i = 0; i < gamesList.size(); i++) {
-                try {
-                    GameInfo gameInfo = gamesList.get(i);
-                    gamesTableModel.addRow(new Object[]{gameInfo.player1Username + " VS " + gameInfo.player2Username,
-                                                        gameInfo.state != GameInfo.State.Finished ? ("Playing: " + dF.format(gameInfo.startDate)) : "Played on: " + dF.format(gameInfo.endDate)});
+
+                /*GameInfo gameInfo = gamesList.get(i);
+                String s1 = gameInfo.player1Username + " VS " + gameInfo.player2Username;
+                
+                switch (gameInfo.state) {
+                    case Finished:
+                        break;
+                    case Created:
+                        break;
+                    case 
                 }
-                catch (Exception ignored) {
-                    // TODO: code in the try statement has bugs and crashes
-                }
+                
+                String s2 = gameInfo.state != GameInfo.State.Finished ? ("Playing: " + dF.format(gameInfo.startDate)) : "Played on: " + dF.format(gameInfo.endDate);
+                gamesTableModel.addRow(new Object[]{s1, s2});*/
+
             }
         }
         catch (UserMessageException ex) {
