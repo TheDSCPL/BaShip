@@ -1,7 +1,7 @@
 package client.logic;
 
 import client.ClientMain;
-import client.ui.lobby.LobbyPanel;
+import client.ui.game.GamePanel;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -10,11 +10,10 @@ import sharedlib.exceptions.UserMessageException;
 import sharedlib.structs.Message;
 
 /**
- * Class responsible for managing the global chat.
  *
  * @author Alex
  */
-public class GlobalChatC {
+public class GameChatC {
 
     private static final List<Message> messages = Collections.synchronizedList(new ArrayList<>());
 
@@ -25,13 +24,13 @@ public class GlobalChatC {
      *
      * @param message The message object to be displayed on the UI
      */
-    public static void receiveGlobalMessage(Message message) {
+    public static void receiveGameMessage(Message message) {
         messages.add(message);
 
         ClientMain.runOnUI(() -> {
             JComponent panel = ClientMain.mainFrame.getCurrentPanel();
-            if (panel instanceof LobbyPanel) {
-                ((LobbyPanel) panel).refreshGlobalMessages();
+            if (panel instanceof GamePanel) {
+                ((GamePanel) panel).refreshGameMessages();
             }
         });
     }
@@ -43,8 +42,8 @@ public class GlobalChatC {
      * @param text The text of the message
      * @throws UserMessageException
      */
-    public static void sendGlobalMessage(String text) throws UserMessageException {
-        ClientMain.server.sendGlobalMessage(text);
+    public static void sendGameMessage(String text) throws UserMessageException {
+        ClientMain.server.sendGameMessage(text);
     }
 
     public static String messagesHTML() {
@@ -72,5 +71,4 @@ public class GlobalChatC {
 
         return sb.toString();
     }
-
 }

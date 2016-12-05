@@ -5,10 +5,10 @@
  */
 package client.ui.game.Components;
 
-import sharedlib.exceptions.UserMessageException;
 import client.ClientMain;
 import client.logic.*;
 import java.util.logging.*;
+import sharedlib.exceptions.UserMessageException;
 
 /**
  *
@@ -32,15 +32,10 @@ public class GameChat extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        scrollableGameChat = new javax.swing.JScrollPane();
-        gameChatTextAre = new javax.swing.JTextArea();
         gameChatSendMessageField = new javax.swing.JTextField();
         gameChatSendButton = new javax.swing.JButton();
-
-        gameChatTextAre.setEditable(false);
-        gameChatTextAre.setColumns(20);
-        gameChatTextAre.setRows(5);
-        scrollableGameChat.setViewportView(gameChatTextAre);
+        jScrollPane1 = new javax.swing.JScrollPane();
+        chatPane = new javax.swing.JTextPane();
 
         gameChatSendMessageField.setToolTipText("Press enter to send message");
         gameChatSendMessageField.setMaximumSize(new java.awt.Dimension(2147483647, 26));
@@ -52,6 +47,8 @@ public class GameChat extends javax.swing.JPanel {
             }
         });
 
+        jScrollPane1.setViewportView(chatPane);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -59,9 +56,9 @@ public class GameChat extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(scrollableGameChat, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(gameChatSendMessageField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(gameChatSendMessageField, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(gameChatSendButton)))
                 .addContainerGap())
@@ -70,7 +67,7 @@ public class GameChat extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(scrollableGameChat, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(gameChatSendMessageField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -92,9 +89,9 @@ public class GameChat extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextPane chatPane;
     private javax.swing.JButton gameChatSendButton;
     private javax.swing.JTextField gameChatSendMessageField;
-    private javax.swing.JTextArea gameChatTextAre;
-    private javax.swing.JScrollPane scrollableGameChat;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

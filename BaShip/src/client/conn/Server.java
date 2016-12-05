@@ -48,10 +48,10 @@ public class Server implements Connection.Delegate {
         Packet response = null;
 
         switch (request.query) {
-            /*case S_ReceiveGameMessage: {
-                GameC.receiveGameMessage((Message) request.info);
+            case S_ReceiveGameMessage: {
+                GameChatC.receiveGameMessage((Message) request.info);
                 break;
-            }*/
+            }
             case S_ReceiveGlobalMessage: {
                 GlobalChatC.receiveGlobalMessage((Message) request.info);
                 break;
@@ -223,6 +223,15 @@ public class Server implements Connection.Delegate {
 
         if (response.query == Query.SR_ErrorMessage) {
             throw new UserMessageException("Could not send global message: " + ((ErrorMessage) response.info).message);
+        }
+    }
+    
+    public void sendGameMessage(String message) throws UserMessageException {
+        Packet request = new Packet(Query.C_SendGameMessage, message);
+        Packet response = sendAndReceiveWrapper(request);
+
+        if (response.query == Query.SR_ErrorMessage) {
+            throw new UserMessageException("Could not send game message: " + ((ErrorMessage) response.info).message);
         }
     }
 

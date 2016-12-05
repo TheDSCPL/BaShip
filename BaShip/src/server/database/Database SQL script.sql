@@ -35,7 +35,7 @@ CREATE TABLE gamechat (
     mssgid BIGSERIAL PRIMARY KEY,
     gmid INTEGER NOT NULL REFERENCES games,
     player INTEGER NOT NULL CHECK (player IN (1,2)),
-    timestamp TIME NOT NULL,
+    timestamp TIMESTAMP WITH TIME ZONE NOT NULL,
     txt TEXT NOT NULL,
     UNIQUE(gmid, player, timestamp)
 );

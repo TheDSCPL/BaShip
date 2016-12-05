@@ -69,6 +69,10 @@ public final class GamePanel extends javax.swing.JPanel {
     private final BoardContainer rightBoard;
     private final TopBar topBar;
 
+    public void refreshGameMessages() {
+        
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
 }

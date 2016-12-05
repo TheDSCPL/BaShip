@@ -202,7 +202,11 @@ final public class Connection extends Thread {
                 }
             }
             catch (IOException | PacketException ex) {
-                Logger.getLogger(this.getClass().getName()).log(Level.WARNING, "Error when processing packet -> disconnecting", ex);
+                Logger.getLogger(Connection.class.getName()).log(Level.WARNING, "Error when processing packet -> disconnecting", ex);
+                break;
+            }
+            catch (Throwable ex) {
+                Logger.getLogger(Connection.class.getName()).log(Level.WARNING, "Unknown error in connection loop -> disconnecting", ex);
                 break;
             }
         }
@@ -210,7 +214,5 @@ final public class Connection extends Thread {
         if (delegate != null) {
             delegate.disconnected(this);
         }
-
-        System.gc();
     }
 }

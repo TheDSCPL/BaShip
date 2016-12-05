@@ -18,7 +18,6 @@ import javax.swing.table.DefaultTableModel;
 import sharedlib.exceptions.UserMessageException;
 import sharedlib.structs.GameInfo;
 import sharedlib.structs.GameSearch;
-import sharedlib.structs.Message;
 import sharedlib.structs.UserInfo;
 import sharedlib.structs.UserSearch;
 
@@ -423,29 +422,7 @@ public class LobbyTabbedPanel extends JPanel {
     }//GEN-LAST:event_globalChatSendButtonActionPerformed
 
     public void refreshGlobalMessages() {
-        StringBuilder sb = new StringBuilder();
-
-        sb.append("<html>").append("<head>").append("</head>").append("<body>");
-        
-        for (Message m : GlobalChatC.messages) {
-            sb.append("<p>")
-                    .append("<font size=6>")
-                    .append("<b>")
-                    .append(m.username)
-                    .append("</b>")
-                    .append("</font>");
-            sb.append("<br>")
-                    .append("<font size=4; color='red'>")
-                    .append(m.timestamp)
-                    .append("</font>");
-            sb.append("<br>")
-                    .append(m.text);
-            sb.append("</p>");
-        }
-
-        sb.append("</body>").append("</html>");
-
-        globalChatTextPane.setText(sb.toString());
+        globalChatTextPane.setText(GlobalChatC.messagesHTML());
         globalChatTextPane.setCaretPosition(globalChatTextPane.getDocument().getLength()); // Scroll to bottom
     }
 

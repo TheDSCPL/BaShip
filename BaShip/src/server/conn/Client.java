@@ -125,6 +125,21 @@ public class Client implements Connection.Delegate {
                 }
                 break;
             }
+            case C_SendGameMessage: {
+                try {
+                    GameS.sendGameMessage(this, (String) request.info);
+                    response = new Packet();
+                }
+                catch (SQLException ex) {
+                    Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+                    response = new Packet(Query.SR_ErrorMessage, new ErrorMessage("Could not run SQL query: " + ex.getMessage()));
+                }
+                catch (ConnectionException ex) {
+                    Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+                    response = new Packet(Query.SR_ErrorMessage, new ErrorMessage("Connection problem: " + ex.getMessage()));
+                }
+                break;
+            }
             case C_StartRandomGame: {
                 try {
                     GameS.startRandomGame(this);
@@ -184,6 +199,10 @@ public class Client implements Connection.Delegate {
      */
     public void informAboutGlobalMessage(Message msg) throws ConnectionException {
         connection.sendOnly(new Packet(Query.S_ReceiveGlobalMessage, msg));
+    }
+
+    public void informAboutGameMessage(Message msg) throws ConnectionException {
+        connection.sendOnly(new Packet(Query.S_ReceiveGameMessage, msg));
     }
 
     /**

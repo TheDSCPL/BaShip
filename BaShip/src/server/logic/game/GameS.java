@@ -240,8 +240,8 @@ public class GameS {
     }
 
     /**
-     * Informs the state machine of the game that the player clicked on the right
-     * board, which then performs the appropriate operations.
+     * Informs the state machine of the game that the player clicked on the
+     * right board, which then performs the appropriate operations.
      *
      * @param player
      * @param pos
@@ -260,12 +260,21 @@ public class GameS {
      *
      * @param client The player who closed the game.
      */
-    public static void clientClosedGame(Client client) {
+    public synchronized static void clientClosedGame(Client client) {
         if (Info.isPlaying(client)) {
             Info.gameFromPlayer(client).clientClosedGame(client);
         }
         else if (Info.isWaitingForRandomGame(client)) {
             Info.removePlayerWaiting(client);
+        }
+    }
+
+    public synchronized static void sendGameMessage(Client player, String message) throws SQLException, ConnectionException {
+        if (isClientPlaying(player)) {
+            Info.gameFromPlayer(player).playerSentMessage(player, message);
+        }
+        else {
+            Logger.getLogger(GameS.class.getName()).log(Level.SEVERE, "Player {0} cannot send message because he's not playing any game", player);
         }
     }
 

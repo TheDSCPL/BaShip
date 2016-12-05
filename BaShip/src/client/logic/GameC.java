@@ -43,15 +43,6 @@ public class GameC {
     }
 
     /**
-     * Called automatically by the <code>Server</code> class whenever a new
-     * in-game message is received.
-     *
-     * @param message The Message object
-     */
-    /*static public void receiveGameMessage(Message message) {
-
-    }*/
-    /**
      * Called automatically by the <code>Server</code> class whenever an
      * invitation is received. Shows a pop-up to the user with the given message
      * String, allowing the user to choose whether he wants to accept the

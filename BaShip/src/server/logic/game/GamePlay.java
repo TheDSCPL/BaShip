@@ -6,6 +6,7 @@ import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import server.conn.Client;
+import server.database.GameChatDB;
 import server.database.GameDB;
 import server.database.MoveDB;
 import server.database.ShipDB;
@@ -13,6 +14,7 @@ import server.logic.UserS;
 import sharedlib.exceptions.ConnectionException;
 import sharedlib.structs.BoardUIInfo;
 import sharedlib.structs.GameUIInfo;
+import sharedlib.structs.Message;
 import sharedlib.utils.Coord;
 
 class GamePlay {
@@ -27,7 +29,7 @@ class GamePlay {
     private boolean p1Turn;
     private int moveIndex;
 
-    private final HashSet<Client> spectators = new HashSet<>(); // TODO: make this set thread-safe!
+    private final HashSet<Client> spectators = new HashSet<>();
 
     private enum PlayerState {
         PlacingShips, Waiting, Playing
@@ -59,7 +61,21 @@ class GamePlay {
         refreshClientInfo();
     }
 
-    public void clientClosedGame(Client client) {
+    public synchronized void addSpectator(Client client) {
+        spectators.add(client);
+        
+        // Update UI
+        refreshClientInfoForClient(client);
+        
+        // Send messages
+        // TODO: XXX
+    }
+
+    public synchronized void removeSpectator(Client client) {
+        spectators.remove(client);
+    }
+
+    public synchronized void clientClosedGame(Client client) {
         if (isPlayer(client)) {
             finishGame("Game ended. Player " + UserS.usernameFromClient(client) + " closed game.", opponent(client), client);
         }
@@ -68,7 +84,7 @@ class GamePlay {
         }
     }
 
-    public void clientDisconnected(Client client) {
+    public synchronized void clientDisconnected(Client client) {
         if (isPlayer(client)) {
             finishGame("Game ended. Player " + UserS.usernameFromClient(client) + " disconnected.", opponent(client), null);
         }
@@ -123,7 +139,7 @@ class GamePlay {
         GameS.gameFinished(this);
     }
 
-    public void clickReadyButton(Client player) {
+    public synchronized void clickReadyButton(Client player) {
         // Verify if player is in this game
         if (!isPlayer(player)) {
             return;
@@ -164,7 +180,7 @@ class GamePlay {
         refreshClientInfo();
     }
 
-    public void playerClickedRightBoard(Client player, Coord pos) {
+    public synchronized void playerClickedRightBoard(Client player, Coord pos) {
         // Verify if game has finished
         if (finished) {
             return;
@@ -215,7 +231,7 @@ class GamePlay {
         }
     }
 
-    public void playerClickedLeftBoard(Client player, Coord pos) {
+    public synchronized void playerClickedLeftBoard(Client player, Coord pos) {
         // Verify if game has finished
         if (finished) {
             return;
@@ -238,6 +254,17 @@ class GamePlay {
         refreshClientInfo();
     }
 
+    public synchronized void playerSentMessage(Client player, String text) throws SQLException, ConnectionException {
+        Message message = GameChatDB.saveMessage(gameID, player == player1 ? 1 : 2, text);
+        
+        player1.informAboutGameMessage(message);
+        player2.informAboutGameMessage(message);
+        
+        for (Client c : spectators) {
+            c.informAboutGameMessage(message);
+        }
+    }
+    
     private void refreshClientInfo() {
         refreshClientInfoForClient(player1);
         refreshClientInfoForClient(player2);
@@ -251,12 +278,12 @@ class GamePlay {
 
     private void refreshGameScreenForClient(Client client) {
         GameUIInfo info;
+        boolean gameStarted = gameHasStarted();
 
         if (isPlayer(client)) {
             boolean opponentReady = stateForPlayer(opponent(client)) == PlayerState.Waiting;
             boolean placingShips = stateForPlayer(client) == PlayerState.PlacingShips;
-            boolean playing = stateForPlayer(client) == PlayerState.Playing;
-            
+
             info = new GameUIInfo(
                     UserS.usernameFromClient(client),
                     UserS.usernameFromClient(opponent(client)),
@@ -264,8 +291,8 @@ class GamePlay {
                     opponentReady ? "Opponent is ready" : "Opponent is placing ships",
                     placingShips ? "You can place ships" : "Please wait for opponent",
                     placingShips && boardForPlayer(client).placedShipsAreValid(),
-                    playing ? (client == player1 ? p1Turn : !p1Turn) : false,
-                    playing ? (client == player1 ? !p1Turn : p1Turn) : false
+                    gameStarted ? (client == player1 ? p1Turn : !p1Turn) : false,
+                    gameStarted ? (client == player1 ? !p1Turn : p1Turn) : false
             );
         }
         else {
@@ -274,7 +301,8 @@ class GamePlay {
                     UserS.usernameFromClient(player2),
                     true,
                     null, null, null,
-                    p1Turn, !p1Turn
+                    gameStarted ? p1Turn : false,
+                    gameStarted ? !p1Turn : false
             );
         }
 
@@ -324,15 +352,15 @@ class GamePlay {
         return null;
     }
 
-    public boolean isPlayer(Client player) {
-        return player == player1 || player == player2;
+    public synchronized boolean isPlayer(Client client) {
+        return client == player1 || client == player2;
     }
 
-    public boolean isSpectator(Client player) {
-        return spectators.contains(player);
+    public synchronized boolean isSpectator(Client client) {
+        return spectators.contains(client);
     }
 
-    public boolean gameHasStarted() {
+    public synchronized boolean gameHasStarted() {
         return p1State == PlayerState.Playing && p2State == PlayerState.Playing;
     }
 
@@ -369,7 +397,7 @@ class GamePlay {
         return null;
     }
 
-    public int getCurrentMoveNumber() {
+    public synchronized int getCurrentMoveNumber() {
         return moveIndex;
     }
 }
