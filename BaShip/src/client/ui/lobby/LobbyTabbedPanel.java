@@ -119,6 +119,7 @@ public class LobbyTabbedPanel extends JPanel {
         filterUserField = new javax.swing.JTextField();
         applyUserFilterButton = new javax.swing.JButton();
         clearUserFilterButton = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox<>();
         gamesTab = new javax.swing.JLayeredPane();
         scrollableGamesTable = new javax.swing.JScrollPane();
         gamesTable = new javax.swing.JTable();
@@ -158,10 +159,13 @@ public class LobbyTabbedPanel extends JPanel {
             }
         });
 
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         usersTab.setLayer(scrollableUsersTable, javax.swing.JLayeredPane.DEFAULT_LAYER);
         usersTab.setLayer(filterUserField, javax.swing.JLayeredPane.DEFAULT_LAYER);
         usersTab.setLayer(applyUserFilterButton, javax.swing.JLayeredPane.DEFAULT_LAYER);
         usersTab.setLayer(clearUserFilterButton, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        usersTab.setLayer(jComboBox1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout usersTabLayout = new javax.swing.GroupLayout(usersTab);
         usersTab.setLayout(usersTabLayout);
@@ -177,6 +181,8 @@ public class LobbyTabbedPanel extends JPanel {
                         .addComponent(applyUserFilterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(clearUserFilterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -186,10 +192,12 @@ public class LobbyTabbedPanel extends JPanel {
                 .addContainerGap()
                 .addComponent(scrollableUsersTable, javax.swing.GroupLayout.DEFAULT_SIZE, 483, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(usersTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(applyUserFilterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(clearUserFilterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(filterUserField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE))
+                .addGroup(usersTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(usersTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(applyUserFilterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addComponent(clearUserFilterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addComponent(filterUserField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE))
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -262,6 +270,11 @@ public class LobbyTabbedPanel extends JPanel {
 
         globalChatSendMessageField.setToolTipText("Press enter to send message");
         globalChatSendMessageField.setMaximumSize(new java.awt.Dimension(2147483647, 26));
+        globalChatSendMessageField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                globalChatSendMessageFieldActionPerformed(evt);
+            }
+        });
 
         globalChatSendButton.setText("Send message");
         globalChatSendButton.addActionListener(new java.awt.event.ActionListener() {
@@ -335,7 +348,7 @@ public class LobbyTabbedPanel extends JPanel {
             throw new IndexOutOfBoundsException("Invalid column index to sort");
         }
         try {
-            List<UserInfo> userList = UserC.getUserList(new UserSearch(false, filterUserField.getText(), columnToSortWith, maxUsers));
+            List<UserInfo> userList = UserC.getUserList(new UserSearch(false, filterUserField.getText(), false, null, columnToSortWith, maxUsers));
             while (usersTableModel.getRowCount() > 0) {
                 usersTableModel.removeRow(usersTableModel.getRowCount() - 1);
             }
@@ -359,23 +372,27 @@ public class LobbyTabbedPanel extends JPanel {
             while (gamesTableModel.getRowCount() > 0) {
                 gamesTableModel.removeRow(gamesTableModel.getRowCount() - 1);
             }
-            SimpleDateFormat dF = new SimpleDateFormat("yyyy.MM.dd 'at' HH:mm:ss");
+            
+            SimpleDateFormat df = new SimpleDateFormat("yyyy.MM.dd 'at' HH:mm:ss");
             for (int i = 0; i < gamesList.size(); i++) {
-
-                /*GameInfo gameInfo = gamesList.get(i);
+                GameInfo gameInfo = gamesList.get(i);
+                
                 String s1 = gameInfo.player1Username + " VS " + gameInfo.player2Username;
                 
+                String s2 = null;
                 switch (gameInfo.state) {
                     case Finished:
+                        s2 = "Finished on " + df.format(gameInfo.endDate);
                         break;
                     case Created:
+                        s2 = "Placing ships";
                         break;
-                    case 
+                    case Playing:
+                        s2 = "Playing, started on " + df.format(gameInfo.startDate);
+                        break;
                 }
                 
-                String s2 = gameInfo.state != GameInfo.State.Finished ? ("Playing: " + dF.format(gameInfo.startDate)) : "Played on: " + dF.format(gameInfo.endDate);
-                gamesTableModel.addRow(new Object[]{s1, s2});*/
-
+                gamesTableModel.addRow(new Object[]{s1, s2});
             }
         }
         catch (UserMessageException ex) {
@@ -428,6 +445,10 @@ public class LobbyTabbedPanel extends JPanel {
         }
     }//GEN-LAST:event_globalChatSendButtonActionPerformed
 
+    private void globalChatSendMessageFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_globalChatSendMessageFieldActionPerformed
+        globalChatSendButtonActionPerformed(evt);
+    }//GEN-LAST:event_globalChatSendMessageFieldActionPerformed
+
     public void refreshGlobalMessages() {
         globalChatTextPane.setText(GlobalChatC.messagesHTML());
         globalChatTextPane.setCaretPosition(globalChatTextPane.getDocument().getLength()); // Scroll to bottom
@@ -447,6 +468,7 @@ public class LobbyTabbedPanel extends JPanel {
     private javax.swing.JTextField globalChatSendMessageField;
     private javax.swing.JLayeredPane globalChatTab;
     private javax.swing.JTextPane globalChatTextPane;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane;
     private javax.swing.JScrollPane scrollableGamesTable;

@@ -53,6 +53,9 @@
           <Dimension value="[2147483647, 26]"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="gameChatSendMessageFieldActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="gameChatSendButton">
       <Properties>
