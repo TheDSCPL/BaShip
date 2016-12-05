@@ -3,9 +3,9 @@ package client.logic;
 import client.ClientMain;
 import java.util.List;
 import java.util.regex.*;
-import pt.up.fe.lpro1613.sharedlib.exceptions.UserMessageException;
-import pt.up.fe.lpro1613.sharedlib.structs.UserInfo;
-import pt.up.fe.lpro1613.sharedlib.structs.UserSearch;
+import sharedlib.exceptions.UserMessageException;
+import sharedlib.structs.UserInfo;
+import sharedlib.structs.UserSearch;
 
 /**
  * Class responsible for managing the state of the user (logged-in or not) and

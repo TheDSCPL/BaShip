@@ -7,8 +7,8 @@ package client.ui.game;
 
 import client.ui.game.Components.*;
 import java.awt.*;
-import pt.up.fe.lpro1613.sharedlib.structs.BoardUIInfo;
-import pt.up.fe.lpro1613.sharedlib.structs.GameUIInfo;
+import sharedlib.structs.BoardUIInfo;
+import sharedlib.structs.GameUIInfo;
 
 public final class GamePanel extends javax.swing.JPanel {
 

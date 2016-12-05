@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import javax.swing.JComponent;
-import pt.up.fe.lpro1613.sharedlib.exceptions.UserMessageException;
-import pt.up.fe.lpro1613.sharedlib.structs.Message;
+import sharedlib.exceptions.UserMessageException;
+import sharedlib.structs.Message;
 
 /**
  * Class responsible for managing the global chat.

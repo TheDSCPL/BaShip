@@ -5,10 +5,10 @@
  */
 package client.ui.game.Components;
 
+import sharedlib.exceptions.UserMessageException;
 import client.ClientMain;
 import client.logic.*;
 import java.util.logging.*;
-import pt.up.fe.lpro1613.sharedlib.exceptions.*;
 
 /**
  *

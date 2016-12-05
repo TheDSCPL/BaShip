@@ -8,10 +8,10 @@ package client.ui.game.Components;
 import client.ClientMain;
 import client.logic.GameC;
 import javax.swing.BorderFactory;
-import static pt.up.fe.lpro1613.sharedlib.constants.UIK.BOARD_BORDER_COLOR_NORMAL;
-import pt.up.fe.lpro1613.sharedlib.exceptions.UserMessageException;
-import pt.up.fe.lpro1613.sharedlib.structs.GameUIInfo;
-import pt.up.fe.lpro1613.sharedlib.structs.UIInfo;
+import static sharedlib.constants.UIK.BOARD_BORDER_COLOR_NORMAL;
+import sharedlib.exceptions.UserMessageException;
+import sharedlib.structs.GameUIInfo;
+import sharedlib.structs.UIInfo;
 
 /**
  *

@@ -15,12 +15,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import pt.up.fe.lpro1613.sharedlib.exceptions.UserMessageException;
-import pt.up.fe.lpro1613.sharedlib.structs.GameInfo;
-import pt.up.fe.lpro1613.sharedlib.structs.GameSearch;
-import pt.up.fe.lpro1613.sharedlib.structs.Message;
-import pt.up.fe.lpro1613.sharedlib.structs.UserInfo;
-import pt.up.fe.lpro1613.sharedlib.structs.UserSearch;
+import sharedlib.exceptions.UserMessageException;
+import sharedlib.structs.GameInfo;
+import sharedlib.structs.GameSearch;
+import sharedlib.structs.Message;
+import sharedlib.structs.UserInfo;
+import sharedlib.structs.UserSearch;
 
 /**
  *

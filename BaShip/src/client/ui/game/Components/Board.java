@@ -5,10 +5,12 @@
  */
 package client.ui.game.Components;
 
+import sharedlib.utils.Coord;
+import sharedlib.structs.BoardUIInfo;
+import sharedlib.structs.UIInfo;
+import sharedlib.utils.Matrix;
 import java.awt.*;
-import static pt.up.fe.lpro1613.sharedlib.constants.BoardK.*;
-import pt.up.fe.lpro1613.sharedlib.structs.*;
-import pt.up.fe.lpro1613.sharedlib.utils.*;
+import static sharedlib.constants.BoardK.*;
 
 /**
  *

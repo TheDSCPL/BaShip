@@ -8,7 +8,7 @@ package client.ui.game.Components;
 import client.logic.GameC;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import pt.up.fe.lpro1613.sharedlib.exceptions.UserMessageException;
+import sharedlib.exceptions.UserMessageException;
 
 /**
  *

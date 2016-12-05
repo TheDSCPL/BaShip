@@ -5,7 +5,7 @@
  */
 package client.ui.game.Components;
 
-import pt.up.fe.lpro1613.sharedlib.structs.*;
+import sharedlib.structs.UIInfo;
 
 /**
  *

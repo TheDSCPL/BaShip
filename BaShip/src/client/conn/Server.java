@@ -4,21 +4,21 @@ import client.ClientMain;
 import client.logic.*;
 import java.io.*;
 import java.util.*;
-import pt.up.fe.lpro1613.sharedlib.conn.Connection;
-import pt.up.fe.lpro1613.sharedlib.conn.Packet;
-import pt.up.fe.lpro1613.sharedlib.conn.Query;
-import pt.up.fe.lpro1613.sharedlib.exceptions.ConnectionException;
-import pt.up.fe.lpro1613.sharedlib.exceptions.UserMessageException;
-import pt.up.fe.lpro1613.sharedlib.structs.BoardUIInfo;
-import pt.up.fe.lpro1613.sharedlib.structs.ErrorMessage;
-import pt.up.fe.lpro1613.sharedlib.structs.GameInfo;
-import pt.up.fe.lpro1613.sharedlib.structs.GameSearch;
-import pt.up.fe.lpro1613.sharedlib.structs.GameUIInfo;
-import pt.up.fe.lpro1613.sharedlib.structs.Message;
-import pt.up.fe.lpro1613.sharedlib.structs.UserInfo;
-import pt.up.fe.lpro1613.sharedlib.structs.UserSearch;
-import pt.up.fe.lpro1613.sharedlib.utils.Coord;
-import pt.up.fe.lpro1613.sharedlib.utils.Crypto;
+import sharedlib.conn.Connection;
+import sharedlib.conn.Packet;
+import sharedlib.conn.Query;
+import sharedlib.exceptions.ConnectionException;
+import sharedlib.exceptions.UserMessageException;
+import sharedlib.structs.BoardUIInfo;
+import sharedlib.structs.ErrorMessage;
+import sharedlib.structs.GameInfo;
+import sharedlib.structs.GameSearch;
+import sharedlib.structs.GameUIInfo;
+import sharedlib.structs.Message;
+import sharedlib.structs.UserInfo;
+import sharedlib.structs.UserSearch;
+import sharedlib.utils.Coord;
+import sharedlib.utils.Crypto;
 
 /**
  * Wrapper around a Connection object that implements the Server-Client protocol

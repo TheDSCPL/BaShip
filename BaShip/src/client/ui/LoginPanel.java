@@ -8,7 +8,7 @@ import java.awt.event.*;
 import java.util.concurrent.*;
 import java.util.logging.*;
 import javax.swing.event.*;
-import pt.up.fe.lpro1613.sharedlib.exceptions.UserMessageException;
+import sharedlib.exceptions.UserMessageException;
 
 public class LoginPanel extends javax.swing.JPanel {
 

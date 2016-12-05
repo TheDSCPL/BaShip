@@ -8,9 +8,9 @@ import java.net.*;
 import java.util.concurrent.*;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.*;
-import pt.up.fe.lpro1613.sharedlib.conn.Connection;
-import pt.up.fe.lpro1613.sharedlib.exceptions.ConnectionException;
-import pt.up.fe.lpro1613.sharedlib.utils.Preferences;
+import sharedlib.conn.Connection;
+import sharedlib.exceptions.ConnectionException;
+import sharedlib.utils.Preferences;
 
 public class ClientMain {
 
@@ -77,7 +77,7 @@ public class ClientMain {
     }
 
     /**
-     * Called by the <code>server</code> object automatically whenever the
+     * Called by the <code>Server</code> object automatically whenever the
      * server is disconnected
      *
      * @param address The address of the recently disconnected server
@@ -130,7 +130,7 @@ public class ClientMain {
     }
 
     /**
-     * Run a Runnable on a background thread asynchronously
+     * Run a Callable on a background thread asynchronously
      *
      * @param r The runnable to run
      * @return

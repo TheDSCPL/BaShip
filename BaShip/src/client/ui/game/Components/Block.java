@@ -5,6 +5,7 @@
  */
 package client.ui.game.Components;
 
+import sharedlib.utils.Coord;
 import client.ClientMain;
 import client.logic.GameC;
 import java.awt.*;
@@ -12,10 +13,9 @@ import java.awt.event.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
-import static pt.up.fe.lpro1613.sharedlib.constants.UIK.*;
-import pt.up.fe.lpro1613.sharedlib.exceptions.UserMessageException;
-import pt.up.fe.lpro1613.sharedlib.structs.BoardUIInfo.SquareFill;
-import pt.up.fe.lpro1613.sharedlib.utils.*;
+import static sharedlib.constants.UIK.*;
+import sharedlib.exceptions.UserMessageException;
+import sharedlib.structs.BoardUIInfo.SquareFill;
 
 /**
  *

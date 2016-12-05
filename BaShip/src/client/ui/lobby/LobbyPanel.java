@@ -11,7 +11,7 @@ import client.logic.UserC;
 import client.ui.LoginPanel;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import pt.up.fe.lpro1613.sharedlib.exceptions.UserMessageException;
+import sharedlib.exceptions.UserMessageException;
 
 /**
  *

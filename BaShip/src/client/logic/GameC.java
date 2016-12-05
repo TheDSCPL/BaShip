@@ -5,12 +5,12 @@ import client.ui.game.GamePanel;
 import client.ui.lobby.LobbyPanel;
 import java.util.List;
 import javax.swing.JComponent;
-import pt.up.fe.lpro1613.sharedlib.exceptions.UserMessageException;
-import pt.up.fe.lpro1613.sharedlib.structs.BoardUIInfo;
-import pt.up.fe.lpro1613.sharedlib.structs.GameInfo;
-import pt.up.fe.lpro1613.sharedlib.structs.GameSearch;
-import pt.up.fe.lpro1613.sharedlib.structs.GameUIInfo;
-import pt.up.fe.lpro1613.sharedlib.utils.Coord;
+import sharedlib.exceptions.UserMessageException;
+import sharedlib.structs.BoardUIInfo;
+import sharedlib.structs.GameInfo;
+import sharedlib.structs.GameSearch;
+import sharedlib.structs.GameUIInfo;
+import sharedlib.utils.Coord;
 
 /**
  * Class responsible for managing the state of the game of this user and getting
