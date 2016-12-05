@@ -21,6 +21,7 @@ public class GameChat extends javax.swing.JPanel {
      */
     public GameChat() {
         initComponents();
+        chatPane.setContentType("text/html");
     }
 
     /**
@@ -77,8 +78,12 @@ public class GameChat extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void gameChatSendButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gameChatSendButtonActionPerformed
+        if (gameChatSendMessageField.getText().isEmpty()) {
+            return;
+        }
+
         try {
-            GlobalChatC.sendGlobalMessage(gameChatSendMessageField.getText());
+            GameChatC.sendGameMessage(gameChatSendMessageField.getText());
             gameChatSendMessageField.setText("");
         }
         catch (UserMessageException ex) {
@@ -87,6 +92,10 @@ public class GameChat extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_gameChatSendButtonActionPerformed
 
+    public void refreshGameMessages() {
+        chatPane.setText(GameChatC.messagesHTML());
+        chatPane.setCaretPosition(chatPane.getDocument().getLength()); // Scroll to bottom
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextPane chatPane;

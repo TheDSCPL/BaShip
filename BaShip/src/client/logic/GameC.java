@@ -63,6 +63,7 @@ public class GameC {
         ClientMain.runOnUI(() -> {
             if (!(ClientMain.mainFrame.getCurrentPanel() instanceof GamePanel)) {
                 ClientMain.mainFrame.changeToPanel(new GamePanel());
+                GameChatC.clearGameMessages();
             }
 
             ((GamePanel) ClientMain.mainFrame.getCurrentPanel()).updateGameScreen(info);

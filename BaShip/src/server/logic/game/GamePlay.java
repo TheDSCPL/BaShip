@@ -255,7 +255,10 @@ class GamePlay {
     }
 
     public synchronized void playerSentMessage(Client player, String text) throws SQLException, ConnectionException {
-        Message message = GameChatDB.saveMessage(gameID, player == player1 ? 1 : 2, text);
+        Message m = GameChatDB.saveMessage(gameID, player == player1 ? 1 : 2, text);
+        
+        // TODO: correct this "UserS.usernameFromClient(player)"
+        Message message = new Message(m.id, m.userID, UserS.usernameFromClient(player), m.timestamp, m.text);
         
         player1.informAboutGameMessage(message);
         player2.informAboutGameMessage(message);

@@ -25,10 +25,11 @@ public final class GamePanel extends javax.swing.JPanel {
         leftBoard = new BoardContainer();
         rightBoard = new BoardContainer();
         topBar = new TopBar();
+        gameChat = new GameChat();
 
         add(topBar, BorderLayout.PAGE_START);
         add(leftBoard, BorderLayout.LINE_START);
-        add(new GameChat(), BorderLayout.CENTER);
+        add(gameChat, BorderLayout.CENTER);
         add(rightBoard, BorderLayout.LINE_END);
     }
 
@@ -67,10 +68,11 @@ public final class GamePanel extends javax.swing.JPanel {
 
     private final BoardContainer leftBoard;
     private final BoardContainer rightBoard;
+    private final GameChat gameChat;
     private final TopBar topBar;
 
     public void refreshGameMessages() {
-        
+        gameChat.refreshGameMessages();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

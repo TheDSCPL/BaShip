@@ -16,7 +16,11 @@ import sharedlib.structs.Message;
 public class GameChatC {
 
     private static final List<Message> messages = Collections.synchronizedList(new ArrayList<>());
-
+    
+    public static void clearGameMessages() {
+        messages.clear();
+    }
+    
     /**
      * Updates the global chat UI accordingly. Called automatically by the
      * <code>Server</code> class whenever an <code>SReceiveGlobalMessage</code>
