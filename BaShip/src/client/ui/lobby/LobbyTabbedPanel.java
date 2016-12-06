@@ -159,7 +159,7 @@ public class LobbyTabbedPanel extends JPanel {
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Filtro do state", "do user?", "Ja q o prof nao", "valoriza estas coisas...", "Talvez seja uma", "melhor pensarmos", "noutra abordagem", "XXX", "YYY" }));
 
         usersTab.setLayer(scrollableUsersTable, javax.swing.JLayeredPane.DEFAULT_LAYER);
         usersTab.setLayer(filterUserField, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -174,7 +174,7 @@ public class LobbyTabbedPanel extends JPanel {
             .addGroup(usersTabLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(usersTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(scrollableUsersTable, javax.swing.GroupLayout.DEFAULT_SIZE, 539, Short.MAX_VALUE)
+                    .addComponent(scrollableUsersTable)
                     .addGroup(usersTabLayout.createSequentialGroup()
                         .addComponent(filterUserField, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)

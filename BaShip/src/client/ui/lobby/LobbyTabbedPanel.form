@@ -10,7 +10,7 @@
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="scrollableUsersTable" pref="539" max="32767" attributes="0"/>
+                      <Component id="scrollableUsersTable" max="32767" attributes="0"/>
                       <Group type="102" attributes="0">
                           <Component id="filterUserField" min="-2" pref="182" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -96,11 +96,16 @@
         <Component class="javax.swing.JComboBox" name="jComboBox1">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="4">
-                <StringItem index="0" value="Item 1"/>
-                <StringItem index="1" value="Item 2"/>
-                <StringItem index="2" value="Item 3"/>
-                <StringItem index="3" value="Item 4"/>
+              <StringArray count="9">
+                <StringItem index="0" value="Filtro do state"/>
+                <StringItem index="1" value="do user?"/>
+                <StringItem index="2" value="Ja q o prof nao"/>
+                <StringItem index="3" value="valoriza estas coisas..."/>
+                <StringItem index="4" value="Talvez seja uma"/>
+                <StringItem index="5" value="melhor pensarmos"/>
+                <StringItem index="6" value="noutra abordagem"/>
+                <StringItem index="7" value="XXX"/>
+                <StringItem index="8" value="YYY"/>
               </StringArray>
             </Property>
           </Properties>
