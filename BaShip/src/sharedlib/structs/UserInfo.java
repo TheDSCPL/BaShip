@@ -1,5 +1,7 @@
 package sharedlib.structs;
 
+import sharedlib.enums.UserStatus;
+
 /**
  * Tuple containing information about an user. Some fields may be null in some
  * cases. It is up to the function that returns instances of this class to
@@ -16,7 +18,7 @@ public class UserInfo {
     public final Integer nGames;
     public final Integer nWins;
     public final Integer nShots;
-    public final Status status;
+    public final UserStatus status;
 
     public UserInfo(Long id, String username) {
         this(id, username, null, null, null, null, null, null);
@@ -26,7 +28,7 @@ public class UserInfo {
         this(null, username, passwordHash, null, null, null, null, null);
     }
     
-    public UserInfo(Long id, String username, String passwordHash, Integer rank, Integer nGames, Integer nWins, Integer nShots, Status status) {
+    public UserInfo(Long id, String username, String passwordHash, Integer rank, Integer nGames, Integer nWins, Integer nShots, UserStatus status) {
         this.id = id;
         this.username = username;
         this.passwordHash = passwordHash;
@@ -36,11 +38,5 @@ public class UserInfo {
         this.nShots = nShots;
         this.status = status;
     }
-        
-    public enum Status {
-        Offline,
-        Online,
-        Waiting,
-        Playing
-    }
+    
 }

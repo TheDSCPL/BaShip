@@ -8,11 +8,11 @@ import java.util.logging.Logger;
 import server.conn.Client;
 import server.database.UserDB;
 import server.logic.game.GameS;
+import sharedlib.enums.UserStatus;
 import sharedlib.exceptions.ConnectionException;
 import sharedlib.exceptions.UserMessageException;
 import sharedlib.structs.Message;
 import sharedlib.structs.UserInfo;
-import sharedlib.structs.UserInfo.Status;
 
 /**
  * Class responsible for managing the state of the users on the server. Supports
@@ -123,7 +123,7 @@ public class UserS {
      * the specified user id. Returns null if the user for that id is not
      * logged-in and therefore is not assigned to a specific {@code Client}.
      */
-    public static Client clientFromID(Long id) {
+    public static Client clientWithUserID(Long id) {
         return loginsID.get(id);
     }
 
@@ -132,30 +132,8 @@ public class UserS {
      * @return The id of the user for the given {@code Client} object, if the
      * client is logged-in. If not, returns null.
      */
-    public static Long idFromClient(Client c) {
+    public static Long userIDOfClient(Client c) {
         return loginsClient.get(c);
-    }
-
-    /**
-     * Each user has a status, as defined in {@code UserInfo.Status}, which can
-     * be accessed through this method.
-     *
-     * @param userID
-     * @return The status of the user. Never null
-     */
-    public static Status getUserStatus(Long userID) {
-        if (isUserLoggedIn(userID)) {
-            if (GameS.isClientPlaying(clientFromID(userID))) {
-                return Status.Playing;
-            }
-            else if (GameS.isClientWaiting(clientFromID(userID))) {
-                return Status.Waiting;
-            }
-
-            return Status.Online;
-        }
-
-        return Status.Offline;
     }
 
     /**
@@ -163,9 +141,9 @@ public class UserS {
      * @return The username of the user for the given {@code Client} object, if
      * the client is logged-in. If not, returns null.
      */
-    public static String usernameFromClient(Client c) {
+    public static String usernameOfClient(Client c) {
         /*try {
-            Long id = idFromClient(c);
+            Long id = userIDOfClient(c);
             if (id != null) {
                 return UserDB.getUsernameFromID(id);
             }
@@ -178,6 +156,30 @@ public class UserS {
             return null;
         }*/
         return usernamesClient.get(c);
+    }
+
+    /**
+     * Each user has a status, as defined in {@code UserInfo.Status}, which can
+     * be accessed through this method.
+     *
+     * @param userID
+     * @return The status of the user. Never null
+     */
+    public static UserStatus statusOfUser(Long userID) {
+        if (isUserLoggedIn(userID)) {
+            Client c = clientWithUserID(userID);
+            
+            if (GameS.PlayerInfo.isPlaying(c) || GameS.PlayerInfo.isSpectating(c)) {
+                return UserStatus.Playing;
+            }
+            else if (GameS.PlayerInfo.isWaiting(c)) {
+                return UserStatus.Waiting;
+            }
+
+            return UserStatus.Online;
+        }
+
+        return UserStatus.Offline;
     }
 
     static void distributeGlobalMessage(Message msg) {

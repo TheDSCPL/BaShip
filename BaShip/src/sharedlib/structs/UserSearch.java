@@ -1,5 +1,7 @@
 package sharedlib.structs;
 
+import sharedlib.enums.UserStatus;
+
 /**
  * Tuple containing information about how a search for users on the database
  * should be done.
@@ -21,7 +23,7 @@ public class UserSearch {
     
     public final boolean useStatusFilter;
     
-    public final UserInfo.Status statusFilter;
+    public final UserStatus statusFilter;
 
     /**
      * Which user information to order the results by. 1=id , 2=username ,
@@ -34,7 +36,7 @@ public class UserSearch {
      */
     public final int rowLimit;
 
-    public UserSearch(boolean onlineOnly, String usernameFilter, boolean useStatusFilter, UserInfo.Status statusFilter, int orderByColumn, int rowLimit) {
+    public UserSearch(boolean onlineOnly, String usernameFilter, boolean useStatusFilter, UserStatus statusFilter, int orderByColumn, int rowLimit) {
         this.onlineOnly = onlineOnly;
         this.usernameFilter = usernameFilter;
         this.useStatusFilter = useStatusFilter;

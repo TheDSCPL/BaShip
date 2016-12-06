@@ -177,7 +177,7 @@ public class UserDB {
                         new UserInfo(
                                 id, rs.getString(2), null,
                                 rs.getInt(3), rs.getInt(4), rs.getInt(5),
-                                rs.getInt(6), UserS.getUserStatus(id) // TODO: filter by online only
+                                rs.getInt(6), UserS.statusOfUser(id) // TODO: filter by online only
                         )
                 );
             }

@@ -127,7 +127,7 @@ public class Client implements Connection.Delegate {
             }
             case C_SendGameMessage: {
                 try {
-                    GameS.sendGameMessage(this, (String) request.info);
+                    GameS.Actions.sendGameMessage(this, (String) request.info);
                     response = new Packet();
                 }
                 catch (SQLException ex) {
@@ -142,7 +142,42 @@ public class Client implements Connection.Delegate {
             }
             case C_StartRandomGame: {
                 try {
-                    GameS.startRandomGame(this);
+                    GameS.Actions.startRandomGame(this);
+                    response = new Packet();
+                }
+                catch (UserMessageException ex) {
+                    response = new Packet(Query.SR_ErrorMessage, new ErrorMessage(ex.getMessage()));
+                }
+                break;
+            }
+            case C_ClickLeftBoard: {
+                GameS.Actions.clientClickedLeftBoard(this, (Coord) request.info);
+                response = new Packet(); // Empty response just for confirmation
+                break;
+            }
+            case C_ClickRightBoard: {
+                GameS.Actions.clientClickedRightBoard(this, (Coord) request.info);
+                response = new Packet(); // Empty response just for confirmation
+                break;
+            }
+            case C_ClickReadyButton: {
+                GameS.Actions.clickReadyButton(this);
+                response = new Packet(); // Empty response just for confirmation
+                break;
+            }
+            case C_CloseGame: {
+                GameS.Actions.clientClosedGame(this);
+                response = new Packet(); // Empty response just for confirmation
+                break;
+            }
+            case C_DoubleClickGame: {
+                GameS.Actions.doubleClickGame(this, (Long) request.info);
+                response = new Packet(); // Empty response just for confirmation
+                break;
+            }
+            case C_DoubleClickUser: {
+                try {
+                GameS.Actions.doubleClickUser(this, (Long) request.info);
                     response = new Packet();
                 }
                 catch (UserMessageException ex) {
@@ -165,34 +200,30 @@ public class Client implements Connection.Delegate {
                 GameS.answerGameInvitation(this, (Boolean) request.info);
                 break;
             }*/
-            case C_ClickLeftBoard: {
-                GameS.clientClickedLeftBoard(this, (Coord) request.info);
-                response = new Packet(); // Empty response just for confirmation
-                break;
-            }
-            case C_ClickRightBoard: {
-                GameS.clientClickedRightBoard(this, (Coord) request.info);
-                response = new Packet(); // Empty response just for confirmation
-                break;
-            }
-            case C_ClickReadyButton: {
-                GameS.clickReadyButton(this);
-                response = new Packet(); // Empty response just for confirmation
-                break;
-            }
-            case C_CloseGame: {
-                GameS.clientClosedGame(this);
-                response = new Packet(); // Empty response just for confirmation
-                break;
-            }
-            case C_SpectateGame: {
-                GameS.spectateGame(this, (Long) request.info);
-                response = new Packet(); // Empty response just for confirmation
-                break;
-            }
         }
 
         return response;
+    }
+
+    @Override
+    public void connected(Connection connection) {
+        System.out.println("Connected to client on " + connection.address());
+        synchronized (ServerMain.clients) {
+            ServerMain.clients.add(this);
+        }
+    }
+
+    @Override
+    public void disconnected(Connection connection) {
+        System.out.println("Disconnected from client on " + connection.address());
+
+        // It's important that GameS be called first
+        GameS.Actions.clientDisconnected(this);
+        UserS.clientDisconnected(this);
+
+        synchronized (ServerMain.clients) {
+            ServerMain.clients.remove(this);
+        }
     }
 
     /**
@@ -209,7 +240,7 @@ public class Client implements Connection.Delegate {
     public void informAboutGameMessage(Message msg) throws ConnectionException {
         connection.sendOnly(new Packet(Query.S_ReceiveGameMessage, msg));
     }
-    
+
     public void clearGameMessages() throws ConnectionException {
         connection.sendOnly(new Packet(Query.S_ClearGameMessages));
     }
@@ -256,24 +287,4 @@ public class Client implements Connection.Delegate {
         connection.sendOnly(new Packet(Query.S_GameFinished, message));
     }
 
-    @Override
-    public void connected(Connection connection) {
-        System.out.println("Connected to client on " + connection.address());
-        synchronized (ServerMain.clients) {
-            ServerMain.clients.add(this);
-        }
-    }
-
-    @Override
-    public void disconnected(Connection connection) {
-        System.out.println("Disconnected from client on " + connection.address());
-
-        // It's important that GameS be called first
-        GameS.clientDisconnected(this);
-        UserS.clientDisconnected(this);
-
-        synchronized (ServerMain.clients) {
-            ServerMain.clients.remove(this);
-        }
-    }
 }

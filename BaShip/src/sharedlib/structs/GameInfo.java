@@ -1,6 +1,7 @@
 package sharedlib.structs;
 
 import java.util.Date;
+import sharedlib.enums.GameState;
 
 /**
  * Tuple containing information about a game. Some fields may be null in some
@@ -16,12 +17,12 @@ public class GameInfo {
     public final Long player2ID;
     public final String player1Username;
     public final String player2Username;
-    public final State state;
+    public final GameState state;
     public final Date startDate;
     public final Date endDate;
     public final Integer turnNumber;
 
-    public GameInfo(Long id, Long player1ID, Long player2ID, String player1Username, String player2Username, State state, Date startDate, Date endDate, Integer turnNumber) {
+    public GameInfo(Long id, Long player1ID, Long player2ID, String player1Username, String player2Username, GameState state, Date startDate, Date endDate, Integer turnNumber) {
         this.id = id;
         this.player1ID = player1ID;
         this.player2ID = player2ID;
@@ -31,21 +32,6 @@ public class GameInfo {
         this.startDate = startDate;
         this.endDate = endDate;
         this.turnNumber = turnNumber;
-    }
-
-    public enum State {
-        /**
-         * Game exists but players are still placing ships.
-         */
-        Created,
-        /**
-         * Players are playing. startDate and turnNumber are non-null
-         */
-        Playing,
-        /**
-         * Game has ended. startDate and endDate are non-null
-         */
-        Finished
     }
 
 }

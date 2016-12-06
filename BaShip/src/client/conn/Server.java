@@ -239,12 +239,21 @@ public class Server implements Connection.Delegate {
         }
     }
     
-    public void spectateGame(Long id) throws UserMessageException {
-        Packet request = new Packet(Query.C_SpectateGame, id);
-        Packet response = sendAndReceiveWrapper(request); // TODO: ?
+    public void doubleClickGame(Long gameID) throws UserMessageException {
+        Packet request = new Packet(Query.C_DoubleClickGame, gameID);
+        Packet response = sendAndReceiveWrapper(request);
         
         if (response.query == Query.SR_ErrorMessage) {
-            throw new UserMessageException("Could not send game message: " + ((ErrorMessage) response.info).message);
+            throw new UserMessageException("Error XXX: " + ((ErrorMessage) response.info).message); // TODO: message
+        }
+    }
+    
+    public void doubleClickUser(Long playerID) throws UserMessageException {
+        Packet request = new Packet(Query.C_DoubleClickUser, playerID);
+        Packet response = sendAndReceiveWrapper(request);
+        
+        if (response.query == Query.SR_ErrorMessage) {
+            throw new UserMessageException("Error YYY: " + ((ErrorMessage) response.info).message); // TODO: message
         }
     }
 

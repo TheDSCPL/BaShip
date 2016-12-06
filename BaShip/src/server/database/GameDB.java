@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import server.logic.game.GameS;
+import sharedlib.enums.GameState;
 import sharedlib.structs.GameInfo;
 import sharedlib.structs.GameSearch;
 
@@ -55,15 +56,15 @@ public class GameDB {
                 Date start = rs.getDate(6);
                 Date end = rs.getDate(7);
 
-                GameInfo.State state;
+                GameState state;
                 if (end != null) {
-                    state = GameInfo.State.Finished;
+                    state = GameState.Finished;
                 }
                 else if (start != null) {
-                    state = GameInfo.State.Playing;
+                    state = GameState.Playing;
                 }
                 else {
-                    state = GameInfo.State.Created;
+                    state = GameState.Created;
                 }
 
                 games.add(
@@ -76,7 +77,7 @@ public class GameDB {
                                 state, // TODO: filter by currently playing only
                                 start,
                                 end,
-                                state == GameInfo.State.Playing ? GameS.getGameCurrentMoveNumber(id) : null
+                                state == GameState.Playing ? GameS.GameInfo.getGameCurrentMoveNumber(id) : null
                         )
                 );
             }

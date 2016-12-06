@@ -2,6 +2,8 @@ package client.logic;
 
 import client.ClientMain;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.*;
 import sharedlib.exceptions.UserMessageException;
 import sharedlib.structs.UserInfo;
@@ -126,6 +128,16 @@ public class UserC {
      */
     public static List<UserInfo> getUserList(UserSearch us) throws UserMessageException {
         return ClientMain.server.getUserList(us);
+    }
+
+    public static void doubleClickUser(UserInfo userInfo) {
+        try {
+            ClientMain.server.doubleClickUser(userInfo.id);
+        }
+        catch (UserMessageException ex) {
+            Logger.getLogger(UserC.class.getName()).log(Level.SEVERE, null, ex);
+            ClientMain.showError(ex.getMessage());
+        }
     }
 
 }

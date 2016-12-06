@@ -27,7 +27,7 @@ public class GlobalChatS {
      */
     public static void sendGlobalMessage(Client client, String message) throws SQLException {
         if (isClientLoggedIn(client)) {
-            Message msg = GlobalChatDB.saveGlobalMessage(UserS.idFromClient(client), message);
+            Message msg = GlobalChatDB.saveGlobalMessage(UserS.userIDOfClient(client), message);
             UserS.distributeGlobalMessage(msg);
         }
         else {

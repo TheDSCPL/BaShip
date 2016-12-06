@@ -366,17 +366,18 @@ public class LobbyTabbedPanel extends JPanel {
         applyUserFilterButtonActionPerformed(evt);
     }//GEN-LAST:event_filterUserFieldActionPerformed
 
+    List<UserInfo> usersList;
     private void updateUsersTableData(int columnToSortWith, int maxUsers) {
         if (columnToSortWith < 0 || columnToSortWith >= usersTableModel.getColumnCount()) {
             throw new IndexOutOfBoundsException("Invalid column index to sort");
         }
         try {
-            List<UserInfo> userList = UserC.getUserList(new UserSearch(false, filterUserField.getText(), false, null, columnToSortWith, maxUsers));
+            usersList = UserC.getUserList(new UserSearch(false, filterUserField.getText(), false, null, columnToSortWith, maxUsers));
             while (usersTableModel.getRowCount() > 0) {
                 usersTableModel.removeRow(usersTableModel.getRowCount() - 1);
             }
-            for (int i = 0; i < userList.size(); i++) {
-                UserInfo userInfo = userList.get(i);
+            for (int i = 0; i < usersList.size(); i++) {
+                UserInfo userInfo = usersList.get(i);
                 usersTableModel.addRow(new Object[]{userInfo.username, userInfo.rank, userInfo.nGames, userInfo.nWins, userInfo.nShots, userInfo.status});
             }
         }
@@ -385,7 +386,7 @@ public class LobbyTabbedPanel extends JPanel {
         }
     }
 
-     List<GameInfo> gamesList;
+    List<GameInfo> gamesList;
     private void updateGamesTableData(int columnToSortWith, int maxUsers) {
         if (columnToSortWith < 0 || columnToSortWith >= gamesTableModel.getColumnCount()) {
             throw new IndexOutOfBoundsException("Invalid column index to sort");
@@ -427,7 +428,7 @@ public class LobbyTabbedPanel extends JPanel {
     private String prevFilter = "";
     
     private void doubleClickUsersTable(int row) {
-        // TODO: finish
+        UserC.doubleClickUser(usersList.get(row));
     }
     
     private void doubleClickGamesTable(int row) {

@@ -60,7 +60,7 @@ class GamePlay {
         moveIndex = 0;
 
         // Create game in DB
-        gameID = GameDB.createGame(UserS.idFromClient(p1), UserS.idFromClient(p2));
+        gameID = GameDB.createGame(UserS.userIDOfClient(p1), UserS.userIDOfClient(p2));
 
         // Clear game messages
         try {
@@ -108,7 +108,7 @@ class GamePlay {
 
     public synchronized void clientClosedGame(Client client) {
         if (isPlayer(client)) {
-            finishGame("Game ended. Player " + UserS.usernameFromClient(client) + " closed game.", opponent(client), client);
+            finishGame("Game ended. Player " + UserS.usernameOfClient(client) + " closed game.", opponent(client), client);
         }
         else if (isSpectator(client)) {
             spectators.remove(client);
@@ -117,7 +117,7 @@ class GamePlay {
 
     public synchronized void clientDisconnected(Client client) {
         if (isPlayer(client)) {
-            finishGame("Game ended. Player " + UserS.usernameFromClient(client) + " disconnected.", opponent(client), null);
+            finishGame("Game ended. Player " + UserS.usernameOfClient(client) + " disconnected.", opponent(client), null);
         }
         else if (isSpectator(client)) {
             spectators.remove(client);
@@ -142,7 +142,7 @@ class GamePlay {
             GameDB.setEndTimeToNow(gameID);
 
             if (winner != null) {
-                GameDB.setWinner(gameID, UserS.idFromClient(winner));
+                GameDB.setWinner(gameID, UserS.userIDOfClient(winner));
             }
         }
         catch (SQLException ex) {
@@ -167,7 +167,7 @@ class GamePlay {
         }
 
         // Remove myself from GameS's lists
-        GameS.gameFinished(this);
+        GameS.Callbacks.gameFinished(this);
     }
 
     public synchronized void clickReadyButton(Client player) {
@@ -254,7 +254,7 @@ class GamePlay {
         // Check if player won
         if (boardForPlayer(opponent(player)).allShipsAreShot()) { // Player won
             refreshClientInfo();
-            finishGame("Game finished: player " + UserS.usernameFromClient(player) + " won!", player, null);
+            finishGame("Game finished: player " + UserS.usernameOfClient(player) + " won!", player, null);
         }
         else { // If not, change turn
             p1Turn = !p1Turn;
@@ -288,8 +288,8 @@ class GamePlay {
     public synchronized void playerSentMessage(Client player, String text) throws SQLException, ConnectionException {
         Message m = GameChatDB.saveMessage(gameID, player == player1 ? 1 : 2, text);
 
-        // TODO: correct this "UserS.usernameFromClient(player)"
-        Message message = new Message(m.id, m.userID, UserS.usernameFromClient(player), m.timestamp, m.text);
+        // TODO: correct this "UserS.usernameOfClient(player)"
+        Message message = new Message(m.id, m.userID, UserS.usernameOfClient(player), m.timestamp, m.text);
 
         messages.add(message);
 
@@ -321,8 +321,8 @@ class GamePlay {
             boolean placingShips = stateForPlayer(client) == PlayerState.PlacingShips;
 
             info = new GameUIInfo(
-                    UserS.usernameFromClient(client),
-                    UserS.usernameFromClient(opponent(client)),
+                    UserS.usernameOfClient(client),
+                    UserS.usernameOfClient(opponent(client)),
                     gameHasStarted(),
                     opponentReady ? "Opponent is ready" : "Opponent is placing ships",
                     placingShips ? "You can place ships" : "Please wait for opponent",
@@ -334,8 +334,8 @@ class GamePlay {
         }
         else {
             info = new GameUIInfo(
-                    UserS.usernameFromClient(player1),
-                    UserS.usernameFromClient(player2),
+                    UserS.usernameOfClient(player1),
+                    UserS.usernameOfClient(player2),
                     true,
                     null, null, null,
                     gameStarted ? p1Turn : false,

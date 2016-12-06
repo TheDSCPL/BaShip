@@ -144,16 +144,7 @@ public class GameC {
 
     public static void doubleClickGame(GameInfo gameInfo) {
         try {
-            switch (gameInfo.state) {
-                case Finished:
-                    // Replay
-                    break;
-                case Created:
-                case Playing:
-                    // Spectate
-                    ClientMain.server.spectateGame(gameInfo.id);
-                    break;
-            }
+            ClientMain.server.doubleClickGame(gameInfo.id);
         }
         catch (UserMessageException ex) {
             Logger.getLogger(GameC.class.getName()).log(Level.SEVERE, null, ex);
