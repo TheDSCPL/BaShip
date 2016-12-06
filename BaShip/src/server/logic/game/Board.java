@@ -62,8 +62,8 @@ class Board {
             boolean yAllEqual = currentConnectedSquares.stream().map((c) -> c.y).collect(toSet()).size() == 1;
 
             if (xAllEqual || yAllEqual) {
-                int minXpos = currentConnectedSquares.stream().map((c) -> c.x).reduce(Integer.MAX_VALUE, (a,b) -> (a < b ? a : b));
-                int minYpos = currentConnectedSquares.stream().map((c) -> c.y).reduce(Integer.MAX_VALUE, (a,b) -> (a < b ? a : b));
+                int minXpos = currentConnectedSquares.stream().map((c) -> c.x).reduce(Integer.MAX_VALUE, (a, b) -> (a < b ? a : b));
+                int minYpos = currentConnectedSquares.stream().map((c) -> c.y).reduce(Integer.MAX_VALUE, (a, b) -> (a < b ? a : b));
                 ships.add(new Ship(minXpos, minYpos, squareCount, xAllEqual));
             }
             else {
@@ -125,18 +125,17 @@ class Board {
     }
 
     // GET BOARD INFO
-    public BoardUIInfo getBoardInfo(boolean playing, boolean showEverything, boolean isLeftBoard) {
+    public BoardUIInfo getBoardInfo(boolean playing, boolean showEverything) {
         if (playing) {
-            return getBoardInfoPlaying(showEverything, isLeftBoard);
+            return getBoardInfoPlaying(showEverything);
         }
         else {
-            return getBoardInfoPlacingShips(showEverything, isLeftBoard);
+            return getBoardInfoPlacingShips(showEverything);
         }
     }
 
-    public BoardUIInfo getBoardInfoPlacingShips(boolean showEverything, boolean isLeftBoard) {
+    public BoardUIInfo getBoardInfoPlacingShips(boolean showEverything) {
         BoardUIInfo bi = new BoardUIInfo();
-        bi.leftBoard = isLeftBoard;
 
         if (showEverything) {
             // Populate top board
@@ -149,6 +148,7 @@ class Board {
                 bi.board.set(c, BoardUIInfo.SquareFill.RedSquare);
             });
 
+            // TODO: finish: bottom info
             // Populate bottom info rows
             /*final int[] offset = {16, 10, 4, 0}; // static final TODO: should change based on info in SHIP_COUNT_FOR_SIZE
             int[] count = {0, 0, 0, 0};
@@ -166,9 +166,8 @@ class Board {
         return bi;
     }
 
-    public BoardUIInfo getBoardInfoPlaying(boolean showEverything, boolean leftBoard) {
+    public BoardUIInfo getBoardInfoPlaying(boolean showEverything) {
         BoardUIInfo bi = new BoardUIInfo();
-        bi.leftBoard = leftBoard;
 
         if (showEverything) {
             bi.board.setEach((c) -> {
@@ -186,7 +185,7 @@ class Board {
                 }
             });
 
-            // TODO: finish
+            // TODO: finish: bottom info
         }
         else {
             shotsLayer.forEach((coord, shot) -> {
@@ -207,9 +206,9 @@ class Board {
                 bi.board.set(coord, fill);
             });
 
-            // TODO: finish
+            // TODO: finish: bottom info
         }
-        
+
         return bi;
     }
 

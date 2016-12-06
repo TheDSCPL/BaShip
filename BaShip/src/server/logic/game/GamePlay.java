@@ -24,7 +24,7 @@ class GamePlay {
 
     public final Long gameID;
 
-    public final Client player1, player2;
+    private final Client player1, player2;
     private PlayerState p1State, p2State;
     private final Board p1Board, p2Board;
 
@@ -62,24 +62,35 @@ class GamePlay {
         // Create game in DB
         gameID = GameDB.createGame(UserS.idFromClient(p1), UserS.idFromClient(p2));
 
+        // Clear game messages
+        try {
+            player1.clearGameMessages();
+            player2.clearGameMessages();
+        }
+        catch (ConnectionException ex) {
+            Logger.getLogger(GamePlay.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         // Refresh interfaces
         refreshClientInfo();
     }
 
     public synchronized void addSpectator(Client client) {
+        // Add spectator
         spectators.add(client);
-        
+
         // Update UI
         refreshClientInfoForClient(client);
-        
+
         // Send messages
-        for (Message m : messages) {
-            try {
+        try {
+            client.clearGameMessages();
+            for (Message m : messages) {
                 client.informAboutGameMessage(m);
             }
-            catch (ConnectionException ex) {
-                Logger.getLogger(GamePlay.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        }
+        catch (ConnectionException ex) {
+            Logger.getLogger(GamePlay.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -87,13 +98,20 @@ class GamePlay {
         spectators.remove(client);
     }
 
+    public synchronized boolean hasSpectator(Client client) {
+        return spectators.contains(client);
+    }
+
+    public synchronized boolean hasPlayer(Client client) {
+        return player1 == client || player2 == client;
+    }
+
     public synchronized void clientClosedGame(Client client) {
         if (isPlayer(client)) {
             finishGame("Game ended. Player " + UserS.usernameFromClient(client) + " closed game.", opponent(client), client);
         }
-        else {
+        else if (isSpectator(client)) {
             spectators.remove(client);
-            // TODO: anything else?
         }
     }
 
@@ -101,9 +119,8 @@ class GamePlay {
         if (isPlayer(client)) {
             finishGame("Game ended. Player " + UserS.usernameFromClient(client) + " disconnected.", opponent(client), null);
         }
-        else {
+        else if (isSpectator(client)) {
             spectators.remove(client);
-            // TODO: anything else?
         }
     }
 
@@ -270,20 +287,20 @@ class GamePlay {
 
     public synchronized void playerSentMessage(Client player, String text) throws SQLException, ConnectionException {
         Message m = GameChatDB.saveMessage(gameID, player == player1 ? 1 : 2, text);
-        
+
         // TODO: correct this "UserS.usernameFromClient(player)"
         Message message = new Message(m.id, m.userID, UserS.usernameFromClient(player), m.timestamp, m.text);
-        
+
         messages.add(message);
-        
+
         player1.informAboutGameMessage(message);
         player2.informAboutGameMessage(message);
-        
+
         for (Client c : spectators) {
             c.informAboutGameMessage(message);
         }
     }
-    
+
     private void refreshClientInfo() {
         refreshClientInfoForClient(player1);
         refreshClientInfoForClient(player2);
@@ -340,13 +357,16 @@ class GamePlay {
         boolean playing = gameHasStarted();
 
         if (isPlayer(client)) {
-            leftBoard = boardForPlayer(client).getBoardInfo(playing, true, true);
-            rightBoard = boardForPlayer(opponent(client)).getBoardInfo(playing, false, false);
+            leftBoard = boardForPlayer(client).getBoardInfo(playing, true);
+            rightBoard = boardForPlayer(opponent(client)).getBoardInfo(playing, false);
         }
         else {
-            leftBoard = boardForPlayer(player1).getBoardInfo(playing, true, true);
-            rightBoard = boardForPlayer(player2).getBoardInfo(playing, true, false);
+            leftBoard = boardForPlayer(player1).getBoardInfo(playing, true);
+            rightBoard = boardForPlayer(player2).getBoardInfo(playing, true);
         }
+
+        leftBoard.leftBoard = true;
+        rightBoard.leftBoard = false;
 
         try {
             client.updateGameBoard(leftBoard);

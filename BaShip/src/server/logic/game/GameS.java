@@ -1,11 +1,11 @@
 package server.logic.game;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Queue;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.logging.Level;
@@ -14,6 +14,7 @@ import server.conn.Client;
 import server.logic.UserS;
 import sharedlib.exceptions.ConnectionException;
 import sharedlib.exceptions.UserMessageException;
+import sharedlib.structs.BoardUIInfo;
 import sharedlib.structs.GameUIInfo;
 import sharedlib.structs.GameUIInfo.UIType;
 import sharedlib.utils.Coord;
@@ -26,14 +27,13 @@ import sharedlib.utils.Coord;
  */
 public class GameS {
 
+    private static final Set<GamePlay> gamePlaySet = Collections.newSetFromMap(new ConcurrentHashMap<>());
+
     private static class Info {
 
-        private static final Map<Long, GamePlay> currentGamesPlay = new ConcurrentHashMap<>();
-        private static final Map<Client, GamePlay> currentGamesPlayFromUser = new ConcurrentHashMap<>();
         //private static final Map<Client, Client> playersWaitingForPlayer = new ConcurrentHashMap<>();
         private static final Queue<Client> playersWaitingForGame = new ConcurrentLinkedQueue<>();
         private static final Map<Client, Board> playersWaitingBoards = new ConcurrentHashMap<>();
-        private static final List<Client> spectators = Collections.synchronizedList(new ArrayList<Client>());
 
         public static Client nextPlayerWaitingForGame() {
             return playersWaitingForGame.poll();
@@ -46,41 +46,13 @@ public class GameS {
         public static boolean isWaitingForRandomGame(Client c) {
             return playersWaitingForGame.contains(c);
         }
-
-        public static boolean isPlaying(Client c) {
-            return currentGamesPlayFromUser.containsKey(c);
-        }
-
-        public static boolean gameIDisBeingPlayed(Long gameID) {
-            return currentGamesPlay.containsKey(gameID);
-        }
-
-        public static GamePlay gameFromGameID(Long gameID) {
-            return currentGamesPlay.get(gameID);
-        }
-
-        public static GamePlay gameFromPlayer(Client client) {
-            return currentGamesPlayFromUser.get(client);
-        }
-
+        
         public static Board waitingBoardForPlayer(Client client) {
             if (!playersWaitingBoards.containsKey(client)) {
                 playersWaitingBoards.put(client, new Board());
             }
 
             return playersWaitingBoards.get(client);
-        }
-
-        public static void addGame(GamePlay gp, Client p1, Client p2) {
-            currentGamesPlayFromUser.put(p1, gp);
-            currentGamesPlayFromUser.put(p2, gp);
-            currentGamesPlay.put(gp.gameID, gp);
-        }
-
-        public static void removeGame(GamePlay gp) {
-            currentGamesPlayFromUser.remove(gp.player1);
-            currentGamesPlayFromUser.remove(gp.player2);
-            currentGamesPlay.remove(gp);
         }
 
         public static void addPlayerWaiting(Client client) {
@@ -94,20 +66,6 @@ public class GameS {
         private static void removeWaitingBoardForPlayer(Client player) {
             playersWaitingBoards.remove(player);
         }
-
-        private static boolean isSpectating(Client client) {
-            return false; // TODO: finish
-        }
-        
-        private static void addSpectator(Client client, GamePlay game) {
-            // TODO: finish
-        }
-
-        private static GamePlay gameFromSpectator(Client client) {
-            // TODO: finish
-            return null;
-        }
-
     }
 
     /**
@@ -186,7 +144,7 @@ public class GameS {
         GamePlay game;
         try {
             game = new GamePlay(player1, Info.waitingBoardForPlayer(player1), player2, Info.waitingBoardForPlayer(player2));
-            Info.addGame(game, player1, player2);
+            gamePlaySet.add(game);
             Info.removeWaitingBoardForPlayer(player1);
             Info.removeWaitingBoardForPlayer(player2);
         }
@@ -209,7 +167,9 @@ public class GameS {
         updateGameScreenForClient(clientWaiting);
 
         try {
-            clientWaiting.updateGameBoard(Info.waitingBoardForPlayer(clientWaiting).getBoardInfoPlacingShips(true, true));
+            BoardUIInfo bi = Info.waitingBoardForPlayer(clientWaiting).getBoardInfoPlacingShips(true);
+            bi.leftBoard = true;
+            clientWaiting.updateGameBoard(bi);
         }
         catch (ConnectionException ex) {
             Logger.getLogger(GameS.class.getName()).log(Level.SEVERE, null, ex);
@@ -226,34 +186,37 @@ public class GameS {
      */
     public static void clickReadyButton(Client player) {
         if (isClientPlaying(player)) {
-            Info.gameFromPlayer(player).clickReadyButton(player);
-        }
-        else {
-            Logger.getLogger(GameS.class.getName()).log(Level.SEVERE, "Player {0} cannot click ready because he's not playing any game", player);
+            gamePlayFromPlayer(player).clickReadyButton(player);
         }
     }
-    
+
     public static void spectateGame(Client client, Long gameID) {
-        Info.gameFromGameID(gameID).addSpectator(client);
+        GamePlay gp = gamePlayFromGameID(gameID);
+
+        if (gp != null) {
+            gp.addSpectator(client);
+        }
     }
 
     /**
      * Informs the state machine of the game that the player clicked on the left
      * board, which then performs the appropriate operations.
      *
-     * @param player
+     * @param client
      * @param pos
      */
-    public static void clientClickedLeftBoard(Client player, Coord pos) {
-        if (isClientPlaying(player)) {
-            Info.gameFromPlayer(player).playerClickedLeftBoard(player, pos);
+    public static void clientClickedLeftBoard(Client client, Coord pos) {
+        if (isClientPlaying(client)) {
+            gamePlayFromPlayer(client).playerClickedLeftBoard(client, pos);
         }
-        else {
-            Board board = Info.waitingBoardForPlayer(player);
+        else if (isClientWaiting(client)) {
+            Board board = Info.waitingBoardForPlayer(client);
             board.togglePlaceShipOnSquare(pos);
 
             try {
-                player.updateGameBoard(board.getBoardInfoPlacingShips(true, true));
+                BoardUIInfo bi = board.getBoardInfoPlacingShips(true);
+                bi.leftBoard = true;
+                client.updateGameBoard(bi);
             }
             catch (ConnectionException ex) {
                 Logger.getLogger(GameS.class.getName()).log(Level.SEVERE, null, ex);
@@ -270,10 +233,7 @@ public class GameS {
      */
     public static void clientClickedRightBoard(Client player, Coord pos) {
         if (isClientPlaying(player)) {
-            Info.gameFromPlayer(player).playerClickedRightBoard(player, pos);
-        }
-        else {
-            Logger.getLogger(GameS.class.getName()).log(Level.SEVERE, "Player {0} cannot click on right board because he's not playing any game", player);
+            gamePlayFromPlayer(player).playerClickedRightBoard(player, pos);
         }
     }
 
@@ -283,11 +243,11 @@ public class GameS {
      * @param client The player who closed the game.
      */
     public synchronized static void clientClosedGame(Client client) {
-        if (Info.isPlaying(client)) {
-            Info.gameFromPlayer(client).clientClosedGame(client);
+        if (isClientPlaying(client)) {
+            gamePlayFromPlayer(client).clientClosedGame(client);
         }
-        else if (Info.isSpectating(client)) {
-            Info.gameFromSpectator(client).clientClosedGame(client);
+        else if (isClientSpectating(client)) {
+            gamePlayFromSpectator(client).clientClosedGame(client);
         }
         else if (Info.isWaitingForRandomGame(client)) {
             Info.removePlayerWaiting(client);
@@ -296,7 +256,7 @@ public class GameS {
 
     public synchronized static void sendGameMessage(Client player, String message) throws SQLException, ConnectionException {
         if (isClientPlaying(player)) {
-            Info.gameFromPlayer(player).playerSentMessage(player, message);
+            gamePlayFromPlayer(player).playerSentMessage(player, message);
         }
         else {
             Logger.getLogger(GameS.class.getName()).log(Level.SEVERE, "Player {0} cannot send message because he's not playing any game", player);
@@ -304,7 +264,7 @@ public class GameS {
     }
 
     static void gameFinished(GamePlay game) {
-        Info.removeGame(game);
+        gamePlaySet.remove(game);
     }
 
     /**
@@ -316,7 +276,10 @@ public class GameS {
      */
     public static void clientDisconnected(Client client) {
         if (isClientPlaying(client)) {
-            Info.gameFromPlayer(client).clientDisconnected(client);
+            gamePlayFromPlayer(client).clientDisconnected(client);
+        }
+        else if (isClientSpectating(client)) {
+            gamePlayFromSpectator(client).clientDisconnected(client);
         }
         else if (isClientWaiting(client)) {
             Info.removePlayerWaiting(client);
@@ -332,11 +295,11 @@ public class GameS {
      * @see GameS#isClientWaiting(Client)
      */
     public static boolean isClientPlaying(Client client) {
-        return Info.isPlaying(client);
+        return gamePlayFromPlayer(client) != null;
     }
-    
+
     public static boolean isClientSpectating(Client client) {
-        return Info.isSpectating(client);
+        return gamePlayFromSpectator(client) != null;
     }
 
     /**
@@ -347,10 +310,7 @@ public class GameS {
     public static boolean isClientWaiting(Client client) {
         return Info.isWaitingForRandomGame(client);// || playersWaitingForPlayer.containsValue(client);
     }
-
-    /*public static boolean isGameRunning(Long gameID) {
-        return currentGamesPlay.get(gameID).gameHasStarted();
-    }*/
+    
     /**
      *
      * @param gameID The game id. This must be an id of a game currently running
@@ -358,11 +318,25 @@ public class GameS {
      * (includes both players' moves).
      */
     public static Integer getGameCurrentMoveNumber(Long gameID) {
-        if (Info.gameIDisBeingPlayed(gameID)) {
-            return Info.gameFromGameID(gameID).getCurrentMoveNumber();
+        GamePlay gp = gamePlayFromGameID(gameID);
+
+        if (gp != null) {
+            return gp.getCurrentMoveNumber();
         }
 
         return null;
+    }
+
+    private static GamePlay gamePlayFromGameID(Long gameID) {
+        return gamePlaySet.stream().filter(g -> Objects.equals(g.gameID, gameID)).findAny().orElse(null);
+    }
+
+    private static GamePlay gamePlayFromPlayer(Client player) {
+        return gamePlaySet.stream().filter(g -> g.hasPlayer(player)).findAny().orElse(null);
+    }
+
+    private static GamePlay gamePlayFromSpectator(Client spectator) {
+        return gamePlaySet.stream().filter(g -> g.hasSpectator(spectator)).findAny().orElse(null);
     }
 
     private static void updateGameScreenForClient(Client client) {

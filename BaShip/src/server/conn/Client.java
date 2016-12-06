@@ -209,6 +209,10 @@ public class Client implements Connection.Delegate {
     public void informAboutGameMessage(Message msg) throws ConnectionException {
         connection.sendOnly(new Packet(Query.S_ReceiveGameMessage, msg));
     }
+    
+    public void clearGameMessages() throws ConnectionException {
+        connection.sendOnly(new Packet(Query.S_ClearGameMessages));
+    }
 
     /**
      * Tell the client to update the game UI using the given information.

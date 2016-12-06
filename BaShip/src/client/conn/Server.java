@@ -60,6 +60,10 @@ public class Server implements Connection.Delegate {
                 GameC.updateGameScreen((GameUIInfo) request.info);
                 break;
             }
+            case S_ClearGameMessages: {
+                GameChatC.clearGameMessages();
+                break;
+            }
             /*case S_ReceiveGameInvitation: {
                 GameC.showGameInvitation((String) request.info);
                 break;
