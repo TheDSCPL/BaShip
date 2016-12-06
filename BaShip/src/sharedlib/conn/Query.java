@@ -35,6 +35,7 @@ public enum Query {
     S_ReceiveGameMessage(Message.class),
     C_SendGlobalMessage(String.class),
     S_ReceiveGlobalMessage(Message.class),
+    C_SpectateGame(Long.class),
     C_StartRandomGame(),
     C_StartGameWithPlayer(Long.class),
     S_UpdateGameScreen(GameUIInfo.class),

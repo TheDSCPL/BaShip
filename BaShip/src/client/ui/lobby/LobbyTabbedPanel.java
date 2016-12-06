@@ -9,6 +9,9 @@ import client.ClientMain;
 import client.logic.GameC;
 import client.logic.GlobalChatC;
 import client.logic.UserC;
+import java.awt.Point;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.logging.Level;
@@ -61,6 +64,7 @@ public class LobbyTabbedPanel extends JPanel {
                 return false;
             }
         };
+
         gamesTableModel = new javax.swing.table.DefaultTableModel(new Object[][]{}, new String[]{"Players", "Status"}) {
             @Override
             public Class getColumnClass(int columnIndex) {
@@ -87,10 +91,29 @@ public class LobbyTabbedPanel extends JPanel {
         if (!UserC.isLoggedIn()) {
             return;
         }
-
-        /*filterIcon = new ImageIcon(getClass().getResource("/client/ui/Images/find.png"));
-        clearIcon = new ImageIcon(getClass().getResource("/client/ui/Images/cancel.png"));
-        applyFilterButton.setIcon(filterIcon);*/
+        
+        usersTable.addMouseListener(new MouseAdapter() {
+            public void mousePressed(MouseEvent me) {
+                JTable table = (JTable) me.getSource();
+                Point p = me.getPoint();
+                int row = table.rowAtPoint(p);
+                if (me.getClickCount() == 2 && row != -1) {
+                    doubleClickUsersTable(row);
+                }
+            }
+        });
+        
+        gamesTable.addMouseListener(new MouseAdapter() {
+            public void mousePressed(MouseEvent me) {
+                JTable table = (JTable) me.getSource();
+                Point p = me.getPoint();
+                int row = table.rowAtPoint(p);
+                if (me.getClickCount() == 2 && row != -1) {
+                    doubleClickGamesTable(row);
+                }
+            }
+        });
+        
         applyUserFilterButton.addComponentListener(ClientMain.mainFrame.imageResizer);
         clearUserFilterButton.addComponentListener(ClientMain.mainFrame.imageResizer);
         applyGamesFilterButton.addComponentListener(ClientMain.mainFrame.imageResizer);
@@ -362,23 +385,24 @@ public class LobbyTabbedPanel extends JPanel {
         }
     }
 
+     List<GameInfo> gamesList;
     private void updateGamesTableData(int columnToSortWith, int maxUsers) {
         if (columnToSortWith < 0 || columnToSortWith >= gamesTableModel.getColumnCount()) {
             throw new IndexOutOfBoundsException("Invalid column index to sort");
         }
         try {
             // TODO: checkbox hardcoded to false
-            List<GameInfo> gamesList = GameC.getGameList(new GameSearch(false, filterGamesField.getText(), maxUsers));
+            gamesList = GameC.getGameList(new GameSearch(false, filterGamesField.getText(), maxUsers));
             while (gamesTableModel.getRowCount() > 0) {
                 gamesTableModel.removeRow(gamesTableModel.getRowCount() - 1);
             }
-            
+
             SimpleDateFormat df = new SimpleDateFormat("yyyy.MM.dd 'at' HH:mm:ss");
             for (int i = 0; i < gamesList.size(); i++) {
                 GameInfo gameInfo = gamesList.get(i);
-                
+
                 String s1 = gameInfo.player1Username + " VS " + gameInfo.player2Username;
-                
+
                 String s2 = null;
                 switch (gameInfo.state) {
                     case Finished:
@@ -391,7 +415,7 @@ public class LobbyTabbedPanel extends JPanel {
                         s2 = "Playing, started on " + df.format(gameInfo.startDate);
                         break;
                 }
-                
+
                 gamesTableModel.addRow(new Object[]{s1, s2});
             }
         }
@@ -401,6 +425,14 @@ public class LobbyTabbedPanel extends JPanel {
     }
 
     private String prevFilter = "";
+    
+    private void doubleClickUsersTable(int row) {
+        // TODO: finish
+    }
+    
+    private void doubleClickGamesTable(int row) {
+        GameC.doubleClickGame(gamesList.get(row));
+    }
 
     private void applyUserFilterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_applyUserFilterButtonActionPerformed
         if (filterUserField.getText().equals(prevFilter)) {

@@ -1,6 +1,9 @@
 package server.logic.game;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentHashMap;
@@ -30,6 +33,7 @@ public class GameS {
         //private static final Map<Client, Client> playersWaitingForPlayer = new ConcurrentHashMap<>();
         private static final Queue<Client> playersWaitingForGame = new ConcurrentLinkedQueue<>();
         private static final Map<Client, Board> playersWaitingBoards = new ConcurrentHashMap<>();
+        private static final List<Client> spectators = Collections.synchronizedList(new ArrayList<Client>());
 
         public static Client nextPlayerWaitingForGame() {
             return playersWaitingForGame.poll();
@@ -89,6 +93,19 @@ public class GameS {
 
         private static void removeWaitingBoardForPlayer(Client player) {
             playersWaitingBoards.remove(player);
+        }
+
+        private static boolean isSpectating(Client client) {
+            return false; // TODO: finish
+        }
+        
+        private static void addSpectator(Client client, GamePlay game) {
+            // TODO: finish
+        }
+
+        private static GamePlay gameFromSpectator(Client client) {
+            // TODO: finish
+            return null;
         }
 
     }
@@ -215,6 +232,10 @@ public class GameS {
             Logger.getLogger(GameS.class.getName()).log(Level.SEVERE, "Player {0} cannot click ready because he's not playing any game", player);
         }
     }
+    
+    public static void spectateGame(Client client, Long gameID) {
+        Info.gameFromGameID(gameID).addSpectator(client);
+    }
 
     /**
      * Informs the state machine of the game that the player clicked on the left
@@ -265,6 +286,9 @@ public class GameS {
         if (Info.isPlaying(client)) {
             Info.gameFromPlayer(client).clientClosedGame(client);
         }
+        else if (Info.isSpectating(client)) {
+            Info.gameFromSpectator(client).clientClosedGame(client);
+        }
         else if (Info.isWaitingForRandomGame(client)) {
             Info.removePlayerWaiting(client);
         }
@@ -309,6 +333,10 @@ public class GameS {
      */
     public static boolean isClientPlaying(Client client) {
         return Info.isPlaying(client);
+    }
+    
+    public static boolean isClientSpectating(Client client) {
+        return Info.isSpectating(client);
     }
 
     /**

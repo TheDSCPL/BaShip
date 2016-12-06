@@ -234,6 +234,15 @@ public class Server implements Connection.Delegate {
             throw new UserMessageException("Could not send game message: " + ((ErrorMessage) response.info).message);
         }
     }
+    
+    public void spectateGame(Long id) throws UserMessageException {
+        Packet request = new Packet(Query.C_SpectateGame, id);
+        Packet response = sendAndReceiveWrapper(request); // TODO: ?
+        
+        if (response.query == Query.SR_ErrorMessage) {
+            throw new UserMessageException("Could not send game message: " + ((ErrorMessage) response.info).message);
+        }
+    }
 
     /**
      * Ask the server to start a game with another random player. If the server

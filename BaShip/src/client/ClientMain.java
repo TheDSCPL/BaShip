@@ -26,8 +26,6 @@ public class ClientMain {
     public static void main(String args[]) {
         runOnUI(() -> {
             mainFrame.changeToPanel(new LoginPanel());
-            //mainFrame.changeToPanel(new Board(true));
-            //mainFrame.changeToPanel(new GamePanel());
             mainFrame.setVisible(true);
         });
     }

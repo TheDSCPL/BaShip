@@ -166,7 +166,7 @@ class Board {
         return bi;
     }
 
-    public BoardUIInfo getBoardInfoPlaying(boolean leftBoard, boolean showEverything) {
+    public BoardUIInfo getBoardInfoPlaying(boolean showEverything, boolean leftBoard) {
         BoardUIInfo bi = new BoardUIInfo();
         bi.leftBoard = leftBoard;
 

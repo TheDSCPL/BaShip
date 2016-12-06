@@ -4,6 +4,8 @@ import client.ClientMain;
 import client.ui.game.GamePanel;
 import client.ui.lobby.LobbyPanel;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
@@ -136,9 +138,28 @@ public class GameC {
     public static void gameFinished(String message) {
         ClientMain.runOnUI(() -> {
             // TODO: abonitar a coisa (não copiar código da funcao showInfo)
-            JOptionPane.showMessageDialog(ClientMain.mainFrame, message, "Info", INFORMATION_MESSAGE);            
+            JOptionPane.showMessageDialog(ClientMain.mainFrame, message, "Info", INFORMATION_MESSAGE);
             ClientMain.mainFrame.changeToPanel(new LobbyPanel());
         });
+    }
+
+    public static void doubleClickGame(GameInfo gameInfo) {
+        try {
+            switch (gameInfo.state) {
+                case Finished:
+                    // Replay
+                    break;
+                case Created:
+                case Playing:
+                    // Spectate
+                    ClientMain.server.spectateGame(gameInfo.id);
+                    break;
+            }
+        }
+        catch (UserMessageException ex) {
+            Logger.getLogger(GameC.class.getName()).log(Level.SEVERE, null, ex);
+            ClientMain.showError(ex.getMessage());
+        }
     }
 
 }

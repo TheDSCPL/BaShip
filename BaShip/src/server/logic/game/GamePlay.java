@@ -92,7 +92,8 @@ class GamePlay {
             finishGame("Game ended. Player " + UserS.usernameFromClient(client) + " closed game.", opponent(client), client);
         }
         else {
-            // TODO: spectator?
+            spectators.remove(client);
+            // TODO: anything else?
         }
     }
 
@@ -101,7 +102,8 @@ class GamePlay {
             finishGame("Game ended. Player " + UserS.usernameFromClient(client) + " disconnected.", opponent(client), null);
         }
         else {
-            // TODO: spectator?
+            spectators.remove(client);
+            // TODO: anything else?
         }
     }
 

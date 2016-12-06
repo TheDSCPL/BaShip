@@ -185,6 +185,11 @@ public class Client implements Connection.Delegate {
                 response = new Packet(); // Empty response just for confirmation
                 break;
             }
+            case C_SpectateGame: {
+                GameS.spectateGame(this, (Long) request.info);
+                response = new Packet(); // Empty response just for confirmation
+                break;
+            }
         }
 
         return response;
