@@ -171,13 +171,23 @@ public class Client implements Connection.Delegate {
                 break;
             }
             case C_DoubleClickGame: {
-                GameS.Actions.doubleClickGame(this, (Long) request.info);
+                GameS.Actions.clientDoubleClickedGame(this, (Long) request.info);
+                response = new Packet(); // Empty response just for confirmation
+                break;
+            }
+            case C_ShowNextMove: {
+                GameS.Actions.showNextMove(this);
+                response = new Packet(); // Empty response just for confirmation
+                break;
+            }
+            case C_ShowPreviousMove: {
+                GameS.Actions.showPreviousMove(this);
                 response = new Packet(); // Empty response just for confirmation
                 break;
             }
             case C_DoubleClickUser: {
                 try {
-                    GameS.Actions.doubleClickUser(this, (Long) request.info);
+                    GameS.Actions.clientDoubleClickedUser(this, (Long) request.info);
                     response = new Packet();
                 }
                 catch (UserMessageException ex) {

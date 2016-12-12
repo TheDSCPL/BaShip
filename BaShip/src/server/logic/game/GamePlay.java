@@ -167,7 +167,7 @@ class GamePlay {
         }
 
         // Remove myself from GameS's lists
-        GameS.Callbacks.gameFinished(this);
+        GameS.Callbacks.gamePlayFinished(this);
     }
 
     public synchronized void clickReadyButton(Client player) {

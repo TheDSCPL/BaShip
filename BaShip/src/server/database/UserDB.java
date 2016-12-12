@@ -38,7 +38,7 @@ public class UserDB {
             stmt = conn.prepareStatement("SELECT COUNT(*) FROM users WHERE username = ?");
             stmt.setString(1, username);
 
-            rs = stmt.executeQuery(username);
+            rs = stmt.executeQuery();
             rs.next();
             return rs.getInt(1) == 0;
         }

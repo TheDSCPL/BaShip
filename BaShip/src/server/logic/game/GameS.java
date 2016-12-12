@@ -11,6 +11,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import server.conn.Client;
+import server.database.GameDB;
 import server.logic.UserS;
 import sharedlib.exceptions.ConnectionException;
 import sharedlib.exceptions.UserMessageException;
@@ -27,9 +28,26 @@ import sharedlib.utils.Coord;
  */
 public class GameS {
 
-    private static final Set<GamePlay> gamePlaySet = Collections.newSetFromMap(new ConcurrentHashMap<>());
-
     public static class GameInfo {
+
+        private static final Set<GamePlay> gamePlaySet = Collections.newSetFromMap(new ConcurrentHashMap<>());
+        private static final Set<GameReplay> gameReplaySet = Collections.newSetFromMap(new ConcurrentHashMap<>());
+
+        private static void addGamePlay(GamePlay game) {
+            gamePlaySet.add(game);
+        }
+
+        private static void removeGamePlay(GamePlay game) {
+            gamePlaySet.remove(game);
+        }
+
+        private static void addGameReplay(GameReplay game) {
+            gameReplaySet.add(game);
+        }
+
+        private static void removeGameReplay(GameReplay game) {
+            gameReplaySet.remove(game);
+        }
 
         /**
          *
@@ -58,6 +76,10 @@ public class GameS {
 
         private static GamePlay gamePlayFromSpectator(Client spectator) {
             return gamePlaySet.stream().filter(g -> g.hasSpectator(spectator)).findAny().orElse(null);
+        }
+
+        private static GameReplay gameReplayFromClient(Client client) {
+            return gameReplaySet.stream().filter(g -> g.client == client).findAny().orElse(null);
         }
     }
 
@@ -228,10 +250,24 @@ public class GameS {
                 Info.removePlayerWaitingForPlayer(client);
                 // TODO: remove invitation from screen of invited player
             }
-            
+
             if (false) { // TODO: if disconnected player was invited by someone
                 // TODO: Info.removePlayerWaitingForPlayer(client);
                 // TODO: close game of player who invited
+            }
+        }
+
+        public static void showNextMove(Client client) {
+            GameReplay gr = GameInfo.gameReplayFromClient(client);
+            if (gr != null) {
+                gr.showNextMove();
+            }
+        }
+
+        public static void showPreviousMove(Client client) {
+            GameReplay gr = GameInfo.gameReplayFromClient(client);
+            if (gr != null) {
+                gr.showPreviousMove();
             }
         }
 
@@ -241,7 +277,7 @@ public class GameS {
             }
         }
 
-        public static void doubleClickUser(Client client, Long playerID) throws UserMessageException {
+        public static void clientDoubleClickedUser(Client client, Long playerID) throws UserMessageException {
             Client clickedClient = UserS.clientWithUserID(playerID);
 
             if (clickedClient != null && client != clickedClient) { // Online and another player
@@ -266,18 +302,32 @@ public class GameS {
             }
         }
 
-        public static void doubleClickGame(Client client, Long gameID) {
+        public static void clientDoubleClickedGame(Client client, Long gameID) {
             if (GameInfo.gamePlayFromGameID(gameID) != null) { // Game is currently being played -> spectate
                 spectateGame(client, gameID);
             }
-            // TODO: other cases
+            else {
+                boolean finished = false;
+
+                try {
+                    finished = GameDB.getGameHasFinished(gameID);
+                }
+                catch (SQLException ex) {
+                    Logger.getLogger(GameS.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                if (finished) {
+                    GameReplay game = new GameReplay(client, gameID);
+                    GameInfo.addGameReplay(game);
+                }
+            }
         }
 
         private static void startGame(Client player1, Client player2) throws UserMessageException {
             GamePlay game;
             try {
                 game = new GamePlay(player1, Info.waitingBoardForPlayer(player1), player2, Info.waitingBoardForPlayer(player2));
-                gamePlaySet.add(game);
+                GameInfo.addGamePlay(game);
 
                 // TODO: refactor
                 Info.removePlayerWaiting(player1);
@@ -289,6 +339,10 @@ public class GameS {
                 Logger.getLogger(GameS.class.getName()).log(Level.SEVERE, null, ex);
                 throw new UserMessageException("Could not access DB and create game: " + ex.getMessage());
             }
+        }
+
+        private static void startReplay(Client client, Long gameID) {
+
         }
 
         private static void startWait(Client clientWaiting, Client targetClient) {
@@ -385,8 +439,12 @@ public class GameS {
 
     static class Callbacks {
 
-        static void gameFinished(GamePlay game) {
-            gamePlaySet.remove(game);
+        static void gamePlayFinished(GamePlay game) {
+            GameInfo.removeGamePlay(game);
+        }
+
+        static void gameReplayFinished(GameReplay game) {
+            GameInfo.removeGameReplay(game);
         }
     }
 

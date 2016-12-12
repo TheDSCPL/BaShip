@@ -115,6 +115,14 @@ public class GameC {
     static public void clickReadyButton() throws UserMessageException {
         ClientMain.server.clickReadyButton();
     }
+    
+    static public void showNextMove() throws UserMessageException {
+        ClientMain.server.showNextMove();
+    }
+    
+    static public void showPreviousMove() throws UserMessageException {
+        ClientMain.server.showPreviousMove();
+    }
 
     /**
      * Close the game. Switches the UI to the lobby and informs the server.

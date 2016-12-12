@@ -188,4 +188,25 @@ public class GameDB {
         }
     }
 
+    public static boolean getGameHasFinished(Long gameID) throws SQLException {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            String query = "SELECT enddate FROM games WHERE gmid = ?";
+
+            conn = Database.getConn();
+            stmt = conn.prepareStatement(query);
+            stmt.setLong(1, gameID);
+
+            rs = stmt.executeQuery();
+            rs.next();
+            return rs.getDate(1) != null;
+        }
+        finally {
+            Database.close(conn, stmt, rs);
+        }
+    }
+
 }
