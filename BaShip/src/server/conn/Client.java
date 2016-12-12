@@ -201,7 +201,6 @@ public class Client implements Connection.Delegate {
                 }
                 catch (UserMessageException ex) {
                     Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
-                    // TODO: XXX
                 }
                 break;
             }
@@ -261,14 +260,15 @@ public class Client implements Connection.Delegate {
         connection.sendOnly(new Packet(Query.S_UpdateGameScreen, info));
     }
 
-    /**
+    /*
      * Inform the client that he has received an invitation from another player.
      * Note: API not yet finished.
      *
+     * @param usernameOfUserInvitingPlayer
      * @throws ConnectionException
      */
     public void sendGameInvitation(String usernameOfUserInvitingPlayer) throws ConnectionException {
-        connection.sendOnly(new Packet(Query.S_ReceiveGameInvitation, usernameOfUserInvitingPlayer)); // TODO: info?
+        connection.sendOnly(new Packet(Query.S_ReceiveGameInvitation, usernameOfUserInvitingPlayer));
     }
 
     /**

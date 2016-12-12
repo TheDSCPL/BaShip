@@ -244,7 +244,7 @@ public class Server implements Connection.Delegate {
         Packet response = sendAndReceiveWrapper(request);
         
         if (response.query == Query.SR_ErrorMessage) {
-            throw new UserMessageException("Error XXX: " + ((ErrorMessage) response.info).message); // TODO: message
+            throw new UserMessageException("There was a problem: " + ((ErrorMessage) response.info).message);
         }
     }
     
@@ -253,7 +253,7 @@ public class Server implements Connection.Delegate {
         Packet response = sendAndReceiveWrapper(request);
         
         if (response.query == Query.SR_ErrorMessage) {
-            throw new UserMessageException("Error YYY: " + ((ErrorMessage) response.info).message); // TODO: message
+            throw new UserMessageException("There was a problem: " + ((ErrorMessage) response.info).message);
         }
     }
 

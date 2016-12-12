@@ -172,7 +172,7 @@ public class UserS {
             if (GameS.PlayerInfo.isPlaying(c) || GameS.PlayerInfo.isSpectating(c)) {
                 return UserStatus.Playing;
             }
-            else if (GameS.PlayerInfo.isWaiting(c)) {
+            else if (GameS.PlayerInfo.isWaitingForGame(c)) {
                 return UserStatus.Waiting;
             }
 

@@ -1,26 +1,72 @@
 package server.logic.game;
 
+import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import server.conn.Client;
+import server.database.GameChatDB;
+import server.database.MoveDB;
+import server.database.ShipDB;
+import sharedlib.exceptions.ConnectionException;
+import sharedlib.structs.BoardUIInfo;
+import sharedlib.structs.GameUIInfo;
+import sharedlib.structs.GameUIInfo.UIType;
+import sharedlib.structs.Message;
 
-/**
- *
- * @author Alex
- */
 public class GameReplay {
 
     public final Client client;
+    public final Long gameID;
 
-    public GameReplay(Client client, Long gameID) {
+    private String p1Username, p2Username;
+    private Board p1Board, p2Board;
+    private int currentTurn;
+    private final int totalTurnCount;
+
+    public GameReplay(Client client, Long gameID) throws SQLException {
         this.client = client;
+        this.gameID = gameID;
+        
+        p1Username = "XXX"; // TODO: finish
+        p2Username = "YYY";
+
+        p1Board = new Board();
+        p2Board = new Board();
+
+        p1Board.setShips(ShipDB.getShipPositions(gameID, 1));
+        p2Board.setShips(ShipDB.getShipPositions(gameID, 2));
+        
+        currentTurn = 0;
+        totalTurnCount = MoveDB.getTotalMoveCount(gameID);
+        
+        refreshClient();
+        
+        try {
+            client.clearGameMessages();
+
+            List<Message> messages = GameChatDB.getMessages(gameID);
+            System.out.println(messages);
+            for (Message msg : messages) {
+                client.informAboutGameMessage(msg);
+            }
+        }
+        catch (ConnectionException ex) {
+            Logger.getLogger(GameReplay.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     // TODO: synchronized methods?
     public void showNextMove() {
-
+        // TODO: finish
+        currentTurn++;
+        refreshClient();
     }
 
     public void showPreviousMove() {
-
+        // TODO: finish
+        currentTurn--;
+        refreshClient();
     }
 
     public void clientClosedGame() {
@@ -31,50 +77,30 @@ public class GameReplay {
 
     }
 
-    /*private void refreshGameScreenForClient() {
+    private void refreshClient() {
         GameUIInfo info = new GameUIInfo(
-                UserS.usernameOfClient(client),
-                UserS.usernameOfClient(opponent(client)),
-                gameHasStarted(),
-                opponentReady ? "Opponent is ready" : "Opponent is placing ships",
-                placingShips ? "You can place ships" : "Please wait for opponent",
-                placingShips && boardForPlayer(client).placedShipsAreValid(),
-                gameStarted ? (client == player1 ? p1Turn : !p1Turn) : false,
-                gameStarted ? (client == player1 ? !p1Turn : p1Turn) : false,
-                UIType.Play, null, null, null
+                p1Username,
+                p2Username,
+                true, null, null, null,
+                false, false, UIType.Replay,
+                currentTurn > 0, currentTurn < totalTurnCount,
+                "Turn " + currentTurn + " of " + totalTurnCount
         );
 
-        try {
-            client.updateGameScreen(info);
-        }
-        catch (ConnectionException ex) {
-            Logger.getLogger(GamePlay.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    private void refreshBoardsForClient() {
-        BoardUIInfo leftBoard, rightBoard;
-        boolean playing = gameHasStarted();
-
-        if (isPlayer(client)) {
-            leftBoard = boardForPlayer(client).getBoardInfo(playing, true);
-            rightBoard = boardForPlayer(opponent(client)).getBoardInfo(playing, false);
-        }
-        else {
-            leftBoard = boardForPlayer(player1).getBoardInfo(playing, true);
-            rightBoard = boardForPlayer(player2).getBoardInfo(playing, true);
-        }
-
+        BoardUIInfo leftBoard = p1Board.getBoardInfoPlaying(true);
         leftBoard.leftBoard = true;
+        
+        BoardUIInfo rightBoard = p2Board.getBoardInfoPlaying(true);
         rightBoard.leftBoard = false;
 
         try {
+            client.updateGameScreen(info);
             client.updateGameBoard(leftBoard);
             client.updateGameBoard(rightBoard);
         }
         catch (ConnectionException ex) {
-            Logger.getLogger(GamePlay.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GameReplay.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }*/
+    }
 
 }

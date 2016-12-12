@@ -169,7 +169,6 @@ public class GameC {
             }
             catch (UserMessageException ex) {
                 Logger.getLogger(GameC.class.getName()).log(Level.SEVERE, null, ex);
-                // TODO: XXX
             }
         });
 

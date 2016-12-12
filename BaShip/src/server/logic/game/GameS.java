@@ -105,8 +105,12 @@ public class GameS {
          * @return True if the client is waiting for a game.
          * @see GameS#isClientPlaying(Client)
          */
-        public static boolean isWaiting(Client client) {
-            return Info.isWaitingForRandomGame(client);// || playersWaitingForPlayer.containsValue(client); // TODO: also review isWaiting usage
+        public static boolean isWaitingForGame(Client client) {
+            return Info.isWaitingForRandomGame(client);
+        }
+
+        public static boolean isWaitingForPlayer(Client client) {
+            return Info.isWaitingForPlayer(client);
         }
     }
 
@@ -144,7 +148,7 @@ public class GameS {
             }
             else {
                 try {
-                    playerWhoSentInvitation.showMessageAndCloseGame("Player " + UserS.usernameOfClient(invitedPlayer) + " declined invitation.");
+                    playerWhoSentInvitation.showMessageAndCloseGame("Player " + UserS.usernameOfClient(invitedPlayer) + " declined your invitation.");
                 }
                 catch (ConnectionException ex) {
                     Logger.getLogger(GameS.class.getName()).log(Level.SEVERE, null, ex);
@@ -179,7 +183,7 @@ public class GameS {
             if (PlayerInfo.isPlaying(client)) {
                 GameInfo.gamePlayFromPlayer(client).playerClickedLeftBoard(client, pos);
             }
-            else if (PlayerInfo.isWaiting(client)) { // TODO: also add || option when waiting for player
+            else if (PlayerInfo.isWaitingForGame(client)) { // TODO: also add || option when waiting for player
                 Board board = Info.waitingBoardForPlayer(client);
                 board.togglePlaceShipOnSquare(pos);
 
@@ -219,10 +223,10 @@ public class GameS {
             else if (PlayerInfo.isSpectating(client)) {
                 GameInfo.gamePlayFromSpectator(client).clientClosedGame(client);
             }
-            else if (PlayerInfo.isWaiting(client)) {
-                Info.removePlayerWaiting(client);
+            else if (PlayerInfo.isWaitingForGame(client)) {
+                Info.removePlayerWaitingForGame(client);
             }
-            else if (true) { // TODO: if player waiting for player
+            else if (PlayerInfo.isWaitingForPlayer(client)) { // Player waiting for player
                 Info.removePlayerWaitingForPlayer(client);
                 // TODO: remove invitation from screen of invited player
             }
@@ -242,18 +246,26 @@ public class GameS {
             else if (PlayerInfo.isSpectating(client)) {
                 GameInfo.gamePlayFromSpectator(client).clientDisconnected(client);
             }
-            else if (PlayerInfo.isWaiting(client)) {
-                Info.removePlayerWaiting(client);
+            else if (PlayerInfo.isWaitingForGame(client)) {
+                Info.removePlayerWaitingForGame(client);
                 Info.removeWaitingBoardForPlayer(client);
             }
-            else if (false) { // TODO: if disconnected player waiting for player
+            else if (PlayerInfo.isWaitingForPlayer(client)) { // Disconnected player waiting for player
                 Info.removePlayerWaitingForPlayer(client);
                 // TODO: remove invitation from screen of invited player
             }
 
-            if (false) { // TODO: if disconnected player was invited by someone
-                // TODO: Info.removePlayerWaitingForPlayer(client);
-                // TODO: close game of player who invited
+            // TODO: repeated code - refactor to function?
+            Client playerWhoSentInvitation = Info.playerWaitingForHim(client);
+            if (playerWhoSentInvitation != null) { // Disconnected player was invited by someone
+                try {
+                    playerWhoSentInvitation.showMessageAndCloseGame("Player " + UserS.usernameOfClient(client) + " disconnected.");
+                }
+                catch (ConnectionException ex) {
+                    Logger.getLogger(GameS.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                Info.removePlayerWaitingForPlayer(playerWhoSentInvitation);
             }
         }
 
@@ -284,7 +296,7 @@ public class GameS {
                 if (PlayerInfo.isPlaying(clickedClient)) {
                     spectateGame(client, GameInfo.gamePlayFromPlayer(clickedClient).gameID);
                 }
-                else if (PlayerInfo.isWaiting(clickedClient)) {
+                else if (PlayerInfo.isWaitingForGame(clickedClient)) {
                     startGame(client, clickedClient);
                 }
                 else {
@@ -295,7 +307,7 @@ public class GameS {
                     }
                     catch (ConnectionException ex) {
                         Logger.getLogger(GameS.class.getName()).log(Level.SEVERE, null, ex);
-                        throw new UserMessageException("Could not invite user"); // TODO: better error handling?
+                        throw new UserMessageException("Could not invite user");
                     }
                 }
                 // TODO: other cases?
@@ -316,9 +328,14 @@ public class GameS {
                     Logger.getLogger(GameS.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
-                if (finished) {
-                    GameReplay game = new GameReplay(client, gameID);
-                    GameInfo.addGameReplay(game);
+                if (finished) { // TODO: cancelled game cannot be replayed
+                    try {
+                        GameReplay game = new GameReplay(client, gameID);
+                        GameInfo.addGameReplay(game);
+                    }
+                    catch (SQLException ex) {
+                        Logger.getLogger(GameS.class.getName()).log(Level.SEVERE, null, ex); // TODO: error
+                    }
                 }
             }
         }
@@ -330,8 +347,8 @@ public class GameS {
                 GameInfo.addGamePlay(game);
 
                 // TODO: refactor
-                Info.removePlayerWaiting(player1);
-                Info.removePlayerWaiting(player2);
+                Info.removePlayerWaitingForGame(player1);
+                Info.removePlayerWaitingForGame(player2);
                 Info.removeWaitingBoardForPlayer(player1);
                 Info.removeWaitingBoardForPlayer(player2);
             }
@@ -409,7 +426,7 @@ public class GameS {
             playersWaitingForGame.add(client);
         }
 
-        public static void removePlayerWaiting(Client client) {
+        public static void removePlayerWaitingForGame(Client client) {
             playersWaitingForGame.remove(client);
         }
 
@@ -418,6 +435,10 @@ public class GameS {
         }
 
         /////////////////
+        public static boolean isWaitingForPlayer(Client c) {
+            return playersWaitingForPlayer1.containsKey(c);
+        }
+
         public static void addPlayerWaitingForPlayer(Client player, Client waitingForPlayer) {
             playersWaitingForPlayer1.put(player, waitingForPlayer);
             playersWaitingForPlayer2.put(waitingForPlayer, player);

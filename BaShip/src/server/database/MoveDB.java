@@ -2,6 +2,7 @@ package server.database;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -41,4 +42,22 @@ public class MoveDB {
         }
     }
 
+    public static int getTotalMoveCount(long gameID) throws SQLException {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            conn = Database.getConn();
+            stmt = conn.prepareStatement("SELECT COUNT(moveid) FROM moves WHERE gmid = ?");            
+            stmt.setLong(1, gameID);
+
+            rs = stmt.executeQuery();
+            rs.next();
+            return rs.getInt(1);
+        }
+        finally {
+            Database.close(conn, stmt);
+        }
+    }
 }

@@ -101,6 +101,16 @@ class Board {
         return invalidShipSquares.isEmpty();
     }
 
+    public void setShips(List<Ship> ships) {
+        this.ships.clear();
+        this.ships.addAll(ships);
+        
+        shipsLayer.setAll(false);
+        for (Coord c : allShipSquares()) {
+            shipsLayer.set(c, true);
+        }
+    }
+    
     public List<Ship> getShips() {
         return new ArrayList<>(ships);
     }
