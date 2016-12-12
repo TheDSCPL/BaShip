@@ -84,7 +84,7 @@ public class GameS {
          * @see GameS#isClientPlaying(Client)
          */
         public static boolean isWaiting(Client client) {
-            return Info.isWaitingForRandomGame(client);// || playersWaitingForPlayer.containsValue(client);
+            return Info.isWaitingForRandomGame(client);// || playersWaitingForPlayer.containsValue(client); // TODO: also review isWaiting usage
         }
     }
 
@@ -107,61 +107,31 @@ public class GameS {
         }
 
         /**
-         * Start a game with another player. The other player must be online and
-         * available (not in a game), or else a {@code UserMessageException} is
-         * thrown. If the player is available, an invitation is sent to him.
-         *
-         * @param client The client that wants to start a game
-         * @param otherPlayerID The player who is to be invited
-         * @throws UserMessageException
-         */
-        public static void startGameWithPlayer(Client client, Long otherPlayerID) throws UserMessageException {
-
-            // Other player must be online
-            /*if (UserS.isUserLoggedIn(otherPlayerID)) {
-            Client otherPlayer = UserS.clientWithUserID(otherPlayerID);
-
-            // Other player is waiting for a game too -> start game immediately
-            if (playersWaitingForGame.contains(otherPlayer)) {
-                startGame(client, otherPlayer);
-            }
-            // Other player is playing
-            else if (currentGamesPlayFromUser.containsKey(client)) {
-                throw new UserMessageException("Invited user is currently playing");
-            }
-            // Other player is online but available
-            // \-> player starts waiting for otherPlayer
-            // \-> send invitation to otherPlayer
-            else {
-                startWait(client, otherPlayer);
-                //sendInvitation(client, otherPlayer);
-            }
-        }
-        else {
-            throw new UserMessageException("Invited user is not online at the moment");
-        }*/
-        }
-
-        /**
          * Inform this class that the client who has received a game invitation
          * has answered said invitation (either by accepting or denying it).
          *
-         * @param client The client who received the invitation
-         * @param acepted True if the client accepted the invitation and wants
+         * @param invitedPlayer The client who received the invitation
+         * @param accepted True if the client accepted the invitation and wants
          * to start a game
          */
-        /*public static void answerGameInvitation(Client client, boolean acepted) {
-        // TODO: finish
-    }*/
+        public static void answerGameInvitation(Client invitedPlayer, boolean accepted) throws UserMessageException {
+            Client playerWhoSentInvitation = Info.playerWaitingForHim(invitedPlayer);
 
- /*private static void sendInvitation(Client from, Client to) {
-        try {
-            to.sendGameInvitation(); // TODO: finish
+            if (accepted) {
+                startGame(invitedPlayer, playerWhoSentInvitation);
+            }
+            else {
+                try {
+                    playerWhoSentInvitation.showMessageAndCloseGame("Player " + UserS.usernameOfClient(invitedPlayer) + " declined invitation.");
+                }
+                catch (ConnectionException ex) {
+                    Logger.getLogger(GameS.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+            Info.removePlayerWaitingForPlayer(playerWhoSentInvitation);
         }
-        catch (ConnectionException ex) {
-            Logger.getLogger(GameS.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }*/
+
         /**
          * When placing ships, inform this class that this player has finished
          * placing all the ships and is ready to start a game. The player must
@@ -187,7 +157,7 @@ public class GameS {
             if (PlayerInfo.isPlaying(client)) {
                 GameInfo.gamePlayFromPlayer(client).playerClickedLeftBoard(client, pos);
             }
-            else if (PlayerInfo.isWaiting(client)) {
+            else if (PlayerInfo.isWaiting(client)) { // TODO: also add || option when waiting for player
                 Board board = Info.waitingBoardForPlayer(client);
                 board.togglePlaceShipOnSquare(pos);
 
@@ -230,6 +200,10 @@ public class GameS {
             else if (PlayerInfo.isWaiting(client)) {
                 Info.removePlayerWaiting(client);
             }
+            else if (true) { // TODO: if player waiting for player
+                Info.removePlayerWaitingForPlayer(client);
+                // TODO: remove invitation from screen of invited player
+            }
         }
 
         /**
@@ -250,6 +224,15 @@ public class GameS {
                 Info.removePlayerWaiting(client);
                 Info.removeWaitingBoardForPlayer(client);
             }
+            else if (false) { // TODO: if disconnected player waiting for player
+                Info.removePlayerWaitingForPlayer(client);
+                // TODO: remove invitation from screen of invited player
+            }
+            
+            if (false) { // TODO: if disconnected player was invited by someone
+                // TODO: Info.removePlayerWaitingForPlayer(client);
+                // TODO: close game of player who invited
+            }
         }
 
         public synchronized static void sendGameMessage(Client player, String message) throws SQLException, ConnectionException {
@@ -261,21 +244,33 @@ public class GameS {
         public static void doubleClickUser(Client client, Long playerID) throws UserMessageException {
             Client clickedClient = UserS.clientWithUserID(playerID);
 
-            if (clickedClient != null) { // Online
+            if (clickedClient != null && client != clickedClient) { // Online and another player
                 if (PlayerInfo.isPlaying(clickedClient)) {
                     spectateGame(client, GameInfo.gamePlayFromPlayer(clickedClient).gameID);
                 }
                 else if (PlayerInfo.isWaiting(clickedClient)) {
                     startGame(client, clickedClient);
                 }
-                // TODO: other cases
+                else {
+                    // Just online, invite
+                    try {
+                        clickedClient.sendGameInvitation(UserS.usernameOfClient(client));
+                        startWait(client, clickedClient);
+                    }
+                    catch (ConnectionException ex) {
+                        Logger.getLogger(GameS.class.getName()).log(Level.SEVERE, null, ex);
+                        throw new UserMessageException("Could not invite user"); // TODO: better error handling?
+                    }
+                }
+                // TODO: other cases?
             }
         }
-        
+
         public static void doubleClickGame(Client client, Long gameID) {
             if (GameInfo.gamePlayFromGameID(gameID) != null) { // Game is currently being played -> spectate
                 spectateGame(client, gameID);
             }
+            // TODO: other cases
         }
 
         private static void startGame(Client player1, Client player2) throws UserMessageException {
@@ -283,7 +278,7 @@ public class GameS {
             try {
                 game = new GamePlay(player1, Info.waitingBoardForPlayer(player1), player2, Info.waitingBoardForPlayer(player2));
                 gamePlaySet.add(game);
-                
+
                 // TODO: refactor
                 Info.removePlayerWaiting(player1);
                 Info.removePlayerWaiting(player2);
@@ -302,9 +297,9 @@ public class GameS {
                 Info.addPlayerWaiting(clientWaiting);
             }
             // Waiting for a specific player
-            /*else {
-            playersWaitingForPlayer.put(targetClient, clientWaiting);
-        }*/
+            else {
+                Info.addPlayerWaitingForPlayer(clientWaiting, targetClient);
+            }
 
             Helpers.updateGameScreenForClient(clientWaiting);
 
@@ -326,12 +321,13 @@ public class GameS {
             }
         }
 
-        
     }
 
     private static class Info {
 
-        //private static final Map<Client, Client> playersWaitingForPlayer = new ConcurrentHashMap<>();
+        private static final Map<Client, Client> playersWaitingForPlayer1 = new ConcurrentHashMap<>();
+        private static final Map<Client, Client> playersWaitingForPlayer2 = new ConcurrentHashMap<>();
+
         private static final Queue<Client> playersWaitingForGame = new ConcurrentLinkedQueue<>();
         private static final Map<Client, Board> playersWaitingBoards = new ConcurrentHashMap<>();
 
@@ -366,6 +362,25 @@ public class GameS {
         private static void removeWaitingBoardForPlayer(Client player) {
             playersWaitingBoards.remove(player);
         }
+
+        /////////////////
+        public static void addPlayerWaitingForPlayer(Client player, Client waitingForPlayer) {
+            playersWaitingForPlayer1.put(player, waitingForPlayer);
+            playersWaitingForPlayer2.put(waitingForPlayer, player);
+        }
+
+        public static Client playerWaitingForHim(Client player) {
+            return playersWaitingForPlayer2.get(player);
+        }
+
+        public static Client playerInvitedBy(Client player) {
+            return playersWaitingForPlayer1.get(player);
+        }
+
+        public static void removePlayerWaitingForPlayer(Client playerWhoSentInvite) {
+            playersWaitingForPlayer2.remove(playersWaitingForPlayer1.remove(playerWhoSentInvite));
+        }
+        /////////////////
     }
 
     static class Callbacks {
@@ -385,16 +400,17 @@ public class GameS {
                         UserS.usernameOfClient(client), "<waiting>", false,
                         "Waiting for opponent", "You can place ships", false,
                         false, false,
-                        UIType.Play
+                        UIType.Play, null, null, null
                 );
             }
-            /*else if (playersWaitingForPlayer.containsValue(client)) {
-            gsi = new GameUIInfo(
-                    UserS.usernameOfClient(client), "<waiting for " + "OTHER PLAYER TODO" + ">", false, // TODO: UserS.usernameOfClient(otherPlayer) 
-                    "Waiting for opponent", "You can place ships", false,
-                    false, false
-            );
-        }*/
+            else if (Info.playerInvitedBy(client) != null) {
+                gsi = new GameUIInfo(
+                        UserS.usernameOfClient(client), "<waiting for " + UserS.usernameOfClient(Info.playerInvitedBy(client)) + ">", false,
+                        "Waiting for opponent", "You can place ships", false,
+                        false, false,
+                        UIType.Play, null, null, null
+                );
+            }
 
             if (gsi != null) {
                 try {

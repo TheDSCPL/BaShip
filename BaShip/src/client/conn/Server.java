@@ -64,16 +64,16 @@ public class Server implements Connection.Delegate {
                 GameChatC.clearGameMessages();
                 break;
             }
-            /*case S_ReceiveGameInvitation: {
+            case S_ReceiveGameInvitation: {
                 GameC.showGameInvitation((String) request.info);
                 break;
-            }*/
+            }
             case S_UpdateGameBoard: {
                 GameC.updateBoardInfo((BoardUIInfo) request.info);
                 break;
             }
-            case S_GameFinished: {
-                GameC.gameFinished((String) request.info);
+            case S_ShowMessageAndCloseGame: {
+                GameC.showMessageAndCloseGame((String) request.info);
                 break;
             }
         }
@@ -273,25 +273,7 @@ public class Server implements Connection.Delegate {
             throw new UserMessageException("Could not start random game: " + ((ErrorMessage) response.info).message);
         }
     }
-
-    /**
-     * Ask the server to start a game with another (specific) player. If the
-     * server decides to start a game, it will later (not as a response to this
-     * packet) send a S_UpdateGameScreen packet to this client that will be
-     * handled by this class separately.
-     *
-     * @param id The id of the other player, to which the server will send an
-     * invite
-     * @throws UserMessageException
-     */
-    /*public void startGameWithPlayer(Long id) throws UserMessageException {
-        Packet request = new Packet(Query.C_StartGameWithPlayer, id);
-        Packet response = sendAndReceiveWrapper(request);
-
-        if (response.query == Query.SR_ErrorMessage) {
-            throw new UserMessageException("Could not start game with player: " + ((ErrorMessage) response.info).message);
-        }
-    }*/
+    
     /**
      * Inform the server if the player accepted the invitation or not. This
      * should be called after receiving an invitation from another player.
@@ -300,10 +282,11 @@ public class Server implements Connection.Delegate {
      * to be started.
      * @throws UserMessageException
      */
-    /*public void anwserGameInvitation(boolean accepted) throws UserMessageException {
+    public void anwserGameInvitation(boolean accepted) throws UserMessageException {
         Packet request = new Packet(Query.C_AnswerGameInvitation, accepted);
         sendOnlyWrapper(request);
-    }*/
+    }
+    
     /**
      * Inform the server that this user clicked on the left board on a specific
      * position.
@@ -347,6 +330,16 @@ public class Server implements Connection.Delegate {
      */
     public void closeGame() throws UserMessageException {
         Packet request = new Packet(Query.C_CloseGame);
+        sendAndReceiveWrapper(request); // Response is an empty packet, just for confirmation
+    }
+    
+    public void showPreviousMove() throws UserMessageException {
+        Packet request = new Packet(Query.C_ShowPreviousMove);
+        sendAndReceiveWrapper(request); // Response is an empty packet, just for confirmation
+    }
+    
+    public void showNextMove() throws UserMessageException {
+        Packet request = new Packet(Query.C_ShowNextMove);
         sendAndReceiveWrapper(request); // Response is an empty packet, just for confirmation
     }
 

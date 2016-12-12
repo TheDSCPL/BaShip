@@ -36,21 +36,20 @@ public enum Query {
     C_SendGlobalMessage(String.class),
     S_ReceiveGlobalMessage(Message.class),
     S_ClearGameMessages(),
-    
     C_DoubleClickGame(Long.class),
     C_DoubleClickUser(Long.class),
-    
     C_StartRandomGame(),
-    C_StartGameWithPlayer(Long.class),
     S_UpdateGameScreen(GameUIInfo.class),
     S_UpdateGameBoard(BoardUIInfo.class),
     C_ClickReadyButton(),
     C_ClickLeftBoard(Coord.class),
     C_ClickRightBoard(Coord.class),
     C_CloseGame(),
-    S_GameFinished(String.class)/*,
-    S_ReceiveGameInvitation(),
-    C_AnswerGameInvitation()*/;
+    S_ShowMessageAndCloseGame(String.class),
+    S_ReceiveGameInvitation(String.class),
+    C_AnswerGameInvitation(Boolean.class),
+    C_ShowNextMove(),
+    C_ShowPreviousMove();
     
     final TypeToken infoType;
 

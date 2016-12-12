@@ -152,14 +152,14 @@ class GamePlay {
         // Message players and spectators
         try {
             if (dontSendMessageTo != player1) {
-                player1.gameFinished(message);
+                player1.showMessageAndCloseGame(message);
             }
             if (dontSendMessageTo != player2) {
-                player2.gameFinished(message);
+                player2.showMessageAndCloseGame(message);
             }
 
             for (Client spectator : spectators) {
-                spectator.gameFinished(message);
+                spectator.showMessageAndCloseGame(message);
             }
         }
         catch (ConnectionException ex) {
@@ -329,7 +329,7 @@ class GamePlay {
                     placingShips && boardForPlayer(client).placedShipsAreValid(),
                     gameStarted ? (client == player1 ? p1Turn : !p1Turn) : false,
                     gameStarted ? (client == player1 ? !p1Turn : p1Turn) : false,
-                    UIType.Play
+                    UIType.Play, null, null, null
             );
         }
         else {
@@ -340,7 +340,7 @@ class GamePlay {
                     null, null, null,
                     gameStarted ? p1Turn : false,
                     gameStarted ? !p1Turn : false,
-                    UIType.Spectate
+                    UIType.Spectate, null, null, null
             );
         }
 

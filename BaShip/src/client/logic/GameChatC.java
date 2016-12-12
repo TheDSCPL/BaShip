@@ -2,8 +2,9 @@ package client.logic;
 
 import client.ClientMain;
 import client.ui.game.GamePanel;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
 import javax.swing.JComponent;
 import sharedlib.exceptions.UserMessageException;
 import sharedlib.structs.Message;
@@ -14,7 +15,7 @@ import sharedlib.structs.Message;
  */
 public class GameChatC {
 
-    private static final List<Message> messages = new CopyOnWriteArrayList<>();//Collections.synchronizedList(new ArrayList<>());
+    private static final List<Message> messages = Collections.synchronizedList(new ArrayList<>());
     
     public static void clearGameMessages() {
         messages.clear();

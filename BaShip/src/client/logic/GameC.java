@@ -134,7 +134,7 @@ public class GameC {
      *
      * @param message The message string to be displayed to the user
      */
-    public static void gameFinished(String message) {
+    public static void showMessageAndCloseGame(String message) {
         ClientMain.runOnUI(() -> {
             // TODO: abonitar a coisa (não copiar código da funcao showInfo)
             JOptionPane.showMessageDialog(ClientMain.mainFrame, message, "Info", INFORMATION_MESSAGE);
@@ -150,6 +150,21 @@ public class GameC {
             Logger.getLogger(GameC.class.getName()).log(Level.SEVERE, null, ex);
             ClientMain.showError(ex.getMessage());
         }
+    }
+
+    public static void showGameInvitation(String username) {
+        ClientMain.runOnUI(() -> {
+            int dialogResult = JOptionPane.showConfirmDialog(ClientMain.mainFrame, "Player '" + username + "' invited you. Would you like to play?", "Invite", JOptionPane.YES_NO_OPTION);
+            
+            try {
+                ClientMain.server.anwserGameInvitation(dialogResult == JOptionPane.YES_OPTION);
+            }
+            catch (UserMessageException ex) {
+                Logger.getLogger(GameC.class.getName()).log(Level.SEVERE, null, ex);
+                // TODO: XXX
+            }
+        });
+
     }
 
 }

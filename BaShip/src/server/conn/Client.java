@@ -177,7 +177,7 @@ public class Client implements Connection.Delegate {
             }
             case C_DoubleClickUser: {
                 try {
-                GameS.Actions.doubleClickUser(this, (Long) request.info);
+                    GameS.Actions.doubleClickUser(this, (Long) request.info);
                     response = new Packet();
                 }
                 catch (UserMessageException ex) {
@@ -185,21 +185,16 @@ public class Client implements Connection.Delegate {
                 }
                 break;
             }
-            /*case C_StartGameWithPlayer: {
+            case C_AnswerGameInvitation: {
                 try {
-                    GameS.startGameWithPlayer(this, (Long) request.info);
-                    response = new Packet();
+                    GameS.Actions.answerGameInvitation(this, (Boolean) request.info);
                 }
                 catch (UserMessageException ex) {
-                    response = new Packet(Query.SR_ErrorMessage, new ErrorMessage(ex.getMessage()));
+                    Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+                    // TODO: XXX
                 }
                 break;
-            }*/
-
- /*case C_AnswerGameInvitation: {
-                GameS.answerGameInvitation(this, (Boolean) request.info);
-                break;
-            }*/
+            }
         }
 
         return response;
@@ -262,9 +257,10 @@ public class Client implements Connection.Delegate {
      *
      * @throws ConnectionException
      */
-    /*public void sendGameInvitation() throws ConnectionException {
-        connection.sendOnly(new Packet(Query.S_ReceiveGameInvitation, "")); // TODO: info?
-    }*/
+    public void sendGameInvitation(String usernameOfUserInvitingPlayer) throws ConnectionException {
+        connection.sendOnly(new Packet(Query.S_ReceiveGameInvitation, usernameOfUserInvitingPlayer)); // TODO: info?
+    }
+
     /**
      * Tell the client to update the UI of one of the boards of the game using
      * the given information.
@@ -276,15 +272,9 @@ public class Client implements Connection.Delegate {
     public void updateGameBoard(BoardUIInfo info) throws ConnectionException {
         connection.sendOnly(new Packet(Query.S_UpdateGameBoard, info));
     }
-
-    /**
-     * Tell the client that the game he's playing has finished.
-     *
-     * @param message The text to display to the player.
-     * @throws ConnectionException
-     */
-    public void gameFinished(String message) throws ConnectionException {
-        connection.sendOnly(new Packet(Query.S_GameFinished, message));
+    
+    public void showMessageAndCloseGame(String message) throws ConnectionException {
+        connection.sendOnly(new Packet(Query.S_ShowMessageAndCloseGame, message));
     }
 
 }

@@ -10,8 +10,11 @@ public class GameUIInfo implements UIInfo{
     public final Boolean player1Turn;
     public final Boolean player2Turn;
     public final UIType uiType;
+    public final Boolean canShowPreviousMove;
+    public final Boolean canShowNextMove;
+    public final String moveCounterText;
 
-    public GameUIInfo(String titleLeft, String titleRight, Boolean showRightBoard, String waitMessageLine1, String waitMessageLine2, Boolean showReadyButton, Boolean player1Turn, Boolean player2Turn, UIType uiType) {
+    public GameUIInfo(String titleLeft, String titleRight, Boolean showRightBoard, String waitMessageLine1, String waitMessageLine2, Boolean showReadyButton, Boolean player1Turn, Boolean player2Turn, UIType uiType, Boolean canShowPreviousMove, Boolean canShowNextMove, String moveCounterText) {
         this.titleLeft = titleLeft;
         this.titleRight = titleRight;
         this.showRightBoard = showRightBoard;
@@ -21,6 +24,9 @@ public class GameUIInfo implements UIInfo{
         this.player1Turn = player1Turn;
         this.player2Turn = player2Turn;
         this.uiType = uiType;
+        this.canShowPreviousMove = canShowPreviousMove;
+        this.canShowNextMove = canShowNextMove;
+        this.moveCounterText = moveCounterText;
     }
     
     public enum UIType {
