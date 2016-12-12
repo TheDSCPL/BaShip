@@ -9,6 +9,7 @@ import client.logic.GameC;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import sharedlib.exceptions.UserMessageException;
+import static client.other.HTMLEscaping.escapeHTML;
 
 /**
  *
@@ -24,27 +25,44 @@ public class TopBar extends javax.swing.JPanel {
         reloadUI();
     }
     
-    private final String SEPARATOR = "        VS        ";
+    private final String SEPARATOR = "&emsp;&emsp;VS&emsp;&emsp;";
     private String player1 = "?????";
     private String player2 = "?????";
 
     private boolean playerTurn;
     private boolean opponentTurn;
 
+    private String getHTMLString()
+    {
+        StringBuilder sb = new StringBuilder();
+        sb.append("<html><body>");
+        if(playerTurn)
+        {
+            sb.append("<a style=\"color: #ffffff; background-color: #000000\">&ensp;");
+            sb.append(escapeHTML(player1));
+            sb.append("&ensp;</a>");
+        }
+        else
+        {
+            sb.append(escapeHTML(player1));
+        }
+        sb.append(SEPARATOR);
+        if(opponentTurn)
+        {
+            sb.append("<a style=\"color: #ffffff; background-color: #000000\">&ensp;");
+            sb.append(escapeHTML(player2));
+            sb.append("&ensp;</a>");
+        }
+        else
+        {
+            sb.append(escapeHTML(player2));
+        }
+        sb.append("</body></html>");
+        return sb.toString();
+    }
+    
     private void reloadUI() {
-        opponentsLabel.setText(player1 + SEPARATOR + player2);
-
-        if (playerTurn || opponentTurn) {
-            if (opponentTurn) {
-                turnLabel.setText("Opponent turn");
-            }
-            else {
-                turnLabel.setText("Your turn");
-            }
-        }
-        else {
-            turnLabel.setText("");
-        }
+        opponentsLabel.setText(getHTMLString());
     }
 
     public final void setTurn(boolean playerTurn, boolean opponentTurn) {
@@ -75,7 +93,6 @@ public class TopBar extends javax.swing.JPanel {
         topGamePanel = new javax.swing.JLayeredPane();
         opponentsLabel = new javax.swing.JLabel();
         closeBttn = new javax.swing.JButton();
-        turnLabel = new javax.swing.JLabel();
 
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
@@ -91,20 +108,15 @@ public class TopBar extends javax.swing.JPanel {
             }
         });
 
-        turnLabel.setText("Opponent turn");
-
         topGamePanel.setLayer(opponentsLabel, javax.swing.JLayeredPane.DEFAULT_LAYER);
         topGamePanel.setLayer(closeBttn, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        topGamePanel.setLayer(turnLabel, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout topGamePanelLayout = new javax.swing.GroupLayout(topGamePanel);
         topGamePanel.setLayout(topGamePanelLayout);
         topGamePanelLayout.setHorizontalGroup(
             topGamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(topGamePanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(turnLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(87, 87, 87)
                 .addComponent(opponentsLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(closeBttn)
@@ -113,11 +125,10 @@ public class TopBar extends javax.swing.JPanel {
         topGamePanelLayout.setVerticalGroup(
             topGamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(topGamePanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(topGamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(topGamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(closeBttn)
-                    .addComponent(opponentsLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-                    .addComponent(turnLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(opponentsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -153,6 +164,5 @@ public class TopBar extends javax.swing.JPanel {
     private javax.swing.JButton closeBttn;
     private javax.swing.JLabel opponentsLabel;
     private javax.swing.JLayeredPane topGamePanel;
-    private javax.swing.JLabel turnLabel;
     // End of variables declaration//GEN-END:variables
 }

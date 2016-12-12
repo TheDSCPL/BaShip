@@ -9,6 +9,7 @@ import java.util.concurrent.*;
 import java.util.logging.*;
 import javax.swing.event.*;
 import sharedlib.exceptions.UserMessageException;
+import static sharedlib.constants.UIK.*;
 
 public class LoginPanel extends javax.swing.JPanel {
 
@@ -42,7 +43,7 @@ public class LoginPanel extends javax.swing.JPanel {
         loginButton = new javax.swing.JButton();
         registerButton = new javax.swing.JButton();
         topBar = new javax.swing.JPanel();
-        settingsButton = new javax.swing.JButton();
+        settingsLabelButton = new client.ui.GeneralComponents.LabelButton();
 
         retypePasswordDialog.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         retypePasswordDialog.setMinimumSize(new java.awt.Dimension(250, 170));
@@ -210,28 +211,21 @@ public class LoginPanel extends javax.swing.JPanel {
 
         topBar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        settingsButton.setText("Settings");
-        settingsButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                settingsButtonActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout topBarLayout = new javax.swing.GroupLayout(topBar);
         topBar.setLayout(topBarLayout);
         topBarLayout.setHorizontalGroup(
             topBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(topBarLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(settingsButton)
+                .addComponent(settingsLabelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         topBarLayout.setVerticalGroup(
             topBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(topBarLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(settingsButton)
-                .addContainerGap())
+                .addComponent(settingsLabelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -346,6 +340,11 @@ public class LoginPanel extends javax.swing.JPanel {
         passwordField.setToolTipText(defaultPasswordFieldTooltip);
         loginButton.setToolTipText(defaultLoginButtonTooltip);
         registerButton.setToolTipText(defaultRegisterButtonTooltip);
+        
+        settingsLabelButton.setClickListener(() -> {
+            ClientMain.mainFrame.changeToPanel(new SettingsPanel());
+        });
+        settingsLabelButton.setIcon(SETTINGS_ICON);
     }
 
     private final String defaultUsernameFieldTooltip = "Insert username";
@@ -606,10 +605,6 @@ public class LoginPanel extends javax.swing.JPanel {
         loginButtonActionPerformed(evt);
     }//GEN-LAST:event_usernameFieldActionPerformed
 
-    private void settingsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_settingsButtonActionPerformed
-        ClientMain.mainFrame.changeToPanel(new SettingsPanel());
-    }//GEN-LAST:event_settingsButtonActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton loginButton;
     private javax.swing.JPanel loginPanel;
@@ -623,7 +618,7 @@ public class LoginPanel extends javax.swing.JPanel {
     private javax.swing.JLabel retypePasswordLabel;
     private javax.swing.JLabel retypePasswordNoMatchLabel;
     private javax.swing.JPanel retypePasswordPanel;
-    private javax.swing.JButton settingsButton;
+    private client.ui.GeneralComponents.LabelButton settingsLabelButton;
     private javax.swing.JPanel topBar;
     public final javax.swing.JTextField usernameField = new javax.swing.JTextField();
     private javax.swing.JLabel usernameLabel;

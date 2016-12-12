@@ -8,6 +8,7 @@ package client.ui.game.Components;
 import sharedlib.utils.Coord;
 import client.ClientMain;
 import client.logic.GameC;
+import client.other.ImageResizer;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.logging.Level;
@@ -146,6 +147,10 @@ public final class Block extends javax.swing.JPanel {
         jLabel1.addComponentListener(cl);
     }
 
+    private static ImageIcon RESIZED_RED_CROSS_ICON = RED_CROSS_ICON;
+    private static ImageIcon RESIZED_BLUE_DIAMOND_ICON = BLUE_DIAMOND_ICON;
+    private static ImageIcon RESIZED_GREY_CIRCLE_ICON = GREY_CIRCLE_ICON;
+    
     public void setSquareFill(SquareFill sf) {
         switch (sf) {
             case Empty:
@@ -161,27 +166,27 @@ public final class Block extends javax.swing.JPanel {
                 setColor(RED_BLOCK_COLOR);
                 break;
             case RedCross:
-                setIcon(RED_CROSS_ICON);
+                RESIZED_RED_CROSS_ICON = setIcon(RESIZED_RED_CROSS_ICON);
                 setColor(null);
                 break;
             case BlueDiamond:
-                setIcon(BLUE_DIAMOND_ICON);
+                RESIZED_BLUE_DIAMOND_ICON = setIcon(RESIZED_BLUE_DIAMOND_ICON);
                 setColor(null);
                 break;
             case GrayCircle:
-                setIcon(GREY_CIRCLE_ICON);
+                RESIZED_GREY_CIRCLE_ICON = setIcon(RESIZED_GREY_CIRCLE_ICON);
                 setColor(null);
                 break;
             case GraySquareRedCross:
-                setIcon(RED_CROSS_ICON);
+                RESIZED_RED_CROSS_ICON = setIcon(RESIZED_RED_CROSS_ICON);
                 setColor(GREY_BLOCK_COLOR);
                 break;
         }
     }
 
-    private void setIcon(Icon icon) {
+    private ImageIcon setIcon(ImageIcon icon) {
         if (text != null) {
-            return;
+            return null;
         }
 
         setImageResizer();
@@ -189,6 +194,10 @@ public final class Block extends javax.swing.JPanel {
         jLabel1.removeAll();
 
         jLabel1.setIcon(icon);
+        
+        ImageIcon ret = ImageResizer.resizeIcon(icon, jLabel1.getWidth(), jLabel1.getHeight());
+        
+        jLabel1.setIcon(ret);
         jLabel1.setHorizontalAlignment(SwingConstants.CENTER);
         jLabel1.setVerticalAlignment(SwingConstants.CENTER);
 
@@ -197,6 +206,8 @@ public final class Block extends javax.swing.JPanel {
         jLabel1.setVisible(true);
 
         jLabel1.revalidate();
+        
+        return ret;
     }
 
     /**
