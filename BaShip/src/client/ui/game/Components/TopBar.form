@@ -55,9 +55,7 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="turnLabel" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="87" max="-2" attributes="0"/>
                   <Component id="opponentsLabel" pref="195" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="closeBttn" min="-2" max="-2" attributes="0"/>
@@ -68,11 +66,10 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
                       <Component id="closeBttn" min="-2" max="-2" attributes="0"/>
-                      <Component id="opponentsLabel" pref="30" max="32767" attributes="0"/>
-                      <Component id="turnLabel" alignment="1" max="32767" attributes="0"/>
+                      <Component id="opponentsLabel" min="-2" pref="30" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -92,11 +89,6 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="closeBttnActionPerformed"/>
           </Events>
-        </Component>
-        <Component class="javax.swing.JLabel" name="turnLabel">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Opponent turn"/>
-          </Properties>
         </Component>
       </SubComponents>
     </Container>

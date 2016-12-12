@@ -18,9 +18,10 @@ public class UIK {
     public static final Color GREY_BLOCK_COLOR = new Color(202, 202, 202);
     public static final Color RED_BLOCK_COLOR = new Color(255, 0, 0);
 
-    public static final Icon RED_CROSS_ICON = new ImageIcon(Block.class.getResource("/client/ui/Images/redCross.png"));
-    public static final Icon BLUE_DIAMOND_ICON = new ImageIcon(Block.class.getResource("/client/ui/Images/blueDiamond.png"));
-    public static final Icon GREY_CIRCLE_ICON = new ImageIcon(Block.class.getResource("/client/ui/Images/greyCircle.png"));
-    public static final Icon[] ICONS = new Icon[]{RED_CROSS_ICON, BLUE_DIAMOND_ICON, GREY_CIRCLE_ICON};
+    public static final ImageIcon RED_CROSS_ICON = new ImageIcon(Block.class.getResource("/client/ui/Images/redCross.png"));
+    public static final ImageIcon BLUE_DIAMOND_ICON = new ImageIcon(Block.class.getResource("/client/ui/Images/blueDiamond.png"));
+    public static final ImageIcon GREY_CIRCLE_ICON = new ImageIcon(Block.class.getResource("/client/ui/Images/greyCircle.png"));
+    public static final ImageIcon SETTINGS_ICON = new ImageIcon(Block.class.getResource("/client/ui/Images/settings.png"));
+    public static final ImageIcon[] ICONS = new ImageIcon[]{RED_CROSS_ICON, BLUE_DIAMOND_ICON, GREY_CIRCLE_ICON};
 
 }

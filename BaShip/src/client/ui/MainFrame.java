@@ -1,5 +1,6 @@
 package client.ui;
 
+import client.other.ImageResizer;
 import java.awt.Component;
 import java.awt.Image;
 import java.awt.event.ComponentEvent;
@@ -16,57 +17,7 @@ public class MainFrame extends javax.swing.JFrame {
      */
     public MainFrame() {
         initComponents();
-        imageResizer = new ComponentListener() {
-            private ImageIcon _resizeIcon(ImageIcon srcImg, int width, int height) {
-                Image tempImage = srcImg.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
-                return new ImageIcon(tempImage);
-            }
-
-            private void resizeIcon(ComponentEvent e) {
-                Component c = e.getComponent();
-                int width = (int) (c.getWidth() * 0.8);
-                int height = (int) (c.getHeight() * 0.8);
-                if (c instanceof JButton) {
-                    JButton button = (JButton) c;
-                    ImageIcon prevIcon = (ImageIcon) button.getIcon();
-                    if (prevIcon == null) {
-                        return;
-                    }
-                    button.setIcon(_resizeIcon(prevIcon, width, height));
-                }
-                else if (c instanceof JLabel) {
-                    JLabel label = (JLabel) c;
-                    ImageIcon prevIcon = (ImageIcon) label.getIcon();
-                    if (prevIcon == null) {
-                        return;
-                    }
-                    label.setIcon(_resizeIcon(prevIcon, width, height));
-                }
-                else {
-                    throw new ClassCastException("Resizer used on a Component that is neither a Jlabel nor a JButton");
-                }
-            }
-
-            @Override
-            public void componentResized(ComponentEvent e) {
-                resizeIcon(e);
-            }
-
-            @Override
-            public void componentMoved(ComponentEvent e) {
-                resizeIcon(e);
-            }
-
-            @Override
-            public void componentShown(ComponentEvent e) {
-                resizeIcon(e);
-            }
-
-            @Override
-            public void componentHidden(ComponentEvent e) {
-                resizeIcon(e);
-            }
-        };
+        imageResizer = new ImageResizer();
     }
 
     public final ComponentListener imageResizer;
