@@ -18,6 +18,8 @@ CREATE TABLE moves (
     gmid INTEGER NOT NULL REFERENCES games,
     player INTEGER NOT NULL CHECK (player in (1,2)),
     index INTEGER NOT NULL,
+    posx INTEGER NOT NULL CHECK (posx >= 0 AND posx < 10),
+    posy INTEGER NOT NULL CHECK (posy >= 0 AND posy < 10),
     UNIQUE(gmid, index)
 );
 
@@ -25,10 +27,10 @@ CREATE TABLE ships (
     sid BIGSERIAL PRIMARY KEY,
     gmid INTEGER NOT NULL REFERENCES games,
     player INTEGER NOT NULL CHECK (player IN (1,2)),
-    size INTEGER CHECK (type >= 1 AND type <= 4),
-    posx INTEGER CHECK (posx >= 0 AND posx < 10),
-    posy INTEGER CHECK (posy >= 0 AND posy < 10),
-    vertical BOOLEAN
+    size INTEGER NOT NULL CHECK (type >= 1 AND type <= 4),
+    posx INTEGER NOT NULL CHECK (posx >= 0 AND posx < 10),
+    posy INTEGER NOT NULL CHECK (posy >= 0 AND posy < 10),
+    vertical BOOLEAN NOT NULL
 );
 
 CREATE TABLE gamechat (

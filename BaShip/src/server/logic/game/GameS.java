@@ -269,7 +269,7 @@ public class GameS {
             }
         }
 
-        public static void showNextMove(Client client) {
+        public static void showNextMove(Client client) throws UserMessageException {
             GameReplay gr = GameInfo.gameReplayFromClient(client);
             if (gr != null) {
                 gr.showNextMove();
@@ -322,7 +322,7 @@ public class GameS {
                 boolean finished = false;
 
                 try {
-                    finished = GameDB.getGameHasFinished(gameID);
+                    finished = GameDB.getGameHasWinner(gameID);
                 }
                 catch (SQLException ex) {
                     Logger.getLogger(GameS.class.getName()).log(Level.SEVERE, null, ex);

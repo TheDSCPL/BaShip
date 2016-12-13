@@ -176,8 +176,13 @@ public class Client implements Connection.Delegate {
                 break;
             }
             case C_ShowNextMove: {
-                GameS.Actions.showNextMove(this);
-                response = new Packet(); // Empty response just for confirmation
+                try {
+                    GameS.Actions.showNextMove(this);
+                    response = new Packet(); // Empty response just for confirmation
+                }
+                catch (UserMessageException ex) {
+                    response = new Packet(Query.SR_ErrorMessage, new ErrorMessage(ex.getMessage()));
+                }
                 break;
             }
             case C_ShowPreviousMove: {
@@ -282,7 +287,7 @@ public class Client implements Connection.Delegate {
     public void updateGameBoard(BoardUIInfo info) throws ConnectionException {
         connection.sendOnly(new Packet(Query.S_UpdateGameBoard, info));
     }
-    
+
     public void showMessageAndCloseGame(String message) throws ConnectionException {
         connection.sendOnly(new Packet(Query.S_ShowMessageAndCloseGame, message));
     }

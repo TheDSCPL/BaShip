@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import sharedlib.structs.Move;
+import sharedlib.utils.Coord;
 
 /**
  * Collection of static methods that access, set and return information present
@@ -23,18 +25,20 @@ public class MoveDB {
      * game).
      * @throws SQLException
      */
-    public static void saveMove(long gameID, int playerN, int moveIndex) throws SQLException {
+    public static void saveMove(long gameID, int playerN, int moveIndex, Coord pos) throws SQLException {
         Connection conn = null;
         PreparedStatement stmt = null;
 
         try {
             conn = Database.getConn();
             stmt = conn.prepareStatement(
-                    "INSERT INTO moves VALUES (DEFAULT, ?, ?, ?)"
+                    "INSERT INTO moves VALUES (DEFAULT, ?, ?, ?, ?, ?)"
             );
             stmt.setLong(1, gameID);
             stmt.setInt(2, playerN);
             stmt.setInt(3, moveIndex);
+            stmt.setInt(4, pos.x);
+            stmt.setInt(5, pos.y);
             stmt.executeUpdate();
         }
         finally {
@@ -49,12 +53,35 @@ public class MoveDB {
 
         try {
             conn = Database.getConn();
-            stmt = conn.prepareStatement("SELECT COUNT(moveid) FROM moves WHERE gmid = ?");            
+            stmt = conn.prepareStatement("SELECT COUNT(moveid) FROM moves WHERE gmid = ?");
             stmt.setLong(1, gameID);
 
             rs = stmt.executeQuery();
             rs.next();
             return rs.getInt(1);
+        }
+        finally {
+            Database.close(conn, stmt);
+        }
+    }
+
+    public static Move getMove(long gameID, int moveIndex) throws SQLException {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            conn = Database.getConn();
+            stmt = conn.prepareStatement("SELECT player, posx, posy FROM moves WHERE gmid = ? AND index = ?");
+            stmt.setLong(1, gameID);
+
+            rs = stmt.executeQuery();
+            rs.next();
+            
+            return new Move(
+                    new Coord(rs.getInt("posx"), rs.getInt("posy")),
+                    rs.getInt("player")
+            );
         }
         finally {
             Database.close(conn, stmt);

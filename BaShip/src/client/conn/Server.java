@@ -340,7 +340,11 @@ public class Server implements Connection.Delegate {
     
     public void showNextMove() throws UserMessageException {
         Packet request = new Packet(Query.C_ShowNextMove);
-        sendAndReceiveWrapper(request); // Response is an empty packet, just for confirmation
+        Packet response = sendAndReceiveWrapper(request);
+
+        if (response.query == Query.SR_ErrorMessage) {
+            throw new UserMessageException("Could not get next move: " + ((ErrorMessage) response.info).message);
+        }
     }
 
     private Packet sendAndReceiveWrapper(Packet request) throws UserMessageException {

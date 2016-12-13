@@ -242,7 +242,7 @@ class GamePlay {
 
         // Save shot on DB
         try {
-            MoveDB.saveMove(gameID, player == player1 ? 1 : 2, moveIndex);
+            MoveDB.saveMove(gameID, player == player1 ? 1 : 2, moveIndex, pos);
         }
         catch (SQLException ex) {
             Logger.getLogger(GamePlay.class.getName()).log(Level.SEVERE, "Could not fire shot", ex);

@@ -123,6 +123,10 @@ class Board {
     public void shootOnSquare(Coord c) {
         shotsLayer.set(c, true);
     }
+    
+    public void removeShotFromSquare(Coord c) {
+        shotsLayer.set(c, false);
+    }
 
     public Set<Coord> allShipSquares() {
         Set<Coord> allShipSquares = new HashSet<>();

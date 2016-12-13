@@ -188,13 +188,13 @@ public class GameDB {
         }
     }
 
-    public static boolean getGameHasFinished(Long gameID) throws SQLException {
+    public static boolean getGameHasWinner(Long gameID) throws SQLException {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
 
         try {
-            String query = "SELECT enddate FROM games WHERE gmid = ?";
+            String query = "SELECT COALESCE(winner, -1) FROM games WHERE gmid = ?";
 
             conn = Database.getConn();
             stmt = conn.prepareStatement(query);
@@ -202,7 +202,7 @@ public class GameDB {
 
             rs = stmt.executeQuery();
             rs.next();
-            return rs.getDate(1) != null;
+            return rs.getInt(1) != -1;
         }
         finally {
             Database.close(conn, stmt, rs);
