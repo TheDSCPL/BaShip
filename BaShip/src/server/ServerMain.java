@@ -12,7 +12,6 @@ import sharedlib.utils.Preferences;
 
 /*
 TODO:
-
  - Review all error logging and error messages
 */
 
