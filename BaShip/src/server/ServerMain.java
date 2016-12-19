@@ -10,10 +10,7 @@ import server.other.ConsoleThread;
 import server.other.PrefsKey;
 import sharedlib.utils.Preferences;
 
-/*
-TODO:
- - Review all error logging and error messages
-*/
+// TODO: Review all error logging and error messages
 
 public class ServerMain {
     

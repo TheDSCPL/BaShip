@@ -89,6 +89,31 @@ public class GameDB {
         }
     }
 
+    public static String[] getPlayerUsernamesFromGame(Long gameID) throws SQLException {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            String query = "SELECT u1.username AS pu1, u2.username AS pu2 "
+                           + "FROM games "
+                           + "JOIN users AS u1 ON player1 = u1.uid "
+                           + "JOIN users AS u2 ON player2 = u2.uid "
+                           + "WHERE gmid = ?";
+
+            conn = Database.getConn();
+            stmt = conn.prepareStatement(query);
+            stmt.setLong(1, gameID);
+
+            rs = stmt.executeQuery();
+            rs.next();
+            return new String[] {rs.getString("pu1"), rs.getString("pu2")};
+        }
+        finally {
+            Database.close(conn, stmt, rs);
+        }
+    }
+
     /**
      * Create a game on the database. This inserts a new row on the "games"
      * table but does not set the start date (the start date is set to NULL)
@@ -188,7 +213,7 @@ public class GameDB {
         }
     }
 
-    public static boolean getGameHasWinner(Long gameID) throws SQLException {
+    /*public static boolean getGameHasWinner(Long gameID) throws SQLException {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -207,6 +232,5 @@ public class GameDB {
         finally {
             Database.close(conn, stmt, rs);
         }
-    }
-
+    }*/
 }

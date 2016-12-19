@@ -11,7 +11,6 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import server.conn.Client;
-import server.database.GameDB;
 import server.logic.UserS;
 import sharedlib.exceptions.ConnectionException;
 import sharedlib.exceptions.UserMessageException;
@@ -315,28 +314,13 @@ public class GameS {
         }
 
         public static void clientDoubleClickedGame(Client client, Long gameID) {
-            if (GameInfo.gamePlayFromGameID(gameID) != null) { // Game is currently being played -> spectate
+            // Game is currently being played -> spectate
+            if (GameInfo.gamePlayFromGameID(gameID) != null) {
                 spectateGame(client, gameID);
             }
+            // Game has finished (with or without winner)
             else {
-                boolean finished = false;
-
-                try {
-                    finished = GameDB.getGameHasWinner(gameID);
-                }
-                catch (SQLException ex) {
-                    Logger.getLogger(GameS.class.getName()).log(Level.SEVERE, null, ex);
-                }
-
-                if (finished) { // TODO: cancelled game cannot be replayed
-                    try {
-                        GameReplay game = new GameReplay(client, gameID);
-                        GameInfo.addGameReplay(game);
-                    }
-                    catch (SQLException ex) {
-                        Logger.getLogger(GameS.class.getName()).log(Level.SEVERE, null, ex); // TODO: error
-                    }
-                }
+                startReplay(client, gameID);
             }
         }
 
@@ -359,7 +343,13 @@ public class GameS {
         }
 
         private static void startReplay(Client client, Long gameID) {
-
+            try {
+                GameReplay game = new GameReplay(client, gameID);
+                GameInfo.addGameReplay(game);
+            }
+            catch (SQLException ex) {
+                Logger.getLogger(GameS.class.getName()).log(Level.SEVERE, null, ex); // TODO: error handling
+            }
         }
 
         private static void startWait(Client clientWaiting, Client targetClient) {

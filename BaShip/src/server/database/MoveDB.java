@@ -61,7 +61,7 @@ public class MoveDB {
             return rs.getInt(1);
         }
         finally {
-            Database.close(conn, stmt);
+            Database.close(conn, stmt, rs);
         }
     }
 
@@ -74,17 +74,18 @@ public class MoveDB {
             conn = Database.getConn();
             stmt = conn.prepareStatement("SELECT player, posx, posy FROM moves WHERE gmid = ? AND index = ?");
             stmt.setLong(1, gameID);
+            stmt.setInt(2, moveIndex);
 
             rs = stmt.executeQuery();
             rs.next();
-            
+
             return new Move(
                     new Coord(rs.getInt("posx"), rs.getInt("posy")),
                     rs.getInt("player")
             );
         }
         finally {
-            Database.close(conn, stmt);
+            Database.close(conn, stmt, rs);
         }
     }
 }

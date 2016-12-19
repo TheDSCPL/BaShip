@@ -1,13 +1,13 @@
 package server.logic.game;
 
 import java.sql.SQLException;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Queue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import server.conn.Client;
 import server.database.GameChatDB;
+import server.database.GameDB;
 import server.database.MoveDB;
 import server.database.ShipDB;
 import sharedlib.exceptions.ConnectionException;
@@ -25,16 +25,17 @@ public class GameReplay {
 
     private String p1Username, p2Username;
     private Board p1Board, p2Board;
-    private int currentTurn;
+    private int currentTurn; // 0 means no turns are being shown; 1.. is the (one-indexed) turn number
     private final int totalTurnCount;
-    private final Queue<Move> moves = new LinkedList<>(); // TODO: optimization possible
+    private final List<Move> moves = new ArrayList<>();
 
     public GameReplay(Client client, Long gameID) throws SQLException {
         this.client = client;
         this.gameID = gameID;
 
-        p1Username = "XXX"; // TODO: finish
-        p2Username = "YYY";
+        String[] usernames = GameDB.getPlayerUsernamesFromGame(gameID);
+        p1Username = usernames[0];
+        p2Username = usernames[1];
 
         p1Board = new Board();
         p2Board = new Board();
@@ -64,35 +65,38 @@ public class GameReplay {
     }
 
     // TODO: synchronized methods?
-    // TODO: test this function
     public void showNextMove() throws UserMessageException {
         if (currentTurn >= totalTurnCount) {
             return;
         }
 
+        currentTurn++;
+
         Move move;
-        try {
-            move = MoveDB.getMove(gameID, currentTurn);
-        }
-        catch (SQLException ex) {
-            Logger.getLogger(GameReplay.class.getName()).log(Level.SEVERE, null, ex);
-            throw new UserMessageException("Could not access database to get next move: " + ex.getMessage());
+        if (currentTurn > moves.size()) {
+            try {
+                move = MoveDB.getMove(gameID, currentTurn - 1); // Moves on DB are zero-indexed
+            }
+            catch (SQLException ex) {
+                Logger.getLogger(GameReplay.class.getName()).log(Level.SEVERE, null, ex);
+                throw new UserMessageException("Could not access database to get next move: " + ex.getMessage());
+            }
+            moves.add(move);
         }
 
-        currentTurn++;
-        moves.add(move);
+        move = moves.get(currentTurn - 1);
         boardForOpponentOfPlayerN(move.playerN).shootOnSquare(move.coord);
         refreshClient();
     }
 
-    // TODO: test this function
     public void showPreviousMove() {
-        if (currentTurn < 0) {
+        if (currentTurn <= 0) {
             return;
         }
 
         currentTurn--;
-        Move lastMove = moves.poll();
+        
+        Move lastMove = moves.get(currentTurn);
         boardForOpponentOfPlayerN(lastMove.playerN).removeShotFromSquare(lastMove.coord);
         refreshClient();
     }

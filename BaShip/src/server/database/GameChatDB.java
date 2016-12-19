@@ -38,7 +38,7 @@ public class GameChatDB {
             return new Message(mssgID, null, null, timestamp, message);
         }
         finally {
-            Database.close(conn, stmt);
+            Database.close(conn, stmt, rs);
         }
     }
 
@@ -49,9 +49,13 @@ public class GameChatDB {
 
         try {
             String query
-                    = "SELECT mssgid, player, timestamp, txt "
+                    = "SELECT mssgid, timestamp, txt, CASE WHEN player = 1 THEN u1.username ELSE u2.username END AS username "
                       + "FROM gamechat "
-                      + "WHERE gmid = ?";
+                      + "JOIN games USING(gmid) "
+                      + "JOIN users AS u1 ON player1 = u1.uid "
+                      + "JOIN users AS u2 ON player2 = u2.uid "
+                      + "WHERE gmid = ? "
+                      + "ORDER BY timestamp ASC";
 
             conn = Database.getConn();
             stmt = conn.prepareStatement(query);
@@ -65,7 +69,7 @@ public class GameChatDB {
                         new Message(
                                 rs.getLong("mssgid"),
                                 gameID,
-                                "XXXX", // TODO: get correct username
+                                rs.getString("username"),
                                 rs.getTimestamp("timestamp"),
                                 rs.getString("txt")
                         )

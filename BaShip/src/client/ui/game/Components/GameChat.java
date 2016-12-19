@@ -88,6 +88,19 @@ public class GameChat extends javax.swing.JPanel {
         }
 
         try {
+            /*
+            // TODO: DEMO
+            String text = gameChatSendMessageField.getText();
+            switch (text) {
+                case "p":
+                    GameC.showPreviousMove();
+                    break;
+                case "n":
+                    GameC.showNextMove();
+                    break;
+                default:
+                    GameChatC.sendGameMessage(gameChatSendMessageField.getText());
+            }*/
             GameChatC.sendGameMessage(gameChatSendMessageField.getText());
             gameChatSendMessageField.setText("");
         }
