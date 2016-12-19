@@ -1,9 +1,11 @@
 package server.logic.game;
 
 import java.util.*;
+import static java.util.Collections.nCopies;
 import static java.util.stream.Collectors.toSet;
 import static sharedlib.constants.BoardK.*;
 import sharedlib.structs.BoardUIInfo;
+import sharedlib.structs.BoardUIInfo.SquareFill;
 import sharedlib.structs.Ship;
 import sharedlib.utils.Coord;
 import sharedlib.utils.Matrix;
@@ -104,13 +106,13 @@ class Board {
     public void setShips(List<Ship> ships) {
         this.ships.clear();
         this.ships.addAll(ships);
-        
+
         shipsLayer.setAll(false);
         for (Coord c : allShipSquares()) {
             shipsLayer.set(c, true);
         }
     }
-    
+
     public List<Ship> getShips() {
         return new ArrayList<>(ships);
     }
@@ -123,7 +125,7 @@ class Board {
     public void shootOnSquare(Coord c) {
         shotsLayer.set(c, true);
     }
-    
+
     public void removeShotFromSquare(Coord c) {
         shotsLayer.set(c, false);
     }
@@ -161,20 +163,19 @@ class Board {
             invalidShipSquares.forEach((c) -> {
                 bi.board.set(c, BoardUIInfo.SquareFill.RedSquare);
             });
-
-            // TODO: finish: bottom info
+            
             // Populate bottom info rows
-            /*final int[] offset = {16, 10, 4, 0}; // static final TODO: should change based on info in SHIP_COUNT_FOR_SIZE
-            int[] count = {0, 0, 0, 0};
-            for (Ship s : ships) {
-                int index = s.size - 1;
+            List<Integer> shipCount = new ArrayList<>(nCopies(SHIP_COUNT_FOR_SIZE.keySet().size(), 0));
 
-                for (int i = offset[index] + count[index]; i < s.size; i++) {
-                    bi.bottomInfo.set(i, BoardUIInfo.SquareFill.GraySquare);
+            for (Ship s : ships) {
+                int count = shipCount.get(s.size - 1);
+                
+                for (int i = 0; i < s.size; i++) {
+                    bi.setBottomInfo(s.size, count, i, SquareFill.GraySquare);
                 }
 
-                count[index]++;
-            }*/
+                shipCount.set(s.size - 1, count + 1);
+            }
         }
 
         return bi;

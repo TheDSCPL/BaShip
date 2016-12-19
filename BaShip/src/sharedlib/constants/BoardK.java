@@ -15,8 +15,8 @@ public class BoardK {
     public static final int BOARD_SIZE = 10;
 
     /**
-     * Keys: size of ship Values: number of ships for that size (for one player
-     * only) in a game of Battleship
+     * Map. Keys: size of ship. Values: number of ships for that size (for one
+     * player only) in a game of Battleship
      */
     public static final Map<Integer, Integer> SHIP_COUNT_FOR_SIZE
             = Collections.unmodifiableMap(
