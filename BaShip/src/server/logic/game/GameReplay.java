@@ -54,7 +54,6 @@ public class GameReplay {
             client.clearGameMessages();
 
             List<Message> messages = GameChatDB.getMessages(gameID);
-            System.out.println(messages);
             for (Message msg : messages) {
                 client.informAboutGameMessage(msg);
             }
@@ -63,9 +62,8 @@ public class GameReplay {
             Logger.getLogger(GameReplay.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
-    // TODO: synchronized methods?
-    public void showNextMove() throws UserMessageException {
+    
+    public synchronized void showNextMove() throws UserMessageException {
         if (currentTurn >= totalTurnCount) {
             return;
         }
@@ -89,7 +87,7 @@ public class GameReplay {
         refreshClient();
     }
 
-    public void showPreviousMove() {
+    public synchronized void showPreviousMove() {
         if (currentTurn <= 0) {
             return;
         }
@@ -101,11 +99,11 @@ public class GameReplay {
         refreshClient();
     }
 
-    public void clientClosedGame() {
+    public synchronized void clientClosedGame() {
         GameS.Callbacks.gameReplayFinished(this);
     }
 
-    public void clientDisconnected() {
+    public synchronized void clientDisconnected() {
         GameS.Callbacks.gameReplayFinished(this);
     }
 

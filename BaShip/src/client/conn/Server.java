@@ -76,6 +76,10 @@ public class Server implements Connection.Delegate {
                 GameC.showMessageAndCloseGame((String) request.info);
                 break;
             }
+            case S_CloseGameInvitation: {
+                GameC.closeGameInvitation();
+                break;
+            }
         }
 
         return response;

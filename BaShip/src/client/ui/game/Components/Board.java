@@ -93,7 +93,6 @@ public final class Board extends SuperBoard {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    // TODO: flicker when firing shots
     @Override
     void update(UIInfo info) {
         if (!(info instanceof BoardUIInfo)) {

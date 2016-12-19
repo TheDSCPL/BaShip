@@ -35,7 +35,7 @@ public class GameChatDB {
 
             Long mssgID = rs.getLong("mssgid");
             Date timestamp = rs.getTimestamp("timestamp");
-            return new Message(mssgID, null, null, timestamp, message);
+            return new Message(mssgID, null, GameDB.getPlayerUsernamesFromGame(gameID)[playerN - 1], timestamp, message);
         }
         finally {
             Database.close(conn, stmt, rs);

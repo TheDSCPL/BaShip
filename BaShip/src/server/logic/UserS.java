@@ -169,7 +169,7 @@ public class UserS {
         if (isUserLoggedIn(userID)) {
             Client c = clientWithUserID(userID);
             
-            if (GameS.PlayerInfo.isPlaying(c) || GameS.PlayerInfo.isSpectating(c)) {
+            if (GameS.PlayerInfo.isPlaying(c) || GameS.PlayerInfo.isSpectating(c) || GameS.PlayerInfo.isWaitingForPlayer(c)) {
                 return UserStatus.Playing;
             }
             else if (GameS.PlayerInfo.isWaitingForGame(c)) {

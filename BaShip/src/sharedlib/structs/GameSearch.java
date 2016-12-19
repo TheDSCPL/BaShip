@@ -20,15 +20,12 @@ public class GameSearch {
      */
     public final String usernameFilter;
 
-    /**
-     * Maximum number of games to fetch from the DB.
-     */
-    public final int rowLimit;
+    public final int pageIndex;
 
-    public GameSearch(boolean currentlyPlayingOnly, String usernameFilter, int rowLimit) {
+    public GameSearch(boolean currentlyPlayingOnly, String usernameFilter, int pageIndex) {
         this.currentlyPlayingOnly = currentlyPlayingOnly;
         this.usernameFilter = usernameFilter;
-        this.rowLimit = rowLimit;
+        this.pageIndex = pageIndex;
     }
 
 }

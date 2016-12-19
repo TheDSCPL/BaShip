@@ -4,24 +4,27 @@ import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Set;
 import server.conn.Client;
-import server.conn.ServerThread;
+import server.conn.Server;
 import server.database.Database;
-import server.other.ConsoleThread;
+import server.other.Console;
 import server.other.PrefsKey;
 import sharedlib.utils.Preferences;
 
 // TODO: Review all error logging and error messages
+// TODO: JUnit
+// TODO: Javadoc
+// TODO: Server console
 
 public class ServerMain {
-    
+
     public static final Preferences prefs = new Preferences(ServerMain.class);
-    public static final ServerThread server = new ServerThread(prefs.getI(PrefsKey.ServerPort));
-    public static final ConsoleThread console = new ConsoleThread();
+    public static final Server server = new Server(prefs.getI(PrefsKey.ServerPort));
+    public static final Console console = new Console();
     public static final Set<Client> clients = new HashSet<>();
-    
+
     public static void main(String args[]) throws SQLException {
         Database.initialize();
-        server.start();
         console.start();
+        server.start();
     }
 }

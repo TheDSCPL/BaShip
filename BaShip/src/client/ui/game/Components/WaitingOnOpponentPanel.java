@@ -98,7 +98,7 @@ public class WaitingOnOpponentPanel extends SuperBoard {
             GameC.clickReadyButton();
         }
         catch (UserMessageException ex) {
-            ClientMain.showInfo(ex.getMessage());
+            ClientMain.showError(ex.getMessage());
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 

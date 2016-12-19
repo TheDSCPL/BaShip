@@ -3,6 +3,7 @@ package server.conn;
 import java.io.*;
 import java.net.*;
 import java.util.logging.*;
+import server.ServerMain;
 import sharedlib.conn.Connection;
 import sharedlib.exceptions.ConnectionException;
 
@@ -12,14 +13,14 @@ import sharedlib.exceptions.ConnectionException;
  *
  * @author Alex
  */
-public class ServerThread extends Thread {
+public class Server extends Thread {
 
     /**
      * The port on which to create a {@code ServerSocket}.
      */
     public final int port;
     
-    public ServerThread(int port) {
+    public Server(int port) {
         super("Server thread");
         this.port = port;
     }
@@ -27,7 +28,7 @@ public class ServerThread extends Thread {
     @Override
     public void run() {
         try (ServerSocket serverSocket = new ServerSocket(port)) {
-            System.out.println("Server running on " + serverSocket.getInetAddress().getHostName() + ":" + serverSocket.getLocalPort());
+            ServerMain.console.println("Server running on " + serverSocket.getInetAddress().getHostName() + ":" + serverSocket.getLocalPort());
 
             while (true) {
                 Socket socket = serverSocket.accept();
@@ -38,7 +39,7 @@ public class ServerThread extends Thread {
                     conn.start();
                 }
                 catch (ConnectionException ex) {
-                    Logger.getLogger(ServerThread.class.getName()).log(Level.WARNING, "Accepted a client socket but could not connect -> ignoring connection", ex);
+                    Logger.getLogger(Server.class.getName()).log(Level.WARNING, "Accepted a client socket but could not connect -> ignoring connection", ex);
                 }
             }
         }

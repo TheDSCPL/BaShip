@@ -26,7 +26,7 @@ public class LobbyPanel extends javax.swing.JPanel {
         initComponents();
 
         if (!UserC.isLoggedIn()) {
-            ClientMain.showWarning("Lobby panel shown without an user logged in");
+            ClientMain.showError("Lobby panel shown without an user logged in");
             ClientMain.mainFrame.changeToPanel(new LoginPanel());
             return;
         }
@@ -161,7 +161,7 @@ public class LobbyPanel extends javax.swing.JPanel {
             UserC.logout();
         }
         catch (UserMessageException ex) {
-            ClientMain.showWarning(ex.getMessage());
+            ClientMain.showError(ex.getMessage());
         }
         ClientMain.mainFrame.changeToPanel(new LoginPanel());
     }//GEN-LAST:event_logoutButtonActionPerformed

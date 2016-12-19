@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import server.logic.UserS;
+import sharedlib.constants.DBK;
 import sharedlib.structs.UserInfo;
 import sharedlib.structs.UserSearch;
 
@@ -161,11 +162,12 @@ public class UserDB {
                     "SELECT uid, username, rank, ngames, nwins, nshots "
                     + "FROM users JOIN user_ranks USING(uid) JOIN user_stats USING(uid) "
                     + "WHERE username LIKE ? "
-                    + "ORDER BY ? LIMIT ?"
+                    + "ORDER BY username LIMIT ? OFFSET ?"
+                    //+ "ORDER BY ? LIMIT ?"
             );
             stmt.setString(1, "%" + s.usernameFilter + "%");
-            stmt.setInt(2, s.orderByColumn);
-            stmt.setInt(3, s.rowLimit);
+            stmt.setInt(2, DBK.pageSize);
+            stmt.setInt(3, DBK.pageSize * s.pageIndex);
 
             rs = stmt.executeQuery();
 
@@ -177,7 +179,7 @@ public class UserDB {
                         new UserInfo(
                                 id, rs.getString(2), null,
                                 rs.getInt(3), rs.getInt(4), rs.getInt(5),
-                                rs.getInt(6), UserS.statusOfUser(id) // TODO: filter by online only
+                                rs.getInt(6), UserS.statusOfUser(id)
                         )
                 );
             }

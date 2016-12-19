@@ -144,7 +144,6 @@ public class GameC {
      */
     public static void showMessageAndCloseGame(String message) {
         ClientMain.runOnUI(() -> {
-            // TODO: abonitar a coisa (não copiar código da funcao showInfo)
             JOptionPane.showMessageDialog(ClientMain.mainFrame, message, "Info", INFORMATION_MESSAGE);
             ClientMain.mainFrame.changeToPanel(new LobbyPanel());
         });
@@ -171,7 +170,12 @@ public class GameC {
                 Logger.getLogger(GameC.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
-
+    }
+    
+    public static void closeGameInvitation() {
+        ClientMain.runOnUI(() -> {
+            // TODO: Luis: fechar o confirm dialog criado na linha 165 deste ficheiro
+        });
     }
 
 }

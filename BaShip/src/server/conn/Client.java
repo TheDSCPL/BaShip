@@ -275,6 +275,10 @@ public class Client implements Connection.Delegate {
     public void sendGameInvitation(String usernameOfUserInvitingPlayer) throws ConnectionException {
         connection.sendOnly(new Packet(Query.S_ReceiveGameInvitation, usernameOfUserInvitingPlayer));
     }
+    
+    public void closeGameInvitation() throws ConnectionException {
+        connection.sendOnly(new Packet(Query.S_CloseGameInvitation));
+    }
 
     /**
      * Tell the client to update the UI of one of the boards of the game using

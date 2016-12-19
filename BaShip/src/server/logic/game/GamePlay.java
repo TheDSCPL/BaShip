@@ -132,8 +132,7 @@ class GamePlay {
         ShipDB.saveShipPositions(gameID, 1, p1Board.getShips());
         ShipDB.saveShipPositions(gameID, 2, p2Board.getShips());
     }
-
-    // TODO: refactor use of this function
+    
     private void finishGame(String message, Client winner, Client dontSendMessageTo) {
         finished = true;
 
@@ -202,7 +201,7 @@ class GamePlay {
             }
             catch (SQLException ex) {
                 Logger.getLogger(GamePlay.class.getName()).log(Level.SEVERE, null, ex);
-                finishGame("Could not access database to start game", null, null);
+                finishGame("There was a database error", null, null);
                 return;
             }
         }
@@ -286,11 +285,7 @@ class GamePlay {
     }
 
     public synchronized void playerSentMessage(Client player, String text) throws SQLException, ConnectionException {
-        Message m = GameChatDB.saveMessage(gameID, player == player1 ? 1 : 2, text);
-
-        // TODO: correct this "UserS.usernameOfClient(player)"
-        Message message = new Message(m.id, m.userID, UserS.usernameOfClient(player), m.timestamp, m.text);
-
+        Message message = GameChatDB.saveMessage(gameID, player == player1 ? 1 : 2, text);
         messages.add(message);
 
         player1.informAboutGameMessage(message);

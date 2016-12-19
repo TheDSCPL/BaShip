@@ -48,6 +48,7 @@ public enum Query {
     S_ShowMessageAndCloseGame(String.class),
     S_ReceiveGameInvitation(String.class),
     C_AnswerGameInvitation(Boolean.class),
+    S_CloseGameInvitation(),
     C_ShowNextMove(),
     C_ShowPreviousMove();
     

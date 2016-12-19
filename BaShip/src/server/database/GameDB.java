@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import server.logic.game.GameS;
+import sharedlib.constants.DBK;
 import sharedlib.enums.GameState;
 import sharedlib.structs.GameInfo;
 import sharedlib.structs.GameSearch;
@@ -41,11 +42,15 @@ public class GameDB {
             if (s.currentlyPlayingOnly) {
                 query += " AND enddate IS NOT NULL";
             }
-
+            
+            query += " ORDER BY startdate LIMIT ? OFFSET ?";
+            
             conn = Database.getConn();
             stmt = conn.prepareStatement(query);
             stmt.setString(1, "%" + s.usernameFilter + "%");
             stmt.setString(2, "%" + s.usernameFilter + "%");
+            stmt.setInt(3, DBK.pageSize);
+            stmt.setInt(4, DBK.pageSize * s.pageIndex);
 
             rs = stmt.executeQuery();
 
@@ -74,7 +79,7 @@ public class GameDB {
                                 rs.getLong(3),
                                 rs.getString(4),
                                 rs.getString(5),
-                                state, // TODO: filter by currently playing only
+                                state,
                                 start,
                                 end,
                                 state == GameState.Playing ? GameS.GameInfo.getGameCurrentMoveNumber(id) : null

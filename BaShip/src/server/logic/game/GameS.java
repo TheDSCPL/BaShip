@@ -138,23 +138,26 @@ public class GameS {
          * @param invitedPlayer The client who received the invitation
          * @param accepted True if the client accepted the invitation and wants
          * to start a game
+         * @throws sharedlib.exceptions.UserMessageException
          */
         public static void answerGameInvitation(Client invitedPlayer, boolean accepted) throws UserMessageException {
             Client playerWhoSentInvitation = Info.playerWaitingForHim(invitedPlayer);
 
-            if (accepted) {
-                startGame(invitedPlayer, playerWhoSentInvitation);
-            }
-            else {
-                try {
-                    playerWhoSentInvitation.showMessageAndCloseGame("Player " + UserS.usernameOfClient(invitedPlayer) + " declined your invitation.");
+            if (playerWhoSentInvitation != null) {
+                if (accepted) {
+                    startGame(invitedPlayer, playerWhoSentInvitation);
                 }
-                catch (ConnectionException ex) {
-                    Logger.getLogger(GameS.class.getName()).log(Level.SEVERE, null, ex);
+                else {
+                    try {
+                        playerWhoSentInvitation.showMessageAndCloseGame("Player " + UserS.usernameOfClient(invitedPlayer) + " declined your invitation.");
+                    }
+                    catch (ConnectionException ex) {
+                        Logger.getLogger(GameS.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
-            }
 
-            Info.removePlayerWaitingForPlayer(playerWhoSentInvitation);
+                Info.removePlayerWaitingForPlayer(playerWhoSentInvitation);
+            }
         }
 
         /**
@@ -182,7 +185,7 @@ public class GameS {
             if (PlayerInfo.isPlaying(client)) {
                 GameInfo.gamePlayFromPlayer(client).playerClickedLeftBoard(client, pos);
             }
-            else if (PlayerInfo.isWaitingForGame(client)) { // TODO: also add || option when waiting for player
+            else if (PlayerInfo.isWaitingForGame(client) || PlayerInfo.isWaitingForPlayer(client)) {
                 Board board = Info.waitingBoardForPlayer(client);
                 board.togglePlaceShipOnSquare(pos);
 
@@ -227,7 +230,13 @@ public class GameS {
             }
             else if (PlayerInfo.isWaitingForPlayer(client)) { // Player waiting for player
                 Info.removePlayerWaitingForPlayer(client);
-                // TODO: remove invitation from screen of invited player
+
+                try {
+                    Info.playerInvitedBy(client).closeGameInvitation();
+                }
+                catch (ConnectionException ex) {
+                    Logger.getLogger(GameS.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
 
@@ -249,12 +258,20 @@ public class GameS {
                 Info.removePlayerWaitingForGame(client);
                 Info.removeWaitingBoardForPlayer(client);
             }
-            else if (PlayerInfo.isWaitingForPlayer(client)) { // Disconnected player waiting for player
+            else if (PlayerInfo.isWaitingForPlayer(client)) {
+                // Disconnected player waiting for player
+
+                try {
+                    Info.playerInvitedBy(client).closeGameInvitation();
+                }
+                catch (ConnectionException ex) {
+                    Logger.getLogger(GameS.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
                 Info.removePlayerWaitingForPlayer(client);
-                // TODO: remove invitation from screen of invited player
             }
 
-            // TODO: repeated code - refactor to function?
+            // TODO: refactor (to function)? (repeated code (from where?))
             Client playerWhoSentInvitation = Info.playerWaitingForHim(client);
             if (playerWhoSentInvitation != null) { // Disconnected player was invited by someone
                 try {
@@ -298,8 +315,8 @@ public class GameS {
                 else if (PlayerInfo.isWaitingForGame(clickedClient)) {
                     startGame(client, clickedClient);
                 }
-                else {
-                    // Just online, invite
+                else if (!PlayerInfo.isWaitingForPlayer(clickedClient)) {
+                    // Just online and available -> invite
                     try {
                         clickedClient.sendGameInvitation(UserS.usernameOfClient(client));
                         startWait(client, clickedClient);
@@ -309,7 +326,6 @@ public class GameS {
                         throw new UserMessageException("Could not invite user");
                     }
                 }
-                // TODO: other cases?
             }
         }
 
@@ -348,7 +364,7 @@ public class GameS {
                 GameInfo.addGameReplay(game);
             }
             catch (SQLException ex) {
-                Logger.getLogger(GameS.class.getName()).log(Level.SEVERE, null, ex); // TODO: error handling
+                Logger.getLogger(GameS.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
 
@@ -384,7 +400,7 @@ public class GameS {
 
     }
 
-    private static class Info {
+    private static class Info { // TODO: refactor
 
         private static final Map<Client, Client> playersWaitingForPlayer1 = new ConcurrentHashMap<>();
         private static final Map<Client, Client> playersWaitingForPlayer2 = new ConcurrentHashMap<>();
