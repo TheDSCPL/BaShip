@@ -60,11 +60,9 @@ public final class GamePanel extends javax.swing.JPanel {
     public void updateBoardInfo(BoardUIInfo info) {
         if (info.leftBoard) {
             leftBoard.updateBoard(info);
-            System.out.println("Left board: " + info.bottomInfo);
         }
         else {
             rightBoard.updateBoard(info);
-            System.out.println("Right board: " + info.bottomInfo);
         }
     }
 

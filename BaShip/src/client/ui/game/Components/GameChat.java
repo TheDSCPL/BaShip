@@ -89,7 +89,7 @@ public class GameChat extends javax.swing.JPanel {
 
         try {
             /*
-            // TODO: DEMO
+            // TODO: DEMO - delete when interface for replaying games is finished
             String text = gameChatSendMessageField.getText();
             switch (text) {
                 case "p":
@@ -101,6 +101,7 @@ public class GameChat extends javax.swing.JPanel {
                 default:
                     GameChatC.sendGameMessage(gameChatSendMessageField.getText());
             }*/
+            
             GameChatC.sendGameMessage(gameChatSendMessageField.getText());
             gameChatSendMessageField.setText("");
         }
