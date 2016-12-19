@@ -130,10 +130,14 @@ class Board {
         shotsLayer.set(c, false);
     }
 
-    public Set<Coord> allShipSquares() {
+    private Set<Coord> allShipSquares() {
         Set<Coord> allShipSquares = new HashSet<>();
         ships.stream().forEach(s -> allShipSquares.addAll(s.getShipSquares()));
         return allShipSquares;
+    }
+
+    private boolean shipIsCompletelyShot(Ship s) {
+        return s.getShipSquares().stream().allMatch(c -> shotsLayer.get(c));
     }
 
     public boolean allShipsAreShot() {
@@ -163,13 +167,13 @@ class Board {
             invalidShipSquares.forEach((c) -> {
                 bi.board.set(c, BoardUIInfo.SquareFill.RedSquare);
             });
-            
+
             // Populate bottom info rows
             List<Integer> shipCount = new ArrayList<>(nCopies(SHIP_COUNT_FOR_SIZE.keySet().size(), 0));
 
             for (Ship s : ships) {
                 int count = shipCount.get(s.size - 1);
-                
+
                 for (int i = 0; i < s.size; i++) {
                     bi.setBottomInfo(s.size, count, i, SquareFill.GraySquare);
                 }
@@ -199,8 +203,6 @@ class Board {
                     return BoardUIInfo.SquareFill.Empty;
                 }
             });
-
-            // TODO: finish: bottom info
         }
         else {
             shotsLayer.forEach((coord, shot) -> {
@@ -220,8 +222,24 @@ class Board {
 
                 bi.board.set(coord, fill);
             });
+        }
 
-            // TODO: finish: bottom info
+        // Populate bottom info rows
+        List<Integer> shipCount = new ArrayList<>(nCopies(SHIP_COUNT_FOR_SIZE.keySet().size(), 0));
+
+        for (Ship s : ships) {
+            if (showEverything || (!showEverything && shipIsCompletelyShot(s))) {
+                int count = shipCount.get(s.size - 1);
+
+                for (int i = 0; i < s.size; i++) {
+                    bi.setBottomInfo(
+                            s.size, count, i,
+                            shotsLayer.get(s.coordForShipPos(i)) ? SquareFill.RedCross : SquareFill.Empty
+                    );
+                }
+
+                shipCount.set(s.size - 1, count + 1);
+            }
         }
 
         return bi;

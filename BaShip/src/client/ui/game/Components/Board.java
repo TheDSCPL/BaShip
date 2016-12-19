@@ -5,12 +5,12 @@
  */
 package client.ui.game.Components;
 
-import sharedlib.utils.Coord;
-import sharedlib.structs.BoardUIInfo;
-import sharedlib.structs.UIInfo;
-import sharedlib.utils.Matrix;
 import java.awt.*;
 import static sharedlib.constants.BoardK.*;
+import sharedlib.structs.BoardUIInfo;
+import sharedlib.structs.UIInfo;
+import sharedlib.utils.Coord;
+import sharedlib.utils.Matrix;
 
 /**
  *
