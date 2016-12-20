@@ -1,3 +1,5 @@
+-- TODO: Alex: feup dbm update sql code
+
 CREATE TABLE users (
     uid BIGSERIAL PRIMARY KEY,
     username VARCHAR(256) UNIQUE NOT NULL,
@@ -6,8 +8,8 @@ CREATE TABLE users (
 
 CREATE TABLE games (
     gmid BIGSERIAL PRIMARY KEY,
-    startdate TIMESTAMP,
-    enddate TIMESTAMP,
+    startdate TIMESTAMP WITH TIME ZONE,
+    enddate TIMESTAMP WITH TIME ZONE,
     player1 INTEGER NOT NULL REFERENCES users,
     player2 INTEGER NOT NULL REFERENCES users,
     winner INTEGER REFERENCES users CHECK (winner IN (player1, player2))
@@ -50,7 +52,6 @@ CREATE TABLE globalchat (
     UNIQUE(uid, timestamp)
 );
 
--- TODO: Alex: feup dbm must be updated with this SQL code
 CREATE VIEW user_ranks AS SELECT tbl.uid,
     row_number() OVER (ORDER BY tbl.rank_value DESC)::integer AS rank
    FROM ( SELECT users.uid,

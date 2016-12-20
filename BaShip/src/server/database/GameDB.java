@@ -37,7 +37,7 @@ public class GameDB {
             String query
                     = "SELECT gmid, p1.uid, p2.uid, p1.username, p2.username, startdate, enddate "
                       + "FROM games JOIN users AS p1 ON player1 = p1.uid JOIN users AS p2 ON player2 = p2.uid "
-                      + "WHERE (p1.username LIKE ? OR p1.username LIKE ?)";
+                      + "WHERE (p1.username LIKE ? OR p2.username LIKE ?)"; // AND startdate IS NOT NULL ?
 
             if (s.currentlyPlayingOnly) {
                 query += " AND enddate IS NOT NULL";
@@ -58,8 +58,8 @@ public class GameDB {
             while (rs.next()) {
                 long id = rs.getLong(1);
 
-                Date start = rs.getDate(6);
-                Date end = rs.getDate(7);
+                Date start = rs.getTimestamp(6);
+                Date end = rs.getTimestamp(7);
 
                 GameState state;
                 if (end != null) {
