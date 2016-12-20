@@ -10,8 +10,11 @@ import server.other.Console;
 import server.other.PrefsKey;
 import sharedlib.utils.Preferences;
 
-// TODO: Alex: NEXT 1: Review all functionality
-// TODO: Alex: NEXT 2: Review all error logging and error messages
+// TODO: Alex: NEXT: Review all error logging and error messages
+// TODO: Alex: rank calculation
+
+// TODO: Sound
+// TODO: Interface color (option in settings)
 // TODO: JUnit
 // TODO: Javadoc
 // TODO: Luis: Server console
