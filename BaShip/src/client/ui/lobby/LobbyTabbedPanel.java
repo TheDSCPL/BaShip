@@ -38,9 +38,7 @@ public class LobbyTabbedPanel extends JPanel {
         initComponents();
         myInitComponents();
     }
-
-    private ImageIcon filterIcon, clearIcon;
-
+    
     private void addNewTab(JComponent tab, String name) {
         if (tab == null) {
             return;

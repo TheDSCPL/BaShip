@@ -271,7 +271,7 @@ public class GameS {
                 Info.removePlayerWaitingForPlayer(client);
             }
 
-            // TODO: refactor (to function)? (repeated code (from where?))
+            // TODO: Alex: Refactor: to function? (repeated code (from where?))
             Client playerWhoSentInvitation = Info.playerWaitingForHim(client);
             if (playerWhoSentInvitation != null) { // Disconnected player was invited by someone
                 try {
@@ -346,7 +346,7 @@ public class GameS {
                 game = new GamePlay(player1, Info.waitingBoardForPlayer(player1), player2, Info.waitingBoardForPlayer(player2));
                 GameInfo.addGamePlay(game);
 
-                // TODO: refactor
+                // TODO: Alex: Refactor: organize this?
                 Info.removePlayerWaitingForGame(player1);
                 Info.removePlayerWaitingForGame(player2);
                 Info.removeWaitingBoardForPlayer(player1);
@@ -400,7 +400,7 @@ public class GameS {
 
     }
 
-    private static class Info { // TODO: refactor
+    private static class Info { // TODO: Alex: Refactor: organize this?
 
         private static final Map<Client, Client> playersWaitingForPlayer1 = new ConcurrentHashMap<>();
         private static final Map<Client, Client> playersWaitingForPlayer2 = new ConcurrentHashMap<>();

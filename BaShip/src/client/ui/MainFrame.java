@@ -1,14 +1,13 @@
 package client.ui;
 
 import client.other.ImageResizer;
-import java.awt.Component;
-import java.awt.Image;
-import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JComponent;
-import javax.swing.JLabel;
+
+// TODO: Luis: bottom info no board
+// TODO: Luis: filter interface for players and games (note: columns cannot be ordered now)
+// TODO: Luis: replay & spectator interfaces
+
 
 public class MainFrame extends javax.swing.JFrame {
 
