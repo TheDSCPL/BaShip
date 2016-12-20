@@ -9,9 +9,6 @@ import client.ClientMain;
 import client.logic.GameC;
 import client.logic.UserC;
 import client.ui.LoginPanel;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import sharedlib.exceptions.UserMessageException;
 
 /**
  *
@@ -157,13 +154,9 @@ public class LobbyPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed
-        try {
-            UserC.logout();
+        if (UserC.logout()) {
+            ClientMain.mainFrame.changeToPanel(new LoginPanel());
         }
-        catch (UserMessageException ex) {
-            ClientMain.showError(ex.getMessage());
-        }
-        ClientMain.mainFrame.changeToPanel(new LoginPanel());
     }//GEN-LAST:event_logoutButtonActionPerformed
 
     private void refreshBttnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshBttnActionPerformed
@@ -171,13 +164,7 @@ public class LobbyPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_refreshBttnActionPerformed
 
     private void startRandomGameBttnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startRandomGameBttnActionPerformed
-        try {
-            GameC.startRandomGame();
-        }
-        catch (UserMessageException ex) {
-            Logger.getLogger(LobbyTabbedPanel.class.getName()).log(Level.SEVERE, null, ex);
-            ClientMain.showError(ex.getMessage());
-        }
+        GameC.startRandomGame();
     }//GEN-LAST:event_startRandomGameBttnActionPerformed
 
     public void refreshGlobalMessages() {

@@ -5,6 +5,8 @@ import client.ui.game.GamePanel;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JComponent;
 import sharedlib.exceptions.UserMessageException;
 import sharedlib.structs.Message;
@@ -16,11 +18,11 @@ import sharedlib.structs.Message;
 public class GameChatC {
 
     private static final List<Message> messages = Collections.synchronizedList(new ArrayList<>());
-    
+
     public static void clearGameMessages() {
         messages.clear();
     }
-    
+
     /**
      * Updates the game chat UI accordingly. Called automatically by the
      * <code>Server</code> class whenever an <code>SReceiveGameMessage</code>
@@ -40,14 +42,19 @@ public class GameChatC {
     }
 
     /**
-     * Send a game message to the server, that will then distribute the
-     * message for all players and spectators of the game.
+     * Send a game message to the server, that will then distribute the message
+     * for all players and spectators of the game.
      *
      * @param text The text of the message
-     * @throws UserMessageException
      */
-    public static void sendGameMessage(String text) throws UserMessageException {
-        ClientMain.server.sendGameMessage(text);
+    public static void sendGameMessage(String text) {
+        try {
+            ClientMain.server.sendGameMessage(text);
+        }
+        catch (UserMessageException ex) {
+            Logger.getLogger(GameChatC.class.getName()).log(Level.SEVERE, null, ex);
+            ClientMain.showError(ex.getMessage());
+        }
     }
 
     public static String messagesHTML() {

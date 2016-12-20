@@ -86,12 +86,18 @@ public class UserC {
      * Logout the current logged-in user for this client.
      *
      * @return True if logout was successful
-     * @throws UserMessageException
      */
-    public static boolean logout() throws UserMessageException {
-        ClientMain.server.logout();
-        loggedInUser = null;
-        return true;
+    public static boolean logout() {
+        try {
+            ClientMain.server.logout();
+            loggedInUser = null;
+            return true;
+        }
+        catch (UserMessageException ex) {
+            Logger.getLogger(UserC.class.getName()).log(Level.SEVERE, null, ex);
+            ClientMain.showError(ex.getMessage());
+            return false;
+        }
     }
 
     /**
@@ -124,10 +130,16 @@ public class UserC {
      * @param us The filter parameters.
      * @return A list of <code>UserInfo</code> objects with all its fields
      * non-null.
-     * @throws UserMessageException
      */
-    public static List<UserInfo> getUserList(UserSearch us) throws UserMessageException {
-        return ClientMain.server.getUserList(us);
+    public static List<UserInfo> getUserList(UserSearch us) {
+        try {
+            return ClientMain.server.getUserList(us);
+        }
+        catch (UserMessageException ex) {
+            Logger.getLogger(UserC.class.getName()).log(Level.SEVERE, null, ex);
+            ClientMain.showError(ex.getMessage());
+            return null;
+        }
     }
 
     public static void doubleClickUser(UserInfo userInfo) {

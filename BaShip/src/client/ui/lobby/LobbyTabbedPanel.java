@@ -38,7 +38,7 @@ public class LobbyTabbedPanel extends JPanel {
         initComponents();
         myInitComponents();
     }
-    
+
     private void addNewTab(JComponent tab, String name) {
         if (tab == null) {
             return;
@@ -75,7 +75,7 @@ public class LobbyTabbedPanel extends JPanel {
             }
         };
     }
-    
+
     private void myInitComponents() {
         //Add tabs
         jTabbedPane.removeAll();
@@ -86,7 +86,7 @@ public class LobbyTabbedPanel extends JPanel {
         if (!UserC.isLoggedIn()) {
             return;
         }
-        
+
         usersTable.addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent me) {
                 JTable table = (JTable) me.getSource();
@@ -97,7 +97,7 @@ public class LobbyTabbedPanel extends JPanel {
                 }
             }
         });
-        
+
         gamesTable.addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent me) {
                 JTable table = (JTable) me.getSource();
@@ -108,7 +108,7 @@ public class LobbyTabbedPanel extends JPanel {
                 }
             }
         });
-        
+
         applyUserFilterButton.addComponentListener(ClientMain.mainFrame.imageResizer);
         clearUserFilterButton.addComponentListener(ClientMain.mainFrame.imageResizer);
         applyGamesFilterButton.addComponentListener(ClientMain.mainFrame.imageResizer);
@@ -402,10 +402,12 @@ public class LobbyTabbedPanel extends JPanel {
     }//GEN-LAST:event_filterUserFieldActionPerformed
 
     List<UserInfo> usersList;
+
     private void updateUsersTableData(int pageIndex) {
-        
-        try {
-            usersList = UserC.getUserList(new UserSearch(filterUserField.getText(), pageIndex));
+        List<UserInfo> list = UserC.getUserList(new UserSearch(filterUserField.getText(), pageIndex));
+
+        if (list != null) {
+            usersList = list;
             while (usersTableModel.getRowCount() > 0) {
                 usersTableModel.removeRow(usersTableModel.getRowCount() - 1);
             }
@@ -414,12 +416,10 @@ public class LobbyTabbedPanel extends JPanel {
                 usersTableModel.addRow(new Object[]{userInfo.username, userInfo.rank, userInfo.nGames, userInfo.nWins, userInfo.nShots, userInfo.status});
             }
         }
-        catch (UserMessageException ex) {
-            ClientMain.showError(ex.getMessage());
-        }
     }
 
     List<GameInfo> gamesList;
+
     private void updateGamesTableData(int pageIndex) {
         try {
             gamesList = GameC.getGameList(new GameSearch(currentPlayingCheckbox.isSelected(), filterGamesField.getText(), pageIndex));
@@ -455,11 +455,11 @@ public class LobbyTabbedPanel extends JPanel {
     }
 
     private String prevFilter = "";
-    
+
     private void doubleClickUsersTable(int row) {
         UserC.doubleClickUser(usersList.get(row));
     }
-    
+
     private void doubleClickGamesTable(int row) {
         GameC.doubleClickGame(gamesList.get(row));
     }

@@ -42,8 +42,14 @@ public class GameC {
      *
      * @throws UserMessageException
      */
-    public static void startRandomGame() throws UserMessageException {
-        ClientMain.server.startRandomGame();
+    public static void startRandomGame() {
+        try {
+            ClientMain.server.startRandomGame();
+        }
+        catch (UserMessageException ex) {
+            Logger.getLogger(GameC.class.getName()).log(Level.SEVERE, null, ex);
+            ClientMain.showError(ex.getMessage());
+        }
     }
 
     /**
@@ -97,12 +103,18 @@ public class GameC {
      * @param c Coordinates of the square where the player clicked
      * @throws UserMessageException
      */
-    static public void clickBoardCoordinate(boolean leftBoard, Coord c) throws UserMessageException {
-        if (leftBoard) {
-            ClientMain.server.clickLeftBoard(c);
+    static public void clickBoardCoordinate(boolean leftBoard, Coord c) {
+        try {
+            if (leftBoard) {
+                ClientMain.server.clickLeftBoard(c);
+            }
+            else {
+                ClientMain.server.clickRightBoard(c);
+            }
         }
-        else {
-            ClientMain.server.clickRightBoard(c);
+        catch (UserMessageException ex) {
+            Logger.getLogger(GameC.class.getName()).log(Level.SEVERE, null, ex);
+            ClientMain.showError(ex.getMessage());
         }
     }
 
@@ -112,14 +124,20 @@ public class GameC {
      *
      * @throws UserMessageException
      */
-    static public void clickReadyButton() throws UserMessageException {
-        ClientMain.server.clickReadyButton();
+    static public void clickReadyButton() {
+        try {
+            ClientMain.server.clickReadyButton();
+        }
+        catch (UserMessageException ex) {
+            Logger.getLogger(GameC.class.getName()).log(Level.SEVERE, null, ex);
+            ClientMain.showError(ex.getMessage());
+        }
     }
-    
+
     static public void showNextMove() throws UserMessageException {
         ClientMain.server.showNextMove();
     }
-    
+
     static public void showPreviousMove() throws UserMessageException {
         ClientMain.server.showPreviousMove();
     }
@@ -129,8 +147,15 @@ public class GameC {
      *
      * @throws UserMessageException
      */
-    static public void closeGame() throws UserMessageException {
-        ClientMain.server.closeGame();
+    static public void closeGame() {
+        try {
+            ClientMain.server.closeGame();
+        }
+        catch (UserMessageException ex) {
+            Logger.getLogger(GameC.class.getName()).log(Level.SEVERE, null, ex);
+            ClientMain.showError(ex.getMessage());
+        }
+
         ClientMain.runOnUI(() -> {
             ClientMain.mainFrame.changeToPanel(new LobbyPanel());
         });
@@ -162,16 +187,17 @@ public class GameC {
     public static void showGameInvitation(String username) {
         ClientMain.runOnUI(() -> {
             int dialogResult = JOptionPane.showConfirmDialog(ClientMain.mainFrame, "Player '" + username + "' invited you. Would you like to play?", "Invite", JOptionPane.YES_NO_OPTION);
-            
+
             try {
                 ClientMain.server.anwserGameInvitation(dialogResult == JOptionPane.YES_OPTION);
             }
             catch (UserMessageException ex) {
                 Logger.getLogger(GameC.class.getName()).log(Level.SEVERE, null, ex);
+                ClientMain.showError(ex.getMessage());
             }
         });
     }
-    
+
     public static void closeGameInvitation() {
         ClientMain.runOnUI(() -> {
             // TODO: Luis: fechar o confirm dialog criado na linha 165 deste ficheiro

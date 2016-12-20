@@ -5,11 +5,9 @@
  */
 package client.ui.game.Components;
 
-import client.ClientMain;
 import client.logic.GameC;
 import javax.swing.BorderFactory;
 import static sharedlib.constants.UIK.BOARD_BORDER_COLOR_NORMAL;
-import sharedlib.exceptions.UserMessageException;
 import sharedlib.structs.GameUIInfo;
 import sharedlib.structs.UIInfo;
 
@@ -32,7 +30,7 @@ public class WaitingOnOpponentPanel extends SuperBoard {
         initComponents();
         setBorder(BorderFactory.createLineBorder(BOARD_BORDER_COLOR_NORMAL));
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -94,12 +92,7 @@ public class WaitingOnOpponentPanel extends SuperBoard {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        try {
-            GameC.clickReadyButton();
-        }
-        catch (UserMessageException ex) {
-            ClientMain.showError(ex.getMessage());
-        }
+        GameC.clickReadyButton();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     @Override
@@ -107,7 +100,7 @@ public class WaitingOnOpponentPanel extends SuperBoard {
         if (!(info instanceof GameUIInfo)) {
             return;
         }
-        
+
         GameUIInfo gameInfo = (GameUIInfo) info;
         jLabel1.setText(gameInfo.waitMessageLine1);
         jLabel2.setText(gameInfo.waitMessageLine2);

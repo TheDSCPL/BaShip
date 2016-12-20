@@ -6,9 +6,6 @@
 package client.ui.game.Components;
 
 import client.logic.GameC;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import sharedlib.exceptions.UserMessageException;
 import static client.other.HTMLEscaping.escapeHTML;
 
 /**
@@ -24,7 +21,7 @@ public class TopBar extends javax.swing.JPanel {
         initComponents();
         reloadUI();
     }
-    
+
     private final String SEPARATOR = "&emsp;&emsp;VS&emsp;&emsp;";
     private String player1 = "?????";
     private String player2 = "?????";
@@ -32,35 +29,30 @@ public class TopBar extends javax.swing.JPanel {
     private boolean playerTurn;
     private boolean opponentTurn;
 
-    private String getHTMLString()
-    {
+    private String getHTMLString() {
         StringBuilder sb = new StringBuilder();
         sb.append("<html><body>");
-        if(playerTurn)
-        {
+        if (playerTurn) {
             sb.append("<a style=\"color: #ffffff; background-color: #000000\">&ensp;");
             sb.append(escapeHTML(player1));
             sb.append("&ensp;</a>");
         }
-        else
-        {
+        else {
             sb.append(escapeHTML(player1));
         }
         sb.append(SEPARATOR);
-        if(opponentTurn)
-        {
+        if (opponentTurn) {
             sb.append("<a style=\"color: #ffffff; background-color: #000000\">&ensp;");
             sb.append(escapeHTML(player2));
             sb.append("&ensp;</a>");
         }
-        else
-        {
+        else {
             sb.append(escapeHTML(player2));
         }
         sb.append("</body></html>");
         return sb.toString();
     }
-    
+
     private void reloadUI() {
         opponentsLabel.setText(getHTMLString());
     }
@@ -151,12 +143,7 @@ public class TopBar extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void closeBttnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeBttnActionPerformed
-        try {
-            GameC.closeGame();
-        }
-        catch (UserMessageException ex) {
-            Logger.getLogger(TopBar.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        GameC.closeGame();
     }//GEN-LAST:event_closeBttnActionPerformed
 
 
