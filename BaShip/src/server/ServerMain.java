@@ -14,7 +14,7 @@ import sharedlib.utils.Preferences;
 // TODO: Alex: NEXT 2: Review all error logging and error messages
 // TODO: JUnit
 // TODO: Javadoc
-// TODO: Server console
+// TODO: Luis: Server console
 
 public class ServerMain {
 
