@@ -162,7 +162,7 @@ final public class Connection extends Thread {
             try {
                 Thread.sleep(1);
             }
-            catch (InterruptedException ex) {
+            catch (InterruptedException ignored) {
                 // Ignore interrupted exception
             }
         }

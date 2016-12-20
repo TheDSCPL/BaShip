@@ -22,7 +22,6 @@ import sharedlib.utils.Coord;
 public enum Query {
     B_Empty(),
     SR_ErrorMessage(ErrorMessage.class),
-    C_UsernameAvailable(String.class),
     SR_UsernameAvailable(Boolean.class),
     B_Register(UserInfo.class),
     B_Login(UserInfo.class),

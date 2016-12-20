@@ -5,7 +5,6 @@ import com.jolbox.bonecp.BoneCPConfig;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import server.ServerMain;
 import static server.ServerMain.prefs;
 import server.other.PrefsKey;
 
@@ -22,7 +21,7 @@ public class Database {
             DriverManager.registerDriver(new org.postgresql.Driver());
         }
         catch (SQLException ex) {
-            Logger.getLogger(ServerMain.class.getName()).log(Level.SEVERE, "Could not find PostgreSQL driver -> exiting", ex);
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, "Could not find PostgreSQL driver -> exiting", ex);
             System.exit(-1);
         }
     }
@@ -48,7 +47,8 @@ public class Database {
             System.out.println("done.");
         }
         catch (SQLException ex) {
-            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, "Error connecting to the database -> exiting", ex);
+            System.exit(-1);
         }
     }
 

@@ -1,6 +1,5 @@
 package server.logic.game;
 
-import java.sql.SQLException;
 import java.util.Collections;
 import java.util.Map;
 import java.util.Objects;
@@ -152,7 +151,7 @@ public class GameS {
                         playerWhoSentInvitation.showMessageAndCloseGame("Player " + UserS.usernameOfClient(invitedPlayer) + " declined your invitation.");
                     }
                     catch (ConnectionException ex) {
-                        Logger.getLogger(GameS.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(GameS.class.getName()).log(Level.SEVERE, "Could not send 'invitation declined' message to inviting player " + playerWhoSentInvitation, ex);
                     }
                 }
 
@@ -195,7 +194,7 @@ public class GameS {
                     client.updateGameBoard(bi);
                 }
                 catch (ConnectionException ex) {
-                    Logger.getLogger(GameS.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(GameS.class.getName()).log(Level.SEVERE, "Could not update board of " + client, ex);
                 }
             }
         }
@@ -229,14 +228,14 @@ public class GameS {
                 Info.removePlayerWaitingForGame(client);
             }
             else if (PlayerInfo.isWaitingForPlayer(client)) { // Player waiting for player
-                Info.removePlayerWaitingForPlayer(client);
-
                 try {
                     Info.playerInvitedBy(client).closeGameInvitation();
                 }
                 catch (ConnectionException ex) {
-                    Logger.getLogger(GameS.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(GameS.class.getName()).log(Level.SEVERE, "Could not close game invitation message of " + Info.playerInvitedBy(client), ex);
                 }
+
+                Info.removePlayerWaitingForPlayer(client);
             }
         }
 
@@ -265,7 +264,7 @@ public class GameS {
                     Info.playerInvitedBy(client).closeGameInvitation();
                 }
                 catch (ConnectionException ex) {
-                    Logger.getLogger(GameS.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(GameS.class.getName()).log(Level.SEVERE, "Could not close game invitation message of " + Info.playerInvitedBy(client), ex);
                 }
 
                 Info.removePlayerWaitingForPlayer(client);
@@ -278,7 +277,7 @@ public class GameS {
                     playerWhoSentInvitation.showMessageAndCloseGame("Player " + UserS.usernameOfClient(client) + " disconnected.");
                 }
                 catch (ConnectionException ex) {
-                    Logger.getLogger(GameS.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(GameS.class.getName()).log(Level.SEVERE, "Could not close game of player " + playerWhoSentInvitation + " who sent invitation", ex);
                 }
 
                 Info.removePlayerWaitingForPlayer(playerWhoSentInvitation);
@@ -299,7 +298,7 @@ public class GameS {
             }
         }
 
-        public synchronized static void sendGameMessage(Client player, String message) throws SQLException, ConnectionException {
+        public synchronized static void sendGameMessage(Client player, String message) throws UserMessageException {
             if (PlayerInfo.isPlaying(player)) {
                 GameInfo.gamePlayFromPlayer(player).playerSentMessage(player, message);
             }
@@ -322,14 +321,14 @@ public class GameS {
                         startWait(client, clickedClient);
                     }
                     catch (ConnectionException ex) {
-                        Logger.getLogger(GameS.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(GameS.class.getName()).log(Level.SEVERE, "Could not send invitation to " + clickedClient, ex);
                         throw new UserMessageException("Could not invite user");
                     }
                 }
             }
         }
 
-        public static void clientDoubleClickedGame(Client client, Long gameID) {
+        public static void clientDoubleClickedGame(Client client, Long gameID) throws UserMessageException {
             // Game is currently being played -> spectate
             if (GameInfo.gamePlayFromGameID(gameID) != null) {
                 spectateGame(client, gameID);
@@ -342,30 +341,19 @@ public class GameS {
 
         private static void startGame(Client player1, Client player2) throws UserMessageException {
             GamePlay game;
-            try {
-                game = new GamePlay(player1, Info.waitingBoardForPlayer(player1), player2, Info.waitingBoardForPlayer(player2));
-                GameInfo.addGamePlay(game);
+            game = new GamePlay(player1, Info.waitingBoardForPlayer(player1), player2, Info.waitingBoardForPlayer(player2));
+            GameInfo.addGamePlay(game);
 
-                // TODO: Alex: Refactor: organize this?
-                Info.removePlayerWaitingForGame(player1);
-                Info.removePlayerWaitingForGame(player2);
-                Info.removeWaitingBoardForPlayer(player1);
-                Info.removeWaitingBoardForPlayer(player2);
-            }
-            catch (SQLException ex) {
-                Logger.getLogger(GameS.class.getName()).log(Level.SEVERE, null, ex);
-                throw new UserMessageException("Could not access DB and create game: " + ex.getMessage());
-            }
+            // TODO: Alex: Refactor: organize this?
+            Info.removePlayerWaitingForGame(player1);
+            Info.removePlayerWaitingForGame(player2);
+            Info.removeWaitingBoardForPlayer(player1);
+            Info.removeWaitingBoardForPlayer(player2);
         }
 
-        private static void startReplay(Client client, Long gameID) {
-            try {
-                GameReplay game = new GameReplay(client, gameID);
-                GameInfo.addGameReplay(game);
-            }
-            catch (SQLException ex) {
-                Logger.getLogger(GameS.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        private static void startReplay(Client client, Long gameID) throws UserMessageException {
+            GameReplay game = new GameReplay(client, gameID);
+            GameInfo.addGameReplay(game);
         }
 
         private static void startWait(Client clientWaiting, Client targetClient) {
@@ -386,7 +374,7 @@ public class GameS {
                 clientWaiting.updateGameBoard(bi);
             }
             catch (ConnectionException ex) {
-                Logger.getLogger(GameS.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(GameS.class.getName()).log(Level.SEVERE, "Could not update board of " + clientWaiting, ex);
             }
         }
 
@@ -502,7 +490,7 @@ public class GameS {
                     client.updateGameScreen(gsi);
                 }
                 catch (ConnectionException ex) {
-                    Logger.getLogger(GameS.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(GameS.class.getName()).log(Level.SEVERE, "Could not update game screen of " + client, ex);
                 }
             }
         }

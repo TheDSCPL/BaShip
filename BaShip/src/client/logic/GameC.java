@@ -4,8 +4,6 @@ import client.ClientMain;
 import client.ui.game.GamePanel;
 import client.ui.lobby.LobbyPanel;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
@@ -33,8 +31,14 @@ public class GameC {
      * non-null.
      * @throws UserMessageException
      */
-    public static List<GameInfo> getGameList(GameSearch gs) throws UserMessageException {
-        return ClientMain.server.getGameList(gs);
+    public static List<GameInfo> getGameList(GameSearch gs) {
+        try {
+            return ClientMain.server.getGameList(gs);
+        }
+        catch (UserMessageException ex) {
+            ClientMain.showError(ex.getMessage());
+            return null;
+        }
     }
 
     /**
@@ -47,7 +51,6 @@ public class GameC {
             ClientMain.server.startRandomGame();
         }
         catch (UserMessageException ex) {
-            Logger.getLogger(GameC.class.getName()).log(Level.SEVERE, null, ex);
             ClientMain.showError(ex.getMessage());
         }
     }
@@ -113,7 +116,6 @@ public class GameC {
             }
         }
         catch (UserMessageException ex) {
-            Logger.getLogger(GameC.class.getName()).log(Level.SEVERE, null, ex);
             ClientMain.showError(ex.getMessage());
         }
     }
@@ -129,7 +131,6 @@ public class GameC {
             ClientMain.server.clickReadyButton();
         }
         catch (UserMessageException ex) {
-            Logger.getLogger(GameC.class.getName()).log(Level.SEVERE, null, ex);
             ClientMain.showError(ex.getMessage());
         }
     }
@@ -152,7 +153,6 @@ public class GameC {
             ClientMain.server.closeGame();
         }
         catch (UserMessageException ex) {
-            Logger.getLogger(GameC.class.getName()).log(Level.SEVERE, null, ex);
             ClientMain.showError(ex.getMessage());
         }
 
@@ -179,7 +179,6 @@ public class GameC {
             ClientMain.server.doubleClickGame(gameInfo.id);
         }
         catch (UserMessageException ex) {
-            Logger.getLogger(GameC.class.getName()).log(Level.SEVERE, null, ex);
             ClientMain.showError(ex.getMessage());
         }
     }
@@ -192,7 +191,6 @@ public class GameC {
                 ClientMain.server.anwserGameInvitation(dialogResult == JOptionPane.YES_OPTION);
             }
             catch (UserMessageException ex) {
-                Logger.getLogger(GameC.class.getName()).log(Level.SEVERE, null, ex);
                 ClientMain.showError(ex.getMessage());
             }
         });

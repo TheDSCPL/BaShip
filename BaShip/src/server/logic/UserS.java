@@ -35,10 +35,29 @@ public class UserS {
      * @param username
      * @param passwordHash
      * @return A UserInfo class with the #id and #username fields non-null
-     * @throws SQLException
+     * @throws sharedlib.exceptions.UserMessageException
      */
-    public static UserInfo register(Client client, String username, String passwordHash) throws SQLException {
-        UserInfo user = UserDB.register(username, passwordHash);
+    public static UserInfo register(Client client, String username, String passwordHash) throws UserMessageException {
+        UserInfo user;
+
+        try {
+            if (!UserDB.isUsernameAvailable(username)) {
+                throw new UserMessageException("Could not register because username is already in use");
+            }
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(UserS.class.getName()).log(Level.SEVERE, "Could not verify if username is already in use or not", ex);
+            throw new UserMessageException("Could not register due to database error");
+        }
+
+        try {
+            user = UserDB.register(username, passwordHash);
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(UserS.class.getName()).log(Level.SEVERE, "Could not register due to database error", ex);
+            throw new UserMessageException("Could not register due to database error");
+        }
+
         loginsID.put(user.id, client);
         loginsClient.put(client, user.id);
         usernamesClient.put(client, username);
@@ -55,15 +74,21 @@ public class UserS {
      * @param username
      * @param passwordHash
      * @return
-     * @throws SQLException
      * @throws UserMessageException
      */
-    public static UserInfo login(Client client, String username, String passwordHash) throws SQLException, UserMessageException {
-        Long id = UserDB.verifyLogin(username, passwordHash);
+    public static UserInfo login(Client client, String username, String passwordHash) throws UserMessageException {
+        Long id;
+        try {
+            id = UserDB.verifyLogin(username, passwordHash);
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(UserS.class.getName()).log(Level.SEVERE, "Could not verify login info on database", ex);
+            throw new UserMessageException("Could not login due to database error");
+        }
 
         if (id != null) {
             if (isUserLoggedIn(id)) {
-                throw new UserMessageException("Already logged in");
+                throw new UserMessageException("Could not login because this account is already logged in");
             }
             else {
                 loginsID.put(id, client);
@@ -142,19 +167,6 @@ public class UserS {
      * the client is logged-in. If not, returns null.
      */
     public static String usernameOfClient(Client c) {
-        /*try {
-            Long id = userIDOfClient(c);
-            if (id != null) {
-                return UserDB.getUsernameFromID(id);
-            }
-            else {
-                return null;
-            }
-        }
-        catch (SQLException ex) {
-            Logger.getLogger(UserS.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
-        }*/
         return usernamesClient.get(c);
     }
 
@@ -168,7 +180,7 @@ public class UserS {
     public static UserStatus statusOfUser(Long userID) {
         if (isUserLoggedIn(userID)) {
             Client c = clientWithUserID(userID);
-            
+
             if (GameS.PlayerInfo.isPlaying(c) || GameS.PlayerInfo.isSpectating(c) || GameS.PlayerInfo.isWaitingForPlayer(c)) {
                 return UserStatus.Playing;
             }
@@ -188,7 +200,7 @@ public class UserS {
                 client.informAboutGlobalMessage(msg);
             }
             catch (ConnectionException ex) {
-                Logger.getLogger(UserS.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(UserS.class.getName()).log(Level.SEVERE, "Could not distribute global message to " + client, ex);
             }
         }
     }

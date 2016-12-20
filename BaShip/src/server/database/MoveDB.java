@@ -23,6 +23,7 @@ public class MoveDB {
      * values raise an SQLException.
      * @param moveIndex The move number for that game (for both players of the
      * game).
+     * @param pos
      * @throws SQLException
      */
     public static void saveMove(long gameID, int playerN, int moveIndex, Coord pos) throws SQLException {

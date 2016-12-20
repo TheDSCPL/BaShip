@@ -112,19 +112,6 @@ public class Server implements Connection.Delegate {
     }
 
     /**
-     * Ask the server if the specified username is available
-     *
-     * @param username The username to test. Cannot be null
-     * @return True if the username can be used to create a new account
-     * @throws UserMessageException
-     */
-    public boolean getUsernameAvailable(String username) throws UserMessageException {
-        Packet request = new Packet(Query.C_UsernameAvailable, username);
-        Packet response = sendAndReceiveWrapper(request);
-        return (Boolean) response.info;
-    }
-
-    /**
      * Login using the specified username and password
      *
      * @param username
@@ -138,7 +125,7 @@ public class Server implements Connection.Delegate {
         Packet response = sendAndReceiveWrapper(request);
 
         if (response.query == Query.SR_ErrorMessage) {
-            throw new UserMessageException("Could not login: " + ((ErrorMessage) response.info).message);
+            throw new UserMessageException(((ErrorMessage) response.info).message);
         }
         else {
             return (UserInfo) response.info;
@@ -159,7 +146,7 @@ public class Server implements Connection.Delegate {
         Packet response = sendAndReceiveWrapper(request);
 
         if (response.query == Query.SR_ErrorMessage) {
-            throw new UserMessageException("Could not register: " + ((ErrorMessage) response.info).message);
+            throw new UserMessageException(((ErrorMessage) response.info).message);
         }
         else {
             return (UserInfo) response.info;
@@ -190,7 +177,7 @@ public class Server implements Connection.Delegate {
         Packet response = sendAndReceiveWrapper(request);
 
         if (response.query == Query.SR_ErrorMessage) {
-            throw new UserMessageException("Could not get user list: " + ((ErrorMessage) response.info).message);
+            throw new UserMessageException(((ErrorMessage) response.info).message);
         }
         else {
             return (List<UserInfo>) response.info;
@@ -211,7 +198,7 @@ public class Server implements Connection.Delegate {
         Packet response = sendAndReceiveWrapper(request);
 
         if (response.query == Query.SR_ErrorMessage) {
-            throw new UserMessageException("Could not get game list: " + ((ErrorMessage) response.info).message);
+            throw new UserMessageException(((ErrorMessage) response.info).message);
         }
         else {
             return (List<GameInfo>) response.info;
@@ -230,34 +217,34 @@ public class Server implements Connection.Delegate {
         Packet response = sendAndReceiveWrapper(request);
 
         if (response.query == Query.SR_ErrorMessage) {
-            throw new UserMessageException("Could not send global message: " + ((ErrorMessage) response.info).message);
+            throw new UserMessageException(((ErrorMessage) response.info).message);
         }
     }
-    
+
     public void sendGameMessage(String message) throws UserMessageException {
         Packet request = new Packet(Query.C_SendGameMessage, message);
         Packet response = sendAndReceiveWrapper(request);
 
         if (response.query == Query.SR_ErrorMessage) {
-            throw new UserMessageException("Could not send game message: " + ((ErrorMessage) response.info).message);
+            throw new UserMessageException(((ErrorMessage) response.info).message);
         }
     }
-    
+
     public void doubleClickGame(Long gameID) throws UserMessageException {
         Packet request = new Packet(Query.C_DoubleClickGame, gameID);
         Packet response = sendAndReceiveWrapper(request);
-        
+
         if (response.query == Query.SR_ErrorMessage) {
-            throw new UserMessageException("There was a problem: " + ((ErrorMessage) response.info).message);
+            throw new UserMessageException(((ErrorMessage) response.info).message);
         }
     }
-    
+
     public void doubleClickUser(Long playerID) throws UserMessageException {
         Packet request = new Packet(Query.C_DoubleClickUser, playerID);
         Packet response = sendAndReceiveWrapper(request);
-        
+
         if (response.query == Query.SR_ErrorMessage) {
-            throw new UserMessageException("There was a problem: " + ((ErrorMessage) response.info).message);
+            throw new UserMessageException(((ErrorMessage) response.info).message);
         }
     }
 
@@ -274,10 +261,10 @@ public class Server implements Connection.Delegate {
         Packet response = sendAndReceiveWrapper(request);
 
         if (response.query == Query.SR_ErrorMessage) {
-            throw new UserMessageException("Could not start random game: " + ((ErrorMessage) response.info).message);
+            throw new UserMessageException(((ErrorMessage) response.info).message);
         }
     }
-    
+
     /**
      * Inform the server if the player accepted the invitation or not. This
      * should be called after receiving an invitation from another player.
@@ -288,9 +275,14 @@ public class Server implements Connection.Delegate {
      */
     public void anwserGameInvitation(boolean accepted) throws UserMessageException {
         Packet request = new Packet(Query.C_AnswerGameInvitation, accepted);
-        sendOnlyWrapper(request);
+
+        Packet response = sendAndReceiveWrapper(request);
+
+        if (response.query == Query.SR_ErrorMessage) {
+            throw new UserMessageException(((ErrorMessage) response.info).message);
+        }
     }
-    
+
     /**
      * Inform the server that this user clicked on the left board on a specific
      * position.
@@ -336,18 +328,18 @@ public class Server implements Connection.Delegate {
         Packet request = new Packet(Query.C_CloseGame);
         sendAndReceiveWrapper(request); // Response is an empty packet, just for confirmation
     }
-    
+
     public void showPreviousMove() throws UserMessageException {
         Packet request = new Packet(Query.C_ShowPreviousMove);
         sendAndReceiveWrapper(request); // Response is an empty packet, just for confirmation
     }
-    
+
     public void showNextMove() throws UserMessageException {
         Packet request = new Packet(Query.C_ShowNextMove);
         Packet response = sendAndReceiveWrapper(request);
 
         if (response.query == Query.SR_ErrorMessage) {
-            throw new UserMessageException("Could not get next move: " + ((ErrorMessage) response.info).message);
+            throw new UserMessageException(((ErrorMessage) response.info).message);
         }
     }
 

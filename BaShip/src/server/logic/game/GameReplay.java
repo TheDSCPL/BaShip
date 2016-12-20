@@ -29,22 +29,43 @@ public class GameReplay {
     private final int totalTurnCount;
     private final List<Move> moves = new ArrayList<>();
 
-    public GameReplay(Client client, Long gameID) throws SQLException {
+    public GameReplay(Client client, Long gameID) throws UserMessageException {
         this.client = client;
         this.gameID = gameID;
 
-        String[] usernames = GameDB.getPlayerUsernamesFromGame(gameID);
+        String[] usernames;
+        try {
+            usernames = GameDB.getPlayerUsernamesFromGame(gameID);
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(GameReplay.class.getName()).log(Level.SEVERE, "Could not get usernames of players of game from database", ex);
+            throw new UserMessageException("Cannot replay game due to a database error");
+        }
+
         p1Username = usernames[0];
         p2Username = usernames[1];
 
         p1Board = new Board();
         p2Board = new Board();
 
-        p1Board.setShips(ShipDB.getShipPositions(gameID, 1));
-        p2Board.setShips(ShipDB.getShipPositions(gameID, 2));
+        try {
+            p1Board.setShips(ShipDB.getShipPositions(gameID, 1));
+            p2Board.setShips(ShipDB.getShipPositions(gameID, 2));
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(GameReplay.class.getName()).log(Level.SEVERE, "Could not get ship positions from database", ex);
+            throw new UserMessageException("Could not replay game due to a database error");
+        }
 
         currentTurn = 0;
-        totalTurnCount = MoveDB.getTotalMoveCount(gameID);
+
+        try {
+            totalTurnCount = MoveDB.getTotalMoveCount(gameID);
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(GameReplay.class.getName()).log(Level.SEVERE, "Could not get total move count from database", ex);
+            throw new UserMessageException("Could not replay game due to a database error");
+        }
 
         // Show game screen and boards
         refreshClient();
@@ -58,11 +79,14 @@ public class GameReplay {
                 client.informAboutGameMessage(msg);
             }
         }
+        catch (SQLException ex) {
+            Logger.getLogger(GameReplay.class.getName()).log(Level.SEVERE, "Could not get game messages from database", ex);
+        }
         catch (ConnectionException ex) {
-            Logger.getLogger(GameReplay.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GameReplay.class.getName()).log(Level.SEVERE, "Could not send messages to " + client, ex);
         }
     }
-    
+
     public synchronized void showNextMove() throws UserMessageException {
         if (currentTurn >= totalTurnCount) {
             return;
@@ -76,8 +100,8 @@ public class GameReplay {
                 move = MoveDB.getMove(gameID, currentTurn - 1); // Moves on DB are zero-indexed
             }
             catch (SQLException ex) {
-                Logger.getLogger(GameReplay.class.getName()).log(Level.SEVERE, null, ex);
-                throw new UserMessageException("Could not access database to get next move: " + ex.getMessage());
+                Logger.getLogger(GameReplay.class.getName()).log(Level.SEVERE, "Could not access database to get next move", ex);
+                throw new UserMessageException("Could not access database to get next move");
             }
             moves.add(move);
         }
@@ -93,7 +117,7 @@ public class GameReplay {
         }
 
         currentTurn--;
-        
+
         Move lastMove = moves.get(currentTurn);
         boardForOpponentOfPlayerN(lastMove.playerN).removeShotFromSquare(lastMove.coord);
         refreshClient();
@@ -137,7 +161,7 @@ public class GameReplay {
             client.updateGameBoard(rightBoard);
         }
         catch (ConnectionException ex) {
-            Logger.getLogger(GameReplay.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GameReplay.class.getName()).log(Level.SEVERE, "Could not update game & board info for " + client, ex);
         }
     }
 

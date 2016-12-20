@@ -14,11 +14,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import sharedlib.exceptions.UserMessageException;
 import sharedlib.structs.GameInfo;
 import sharedlib.structs.GameSearch;
 import sharedlib.structs.UserInfo;
@@ -421,8 +418,11 @@ public class LobbyTabbedPanel extends JPanel {
     List<GameInfo> gamesList;
 
     private void updateGamesTableData(int pageIndex) {
-        try {
-            gamesList = GameC.getGameList(new GameSearch(currentPlayingCheckbox.isSelected(), filterGamesField.getText(), pageIndex));
+        List<GameInfo> list = GameC.getGameList(new GameSearch(currentPlayingCheckbox.isSelected(), filterGamesField.getText(), pageIndex));
+
+        if (list != null) {
+            gamesList = list;
+
             while (gamesTableModel.getRowCount() > 0) {
                 gamesTableModel.removeRow(gamesTableModel.getRowCount() - 1);
             }
@@ -448,9 +448,6 @@ public class LobbyTabbedPanel extends JPanel {
 
                 gamesTableModel.addRow(new Object[]{s1, s2});
             }
-        }
-        catch (UserMessageException ex) {
-            ClientMain.showError(ex.getMessage());
         }
     }
 
@@ -497,14 +494,8 @@ public class LobbyTabbedPanel extends JPanel {
             return;
         }
 
-        try {
-            GlobalChatC.sendGlobalMessage(globalChatSendMessageField.getText());
-            globalChatSendMessageField.setText("");
-        }
-        catch (UserMessageException ex) {
-            Logger.getLogger(LobbyTabbedPanel.class.getName()).log(Level.SEVERE, null, ex);
-            ClientMain.showError(ex.getMessage());
-        }
+        GlobalChatC.sendGlobalMessage(globalChatSendMessageField.getText());
+        globalChatSendMessageField.setText("");
     }//GEN-LAST:event_globalChatSendButtonActionPerformed
 
     private void globalChatSendMessageFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_globalChatSendMessageFieldActionPerformed

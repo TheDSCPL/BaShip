@@ -14,6 +14,7 @@ import server.database.MoveDB;
 import server.database.ShipDB;
 import server.logic.UserS;
 import sharedlib.exceptions.ConnectionException;
+import sharedlib.exceptions.UserMessageException;
 import sharedlib.structs.BoardUIInfo;
 import sharedlib.structs.GameUIInfo;
 import sharedlib.structs.GameUIInfo.UIType;
@@ -40,7 +41,7 @@ class GamePlay {
         PlacingShips, Waiting, Playing
     }
 
-    public GamePlay(Client p1, Board p1Board, Client p2, Board p2Board) throws SQLException {
+    public GamePlay(Client p1, Board p1Board, Client p2, Board p2Board) throws UserMessageException {
 
         // Set players
         player1 = p1;
@@ -60,15 +61,27 @@ class GamePlay {
         moveIndex = 0;
 
         // Create game in DB
-        gameID = GameDB.createGame(UserS.userIDOfClient(p1), UserS.userIDOfClient(p2));
+        try {
+            gameID = GameDB.createGame(UserS.userIDOfClient(p1), UserS.userIDOfClient(p2));
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(GamePlay.class.getName()).log(Level.SEVERE, "Could not create game on the database", ex);
+            throw new UserMessageException("Could not start a game due to a database error");
+        }
 
         // Clear game messages
         try {
             player1.clearGameMessages();
+        }
+        catch (ConnectionException ex) {
+            Logger.getLogger(GamePlay.class.getName()).log(Level.SEVERE, "Could not clear game messages of " + player1, ex);
+        }
+
+        try {
             player2.clearGameMessages();
         }
         catch (ConnectionException ex) {
-            Logger.getLogger(GamePlay.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GamePlay.class.getName()).log(Level.SEVERE, "Could not clear game messages of " + player2, ex);
         }
 
         // Refresh interfaces
@@ -90,7 +103,7 @@ class GamePlay {
             }
         }
         catch (ConnectionException ex) {
-            Logger.getLogger(GamePlay.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GamePlay.class.getName()).log(Level.SEVERE, "Could not send game messages to spectator " + client, ex);
         }
     }
 
@@ -124,51 +137,6 @@ class GamePlay {
         }
     }
 
-    private void startGame() throws SQLException {
-        // Set start date
-        GameDB.setStartTimeToNow(gameID);
-
-        // Save ship positions
-        ShipDB.saveShipPositions(gameID, 1, p1Board.getShips());
-        ShipDB.saveShipPositions(gameID, 2, p2Board.getShips());
-    }
-    
-    private void finishGame(String message, Client winner, Client dontSendMessageTo) {
-        finished = true;
-
-        // Set winner and finish time
-        try {
-            GameDB.setEndTimeToNow(gameID);
-
-            if (winner != null) {
-                GameDB.setWinner(gameID, UserS.userIDOfClient(winner));
-            }
-        }
-        catch (SQLException ex) {
-            Logger.getLogger(GamePlay.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        // Message players and spectators
-        try {
-            if (dontSendMessageTo != player1) {
-                player1.showMessageAndCloseGame(message);
-            }
-            if (dontSendMessageTo != player2) {
-                player2.showMessageAndCloseGame(message);
-            }
-
-            for (Client spectator : spectators) {
-                spectator.showMessageAndCloseGame(message);
-            }
-        }
-        catch (ConnectionException ex) {
-            Logger.getLogger(GamePlay.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        // Remove myself from GameS's lists
-        GameS.Callbacks.gamePlayFinished(this);
-    }
-
     public synchronized void clickReadyButton(Client player) {
         // Verify if player is in this game
         if (!isPlayer(player)) {
@@ -200,8 +168,8 @@ class GamePlay {
                 startGame();
             }
             catch (SQLException ex) {
-                Logger.getLogger(GamePlay.class.getName()).log(Level.SEVERE, null, ex);
-                finishGame("There was a database error", null, null);
+                Logger.getLogger(GamePlay.class.getName()).log(Level.SEVERE, "Could not save start game info on database", ex);
+                finishGame("Game closed due to a database error", null, null);
                 return;
             }
         }
@@ -244,8 +212,8 @@ class GamePlay {
             MoveDB.saveMove(gameID, player == player1 ? 1 : 2, moveIndex, pos);
         }
         catch (SQLException ex) {
-            Logger.getLogger(GamePlay.class.getName()).log(Level.SEVERE, "Could not fire shot", ex);
-            finishGame("Could not access database to fire shot", null, null);
+            Logger.getLogger(GamePlay.class.getName()).log(Level.SEVERE, "Could not save move info on database", ex);
+            finishGame("Game closed due to a database error", null, null);
             return;
         }
         moveIndex++;
@@ -284,16 +252,101 @@ class GamePlay {
         refreshClientInfo();
     }
 
-    public synchronized void playerSentMessage(Client player, String text) throws SQLException, ConnectionException {
-        Message message = GameChatDB.saveMessage(gameID, player == player1 ? 1 : 2, text);
+    public synchronized void playerSentMessage(Client player, String text) throws UserMessageException {
+        Message message;
+        try {
+            message = GameChatDB.saveMessage(gameID, player == player1 ? 1 : 2, text);
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(GamePlay.class.getName()).log(Level.SEVERE, "Could not save game message on database", ex);
+            throw new UserMessageException("Could not send game message due to database error");
+        }
+
         messages.add(message);
 
-        player1.informAboutGameMessage(message);
-        player2.informAboutGameMessage(message);
+        try {
+            player1.informAboutGameMessage(message);
+            player2.informAboutGameMessage(message);
 
-        for (Client c : spectators) {
-            c.informAboutGameMessage(message);
+            for (Client c : spectators) {
+                c.informAboutGameMessage(message);
+            }
         }
+        catch (ConnectionException ex) {
+            Logger.getLogger(GamePlay.class.getName()).log(Level.SEVERE, "Could not inform players and/or spectators about game message", ex);
+        }
+    }
+
+    public synchronized boolean isPlayer(Client client) {
+        return client == player1 || client == player2;
+    }
+
+    public synchronized boolean isSpectator(Client client) {
+        return spectators.contains(client);
+    }
+
+    public synchronized boolean gameHasStarted() {
+        return p1State == PlayerState.Playing && p2State == PlayerState.Playing;
+    }
+
+    public synchronized int getCurrentMoveNumber() {
+        return moveIndex;
+    }
+
+    private void startGame() throws SQLException {
+        // Set start date
+        GameDB.setStartTimeToNow(gameID);
+
+        // Save ship positions
+        ShipDB.saveShipPositions(gameID, 1, p1Board.getShips());
+        ShipDB.saveShipPositions(gameID, 2, p2Board.getShips());
+    }
+
+    private void finishGame(String message, Client winner, Client dontSendMessageTo) {
+        finished = true;
+
+        // Set winner and finish time
+        try {
+            GameDB.setEndTimeToNow(gameID);
+
+            if (winner != null) {
+                GameDB.setWinner(gameID, UserS.userIDOfClient(winner));
+            }
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(GamePlay.class.getName()).log(Level.SEVERE, "Could not save game finished information on database. Game with id=" + gameID + " is possibly corrupt on database", ex);
+        }
+
+        // Message players and spectators that game has finished
+        if (dontSendMessageTo != player1) {
+            try {
+                player1.showMessageAndCloseGame(message);
+            }
+            catch (ConnectionException ex) {
+                Logger.getLogger(GamePlay.class.getName()).log(Level.SEVERE, "Could not close game of player " + player1, ex);
+            }
+        }
+
+        if (dontSendMessageTo != player2) {
+            try {
+                player2.showMessageAndCloseGame(message);
+            }
+            catch (ConnectionException ex) {
+                Logger.getLogger(GamePlay.class.getName()).log(Level.SEVERE, "Could not close game of player " + player2, ex);
+            }
+        }
+
+        for (Client spectator : spectators) {
+            try {
+                spectator.showMessageAndCloseGame(message);
+            }
+            catch (ConnectionException ex) {
+                Logger.getLogger(GamePlay.class.getName()).log(Level.SEVERE, "Could not close game of spectator " + spectator, ex);
+            }
+        }
+
+        // Remove myself from GameS's lists
+        GameS.Callbacks.gamePlayFinished(this);
     }
 
     private void refreshClientInfo() {
@@ -343,7 +396,7 @@ class GamePlay {
             client.updateGameScreen(info);
         }
         catch (ConnectionException ex) {
-            Logger.getLogger(GamePlay.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GamePlay.class.getName()).log(Level.SEVERE, "Could not update game screen info of " + client, ex);
         }
     }
 
@@ -366,9 +419,10 @@ class GamePlay {
         try {
             client.updateGameBoard(leftBoard);
             client.updateGameBoard(rightBoard);
+
         }
         catch (ConnectionException ex) {
-            Logger.getLogger(GamePlay.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GamePlay.class.getName()).log(Level.SEVERE, "Could not update board info of " + client, ex);
         }
     }
 
@@ -386,18 +440,6 @@ class GamePlay {
         }
 
         return null;
-    }
-
-    public synchronized boolean isPlayer(Client client) {
-        return client == player1 || client == player2;
-    }
-
-    public synchronized boolean isSpectator(Client client) {
-        return spectators.contains(client);
-    }
-
-    public synchronized boolean gameHasStarted() {
-        return p1State == PlayerState.Playing && p2State == PlayerState.Playing;
     }
 
     private PlayerState stateForPlayer(Client player) {
@@ -431,9 +473,5 @@ class GamePlay {
         }
 
         return null;
-    }
-
-    public synchronized int getCurrentMoveNumber() {
-        return moveIndex;
     }
 }

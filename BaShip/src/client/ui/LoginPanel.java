@@ -6,9 +6,7 @@ import client.ui.lobby.LobbyPanel;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.concurrent.*;
-import java.util.logging.*;
 import javax.swing.event.*;
-import sharedlib.exceptions.UserMessageException;
 import static sharedlib.constants.UIK.*;
 
 public class LoginPanel extends javax.swing.JPanel {
@@ -340,7 +338,7 @@ public class LoginPanel extends javax.swing.JPanel {
         passwordField.setToolTipText(defaultPasswordFieldTooltip);
         loginButton.setToolTipText(defaultLoginButtonTooltip);
         registerButton.setToolTipText(defaultRegisterButtonTooltip);
-        
+
         settingsLabelButton.setClickListener(() -> {
             ClientMain.mainFrame.changeToPanel(new SettingsPanel());
         });
@@ -551,16 +549,10 @@ public class LoginPanel extends javax.swing.JPanel {
             return;
         }
 
-        try {
-            if (ClientMain.connectToServer(false)) {
-                if (UserC.register(usernameField.getText(), passwordField.getPassword())) {
-                    ClientMain.mainFrame.changeToPanel(new LobbyPanel());
-                }
+        if (ClientMain.connectToServer(false)) {
+            if (UserC.register(usernameField.getText(), passwordField.getPassword())) {
+                ClientMain.mainFrame.changeToPanel(new LobbyPanel());
             }
-        }
-        catch (UserMessageException ex) {
-            Logger.getLogger(LoginPanel.class.getName()).log(Level.SEVERE, null, ex);
-            ClientMain.showError(ex.getMessage());
         }
 
         retypePasswordDialog.dispose();
@@ -584,16 +576,10 @@ public class LoginPanel extends javax.swing.JPanel {
             return;
         }
 
-        try {
-            if (ClientMain.connectToServer(false)) {
-                if (UserC.login(usernameField.getText(), passwordField.getPassword())) {
-                    ClientMain.mainFrame.changeToPanel(new LobbyPanel());
-                }
+        if (ClientMain.connectToServer(false)) {
+            if (UserC.login(usernameField.getText(), passwordField.getPassword())) {
+                ClientMain.mainFrame.changeToPanel(new LobbyPanel());
             }
-        }
-        catch (UserMessageException ex) {
-            Logger.getLogger(LoginPanel.class.getName()).log(Level.SEVERE, null, ex);
-            ClientMain.showError(ex.getMessage());
         }
     }//GEN-LAST:event_loginButtonActionPerformed
 

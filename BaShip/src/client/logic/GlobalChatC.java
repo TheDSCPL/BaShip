@@ -41,10 +41,14 @@ public class GlobalChatC {
      * message for all currently logged-in players.
      *
      * @param text The text of the message
-     * @throws UserMessageException
      */
-    public static void sendGlobalMessage(String text) throws UserMessageException {
-        ClientMain.server.sendGlobalMessage(text);
+    public static void sendGlobalMessage(String text) {
+        try {
+            ClientMain.server.sendGlobalMessage(text);
+        }
+        catch (UserMessageException ex) {
+            ClientMain.showError(ex.getMessage());
+        }
     }
 
     public static String messagesHTML() {

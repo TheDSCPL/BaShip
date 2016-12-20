@@ -5,8 +5,6 @@ import client.ui.game.GamePanel;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JComponent;
 import sharedlib.exceptions.UserMessageException;
 import sharedlib.structs.Message;
@@ -52,7 +50,6 @@ public class GameChatC {
             ClientMain.server.sendGameMessage(text);
         }
         catch (UserMessageException ex) {
-            Logger.getLogger(GameChatC.class.getName()).log(Level.SEVERE, null, ex);
             ClientMain.showError(ex.getMessage());
         }
     }

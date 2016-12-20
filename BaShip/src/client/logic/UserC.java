@@ -2,8 +2,6 @@ package client.logic;
 
 import client.ClientMain;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.regex.*;
 import sharedlib.exceptions.UserMessageException;
 import sharedlib.structs.UserInfo;
@@ -62,10 +60,15 @@ public class UserC {
      * @param username
      * @param password
      * @return True if login was successful
-     * @throws UserMessageException
      */
-    public static boolean login(String username, char[] password) throws UserMessageException {
-        loggedInUser = ClientMain.server.login(username, password);
+    public static boolean login(String username, char[] password) {
+        try {
+            loggedInUser = ClientMain.server.login(username, password);
+        }
+        catch (UserMessageException ex) {
+            ClientMain.showError(ex.getMessage());
+        }
+        
         return isLoggedIn();
     }
 
@@ -75,10 +78,15 @@ public class UserC {
      * @param username
      * @param password
      * @return True if register was successful
-     * @throws UserMessageException
      */
-    public static boolean register(String username, char[] password) throws UserMessageException {
-        loggedInUser = ClientMain.server.register(username, password);
+    public static boolean register(String username, char[] password) {
+        try {
+            loggedInUser = ClientMain.server.register(username, password);
+        }
+        catch (UserMessageException ex) {
+            ClientMain.showError(ex.getMessage());
+        }
+
         return isLoggedIn();
     }
 
@@ -94,7 +102,6 @@ public class UserC {
             return true;
         }
         catch (UserMessageException ex) {
-            Logger.getLogger(UserC.class.getName()).log(Level.SEVERE, null, ex);
             ClientMain.showError(ex.getMessage());
             return false;
         }
@@ -136,7 +143,6 @@ public class UserC {
             return ClientMain.server.getUserList(us);
         }
         catch (UserMessageException ex) {
-            Logger.getLogger(UserC.class.getName()).log(Level.SEVERE, null, ex);
             ClientMain.showError(ex.getMessage());
             return null;
         }
@@ -147,7 +153,6 @@ public class UserC {
             ClientMain.server.doubleClickUser(userInfo.id);
         }
         catch (UserMessageException ex) {
-            Logger.getLogger(UserC.class.getName()).log(Level.SEVERE, null, ex);
             ClientMain.showError(ex.getMessage());
         }
     }

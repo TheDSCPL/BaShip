@@ -46,28 +46,12 @@ public class Client implements Connection.Delegate {
         Packet response = null;
 
         switch (request.query) {
-            case C_UsernameAvailable: {
-                boolean b = false;
-                try {
-                    b = UserDB.isUsernameAvailable((String) request.info);
-                }
-                catch (SQLException ex) {
-                    Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                response = new Packet(Query.SR_UsernameAvailable, b);
-                break;
-            }
             case B_Login: {
                 UserInfo um = (UserInfo) request.info;
                 try {
                     response = new Packet(Query.B_Login, UserS.login(this, um.username, um.passwordHash));
                 }
-                catch (SQLException ex) {
-                    Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
-                    response = new Packet(Query.SR_ErrorMessage, new ErrorMessage("Could not run SQL query: " + ex.getMessage()));
-                }
                 catch (UserMessageException ex) {
-                    Logger.getLogger(Client.class.getName()).log(Level.INFO, null, ex);
                     response = new Packet(Query.SR_ErrorMessage, new ErrorMessage(ex.getMessage()));
                 }
                 break;
@@ -77,9 +61,8 @@ public class Client implements Connection.Delegate {
                 try {
                     response = new Packet(Query.B_Register, UserS.register(this, um.username, um.passwordHash));
                 }
-                catch (SQLException ex) {
-                    Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
-                    response = new Packet(Query.SR_ErrorMessage, new ErrorMessage("Could not run SQL query: " + ex.getMessage()));
+                catch (UserMessageException ex) {
+                    response = new Packet(Query.SR_ErrorMessage, new ErrorMessage(ex.getMessage()));
                 }
                 break;
             }
@@ -95,8 +78,8 @@ public class Client implements Connection.Delegate {
                     response = new Packet(Query.SR_GetUserList, UserDB.getUserList(s));
                 }
                 catch (SQLException ex) {
-                    Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
-                    response = new Packet(Query.SR_ErrorMessage, new ErrorMessage("Could not run SQL query: " + ex.getMessage()));
+                    Logger.getLogger(Client.class.getName()).log(Level.SEVERE, "Could not get user list due to database error", ex);
+                    response = new Packet(Query.SR_ErrorMessage, new ErrorMessage("Could not get user list due to database error"));
                 }
 
                 break;
@@ -108,8 +91,8 @@ public class Client implements Connection.Delegate {
                     response = new Packet(Query.SR_GetGameList, GameDB.getGameList(s));
                 }
                 catch (SQLException ex) {
-                    Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
-                    response = new Packet(Query.SR_ErrorMessage, new ErrorMessage("Could not run SQL query: " + ex.getMessage()));
+                    Logger.getLogger(Client.class.getName()).log(Level.SEVERE, "Could not get game list due to database error", ex);
+                    response = new Packet(Query.SR_ErrorMessage, new ErrorMessage("Could not get game list due to database error"));
                 }
 
                 break;
@@ -120,8 +103,8 @@ public class Client implements Connection.Delegate {
                     response = new Packet();
                 }
                 catch (SQLException ex) {
-                    Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
-                    response = new Packet(Query.SR_ErrorMessage, new ErrorMessage("Could not run SQL query: " + ex.getMessage()));
+                    Logger.getLogger(Client.class.getName()).log(Level.SEVERE, "Could not send global message due to database error", ex);
+                    response = new Packet(Query.SR_ErrorMessage, new ErrorMessage("Could not send global message due to database error"));
                 }
                 break;
             }
@@ -130,13 +113,8 @@ public class Client implements Connection.Delegate {
                     GameS.Actions.sendGameMessage(this, (String) request.info);
                     response = new Packet();
                 }
-                catch (SQLException ex) {
-                    Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
-                    response = new Packet(Query.SR_ErrorMessage, new ErrorMessage("Could not run SQL query: " + ex.getMessage()));
-                }
-                catch (ConnectionException ex) {
-                    Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
-                    response = new Packet(Query.SR_ErrorMessage, new ErrorMessage("Connection problem: " + ex.getMessage()));
+                catch (UserMessageException ex) {
+                    response = new Packet(Query.SR_ErrorMessage, new ErrorMessage(ex.getMessage()));
                 }
                 break;
             }
@@ -171,14 +149,19 @@ public class Client implements Connection.Delegate {
                 break;
             }
             case C_DoubleClickGame: {
-                GameS.Actions.clientDoubleClickedGame(this, (Long) request.info);
-                response = new Packet(); // Empty response just for confirmation
+                try {
+                    GameS.Actions.clientDoubleClickedGame(this, (Long) request.info);
+                    response = new Packet();
+                }
+                catch (UserMessageException ex) {
+                    response = new Packet(Query.SR_ErrorMessage, new ErrorMessage(ex.getMessage()));
+                }
                 break;
             }
             case C_ShowNextMove: {
                 try {
                     GameS.Actions.showNextMove(this);
-                    response = new Packet(); // Empty response just for confirmation
+                    response = new Packet();
                 }
                 catch (UserMessageException ex) {
                     response = new Packet(Query.SR_ErrorMessage, new ErrorMessage(ex.getMessage()));
@@ -203,9 +186,10 @@ public class Client implements Connection.Delegate {
             case C_AnswerGameInvitation: {
                 try {
                     GameS.Actions.answerGameInvitation(this, (Boolean) request.info);
+                    response = new Packet();
                 }
                 catch (UserMessageException ex) {
-                    Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+                    response = new Packet(Query.SR_ErrorMessage, new ErrorMessage(ex.getMessage()));
                 }
                 break;
             }
@@ -216,23 +200,19 @@ public class Client implements Connection.Delegate {
 
     @Override
     public void connected(Connection connection) {
-        System.out.println("Connected to client on " + connection.address());
-        synchronized (ServerMain.clients) {
-            ServerMain.clients.add(this);
-        }
+        ServerMain.console.println("Connected to client on " + connection.address());
+        ServerMain.clients.add(this);
     }
 
     @Override
     public void disconnected(Connection connection) {
-        System.out.println("Disconnected from client on " + connection.address());
+        ServerMain.console.println("Disconnected from client on " + connection.address());
 
         // It's important that GameS be called first
         GameS.Actions.clientDisconnected(this);
         UserS.clientDisconnected(this);
 
-        synchronized (ServerMain.clients) {
-            ServerMain.clients.remove(this);
-        }
+        ServerMain.clients.remove(this);
     }
 
     /**
@@ -275,7 +255,7 @@ public class Client implements Connection.Delegate {
     public void sendGameInvitation(String usernameOfUserInvitingPlayer) throws ConnectionException {
         connection.sendOnly(new Packet(Query.S_ReceiveGameInvitation, usernameOfUserInvitingPlayer));
     }
-    
+
     public void closeGameInvitation() throws ConnectionException {
         connection.sendOnly(new Packet(Query.S_CloseGameInvitation));
     }
@@ -296,4 +276,8 @@ public class Client implements Connection.Delegate {
         connection.sendOnly(new Packet(Query.S_ShowMessageAndCloseGame, message));
     }
 
+    @Override
+    public String toString() {
+        return "client on " + connection.address();
+    }
 }
