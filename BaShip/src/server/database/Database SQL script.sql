@@ -50,7 +50,14 @@ CREATE TABLE globalchat (
     UNIQUE(uid, timestamp)
 );
 
-CREATE VIEW user_ranks AS SELECT users.uid, 0 AS rank FROM users;
+-- TODO: Alex: feup dbm must be updated with this SQL code
+CREATE VIEW user_ranks AS SELECT tbl.uid,
+    row_number() OVER (ORDER BY tbl.rank_value DESC)::integer AS rank
+   FROM ( SELECT users.uid,
+            user_stats.nwins::numeric / (user_stats.ngames - user_stats.nwins + 1)::numeric AS rank_value
+           FROM users
+             JOIN user_stats USING (uid)) tbl
+  ORDER BY (row_number() OVER (ORDER BY tbl.rank_value DESC)::integer);
 
 CREATE VIEW user_stats AS SELECT t1.uid,
     t2.ngames,

@@ -11,8 +11,6 @@ import server.other.Console;
 import server.other.PrefsKey;
 import sharedlib.utils.Preferences;
 
-// TODO: Alex: rank calculation
-
 // TODO: Sound
 // TODO: Interface color (option in settings)
 // TODO: JUnit
