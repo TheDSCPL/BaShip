@@ -24,4 +24,12 @@ public class UIK {
     public static final ImageIcon SETTINGS_ICON = new ImageIcon(Block.class.getResource("/client/ui/Images/settings.png"));
     public static final ImageIcon[] ICONS = new ImageIcon[]{RED_CROSS_ICON, BLUE_DIAMOND_ICON, GREY_CIRCLE_ICON};
 
+    public static boolean allIconsOK()
+    {
+        for(ImageIcon ii : ICONS)
+            if(ii == null)
+                return false;
+        return true;
+    }
+    
 }

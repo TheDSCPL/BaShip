@@ -75,13 +75,10 @@ public final class Block extends javax.swing.JPanel {
         return text == null;
     }
 
-    private void sanityCheck() {
-        for (Icon i : ICONS) {
-            if (i == null) {
-                ClientMain.showError("Couldn't open an Icon resource");
-                throw new Error("Couldn't open an Icon resource");
-            }
-        }
+    public void sanityCheck() {
+        /*if (!allIconsOK()) {
+            ClientMain.showError("Couldn't open an Icon resource");
+        }*/
 
         boolean containsLabel = false;
         for (Component _c : getComponents()) {

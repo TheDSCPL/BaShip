@@ -5,6 +5,7 @@
  */
 package client.ui.game.Components;
 
+import java.awt.BorderLayout;
 import sharedlib.structs.UIInfo;
 
 /**
@@ -19,6 +20,7 @@ public class BoardContainer extends javax.swing.JPanel {
     public BoardContainer() {
         initComponents();
         this.left = board.left;
+        shipsPreview = left ? new ShipsPreviewLeft() : new ShipsPreviewRight();
     }
 
     /**
@@ -32,22 +34,8 @@ public class BoardContainer extends javax.swing.JPanel {
 
         board = new client.ui.game.Components.Board();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(board, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(board, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        setLayout(new java.awt.BorderLayout());
+        add(board, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
     public final boolean left;
@@ -59,46 +47,32 @@ public class BoardContainer extends javax.swing.JPanel {
         if(waiting && !(board instanceof WaitingOnOpponentPanel))
         {
             board = new WaitingOnOpponentPanel(board.left);
+            shipsPreview = null;
             repaintBoard();
-            /*board.revalidate();
-            board.repaint();
-            this.revalidate();
-            this.repaint();*/
         }
         else if(!waiting && !(board instanceof Board))
         {
             board = new Board(left);
+            shipsPreview = left ? new ShipsPreviewLeft() : new ShipsPreviewRight();
             repaintBoard();
-            /*board.revalidate();
-            board.repaint();
-            this.revalidate();
-            this.repaint();*/
         }
     }
+    
+    private SuperBoard previousBoard = null;
     
     private void repaintBoard()
     {
         this.removeAll();
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(board, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(board, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        this.add(board,BorderLayout.CENTER);
+        if(shipsPreview != null)
+            this.add(shipsPreview,BorderLayout.PAGE_END);
+        previousBoard = board;
     }
     
+    private ShipsPreview shipsPreview;
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public client.ui.game.Components.SuperBoard board;
+    private client.ui.game.Components.SuperBoard board;
     // End of variables declaration//GEN-END:variables
 
     public void updateBoard(UIInfo info) {
