@@ -11,12 +11,10 @@ import server.other.Console;
 import server.other.PrefsKey;
 import sharedlib.utils.Preferences;
 
-// TODO: Alex: rank calculation
-
-// TODO: Sound
-// TODO: Interface color (option in settings)
-// TODO: JUnit
-// TODO: Javadoc
+// TODO: ???: Sound
+// TODO: ???: Interface color (option in settings)
+// TODO: ???: JUnit
+// TODO: ???: Javadoc
 // TODO: Luis: Server console
 
 public class ServerMain {
