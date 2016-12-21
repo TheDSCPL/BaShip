@@ -1,10 +1,3 @@
--- TODO: Alex: feup dbm update sql code
-
-CREATE TABLE users (
-    uid BIGSERIAL PRIMARY KEY,
-    username VARCHAR(256) UNIQUE NOT NULL,
-    password VARCHAR(256) NOT 
-);
 
 CREATE TABLE games (
     gmid BIGSERIAL PRIMARY KEY,
@@ -29,7 +22,7 @@ CREATE TABLE ships (
     sid BIGSERIAL PRIMARY KEY,
     gmid INTEGER NOT NULL REFERENCES games,
     player INTEGER NOT NULL CHECK (player IN (1,2)),
-    size INTEGER NOT NULL CHECK (type >= 1 AND type <= 4),
+    size INTEGER NOT NULL CHECK (size >= 1 AND size <= 4),
     posx INTEGER NOT NULL CHECK (posx >= 0 AND posx < 10),
     posy INTEGER NOT NULL CHECK (posy >= 0 AND posy < 10),
     vertical BOOLEAN NOT NULL
@@ -43,22 +36,6 @@ CREATE TABLE gamechat (
     txt TEXT NOT NULL,
     UNIQUE(gmid, player, timestamp)
 );
-
-CREATE TABLE globalchat (
-    mssgid BIGSERIAL PRIMARY KEY,
-    uid INTEGER NOT NULL REFERENCES users,
-    timestamp TIMESTAMP WITH TIME ZONE NOT NULL,
-    txt TEXT NOT NULL,
-    UNIQUE(uid, timestamp)
-);
-
-CREATE VIEW user_ranks AS SELECT tbl.uid,
-    row_number() OVER (ORDER BY tbl.rank_value DESC)::integer AS rank
-   FROM ( SELECT users.uid,
-            user_stats.nwins::numeric / (user_stats.ngames - user_stats.nwins + 1)::numeric AS rank_value
-           FROM users
-             JOIN user_stats USING (uid)) tbl
-  ORDER BY (row_number() OVER (ORDER BY tbl.rank_value DESC)::integer);
 
 CREATE VIEW user_stats AS SELECT t1.uid,
     t2.ngames,
@@ -91,3 +68,11 @@ CREATE VIEW user_stats AS SELECT t1.uid,
                      LEFT JOIN moves USING (gmid)
                   WHERE moves.player = 2) tbl1 USING (uid)
           GROUP BY users.uid) t3 USING (uid);
+
+CREATE VIEW user_ranks AS SELECT tbl.uid,
+    row_number() OVER (ORDER BY tbl.rank_value DESC)::integer AS rank
+   FROM ( SELECT users.uid,
+            user_stats.nwins::numeric / (user_stats.ngames - user_stats.nwins + 1)::numeric AS rank_value
+           FROM users
+             JOIN user_stats USING (uid)) tbl
+  ORDER BY (row_number() OVER (ORDER BY tbl.rank_value DESC)::integer);
