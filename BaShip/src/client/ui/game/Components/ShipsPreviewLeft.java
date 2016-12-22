@@ -24,8 +24,6 @@ public final class ShipsPreviewLeft extends ShipsPreview {
                            ,new Ship(ship1_4_1)};
     }
     
-    private final Ship[] ships;
-    
     /**
      * 
      * @param shipSize
@@ -48,33 +46,6 @@ public final class ShipsPreviewLeft extends ShipsPreview {
         index += (shipNumber-1);
         
         return ships[index].get(blockNumber-1);
-    }
-    
-    private class Ship {
-        
-        Ship(PreviewBlock ... pbs)
-        {
-            a = java.util.Arrays.asList(pbs);
-        }
-        
-        private final java.util.List<PreviewBlock> a;
-        
-        public int size()
-        {
-            return a.size();
-        }
-        public PreviewBlock get(int i)
-        {
-            PreviewBlock ret;
-            try {
-                ret = a.get(i);
-            }
-            catch (IndexOutOfBoundsException e)
-            {
-                ret = null;
-            }
-            return ret;
-        }
     }
     
     /**
@@ -191,7 +162,7 @@ public final class ShipsPreviewLeft extends ShipsPreview {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        jPanel1.add(ship4_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 10, -1, -1));
+        jPanel1.add(ship4_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 0, -1, -1));
 
         ship3_1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -250,7 +221,7 @@ public final class ShipsPreviewLeft extends ShipsPreview {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        jPanel1.add(ship3_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, -1, -1));
+        jPanel1.add(ship3_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 0, -1, -1));
 
         ship3_2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -309,7 +280,7 @@ public final class ShipsPreviewLeft extends ShipsPreview {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        jPanel1.add(ship3_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 10, -1, -1));
+        jPanel1.add(ship3_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 0, -1, -1));
 
         ship2_1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -354,7 +325,7 @@ public final class ShipsPreviewLeft extends ShipsPreview {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        jPanel1.add(ship2_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+        jPanel1.add(ship2_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         ship2_2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -399,7 +370,7 @@ public final class ShipsPreviewLeft extends ShipsPreview {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        jPanel1.add(ship2_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 40, -1, -1));
+        jPanel1.add(ship2_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 30, -1, -1));
 
         ship2_3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -444,7 +415,7 @@ public final class ShipsPreviewLeft extends ShipsPreview {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        jPanel1.add(ship2_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 40, -1, -1));
+        jPanel1.add(ship2_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 30, -1, -1));
 
         ship1_1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -474,7 +445,7 @@ public final class ShipsPreviewLeft extends ShipsPreview {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        jPanel1.add(ship1_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 40, -1, -1));
+        jPanel1.add(ship1_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 30, -1, -1));
 
         ship1_2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -504,7 +475,7 @@ public final class ShipsPreviewLeft extends ShipsPreview {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        jPanel1.add(ship1_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 40, -1, -1));
+        jPanel1.add(ship1_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 30, -1, -1));
 
         ship1_3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -534,7 +505,7 @@ public final class ShipsPreviewLeft extends ShipsPreview {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        jPanel1.add(ship1_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 40, -1, -1));
+        jPanel1.add(ship1_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 30, -1, -1));
 
         ship1_4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -564,31 +535,28 @@ public final class ShipsPreviewLeft extends ShipsPreview {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        jPanel1.add(ship1_4, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 40, -1, -1));
+        jPanel1.add(ship1_4, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 0, 0)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel ship1_1;
     private client.ui.game.Components.PreviewBlock ship1_1_1;
     private javax.swing.JPanel ship1_2;

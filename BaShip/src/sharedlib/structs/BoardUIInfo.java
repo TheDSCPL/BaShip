@@ -40,6 +40,10 @@ public class BoardUIInfo implements UIInfo {
         bottomInfo.set(bottomInfoOffsets.get(shipSize) + shipIndex * shipSize + shipSquareIndex, value);
     }
     
+    public SquareFill getBottomInfo(int shipSize, int shipIndex, int shipSquareIndex) {
+        return bottomInfo.get(bottomInfoOffsets.get(shipSize) + shipIndex * shipSize + shipSquareIndex);
+    }
+    
     private static final Map<Integer, Integer> bottomInfoOffsets = new HashMap<Integer, Integer>() {
         {
             SHIP_COUNT_FOR_SIZE.keySet().stream().forEach((size) -> {

@@ -18,11 +18,12 @@ import sharedlib.utils.Matrix;
  */
 public final class Board extends SuperBoard {
 
-    private static boolean nextSide = true;
+    //private static boolean nextSide = true;
 
     public Board() {
-        this(nextSide);
-        nextSide = !nextSide;
+        //this(nextSide);
+        this(true);
+        //nextSide = !nextSide;
     }
 
     public Board(boolean left) {

@@ -22,8 +22,8 @@ public final class GamePanel extends javax.swing.JPanel {
         leftPane.setLayer(new Board(true),JLayeredPane.DEFAULT_LAYER);
         final JLayeredPane rightPane = new JLayeredPane();
         rightPane.setLayer(new Board(false),JLayeredPane.DEFAULT_LAYER);*/
-        leftBoard = new BoardContainer();
-        rightBoard = new BoardContainer();
+        leftBoard = new BoardContainer(true);
+        rightBoard = new BoardContainer(false);
         topBar = new TopBar();
         gameChat = new GameChat();
 
