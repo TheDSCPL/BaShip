@@ -58,6 +58,10 @@ public final class Block extends javax.swing.JPanel {
         }
 
         setOpaque(false);
+        
+        RESIZED_RED_CROSS_ICON = ImageResizer.resizeIcon(RED_CROSS_ICON, 30, 30);
+        RESIZED_BLUE_DIAMOND_ICON = ImageResizer.resizeIcon(BLUE_DIAMOND_ICON, 30, 30);
+        RESIZED_GREY_CIRCLE_ICON = ImageResizer.resizeIcon(GREY_CIRCLE_ICON, 30, 30);
     }
 
     private final boolean left;
@@ -136,9 +140,9 @@ public final class Block extends javax.swing.JPanel {
         jLabel1.addComponentListener(cl);
     }
 
-    private static ImageIcon RESIZED_RED_CROSS_ICON = RED_CROSS_ICON;
-    private static ImageIcon RESIZED_BLUE_DIAMOND_ICON = BLUE_DIAMOND_ICON;
-    private static ImageIcon RESIZED_GREY_CIRCLE_ICON = GREY_CIRCLE_ICON;
+    private final ImageIcon RESIZED_RED_CROSS_ICON;
+    private final ImageIcon RESIZED_BLUE_DIAMOND_ICON;
+    private final ImageIcon RESIZED_GREY_CIRCLE_ICON;
 
     public void setSquareFill(SquareFill sf) {
         switch (sf) {
@@ -155,48 +159,56 @@ public final class Block extends javax.swing.JPanel {
                 setColor(RED_BLOCK_COLOR);
                 break;
             case RedCross:
-                RESIZED_RED_CROSS_ICON = setIcon(RESIZED_RED_CROSS_ICON);
+                //RESIZED_RED_CROSS_ICON = setIcon(RESIZED_RED_CROSS_ICON);
+                setIcon(RESIZED_RED_CROSS_ICON);
                 setColor(null);
                 break;
             case BlueDiamond:
-                RESIZED_BLUE_DIAMOND_ICON = setIcon(RESIZED_BLUE_DIAMOND_ICON);
+                //RESIZED_BLUE_DIAMOND_ICON = setIcon(RESIZED_BLUE_DIAMOND_ICON);
+                setIcon(RESIZED_BLUE_DIAMOND_ICON);
                 setColor(null);
                 break;
             case GrayCircle:
-                RESIZED_GREY_CIRCLE_ICON = setIcon(RESIZED_GREY_CIRCLE_ICON);
+                //RESIZED_GREY_CIRCLE_ICON = setIcon(RESIZED_GREY_CIRCLE_ICON);
+                setIcon(RESIZED_GREY_CIRCLE_ICON);
                 setColor(null);
                 break;
             case GraySquareRedCross:
-                RESIZED_RED_CROSS_ICON = setIcon(RESIZED_RED_CROSS_ICON);
+                //RESIZED_RED_CROSS_ICON = setIcon(RESIZED_RED_CROSS_ICON);
+                setIcon(RESIZED_RED_CROSS_ICON);
                 setColor(GREY_BLOCK_COLOR);
                 break;
         }
     }
 
-    private ImageIcon setIcon(ImageIcon icon) {
+    private void setIcon(ImageIcon icon) {
         if (text != null) {
-            return null;
+            return;
         }
 
-        setImageResizer();
+        //setImageResizer();
 
         jLabel1.removeAll();
+        
+        //System.err.println("b4: width: " + jLabel1.getWidth() + " height: " + jLabel1.getHeight());
 
         jLabel1.setIcon(icon);
 
-        ImageIcon ret = ImageResizer.resizeIcon(icon, jLabel1.getWidth(), jLabel1.getHeight());
+        /*ImageIcon ret = ImageResizer.resizeIcon(icon, jLabel1.getWidth(), jLabel1.getHeight());
+        
+        System.err.println("after: width: " + jLabel1.getWidth() + " height: " + jLabel1.getHeight());
 
-        jLabel1.setIcon(ret);
+        jLabel1.setIcon(ret);*/
         jLabel1.setHorizontalAlignment(SwingConstants.CENTER);
         jLabel1.setVerticalAlignment(SwingConstants.CENTER);
 
         //To trigger the image resizing
-        jLabel1.setVisible(false);
-        jLabel1.setVisible(true);
+        /*jLabel1.setVisible(false);
+        jLabel1.setVisible(true);*/
 
-        jLabel1.revalidate();
+        //jLabel1.revalidate();
 
-        return ret;
+        //return ret;
     }
 
     /**

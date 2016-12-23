@@ -57,6 +57,7 @@ public final class ShipsPreviewRight extends ShipsPreview {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         ship4_1 = new javax.swing.JPanel();
         ship4_1_1 = new client.ui.game.Components.PreviewBlock();
@@ -80,62 +81,29 @@ public final class ShipsPreviewRight extends ShipsPreview {
         ship2_3 = new javax.swing.JPanel();
         ship2_3_1 = new client.ui.game.Components.PreviewBlock();
         ship2_3_2 = new client.ui.game.Components.PreviewBlock();
-        ship1_1 = new javax.swing.JPanel();
-        ship1_1_1 = new client.ui.game.Components.PreviewBlock();
         ship1_2 = new javax.swing.JPanel();
         ship1_2_1 = new client.ui.game.Components.PreviewBlock();
         ship1_3 = new javax.swing.JPanel();
         ship1_3_1 = new client.ui.game.Components.PreviewBlock();
         ship1_4 = new javax.swing.JPanel();
         ship1_4_1 = new client.ui.game.Components.PreviewBlock();
+        ship1_1 = new javax.swing.JPanel();
+        ship1_1_1 = new client.ui.game.Components.PreviewBlock();
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         ship4_1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        javax.swing.GroupLayout ship4_1_1Layout = new javax.swing.GroupLayout(ship4_1_1);
-        ship4_1_1.setLayout(ship4_1_1Layout);
-        ship4_1_1Layout.setHorizontalGroup(
-            ship4_1_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 15, Short.MAX_VALUE)
-        );
-        ship4_1_1Layout.setVerticalGroup(
-            ship4_1_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 15, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout ship4_1_2Layout = new javax.swing.GroupLayout(ship4_1_2);
-        ship4_1_2.setLayout(ship4_1_2Layout);
-        ship4_1_2Layout.setHorizontalGroup(
-            ship4_1_2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 15, Short.MAX_VALUE)
-        );
-        ship4_1_2Layout.setVerticalGroup(
-            ship4_1_2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 15, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout ship4_1_3Layout = new javax.swing.GroupLayout(ship4_1_3);
-        ship4_1_3.setLayout(ship4_1_3Layout);
-        ship4_1_3Layout.setHorizontalGroup(
-            ship4_1_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 15, Short.MAX_VALUE)
-        );
-        ship4_1_3Layout.setVerticalGroup(
-            ship4_1_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 15, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout ship4_1_4Layout = new javax.swing.GroupLayout(ship4_1_4);
-        ship4_1_4.setLayout(ship4_1_4Layout);
-        ship4_1_4Layout.setHorizontalGroup(
-            ship4_1_4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 15, Short.MAX_VALUE)
-        );
-        ship4_1_4Layout.setVerticalGroup(
-            ship4_1_4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 15, Short.MAX_VALUE)
-        );
 
         javax.swing.GroupLayout ship4_1Layout = new javax.swing.GroupLayout(ship4_1);
         ship4_1.setLayout(ship4_1Layout);
@@ -144,12 +112,13 @@ public final class ShipsPreviewRight extends ShipsPreview {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ship4_1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(ship4_1_1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(3, 3, 3)
+                .addGap(1, 1, 1)
                 .addComponent(ship4_1_2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(3, 3, 3)
+                .addGap(1, 1, 1)
                 .addComponent(ship4_1_3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(3, 3, 3)
-                .addComponent(ship4_1_4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(1, 1, 1)
+                .addComponent(ship4_1_4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(1, 1, 1))
         );
         ship4_1Layout.setVerticalGroup(
             ship4_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -159,45 +128,12 @@ public final class ShipsPreviewRight extends ShipsPreview {
                     .addComponent(ship4_1_2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ship4_1_3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ship4_1_4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 0, 0))
         );
 
-        jPanel1.add(ship4_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 0, -1, -1));
+        jPanel1.add(ship4_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 0, -1, -1));
 
         ship3_1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        javax.swing.GroupLayout ship3_1_1Layout = new javax.swing.GroupLayout(ship3_1_1);
-        ship3_1_1.setLayout(ship3_1_1Layout);
-        ship3_1_1Layout.setHorizontalGroup(
-            ship3_1_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 15, Short.MAX_VALUE)
-        );
-        ship3_1_1Layout.setVerticalGroup(
-            ship3_1_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 15, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout ship3_1_2Layout = new javax.swing.GroupLayout(ship3_1_2);
-        ship3_1_2.setLayout(ship3_1_2Layout);
-        ship3_1_2Layout.setHorizontalGroup(
-            ship3_1_2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 15, Short.MAX_VALUE)
-        );
-        ship3_1_2Layout.setVerticalGroup(
-            ship3_1_2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 15, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout ship3_1_3Layout = new javax.swing.GroupLayout(ship3_1_3);
-        ship3_1_3.setLayout(ship3_1_3Layout);
-        ship3_1_3Layout.setHorizontalGroup(
-            ship3_1_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 15, Short.MAX_VALUE)
-        );
-        ship3_1_3Layout.setVerticalGroup(
-            ship3_1_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 15, Short.MAX_VALUE)
-        );
 
         javax.swing.GroupLayout ship3_1Layout = new javax.swing.GroupLayout(ship3_1);
         ship3_1.setLayout(ship3_1Layout);
@@ -206,57 +142,25 @@ public final class ShipsPreviewRight extends ShipsPreview {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ship3_1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(ship3_1_1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(3, 3, 3)
+                .addGap(1, 1, 1)
                 .addComponent(ship3_1_2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(3, 3, 3)
-                .addComponent(ship3_1_3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(1, 1, 1)
+                .addComponent(ship3_1_3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(1, 1, 1))
         );
         ship3_1Layout.setVerticalGroup(
             ship3_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ship3_1Layout.createSequentialGroup()
                 .addGroup(ship3_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(ship3_1_1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ship3_1_2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ship3_1_3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(ship3_1_3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ship3_1_1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, 0))
         );
 
-        jPanel1.add(ship3_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 0, -1, -1));
+        jPanel1.add(ship3_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 0, -1, -1));
 
         ship3_2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        javax.swing.GroupLayout ship3_2_1Layout = new javax.swing.GroupLayout(ship3_2_1);
-        ship3_2_1.setLayout(ship3_2_1Layout);
-        ship3_2_1Layout.setHorizontalGroup(
-            ship3_2_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 15, Short.MAX_VALUE)
-        );
-        ship3_2_1Layout.setVerticalGroup(
-            ship3_2_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 15, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout ship3_2_2Layout = new javax.swing.GroupLayout(ship3_2_2);
-        ship3_2_2.setLayout(ship3_2_2Layout);
-        ship3_2_2Layout.setHorizontalGroup(
-            ship3_2_2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 15, Short.MAX_VALUE)
-        );
-        ship3_2_2Layout.setVerticalGroup(
-            ship3_2_2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 15, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout ship3_2_3Layout = new javax.swing.GroupLayout(ship3_2_3);
-        ship3_2_3.setLayout(ship3_2_3Layout);
-        ship3_2_3Layout.setHorizontalGroup(
-            ship3_2_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 15, Short.MAX_VALUE)
-        );
-        ship3_2_3Layout.setVerticalGroup(
-            ship3_2_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 15, Short.MAX_VALUE)
-        );
 
         javax.swing.GroupLayout ship3_2Layout = new javax.swing.GroupLayout(ship3_2);
         ship3_2.setLayout(ship3_2Layout);
@@ -265,10 +169,11 @@ public final class ShipsPreviewRight extends ShipsPreview {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ship3_2Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(ship3_2_1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(3, 3, 3)
+                .addGap(1, 1, 1)
                 .addComponent(ship3_2_2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(3, 3, 3)
-                .addComponent(ship3_2_3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(1, 1, 1)
+                .addComponent(ship3_2_3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(1, 1, 1))
         );
         ship3_2Layout.setVerticalGroup(
             ship3_2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -277,34 +182,12 @@ public final class ShipsPreviewRight extends ShipsPreview {
                     .addComponent(ship3_2_1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ship3_2_2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ship3_2_3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 0, 0))
         );
 
-        jPanel1.add(ship3_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 0, -1, -1));
+        jPanel1.add(ship3_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 0, -1, -1));
 
         ship2_1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        javax.swing.GroupLayout ship2_1_1Layout = new javax.swing.GroupLayout(ship2_1_1);
-        ship2_1_1.setLayout(ship2_1_1Layout);
-        ship2_1_1Layout.setHorizontalGroup(
-            ship2_1_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 15, Short.MAX_VALUE)
-        );
-        ship2_1_1Layout.setVerticalGroup(
-            ship2_1_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 15, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout ship2_1_2Layout = new javax.swing.GroupLayout(ship2_1_2);
-        ship2_1_2.setLayout(ship2_1_2Layout);
-        ship2_1_2Layout.setHorizontalGroup(
-            ship2_1_2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 15, Short.MAX_VALUE)
-        );
-        ship2_1_2Layout.setVerticalGroup(
-            ship2_1_2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 15, Short.MAX_VALUE)
-        );
 
         javax.swing.GroupLayout ship2_1Layout = new javax.swing.GroupLayout(ship2_1);
         ship2_1.setLayout(ship2_1Layout);
@@ -313,8 +196,9 @@ public final class ShipsPreviewRight extends ShipsPreview {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ship2_1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(ship2_1_1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(3, 3, 3)
-                .addComponent(ship2_1_2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(1, 1, 1)
+                .addComponent(ship2_1_2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(1, 1, 1))
         );
         ship2_1Layout.setVerticalGroup(
             ship2_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -322,34 +206,12 @@ public final class ShipsPreviewRight extends ShipsPreview {
                 .addGroup(ship2_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(ship2_1_1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ship2_1_2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 0, 0))
         );
 
         jPanel1.add(ship2_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         ship2_2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        javax.swing.GroupLayout ship2_2_1Layout = new javax.swing.GroupLayout(ship2_2_1);
-        ship2_2_1.setLayout(ship2_2_1Layout);
-        ship2_2_1Layout.setHorizontalGroup(
-            ship2_2_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 15, Short.MAX_VALUE)
-        );
-        ship2_2_1Layout.setVerticalGroup(
-            ship2_2_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 15, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout ship2_2_2Layout = new javax.swing.GroupLayout(ship2_2_2);
-        ship2_2_2.setLayout(ship2_2_2Layout);
-        ship2_2_2Layout.setHorizontalGroup(
-            ship2_2_2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 15, Short.MAX_VALUE)
-        );
-        ship2_2_2Layout.setVerticalGroup(
-            ship2_2_2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 15, Short.MAX_VALUE)
-        );
 
         javax.swing.GroupLayout ship2_2Layout = new javax.swing.GroupLayout(ship2_2);
         ship2_2.setLayout(ship2_2Layout);
@@ -358,8 +220,9 @@ public final class ShipsPreviewRight extends ShipsPreview {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ship2_2Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(ship2_2_1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(3, 3, 3)
-                .addComponent(ship2_2_2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(1, 1, 1)
+                .addComponent(ship2_2_2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(1, 1, 1))
         );
         ship2_2Layout.setVerticalGroup(
             ship2_2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -367,44 +230,22 @@ public final class ShipsPreviewRight extends ShipsPreview {
                 .addGroup(ship2_2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(ship2_2_1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ship2_2_2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 0, 0))
         );
 
         jPanel1.add(ship2_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 30, -1, -1));
 
         ship2_3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        javax.swing.GroupLayout ship2_3_1Layout = new javax.swing.GroupLayout(ship2_3_1);
-        ship2_3_1.setLayout(ship2_3_1Layout);
-        ship2_3_1Layout.setHorizontalGroup(
-            ship2_3_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 15, Short.MAX_VALUE)
-        );
-        ship2_3_1Layout.setVerticalGroup(
-            ship2_3_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 15, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout ship2_3_2Layout = new javax.swing.GroupLayout(ship2_3_2);
-        ship2_3_2.setLayout(ship2_3_2Layout);
-        ship2_3_2Layout.setHorizontalGroup(
-            ship2_3_2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 15, Short.MAX_VALUE)
-        );
-        ship2_3_2Layout.setVerticalGroup(
-            ship2_3_2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 15, Short.MAX_VALUE)
-        );
-
         javax.swing.GroupLayout ship2_3Layout = new javax.swing.GroupLayout(ship2_3);
         ship2_3.setLayout(ship2_3Layout);
         ship2_3Layout.setHorizontalGroup(
             ship2_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ship2_3Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(ship2_3_1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(3, 3, 3)
-                .addComponent(ship2_3_2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(1, 1, 1)
+                .addComponent(ship2_3_2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0))
         );
         ship2_3Layout.setVerticalGroup(
             ship2_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -412,53 +253,12 @@ public final class ShipsPreviewRight extends ShipsPreview {
                 .addGroup(ship2_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(ship2_3_1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ship2_3_2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 0, 0))
         );
 
-        jPanel1.add(ship2_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 30, -1, -1));
-
-        ship1_1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        javax.swing.GroupLayout ship1_1_1Layout = new javax.swing.GroupLayout(ship1_1_1);
-        ship1_1_1.setLayout(ship1_1_1Layout);
-        ship1_1_1Layout.setHorizontalGroup(
-            ship1_1_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 15, Short.MAX_VALUE)
-        );
-        ship1_1_1Layout.setVerticalGroup(
-            ship1_1_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 15, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout ship1_1Layout = new javax.swing.GroupLayout(ship1_1);
-        ship1_1.setLayout(ship1_1Layout);
-        ship1_1Layout.setHorizontalGroup(
-            ship1_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ship1_1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(ship1_1_1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        ship1_1Layout.setVerticalGroup(
-            ship1_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ship1_1Layout.createSequentialGroup()
-                .addComponent(ship1_1_1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-
-        jPanel1.add(ship1_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, -1, -1));
+        jPanel1.add(ship2_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 30, -1, -1));
 
         ship1_2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        javax.swing.GroupLayout ship1_2_1Layout = new javax.swing.GroupLayout(ship1_2_1);
-        ship1_2_1.setLayout(ship1_2_1Layout);
-        ship1_2_1Layout.setHorizontalGroup(
-            ship1_2_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 15, Short.MAX_VALUE)
-        );
-        ship1_2_1Layout.setVerticalGroup(
-            ship1_2_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 15, Short.MAX_VALUE)
-        );
 
         javax.swing.GroupLayout ship1_2Layout = new javax.swing.GroupLayout(ship1_2);
         ship1_2.setLayout(ship1_2Layout);
@@ -470,55 +270,33 @@ public final class ShipsPreviewRight extends ShipsPreview {
         );
         ship1_2Layout.setVerticalGroup(
             ship1_2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ship1_2Layout.createSequentialGroup()
+            .addGroup(ship1_2Layout.createSequentialGroup()
                 .addComponent(ship1_2_1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        jPanel1.add(ship1_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, -1));
+        jPanel1.add(ship1_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 20, 20));
 
         ship1_3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        javax.swing.GroupLayout ship1_3_1Layout = new javax.swing.GroupLayout(ship1_3_1);
-        ship1_3_1.setLayout(ship1_3_1Layout);
-        ship1_3_1Layout.setHorizontalGroup(
-            ship1_3_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 15, Short.MAX_VALUE)
-        );
-        ship1_3_1Layout.setVerticalGroup(
-            ship1_3_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 15, Short.MAX_VALUE)
-        );
 
         javax.swing.GroupLayout ship1_3Layout = new javax.swing.GroupLayout(ship1_3);
         ship1_3.setLayout(ship1_3Layout);
         ship1_3Layout.setHorizontalGroup(
             ship1_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ship1_3Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(ship1_3_1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(ship1_3Layout.createSequentialGroup()
+                .addComponent(ship1_3_1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0))
         );
         ship1_3Layout.setVerticalGroup(
             ship1_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ship1_3Layout.createSequentialGroup()
+            .addGroup(ship1_3Layout.createSequentialGroup()
                 .addComponent(ship1_3_1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 0, 0))
         );
 
         jPanel1.add(ship1_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 30, -1, -1));
 
         ship1_4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        javax.swing.GroupLayout ship1_4_1Layout = new javax.swing.GroupLayout(ship1_4_1);
-        ship1_4_1.setLayout(ship1_4_1Layout);
-        ship1_4_1Layout.setHorizontalGroup(
-            ship1_4_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 15, Short.MAX_VALUE)
-        );
-        ship1_4_1Layout.setVerticalGroup(
-            ship1_4_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 15, Short.MAX_VALUE)
-        );
 
         javax.swing.GroupLayout ship1_4Layout = new javax.swing.GroupLayout(ship1_4);
         ship1_4.setLayout(ship1_4Layout);
@@ -526,25 +304,37 @@ public final class ShipsPreviewRight extends ShipsPreview {
             ship1_4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ship1_4Layout.createSequentialGroup()
                 .addComponent(ship1_4_1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 0, 0))
         );
         ship1_4Layout.setVerticalGroup(
             ship1_4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ship1_4Layout.createSequentialGroup()
+            .addGroup(ship1_4Layout.createSequentialGroup()
                 .addComponent(ship1_4_1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 0, 0))
         );
 
         jPanel1.add(ship1_4, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 30, -1, -1));
+
+        ship1_1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        javax.swing.GroupLayout ship1_1Layout = new javax.swing.GroupLayout(ship1_1);
+        ship1_1.setLayout(ship1_1Layout);
+        ship1_1Layout.setHorizontalGroup(
+            ship1_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(ship1_1_1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        ship1_1Layout.setVerticalGroup(
+            ship1_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(ship1_1_1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+
+        jPanel1.add(ship1_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -558,6 +348,7 @@ public final class ShipsPreviewRight extends ShipsPreview {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel ship1_1;
     private client.ui.game.Components.PreviewBlock ship1_1_1;
     private javax.swing.JPanel ship1_2;

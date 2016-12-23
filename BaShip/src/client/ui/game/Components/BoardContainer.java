@@ -160,6 +160,8 @@ public class BoardContainer extends javax.swing.JPanel {
     private client.ui.game.Components.ShipsPreviewLeft shipsPreviewLeft1;
     // End of variables declaration//GEN-END:variables
 
+    private int updateId = 0;
+    
     public void updateBoard(UIInfo info) {
         board.update(info);
         if(shipsPreview != null && info instanceof BoardUIInfo)
@@ -168,7 +170,12 @@ public class BoardContainer extends javax.swing.JPanel {
             for(int n=1 ; n<=4 ; n++)   //shipSizes
                 for(int i=1 ; i<=(5-n) ; i++)   //shipNumber
                     for(int j=1 ; j <= n ; j++) //blockNumber
-                        shipsPreview.getPreviewBlock(n, i, j).setSquareFill(buii.getBottomInfo(n, i-1, j-1));
+                    {
+                        final BoardUIInfo.SquareFill sf = buii.getBottomInfo(n, i-1, j-1);
+                        //System.out.println( (left ? "left " : "right ") + updateId + " bottom info shipSize: " + n + " | shipNumber: " + i + " | blockNumber: " + j + " fill: " + sf.name());
+                        shipsPreview.getPreviewBlock(n, i, j).setSquareFill(sf);
+                    }
+        updateId++;
         }
     }
 }

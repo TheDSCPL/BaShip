@@ -3,6 +3,9 @@ package client;
 import client.conn.*;
 import client.other.PrefsKey;
 import client.ui.*;
+import client.ui.game.Components.PreviewBlock;
+import client.ui.game.Components.ShipsPreviewLeft;
+import client.ui.game.Components.ShipsPreviewRight;
 import java.io.*;
 import java.net.*;
 import java.util.concurrent.*;
@@ -26,6 +29,7 @@ public class ClientMain {
     public static void main(String args[]) {
         runOnUI(() -> {
             mainFrame.changeToPanel(new LoginPanel());
+            //mainFrame.changeToPanel(new ShipsPreviewRight());
             mainFrame.setVisible(true);
         });
     }

@@ -16,26 +16,43 @@ import sharedlib.structs.BoardUIInfo.SquareFill;
  *
  * @author luisp
  */
-public class PreviewBlock extends javax.swing.JPanel {
+public final class PreviewBlock extends javax.swing.JPanel {
 
+    private static int counter = 0;
+    
     /**
      * Creates new form previewBlock
      */
     public PreviewBlock() {
+        id = counter++;
         initComponents();
+        //setSquareFill(SquareFill.BlueDiamond);
     }
 
+    private final int id;
     private final static ImageIcon RESIZED_RED_CROSS_ICON = ImageResizer.resizeIcon(RED_CROSS_ICON, 13, 13);
     private final static ImageIcon RESIZED_BLUE_DIAMOND_ICON = ImageResizer.resizeIcon(BLUE_DIAMOND_ICON, 13, 13);
     private final static ImageIcon RESIZED_GREY_CIRCLE_ICON = ImageResizer.resizeIcon(GREY_CIRCLE_ICON, 13, 13);
     
+    private int n = 0;
+    private SquareFill lastSF = SquareFill.Empty;
+    
     public void setSquareFill(SquareFill sf) {
+//        if(n>0)
+//            return;
+//        n=1;
+        if(sf!=lastSF)
+        {
+            System.err.println("Preview block " + id + " | Square fill: " + sf.name());
+            lastSF = sf;
+        }
         switch (sf) {
             case Empty:
                 setIcon(null);
                 setColor(null);
                 break;
             case GraySquare:
+                //System.err.println("INSIDE GRAYSQUARE CASE");
                 setIcon(null);
                 setColor(GREY_BLOCK_COLOR);
                 break;
@@ -67,8 +84,10 @@ public class PreviewBlock extends javax.swing.JPanel {
         jLabel1.setIcon(icon);
         jLabel1.setHorizontalAlignment(SwingConstants.CENTER);
         jLabel1.setVerticalAlignment(SwingConstants.CENTER);
+//        jLabel1.setVisible(true);
+//        jLabel1.setOpaque(true);
 
-        //jLabel1.revalidate();
+//        jLabel1.revalidate();
     }
     
     private void setColor(java.awt.Color _c) {
