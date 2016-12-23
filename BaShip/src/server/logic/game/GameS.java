@@ -316,13 +316,19 @@ public class GameS {
                 }
                 else if (!PlayerInfo.isWaitingForPlayer(clickedClient)) {
                     // Just online and available -> invite
-                    try {
-                        clickedClient.sendGameInvitation(UserS.usernameOfClient(client));
-                        startWait(client, clickedClient);
+
+                    if (Info.playerWaitingForHim(clickedClient) == null) {
+                        try {
+                            clickedClient.sendGameInvitation(UserS.usernameOfClient(client));
+                            startWait(client, clickedClient);
+                        }
+                        catch (ConnectionException ex) {
+                            Logger.getLogger(GameS.class.getName()).log(Level.SEVERE, "Could not send invitation to " + clickedClient, ex);
+                            throw new UserMessageException("Could not invite user");
+                        }
                     }
-                    catch (ConnectionException ex) {
-                        Logger.getLogger(GameS.class.getName()).log(Level.SEVERE, "Could not send invitation to " + clickedClient, ex);
-                        throw new UserMessageException("Could not invite user");
+                    else {
+                        throw new UserMessageException("Could not invite user because user has already been invited by another player");
                     }
                 }
             }
