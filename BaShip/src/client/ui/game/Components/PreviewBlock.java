@@ -7,6 +7,7 @@ package client.ui.game.Components;
 
 import client.other.ImageResizer;
 import java.awt.Color;
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 import static sharedlib.constants.UIK.*;
@@ -19,30 +20,25 @@ import sharedlib.structs.BoardUIInfo.SquareFill;
 public final class PreviewBlock extends javax.swing.JPanel {
 
     private static int counter = 0;
-    
+
     /**
      * Creates new form previewBlock
      */
     public PreviewBlock() {
         id = counter++;
         initComponents();
-        //setSquareFill(SquareFill.BlueDiamond);
+        setBorder(BorderFactory.createLineBorder(BOARD_BORDER_COLOR_NORMAL));
     }
 
     private final int id;
     private final static ImageIcon RESIZED_RED_CROSS_ICON = ImageResizer.resizeIcon(RED_CROSS_ICON, 13, 13);
     private final static ImageIcon RESIZED_BLUE_DIAMOND_ICON = ImageResizer.resizeIcon(BLUE_DIAMOND_ICON, 13, 13);
     private final static ImageIcon RESIZED_GREY_CIRCLE_ICON = ImageResizer.resizeIcon(GREY_CIRCLE_ICON, 13, 13);
-    
-    private int n = 0;
+
     private SquareFill lastSF = SquareFill.Empty;
-    
+
     public void setSquareFill(SquareFill sf) {
-//        if(n>0)
-//            return;
-//        n=1;
-        if(sf!=lastSF)
-        {
+        if (sf != lastSF) {
             System.err.println("Preview block " + id + " | Square fill: " + sf.name());
             lastSF = sf;
         }
@@ -52,7 +48,6 @@ public final class PreviewBlock extends javax.swing.JPanel {
                 setColor(null);
                 break;
             case GraySquare:
-                //System.err.println("INSIDE GRAYSQUARE CASE");
                 setIcon(null);
                 setColor(GREY_BLOCK_COLOR);
                 break;
@@ -78,7 +73,7 @@ public final class PreviewBlock extends javax.swing.JPanel {
                 break;
         }
     }
-    
+
     private void setIcon(ImageIcon icon) {
         jLabel1.removeAll();
         jLabel1.setIcon(icon);
@@ -89,7 +84,7 @@ public final class PreviewBlock extends javax.swing.JPanel {
 
 //        jLabel1.revalidate();
     }
-    
+
     private void setColor(java.awt.Color _c) {
         Color color;
         if (_c == null) {
@@ -101,14 +96,12 @@ public final class PreviewBlock extends javax.swing.JPanel {
         setBackground(color);
         jLabel1.setBackground(color);
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-
-        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -118,7 +111,7 @@ public final class PreviewBlock extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 14, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 16, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 

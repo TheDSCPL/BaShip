@@ -8,7 +8,6 @@ import javax.swing.JComponent;
 // TODO: Luis: filter interface for players and games (note: columns cannot be ordered now)
 // TODO: Luis: replay & spectator interfaces
 
-
 public class MainFrame extends javax.swing.JFrame {
 
     /**
