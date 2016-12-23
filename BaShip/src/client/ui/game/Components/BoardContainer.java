@@ -5,7 +5,6 @@
  */
 package client.ui.game.Components;
 
-import java.awt.BorderLayout;
 import javax.swing.GroupLayout;
 import sharedlib.structs.BoardUIInfo;
 import sharedlib.structs.UIInfo;
@@ -22,9 +21,8 @@ public class BoardContainer extends javax.swing.JPanel {
     public BoardContainer() {
         this(true);
     }
-    
-    public BoardContainer(boolean left)
-    {
+
+    public BoardContainer(boolean left) {
         this.left = left;
         initComponents();
         shipsPreview = left ? new ShipsPreviewLeft() : new ShipsPreviewRight();
@@ -60,39 +58,34 @@ public class BoardContainer extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     public final boolean left;
-    
+
     private boolean waiting;
-    public final void setOpponentWaiting(boolean waiting)
-    {
+
+    public final void setOpponentWaiting(boolean waiting) {
         this.waiting = waiting;
-        if(waiting && !(board instanceof WaitingOnOpponentPanel))
-        {
+        if (waiting && !(board instanceof WaitingOnOpponentPanel)) {
             board = new WaitingOnOpponentPanel(board.left);
-            shipsPreview = null;
-            repaintBoard();
         }
-        else if(!waiting && !(board instanceof Board))
-        {
+        else if (!waiting && !(board instanceof Board)) {
             board = new Board(left);
-            repaintBoard();
         }
+
+        repaintBoard();
     }
-    
+
     //private SuperBoard previousBoard = null;
-    
-    private void repaintBoard()
-    {
+    private void repaintBoard() {
         this.removeAll();
-        
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
-        
+
         final javax.swing.GroupLayout.Alignment horizontalAlignment = left ? GroupLayout.Alignment.TRAILING : GroupLayout.Alignment.LEADING;
-        
-        if(!waiting)
-        {
-            if(shipsPreview == null)
-                shipsPreview = left ? new ShipsPreviewLeft() : new ShipsPreviewRight();
+
+        if (!waiting) {
+            //if (shipsPreview == null) {
+            shipsPreview = left ? new ShipsPreviewLeft() : new ShipsPreviewRight();
+            //}
             /*
             layout.setHorizontalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -107,25 +100,24 @@ public class BoardContainer extends javax.swing.JPanel {
                     .addComponent(shipsPreview, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, Short.MAX_VALUE))
             );*/
-            
-            
+
             layout.setHorizontalGroup(
-                layout.createParallelGroup(horizontalAlignment)
-                .addComponent(board, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(shipsPreview, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    layout.createParallelGroup(horizontalAlignment)
+                    .addComponent(board, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(shipsPreview, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             );
             layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addComponent(board, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(10, 10, 10)
-                    .addComponent(shipsPreview, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                            .addComponent(board, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(10, 10, 10)
+                            .addComponent(shipsPreview, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             );
-            
-        } else
-        {
+
+        }
+        else {
             shipsPreview = null;
-            
+
             /*layout.setHorizontalGroup(
                 layout.createParallelGroup(horizontalAlignment)
                 .addComponent(board, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -136,46 +128,48 @@ public class BoardContainer extends javax.swing.JPanel {
                     .addComponent(board, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(92, 92, 92))
             );*/
-            
             layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                .addComponent(board, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(board, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             );
             layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(47, 47, 47)
-                    .addComponent(board, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(51, 51, 51))
+                    layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                            .addGap(47, 47, 47)
+                            .addComponent(board, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(51, 51, 51))
             );
         }
-            
+
         //previousBoard = board;
     }
-    
+
     private ShipsPreview shipsPreview;
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private client.ui.game.Components.SuperBoard board;
     private client.ui.game.Components.ShipsPreviewLeft shipsPreviewLeft1;
     // End of variables declaration//GEN-END:variables
 
     private int updateId = 0;
-    
+
     public void updateBoard(UIInfo info) {
         board.update(info);
-        if(shipsPreview != null && info instanceof BoardUIInfo)
-        {
+        if (shipsPreview != null && info instanceof BoardUIInfo) {
             BoardUIInfo buii = (BoardUIInfo) info;
-            for(int n=1 ; n<=4 ; n++)   //shipSizes
-                for(int i=1 ; i<=(5-n) ; i++)   //shipNumber
-                    for(int j=1 ; j <= n ; j++) //blockNumber
+            for (int n = 1; n <= 4; n++) //shipSizes
+            {
+                for (int i = 1; i <= (5 - n); i++) //shipNumber
+                {
+                    for (int j = 1; j <= n; j++) //blockNumber
                     {
-                        final BoardUIInfo.SquareFill sf = buii.getBottomInfo(n, i-1, j-1);
+                        final BoardUIInfo.SquareFill sf = buii.getBottomInfo(n, i - 1, j - 1);
                         //System.out.println( (left ? "left " : "right ") + updateId + " bottom info shipSize: " + n + " | shipNumber: " + i + " | blockNumber: " + j + " fill: " + sf.name());
                         shipsPreview.getPreviewBlock(n, i, j).setSquareFill(sf);
                     }
-        updateId++;
+                }
+            }
+            updateId++;
         }
     }
 }

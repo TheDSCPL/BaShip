@@ -103,8 +103,6 @@ public final class ShipsPreviewLeft extends ShipsPreview {
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        ship4_1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
         javax.swing.GroupLayout ship4_1Layout = new javax.swing.GroupLayout(ship4_1);
         ship4_1.setLayout(ship4_1Layout);
         ship4_1Layout.setHorizontalGroup(
@@ -133,8 +131,6 @@ public final class ShipsPreviewLeft extends ShipsPreview {
 
         jPanel1.add(ship4_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 0, -1, -1));
 
-        ship3_1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
         javax.swing.GroupLayout ship3_1Layout = new javax.swing.GroupLayout(ship3_1);
         ship3_1.setLayout(ship3_1Layout);
         ship3_1Layout.setHorizontalGroup(
@@ -159,8 +155,6 @@ public final class ShipsPreviewLeft extends ShipsPreview {
         );
 
         jPanel1.add(ship3_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 0, -1, -1));
-
-        ship3_2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         javax.swing.GroupLayout ship3_2Layout = new javax.swing.GroupLayout(ship3_2);
         ship3_2.setLayout(ship3_2Layout);
@@ -187,8 +181,6 @@ public final class ShipsPreviewLeft extends ShipsPreview {
 
         jPanel1.add(ship3_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 0, -1, -1));
 
-        ship2_1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
         javax.swing.GroupLayout ship2_1Layout = new javax.swing.GroupLayout(ship2_1);
         ship2_1.setLayout(ship2_1Layout);
         ship2_1Layout.setHorizontalGroup(
@@ -210,8 +202,6 @@ public final class ShipsPreviewLeft extends ShipsPreview {
         );
 
         jPanel1.add(ship2_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
-
-        ship2_2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         javax.swing.GroupLayout ship2_2Layout = new javax.swing.GroupLayout(ship2_2);
         ship2_2.setLayout(ship2_2Layout);
@@ -235,8 +225,6 @@ public final class ShipsPreviewLeft extends ShipsPreview {
 
         jPanel1.add(ship2_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 30, -1, -1));
 
-        ship2_3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
         javax.swing.GroupLayout ship2_3Layout = new javax.swing.GroupLayout(ship2_3);
         ship2_3.setLayout(ship2_3Layout);
         ship2_3Layout.setHorizontalGroup(
@@ -258,8 +246,6 @@ public final class ShipsPreviewLeft extends ShipsPreview {
 
         jPanel1.add(ship2_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 30, -1, -1));
 
-        ship1_2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
         javax.swing.GroupLayout ship1_2Layout = new javax.swing.GroupLayout(ship1_2);
         ship1_2.setLayout(ship1_2Layout);
         ship1_2Layout.setHorizontalGroup(
@@ -276,8 +262,6 @@ public final class ShipsPreviewLeft extends ShipsPreview {
         );
 
         jPanel1.add(ship1_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 30, 20, 20));
-
-        ship1_3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         javax.swing.GroupLayout ship1_3Layout = new javax.swing.GroupLayout(ship1_3);
         ship1_3.setLayout(ship1_3Layout);
@@ -296,8 +280,6 @@ public final class ShipsPreviewLeft extends ShipsPreview {
 
         jPanel1.add(ship1_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 30, -1, -1));
 
-        ship1_4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
         javax.swing.GroupLayout ship1_4Layout = new javax.swing.GroupLayout(ship1_4);
         ship1_4.setLayout(ship1_4Layout);
         ship1_4Layout.setHorizontalGroup(
@@ -314,8 +296,6 @@ public final class ShipsPreviewLeft extends ShipsPreview {
         );
 
         jPanel1.add(ship1_4, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 30, -1, -1));
-
-        ship1_1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         javax.swing.GroupLayout ship1_1Layout = new javax.swing.GroupLayout(ship1_1);
         ship1_1.setLayout(ship1_1Layout);

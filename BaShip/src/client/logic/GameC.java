@@ -186,7 +186,7 @@ public class GameC {
     public static void showGameInvitation(String username) {
         ClientMain.runOnUI(() -> {
             int dialogResult = JOptionPane.showConfirmDialog(ClientMain.mainFrame, "Player '" + username + "' invited you. Would you like to play?", "Invite", JOptionPane.YES_NO_OPTION);
-
+            
             try {
                 ClientMain.server.anwserGameInvitation(dialogResult == JOptionPane.YES_OPTION);
             }
