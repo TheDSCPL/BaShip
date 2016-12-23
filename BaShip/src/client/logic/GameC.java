@@ -3,8 +3,10 @@ package client.logic;
 import client.ClientMain;
 import client.ui.game.GamePanel;
 import client.ui.lobby.LobbyPanel;
+import java.awt.Dialog;
 import java.util.List;
 import javax.swing.JComponent;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
 import sharedlib.exceptions.UserMessageException;
@@ -183,22 +185,43 @@ public class GameC {
         }
     }
 
+    private static JDialog optionDialog = null;
+    private static JOptionPane optionPane = null;
+    
     public static void showGameInvitation(String username) {
         ClientMain.runOnUI(() -> {
-            int dialogResult = JOptionPane.showConfirmDialog(ClientMain.mainFrame, "Player '" + username + "' invited you. Would you like to play?", "Invite", JOptionPane.YES_NO_OPTION);
+            //int dialogResult = JOptionPane.showConfirmDialog(ClientMain.mainFrame, "Player '" + username + "' invited you. Would you like to play?", "Invite", JOptionPane.YES_NO_OPTION);
 
-            try {
+            if(optionDialog != null)
+            {
+                optionDialog.dispose();
+            }
+            
+            optionPane = new JOptionPane("Player '" + username + "' invited you. Would you like to play?",JOptionPane.QUESTION_MESSAGE,
+JOptionPane.YES_NO_OPTION);
+            optionDialog = optionPane.createDialog(null, "Invite");
+            //System.err.println("B4");
+            optionDialog.setModalityType(Dialog.ModalityType.MODELESS);
+            optionDialog.setVisible(true);
+            //System.err.println("After");
+            
+            //optionDialog.dis
+            
+            /*try {
                 ClientMain.server.anwserGameInvitation(dialogResult == JOptionPane.YES_OPTION);
             }
             catch (UserMessageException ex) {
                 ClientMain.showError(ex.getMessage());
-            }
+            }*/
         });
     }
 
     public static void closeGameInvitation() {
         ClientMain.runOnUI(() -> {
-            // TODO: Luis: fechar o confirm dialog criado na linha 165 deste ficheiro
+            if(optionDialog == null)
+                return;
+            optionDialog.dispose();
+            optionDialog=null;
         });
     }
 
