@@ -1,8 +1,0 @@
-<map id="pt.up.fe.lpro1613.server.logic.game.GameS.isClientPlaying" name="pt.up.fe.lpro1613.server.logic.game.GameS.isClientPlaying">
-<area shape="rect" id="node2" href="$classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1logic_1_1game_1_1_game_s.html#af95663046473b1a2aceebf4fd27906a2" title="pt.up.fe.lpro1613.server.logic.game.\lGameS.togglePlaceShipOnSquare" alt="" coords="571,5,805,46"/>
-<area shape="rect" id="node4" href="$classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1logic_1_1game_1_1_game_s.html#a86e47ee40e26d36abfdac5847e423a35" title="pt.up.fe.lpro1613.server.logic.game.\lGameS.clickReadyButton" alt="" coords="571,70,805,111"/>
-<area shape="rect" id="node5" href="$classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1logic_1_1game_1_1_game_s.html#a13d63cfefe7a487a5c6e694bbeba57e6" title="pt.up.fe.lpro1613.server.logic.game.\lGameS.fireShot" alt="" coords="288,126,523,167"/>
-<area shape="rect" id="node6" href="$classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1logic_1_1_user_s.html#a92958d5006bbce1dbc15722f801d67ef" title="pt.up.fe.lpro1613.server.logic.\lUserS.getUserStatus" alt="" coords="307,191,504,233"/>
-<area shape="rect" id="node3" href="$classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1conn_1_1_client.html#a81efbd1e6b06189da5c814ac767a4a98" title="pt.up.fe.lpro1613.server.conn.\lClient.handle" alt="" coords="854,99,1053,141"/>
-<area shape="rect" id="node7" href="$classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_user_d_b.html#a954a448685644afc277007bdf36bb507" title="pt.up.fe.lpro1613.server.database.\lUserDB.getUserList" alt="" coords="575,189,801,230"/>
-</map>

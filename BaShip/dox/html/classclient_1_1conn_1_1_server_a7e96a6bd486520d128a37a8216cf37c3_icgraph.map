@@ -1,6 +1,0 @@
-<map id="client.conn.Server.connect" name="client.conn.Server.connect">
-<area shape="rect" id="node2" href="$classclient_1_1_client_main.html#aecd59c193bdb0536d649be78f72149b0" title="client.ClientMain.connect\lToServer" alt="" coords="232,38,403,79"/>
-<area shape="rect" id="node3" href="$classclient_1_1ui_1_1_login_panel.html#a9726aa2bc3416aa22ad43d2b4b9eed70" title="client.ui.LoginPanel.calculate\lRetypePasswordDialogPosition" alt="" coords="451,5,659,46"/>
-<area shape="rect" id="node5" href="$classclient_1_1ui_1_1_settings_panel.html#a95dfa76100b4d18863cd0b572c631ebf" title="client.ui.SettingsPanel.\lSettingsPanel" alt="" coords="476,70,633,111"/>
-<area shape="rect" id="node4" href="$classclient_1_1ui_1_1_login_panel.html#a697f38b937f048e562c634c713d90885" title="client.ui.LoginPanel.Login\lPanel" alt="" coords="707,5,880,46"/>
-</map>

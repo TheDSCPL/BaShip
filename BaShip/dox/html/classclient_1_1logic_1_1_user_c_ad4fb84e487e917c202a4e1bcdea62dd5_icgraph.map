@@ -1,7 +1,0 @@
-<map id="client.logic.UserC.isLoggedIn" name="client.logic.UserC.isLoggedIn">
-<area shape="rect" id="node2" href="$classclient_1_1logic_1_1_user_c.html#aa3736b2a54be77a2b631ca49b9980a8c" title="client.logic.UserC.login" alt="" coords="260,5,417,32"/>
-<area shape="rect" id="node5" href="$classclient_1_1logic_1_1_user_c.html#a81ee75a5f1f4a278a71054a9c4f72609" title="client.logic.UserC.register" alt="" coords="252,56,425,83"/>
-<area shape="rect" id="node6" href="$classclient_1_1ui_1_1_lobby_panel.html#aa6432c40dfb52b11101ab3e1e7fbb30c" title="client.ui.LobbyPanel.Lobby\lPanel" alt="" coords="248,107,429,149"/>
-<area shape="rect" id="node3" href="$classclient_1_1ui_1_1_login_panel.html#a9726aa2bc3416aa22ad43d2b4b9eed70" title="client.ui.LoginPanel.calculate\lRetypePasswordDialogPosition" alt="" coords="477,23,685,65"/>
-<area shape="rect" id="node4" href="$classclient_1_1ui_1_1_login_panel.html#a697f38b937f048e562c634c713d90885" title="client.ui.LoginPanel.Login\lPanel" alt="" coords="733,23,907,65"/>
-</map>

@@ -1,4 +1,0 @@
-<map id="client.conn.Server.closeGame" name="client.conn.Server.closeGame">
-<area shape="rect" id="node2" href="$classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1conn_1_1_connection.html#ac70216d1f9f5ed2c8b29431b10108620" title="pt.up.fe.lpro1613.sharedlib.conn.\lConnection.sendAndReceive" alt="" coords="253,5,469,46"/>
-<area shape="rect" id="node3" href="$classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1conn_1_1_connection.html#acdcf8af7c9a37ede122c6db80d06668f" title="pt.up.fe.lpro1613.sharedlib.conn.\lConnection.sendOnly" alt="" coords="253,70,469,111"/>
-</map>

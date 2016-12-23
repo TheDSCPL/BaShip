@@ -1,9 +1,0 @@
-digraph "pt.up.fe.lpro1613.server.database.GameDB.setWinner"
-{
-  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
-  node [fontname="Helvetica",fontsize="10",shape=record];
-  rankdir="LR";
-  Node29 [label="pt.up.fe.lpro1613.server.database.\lGameDB.setWinner",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
-  Node29 -> Node30 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node30 [label="pt.up.fe.lpro1613.server.logic.game.\lGamePlay.clientDisconnected",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1logic_1_1game_1_1_game_play.html#a23edaada7de872711e0cfe61163dec57"];
-}

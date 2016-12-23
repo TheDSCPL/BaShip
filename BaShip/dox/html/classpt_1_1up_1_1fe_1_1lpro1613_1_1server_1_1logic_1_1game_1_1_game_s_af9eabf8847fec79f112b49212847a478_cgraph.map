@@ -1,9 +1,0 @@
-<map id="pt.up.fe.lpro1613.server.logic.game.GameS.getGameCurrentMoveNumber" name="pt.up.fe.lpro1613.server.logic.game.GameS.getGameCurrentMoveNumber">
-<area shape="rect" id="node2" href="$classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1logic_1_1_user_s.html#a26c28666f4e6461ee06eecfe1f55356d" title="pt.up.fe.lpro1613.server.logic.\lUserS.usernameFromClient" alt="" coords="305,102,503,143"/>
-<area shape="rect" id="node7" href="$classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1conn_1_1_client.html#ad3cc8b10b942f6260a0e7db7f5a0a538" title="pt.up.fe.lpro1613.server.conn.\lClient.updateGameScreen" alt="" coords="305,167,503,209"/>
-<area shape="rect" id="node3" href="$classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_user_d_b.html#ab5c986eb5c2ba36eef3defee599c6903" title="pt.up.fe.lpro1613.server.database.\lUserDB.getUsernameFromID" alt="" coords="553,37,778,78"/>
-<area shape="rect" id="node6" href="$classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1logic_1_1_user_s.html#a6ce47ad78e634c757be0ffc905799b4c" title="pt.up.fe.lpro1613.server.logic.\lUserS.idFromClient" alt="" coords="567,102,764,143"/>
-<area shape="rect" id="node4" href="$classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_database.html#aa5ecc24c87d16ca20cc645414d8f3232" title="pt.up.fe.lpro1613.server.database.\lDatabase.getConn" alt="" coords="827,5,1053,46"/>
-<area shape="rect" id="node5" href="$classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_database.html#ae7e6a39f412e24bea44477224f0fdef0" title="pt.up.fe.lpro1613.server.database.\lDatabase.close" alt="" coords="827,70,1053,111"/>
-<area shape="rect" id="node8" href="$classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1conn_1_1_connection.html#acdcf8af7c9a37ede122c6db80d06668f" title="pt.up.fe.lpro1613.sharedlib.conn.\lConnection.sendOnly" alt="" coords="557,167,773,209"/>
-</map>

@@ -1,4 +1,0 @@
-<map id="pt.up.fe.lpro1613.server.database.GlobalChatDB.saveGlobalMessage" name="pt.up.fe.lpro1613.server.database.GlobalChatDB.saveGlobalMessage">
-<area shape="rect" id="node2" href="$classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1logic_1_1_global_chat_s.html#add5e38be43ae6a703ba3865221171ca5" title="pt.up.fe.lpro1613.server.logic.\lGlobalChatS.sendGlobalMessage" alt="" coords="286,5,509,46"/>
-<area shape="rect" id="node3" href="$classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1conn_1_1_client.html#a81efbd1e6b06189da5c814ac767a4a98" title="pt.up.fe.lpro1613.server.conn.\lClient.handle" alt="" coords="558,5,757,46"/>
-</map>

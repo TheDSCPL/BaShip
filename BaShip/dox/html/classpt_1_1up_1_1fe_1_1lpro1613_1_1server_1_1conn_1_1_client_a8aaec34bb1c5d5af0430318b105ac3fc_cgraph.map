@@ -1,7 +1,0 @@
-<map id="pt.up.fe.lpro1613.server.conn.Client.disconnected" name="pt.up.fe.lpro1613.server.conn.Client.disconnected">
-<area shape="rect" id="node2" href="$classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1conn_1_1_connection.html#a58903a343693acbe946d4ad23eb29bd4" title="pt.up.fe.lpro1613.sharedlib.conn.\lConnection.address" alt="" coords="263,5,479,46"/>
-<area shape="rect" id="node3" href="$classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1logic_1_1_user_s.html#afca9c18f164a1006c2411b8e283ec4fb" title="pt.up.fe.lpro1613.server.logic.\lUserS.clientDisconnected" alt="" coords="272,70,469,111"/>
-<area shape="rect" id="node6" href="$classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1logic_1_1game_1_1_game_s.html#aed1d2b65cf8abf9429c7613fb270140c" title="pt.up.fe.lpro1613.server.logic.game.\lGameS.clientDisconnected" alt="" coords="253,135,488,177"/>
-<area shape="rect" id="node4" href="$classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1logic_1_1_user_s.html#ade6f87a4adfd727f4fceca4f9ac17362" title="pt.up.fe.lpro1613.server.logic.\lUserS.logout" alt="" coords="536,70,733,111"/>
-<area shape="rect" id="node5" href="$classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1logic_1_1_user_s.html#abe3cf61bff09cb09e3ed0a5564e98257" title="pt.up.fe.lpro1613.server.logic.\lUserS.isClientLoggedIn" alt="" coords="781,70,979,111"/>
-</map>

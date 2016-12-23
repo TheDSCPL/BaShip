@@ -1,9 +1,0 @@
-<map id="pt.up.fe.lpro1613.sharedlib.utils.Preferences.Key.getDefaultValue" name="pt.up.fe.lpro1613.sharedlib.utils.Preferences.Key.getDefaultValue">
-<area shape="rect" id="node2" href="$classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1utils_1_1_preferences.html#ad42ac07907c3bb6066925a1de8706007" title="pt.up.fe.lpro1613.sharedlib.utils.\lPreferences.getB" alt="" coords="531,5,741,46"/>
-<area shape="rect" id="node4" href="$classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1utils_1_1_preferences.html#a6b5169368a838aca6c6880826294aea7" title="pt.up.fe.lpro1613.sharedlib.utils.\lPreferences.getI" alt="" coords="272,129,483,170"/>
-<area shape="rect" id="node8" href="$classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1utils_1_1_preferences.html#aada2e7f8fe94b6a7ef78cfb30637b982" title="pt.up.fe.lpro1613.sharedlib.utils.\lPreferences.getS" alt="" coords="272,63,483,105"/>
-<area shape="rect" id="node3" href="$classclient_1_1ui_1_1_settings_panel.html#a95dfa76100b4d18863cd0b572c631ebf" title="client.ui.SettingsPanel.\lSettingsPanel" alt="" coords="815,63,972,105"/>
-<area shape="rect" id="node5" href="$classclient_1_1_client_main.html#aecd59c193bdb0536d649be78f72149b0" title="client.ClientMain.connect\lToServer" alt="" coords="551,122,721,163"/>
-<area shape="rect" id="node6" href="$classclient_1_1ui_1_1_login_panel.html#a9726aa2bc3416aa22ad43d2b4b9eed70" title="client.ui.LoginPanel.calculate\lRetypePasswordDialogPosition" alt="" coords="789,129,997,170"/>
-<area shape="rect" id="node7" href="$classclient_1_1ui_1_1_login_panel.html#a697f38b937f048e562c634c713d90885" title="client.ui.LoginPanel.Login\lPanel" alt="" coords="1045,129,1219,170"/>
-</map>
