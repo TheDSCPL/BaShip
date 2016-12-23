@@ -19,29 +19,19 @@ import sharedlib.structs.BoardUIInfo.SquareFill;
  */
 public final class PreviewBlock extends javax.swing.JPanel {
 
-    private static int counter = 0;
-
     /**
      * Creates new form previewBlock
      */
     public PreviewBlock() {
-        id = counter++;
         initComponents();
         setBorder(BorderFactory.createLineBorder(BOARD_BORDER_COLOR_NORMAL));
     }
 
-    private final int id;
     private final static ImageIcon RESIZED_RED_CROSS_ICON = ImageResizer.resizeIcon(RED_CROSS_ICON, 13, 13);
     private final static ImageIcon RESIZED_BLUE_DIAMOND_ICON = ImageResizer.resizeIcon(BLUE_DIAMOND_ICON, 13, 13);
     private final static ImageIcon RESIZED_GREY_CIRCLE_ICON = ImageResizer.resizeIcon(GREY_CIRCLE_ICON, 13, 13);
 
-    private SquareFill lastSF = SquareFill.Empty;
-
     public void setSquareFill(SquareFill sf) {
-        if (sf != lastSF) {
-            System.err.println("Preview block " + id + " | Square fill: " + sf.name());
-            lastSF = sf;
-        }
         switch (sf) {
             case Empty:
                 setIcon(null);

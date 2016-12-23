@@ -164,7 +164,6 @@ public class BoardContainer extends javax.swing.JPanel {
                     for (int j = 1; j <= n; j++) //blockNumber
                     {
                         final BoardUIInfo.SquareFill sf = buii.getBottomInfo(n, i - 1, j - 1);
-                        //System.out.println( (left ? "left " : "right ") + updateId + " bottom info shipSize: " + n + " | shipNumber: " + i + " | blockNumber: " + j + " fill: " + sf.name());
                         shipsPreview.getPreviewBlock(n, i, j).setSquareFill(sf);
                     }
                 }
