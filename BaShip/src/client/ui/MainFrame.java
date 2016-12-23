@@ -4,7 +4,6 @@ import client.other.ImageResizer;
 import java.awt.event.ComponentListener;
 import javax.swing.JComponent;
 
-// TODO: Luis: bottom info no board
 // TODO: Luis: filter interface for players and games (note: columns cannot be ordered now)
 // TODO: Luis: replay & spectator interfaces
 

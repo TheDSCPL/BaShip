@@ -187,131 +187,117 @@ public class GameC {
         }
     }
 
-    private static class InvitationWindow {
-
-        private static InvitationWindow instance;
-
-        public static InvitationWindow makeNew(String username) {
-            if (instance != null) {
-                instance.close();
-            }
-            instance = new InvitationWindow(username);
-            return null;
-        }
-
-        private final JOptionPane optionPane;
-        private final JDialog optionDialog;
-
-        private InvitationWindow(String username) {
-            this.optionPane = new JOptionPane("Player '" + username + "' invited you. Would you like to play?", JOptionPane.QUESTION_MESSAGE,
-                                              JOptionPane.YES_NO_OPTION);
-            this.optionDialog = optionPane.createDialog("Invite");
-            optionDialog.setModalityType(Dialog.ModalityType.MODELESS);
-            optionDialog.addWindowListener(this.optionDialogListener);
-            optionDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-        }
-
-        public static InvitationWindow show() {
-            if (instance == null || isOpen()) {
-                return null;
-            }
-            instance.optionDialog.setVisible(true);
-            instance.optionDialog.requestFocusInWindow();
-            return null;
-        }
-
-        public static boolean isOpen() {
-            if (instance == null) {
-                return false;
-            }
-            return instance.optionDialog.isVisible();
-        }
-
-        public static InvitationWindow close() {
-            if (instance == null) {
-                return null;
-            }
-            instance.optionDialog.setVisible(false);
-            instance.optionDialog.dispose();
-            instance = null;
-            return null;
-        }
-
-        private final WindowListener optionDialogListener = new WindowListener() {
-
-            private void closeOperation() {
-                Integer selectedOption = (Integer) optionPane.getValue();
-                int n = selectedOption == null ? JOptionPane.NO_OPTION : selectedOption;
-                //Integer.parseInt(selectedOption.toString())
-                try {
-                    ClientMain.server.anwserGameInvitation(n == JOptionPane.YES_OPTION);
-                }
-                catch (UserMessageException ex) {
-                    ClientMain.showError(ex.getMessage());
-                }
-            }
-
-            @Override
-            public void windowClosed(WindowEvent e) {
-                closeOperation();
-            }
-
-            @Override
-            public void windowDeactivated(WindowEvent e) {
-                if (e.getComponent().isVisible()) {
-                    return;
-                }
-                closeOperation();
-            }
-
-            // <editor-fold defaultstate="collapsed" desc="Empty functions">
-            @Override
-            public void windowOpened(WindowEvent e) {
-
-            }
-
-            @Override
-            public void windowClosing(WindowEvent e) {
-
-            }
-
-            @Override
-            public void windowIconified(WindowEvent e) {
-
-            }
-
-            @Override
-            public void windowDeiconified(WindowEvent e) {
-
-            }
-
-            @Override
-            public void windowActivated(WindowEvent e) {
-
-            }
-            // </editor-fold>
-        };
-
-    }
+    private static InvitationWindow invitationWindow;
 
     public static void showGameInvitation(String username) {
+        System.out.println("Show game invitation called");
+
         ClientMain.runOnUI(() -> {
-            int dialogResult = JOptionPane.showConfirmDialog(ClientMain.mainFrame, "Player '" + username + "' invited you. Would you like to play?", "Invite", JOptionPane.YES_NO_OPTION);
+            /*int dialogResult = JOptionPane.showConfirmDialog(ClientMain.mainFrame, "Player '" + username + "' invited you. Would you like to play?", "Invite", JOptionPane.YES_NO_OPTION);
             try {
                 ClientMain.server.anwserGameInvitation(dialogResult == JOptionPane.YES_OPTION);
             }
             catch (UserMessageException ex) {
                 ClientMain.showError(ex.getMessage());
+            }*/
+
+            if (invitationWindow != null) {
+                invitationWindow.close();
             }
-            //InvitationWindow.makeNew(username).show();
+
+            invitationWindow = new InvitationWindow(username);
+            invitationWindow.show();
         });
     }
 
     public static void closeGameInvitation() {
+        System.out.println("Close invitation called");
+
         ClientMain.runOnUI(() -> {
-            System.out.println("Close invitation");
-            //InvitationWindow.close();
+            if (invitationWindow != null) {
+                System.out.println("Closing invitation");
+                invitationWindow.close();
+                invitationWindow = null;
+            }
         });
+
     }
+
+}
+
+class InvitationWindow {
+
+    private final JOptionPane optionPane;
+    private final JDialog optionDialog;
+
+    InvitationWindow(String username) {
+        optionPane = new JOptionPane("Player '" + username + "' invited you. Would you like to play?", JOptionPane.QUESTION_MESSAGE, JOptionPane.YES_NO_OPTION);
+        optionDialog = optionPane.createDialog(ClientMain.mainFrame, "Invite");
+        optionDialog.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
+        optionDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        optionDialog.addWindowListener(optionDialogListener);
+    }
+
+    void show() {
+        optionDialog.setVisible(true);
+        optionDialog.requestFocusInWindow();
+    }
+
+    void close() {
+        optionDialog.setVisible(false);
+        optionDialog.dispose();
+    }
+
+    private final WindowListener optionDialogListener = new WindowListener() {
+
+        private void closeOperation() {
+            Integer selectedOption = (Integer) optionPane.getValue();
+            int n = selectedOption == null ? JOptionPane.NO_OPTION : selectedOption;
+
+            try {
+                ClientMain.server.anwserGameInvitation(n == JOptionPane.YES_OPTION);
+            }
+            catch (UserMessageException ex) {
+                ClientMain.showError(ex.getMessage());
+            }
+        }
+
+        @Override
+        public void windowDeactivated(WindowEvent e) {
+            System.out.println("windowDeactivated");
+            closeOperation();
+        }
+
+        // <editor-fold defaultstate="collapsed" desc="Empty functions">
+        @Override
+        public void windowClosed(WindowEvent e) {
+        }
+
+        @Override
+        public void windowOpened(WindowEvent e) {
+
+        }
+
+        @Override
+        public void windowClosing(WindowEvent e) {
+
+        }
+
+        @Override
+        public void windowIconified(WindowEvent e) {
+
+        }
+
+        @Override
+        public void windowDeiconified(WindowEvent e) {
+
+        }
+
+        @Override
+        public void windowActivated(WindowEvent e) {
+
+        }
+        // </editor-fold>
+    };
 
 }
