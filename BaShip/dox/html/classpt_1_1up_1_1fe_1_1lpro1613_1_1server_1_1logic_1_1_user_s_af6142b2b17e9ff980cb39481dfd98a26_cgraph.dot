@@ -1,0 +1,19 @@
+digraph "pt.up.fe.lpro1613.server.logic.UserS.sendGlobalMessage"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node69 [label="pt.up.fe.lpro1613.server.logic.\lUserS.sendGlobalMessage",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node69 -> Node70 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node70 [label="pt.up.fe.lpro1613.server.logic.\lUserS.isClientLoggedIn",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1logic_1_1_user_s.html#abe3cf61bff09cb09e3ed0a5564e98257"];
+  Node69 -> Node71 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node71 [label="pt.up.fe.lpro1613.server.database.\lGlobalChatDB.sendGlobalMessage",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_global_chat_d_b.html#aefbe59782480cfbc94dddf9d80416cd4"];
+  Node71 -> Node72 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node72 [label="pt.up.fe.lpro1613.server.database.\lDatabase.getConn",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_database.html#aa5ecc24c87d16ca20cc645414d8f3232"];
+  Node71 -> Node73 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node73 [label="pt.up.fe.lpro1613.server.database.\lUserDB.getUsernameFromID",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_user_d_b.html#ab5c986eb5c2ba36eef3defee599c6903"];
+  Node73 -> Node72 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node73 -> Node74 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node74 [label="pt.up.fe.lpro1613.server.database.\lDatabase.close",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_database.html#ae7e6a39f412e24bea44477224f0fdef0"];
+  Node71 -> Node74 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+}

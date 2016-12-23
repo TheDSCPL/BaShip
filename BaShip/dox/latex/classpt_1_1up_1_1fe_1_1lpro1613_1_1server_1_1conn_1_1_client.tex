@@ -1,0 +1,330 @@
+\hypertarget{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1conn_1_1_client}{}\section{pt.\+up.\+fe.\+lpro1613.\+server.\+conn.\+Client Class Reference}
+\label{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1conn_1_1_client}\index{pt.\+up.\+fe.\+lpro1613.\+server.\+conn.\+Client@{pt.\+up.\+fe.\+lpro1613.\+server.\+conn.\+Client}}
+
+
+Inheritance diagram for pt.\+up.\+fe.\+lpro1613.\+server.\+conn.\+Client\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=242pt]{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1conn_1_1_client__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for pt.\+up.\+fe.\+lpro1613.\+server.\+conn.\+Client\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=242pt]{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1conn_1_1_client__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1conn_1_1_client_a057095008df340effc95b69dbda5b643}{Client} (\hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1conn_1_1_connection}{Connection} conn)
+\item 
+\hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1conn_1_1_packet}{Packet} \hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1conn_1_1_client_a81efbd1e6b06189da5c814ac767a4a98}{handle} (\hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1conn_1_1_packet}{Packet} request)
+\item 
+void \hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1conn_1_1_client_aea2e952268afe16993958c8affb921cb}{inform\+About\+Global\+Message} (\hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1structs_1_1_message}{Message} msg)  throws Connection\+Exception 
+\item 
+void \hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1conn_1_1_client_ad3cc8b10b942f6260a0e7db7f5a0a538}{update\+Game\+Screen} (\hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1structs_1_1_game_u_i_info}{Game\+U\+I\+Info} info)  throws Connection\+Exception 
+\item 
+void \hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1conn_1_1_client_a2d18ebb9809e36b016e9db24c8274522}{send\+Game\+Invitation} ()  throws Connection\+Exception 
+\item 
+void \hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1conn_1_1_client_a68fc46855fd613c9ca06c32da08c2f5a}{update\+Game\+Board} (\hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1structs_1_1_board_u_i_info}{Board\+U\+I\+Info} info)  throws Connection\+Exception 
+\item 
+void \hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1conn_1_1_client_a58789376953d4b6f316a48627dffbae1}{game\+Finished} (String message)  throws Connection\+Exception 
+\item 
+void \hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1conn_1_1_client_a1cf160e68d7310d9f0b3a53d8b26f80d}{connected} (\hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1conn_1_1_connection}{Connection} connection)
+\item 
+void \hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1conn_1_1_client_a8aaec34bb1c5d5af0430318b105ac3fc}{disconnected} (\hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1conn_1_1_connection}{Connection} connection)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 26 of file Client.\+java.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1conn_1_1_client_a057095008df340effc95b69dbda5b643}{}\label{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1conn_1_1_client_a057095008df340effc95b69dbda5b643} 
+\index{pt\+::up\+::fe\+::lpro1613\+::server\+::conn\+::\+Client@{pt\+::up\+::fe\+::lpro1613\+::server\+::conn\+::\+Client}!Client@{Client}}
+\index{Client@{Client}!pt\+::up\+::fe\+::lpro1613\+::server\+::conn\+::\+Client@{pt\+::up\+::fe\+::lpro1613\+::server\+::conn\+::\+Client}}
+\subsubsection{\texorpdfstring{Client()}{Client()}}
+{\footnotesize\ttfamily pt.\+up.\+fe.\+lpro1613.\+server.\+conn.\+Client.\+Client (\begin{DoxyParamCaption}\item[{\hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1conn_1_1_connection}{Connection}}]{conn }\end{DoxyParamCaption})}
+
+
+
+Definition at line 31 of file Client.\+java.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1conn_1_1_client_a1cf160e68d7310d9f0b3a53d8b26f80d}{}\label{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1conn_1_1_client_a1cf160e68d7310d9f0b3a53d8b26f80d} 
+\index{pt\+::up\+::fe\+::lpro1613\+::server\+::conn\+::\+Client@{pt\+::up\+::fe\+::lpro1613\+::server\+::conn\+::\+Client}!connected@{connected}}
+\index{connected@{connected}!pt\+::up\+::fe\+::lpro1613\+::server\+::conn\+::\+Client@{pt\+::up\+::fe\+::lpro1613\+::server\+::conn\+::\+Client}}
+\subsubsection{\texorpdfstring{connected()}{connected()}}
+{\footnotesize\ttfamily void pt.\+up.\+fe.\+lpro1613.\+server.\+conn.\+Client.\+connected (\begin{DoxyParamCaption}\item[{\hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1conn_1_1_connection}{Connection}}]{connection }\end{DoxyParamCaption})}
+
+Called when the socket connection has just been started.
+
+
+\begin{DoxyParams}{Parameters}
+{\em connection} & The connection object representing this connection \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{interfacept_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1conn_1_1_connection_1_1_delegate_afeb3c54ced46916733df2ba0b0e2d87e}{pt.\+up.\+fe.\+lpro1613.\+sharedlib.\+conn.\+Connection.\+Delegate}.
+
+
+
+Definition at line 222 of file Client.\+java.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1conn_1_1_client_a1cf160e68d7310d9f0b3a53d8b26f80d_cgraph}
+\end{center}
+\end{figure}
+\hypertarget{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1conn_1_1_client_a8aaec34bb1c5d5af0430318b105ac3fc}{}\label{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1conn_1_1_client_a8aaec34bb1c5d5af0430318b105ac3fc} 
+\index{pt\+::up\+::fe\+::lpro1613\+::server\+::conn\+::\+Client@{pt\+::up\+::fe\+::lpro1613\+::server\+::conn\+::\+Client}!disconnected@{disconnected}}
+\index{disconnected@{disconnected}!pt\+::up\+::fe\+::lpro1613\+::server\+::conn\+::\+Client@{pt\+::up\+::fe\+::lpro1613\+::server\+::conn\+::\+Client}}
+\subsubsection{\texorpdfstring{disconnected()}{disconnected()}}
+{\footnotesize\ttfamily void pt.\+up.\+fe.\+lpro1613.\+server.\+conn.\+Client.\+disconnected (\begin{DoxyParamCaption}\item[{\hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1conn_1_1_connection}{Connection}}]{connection }\end{DoxyParamCaption})}
+
+Called when the socket connection ceases to exist.
+
+
+\begin{DoxyParams}{Parameters}
+{\em connection} & The connection object representing this connection \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{interfacept_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1conn_1_1_connection_1_1_delegate_a39547a28a5b1818ca952e8d3d8da15ba}{pt.\+up.\+fe.\+lpro1613.\+sharedlib.\+conn.\+Connection.\+Delegate}.
+
+
+
+Definition at line 230 of file Client.\+java.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1conn_1_1_client_a8aaec34bb1c5d5af0430318b105ac3fc_cgraph}
+\end{center}
+\end{figure}
+\hypertarget{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1conn_1_1_client_a58789376953d4b6f316a48627dffbae1}{}\label{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1conn_1_1_client_a58789376953d4b6f316a48627dffbae1} 
+\index{pt\+::up\+::fe\+::lpro1613\+::server\+::conn\+::\+Client@{pt\+::up\+::fe\+::lpro1613\+::server\+::conn\+::\+Client}!game\+Finished@{game\+Finished}}
+\index{game\+Finished@{game\+Finished}!pt\+::up\+::fe\+::lpro1613\+::server\+::conn\+::\+Client@{pt\+::up\+::fe\+::lpro1613\+::server\+::conn\+::\+Client}}
+\subsubsection{\texorpdfstring{game\+Finished()}{gameFinished()}}
+{\footnotesize\ttfamily void pt.\+up.\+fe.\+lpro1613.\+server.\+conn.\+Client.\+game\+Finished (\begin{DoxyParamCaption}\item[{String}]{message }\end{DoxyParamCaption}) throws \hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1exceptions_1_1_connection_exception}{Connection\+Exception}}
+
+Tell the client that the game he\textquotesingle{}s playing has finished.
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & The text to display to the player. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Connection\+Exception} & \\
+\hline
+\end{DoxyExceptions}
+
+
+Definition at line 217 of file Client.\+java.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1conn_1_1_client_a58789376953d4b6f316a48627dffbae1_cgraph}
+\end{center}
+\end{figure}
+\hypertarget{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1conn_1_1_client_a81efbd1e6b06189da5c814ac767a4a98}{}\label{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1conn_1_1_client_a81efbd1e6b06189da5c814ac767a4a98} 
+\index{pt\+::up\+::fe\+::lpro1613\+::server\+::conn\+::\+Client@{pt\+::up\+::fe\+::lpro1613\+::server\+::conn\+::\+Client}!handle@{handle}}
+\index{handle@{handle}!pt\+::up\+::fe\+::lpro1613\+::server\+::conn\+::\+Client@{pt\+::up\+::fe\+::lpro1613\+::server\+::conn\+::\+Client}}
+\subsubsection{\texorpdfstring{handle()}{handle()}}
+{\footnotesize\ttfamily \hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1conn_1_1_packet}{Packet} pt.\+up.\+fe.\+lpro1613.\+server.\+conn.\+Client.\+handle (\begin{DoxyParamCaption}\item[{\hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1conn_1_1_packet}{Packet}}]{packet }\end{DoxyParamCaption})}
+
+Called whenever a packet is received that isn\textquotesingle{}t part of a request-\/response routine.
+
+
+\begin{DoxyParams}{Parameters}
+{\em packet} & The packet that has been received \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A response packet to be sent back, or null if no response is to be sent 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{interfacept_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1conn_1_1_connection_1_1_delegate_a5b0f77e34d93967ae53cf7e01f0e2835}{pt.\+up.\+fe.\+lpro1613.\+sharedlib.\+conn.\+Connection.\+Delegate}.
+
+
+
+Definition at line 37 of file Client.\+java.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1conn_1_1_client_a81efbd1e6b06189da5c814ac767a4a98_cgraph}
+\end{center}
+\end{figure}
+\hypertarget{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1conn_1_1_client_aea2e952268afe16993958c8affb921cb}{}\label{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1conn_1_1_client_aea2e952268afe16993958c8affb921cb} 
+\index{pt\+::up\+::fe\+::lpro1613\+::server\+::conn\+::\+Client@{pt\+::up\+::fe\+::lpro1613\+::server\+::conn\+::\+Client}!inform\+About\+Global\+Message@{inform\+About\+Global\+Message}}
+\index{inform\+About\+Global\+Message@{inform\+About\+Global\+Message}!pt\+::up\+::fe\+::lpro1613\+::server\+::conn\+::\+Client@{pt\+::up\+::fe\+::lpro1613\+::server\+::conn\+::\+Client}}
+\subsubsection{\texorpdfstring{inform\+About\+Global\+Message()}{informAboutGlobalMessage()}}
+{\footnotesize\ttfamily void pt.\+up.\+fe.\+lpro1613.\+server.\+conn.\+Client.\+inform\+About\+Global\+Message (\begin{DoxyParamCaption}\item[{\hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1structs_1_1_message}{Message}}]{msg }\end{DoxyParamCaption}) throws \hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1exceptions_1_1_connection_exception}{Connection\+Exception}}
+
+Inform the client about a global message that has been sent by a user. The client should then update the UI accordingly.
+
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & The Message object. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Connection\+Exception} & \\
+\hline
+\end{DoxyExceptions}
+
+
+Definition at line 174 of file Client.\+java.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1conn_1_1_client_aea2e952268afe16993958c8affb921cb_cgraph}
+\end{center}
+\end{figure}
+\hypertarget{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1conn_1_1_client_a2d18ebb9809e36b016e9db24c8274522}{}\label{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1conn_1_1_client_a2d18ebb9809e36b016e9db24c8274522} 
+\index{pt\+::up\+::fe\+::lpro1613\+::server\+::conn\+::\+Client@{pt\+::up\+::fe\+::lpro1613\+::server\+::conn\+::\+Client}!send\+Game\+Invitation@{send\+Game\+Invitation}}
+\index{send\+Game\+Invitation@{send\+Game\+Invitation}!pt\+::up\+::fe\+::lpro1613\+::server\+::conn\+::\+Client@{pt\+::up\+::fe\+::lpro1613\+::server\+::conn\+::\+Client}}
+\subsubsection{\texorpdfstring{send\+Game\+Invitation()}{sendGameInvitation()}}
+{\footnotesize\ttfamily void pt.\+up.\+fe.\+lpro1613.\+server.\+conn.\+Client.\+send\+Game\+Invitation (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) throws \hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1exceptions_1_1_connection_exception}{Connection\+Exception}}
+
+Inform the client that he has received an invitation from another player. Note\+: A\+PI not yet finished.
+
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Connection\+Exception} & \\
+\hline
+\end{DoxyExceptions}
+
+
+Definition at line 195 of file Client.\+java.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1conn_1_1_client_a2d18ebb9809e36b016e9db24c8274522_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1conn_1_1_client_a2d18ebb9809e36b016e9db24c8274522_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1conn_1_1_client_a68fc46855fd613c9ca06c32da08c2f5a}{}\label{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1conn_1_1_client_a68fc46855fd613c9ca06c32da08c2f5a} 
+\index{pt\+::up\+::fe\+::lpro1613\+::server\+::conn\+::\+Client@{pt\+::up\+::fe\+::lpro1613\+::server\+::conn\+::\+Client}!update\+Game\+Board@{update\+Game\+Board}}
+\index{update\+Game\+Board@{update\+Game\+Board}!pt\+::up\+::fe\+::lpro1613\+::server\+::conn\+::\+Client@{pt\+::up\+::fe\+::lpro1613\+::server\+::conn\+::\+Client}}
+\subsubsection{\texorpdfstring{update\+Game\+Board()}{updateGameBoard()}}
+{\footnotesize\ttfamily void pt.\+up.\+fe.\+lpro1613.\+server.\+conn.\+Client.\+update\+Game\+Board (\begin{DoxyParamCaption}\item[{\hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1structs_1_1_board_u_i_info}{Board\+U\+I\+Info}}]{info }\end{DoxyParamCaption}) throws \hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1exceptions_1_1_connection_exception}{Connection\+Exception}}
+
+Tell the client to update the UI of one of the boards of the game using the given information.
+
+
+\begin{DoxyParams}{Parameters}
+{\em info} & The tuple that contains all the information needed to update the UI. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Connection\+Exception} & \\
+\hline
+\end{DoxyExceptions}
+
+
+Definition at line 207 of file Client.\+java.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1conn_1_1_client_a68fc46855fd613c9ca06c32da08c2f5a_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1conn_1_1_client_a68fc46855fd613c9ca06c32da08c2f5a_icgraph}
+\end{center}
+\end{figure}
+\hypertarget{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1conn_1_1_client_ad3cc8b10b942f6260a0e7db7f5a0a538}{}\label{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1conn_1_1_client_ad3cc8b10b942f6260a0e7db7f5a0a538} 
+\index{pt\+::up\+::fe\+::lpro1613\+::server\+::conn\+::\+Client@{pt\+::up\+::fe\+::lpro1613\+::server\+::conn\+::\+Client}!update\+Game\+Screen@{update\+Game\+Screen}}
+\index{update\+Game\+Screen@{update\+Game\+Screen}!pt\+::up\+::fe\+::lpro1613\+::server\+::conn\+::\+Client@{pt\+::up\+::fe\+::lpro1613\+::server\+::conn\+::\+Client}}
+\subsubsection{\texorpdfstring{update\+Game\+Screen()}{updateGameScreen()}}
+{\footnotesize\ttfamily void pt.\+up.\+fe.\+lpro1613.\+server.\+conn.\+Client.\+update\+Game\+Screen (\begin{DoxyParamCaption}\item[{\hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1structs_1_1_game_u_i_info}{Game\+U\+I\+Info}}]{info }\end{DoxyParamCaption}) throws \hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1exceptions_1_1_connection_exception}{Connection\+Exception}}
+
+Tell the client to update the game UI using the given information.
+
+
+\begin{DoxyParams}{Parameters}
+{\em info} & The tuple that contains all the information needed to update the UI. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Connection\+Exception} & \\
+\hline
+\end{DoxyExceptions}
+
+
+Definition at line 185 of file Client.\+java.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1conn_1_1_client_ad3cc8b10b942f6260a0e7db7f5a0a538_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1conn_1_1_client_ad3cc8b10b942f6260a0e7db7f5a0a538_icgraph}
+\end{center}
+\end{figure}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+pt/up/fe/lpro1613/server/conn/\hyperlink{_client_8java}{Client.\+java}\end{DoxyCompactItemize}

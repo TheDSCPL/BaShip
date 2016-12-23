@@ -1,0 +1,7 @@
+<map id="pt.up.fe.lpro1613.sharedlib.conn.Connection.connect" name="pt.up.fe.lpro1613.sharedlib.conn.Connection.connect">
+<area shape="rect" id="node2" href="$classclient_1_1conn_1_1_server.html#a7e96a6bd486520d128a37a8216cf37c3" title="client.conn.Server.connect" alt="" coords="269,45,448,72"/>
+<area shape="rect" id="node3" href="$classclient_1_1_client_main.html#aecd59c193bdb0536d649be78f72149b0" title="client.ClientMain.connect\lToServer" alt="" coords="496,38,667,79"/>
+<area shape="rect" id="node4" href="$classclient_1_1ui_1_1_login_panel.html#a9726aa2bc3416aa22ad43d2b4b9eed70" title="client.ui.LoginPanel.calculate\lRetypePasswordDialogPosition" alt="" coords="715,5,923,46"/>
+<area shape="rect" id="node6" href="$classclient_1_1ui_1_1_settings_panel.html#a95dfa76100b4d18863cd0b572c631ebf" title="client.ui.SettingsPanel.\lSettingsPanel" alt="" coords="740,70,897,111"/>
+<area shape="rect" id="node5" href="$classclient_1_1ui_1_1_login_panel.html#a697f38b937f048e562c634c713d90885" title="client.ui.LoginPanel.Login\lPanel" alt="" coords="971,5,1144,46"/>
+</map>

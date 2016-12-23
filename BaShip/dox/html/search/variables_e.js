@@ -1,0 +1,27 @@
+var searchData=
+[
+  ['server',['server',['../classclient_1_1_client_main.html#a933025baa76b4803c185b02d359a7e15',1,'client.ClientMain.server()'],['../classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1_server_main.html#a47b0d3f323dca42ff790cf040be6ce3a',1,'pt.up.fe.lpro1613.server.ServerMain.server()']]],
+  ['serverip',['ServerIP',['../enumclient_1_1other_1_1_prefs_key.html#afb3297cc8cba1e49ec031c14e115feb8',1,'client::other::PrefsKey']]],
+  ['serverport',['ServerPort',['../enumclient_1_1other_1_1_prefs_key.html#a967610c3389ceac5034551d3f69c564c',1,'client.other.PrefsKey.ServerPort()'],['../enumpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1other_1_1_prefs_key.html#a92ee06ea77e828cd8272275f9309e142',1,'pt.up.fe.lpro1613.server.other.PrefsKey.ServerPort()']]],
+  ['sgamefinished',['SGameFinished',['../enumpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1conn_1_1_query.html#aca594101e00b7d1c778971dbc57ef432',1,'pt::up::fe::lpro1613::sharedlib::conn::Query']]],
+  ['ship_5fcount',['SHIP_COUNT',['../classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1constants_1_1_board_k.html#ae2fc4102eec84d733b9ca1136687284a',1,'pt::up::fe::lpro1613::sharedlib::constants::BoardK']]],
+  ['ship_5fcount_5ffor_5fsize',['SHIP_COUNT_FOR_SIZE',['../classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1constants_1_1_board_k.html#af6ff24deb48459109356bdad0fca5e3b',1,'pt::up::fe::lpro1613::sharedlib::constants::BoardK']]],
+  ['showreadybutton',['showReadyButton',['../classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1structs_1_1_game_u_i_info.html#a576914a206905929c654271f00c936b8',1,'pt::up::fe::lpro1613::sharedlib::structs::GameUIInfo']]],
+  ['showrightboard',['showRightBoard',['../classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1structs_1_1_game_u_i_info.html#a20d8a3eadd649476b4a7aa3f9b7d7f57',1,'pt::up::fe::lpro1613::sharedlib::structs::GameUIInfo']]],
+  ['size',['size',['../classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1structs_1_1_ship.html#ae895709b67554ee4cc154cb846f370c6',1,'pt::up::fe::lpro1613::sharedlib::structs::Ship']]],
+  ['sound',['Sound',['../enumclient_1_1other_1_1_prefs_key.html#a8ad253d1a3c77e65df307909afb7f52f',1,'client::other::PrefsKey']]],
+  ['sreceivegameinvitation',['SReceiveGameInvitation',['../enumpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1conn_1_1_query.html#ac7b851d120b1903b63a14053166ca2a8',1,'pt::up::fe::lpro1613::sharedlib::conn::Query']]],
+  ['sreceivegamemessage',['SReceiveGameMessage',['../enumpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1conn_1_1_query.html#a65a9da6e31cb2ae51cfb5a5a301fbef0',1,'pt::up::fe::lpro1613::sharedlib::conn::Query']]],
+  ['sreceiveglobalmessage',['SReceiveGlobalMessage',['../enumpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1conn_1_1_query.html#a4e96d71faf614eae02250fd53ea20382',1,'pt::up::fe::lpro1613::sharedlib::conn::Query']]],
+  ['srerrormessage',['SRErrorMessage',['../enumpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1conn_1_1_query.html#a734b96bcfdfad05b25de2a39e20528a9',1,'pt::up::fe::lpro1613::sharedlib::conn::Query']]],
+  ['srgetgamelist',['SRGetGameList',['../enumpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1conn_1_1_query.html#aecfe06afd2edfe3f3175db6b0164bdab',1,'pt::up::fe::lpro1613::sharedlib::conn::Query']]],
+  ['srgetuserlist',['SRGetUserList',['../enumpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1conn_1_1_query.html#ad743a85e754f5d1d070fe30d8cf1ae25',1,'pt::up::fe::lpro1613::sharedlib::conn::Query']]],
+  ['srusernameavailable',['SRUsernameAvailable',['../enumpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1conn_1_1_query.html#a0634c9c72d7ac829d414fdc13f34bddd',1,'pt::up::fe::lpro1613::sharedlib::conn::Query']]],
+  ['startdate',['startDate',['../classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1structs_1_1_game_info.html#a1832d7b01c7b8be4da35f1df697a5aaf',1,'pt::up::fe::lpro1613::sharedlib::structs::GameInfo']]],
+  ['state',['state',['../classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1structs_1_1_game_info.html#ad3e13822945c29f610ec4a6450ce9798',1,'pt::up::fe::lpro1613::sharedlib::structs::GameInfo']]],
+  ['status',['status',['../classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1structs_1_1_user_info.html#a553ddd0c6e2695e0384a102b046cda02',1,'pt::up::fe::lpro1613::sharedlib::structs::UserInfo']]],
+  ['supdategameboard',['SUpdateGameBoard',['../enumpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1conn_1_1_query.html#ad1ad8328d07097e117b7d7e9acae578c',1,'pt::up::fe::lpro1613::sharedlib::conn::Query']]],
+  ['supdategamescreen',['SUpdateGameScreen',['../enumpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1conn_1_1_query.html#a1b59fac92875e1e89cbc97a4f98b7752',1,'pt::up::fe::lpro1613::sharedlib::conn::Query']]],
+  ['sx',['sx',['../classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1utils_1_1_matrix.html#ad08b31400c1f61080086b12e56e4f31d',1,'pt::up::fe::lpro1613::sharedlib::utils::Matrix']]],
+  ['sy',['sy',['../classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1utils_1_1_matrix.html#ae47549088ae73a43f9b7da81608debbd',1,'pt::up::fe::lpro1613::sharedlib::utils::Matrix']]]
+];

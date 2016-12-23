@@ -1,0 +1,70 @@
+\hypertarget{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_global_chat_d_b}{}\section{pt.\+up.\+fe.\+lpro1613.\+server.\+database.\+Global\+Chat\+DB Class Reference}
+\label{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_global_chat_d_b}\index{pt.\+up.\+fe.\+lpro1613.\+server.\+database.\+Global\+Chat\+DB@{pt.\+up.\+fe.\+lpro1613.\+server.\+database.\+Global\+Chat\+DB}}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1structs_1_1_message}{Message} \hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_global_chat_d_b_a15e0bde1ec58cad9c518731db3074105}{save\+Global\+Message} (Long user\+ID, String message)  throws S\+Q\+L\+Exception 
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Collection of static methods that access, set and return information present on the table \char`\"{}globalchat\char`\"{} of the database.
+
+\begin{DoxyAuthor}{Author}
+Alex 
+\end{DoxyAuthor}
+
+
+Definition at line 16 of file Global\+Chat\+D\+B.\+java.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_global_chat_d_b_a15e0bde1ec58cad9c518731db3074105}{}\label{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_global_chat_d_b_a15e0bde1ec58cad9c518731db3074105} 
+\index{pt\+::up\+::fe\+::lpro1613\+::server\+::database\+::\+Global\+Chat\+DB@{pt\+::up\+::fe\+::lpro1613\+::server\+::database\+::\+Global\+Chat\+DB}!save\+Global\+Message@{save\+Global\+Message}}
+\index{save\+Global\+Message@{save\+Global\+Message}!pt\+::up\+::fe\+::lpro1613\+::server\+::database\+::\+Global\+Chat\+DB@{pt\+::up\+::fe\+::lpro1613\+::server\+::database\+::\+Global\+Chat\+DB}}
+\subsubsection{\texorpdfstring{save\+Global\+Message()}{saveGlobalMessage()}}
+{\footnotesize\ttfamily static \hyperlink{classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1structs_1_1_message}{Message} pt.\+up.\+fe.\+lpro1613.\+server.\+database.\+Global\+Chat\+D\+B.\+save\+Global\+Message (\begin{DoxyParamCaption}\item[{Long}]{user\+ID,  }\item[{String}]{message }\end{DoxyParamCaption}) throws S\+Q\+L\+Exception\hspace{0.3cm}{\ttfamily [static]}}
+
+Save a global message on the database. The message\textquotesingle{}s timestamp is automatically set to the current time.
+
+
+\begin{DoxyParams}{Parameters}
+{\em user\+ID} & The id of the user who sent the message. \\
+\hline
+{\em message} & The string of the message. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The message object, equivalent to the row on the database, representing this message 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em S\+Q\+L\+Exception} & \\
+\hline
+\end{DoxyExceptions}
+
+
+Definition at line 27 of file Global\+Chat\+D\+B.\+java.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_global_chat_d_b_a15e0bde1ec58cad9c518731db3074105_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_global_chat_d_b_a15e0bde1ec58cad9c518731db3074105_icgraph}
+\end{center}
+\end{figure}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+pt/up/fe/lpro1613/server/database/\hyperlink{_global_chat_d_b_8java}{Global\+Chat\+D\+B.\+java}\end{DoxyCompactItemize}

@@ -1,0 +1,4 @@
+<map id="pt.up.fe.lpro1613.server.database.UserDB.verifyLoginAndReturnUserID" name="pt.up.fe.lpro1613.server.database.UserDB.verifyLoginAndReturnUserID">
+<area shape="rect" id="node2" href="$classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_database.html#aa5ecc24c87d16ca20cc645414d8f3232" title="pt.up.fe.lpro1613.server.database.\lDatabase.getConn" alt="" coords="297,5,522,46"/>
+<area shape="rect" id="node3" href="$classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1database_1_1_database.html#ae7e6a39f412e24bea44477224f0fdef0" title="pt.up.fe.lpro1613.server.database.\lDatabase.close" alt="" coords="297,70,522,111"/>
+</map>

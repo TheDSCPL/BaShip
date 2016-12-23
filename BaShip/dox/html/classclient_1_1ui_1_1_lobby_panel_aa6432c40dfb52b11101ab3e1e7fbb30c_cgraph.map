@@ -1,0 +1,7 @@
+<map id="client.ui.LobbyPanel.LobbyPanel" name="client.ui.LobbyPanel.LobbyPanel">
+<area shape="rect" id="node2" href="$classclient_1_1logic_1_1_user_c.html#ad4fb84e487e917c202a4e1bcdea62dd5" title="client.logic.UserC.isLoggedIn" alt="" coords="240,5,435,32"/>
+<area shape="rect" id="node3" href="$classclient_1_1_client_main.html#a0964644423f3d533ca394456ee6f6c95" title="client.ClientMain.showWarning" alt="" coords="235,56,439,83"/>
+<area shape="rect" id="node5" href="$classclient_1_1logic_1_1_user_c.html#a93ff0dc94af63f55144147389b0b2bdf" title="client.logic.UserC.getLogged\lInUsername" alt="" coords="241,107,433,149"/>
+<area shape="rect" id="node6" href="$classclient_1_1logic_1_1_user_c.html#a6609a9ab9414bda2dd3a6685cdec3771" title="client.logic.UserC.logout" alt="" coords="255,173,420,200"/>
+<area shape="rect" id="node4" href="$classclient_1_1_client_main.html#ad1c0bf16363beb967cc1a7a9a41a4e21" title="client.ClientMain.runOnUI" alt="" coords="488,56,661,83"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="pt.up.fe.lpro1613.server.logic.game.GameS.togglePlaceShipOnSquare" name="pt.up.fe.lpro1613.server.logic.game.GameS.togglePlaceShipOnSquare">
+<area shape="rect" id="node2" href="$classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1logic_1_1game_1_1_game_s.html#a9da22a4fd6609b821502380c3ececb41" title="pt.up.fe.lpro1613.server.logic.game.\lGameS.isClientPlaying" alt="" coords="288,5,523,46"/>
+<area shape="rect" id="node3" href="$classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1conn_1_1_client.html#a68fc46855fd613c9ca06c32da08c2f5a" title="pt.up.fe.lpro1613.server.conn.\lClient.updateGameBoard" alt="" coords="306,70,505,111"/>
+<area shape="rect" id="node4" href="$classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1conn_1_1_connection.html#acdcf8af7c9a37ede122c6db80d06668f" title="pt.up.fe.lpro1613.sharedlib.conn.\lConnection.sendOnly" alt="" coords="571,70,787,111"/>
+</map>

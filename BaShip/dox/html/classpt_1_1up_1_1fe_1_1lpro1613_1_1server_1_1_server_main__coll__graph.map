@@ -1,0 +1,5 @@
+<map id="pt.up.fe.lpro1613.server.ServerMain" name="pt.up.fe.lpro1613.server.ServerMain">
+<area shape="rect" id="node2" href="$classpt_1_1up_1_1fe_1_1lpro1613_1_1sharedlib_1_1utils_1_1_preferences.html" title="pt.up.fe.lpro1613.sharedlib.utils.\lPreferences" alt="" coords="131,5,341,46"/>
+<area shape="rect" id="node3" href="$classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1other_1_1_console_thread.html" title="pt.up.fe.lpro1613.server.other.\lConsoleThread" alt="" coords="136,70,336,111"/>
+<area shape="rect" id="node5" href="$classpt_1_1up_1_1fe_1_1lpro1613_1_1server_1_1conn_1_1_server_thread.html" title="pt.up.fe.lpro1613.server.conn.\lServerThread" alt="" coords="137,135,335,177"/>
+</map>
