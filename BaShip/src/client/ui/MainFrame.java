@@ -4,7 +4,6 @@ import client.other.ImageResizer;
 import java.awt.event.ComponentListener;
 import javax.swing.JComponent;
 
-// TODO: Luis: filter interface for players and games (note: columns cannot be ordered now)
 // TODO: Luis: replay & spectator interfaces
 
 public class MainFrame extends javax.swing.JFrame {
@@ -24,7 +23,7 @@ public class MainFrame extends javax.swing.JFrame {
         return currentPanel;
     }
 
-    public void changeToPanel(JComponent panel) {        
+    public void changeToPanel(JComponent panel) {
         getContentPane().removeAll();
         getContentPane().add(advertisementPanel, java.awt.BorderLayout.PAGE_END);
         getContentPane().add(panel, java.awt.BorderLayout.CENTER);

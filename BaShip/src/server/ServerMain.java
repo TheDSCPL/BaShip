@@ -15,7 +15,6 @@ import sharedlib.utils.Preferences;
 // TODO: ???: Interface color (option in settings)
 // TODO: ???: JUnit
 // TODO: ???: Javadoc
-// TODO: Luis: Server console
 
 public class ServerMain {
 

@@ -31,7 +31,7 @@ public class UserC {
         }
         return username.matches("^[A-Za-z0-9_]+$");
     }
-
+    
     /**
      * Runs the password against a set of rules to determine if it is a valid
      * password

@@ -265,7 +265,8 @@ class InvitationWindow {
         @Override
         public void windowDeactivated(WindowEvent e) {
             System.out.println("windowDeactivated");
-            closeOperation();
+            if(!e.getComponent().isVisible())
+                closeOperation();
         }
 
         // <editor-fold defaultstate="collapsed" desc="Empty functions">
