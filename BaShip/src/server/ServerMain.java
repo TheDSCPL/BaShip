@@ -13,10 +13,13 @@ import sharedlib.utils.Preferences;
 
 // TODO: ???: Sound
 // TODO: ???: Interface color (option in settings)
-// TODO: Alex: JUnit - For all classes in use cases "place ship" & "fire shot"
-// TODO: Alex: delete and remake SQL databse on FEUP
 // TODO: ???: Javadoc
+
+// TODO: Alex: JUnit - For all classes in use cases "place ship" & "fire shot"
+// TODO: Alex: Delete and remake SQL databse on FEUP
+
 // TODO: Luis: Test SQL method UserDB.setUserBanned
+// TODO: Luis: Client side: add check for null whenever ClientMain.server is accessed. This means the connection to the server has been shut down. Show message to user and go to login screen.
 
 public class ServerMain {
 

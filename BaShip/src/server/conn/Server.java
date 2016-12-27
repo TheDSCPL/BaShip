@@ -26,8 +26,14 @@ public class Server extends Thread {
     }
 
     public synchronized static void stopServer() throws IOException {
+        // Close server
         if (instance != null) {
             instance.close();
+        }
+        
+        // Close client connections
+        for (Client client : ServerMain.clients) {
+            client.disconnect();
         }
     }
 

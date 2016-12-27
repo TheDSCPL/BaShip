@@ -1,5 +1,6 @@
 package server.conn;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -39,6 +40,10 @@ public class Client implements Connection.Delegate {
     public Client(Connection conn) {
         this.connection = conn;
         this.connection.delegate = this;
+    }
+    
+    public void disconnect() throws IOException {
+        connection.disconnect();
     }
 
     @Override
