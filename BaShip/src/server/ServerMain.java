@@ -14,6 +14,7 @@ import sharedlib.utils.Preferences;
 // TODO: ???: Sound
 // TODO: ???: Interface color (option in settings)
 // TODO: Alex: JUnit - For all classes in use cases "place ship" & "fire shot"
+// TODO: Alex: delete and remake SQL databse on FEUP
 // TODO: ???: Javadoc
 
 public class ServerMain {

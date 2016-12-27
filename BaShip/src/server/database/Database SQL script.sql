@@ -42,7 +42,7 @@ CREATE TABLE gamechat (
     UNIQUE(gmid, player, timestamp)
 );
 
-CREATE VIEW user_stats AS SELECT t1.uid,
+ SELECT t1.uid,
     t2.ngames,
     t1.nwins,
     t3.nshots
@@ -55,7 +55,15 @@ CREATE VIEW user_stats AS SELECT t1.uid,
             count(DISTINCT games.gmid) AS ngames
            FROM users
              LEFT JOIN games ON users.uid = games.player1 OR users.uid = games.player2
-          GROUP BY users.uid) t2 USING (uid)
+          WHERE games.winner IS NOT NULL
+          GROUP BY users.uid
+        UNION
+         SELECT users.uid,
+            0
+           FROM users
+          WHERE NOT (users.uid IN ( SELECT games.player1
+                   FROM games)) AND NOT (users.uid IN ( SELECT games.player2
+                   FROM games))) t2 USING (uid)
      JOIN ( SELECT users.uid,
             count(DISTINCT tbl1.moveid) AS nshots
            FROM users
