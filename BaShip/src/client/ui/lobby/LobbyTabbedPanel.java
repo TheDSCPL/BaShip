@@ -9,6 +9,7 @@ import client.ClientMain;
 import client.logic.GameC;
 import client.logic.GlobalChatC;
 import client.logic.UserC;
+import com.lpcsd.CompanionLibrary.Strings.HTMLLib;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -442,7 +443,25 @@ public class LobbyTabbedPanel extends JPanel {
             }
             for (int i = 0; i < list.size(); i++) {
                 UserInfo userInfo = list.get(i);
-                StringBuilder status = new StringBuilder("<html><body><font color=\"");
+                String statusColor;
+                switch(userInfo.status)
+                {
+                    case Offline:
+                        statusColor = "e60000";    //red
+                        break;
+                    case Online:
+                        statusColor = "009933";    //green
+                        break;
+                    case Playing:
+                        statusColor = "ff9900";    //orange
+                        break;
+                    case Waiting:
+                        statusColor = "6699ff";    //blue
+                        break;
+                    default:
+                        statusColor = "black";     //black
+                }
+                /*StringBuilder status = new StringBuilder("<html><body><font color=\"");
                 switch(userInfo.status)
                 {
                     case Offline:
@@ -463,7 +482,11 @@ public class LobbyTabbedPanel extends JPanel {
                 status  .append("\">")
                         .append(userInfo.status.name())
                         .append(UserC.getLoggedInUserID().equals(userInfo.id) ? " (me)" : "")
-                        .append("</font></body></html>");
+                        .append("</font></body></html>");*/
+                String status = HTMLLib.HTMLFormat.build(
+                                                            new HTMLLib.HTMLFormat(userInfo.status.name() + (UserC.getLoggedInUserID().equals(userInfo.id) ? " (me)" : ""))
+                                                                    .setColor(statusColor)
+                                                        );
                 usersTableModel.addRow(new Object[]{userInfo.username, userInfo.rank, userInfo.nGames, userInfo.nWins, userInfo.nShots, status});
             }
         }

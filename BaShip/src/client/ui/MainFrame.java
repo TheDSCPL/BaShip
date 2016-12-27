@@ -4,8 +4,6 @@ import client.other.ImageResizer;
 import java.awt.event.ComponentListener;
 import javax.swing.JComponent;
 
-// TODO: Luis: replay & spectator interfaces
-
 public class MainFrame extends javax.swing.JFrame {
 
     /**

@@ -193,14 +193,6 @@ public class GameC {
         System.out.println("Show game invitation called");
 
         ClientMain.runOnUI(() -> {
-            /*int dialogResult = JOptionPane.showConfirmDialog(ClientMain.mainFrame, "Player '" + username + "' invited you. Would you like to play?", "Invite", JOptionPane.YES_NO_OPTION);
-            try {
-                ClientMain.server.anwserGameInvitation(dialogResult == JOptionPane.YES_OPTION);
-            }
-            catch (UserMessageException ex) {
-                ClientMain.showError(ex.getMessage());
-            }*/
-
             if (invitationWindow != null) {
                 invitationWindow.close();
             }
