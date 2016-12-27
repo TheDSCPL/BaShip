@@ -98,6 +98,10 @@ public class GameS {
             return GameInfo.gamePlayFromSpectator(client) != null;
         }
 
+        public static boolean isReplaying(Client client) {
+            return GameInfo.gameReplayFromClient(client) != null;
+        }
+        
         /**
          * @param client
          * @return True if the client is waiting for a game.
@@ -224,6 +228,9 @@ public class GameS {
             else if (PlayerInfo.isSpectating(client)) {
                 GameInfo.gamePlayFromSpectator(client).clientClosedGame(client);
             }
+            else if (PlayerInfo.isReplaying(client)) {
+                GameInfo.gameReplayFromClient(client).clientClosedGame();
+            }
             else if (PlayerInfo.isWaitingForGame(client)) {
                 Info.removePlayerWaitingForGame(client);
             }
@@ -252,6 +259,9 @@ public class GameS {
             }
             else if (PlayerInfo.isSpectating(client)) {
                 GameInfo.gamePlayFromSpectator(client).clientDisconnected(client);
+            }
+            else if (PlayerInfo.isReplaying(client)) {
+                GameInfo.gameReplayFromClient(client).clientDisconnected();
             }
             else if (PlayerInfo.isWaitingForGame(client)) {
                 Info.removePlayerWaitingForGame(client);
@@ -286,6 +296,7 @@ public class GameS {
 
         public static void showNextMove(Client client) throws UserMessageException {
             GameReplay gr = GameInfo.gameReplayFromClient(client);
+            System.out.println(gr);
             if (gr != null) {
                 gr.showNextMove();
             }

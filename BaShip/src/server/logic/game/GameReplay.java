@@ -30,6 +30,7 @@ public class GameReplay {
     private final List<Move> moves = new ArrayList<>();
 
     public GameReplay(Client client, Long gameID) throws UserMessageException {
+        System.out.println("NEW GAME REPLAY");
         this.client = client;
         this.gameID = gameID;
 

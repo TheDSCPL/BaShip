@@ -2,14 +2,12 @@ package server.logic.game;
 
 import org.junit.After;
 import org.junit.AfterClass;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import server.conn.Client;
 import sharedlib.utils.Coord;
-
 /**
  *
  * @author Alex
@@ -45,7 +43,7 @@ public class GamePlayTest {
         GamePlay instance = null;
         instance.addSpectator(client);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertFalse(true);
     }
 
     /**
