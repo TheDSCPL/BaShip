@@ -159,6 +159,9 @@ public class GameReplay {
             client.updateGameScreen(info);
             client.updateGameBoard(leftBoard);
             client.updateGameBoard(rightBoard);
+            System.out.println(info);
+            System.out.println(leftBoard);
+            System.out.println(rightBoard);
         }
         catch (ConnectionException ex) {
             Logger.getLogger(GameReplay.class.getName()).log(Level.SEVERE, "Could not update game & board info for " + client, ex);

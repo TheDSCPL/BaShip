@@ -31,7 +31,7 @@ public class GameChat extends javax.swing.JPanel {
         }
         lastType = GameUIInfo.UIType.Play;
 
-        this.removeAll();
+        removeAll();
 
         gameChatSendMessageField = new javax.swing.JTextField();
         gameChatSendButton = new javax.swing.JButton();
@@ -90,7 +90,7 @@ public class GameChat extends javax.swing.JPanel {
         }
         lastType = GameUIInfo.UIType.Spectate;
 
-        this.removeAll();
+        removeAll();
 
         spactatingLabel = new javax.swing.JLabel();
 
@@ -126,7 +126,7 @@ public class GameChat extends javax.swing.JPanel {
         }
         lastType = GameUIInfo.UIType.Replay;
 
-        this.removeAll();
+        removeAll();
 
         previousTurnButton = new javax.swing.JButton();
         turnsLabel = new javax.swing.JLabel();
@@ -138,7 +138,7 @@ public class GameChat extends javax.swing.JPanel {
         previousTurnButton.addComponentListener(new ImageResizer());
 
         turnsLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        turnsLabel.setText("Turn 9 of 31");
+        turnsLabel.setText("Turn XX of YY");
 
         nextTurnButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/client/ui/Images/next.png"))); // NOI18N
         nextTurnButton.addComponentListener(new ImageResizer());
@@ -186,7 +186,6 @@ public class GameChat extends javax.swing.JPanel {
     private GameUIInfo.UIType lastType = GameUIInfo.UIType.Play;
 
     public void updateState(GameUIInfo info) {
-        ClientMain.runOnUI(() -> {
             switch (info.uiType) {
                 case Play:
                     setPlaying();
@@ -203,7 +202,6 @@ public class GameChat extends javax.swing.JPanel {
                 default:
                     throw new IllegalStateException();
             }
-        });
     }
 
     /**
