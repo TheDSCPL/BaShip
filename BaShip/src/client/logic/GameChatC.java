@@ -46,6 +46,10 @@ public class GameChatC {
      * @param text The text of the message
      */
     public static void sendGameMessage(String text) {
+        if (!ClientMain.checkServerConnection()) {
+            return;
+        }
+        
         try {
             ClientMain.server.sendGameMessage(text);
         }

@@ -62,6 +62,10 @@ public class UserC {
      * @return True if login was successful
      */
     public static boolean login(String username, char[] password) {
+        if (!ClientMain.checkServerConnection()) {
+            return false;
+        }
+        
         try {
             loggedInUser = ClientMain.server.login(username, password);
         }
@@ -80,6 +84,10 @@ public class UserC {
      * @return True if register was successful
      */
     public static boolean register(String username, char[] password) {
+        if (!ClientMain.checkServerConnection()) {
+            return false;
+        }
+        
         try {
             loggedInUser = ClientMain.server.register(username, password);
         }
@@ -96,6 +104,10 @@ public class UserC {
      * @return True if logout was successful
      */
     public static boolean logout() {
+        if (!ClientMain.checkServerConnection()) {
+            return false;
+        }
+        
         try {
             ClientMain.server.logout();
             loggedInUser = null;
@@ -139,6 +151,10 @@ public class UserC {
      * non-null.
      */
     public static List<UserInfo> getUserList(UserSearch us) {
+        if (!ClientMain.checkServerConnection()) {
+            return null;
+        }
+        
         try {
             return ClientMain.server.getUserList(us);
         }
@@ -149,6 +165,10 @@ public class UserC {
     }
 
     public static void doubleClickUser(UserInfo userInfo) {
+        if (!ClientMain.checkServerConnection()) {
+            return;
+        }
+        
         try {
             ClientMain.server.doubleClickUser(userInfo.id);
         }

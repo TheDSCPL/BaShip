@@ -36,6 +36,10 @@ public class GameC {
      * @throws UserMessageException
      */
     public static List<GameInfo> getGameList(GameSearch gs) {
+        if (!ClientMain.checkServerConnection()) {
+            return null;
+        }
+
         try {
             return ClientMain.server.getGameList(gs);
         }
@@ -51,6 +55,10 @@ public class GameC {
      * @throws UserMessageException
      */
     public static void startRandomGame() {
+        if (!ClientMain.checkServerConnection()) {
+            return;
+        }
+
         try {
             ClientMain.server.startRandomGame();
         }
@@ -111,6 +119,10 @@ public class GameC {
      * @throws UserMessageException
      */
     static public void clickBoardCoordinate(boolean leftBoard, Coord c) {
+        if (!ClientMain.checkServerConnection()) {
+            return;
+        }
+
         try {
             if (leftBoard) {
                 ClientMain.server.clickLeftBoard(c);
@@ -131,6 +143,10 @@ public class GameC {
      * @throws UserMessageException
      */
     static public void clickReadyButton() {
+        if (!ClientMain.checkServerConnection()) {
+            return;
+        }
+
         try {
             ClientMain.server.clickReadyButton();
         }
@@ -140,10 +156,18 @@ public class GameC {
     }
 
     static public void showNextMove() throws UserMessageException {
+        if (!ClientMain.checkServerConnection()) {
+            return;
+        }
+
         ClientMain.server.showNextMove();
     }
 
     static public void showPreviousMove() throws UserMessageException {
+        if (!ClientMain.checkServerConnection()) {
+            return;
+        }
+
         ClientMain.server.showPreviousMove();
     }
 
@@ -153,6 +177,10 @@ public class GameC {
      * @throws UserMessageException
      */
     static public void closeGame() {
+        if (!ClientMain.checkServerConnection()) {
+            return;
+        }
+
         try {
             ClientMain.server.closeGame();
         }
@@ -179,6 +207,10 @@ public class GameC {
     }
 
     public static void doubleClickGame(GameInfo gameInfo) {
+        if (!ClientMain.checkServerConnection()) {
+            return;
+        }
+
         try {
             ClientMain.server.doubleClickGame(gameInfo.id);
         }
@@ -241,6 +273,10 @@ class InvitationWindow {
             Integer selectedOption = (Integer) optionPane.getValue();
             int n = selectedOption == null ? JOptionPane.NO_OPTION : selectedOption;
 
+            if (!ClientMain.checkServerConnection()) {
+                return;
+            }
+
             try {
                 ClientMain.server.anwserGameInvitation(n == JOptionPane.YES_OPTION);
             }
@@ -252,8 +288,9 @@ class InvitationWindow {
         @Override
         public void windowDeactivated(WindowEvent e) {
             System.out.println("windowDeactivated");
-            if(!e.getComponent().isVisible())
+            if (!e.getComponent().isVisible()) {
                 closeOperation();
+            }
         }
 
         // <editor-fold defaultstate="collapsed" desc="Empty functions">
