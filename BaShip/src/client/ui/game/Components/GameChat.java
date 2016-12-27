@@ -189,16 +189,28 @@ public class GameChat extends javax.swing.JPanel {
     
     public void updateState(GameUIInfo info)
     {
+        if(info == null)
+            return;
         switch(info.uiType)
         {
             case Play:
                 ClientMain.runOnUI(this::setPlaying);
                 break;
             case Replay:
-                ClientMain.runOnUI(this::setReplay);
-                previousTurnButton.setEnabled(info.canShowPreviousMove);
-                nextTurnButton.setEnabled(info.canShowNextMove);
-                turnsLabel.setText(info.moveCounterText);
+                boolean canShowPrevious = false, canShowNext = false;
+                String labelText = "";
+                if(info.canShowPreviousMove != null)
+                    canShowPrevious = info.canShowPreviousMove;
+                if(info.canShowNextMove != null)
+                    canShowNext = info.canShowNextMove;
+                if(info.moveCounterText != null)
+                    labelText = info.moveCounterText;
+                
+                ClientMain.runOnUIBlocking(this::setReplay);
+                
+                previousTurnButton.setEnabled(canShowPrevious);
+                nextTurnButton.setEnabled(canShowNext);
+                turnsLabel.setText(labelText);
                 break;
             case Spectate:
                 ClientMain.runOnUI(this::setSpectating);

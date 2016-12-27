@@ -4,6 +4,7 @@ import client.conn.*;
 import client.other.PrefsKey;
 import client.ui.*;
 import java.io.*;
+import java.lang.reflect.InvocationTargetException;
 import java.net.*;
 import java.util.concurrent.*;
 import javax.swing.JOptionPane;
@@ -144,5 +145,18 @@ public class ClientMain {
      */
     public static void runOnUI(Runnable r) {
         java.awt.EventQueue.invokeLater(r);
+    }
+    
+    /**
+     * Run a Runnable object on the interface thread
+     *
+     * @param r The runnable to run
+     */
+    public static void runOnUIBlocking(Runnable r) {
+        try {
+            java.awt.EventQueue.invokeAndWait(r);
+        } catch (InterruptedException | InvocationTargetException ex) {
+            runOnUI(r);
+        }
     }
 }
