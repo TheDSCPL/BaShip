@@ -55,6 +55,8 @@ public final class GamePanel extends javax.swing.JPanel {
         // Only the Boards that are WaitingOnOpponentPanel will perform any action 
         leftBoard.updateBoard(info);
         rightBoard.updateBoard(info);
+        
+        gameChat.updateState(info);
     }
 
     public void updateBoardInfo(BoardUIInfo info) {

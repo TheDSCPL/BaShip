@@ -26,50 +26,88 @@ public class ImageResizer implements ComponentListener {
         return new ImageIcon(tempImage);
     }
 
-    private static ImageIcon resizeIcon(Component c) {
-        int width = (int) (c.getWidth() * 0.8);
-        int height = (int) (c.getHeight() * 0.8);
-        ImageIcon ret;
+    private int getPretendedWidth(Component c)
+    {
+        if(c == null || c.getWidth() <= 0)
+        {
+            System.err.println("Error getting width. Defaulting to 15.");
+            return 15;
+        }
+        return (int)(c.getWidth() * 0.8);
+    }
+    
+    private int getPretendedHeight(Component c)
+    {
+        if(c == null || c.getHeight() <= 0)
+        {
+            System.err.println("Error getting width. Defaulting to 15.");
+            return 15;
+        }
+        return (int)(c.getHeight() * 0.8);
+    }
+    
+    private ImageIcon getSetIcon(Component c)
+    {
         if (c instanceof JButton) {
             JButton button = (JButton) c;
-            ImageIcon prevIcon = (ImageIcon) button.getIcon();
-            if (prevIcon == null) {
-                return null;
-            }
-            ret = resizeIcon(prevIcon, width, height);
-            button.setIcon(ret);
+            return (ImageIcon) button.getIcon();
         } else if (c instanceof JLabel) {
             JLabel label = (JLabel) c;
-            ImageIcon prevIcon = (ImageIcon) label.getIcon();
-            if (prevIcon == null) {
-                return null;
-            }
-            ret = resizeIcon(prevIcon, width, height);
-            label.setIcon(ret);
+            return (ImageIcon) label.getIcon();
         } else {
             throw new ClassCastException("Resizer used on a Component that is neither a Jlabel nor a JButton");
         }
-        return ret;
+    }
+    
+    private void setIcon(Component c, ImageIcon icon)
+    {
+        if (c instanceof JButton) {
+            JButton button = (JButton) c;
+            button.setIcon(icon);
+        } else if (c instanceof JLabel) {
+            JLabel label = (JLabel) c;
+            label.setIcon(icon);
+        } else {
+            throw new ClassCastException("Resizer used on a Component that is neither a Jlabel nor a JButton");
+        }
+    }
+    
+    private void resizeIfNecessary(Component c)
+    {
+        ImageIcon setIcon = getSetIcon(c);
+        if(setIcon == null || (setIcon.getIconWidth() == getPretendedWidth(c) && setIcon.getIconHeight() == getPretendedHeight(c)) )
+            return;
+        resizeIcon(c);
+    }
+    
+    private void resizeIcon(Component c) {
+        int width = getPretendedWidth(c);
+        int height = getPretendedHeight(c);
+        ImageIcon prevIcon = getSetIcon(c);
+        if(prevIcon == null)
+            return;
+        
+        setIcon(c, resizeIcon(prevIcon, width, height));
     }
     
     @Override
     public void componentResized(ComponentEvent e) {
-        ImageResizer.resizeIcon(e.getComponent());
+        resizeIfNecessary(e.getComponent());
     }
 
     @Override
     public void componentMoved(ComponentEvent e) {
-        ImageResizer.resizeIcon(e.getComponent());
+        resizeIfNecessary(e.getComponent());
     }
 
     @Override
     public void componentShown(ComponentEvent e) {
-        ImageResizer.resizeIcon(e.getComponent());
+        resizeIfNecessary(e.getComponent());
     }
 
     @Override
     public void componentHidden(ComponentEvent e) {
-        ImageResizer.resizeIcon(e.getComponent());
+        resizeIfNecessary(e.getComponent());
     }
     
 }
