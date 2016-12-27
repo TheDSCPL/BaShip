@@ -40,7 +40,7 @@ public class GameDB {
                       + "WHERE (p1.username LIKE ? OR p2.username LIKE ?)"; // AND startdate IS NOT NULL ?
 
             if (s.currentlyPlayingOnly) {
-                query += " AND enddate IS NOT NULL";
+                query += " AND enddate IS NULL";
             }
             
             query += " ORDER BY startdate LIMIT ? OFFSET ?";

@@ -13,7 +13,7 @@ import sharedlib.utils.Preferences;
 
 // TODO: ???: Sound
 // TODO: ???: Interface color (option in settings)
-// TODO: ???: JUnit
+// TODO: Alex: JUnit - For all classes in use cases "place ship" & "fire shot"
 // TODO: ???: Javadoc
 
 public class ServerMain {
