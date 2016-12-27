@@ -79,7 +79,12 @@ public class UserS {
     public static UserInfo login(Client client, String username, String passwordHash) throws UserMessageException {
         Long id;
         try {
-            id = UserDB.verifyLogin(username, passwordHash);
+            if (UserDB.isUserBanned(username)) {
+                throw new UserMessageException("This username has been banned on this server");
+            }
+            else {
+                id = UserDB.verifyLogin(username, passwordHash);
+            }
         }
         catch (SQLException ex) {
             Logger.getLogger(UserS.class.getName()).log(Level.SEVERE, "Could not verify login info on database", ex);

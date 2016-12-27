@@ -15,7 +15,8 @@ import sharedlib.utils.Preferences;
 // TODO: Alex: JUnit - For all classes in use cases "place ship" & "fire shot"
 // TODO: Alex: delete and remake SQL databse on FEUP
 // TODO: ???: Javadoc
-// TODO: Alex: Start/stop server
+// TODO: Alex: Implement start/stop server
+// TODO: Luis: Test SQL method UserDB.setUserBanned
 
 public class ServerMain {
 

@@ -64,8 +64,8 @@ public class UserDB {
 
         try {
             conn = Database.getConn();
-
-            stmt = conn.prepareStatement("INSERT INTO users VALUES (DEFAULT, ?, ?) RETURNING (uid)");
+            
+            stmt = conn.prepareStatement("INSERT INTO users VALUES (DEFAULT, ?, ?, DEFAULT) RETURNING (uid)");
             stmt.setString(1, username);
             stmt.setString(2, passwordHash);
 
@@ -188,6 +188,45 @@ public class UserDB {
         }
         finally {
             Database.close(conn, stmt, rs);
+        }
+    }
+    
+    public static boolean isUserBanned(String username) throws SQLException {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            conn = Database.getConn();
+
+            stmt = conn.prepareStatement("SELECT banned FROM users WHERE username = ?");
+            stmt.setString(1, username);
+
+            rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getBoolean(1);
+            }
+
+            return false;
+        }
+        finally {
+            Database.close(conn, stmt, rs);
+        }
+    }
+    
+    public static void setUserBanned(String username, boolean banned) throws SQLException {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+
+        try {
+            conn = Database.getConn();
+            stmt = conn.prepareStatement("UPDATE users SET banned = ? WHERE username = ?");
+            stmt.setBoolean(1, banned);
+            stmt.setString(2, username);
+            stmt.executeUpdate();
+        }
+        finally {
+            Database.close(conn, stmt);
         }
     }
 }
