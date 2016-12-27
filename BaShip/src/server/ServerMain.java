@@ -1,5 +1,6 @@
 package server;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Collections;
 import java.util.Set;
@@ -15,7 +16,6 @@ import sharedlib.utils.Preferences;
 // TODO: Alex: JUnit - For all classes in use cases "place ship" & "fire shot"
 // TODO: Alex: delete and remake SQL databse on FEUP
 // TODO: ???: Javadoc
-// TODO: Alex: Implement start/stop server
 // TODO: Luis: Test SQL method UserDB.setUserBanned
 
 public class ServerMain {
@@ -24,9 +24,9 @@ public class ServerMain {
     public static final Console console = new Console();
     public static final Set<Client> clients = Collections.newSetFromMap(new ConcurrentHashMap<>());
 
-    public static void main(String args[]) throws SQLException {
-        Database.initialize();
+    public static void main(String args[]) throws SQLException, IOException {
+        Database.initialize(); // Connect to the database
         console.start();
-        Server.startServer();
+        Server.startServer(); // Automatically start server
     }
 }

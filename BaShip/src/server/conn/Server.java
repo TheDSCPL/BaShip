@@ -16,52 +16,50 @@ import sharedlib.exceptions.ConnectionException;
  * @author Alex
  */
 public class Server extends Thread {
-    
+
     private static Server instance;
-    
-    public synchronized static void startServer() {
+
+    public synchronized static void startServer() throws IOException {
         stopServer();
         instance = new Server(prefs.getI(PrefsKey.ServerPort));
         instance.start();
     }
-    
-    public synchronized static void stopServer() {
+
+    public synchronized static void stopServer() throws IOException {
         if (instance != null) {
-            instance.stop();
+            instance.close();
         }
     }
 
-    /**
-     * The port on which to create a {@code ServerSocket}.
-     */
-    public final int port;
+    private final ServerSocket serverSocket;
     
-    public Server(int port) {
+    private Server(int port) throws IOException {
         super("Server thread");
-        this.port = port;
+        serverSocket = new ServerSocket(port);
     }
 
     @Override
     public void run() {
-        try (ServerSocket serverSocket = new ServerSocket(port)) {
-            ServerMain.console.println("Server running on " + serverSocket.getInetAddress().getHostName() + ":" + serverSocket.getLocalPort());
-
-            while (true) {
+        ServerMain.console.println("Server running on " + serverSocket.getInetAddress().getHostName() + ":" + serverSocket.getLocalPort());
+        
+        while (!serverSocket.isClosed()) {
+            try {
                 Socket socket = serverSocket.accept();
-
-                try {
-                    Connection conn = new Connection(socket);
-                    Client client = new Client(conn);
-                    conn.start();
-                }
-                catch (ConnectionException ex) {
-                    Logger.getLogger(Server.class.getName()).log(Level.WARNING, "Accepted a client socket but could not connect -> ignoring connection", ex);
-                }
+                Connection conn = new Connection(socket);
+                Client client = new Client(conn);
+                conn.start();
+            }
+            catch (IOException ex) {
+                Logger.getLogger(Server.class.getName()).log(Level.WARNING, null, ex);
+            }
+            catch (ConnectionException ex) {
+                Logger.getLogger(Server.class.getName()).log(Level.WARNING, "Accepted a client socket but could not connect -> ignoring connection", ex);
             }
         }
-        catch (IOException ex) {
-            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "Could not start server -> exiting", ex);
-            System.exit(-1);
-        }
     }
+
+    private void close() throws IOException {
+        serverSocket.close();
+    }
+
 }

@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -13,6 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import server.conn.Server;
 
 /**
  * Thread responsible for handling the console input from the administrator and
@@ -34,18 +34,34 @@ public class Console extends Thread {
                 return "help";
             }
         });
-        COMMANDS.put("users", new Command() {
+        COMMANDS.put("start", new Command() {
             @Override
             public String run(List<String> args)
             {
-                return "users";
+                try {
+                    Server.startServer();
+                }
+                catch (IOException ex) {
+                    Logger.getLogger(Console.class.getName()).log(Level.SEVERE, null, ex);
+                    return "Error starting server";
+                }
+                
+                return "";
             }
         });
-        COMMANDS.put("games", new Command() {
+        COMMANDS.put("stop", new Command() {
             @Override
             public String run(List<String> args)
             {
-                return "games";
+                try {
+                    Server.stopServer();
+                }
+                catch (IOException ex) {
+                    Logger.getLogger(Console.class.getName()).log(Level.SEVERE, null, ex);
+                    return "Error stopping server";
+                }
+                
+                return "";
             }
         });
         COMMANDS.put("exit", new Command() {
