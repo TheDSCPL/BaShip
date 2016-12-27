@@ -12,12 +12,9 @@ public enum PrefsKey implements Preferences.Key {
     /*DatabaseURL("DatabaseURL", "jdbc:postgresql://dbm.fe.up.pt/lpro1613"),
     DatabaseUsername("DatabaseUsername", "lpro1613"),
     DatabasePassword("DatabasePassword", "X!5493jbo");*/
-    /*DatabaseURL("DatabaseURL", "jdbc:postgresql://localhost/Alex"),
+    DatabaseURL("DatabaseURL", "jdbc:postgresql://localhost/Alex"),
     DatabaseUsername("DatabaseUsername", "Alex"),
-    DatabasePassword("DatabasePassword", "");*/
-    DatabaseURL("DatabaseURL", "jdbc:postgresql://localhost/BaShip"),
-    DatabaseUsername("DatabaseUsername", "postgres"),
-    DatabasePassword("DatabasePassword", "olaola");
+    DatabasePassword("DatabasePassword", "");
 
     private final String key;
     private final Object defaultValue;

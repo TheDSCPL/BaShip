@@ -35,7 +35,7 @@ public class GameUIInfo implements UIInfo{
 
     @Override
     public String toString() {
-        return "GameUIInfo{" + "titleLeft=" + titleLeft + ", titleRight=" + titleRight + ", showRightBoard=" + showRightBoard + ", waitMessageLine1=" + waitMessageLine1 + ", waitMessageLine2=" + waitMessageLine2 + ", showReadyButton=" + showReadyButton + ", player1Turn=" + player1Turn + ", player2Turn=" + player2Turn + '}';
+        return "GameUIInfo{" + "titleLeft=" + titleLeft + ", titleRight=" + titleRight + ", showRightBoard=" + showRightBoard + ", waitMessageLine1=" + waitMessageLine1 + ", waitMessageLine2=" + waitMessageLine2 + ", showReadyButton=" + showReadyButton + ", player1Turn=" + player1Turn + ", player2Turn=" + player2Turn + ", uiType=" + uiType + ", canShowPreviousMove=" + canShowPreviousMove + ", canShowNextMove=" + canShowNextMove + ", moveCounterText=" + moveCounterText + '}';
     }
     
 }

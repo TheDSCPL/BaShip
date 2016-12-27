@@ -3,6 +3,7 @@ package sharedlib.utils;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Implements a generic, fixed-size Matrix. This class can hold {@code null}
@@ -192,6 +193,39 @@ public class Matrix<T> {
     @Override
     public String toString() {
         return "Matrix{" + "sx=" + sx + ", sy=" + sy + ", list=" + list + '}';
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 83 * hash + this.sx;
+        hash = 83 * hash + this.sy;
+        hash = 83 * hash + Objects.hashCode(this.list);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Matrix<?> other = (Matrix<?>) obj;
+        if (this.sx != other.sx) {
+            return false;
+        }
+        if (this.sy != other.sy) {
+            return false;
+        }
+        if (!Objects.equals(this.list, other.list)) {
+            return false;
+        }
+        return true;
     }
 
 }

@@ -66,4 +66,43 @@ public class Ship {
         return "Ship{" + "posx=" + posx + ", posy=" + posy + ", size=" + size + ", vertical=" + vertical + '}';
     }
 
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 79 * hash + this.posx;
+        hash = 79 * hash + this.posy;
+        hash = 79 * hash + this.size;
+        hash = 79 * hash + (this.vertical ? 1 : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Ship other = (Ship) obj;
+        if (this.posx != other.posx) {
+            return false;
+        }
+        if (this.posy != other.posy) {
+            return false;
+        }
+        if (this.size != other.size) {
+            return false;
+        }
+        if (this.vertical != other.vertical) {
+            return false;
+        }
+        return true;
+    }
+    
+    
+
 }
