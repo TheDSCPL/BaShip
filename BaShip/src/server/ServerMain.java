@@ -8,7 +8,6 @@ import server.conn.Client;
 import server.conn.Server;
 import server.database.Database;
 import server.other.Console;
-import server.other.PrefsKey;
 import sharedlib.utils.Preferences;
 
 // TODO: ???: Sound
@@ -16,17 +15,17 @@ import sharedlib.utils.Preferences;
 // TODO: Alex: JUnit - For all classes in use cases "place ship" & "fire shot"
 // TODO: Alex: delete and remake SQL databse on FEUP
 // TODO: ???: Javadoc
+// TODO: Alex: Start/stop server
 
 public class ServerMain {
 
     public static final Preferences prefs = new Preferences(ServerMain.class);
-    public static final Server server = new Server(prefs.getI(PrefsKey.ServerPort));
     public static final Console console = new Console();
     public static final Set<Client> clients = Collections.newSetFromMap(new ConcurrentHashMap<>());
 
     public static void main(String args[]) throws SQLException {
         Database.initialize();
         console.start();
-        server.start();
+        Server.startServer();
     }
 }

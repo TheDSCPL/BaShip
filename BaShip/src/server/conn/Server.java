@@ -4,6 +4,8 @@ import java.io.*;
 import java.net.*;
 import java.util.logging.*;
 import server.ServerMain;
+import static server.ServerMain.prefs;
+import server.other.PrefsKey;
 import sharedlib.conn.Connection;
 import sharedlib.exceptions.ConnectionException;
 
@@ -14,6 +16,20 @@ import sharedlib.exceptions.ConnectionException;
  * @author Alex
  */
 public class Server extends Thread {
+    
+    private static Server instance;
+    
+    public synchronized static void startServer() {
+        stopServer();
+        instance = new Server(prefs.getI(PrefsKey.ServerPort));
+        instance.start();
+    }
+    
+    public synchronized static void stopServer() {
+        if (instance != null) {
+            instance.stop();
+        }
+    }
 
     /**
      * The port on which to create a {@code ServerSocket}.
@@ -47,6 +63,5 @@ public class Server extends Thread {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "Could not start server -> exiting", ex);
             System.exit(-1);
         }
-
     }
 }
