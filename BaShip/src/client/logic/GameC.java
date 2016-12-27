@@ -190,8 +190,6 @@ public class GameC {
     private static InvitationWindow invitationWindow;
 
     public static void showGameInvitation(String username) {
-        System.out.println("Show game invitation called");
-
         ClientMain.runOnUI(() -> {
             if (invitationWindow != null) {
                 invitationWindow.close();
@@ -203,11 +201,8 @@ public class GameC {
     }
 
     public static void closeGameInvitation() {
-        System.out.println("Close invitation called");
-
         ClientMain.runOnUI(() -> {
             if (invitationWindow != null) {
-                System.out.println("Closing invitation");
                 invitationWindow.close();
                 invitationWindow = null;
             }
