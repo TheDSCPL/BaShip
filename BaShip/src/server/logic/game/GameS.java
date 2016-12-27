@@ -101,7 +101,7 @@ public class GameS {
         public static boolean isReplaying(Client client) {
             return GameInfo.gameReplayFromClient(client) != null;
         }
-        
+
         /**
          * @param client
          * @return True if the client is waiting for a game.
@@ -322,11 +322,20 @@ public class GameS {
                 if (PlayerInfo.isPlaying(clickedClient)) {
                     spectateGame(client, GameInfo.gamePlayFromPlayer(clickedClient).gameID);
                 }
+                else if (PlayerInfo.isSpectating(clickedClient)) {
+                    spectateGame(client, GameInfo.gamePlayFromSpectator(clickedClient).gameID);
+                }
+                else if (PlayerInfo.isReplaying(clickedClient)) {
+                    startReplay(client, GameInfo.gameReplayFromClient(clickedClient).gameID);
+                }
                 else if (PlayerInfo.isWaitingForGame(clickedClient)) {
                     startGame(client, clickedClient);
                 }
-                else if (!PlayerInfo.isWaitingForPlayer(clickedClient)) {
-                    // Just online and available -> invite
+                else if (PlayerInfo.isWaitingForPlayer(clickedClient)) {
+                    // Can't do anything
+                }
+                else { // Just online and available -> invite
+                    int x; // Ignore, just here because of auto-indentation issues in NetBeans
 
                     if (Info.playerWaitingForHim(clickedClient) == null) {
                         try {
