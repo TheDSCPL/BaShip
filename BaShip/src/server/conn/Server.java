@@ -4,6 +4,8 @@ import java.io.*;
 import java.net.*;
 import java.util.logging.*;
 import server.ServerMain;
+import static server.ServerMain.prefs;
+import server.other.PrefsKey;
 import sharedlib.conn.Connection;
 import sharedlib.exceptions.ConnectionException;
 
@@ -15,38 +17,61 @@ import sharedlib.exceptions.ConnectionException;
  */
 public class Server extends Thread {
 
-    /**
-     * The port on which to create a {@code ServerSocket}.
-     */
-    public final int port;
+    private volatile static Server instance;
+
+    public synchronized static void startServer() throws IOException {
+        stopServer();
+        instance = new Server(prefs.getI(PrefsKey.ServerPort));
+        instance.start();
+    }
+
+    public synchronized static void stopServer() throws IOException {
+        // Close server
+        if (instance != null) {
+            instance.close();
+        }
+        
+        // Close client connections
+        for (Client client : ServerMain.clients) {
+            client.disconnect();
+        }
+        
+        instance = null;
+    }
+
+    public synchronized static boolean isRunning() {
+        return instance != null;
+    }
     
-    public Server(int port) {
+    private final ServerSocket serverSocket;
+    
+    private Server(int port) throws IOException {
         super("Server thread");
-        this.port = port;
+        serverSocket = new ServerSocket(port);
     }
 
     @Override
     public void run() {
-        try (ServerSocket serverSocket = new ServerSocket(port)) {
-            ServerMain.console.println("Server running on " + serverSocket.getInetAddress().getHostName() + ":" + serverSocket.getLocalPort());
-
-            while (true) {
+        ServerMain.console.println("Server running on " + serverSocket.getInetAddress().getHostName() + ":" + serverSocket.getLocalPort());
+        
+        while (!serverSocket.isClosed()) {
+            try {
                 Socket socket = serverSocket.accept();
-
-                try {
-                    Connection conn = new Connection(socket);
-                    Client client = new Client(conn);
-                    conn.start();
-                }
-                catch (ConnectionException ex) {
-                    Logger.getLogger(Server.class.getName()).log(Level.WARNING, "Accepted a client socket but could not connect -> ignoring connection", ex);
-                }
+                Connection conn = new Connection(socket);
+                Client client = new Client(conn);
+                conn.start();
+            }
+            catch (IOException ex) {
+                Logger.getLogger(Server.class.getName()).log(Level.WARNING, null, ex);
+            }
+            catch (ConnectionException ex) {
+                Logger.getLogger(Server.class.getName()).log(Level.WARNING, "Accepted a client socket but could not connect -> ignoring connection", ex);
             }
         }
-        catch (IOException ex) {
-            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "Could not start server -> exiting", ex);
-            System.exit(-1);
-        }
-
     }
+
+    private void close() throws IOException {
+        serverSocket.close();
+    }
+
 }

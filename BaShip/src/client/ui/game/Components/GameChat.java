@@ -295,7 +295,7 @@ public class GameChat extends javax.swing.JPanel {
 
     private void previousTurnButtonActionPerformed(java.awt.event.ActionEvent evt) {
         try {
-            ClientMain.server.showPreviousMove();
+            GameC.showPreviousMove();
         }
         catch (UserMessageException ex) {
             ClientMain.showWarning(ex.getMessage());
@@ -304,7 +304,7 @@ public class GameChat extends javax.swing.JPanel {
 
     private void nextTurnButtonActionPerformed(java.awt.event.ActionEvent evt) {
         try {
-            ClientMain.server.showNextMove();
+            GameC.showNextMove();
         }
         catch (UserMessageException ex) {
             ClientMain.showWarning(ex.getMessage());

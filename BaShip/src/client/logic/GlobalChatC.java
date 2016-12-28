@@ -43,6 +43,10 @@ public class GlobalChatC {
      * @param text The text of the message
      */
     public static void sendGlobalMessage(String text) {
+        if (!ClientMain.checkServerConnection()) {
+            return;
+        }
+        
         try {
             ClientMain.server.sendGlobalMessage(text);
         }

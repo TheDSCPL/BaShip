@@ -18,7 +18,7 @@ public class ClientMain {
     private ClientMain() {
 
     }
-    
+
     public static Server server;
     public static final MainFrame mainFrame = new MainFrame();
     public static final Preferences prefs = new Preferences(ClientMain.class);
@@ -50,7 +50,7 @@ public class ClientMain {
                 server.disconnect();
             }
             catch (IOException ignored) {
-                
+
             }
         }
 
@@ -146,7 +146,7 @@ public class ClientMain {
     public static void runOnUI(Runnable r) {
         java.awt.EventQueue.invokeLater(r);
     }
-    
+
     /**
      * Run a Runnable object on the interface thread
      *
@@ -155,8 +155,25 @@ public class ClientMain {
     public static void runOnUIBlocking(Runnable r) {
         try {
             java.awt.EventQueue.invokeAndWait(r);
-        } catch (InterruptedException | InvocationTargetException ex) {
+        }
+        catch (InterruptedException | InvocationTargetException ex) {
             runOnUI(r);
         }
+    }
+
+    public static boolean checkServerConnection() {
+        if (server == null) {
+            // Show message
+            ClientMain.showError("Server connection is down");
+            
+            // Change to login panel
+            ClientMain.runOnUI(() -> {
+                ClientMain.mainFrame.changeToPanel(new LoginPanel());
+            });
+            
+            return false;
+        }
+
+        return true;
     }
 }
