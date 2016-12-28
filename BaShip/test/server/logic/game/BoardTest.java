@@ -14,32 +14,35 @@ import sharedlib.structs.BoardUIInfo.SquareFill;
 import sharedlib.structs.Ship;
 import sharedlib.utils.Coord;
 
-/**
- *
- * @author Alex
- */
 public class BoardTest {
 
     public BoardTest() {
+
     }
 
     @BeforeClass
     public static void setUpClass() {
+
     }
 
     @AfterClass
     public static void tearDownClass() {
+
     }
+
+    Board board;
 
     @Before
     public void setUp() {
+        board = new Board();
     }
 
     @After
     public void tearDown() {
+        board = null;
     }
 
-    private void toggleSquaresToPlaceAllShips(Board b) {
+    static void toggleSquaresToPlaceAllShips(Board b) {
         b.togglePlaceShipOnSquare(new Coord(1, 1));
 
         b.togglePlaceShipOnSquare(new Coord(1, 3));
@@ -71,7 +74,7 @@ public class BoardTest {
         b.togglePlaceShipOnSquare(new Coord(7, 4));
     }
 
-    private void shootOnAllShips(Board b) {
+    static void shootOnAllShips(Board b) {
         b.shootOnSquare(new Coord(1, 1));
 
         b.shootOnSquare(new Coord(1, 3));
@@ -109,7 +112,6 @@ public class BoardTest {
     @Test
     public void testTogglePlaceShipOnSquare() {
         System.out.println("togglePlaceShipOnSquare");
-        Board board = new Board();
 
         board.togglePlaceShipOnSquare(new Coord(1, 3));
         board.togglePlaceShipOnSquare(new Coord(1, 4));
@@ -128,7 +130,6 @@ public class BoardTest {
     @Test
     public void testPlacedShipsAreValid() {
         System.out.println("placedShipsAreValid");
-        Board board = new Board();
 
         board.togglePlaceShipOnSquare(new Coord(3, 2));
         assertFalse(board.placedShipsAreValid());
@@ -147,12 +148,10 @@ public class BoardTest {
     @Test
     public void testSetShips() {
         System.out.println("setShips");
-        Board board = new Board();
         List<Ship> list = Arrays.asList(new Ship[]{new Ship(0, 0, 0, true)});
 
         board.setShips(list);
         assertEquals(list, board.getShips());
-
     }
 
     /**
@@ -161,7 +160,6 @@ public class BoardTest {
     @Test
     public void testGetShips() {
         System.out.println("getShips");
-        Board board = new Board();
 
         Ship[] expected = {
             new Ship(1, 1, 1, true),
@@ -186,7 +184,6 @@ public class BoardTest {
     @Test
     public void testCanShootOnSquare_shootOnSquare() {
         System.out.println("canShootOnSquare_shootOnSquare");
-        Board board = new Board();
         Coord c = new Coord(1, 2);
 
         assertTrue(board.canShootOnSquare(c));
@@ -200,7 +197,6 @@ public class BoardTest {
     @Test
     public void testRemoveShotFromSquare() {
         System.out.println("removeShotFromSquare");
-        Board board = new Board();
         Coord c = new Coord(7, 8);
 
         assertTrue(board.canShootOnSquare(c));
@@ -216,7 +212,6 @@ public class BoardTest {
     @Test
     public void testAllShipsAreShot() {
         System.out.println("allShipsAreShot");
-        Board board = new Board();
 
         board.togglePlaceShipOnSquare(new Coord(1, 1));
         assertFalse(board.allShipsAreShot());
@@ -241,7 +236,6 @@ public class BoardTest {
     @Test
     public void testGetBoardInfoPlacingShips_ShowEverythingFalse() {
         System.out.println("testGetBoardInfoPlacingShips_ShowEverythingFalse");
-        Board board = new Board();
 
         // Place ships
         toggleSquaresToPlaceAllShips(board);
@@ -260,7 +254,6 @@ public class BoardTest {
     @Test
     public void testGetBoardInfoPlacingShips_ShowEverythingTrue() {
         System.out.println("testGetBoardInfoPlacingShips_ShowEverythingTrue");
-        Board board = new Board();
 
         // Place ships
         toggleSquaresToPlaceAllShips(board);
@@ -283,7 +276,6 @@ public class BoardTest {
     @Test
     public void testGetBoardInfoPlaying_ShowEverythingFalse() {
         System.out.println("testGetBoardInfoPlaying_ShowEverythingFalse");
-        Board board = new Board();
         BoardUIInfo result;
 
         // Place all ships
@@ -319,7 +311,6 @@ public class BoardTest {
     @Test
     public void testGetBoardInfoPlaying_ShowEverythingTrue() {
         System.out.println("testGetBoardInfoPlaying_ShowEverythingTrue");
-        Board board = new Board();
         BoardUIInfo result;
 
         // Place all ships

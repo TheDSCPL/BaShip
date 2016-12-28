@@ -25,6 +25,10 @@ public class ShipDB {
      * @throws SQLException
      */
     public static void saveShipPositions(long gameID, int playerN, List<Ship> ships) throws SQLException {
+        if (Database.testing) {
+            return;
+        }
+        
         Connection conn = null;
         PreparedStatement stmt = null;
 

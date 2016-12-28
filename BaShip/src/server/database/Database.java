@@ -25,6 +25,8 @@ public class Database {
             System.exit(-1);
         }
     }
+    
+    public static boolean testing = false;
 
     private static BoneCP connectionPool;
 

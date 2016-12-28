@@ -89,6 +89,9 @@ class GamePlay {
     }
 
     public synchronized void addSpectator(Client client) {
+        if (isPlayer(client)) {
+            return;
+        }
         // Add spectator
         spectators.add(client);
 
@@ -109,14 +112,6 @@ class GamePlay {
 
     public synchronized void removeSpectator(Client client) {
         spectators.remove(client);
-    }
-
-    public synchronized boolean hasSpectator(Client client) {
-        return spectators.contains(client);
-    }
-
-    public synchronized boolean hasPlayer(Client client) {
-        return player1 == client || player2 == client;
     }
 
     public synchronized void clientClosedGame(Client client) {
@@ -195,7 +190,7 @@ class GamePlay {
         }
 
         // Verify current turn
-        if (player != currentPlayerTurn()) {
+        if (player != getCurrentPlayer()) {
             return;
         }
 
@@ -285,12 +280,20 @@ class GamePlay {
         return spectators.contains(client);
     }
 
-    public synchronized boolean gameHasStarted() {
+    public synchronized boolean hasStarted() {
         return p1State == PlayerState.Playing && p2State == PlayerState.Playing;
     }
 
     public synchronized int getCurrentMoveNumber() {
         return moveIndex;
+    }
+
+    public synchronized boolean hasFinished() {
+        return finished;
+    }
+
+    public synchronized Client getCurrentPlayer() {
+        return p1Turn ? player1 : player2;
     }
 
     private void startGame() throws SQLException {
@@ -362,7 +365,7 @@ class GamePlay {
 
     private void refreshGameScreenForClient(Client client) {
         GameUIInfo info;
-        boolean gameStarted = gameHasStarted();
+        boolean gameStarted = hasStarted();
 
         if (isPlayer(client)) {
             boolean opponentReady = stateForPlayer(opponent(client)) == PlayerState.Waiting;
@@ -371,7 +374,7 @@ class GamePlay {
             info = new GameUIInfo(
                     UserS.usernameOfClient(client),
                     UserS.usernameOfClient(opponent(client)),
-                    gameHasStarted(),
+                    hasStarted(),
                     opponentReady ? "Opponent is ready" : "Opponent is placing ships",
                     placingShips ? "You can place ships" : "Please wait for opponent",
                     placingShips && boardForPlayer(client).placedShipsAreValid(),
@@ -402,7 +405,7 @@ class GamePlay {
 
     private void refreshBoardsForClient(Client client) {
         BoardUIInfo leftBoard, rightBoard;
-        boolean playing = gameHasStarted();
+        boolean playing = hasStarted();
 
         if (isPlayer(client)) {
             leftBoard = boardForPlayer(client).getBoardInfo(playing, true);
@@ -419,15 +422,10 @@ class GamePlay {
         try {
             client.updateGameBoard(leftBoard);
             client.updateGameBoard(rightBoard);
-
         }
         catch (ConnectionException ex) {
             Logger.getLogger(GamePlay.class.getName()).log(Level.SEVERE, "Could not update board info of " + client, ex);
         }
-    }
-
-    private Client currentPlayerTurn() {
-        return p1Turn ? player1 : player2;
     }
 
     private Client opponent(Client player) {

@@ -18,6 +18,10 @@ import sharedlib.structs.Message;
 public class GameChatDB {
 
     public static Message saveMessage(long gameID, int playerN, String message) throws SQLException {
+        if (Database.testing) {
+            return new Message(1L, 2L, "mock_username", new Date(), message);
+        }
+        
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;

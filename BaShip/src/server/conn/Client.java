@@ -38,10 +38,12 @@ public class Client implements Connection.Delegate {
 
     @SuppressWarnings("LeakingThisInConstructor")
     public Client(Connection conn) {
-        this.connection = conn;
-        this.connection.delegate = this;
+        connection = conn;
+        if (connection != null) {
+            connection.delegate = this;
+        }
     }
-    
+
     public void disconnect() throws IOException {
         connection.disconnect();
     }

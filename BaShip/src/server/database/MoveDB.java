@@ -27,6 +27,10 @@ public class MoveDB {
      * @throws SQLException
      */
     public static void saveMove(long gameID, int playerN, int moveIndex, Coord pos) throws SQLException {
+        if (Database.testing) {
+            return;
+        }
+        
         Connection conn = null;
         PreparedStatement stmt = null;
 

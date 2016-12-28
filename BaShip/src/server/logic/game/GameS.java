@@ -69,11 +69,11 @@ public class GameS {
         }
 
         private static GamePlay gamePlayFromPlayer(Client player) {
-            return gamePlaySet.stream().filter(g -> g.hasPlayer(player)).findAny().orElse(null);
+            return gamePlaySet.stream().filter(g -> g.isPlayer(player)).findAny().orElse(null);
         }
 
         private static GamePlay gamePlayFromSpectator(Client spectator) {
-            return gamePlaySet.stream().filter(g -> g.hasSpectator(spectator)).findAny().orElse(null);
+            return gamePlaySet.stream().filter(g -> g.isSpectator(spectator)).findAny().orElse(null);
         }
 
         private static GameReplay gameReplayFromClient(Client client) {

@@ -42,9 +42,9 @@ public class GameDB {
             if (s.currentlyPlayingOnly) {
                 query += " AND enddate IS NULL";
             }
-            
+
             query += " ORDER BY startdate LIMIT ? OFFSET ?";
-            
+
             conn = Database.getConn();
             stmt = conn.prepareStatement(query);
             stmt.setString(1, "%" + s.usernameFilter + "%");
@@ -112,7 +112,7 @@ public class GameDB {
 
             rs = stmt.executeQuery();
             rs.next();
-            return new String[] {rs.getString("pu1"), rs.getString("pu2")};
+            return new String[]{rs.getString("pu1"), rs.getString("pu2")};
         }
         finally {
             Database.close(conn, stmt, rs);
@@ -129,6 +129,10 @@ public class GameDB {
      * @throws SQLException
      */
     public static Long createGame(Long player1ID, Long player2ID) throws SQLException {
+        if (Database.testing) {
+            return 1L;
+        }
+
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -158,6 +162,10 @@ public class GameDB {
      * @throws SQLException
      */
     public static void setStartTimeToNow(Long gameID) throws SQLException {
+        if (Database.testing) {
+            return;
+        }
+        
         Connection conn = null;
         PreparedStatement stmt = null;
 
@@ -180,6 +188,10 @@ public class GameDB {
      * @throws SQLException
      */
     public static void setEndTimeToNow(Long gameID) throws SQLException {
+        if (Database.testing) {
+            return;
+        }
+        
         Connection conn = null;
         PreparedStatement stmt = null;
 
@@ -203,6 +215,10 @@ public class GameDB {
      * @throws SQLException
      */
     public static void setWinner(Long gameID, Long playerID) throws SQLException {
+        if (Database.testing) {
+            return;
+        }
+        
         Connection conn = null;
         PreparedStatement stmt = null;
 
