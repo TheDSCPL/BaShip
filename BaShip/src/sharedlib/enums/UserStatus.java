@@ -4,5 +4,13 @@ public enum UserStatus {
     Offline,
     Online,
     Waiting,
-    Playing
+    Playing;
+    
+    public UserStatus getFromString(String s)
+    {
+        for(UserStatus us : UserStatus.values())
+            if(us.name().equals(s))
+                return us;
+        return null;
+    }
 }
