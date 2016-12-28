@@ -43,7 +43,15 @@ CREATE TABLE gamechat (
     UNIQUE(gmid, player, timestamp)
 );
 
- SELECT t1.uid,
+CREATE TABLE globalchat (
+    mssgid BIGSERIAL PRIMARY KEY,
+    uid INTEGER NOT NULL REFERENCES users,
+    timestamp TIMESTAMP WITH TIME ZONE NOT NULL,
+    txt TEXT NOT NULL,
+    UNIQUE(uid, timestamp)
+);
+
+CREATE VIEW user_stats AS SELECT t1.uid,
     t2.ngames,
     t1.nwins,
     t3.nshots

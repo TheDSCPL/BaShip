@@ -14,7 +14,6 @@ import sharedlib.utils.Preferences;
 // TODO: ???: Sound
 
 // TODO: Alex: JUnit - For all classes in use cases "place ship" & "fire shot"
-// TODO: Alex: Delete and remake SQL databse on FEUP
 
 // TODO: Luis: Test SQL method UserDB.setUserBanned
 // TODO: Luis: Javadoc
