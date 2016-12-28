@@ -17,7 +17,7 @@ import sharedlib.exceptions.ConnectionException;
  */
 public class Server extends Thread {
 
-    private static Server instance;
+    private volatile static Server instance;
 
     public synchronized static void startServer() throws IOException {
         stopServer();
@@ -35,8 +35,14 @@ public class Server extends Thread {
         for (Client client : ServerMain.clients) {
             client.disconnect();
         }
+        
+        instance = null;
     }
 
+    public synchronized static boolean isRunning() {
+        return instance != null;
+    }
+    
     private final ServerSocket serverSocket;
     
     private Server(int port) throws IOException {

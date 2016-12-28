@@ -13,6 +13,7 @@ import sharedlib.exceptions.ConnectionException;
 import sharedlib.exceptions.UserMessageException;
 import sharedlib.structs.Message;
 import sharedlib.structs.UserInfo;
+import static sharedlib.utils.CredentialsChecker.isUsernameValid;
 
 /**
  * Class responsible for managing the state of the users on the server. Supports
@@ -57,10 +58,13 @@ public class UserS {
             Logger.getLogger(UserS.class.getName()).log(Level.SEVERE, "Could not register due to database error", ex);
             throw new UserMessageException("Could not register due to database error");
         }
-
-        loginsID.put(user.id, client);
-        loginsClient.put(client, user.id);
-        usernamesClient.put(client, username);
+        
+        if(client != null) {
+            loginsID.put(user.id, client);
+            loginsClient.put(client, user.id);
+            usernamesClient.put(client, username);
+        }
+        
         return user;
     }
 
@@ -80,7 +84,7 @@ public class UserS {
         Long id;
         try {
             if (UserDB.isUserBanned(username)) {
-                throw new UserMessageException("This username has been banned on this server");
+                throw new UserMessageException("This user has been banned on this server");
             }
             else {
                 id = UserDB.verifyLogin(username, passwordHash);

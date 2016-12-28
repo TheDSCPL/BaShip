@@ -144,14 +144,19 @@ public class UserDB {
         }
     }
 
+    public static List<UserInfo> getUserList(UserSearch s) throws SQLException {
+        return getUserList(s, DBK.pageSize);
+    }
+    
     /**
      * Get the list of all users according to the search parameters.
      *
      * @param s The search parameters
+     * @param pageSize the number of users per page
      * @return The list of users
      * @throws SQLException
      */
-    public static List<UserInfo> getUserList(UserSearch s) throws SQLException {
+    public static List<UserInfo> getUserList(UserSearch s, int pageSize) throws SQLException {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -166,8 +171,8 @@ public class UserDB {
                     //+ "ORDER BY ? LIMIT ?"
             );
             stmt.setString(1, "%" + s.usernameFilter + "%");
-            stmt.setInt(2, DBK.pageSize);
-            stmt.setInt(3, DBK.pageSize * s.pageIndex);
+            stmt.setInt(2, pageSize);
+            stmt.setInt(3, pageSize * s.pageIndex);
 
             rs = stmt.executeQuery();
 
