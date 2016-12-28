@@ -210,7 +210,12 @@ class Board {
 
                 if (shot) {
                     if (shipsLayer.get(coord)) {
-                        fill = BoardUIInfo.SquareFill.GraySquareRedCross;
+                        if (shipIsCompletelyShot(shipContainingCoord(coord))) {
+                            fill = BoardUIInfo.SquareFill.GraySquareRedCross;
+                        }
+                        else {
+                            fill = BoardUIInfo.SquareFill.RedCross;
+                        }
                     }
                     else {
                         fill = BoardUIInfo.SquareFill.BlueDiamond;
@@ -243,6 +248,16 @@ class Board {
         }
 
         return bi;
+    }
+
+    private Ship shipContainingCoord(Coord coord) {
+        for (Ship s : ships) {
+            if (s.getShipSquares().contains(coord)) {
+                return s;
+            }
+        }
+        
+        return null;
     }
 
 }

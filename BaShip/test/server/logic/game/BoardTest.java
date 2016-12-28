@@ -284,7 +284,7 @@ public class BoardTest {
         // Test case 1
         board.shootOnSquare(new Coord(3, 1));
         result = board.getBoardInfoPlaying(false);
-        assertEquals(result.board.get(new Coord(3, 1)), SquareFill.GraySquareRedCross);
+        assertEquals(result.board.get(new Coord(3, 1)), SquareFill.RedCross);
         result.bottomInfo.stream().forEach((v) -> assertEquals(v, SquareFill.Empty));
 
         // Test case 2
