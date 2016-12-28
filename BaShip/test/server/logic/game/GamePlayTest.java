@@ -2,6 +2,8 @@ package server.logic.game;
 
 import java.math.BigInteger;
 import java.security.SecureRandom;
+import static org.hamcrest.CoreMatchers.either;
+import static org.hamcrest.CoreMatchers.is;
 import org.junit.After;
 import org.junit.AfterClass;
 import static org.junit.Assert.*;
@@ -10,6 +12,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import server.database.Database;
 import sharedlib.exceptions.UserMessageException;
+import sharedlib.structs.BoardUIInfo;
+import sharedlib.structs.BoardUIInfo.SquareFill;
 import sharedlib.structs.GameUIInfo;
 import sharedlib.structs.Message;
 import sharedlib.utils.Coord;
@@ -76,21 +80,21 @@ public class GamePlayTest {
 
         assertFalse(game.isSpectator(client3));
 
+        client3.clearCalled();
         game.addSpectator(client3);
         assertTrue(game.isSpectator(client3));
         assertTrue(client3.wasCalled("updateGameScreen"));
         assertTrue(client3.wasCalled("updateGameBoard"));
         assertTrue(client3.wasCalled("clearGameMessages"));
-        client3.clearCalled();
 
+        client3.clearCalled();
         game.playerClickedLeftBoard(client1, new Coord(0, 0));
         assertTrue(client3.wasCalled("updateGameScreen"));
         assertTrue(client3.wasCalled("updateGameBoard"));
-        client3.clearCalled();
 
+        client3.clearCalled();
         game.playerSentMessage(client1, "MESSAGE");
         assertTrue(client3.wasCalled("informAboutGameMessage"));
-        client3.clearCalled();
     }
 
     /**
@@ -102,19 +106,18 @@ public class GamePlayTest {
 
         game.addSpectator(client3);
         assertTrue(game.isSpectator(client3));
-        client3.clearCalled();
 
         game.removeSpectator(client3);
         assertFalse(game.isSpectator(client3));
 
+        client3.clearCalled();
         game.playerClickedLeftBoard(client1, new Coord(0, 0));
         assertFalse(client3.wasCalled("updateGameScreen"));
         assertFalse(client3.wasCalled("updateGameBoard"));
-        client3.clearCalled();
 
+        client3.clearCalled();
         game.playerSentMessage(client1, "MESSAGE");
         assertFalse(client3.wasCalled("informAboutGameMessage"));
-        client3.clearCalled();
     }
 
     /**
@@ -166,14 +169,14 @@ public class GamePlayTest {
         game.addSpectator(client3);
 
         // Not a player
-        game.clickReadyButton(client3);
-        assertFalse(client1.wasCalled("updateGameInfo"));
         client1.clearCalled();
+        game.clickReadyButton(client3);
+        assertFalse(client1.wasCalled("updateGameScreen"));
 
         // No ships
-        game.clickReadyButton(client1);
-        assertFalse(client1.wasCalled("updateGameInfo"));
         client1.clearCalled();
+        game.clickReadyButton(client1);
+        assertFalse(client1.wasCalled("updateGameScreen"));
 
         // Invalid ships
         game.playerClickedLeftBoard(client1, new Coord(0, 0));
@@ -181,23 +184,23 @@ public class GamePlayTest {
         game.clickReadyButton(client1);
         assertFalse(client1.wasCalled("updateGameScreen"));
         game.playerClickedLeftBoard(client1, new Coord(0, 0)); // Undo
-        client1.clearCalled();
 
         // Ship placement accepted but game hasn't started
+        client1.clearCalled();
         placeShipsP1();
         game.clickReadyButton(client1);
-        System.out.println(client1.calledMethods);
         assertTrue(client1.wasCalled("updateGameScreen"));
         assertFalse(((GameUIInfo) client1.callArgument("updateGameScreen")).showRightBoard);
-        client1.clearCalled();
 
         // Already clicked ready
+        client1.clearCalled();
         game.clickReadyButton(client1);
         assertFalse(client1.wasCalled("updateGameScreen"));
-        client1.clearCalled();
 
         // Both ready, game started
         placeShipsP2();
+        client1.clearCalled();
+        client2.clearCalled();
         game.clickReadyButton(client2);
         assertTrue(((GameUIInfo) client1.callArgument("updateGameScreen")).showRightBoard);
         assertTrue(((GameUIInfo) client2.callArgument("updateGameScreen")).showRightBoard);
@@ -261,6 +264,34 @@ public class GamePlayTest {
     @Test
     public void testPlayerClickedRightBoard() {
         System.out.println("playerClickedRightBoard");
+
+        game.addSpectator(client3);
+        
+        // Game hasn't started
+        client3.clearCalled();
+        game.playerClickedRightBoard(client1, new Coord(5, 5));
+        assertFalse(client3.wasCalled("updateGameBoard"));
+        
+        // Start game
+        placeShipsP1();
+        placeShipsP2();
+        game.clickReadyButton(client1);
+        game.clickReadyButton(client2);
+        
+        // Spectator cannot fire
+        client1.clearCalled();
+        game.playerClickedRightBoard(client3, new Coord(0, 0));
+        assertFalse(client1.wasCalled("updateGameBoard"));
+        
+        // Player can fire
+        MockClient player = (MockClient)game.getCurrentPlayer();
+        player.clearCalled();
+        game.playerClickedRightBoard(player, new Coord(0, 0));
+        assertTrue(player.wasCalled("updateGameBoard"));
+        assertThat(((BoardUIInfo) player.callArgument("updateGameBoard", 1)).board.get(new Coord(0, 0)), either(is(SquareFill.BlueDiamond)).or(is(SquareFill.GraySquareRedCross)));
+        
+        // Turn has changed
+        assertNotEquals(game.getCurrentPlayer(), player);
     }
 
     /**
@@ -270,16 +301,30 @@ public class GamePlayTest {
     public void testPlayerClickedLeftBoard() {
         System.out.println("playerClickedLeftBoard");
 
+        game.addSpectator(client3);
+
         // Spectator
         client3.clearCalled();
-        game.addSpectator(client3);
-        game.playerClickedLeftBoard(client3, new Coord(0, 0));
+        game.playerClickedLeftBoard(client3, new Coord(5, 5));
         assertFalse(client3.wasCalled("updateGameScreen"));
-        
+
         // Player placing ships
-        game.addSpectator(client3);
-        game.playerClickedLeftBoard(client3, new Coord(0, 0));
-        assertFalse(client3.wasCalled("updateGameScreen"));
+        client1.clearCalled();
+        game.playerClickedLeftBoard(client1, new Coord(0, 0));
+        assertTrue(client1.wasCalled("updateGameScreen"));
+        assertEquals(((BoardUIInfo) client1.callArgument("updateGameBoard")).board.get(new Coord(0, 0)), SquareFill.GraySquare);
+        game.playerClickedLeftBoard(client1, new Coord(0, 0));
+
+        // Start game
+        placeShipsP1();
+        placeShipsP2();
+        game.clickReadyButton(client1);
+        game.clickReadyButton(client2);
+        
+        // Game has started
+        client1.clearCalled();
+        game.playerClickedLeftBoard(client1, new Coord(2, 3));
+        assertFalse(client1.wasCalled("updateGameScreen"));
     }
 
     /**
@@ -289,19 +334,21 @@ public class GamePlayTest {
     public void testPlayerSentMessage() throws Exception {
         System.out.println("playerSentMessage");
         SecureRandom random = new SecureRandom();
-        
+
         game.addSpectator(client3);
 
         for (int i = 0; i < 200; i++) {
             client1.clearCalled();
             client2.clearCalled();
+            client3.clearCalled();
 
             String str = new BigInteger(130, random).toString(32);
             game.playerSentMessage(random.nextBoolean() ? client1 : client2, str);
-            
+
             assertEquals(((Message) client1.callArgument("informAboutGameMessage")).text, str);
             assertEquals(((Message) client2.callArgument("informAboutGameMessage")).text, str);
             assertEquals(((Message) client3.callArgument("informAboutGameMessage")).text, str);
         }
     }
+
 }

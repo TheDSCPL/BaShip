@@ -2,10 +2,14 @@ package server.logic.game;
 
 import org.junit.After;
 import org.junit.AfterClass;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import server.database.Database;
+import sharedlib.structs.BoardUIInfo;
+import sharedlib.structs.GameUIInfo;
 
 /**
  *
@@ -52,117 +56,24 @@ public class GameSTest {
     public void testStartRandomGame() throws Exception {
         System.out.println("startRandomGame");
         
-        //GameS.startRandomGame(client);
-    }
-
-    /**
-     * Test of answerGameInvitation method, of class GameS.
-     */
-    @Test
-    public void testAnswerGameInvitation() throws Exception {
-        System.out.println("answerGameInvitation");
+        // Update screen for waiting
+        client1.clearCalled();
+        GameS.Actions.startRandomGame(client1);
+        assertTrue(client1.wasCalled("updateGameScreen"));
+        assertFalse(((GameUIInfo)client1.callArgument("updateGameScreen")).showRightBoard);
+        assertTrue(client1.wasCalled("updateGameBoard"));
+        assertTrue(((BoardUIInfo)client1.callArgument("updateGameBoard")).leftBoard);
         
-        //GameS.answerGameInvitation(invitedPlayer, accepted);
-    }
-
-    /**
-     * Test of clickReadyButton method, of class GameS.
-     */
-    @Test
-    public void testClickReadyButton() {
-        System.out.println("clickReadyButton");
-        
-        //GameS.clickReadyButton(player);
-    }
-
-    /**
-     * Test of clientClickedLeftBoard method, of class GameS.
-     */
-    @Test
-    public void testClientClickedLeftBoard() {
-        System.out.println("clientClickedLeftBoard");
-        
-        //GameS.clientClickedLeftBoard(client, pos);
-    }
-
-    /**
-     * Test of clientClickedRightBoard method, of class GameS.
-     */
-    @Test
-    public void testClientClickedRightBoard() {
-        System.out.println("clientClickedRightBoard");
-        
-        //GameS.clientClickedRightBoard(player, pos);
-    }
-
-    /**
-     * Test of clientClosedGame method, of class GameS.
-     */
-    @Test
-    public void testClientClosedGame() {
-        System.out.println("clientClosedGame");
-        
-        //GameS.clientClosedGame(client);
-    }
-
-    /**
-     * Test of clientDisconnected method, of class GameS.
-     */
-    @Test
-    public void testClientDisconnected() {
-        System.out.println("clientDisconnected");
-        
-        //GameS.clientDisconnected(client);
-    }
-
-    /**
-     * Test of showNextMove method, of class GameS.
-     */
-    @Test
-    public void testShowNextMove() throws Exception {
-        System.out.println("showNextMove");
-        
-        //GameS.showNextMove(client);
-    }
-
-    /**
-     * Test of showPreviousMove method, of class GameS.
-     */
-    @Test
-    public void testShowPreviousMove() {
-        System.out.println("showPreviousMove");
-        
-        //GameS.showPreviousMove(client);
-    }
-
-    /**
-     * Test of sendGameMessage method, of class GameS.
-     */
-    @Test
-    public void testSendGameMessage() throws Exception {
-        System.out.println("sendGameMessage");
-        
-        //GameS.sendGameMessage(player, message);
-    }
-
-    /**
-     * Test of clientDoubleClickedUser method, of class GameS.
-     */
-    @Test
-    public void testClientDoubleClickedUser() throws Exception {
-        System.out.println("clientDoubleClickedUser");
-        
-        //GameS.clientDoubleClickedUser(client, playerID);
-    }
-
-    /**
-     * Test of clientDoubleClickedGame method, of class GameS.
-     */
-    @Test
-    public void testClientDoubleClickedGame() throws Exception {
-        System.out.println("clientDoubleClickedGame");
-        
-        //GameS.clientDoubleClickedGame(client, gameID);
+        // Update screen for game with player (for both players)
+        client1.clearCalled();
+        client2.clearCalled();
+        GameS.Actions.startRandomGame(client2);
+        assertTrue(client1.wasCalled("updateGameScreen"));
+        assertFalse(((GameUIInfo)client1.callArgument("updateGameScreen")).showRightBoard);
+        assertTrue(client2.wasCalled("updateGameScreen"));
+        assertFalse(((GameUIInfo)client2.callArgument("updateGameScreen")).showRightBoard);
+        assertTrue(client2.wasCalled("updateGameBoard"));
+        assertTrue(((BoardUIInfo)client2.callArgument("updateGameBoard")).leftBoard);
     }
     
 }

@@ -13,13 +13,8 @@ import sharedlib.utils.Preferences;
 
 // TODO: ???: Sound
 
-// TODO: Alex: JUnit - For all classes in use cases "place ship" & "fire shot"
-
-// TODO: Luis: Test SQL method UserDB.setUserBanned
 // TODO: Luis: Javadoc
 // TODO: Luis: Interface color (option in settings)
-// TODO: Luis: Console
-// TODO: Luis: Other things?
 
 public class ServerMain {
 
