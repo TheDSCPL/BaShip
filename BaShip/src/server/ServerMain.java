@@ -15,6 +15,7 @@ import sharedlib.utils.Preferences;
 
 // TODO: Luis: Javadoc
 // TODO: Luis: Interface color (option in settings)
+// TODO: Luis: HTML help window
 
 public class ServerMain {
 
