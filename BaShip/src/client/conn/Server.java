@@ -221,6 +221,11 @@ public class Server implements Connection.Delegate {
         }
     }
 
+    /**
+     * Send a text message to the players on the game
+     * @param message The text message
+     * @throws UserMessageException
+     */
     public void sendGameMessage(String message) throws UserMessageException {
         Packet request = new Packet(Query.C_SendGameMessage, message);
         Packet response = sendAndReceiveWrapper(request);

@@ -161,6 +161,10 @@ public class ClientMain {
         }
     }
 
+    /**
+     * Verify if the server connecton is down.
+     * @return True if it's ok. False if server connection is down.
+     */
     public static boolean checkServerConnection() {
         if (server == null) {
             // Show message

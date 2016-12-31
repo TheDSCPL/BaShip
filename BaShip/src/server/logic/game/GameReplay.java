@@ -87,6 +87,10 @@ public class GameReplay {
         }
     }
 
+    /**
+     * Show the next move of the game.
+     * @throws UserMessageException
+     */
     public synchronized void showNextMove() throws UserMessageException {
         if (currentTurn >= totalTurnCount) {
             return;
@@ -111,6 +115,9 @@ public class GameReplay {
         refreshClient();
     }
 
+    /**
+     * Show previous move of the game
+     */
     public synchronized void showPreviousMove() {
         if (currentTurn <= 0) {
             return;

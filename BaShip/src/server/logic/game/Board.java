@@ -92,6 +92,10 @@ class Board {
         }
     }
 
+    /**
+     * Check if the ships are placed in a valid position
+     * @return True if the position is valid, false otherwise
+     */
     public boolean placedShipsAreValid() {
         for (Map.Entry<Integer, Integer> entry : SHIP_COUNT_FOR_SIZE.entrySet()) {
             int count = (int) ships.stream().filter(s -> s.size == entry.getKey()).count();

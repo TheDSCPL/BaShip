@@ -94,6 +94,12 @@ public class GameDB {
         }
     }
 
+    /**
+     * Get the players usernames that played a certain game
+     * @param gameID ID of the game were the players played
+     * @return A string cointaining the name of the usernames
+     * @throws SQLException
+     */
     public static String[] getPlayerUsernamesFromGame(Long gameID) throws SQLException {
         Connection conn = null;
         PreparedStatement stmt = null;

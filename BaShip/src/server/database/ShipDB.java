@@ -53,6 +53,13 @@ public class ShipDB {
         }
     }
 
+    /**
+     * Get the ship positions that a player chooses in a certain game
+     * @param gameID ID of the game
+     * @param playerN Player to know the ship positions
+     * @return A list with the positions of every ship
+     * @throws SQLException
+     */
     public static List<Ship> getShipPositions(long gameID, int playerN) throws SQLException {
         Connection conn = null;
         PreparedStatement stmt = null;
