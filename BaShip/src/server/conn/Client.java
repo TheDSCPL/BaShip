@@ -36,6 +36,10 @@ public class Client implements Connection.Delegate {
 
     private final Connection connection;
 
+    /**
+     * Connects to the client
+     * @param conn Connection of the client
+     */
     @SuppressWarnings("LeakingThisInConstructor")
     public Client(Connection conn) {
         connection = conn;
@@ -44,6 +48,10 @@ public class Client implements Connection.Delegate {
         }
     }
 
+    /**
+     * Disconnects the client
+     * @throws IOException
+     */
     public void disconnect() throws IOException {
         connection.disconnect();
     }
@@ -233,10 +241,20 @@ public class Client implements Connection.Delegate {
         connection.sendOnly(new Packet(Query.S_ReceiveGlobalMessage, msg));
     }
 
+    /**
+     * Inform the client about a game message that has been sent by a user. The
+     * Client should then update the UI accordingly
+     * @param msg The message object
+     * @throws ConnectionException
+     */
     public void informAboutGameMessage(Message msg) throws ConnectionException {
         connection.sendOnly(new Packet(Query.S_ReceiveGameMessage, msg));
     }
 
+    /**
+     * Clear the game messages
+     * @throws ConnectionException
+     */
     public void clearGameMessages() throws ConnectionException {
         connection.sendOnly(new Packet(Query.S_ClearGameMessages));
     }
@@ -252,17 +270,22 @@ public class Client implements Connection.Delegate {
         connection.sendOnly(new Packet(Query.S_UpdateGameScreen, info));
     }
 
-    /*
+
+    /**
      * Inform the client that he has received an invitation from another player.
-     * Note: API not yet finished.
-     *
-     * @param usernameOfUserInvitingPlayer
-     * @throws ConnectionException
+     * 
+     * @param usernameOfUserInvitingPlayer Username of the client that send
+     * the invitation
+     * @throws ConnectionException 
      */
     public void sendGameInvitation(String usernameOfUserInvitingPlayer) throws ConnectionException {
         connection.sendOnly(new Packet(Query.S_ReceiveGameInvitation, usernameOfUserInvitingPlayer));
     }
 
+    /**
+     * Informs the client that he closed a game invitation
+     * @throws ConnectionException
+     */
     public void closeGameInvitation() throws ConnectionException {
         connection.sendOnly(new Packet(Query.S_CloseGameInvitation));
     }
@@ -279,6 +302,12 @@ public class Client implements Connection.Delegate {
         connection.sendOnly(new Packet(Query.S_UpdateGameBoard, info));
     }
 
+    /**
+     * Show a message to the client and then closes the game
+     * 
+     * @param message The message to be sent
+     * @throws ConnectionException
+     */
     public void showMessageAndCloseGame(String message) throws ConnectionException {
         connection.sendOnly(new Packet(Query.S_ShowMessageAndCloseGame, message));
     }

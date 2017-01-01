@@ -85,6 +85,9 @@ public class GameS {
         }
     }
 
+    /**
+     * Class that knows the current info and status of a client
+     */
     public static class PlayerInfo {
 
         /**
@@ -135,6 +138,9 @@ public class GameS {
         }
     }
 
+    /**
+     * Class responsible to managing the actions that a client can take
+     */
     public static class Actions {
 
         /**

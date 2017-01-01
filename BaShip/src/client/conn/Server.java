@@ -235,6 +235,11 @@ public class Server implements Connection.Delegate {
         }
     }
 
+    /**
+     * Informs the server that the client double clicked a game
+     * @param gameID ID of the the game that the client double clicked
+     * @throws UserMessageException
+     */
     public void doubleClickGame(Long gameID) throws UserMessageException {
         Packet request = new Packet(Query.C_DoubleClickGame, gameID);
         Packet response = sendAndReceiveWrapper(request);
@@ -244,6 +249,11 @@ public class Server implements Connection.Delegate {
         }
     }
 
+    /**
+     * Informs the server that the client double clicked a player 
+     * @param playerID ID of the player that the client double clicked
+     * @throws UserMessageException
+     */
     public void doubleClickUser(Long playerID) throws UserMessageException {
         Packet request = new Packet(Query.C_DoubleClickUser, playerID);
         Packet response = sendAndReceiveWrapper(request);
@@ -334,11 +344,19 @@ public class Server implements Connection.Delegate {
         sendAndReceiveWrapper(request); // Response is an empty packet, just for confirmation
     }
 
+    /**
+     * Ask the server 
+     * @throws UserMessageException
+     */
     public void showPreviousMove() throws UserMessageException {
         Packet request = new Packet(Query.C_ShowPreviousMove);
         sendAndReceiveWrapper(request); // Response is an empty packet, just for confirmation
     }
 
+    /**
+     *
+     * @throws UserMessageException
+     */
     public void showNextMove() throws UserMessageException {
         Packet request = new Packet(Query.C_ShowNextMove);
         Packet response = sendAndReceiveWrapper(request);

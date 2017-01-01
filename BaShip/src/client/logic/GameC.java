@@ -33,7 +33,6 @@ public class GameC {
      * @param gs The parameters of this search for games
      * @return A list of <code>GameInfo</code> objects with all its fields
      * non-null.
-     * @throws UserMessageException
      */
     public static List<GameInfo> getGameList(GameSearch gs) {
         if (!ClientMain.checkServerConnection()) {
@@ -52,7 +51,6 @@ public class GameC {
     /**
      * Ask the server to start a game with another random player.
      *
-     * @throws UserMessageException
      */
     public static void startRandomGame() {
         if (!ClientMain.checkServerConnection()) {
@@ -67,17 +65,7 @@ public class GameC {
         }
     }
 
-    /**
-     * Called automatically by the <code>Server</code> class whenever an
-     * invitation is received. Shows a pop-up to the user with the given message
-     * String, allowing the user to choose whether he wants to accept the
-     * invitation and start a game or not.
-     *
-     * @param message The message string to be displayed to the user.
-     */
-    /*static public void showGameInvitation(String message) {
 
-    }*/
     /**
      * Updates the game UI accordingly if a GamePanel is already being shown. If
      * not, shows a GamePanel first.
@@ -116,7 +104,6 @@ public class GameC {
      * @param leftBoard True if player clicked on the left board, false if
      * clicked on the right.
      * @param c Coordinates of the square where the player clicked
-     * @throws UserMessageException
      */
     static public void clickBoardCoordinate(boolean leftBoard, Coord c) {
         if (!ClientMain.checkServerConnection()) {
@@ -140,7 +127,6 @@ public class GameC {
      * Inform the server that this user has finished placing ships and is ready
      * to start the game.
      *
-     * @throws UserMessageException
      */
     static public void clickReadyButton() {
         if (!ClientMain.checkServerConnection()) {
@@ -155,6 +141,10 @@ public class GameC {
         }
     }
 
+    /**
+     * Asks the server to show the next move of the game
+     * @throws UserMessageException
+     */
     static public void showNextMove() throws UserMessageException {
         if (!ClientMain.checkServerConnection()) {
             return;
@@ -163,6 +153,10 @@ public class GameC {
         ClientMain.server.showNextMove();
     }
 
+    /**
+     * Asks the server to show the previous move of the game
+     * @throws UserMessageException
+     */
     static public void showPreviousMove() throws UserMessageException {
         if (!ClientMain.checkServerConnection()) {
             return;
@@ -206,6 +200,10 @@ public class GameC {
         });
     }
 
+    /**
+     * Informs the server that the user double clicked in a game
+     * @param gameInfo The game that the user double clicked
+     */
     public static void doubleClickGame(GameInfo gameInfo) {
         if (!ClientMain.checkServerConnection()) {
             return;
@@ -221,6 +219,12 @@ public class GameC {
 
     private static InvitationWindow invitationWindow;
 
+    /**
+     * Shows a pop-up to the user with the given message String, allowing the
+     * user to choose whether he wants to accept the invitation and start 
+     * a game or not.
+     * @param username The message string to be displayed to the user
+     */
     public static void showGameInvitation(String username) {
         ClientMain.runOnUI(() -> {
             if (invitationWindow != null) {

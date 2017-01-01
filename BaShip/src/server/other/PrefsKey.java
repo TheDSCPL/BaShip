@@ -8,9 +8,25 @@ import sharedlib.utils.Preferences;
  * @author Alex
  */
 public enum PrefsKey implements Preferences.Key {
+
+    /**
+     * Port of server to connect
+     */
     ServerPort("ServerPort", 4413),
+
+    /**
+     * URL of the database to connect
+     */
     DatabaseURL("DatabaseURL", "jdbc:postgresql://dbm.fe.up.pt/lpro1613"),
+
+    /**
+     * Username of database login
+     */
     DatabaseUsername("DatabaseUsername", "lpro1613"),
+
+    /**
+     * Password of database login
+     */
     DatabasePassword("DatabasePassword", "X!5493jbo");
     /*DatabaseURL("DatabaseURL", "jdbc:postgresql://localhost/Alex"),
     DatabaseUsername("DatabaseUsername", "Alex"),
@@ -27,11 +43,19 @@ public enum PrefsKey implements Preferences.Key {
         this.defaultValue = defaultValue;
     }
 
+    /**
+     *
+     * @return Key
+     */
     @Override
     public String getKey() {
         return key;
     }
 
+    /**
+     *
+     * @return Default Value
+     */
     @Override
     public Object getDefaultValue() {
         return defaultValue;

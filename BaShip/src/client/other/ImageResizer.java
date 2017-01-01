@@ -19,6 +19,13 @@ import javax.swing.JLabel;
  */
 public class ImageResizer implements ComponentListener {
 
+    /**
+     * Resize a icon to specified width and height
+     * @param srcImg Icon to be resized
+     * @param width Width expected for the icon image
+     * @param height Height expected for the icon image
+     * @return
+     */
     public static ImageIcon resizeIcon(ImageIcon srcImg, int width, int height) {
         if(srcImg == null || srcImg.getImage() == null)
             return null;

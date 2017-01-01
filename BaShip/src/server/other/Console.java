@@ -382,6 +382,10 @@ public class Console extends Thread {
         }
     }
     
+    /**
+     * Prints a message.
+     * @param output The message to be printed
+     */
     public void println(String output) {
         System.out.print("\b\b" + output + "\n" + PROMPT);
     }

@@ -19,12 +19,21 @@ public class Server extends Thread {
 
     private volatile static Server instance;
 
+    /**
+     * Start a new server accordingly to the preferences
+     * 
+     * @throws IOException
+     */
     public synchronized static void startServer() throws IOException {
         stopServer();
         instance = new Server(prefs.getI(PrefsKey.ServerPort));
         instance.start();
     }
 
+    /**
+     * Close the server and all client connections
+     * @throws IOException
+     */
     public synchronized static void stopServer() throws IOException {
         // Close server
         if (instance != null) {
@@ -39,6 +48,10 @@ public class Server extends Thread {
         instance = null;
     }
 
+    /**
+     *
+     * @return True if the server is running
+     */
     public synchronized static boolean isRunning() {
         return instance != null;
     }

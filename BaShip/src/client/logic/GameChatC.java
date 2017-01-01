@@ -17,6 +17,9 @@ public class GameChatC {
 
     private static final List<Message> messages = Collections.synchronizedList(new ArrayList<>());
 
+    /**
+     * Clear all the messages in a game chat
+     */
     public static void clearGameMessages() {
         messages.clear();
     }

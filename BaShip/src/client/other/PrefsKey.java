@@ -7,9 +7,25 @@ import sharedlib.utils.Preferences;
  * @author Alex
  */
 public enum PrefsKey implements Preferences.Key {
+
+    /**
+     * Server IP of the connection
+     */
     ServerIP("ServerIP", "localhost"),
+
+    /**
+     * Port of the server connection
+     */
     ServerPort("ServerPort", 4413),
+
+    /**
+     * UI colour theme
+     */
     DarkTheme("DarkTheme", false),
+
+    /**
+     * Background music
+     */
     Sound("Sound", true);
 
     private final String key;
@@ -20,11 +36,19 @@ public enum PrefsKey implements Preferences.Key {
         this.defaultValue = defaultValue;
     }
 
+    /**
+     *
+     * @return Key
+     */
     @Override
     public String getKey() {
         return key;
     }
 
+    /**
+     *
+     * @return Default Value
+     */
     @Override
     public Object getDefaultValue() {
         return defaultValue;

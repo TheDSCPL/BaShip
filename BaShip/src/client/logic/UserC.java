@@ -127,6 +127,10 @@ public class UserC {
         }
     }
 
+    /**
+     * Informs the server that the client has double clicked another user
+     * @param userInfo Info of the user that the client double clicked
+     */
     public static void doubleClickUser(UserInfo userInfo) {
         if (!ClientMain.checkServerConnection()) {
             return;

@@ -13,17 +13,38 @@ import sharedlib.conn.Connection;
 import sharedlib.exceptions.ConnectionException;
 import sharedlib.utils.Preferences;
 
+/**
+ * Main Class of the client side code
+ * 
+ */
 public class ClientMain {
 
     private ClientMain() {
 
     }
 
+    /**
+     * Connection this client has with the server. May be null if no connection
+     * is currently open
+     */
     public static Server server;
+
+    /**
+     * Creates a new Main Frame for the client user interface.
+     */
     public static final MainFrame mainFrame = new MainFrame();
+
+    /**
+     * Preferences that each user can change on game settings. It can read
+     * and write values
+     */
     public static final Preferences prefs = new Preferences(ClientMain.class);
     private static final ExecutorService backgroundExecutor = Executors.newCachedThreadPool();
 
+    /**
+     * Main method where the client user interface is called
+     * @param args
+     */
     public static void main(String args[]) {
         runOnUI(() -> {
             mainFrame.changeToPanel(new LoginPanel());

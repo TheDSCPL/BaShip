@@ -18,9 +18,19 @@ import sharedlib.structs.GameUIInfo.UIType;
 import sharedlib.structs.Message;
 import sharedlib.structs.Move;
 
+/**
+ * Class responsible for managing the replay of games already finished
+ */
 public class GameReplay {
 
+    /**
+     * The client who wants to see the game replay
+     */
     public final Client client;
+
+    /**
+     * ID of the game that the client wants to see the game replay
+     */
     public final Long gameID;
 
     private String p1Username, p2Username;
@@ -29,6 +39,14 @@ public class GameReplay {
     private final int totalTurnCount;
     private final List<Move> moves = new ArrayList<>();
 
+    /**
+     * Get all the game info from database and initialize the replay of the 
+     * game.
+     * 
+     * @param client The client who wants to see the game replay
+     * @param gameID ID of the game to replay
+     * @throws UserMessageException
+     */
     public GameReplay(Client client, Long gameID) throws UserMessageException {
         this.client = client;
         this.gameID = gameID;
@@ -130,10 +148,16 @@ public class GameReplay {
         refreshClient();
     }
 
+    /**
+     * Informs that the client closed the game replay
+     */
     public synchronized void clientClosedGame() {
         GameS.Callbacks.gameReplayFinished(this);
     }
 
+    /**
+     * Informs that the client disconnected from the server
+     */
     public synchronized void clientDisconnected() {
         GameS.Callbacks.gameReplayFinished(this);
     }

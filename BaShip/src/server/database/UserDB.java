@@ -144,6 +144,14 @@ public class UserDB {
         }
     }
 
+    /**
+     * Get the list of all users according to the search parameters. 
+     * Automatically limits the number of users per page.
+     * 
+     * @param s The search parameters
+     * @return The list of users
+     * @throws SQLException
+     */
     public static List<UserInfo> getUserList(UserSearch s) throws SQLException {
         return getUserList(s, DBK.pageSize);
     }
