@@ -232,6 +232,9 @@ public class GameC {
         });
     }
 
+    /**
+     * Close and refuses a game invitation
+     */
     public static void closeGameInvitation() {
         ClientMain.runOnUI(() -> {
             if (invitationWindow != null) {

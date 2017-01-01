@@ -26,6 +26,10 @@ import sharedlib.utils.Coord;
  */
 public class GameS {
 
+    /**
+     * Class responsible for managing the info of the games that will be
+     * player or replayed
+     */
     public static class GameInfo {
 
         private static final Set<GamePlay> gamePlaySet = Collections.newSetFromMap(new ConcurrentHashMap<>());
@@ -88,16 +92,26 @@ public class GameS {
          * @return True if the client is in a game currently. It returns false
          * otherwise, specially when the user is on the game screen, but
          * waiting, not playing.
-         * @see GameS#isClientWaiting(Client)
+         * @see GameS#isWaitingForGame(Client)
          */
         public static boolean isPlaying(Client client) {
             return GameInfo.gamePlayFromPlayer(client) != null;
         }
 
+        /**
+         * 
+         * @param client
+         * @return True if the client is spectating a game
+         */
         public static boolean isSpectating(Client client) {
             return GameInfo.gamePlayFromSpectator(client) != null;
         }
 
+        /**
+         * 
+         * @param client
+         * @return True if the client is replaying a game
+         */
         public static boolean isReplaying(Client client) {
             return GameInfo.gameReplayFromClient(client) != null;
         }
@@ -105,12 +119,17 @@ public class GameS {
         /**
          * @param client
          * @return True if the client is waiting for a game.
-         * @see GameS#isClientPlaying(Client)
+         * @see GameS#isPlaying(Client)
          */
         public static boolean isWaitingForGame(Client client) {
             return Info.isWaitingForRandomGame(client);
         }
 
+        /**
+         * 
+         * @param client
+         * @return True if the client is waiting for an opponent
+         */
         public static boolean isWaitingForPlayer(Client client) {
             return Info.isWaitingForPlayer(client);
         }
@@ -294,6 +313,12 @@ public class GameS {
             }
         }
 
+        /** 
+         * Show the next move of a game that the client is replaying
+         * 
+         * @param client The client who is asking to see the next move
+         * @throws UserMessageException 
+         */
         public static void showNextMove(Client client) throws UserMessageException {
             GameReplay gr = GameInfo.gameReplayFromClient(client);
             System.out.println(gr);
@@ -302,6 +327,11 @@ public class GameS {
             }
         }
 
+        /**
+         * Show the previous move of the game that the client is replaying
+         * 
+         * @param client The client who is asking to see the previous move 
+         */
         public static void showPreviousMove(Client client) {
             GameReplay gr = GameInfo.gameReplayFromClient(client);
             if (gr != null) {
@@ -309,12 +339,30 @@ public class GameS {
             }
         }
 
+        /**
+         * Send a message to the game chat that the client is playing
+         * 
+         * @param player The client who sends the message
+         * @param message The message to be sent
+         * @throws UserMessageException 
+         */
         public synchronized static void sendGameMessage(Client player, String message) throws UserMessageException {
             if (PlayerInfo.isPlaying(player)) {
                 GameInfo.gamePlayFromPlayer(player).playerSentMessage(player, message);
             }
         }
 
+        /**
+         * Informs the state machine of the game that the client double clicked 
+         * a player and perform an action depending on the player status:
+         * s) Spectate the game if the player is online and playing a game;
+         * b) Start a game if the player is waiting for an opponent;
+         * c) Invite the player if he's just online.
+         * 
+         * @param client The client who double clicked a player
+         * @param playerID The ID of the player that the client double clicked
+         * @throws UserMessageException 
+         */
         public static void clientDoubleClickedUser(Client client, Long playerID) throws UserMessageException {
             Client clickedClient = UserS.clientWithUserID(playerID);
 
@@ -354,6 +402,16 @@ public class GameS {
             }
         }
 
+        /**
+         * Informs the state machine of the game that the client double clicked
+         * a game and performs an action depending on the currently game status:
+         * s) Spectate if the game is being played;
+         * b) Replay the game if the game is over.
+         * 
+         * @param client The client who double clicked the game
+         * @param gameID ID of the game that the client double clicked
+         * @throws UserMessageException 
+         */
         public static void clientDoubleClickedGame(Client client, Long gameID) throws UserMessageException {
             // Game is currently being played -> spectate
             if (GameInfo.gamePlayFromGameID(gameID) != null) {
@@ -365,6 +423,13 @@ public class GameS {
             }
         }
 
+        /**
+         * Start a game between two players already known
+         * 
+         * @param player1 Client that will play the game
+         * @param player2 The other client that will play agains player1
+         * @throws UserMessageException 
+         */
         private static void startGame(Client player1, Client player2) throws UserMessageException {
             GamePlay game;
             game = new GamePlay(player1, Info.waitingBoardForPlayer(player1), player2, Info.waitingBoardForPlayer(player2));
@@ -377,11 +442,26 @@ public class GameS {
             Info.removeWaitingBoardForPlayer(player2);
         }
 
+        /**
+         * Start replaying a game that have already finished
+         * 
+         * @param client The client that wants to replay the game
+         * @param gameID The ID of the game to be replayed
+         * @throws UserMessageException 
+         */
         private static void startReplay(Client client, Long gameID) throws UserMessageException {
             GameReplay game = new GameReplay(client, gameID);
             GameInfo.addGameReplay(game);
         }
 
+        /**
+         * Informs the state machine that the client will be waiting for an
+         * opponent. It can be a random or specific player.
+         * 
+         * @param clientWaiting The client that will be waiting
+         * @param targetClient The client that the other client is waiting for.
+         * It can be null if he's expecting a random player.
+         */
         private static void startWait(Client clientWaiting, Client targetClient) {
             // Waiting for random game
             if (targetClient == null) {
@@ -404,6 +484,12 @@ public class GameS {
             }
         }
 
+        /**
+         * Allows the client to spectate a game that is currently being played
+         * by other players.
+         * @param client The client who wants to spectate the game
+         * @param gameID The ID of the game that the client wants to spectate
+         */
         private static void spectateGame(Client client, Long gameID) {
             GamePlay gp = GameInfo.gamePlayFromGameID(gameID);
 
@@ -491,6 +577,10 @@ public class GameS {
 
     private static class Helpers {
 
+        /**
+         * Helps the UI updating info of the client currently status
+         * @param client The client who the game screen interface will be updated
+         */
         private static void updateGameScreenForClient(Client client) {
             GameUIInfo gsi = null;
 

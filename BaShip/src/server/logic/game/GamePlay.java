@@ -88,6 +88,10 @@ class GamePlay {
         refreshClientInfo();
     }
 
+    /**
+     * Add a spectator to the gameplay
+     * @param client The client who wants to spectate
+     */
     public synchronized void addSpectator(Client client) {
         if (isPlayer(client)) {
             return;
@@ -114,6 +118,11 @@ class GamePlay {
         spectators.remove(client);
     }
 
+    /**
+     * Informs the class that the client closed the game. If he's a player of that game,
+     * the game ends and the victory goes to the opponent.
+     * @param client Client who closed the game
+     */
     public synchronized void clientClosedGame(Client client) {
         if (isPlayer(client)) {
             finishGame("Game ended. Player " + UserS.usernameOfClient(client) + " closed game.", opponent(client), client);
@@ -123,6 +132,11 @@ class GamePlay {
         }
     }
 
+    /**
+     * Informs the class that the client disconnected. If he's a player of the
+     * game, the game ends and his opponent wins.
+     * @param client Client who disconnected
+     */
     public synchronized void clientDisconnected(Client client) {
         if (isPlayer(client)) {
             finishGame("Game ended. Player " + UserS.usernameOfClient(client) + " disconnected.", opponent(client), null);
@@ -132,6 +146,11 @@ class GamePlay {
         }
     }
 
+    /**
+     * Informs this class that the client is ready to start the game. If both
+     * players are ready, the game starts.
+     * @param player The client who clicked the ready button
+     */
     public synchronized void clickReadyButton(Client player) {
         // Verify if player is in this game
         if (!isPlayer(player)) {
@@ -173,6 +192,12 @@ class GamePlay {
         refreshClientInfo();
     }
 
+    /**
+     * Informs this class that the player clicked on the right board at pos. If 
+     * he shoots the last ship, the game ends
+     * @param player The player of clicked on the right board
+     * @param pos Coordinate where player clicked
+     */
     public synchronized void playerClickedRightBoard(Client player, Coord pos) {
         // Verify if game has finished
         if (finished) {
@@ -224,6 +249,11 @@ class GamePlay {
         }
     }
 
+    /**
+     * Informs this class that the player clicked on the left board at pos.
+     * @param player The player who clicked
+     * @param pos Coordinate where the player clicked
+     */
     public synchronized void playerClickedLeftBoard(Client player, Coord pos) {
         // Verify if game has finished
         if (finished) {
@@ -247,6 +277,12 @@ class GamePlay {
         refreshClientInfo();
     }
 
+    /**
+     * Informs this class that the client send a text message to the game chat
+     * @param player The client who sent the message
+     * @param text The text that the player sent
+     * @throws UserMessageException 
+     */
     public synchronized void playerSentMessage(Client player, String text) throws UserMessageException {
         Message message;
         try {
@@ -305,6 +341,13 @@ class GamePlay {
         ShipDB.saveShipPositions(gameID, 2, p2Board.getShips());
     }
 
+    /**
+     * Informs this class that the game finished. The winner is set and all the
+     * spectator are removed
+     * @param message Message sent to the winner
+     * @param winner The player that wins the game
+     * @param dontSendMessageTo The player that loses the game
+     */
     private void finishGame(String message, Client winner, Client dontSendMessageTo) {
         finished = true;
 

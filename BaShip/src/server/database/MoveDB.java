@@ -51,6 +51,12 @@ public class MoveDB {
         }
     }
 
+    /**
+     * Get the total number of the moves of a certain game
+     * @param gameID ID of the game to know the total moves
+     * @return
+     * @throws SQLException
+     */
     public static int getTotalMoveCount(long gameID) throws SQLException {
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -70,6 +76,14 @@ public class MoveDB {
         }
     }
 
+    /**
+     * Get a specific move of a certain game
+     * 
+     * @param gameID ID of the game
+     * @param moveIndex Index of the move 
+     * @return The move specified
+     * @throws SQLException
+     */
     public static Move getMove(long gameID, int moveIndex) throws SQLException {
         Connection conn = null;
         PreparedStatement stmt = null;

@@ -58,6 +58,11 @@ public class GameChatC {
         }
     }
 
+    /**
+     * Creates a HTML format of the messages sent so it can be correctly 
+     * displayed on UI
+     * @return A string with the HTML code
+     */
     public static String messagesHTML() {
         StringBuilder sb = new StringBuilder();
 

@@ -17,6 +17,14 @@ import sharedlib.structs.Message;
  */
 public class GameChatDB {
 
+    /**
+     * Save a message on the database
+     * @param gameID ID of the game where the message has been sent
+     * @param playerN Player who sent the message
+     * @param message Message sent to be saved
+     * @return 
+     * @throws SQLException
+     */
     public static Message saveMessage(long gameID, int playerN, String message) throws SQLException {
         if (Database.testing) {
             return new Message(1L, 2L, "mock_username", new Date(), message);
@@ -46,6 +54,12 @@ public class GameChatDB {
         }
     }
 
+    /**
+     * Get all the messages that a game had
+     * @param gameID ID of the game
+     * @return A list with all the messages that had been sent
+     * @throws SQLException
+     */
     public static List<Message> getMessages(long gameID) throws SQLException {
         Connection conn = null;
         PreparedStatement stmt = null;

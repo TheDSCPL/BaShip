@@ -196,6 +196,12 @@ public class UserDB {
         }
     }
     
+    /**
+     * Get the banned info of a player
+     * @param username Username of the player
+     * @return True if he is banned
+     * @throws SQLException
+     */
     public static boolean isUserBanned(String username) throws SQLException {
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -219,6 +225,12 @@ public class UserDB {
         }
     }
     
+    /**
+     * Ban/Unban a player from the game
+     * @param username Username of the player to ban
+     * @param banned Ban status to set. True to ban, false otherwise
+     * @throws SQLException
+     */
     public static void setUserBanned(String username, boolean banned) throws SQLException {
         Connection conn = null;
         PreparedStatement stmt = null;
