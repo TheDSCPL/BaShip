@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,7 +26,7 @@ import server.conn.Server;
  * Thread responsible for handling the console input from the administrator and
  * running the various commands.
  *
- * @author Alex
+ * @author Luis
  */
 public class Console extends Thread {
 

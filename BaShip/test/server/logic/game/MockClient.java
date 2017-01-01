@@ -21,7 +21,7 @@ public class MockClient extends Client {
         super(null);
     }
 
-    Map<String, List<Object>> calledMethods = new HashMap<>();
+    private Map<String, List<Object>> calledMethods = new HashMap<>();
 
     public boolean wasCalled(String method) {
         return calledMethods.containsKey(method);
