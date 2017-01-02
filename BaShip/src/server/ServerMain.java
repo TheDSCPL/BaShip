@@ -11,17 +11,10 @@ import server.database.Database;
 import server.other.Console;
 import sharedlib.utils.Preferences;
 
-// TODO: Nuno: Sound
-
-// TODO: Luis: Javadoc
-// TODO: Luis: Interface color (option in settings)
-// TODO: Luis: HTML help window
-
 /**
  * Main Class of server side code. Start connections, preferences, console
  * and database. 
  */
-
 public class ServerMain {
 
     /**
