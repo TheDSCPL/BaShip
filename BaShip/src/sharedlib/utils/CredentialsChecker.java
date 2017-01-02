@@ -7,6 +7,9 @@ package sharedlib.utils;
 
 import java.util.regex.Pattern;
 
+/**
+ * Class responsible for verifying that all credentials requirements are met
+ */
 public class CredentialsChecker {
     /**
      * Runs the username against a set of rules to determine if it is a valid

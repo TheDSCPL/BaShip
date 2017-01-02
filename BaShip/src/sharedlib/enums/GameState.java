@@ -1,5 +1,8 @@
 package sharedlib.enums;
 
+/**
+ * Possible states of a game
+ */
 public enum GameState {
     /**
      * Game exists but players are still placing ships.

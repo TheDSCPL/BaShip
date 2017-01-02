@@ -168,7 +168,6 @@ public class GameC {
     /**
      * Close the game. Switches the UI to the lobby and informs the server.
      *
-     * @throws UserMessageException
      */
     static public void closeGame() {
         if (!ClientMain.checkServerConnection()) {

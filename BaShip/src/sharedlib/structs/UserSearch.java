@@ -14,8 +14,16 @@ public class UserSearch {
      */
     public final String usernameFilter;
     
+    /**
+     * Filter by the Index of list of user page.
+     */
     public final int pageIndex;
 
+    /**
+     * UserSearch constructor
+     * @param usernameFilter Username to filter. It can be an empty string
+     * @param pageIndex Index of page to search
+     */
     public UserSearch(String usernameFilter, int pageIndex) {
         this.usernameFilter = usernameFilter;
         this.pageIndex = pageIndex;

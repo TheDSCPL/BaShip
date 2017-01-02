@@ -10,7 +10,7 @@ import sharedlib.utils.Matrix;
 
 /**
  * A class that represents the information to be displayed on the UI for a board
- * of battleship. A board consists of a quare matrix of positions where ships
+ * of battleship. A board consists of a square matrix of positions where ships
  * and shots are placed, and a bottom row of small squares indicating the status
  * of each ship of a player.
  *
@@ -63,12 +63,41 @@ public class BoardUIInfo implements UIInfo {
      * The various ways a square can be drawn on the UI.
      */
     public enum SquareFill {
+
+        /**
+         * Empty square 
+         */
         Empty,
+
+        /**
+         * Indicates a placed ship
+         */
         GraySquare,
+
+        /**
+         * Red Square
+         */
         RedSquare,
+
+        /**
+         * Indicates a downed part of ship
+         */
         RedCross,
+
+        /**
+         * Inicates a shot missed
+         */
         BlueDiamond,
+
+        /**
+         * Indicates an impossible position to place ships
+         */
         GrayCircle,
+
+        /**
+         *  Indicates a downed ship. Only when the whole ship is downed the
+         *  consecutive RedCrosses become consecutive GraySquareRedCrosses.
+         */
         GraySquareRedCross
     }
 

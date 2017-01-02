@@ -20,8 +20,18 @@ public class GameSearch {
      */
     public final String usernameFilter;
 
+    /**
+     * Filter by the index of the various pages of games.
+     */
     public final int pageIndex;
 
+    /**
+     * Constructor of GameSearch class. 
+     * @param currentlyPlayingOnly True if search by currently being played
+     * games. False otherwise
+     * @param usernameFilter Name of the username. It can be an empty string
+     * @param pageIndex Index number of the page to search
+     */
     public GameSearch(boolean currentlyPlayingOnly, String usernameFilter, int pageIndex) {
         this.currentlyPlayingOnly = currentlyPlayingOnly;
         this.usernameFilter = usernameFilter;

@@ -12,16 +12,63 @@ import sharedlib.enums.GameState;
  */
 public class GameInfo {
 
+    /**
+     * ID of the game
+     */
     public final Long id;
+
+    /**
+     * ID of player1 
+     */
     public final Long player1ID;
+
+    /**
+     * ID of player2
+     */
     public final Long player2ID;
+
+    /**
+     * Username of player1
+     */
     public final String player1Username;
+
+    /**
+     * Username of player2
+     */
     public final String player2Username;
+
+    /**
+     * State of the game
+     */
     public final GameState state;
+
+    /**
+     * Start date of the game
+     */
     public final Date startDate;
+
+    /**
+     * End date of the game
+     */
     public final Date endDate;
+
+    /**
+     * Number of turns 
+     */
     public final Integer turnNumber;
 
+    /**
+     * Class constructor
+     * @param id ID of Game
+     * @param player1ID ID player1
+     * @param player2ID ID player2
+     * @param player1Username Username player1
+     * @param player2Username Username player2
+     * @param state State of game
+     * @param startDate Start date
+     * @param endDate End date
+     * @param turnNumber Number of turns
+     */
     public GameInfo(Long id, Long player1ID, Long player2ID, String player1Username, String player2Username, GameState state, Date startDate, Date endDate, Integer turnNumber) {
         this.id = id;
         this.player1ID = player1ID;

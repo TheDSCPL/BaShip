@@ -9,8 +9,15 @@ package sharedlib.structs;
  */
 public class ErrorMessage {
 
+    /**
+     * Error message to sent
+     */
     public final String message;
 
+    /**
+     * Initialize the error message with a message passed by argument
+     * @param message The error message
+     */
     public ErrorMessage(String message) {
         this.message = message;
     }

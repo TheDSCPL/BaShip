@@ -5,9 +5,22 @@ package sharedlib.utils;
  * @author Alex
  */
 public class Coord {
+
+    /**
+     * Value of the coordinate x axis 
+     */
     public final int x;
+
+    /**
+     * Value of the coordinate y axis
+     */
     public final int y;
 
+    /**
+     * Constructor of this class
+     * @param x Value of x axis
+     * @param y Value of y axis
+     */
     public Coord(int x, int y) {
         this.x = x;
         this.y = y;

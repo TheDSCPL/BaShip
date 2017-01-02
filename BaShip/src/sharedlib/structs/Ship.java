@@ -55,6 +55,11 @@ public class Ship {
         return set;
     }
     
+    /**
+     * Calculate the coordinates of ship according to the index
+     * @param index Index
+     * @return The coordinates of total ship position
+     */
     public Coord coordForShipPos(int index) {
         int x = posx + (vertical ? 0 : index);
         int y = posy + (vertical ? index : 0);

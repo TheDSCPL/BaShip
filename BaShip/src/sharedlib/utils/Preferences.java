@@ -17,8 +17,16 @@ public class Preferences {
      */
     public interface Key {
 
+        /**
+         *
+         * @return Key value
+         */
         public String getKey();
 
+        /**
+         *
+         * @return Default Value of Keyss
+         */
         public Object getDefaultValue();
     }
 
