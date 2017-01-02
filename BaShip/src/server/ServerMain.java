@@ -25,7 +25,7 @@ import sharedlib.utils.Preferences;
 public class ServerMain {
 
     /**
-     * Preferences of the client
+     * Preferences of the server
      */
     public static final Preferences prefs = new Preferences(ServerMain.class);
 
