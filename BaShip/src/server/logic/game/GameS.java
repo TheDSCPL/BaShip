@@ -95,7 +95,7 @@ public class GameS {
          * @return True if the client is in a game currently. It returns false
          * otherwise, specially when the user is on the game screen, but
          * waiting, not playing.
-         * @see GameS#isWaitingForGame(Client)
+         * @see #isWaitingForGame(Client)
          */
         public static boolean isPlaying(Client client) {
             return GameInfo.gamePlayFromPlayer(client) != null;
@@ -122,7 +122,7 @@ public class GameS {
         /**
          * @param client
          * @return True if the client is waiting for a game.
-         * @see GameS#isPlaying(Client)
+         * @see #isPlaying(Client)
          */
         public static boolean isWaitingForGame(Client client) {
             return Info.isWaitingForRandomGame(client);

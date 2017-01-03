@@ -8,5 +8,5 @@ public class DBK {
     /**
      * Limit of items that a UI page can show
      */
-    public static final int pageSize = 10;
+    public static final int pageSize = 35;
 }
