@@ -1,5 +1,9 @@
 package sharedlib.utils;
 
+/**
+ * Empty class used to represent {@code null} values in collections which do not support {@code null} values.
+ * @author Alex
+ */
 public class Null {
     public Null() {
         

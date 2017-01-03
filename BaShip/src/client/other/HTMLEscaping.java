@@ -17,6 +17,12 @@ public class HTMLEscaping {
         "&quot;",
         "&#39;"
     };
+    
+    /**
+     * Return string with especial characters in HTML replaced by their escaped versions.
+     * @param input
+     * @return 
+     */
     public static String escapeHTML(String input) {
         for(int i = 0 ;i < patterns.length ; i++)
             input = patterns[i].matcher(input).replaceAll(replacements[i]);

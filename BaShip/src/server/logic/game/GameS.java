@@ -95,7 +95,6 @@ public class GameS {
          * @return True if the client is in a game currently. It returns false
          * otherwise, specially when the user is on the game screen, but
          * waiting, not playing.
-         * @see #isWaitingForGame(Client)
          */
         public static boolean isPlaying(Client client) {
             return GameInfo.gamePlayFromPlayer(client) != null;
@@ -122,7 +121,6 @@ public class GameS {
         /**
          * @param client
          * @return True if the client is waiting for a game.
-         * @see #isPlaying(Client)
          */
         public static boolean isWaitingForGame(Client client) {
             return Info.isWaitingForRandomGame(client);
@@ -327,7 +325,6 @@ public class GameS {
          */
         public static void showNextMove(Client client) throws UserMessageException {
             GameReplay gr = GameInfo.gameReplayFromClient(client);
-            System.out.println(gr);
             if (gr != null) {
                 gr.showNextMove();
             }
