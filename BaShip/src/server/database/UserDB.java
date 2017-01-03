@@ -117,7 +117,7 @@ public class UserDB {
     /**
      * Queries the database for the id of the user with the given username.
      *
-     * @param id
+     * @param id The id of the user
      * @return The username of the user with the given id, or null if none was found
      * @throws SQLException
      */

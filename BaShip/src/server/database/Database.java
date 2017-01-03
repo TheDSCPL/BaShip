@@ -25,7 +25,12 @@ public class Database {
             System.exit(-1);
         }
     }
-    
+
+    /**
+     * Set to true to enter testing mode. In testing mode, the database classes
+     * do not connect to the SQL databse server. Instead, all inert/update
+     * queries are ignored, and all select queries return fixed values.
+     */
     public static boolean testing = false;
 
     private static BoneCP connectionPool;

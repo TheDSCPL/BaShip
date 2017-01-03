@@ -293,7 +293,6 @@ class InvitationWindow {
 
         @Override
         public void windowDeactivated(WindowEvent e) {
-            System.out.println("windowDeactivated");
             if (!e.getComponent().isVisible()) {
                 closeOperation();
             }

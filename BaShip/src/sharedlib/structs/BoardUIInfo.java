@@ -36,10 +36,24 @@ public class BoardUIInfo implements UIInfo {
      */
     public final List<SquareFill> bottomInfo = new ArrayList(nCopies(BOTTOM_INFO_SQUARES_COUNT, SquareFill.Empty));
 
+    /**
+     * Set the SquareFill of one of the squares in bottomInfo
+     * @param shipSize The size of the ship the square belongs to
+     * @param shipIndex Which ship of this size the square belongs to
+     * @param shipSquareIndex Which square on the ship is to be changed
+     * @param value The value of the square
+     */
     public void setBottomInfo(int shipSize, int shipIndex, int shipSquareIndex, SquareFill value) {
         bottomInfo.set(bottomInfoOffsets.get(shipSize) + shipIndex * shipSize + shipSquareIndex, value);
     }
     
+    /**
+     * @see BoardUIInfo#setBottomInfo(int, int, int, sharedlib.structs.BoardUIInfo.SquareFill) 
+     * @param shipSize
+     * @param shipIndex
+     * @param shipSquareIndex
+     * @return 
+     */
     public SquareFill getBottomInfo(int shipSize, int shipIndex, int shipSquareIndex) {
         return bottomInfo.get(bottomInfoOffsets.get(shipSize) + shipIndex * shipSize + shipSquareIndex);
     }

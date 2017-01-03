@@ -20,6 +20,10 @@ final public class Connection extends Thread {
     private final BufferedReader receive;
     private final PrintWriter send;
 
+    /**
+     * The delegate for this connection.
+     * @see Delegate
+     */
     public Delegate delegate;
 
     /**
